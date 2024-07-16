@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Start here -->
+    <style>
+        .mobile-device-sms {
+            display: flex;
+            width: 393px;
+            height: 814px;
+            flex-direction: column;
+            align-items: flex-end;
+            background: var(--Neutral-0, #fff);
+            border-radius: 32px;
+            background: var(--Neutral-0, #FFF);
+            box-shadow: 0px 0px 30px 0px rgba(39, 42, 43, 0.25);
+        }
+
+        .mobile-device-align {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile-device-body {
+            display: grid;
+            padding: 12px;
+            gap: 24px;
+            overflow-y: auto;
+            padding: 24px 12px;
+
+        }
+
+        .left-section-sms {
+            margin-right: 64px;
+        }
+
+        .right-section-sms {
+            margin-left: auto;
+        }
+
+        .left-sms-question-container {
+            background: var(--Neutral-100, #F3F4F4);
+            border-radius: 16px;
+            padding: 8px;
+            margin-right: auto;
+            display: inline-block;
+        }
+
+        .right-sms-answer-container {
+            background: var(--Success-100, #E8F4E4);
+            border-radius: 16px;
+            padding: 8px;
+            margin-left: auto;
+            display: inline-block;
+        }
+
+        .right-sms-answer {
+            text-align: right;
+        }
+
+        .left-sms-answer {
+            text-align: left;
+        }
+
+        .title-sms {
+            border-radius: 32px 32px var(--Spacing, 0px) var(--Spacing, 0px);
+            border-bottom: 1px solid var(--Neutral-200, #E6E7E8);
+            background: var(--Primary-600, #1D809D);
+            display: flex;
+            padding: 16px 8px;
+            flex-direction: column;
+            align-items: center;
+            align-self: stretch;
+        }
+
+        .h2-mobile {
+            color: var(--Neutral-0, #FFF);
+            text-align: center;
+
+            /* Heading/Mobile/H2 */
+            font-family: "Roboto Condensed";
+            font-size: 23px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 32px;
+        }
+    </style>
+    <!-- End here -->
+
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif">
+    <!-- Start here -->
+    <div class="mobile-device-align">
+        <div class="mobile-device-sms">
+            <div class="title-sms">
+                <div class="h2-mobile">SMS message</div>
+            </div>
+            <div class="mobile-device-body">
+                <div class="left-section-sms">
+                    <div class="left-sms-question-container">
+                        <div class="left-sms-answer">How likely are you to recommend us to family and friends? Answer
+                            1-5 where 1=Very unlikely, 5=Very likely</div>
+                    </div>
+
+                </div>
+                <div class="right-section-sms">
+                    <div class="right-sms-answer-container">
+                        <div class="right-sms-answer">The response</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End here -->
+</body>
+
+</html>

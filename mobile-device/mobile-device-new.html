@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Frame with Text Messages</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .mobile-frame {
+            width: 375px;
+            height: 667px;
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .header {
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .messages {
+            padding: 15px;
+            height: calc(100% - 110px);
+            overflow-y: auto;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .message.sent {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+        }
+        .message.received {
+            background-color: #ececec;
+            align-self: flex-start;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-frame">
+        <div class="header">Messages</div>
+        <div class="messages">
+            <div class="message sent">Hi there!</div>
+            <div class="message received">Hello! How are you?</div>
+            <div class="message sent">I'm good, thanks. How about you?</div>
+            <div class="message received">I'm doing well, too.</div>
+        </div>
+
+    </div>
+</body>
+</html>
