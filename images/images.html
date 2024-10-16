@@ -5,79 +5,75 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>UI Design</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdb-ui-kit@5.0.0/css/mdb.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdb-ui-kit@5.0.0/css/mdb.min.css" />
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mdb-ui-kit@5.0.0/js/mdb.min.js"></script>
+    
     </head>
     <body>
-        <div
-            id="carouselBasicExample"
-            class="carousel slide carousel-fade"
-            data-mdb-ride="carousel"
-            data-mdb-carousel-init
-        >
-            <div class="carousel-indicators">
-                <button
-                    type="button"
-                    data-mdb-target="#carouselBasicExample"
-                    data-mdb-slide-to="0"
-                    class="active"
-                    aria-current="true"
-                    aria-label="Slide 1"
-                ></button>
-                <button
-                    type="button"
-                    data-mdb-target="#carouselBasicExample"
-                    data-mdb-slide-to="1"
-                    aria-label="Slide 2"
-                ></button>
-                <button
-                    type="button"
-                    data-mdb-target="#carouselBasicExample"
-                    data-mdb-slide-to="2"
-                    aria-label="Slide 3"
-                ></button>
+        <nav class="navbar bg-body-tertiary mb-4">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">
+                    <a href="../index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">UI Design</a>
+                </span>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="x3/sms-shop-colorful-fi.png" class="d-block w-100" alt="Sunset Over the City">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </div>
+        </nav>
+        <div class="container">
+            <!-- Gallery -->
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img src="x1/sms-shop-simple-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
+                    <img src="x3/sms-shop-colorful-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
                 </div>
-                <div class="carousel-item">
-                    <img src="x3/sms-shop-cut-fi.png" class="d-block w-100" alt="Canyon at Nigh">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="x3/sms-shop-simple-fi.png" class="d-block w-100" alt="Cliff Above a Stormy Sea">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img src="x3/sms-shop-cut-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
+                    <img src="x3/sms-shop-simple-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
                 </div>
             </div>
-            <button
-                class="carousel-control-prev"
-                type="button"
-                data-mdb-target="#carouselBasicExample"
-                data-mdb-slide="prev"
-            >
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-                class="carousel-control-next"
-                type="button"
-                data-mdb-target="#carouselBasicExample"
-                data-mdb-slide="next"
-            >
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <!-- Gallery -->
+
+            <!-- Carousel -->
+            <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel" data-mdb-carousel-init>
+                <div class="carousel-indicators">
+                    <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+        
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="x3/sms-shop-colorful-fi.png" class="d-block w-100" alt="Sunset Over the City"/>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </div>
+                    </div>
+        
+                    <div class="carousel-item">
+                        <img src="x3/sms-shop-cut-fi.png" class="d-block w-100" alt="Canyon at Nigh"/>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+        
+                    <div class="carousel-item">
+                        <img src="x3/sms-shop-simple-fi.png" class="d-block w-100" alt="Cliff Above a Stormy Sea"/>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Third slide label</h5>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        
         </div>
     </body>
 </html>
