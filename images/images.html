@@ -11,42 +11,30 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         >
-    </head>
-    <style>
-    .image-gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 20px;
-        }
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui/5.3.0/mdb.min.js"></script>
 
-        .image-gallery img {
-            background-size: contain;
-            max-width: 700px;
-            border-radius: 8px;
-        }
-    </style>
+    </head>
     <body>
-        <nav class="navbar bg-body-tertiary">
+        <nav class="navbar bg-body-tertiary mb-4">
             <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1"><a href="../index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">UI Design</a></span>
+                <span class="navbar-brand mb-0 h1">
+                    <a href="../index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">UI Design</a>
+                </span>
             </div>
         </nav>
         <div class="container">
+            <!-- Gallery -->
             <div class="row">
-                <div class="image-gallery">
-                    <img src="x1/sms-shop-simple-fi.png" alt="Image x1">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img src="x1/sms-shop-simple-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
+                    <img src="x3/sms-shop-colorful-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
                 </div>
-                <div class="image-gallery">
-                    <img src="x3/sms-shop-colorful-fi.png" alt="Image x3">
-                </div>
-                <div class="image-gallery">
-                    <img src="x3/sms-shop-cut-fi.png" alt="Image x3">
-                </div>
-                <div class="image-gallery">
-                    <img src="x3/sms-shop-simple-fi.png" alt="Image x3">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <img src="x3/sms-shop-cut-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
+                    <img src="x3/sms-shop-simple-fi.png" class="w-100 shadow-1-strong rounded mb-4" alt="">
                 </div>
             </div>
+            <!-- Gallery -->
         </div>
     </body>
 </html>
