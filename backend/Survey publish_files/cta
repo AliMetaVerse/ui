@@ -1,1 +1,0 @@
-$(document).ready(function(){$(".callToActionLink").on("click",function(){var n={actionName:$(this).data("cta-name"),target:$(this).data("target-url")};$.ajax({url:$(this).data("action-url"),method:"POST",data:n}).done(function(){n.target&&(window.location.href=n.target)})})})
