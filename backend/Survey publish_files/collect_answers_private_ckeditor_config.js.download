@@ -1,0 +1,69 @@
+/**
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.html or http://ckeditor.com/license
+ */
+
+/*
+For create custom config files well to use http://ckeditor.com/latest/samples/toolbarconfigurator/index.html
+ */
+
+CKEDITOR.editorConfig = function (config) {
+    config.toolbarGroups = [
+        { name: 'document', groups: ['mode', 'document', 'doctools'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },       
+        { name: 'paragraph', groups: ['list', 'indent', 'paragraph', 'bidi', 'align'] },
+        { name: 'links', groups: ['links'] },
+        { name: 'insert', groups: ['insert'] },
+        { name: 'insert-custom', groups: ['insert-custom'] },
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'styles', groups: ['styles'] },
+        { name: 'colors', groups: ['colors'] },
+        { name: 'tools', groups: ['tools'] },
+        { name: 'others', groups: ['others'] }       
+    ];
+
+    config.removeButtons = 'BidiLtr,BidiRtl,Language,Save,Templates,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash,Iframe,About,Maximize,Scayt,PageBreak,Image,NewPage,Preview,Print,Paste,PasteText,PasteFromWord,Find,Replace,Strike,blockQuote,Anchor,HorizontalRule,ShowBlocks';
+
+    config.font_names =
+        'latoregular;' +
+        'rockwell;' +
+        'Arial;' +
+        'Calibri;' +
+        'Century Gothic;' +
+        'Comic Sans MS;' +
+        'Courier New;' +
+        'Georgia;' +
+        'Lucida Sans Unicode;' +
+        'PT Sans;' +
+        'Tahoma;' +
+        'Times New Roman;' +
+        'Trebuchet MS;' +
+        'Verdana;' +
+        'montserratregular;' +
+        'segoeuiregular;' +
+        'Robotoregular;' +
+        'Robotolight;' +
+        'Robotobold;' +
+        'Ubuntubold;' +
+        'Ubuntulight;' +
+        'Ubunturegular;' +
+        'Titilliumwebbold;' +
+        'Titilliumweblight;' +
+        'Titilliumwebregular;';
+
+    config.fontSize_sizes = '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;32/32px;36/36px;40/40px;44/44px;48/48px;54/54px;60/60px;66/66px;72/72px;80/80px;88/88px;96/96px;';
+    config.contentsCss = "/Scripts/_shared/libs/ckeditor4/ck_fonts.css";
+
+    config.extraPlugins = 'image2';
+
+    config.toolbarCanCollapse = true;
+    config.resize_enabled = true;
+    config.autoParagraph = false;
+    config.enterMode = CKEDITOR.ENTER_BR;
+    config.entities_latin = false;
+    config.entities_greek = false;
+    config.basicEntities = false;
+    config.allowedContent = true;
+    config.linkShowAdvancedTab = false;
+    config.title = false;
+};
