@@ -13,10 +13,16 @@
     </head>
     <style>
       .pseudo-encrypted-text {
+        background-color: #FFFAE9;
+        width: fit-content;
         padding: 1px 5px;
+        border-radius: 4px;
         color: black;
-      } 
-
+      }
+      .pseudo-encrypted-line {
+        color:rgba(255, 234, 0, 0.6);
+        text-decoration:line-through
+      }
     </style>
     <body>
         <nav class="navbar bg-body-tertiary mb-4">
@@ -25,7 +31,7 @@
             </div>
         </nav>
         <div class="container">
-            <span class="pseudo-encrypted-text">[Pseudonymised]</span>
+            <p class="pseudo-encrypted-line"><span class="pseudo-encrypted-text">[Pseudonymised]</span></p>
         </div>
     </body>
 </html>
