@@ -69,6 +69,10 @@
             font-weight: 400;
             line-height: normal;
         }
+        .tab-border-bottom {
+            border-bottom: #d1d5d6 1px solid;
+            margin-top: -7px;
+        }
     </style>
     <body>
         <nav class="navbar bg-body-tertiary mb-4">
@@ -84,7 +88,7 @@
             <div class="mt-5">
                 <h2>Tabs and Toolbars</h2>
             </div>
-            <div class="row border-bottom mb-5">
+            <div class="row">
                 <div class="tabs m-2 tab-text">
                     <div class="d-inline-flex tabs-icon-bg edit-tab-new"><i class="fa-duotone fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i></div>
                     Edit
@@ -94,7 +98,9 @@
                     Collect Answers
                 </div>
             </div>
-            <div class="row border-bottom">
+            <div class="tab-border-bottom mb-5"></div>
+
+            <div class="row">
                 <div class="tabs m-2 tab-text">
                     <div class="d-inline-flex tabs-icon-bg edit-tab-new"><i class="fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i></div>
                     Edit
@@ -104,7 +110,9 @@
                     Collect Answers
                 </div>
             </div>
-            <div class="row border-bottom">
+            <div class="tab-border-bottom"></div>
+
+            <div class="row">
                 <div class="toolbars m-2 tab-text text-center">
                     <div class="collect-tab-new"><i class="fa-solid fa-square-plus fa-icon-size-toolbar" style="color: #f15723;"></i></div>
                     Add Question
@@ -114,6 +122,7 @@
                     Library
                 </div>
             </div>
+            <div class="tab-border-bottom"></div>
 
             <div class="mb-5"></div>
         </div>
