@@ -32,6 +32,10 @@
         .fa-icon-size-tabs {
             font-size: 18px;
         }
+        .fa-icon-size-toolbar {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
         .tabs {
             width: inherit;
             min-width: 80px;
@@ -45,8 +49,17 @@
             box-shadow: 0px 4px 16px 0px rgba(39, 42, 43, 0.15);
         }
         .toolbars {
-            margin-right: 106px;
+            width: inherit;
+            min-width: 80px;
+            padding: 6px 8px 6px 8px;
+            border-radius: 8px;
+            align-items: center;
         }
+        .toolbars:hover {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 16px 0px rgba(39, 42, 43, 0.15);
+        }
+
         .tab-text {
             color: var(--Primary-800, #215669);
             text-align: left;
@@ -77,10 +90,17 @@
                     Edit
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg collect-tab-new"><i class="fa-duotone fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg collect-tab-new"><i class="fa-duotone fa-light fa-users fa-icon-size-tabs"></i></div>
                     Collect Answers
                 </div>
             </div>
+            <div class="row">
+                <div class="toolbars m-2 tab-text">
+                    <div class="collect-tab-new text-center"><i class="fa-duotone fa-light fa-users fa-icon-size-toolbar"></i></div>
+                    Question
+                </div>
+            </div>
+
             <div class="mb-5"></div>
         </div>
     </body>
