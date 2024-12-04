@@ -12,80 +12,92 @@
         <link rel="stylesheet" href="https://kit.fontawesome.com/50ef2d3cf8.css" crossorigin="anonymous">
     </head>
     <style>
-        body {
-            background-color: #ebf4f7;
-        }
-        .tabs-icon-bg {
-            border-radius: 360px;
-            width: 32px;
-            height: 32px;
-            display: flex; /* Make sure the icon container behaves well with flex */
-            justify-content: center; /* Center the icon horizontally */
-            align-items: center; /* Center the icon vertically */
-        }
-        .tabs-icon-bg.edit-tab-new {
-            background-color: #cfe9c9;
-        }
-        .tabs-icon-bg.collect-tab-new {
-            background-color: #b0e8f1;
-        }
-        .tabs-icon-bg.follow-tab-new {
-            background-color: #fecdd4;
-        }
-        .tabs-icon-bg.report-tab-new {
-            background-color: #fde38a;
-        }
-        .tabs-icon-bg.ai-tab-new {
-            background-color: #ffc8a8;
-        }
-        .fa-icon-size-tabs {
-            font-size: 18px;
-        }
-        .fa-icon-size-toolbar {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        .tabs {
-            width: inherit;
-            min-width: 80px;
-            padding: 4px 8px 6px 8px;
-            flex-direction: column;
-            border-radius: 8px;
-            align-items: center;
-        }
-        .tabs:hover {
-            background-color: #ffffff;
-            box-shadow: 0px 4px 16px 0px rgba(39, 42, 43, 0.15);
-        }
-        .toolbars {
-            width: inherit;
-            min-width: 102px;
-            padding: 6px 8px 6px 8px;
-            border-radius: 8px;
-            align-items: center;
-        }
-        .toolbars:hover {
-            background-color: #ffffff;
-            box-shadow: 0px 4px 16px 0px rgba(39, 42, 43, 0.15);
-        }
+    body {
+      background-color: #ebf4f7;
+    }
+    .tabs-icon-bg {
+      border-radius: 360px;
+      width: 32px;
+      height: 32px;
+      display: flex; /* Make sure the icon container behaves well with flex */
+      justify-content: center; /* Center the icon horizontally */
+      align-items: center; /* Center the icon vertically */
+    }
+    .tabs-icon-bg.edit-tab-new {
+      background-color: #cfe9c9;
+    }
+    .tabs-icon-bg.collect-tab-new {
+      background-color: #b0e8f1;
+    }
+    .tabs-icon-bg.follow-tab-new {
+      background-color: #fecdd4;
+    }
+    .tabs-icon-bg.report-tab-new {
+      background-color: #fde38a;
+    }
+    .tabs-icon-bg.ai-tab-new {
+      background-color: #ffc8a8;
+    }
+    .fa-icon-size-tabs {
+      font-size: 18px;
+    }
+    .fa-icon-size-toolbar {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+    .tabs {
+      width: inherit;
+      min-width: 80px;
+      padding: 6px 8px 6px 8px;
+      flex-direction: column;
+      border-radius: 8px;
+      align-items: center;
+    }
+    .tabs:hover {
+      background-color: #ffffff;
+      box-shadow: 0px 4px 16px 0px rgba(39, 42, 43, 0.15);
+    }
+    .toolbars {
+      width: inherit;
+      min-width: 102px;
+      padding: 6px 8px 6px 8px;
+      border-radius: 8px;
+      align-items: center;
+    }
+    .toolbars:hover {
+      background-color: #ffffff;
+      box-shadow: 0px 4px 16px 0px rgba(39, 42, 43, 0.15);
+    }
 
-        .tab-text {
-            color: var(--Primary-800, #215669);
-            text-align: left;
-            font-family: Roboto;
-            font-size: 15px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-        }
-        .nav-tab-border-bottom {
-            border-bottom: #d1d5d6 1px solid;
-            margin-top: -7px;
-        }
-        .inside-tab-border-bottom {
-            border-bottom: #215669 3px solid;
-            margin-top: 0px;
-        }
+    .tab-text {
+      color: var(--Primary-800, #215669);
+      text-align: left;
+      font-family: Roboto;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    .nav-tab-border-bottom {
+      border-bottom: #d1d5d6 1px solid;
+      margin-top: -7px;
+    }
+    .inside-tab-border-bottom {
+      border-bottom: #215669 3px solid;
+      margin-top: 0px;
+    }
+    .fa-stack-custom {
+      height: 32px;
+      margin-top: -11px;
+      margin-bottom: 19px;
+    }
+    .stack-icon-fa-inside-b {
+      margin-top: 6px !important;
+    }
+
+    .stack-icon-fa-inside-t {
+      margin-top: -2px !important;
+    }
     </style>
     <body>
         <nav class="navbar bg-body-tertiary mb-4">
@@ -103,75 +115,148 @@
             </div>
             <div class="row">
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg edit-tab-new"><i class="fa-duotone fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg edit-tab-new">
+                        <i class="fa-duotone fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i>
+                    </div>
                     Edit
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg collect-tab-new"><i class="fa-duotone fa-light fa-users fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg collect-tab-new">
+                        <i class="fa-duotone fa-light fa-users fa-icon-size-tabs"></i>
+                    </div>
                     Collect Answers
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg follow-tab-new"><i class="fa-duotone fa-light fa-eye fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg follow-tab-new">
+                        <i class="fa-duotone fa-light fa-eye fa-icon-size-tabs"></i>
+                    </div>
                     Follow up
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg report-tab-new"><i class="fa-duotone fa-light fa-chart-column fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg report-tab-new">
+                        <i class="fa-duotone fa-light fa-chart-column fa-icon-size-tabs"></i>
+                    </div>
                     Reporting
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg ai-tab-new"><i class="fa-duotone fa-light fa-magnifying-glass-chart fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg ai-tab-new">
+                        <i class="fa-duotone fa-light fa-magnifying-glass-chart fa-icon-size-tabs"></i>
+                    </div>
                     AI Text Analysis
                 </div>
             </div>
             <div class="row">
                 <div class="toolbars m-2 tab-text text-center">
-                    <div class="collect-tab-new"><i class="fa-duotone fa-light fa-square-plus fa-icon-size-toolbar" style="color: #f15723;"></i></div>
+                    <div class="collect-tab-new">
+                        <i class="fa-duotone fa-light fa-square-plus fa-icon-size-toolbar" style="color: #f15723"></i>
+                    </div>
                     Add Question
                 </div>
                 <div class="toolbars m-2 tab-text text-center">
-                    <div class="collect-tab-new"><i class="fa-duotone fa-light fa-books fa-icon-size-toolbar"></i></div>
+                    <div class="collect-tab-new">
+                        <i class="fa-duotone fa-light fa-books fa-icon-size-toolbar"></i>
+                    </div>
                     Library
                 </div>
             </div>
-
             <div class="nav-tab-border-bottom mb-5"></div>
-
             <div class="row">
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg edit-tab-new"><i class="fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg edit-tab-new">
+                        <i class="fa-light fa-paintbrush-pencil fa-icon-size-tabs"></i>
+                    </div>
                     Edit
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg collect-tab-new"><i class="fa-light fa-users fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg collect-tab-new">
+                        <i class="fa-light fa-users fa-icon-size-tabs"></i>
+                    </div>
                     Collect Answers
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg follow-tab-new"><i class="fa-light fa-eye fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg follow-tab-new">
+                        <i class="fa-light fa-eye fa-icon-size-tabs"></i>
+                    </div>
                     Follow up
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg report-tab-new"><i class="fa-light fa-chart-column fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg report-tab-new">
+                        <i class="fa-light fa-chart-column fa-icon-size-tabs"></i>
+                    </div>
                     Reporting
                 </div>
                 <div class="tabs m-2 tab-text">
-                    <div class="d-inline-flex tabs-icon-bg ai-tab-new"><i class="fa-light fa-magnifying-glass-chart fa-icon-size-tabs"></i></div>
+                    <div class="d-inline-flex tabs-icon-bg ai-tab-new">
+                        <i class="fa-light fa-magnifying-glass-chart fa-icon-size-tabs"></i>
+                    </div>
                     AI Text Analysis
                 </div>
             </div>
             <div class="nav-tab-border-bottom"></div>
-
             <div class="row">
                 <div class="toolbars m-2 tab-text text-center">
-                    <div class="collect-tab-new"><i class="fa-solid fa-square-plus fa-icon-size-toolbar" style="color: #f15723;"></i></div>
+                    <div class="collect-tab-new">
+                        <i class="fa-solid fa-square-plus fa-icon-size-toolbar" style="color: #f15723"></i>
+                    </div>
                     Add Question
                 </div>
                 <div class="toolbars m-2 tab-text text-center">
-                    <div class="collect-tab-new"><i class="fa-light fa-books fa-icon-size-toolbar"></i></div>
+                    <div class="collect-tab-new">
+                        <i class="fa-light fa-books fa-icon-size-toolbar"></i>
+                    </div>
                     Library
+                </div>
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new">
+                        <i class="fa-light fa-file-circle-plus fa-icon-size-toolbar"></i>
+                    </div>
+                    Add Page
+                </div>
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new">
+                        <i class="fa-light fa-square-dashed-circle-plus fa-icon-size-toolbar"></i>
+                    </div>
+                    Add Phase
+                </div>
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new">
+                        <i class="fa-light fa-language fa-icon-size-toolbar"></i>
+                    </div>
+                    Language
+                </div>
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new">
+                        <i class="fa-light fa-images fa-icon-size-toolbar"></i>
+                    </div>
+                    Image gallery
+                </div>
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new">
+                        <i class="fa-light fa-palette fa-icon-size-toolbar"></i>
+                    </div>
+                    Layout
+                </div>
+
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new fa-stack-custom">
+                        <span class="fa-stack fa-2x">
+                            <i class="fa-light fa-shield fa-lg fa-stack-1x"></i>
+                            <i class="fa-regular fa-user fa-2xs fa-stack-1x stack-icon-fa-inside-t"></i>
+                        </span>
+                    </div>
+                    Personal Data
+                </div>
+                <div class="toolbars m-2 tab-text text-center">
+                    <div class="collect-tab-new fa-stack-custom">
+                        <span class="fa-stack fa-2x">
+                            <i class="fa-light fa-file fa-lg fa-stack-1x"></i>
+                            <i class="fa-regular fa-eye fa-2xs fa-stack-1x stack-icon-fa-inside-b"></i>
+                        </span>
+                    </div>
+                    Preview & Test
                 </div>
             </div>
             <div class="nav-tab-border-bottom"></div>
-
             <div class="mb-5"></div>
         </div>
     </body>
