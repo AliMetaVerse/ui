@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .list-group {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        .list-group-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .list-group-item:hover {
+            background-color: #e9ecef;
+        }
+        .list-button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 99px;
+        }
+        .list-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="list-group">
+    <div class="list-group-item" onclick="itemClicked(1)">
+        AI Text Analysis
+        <button class="list-button" onclick="buttonClicked(event, 1)">Activate</button>
+    </div>
+    <div class="list-group-item" onclick="itemClicked(2)">
+        eTest
+        <button class="list-button" onclick="buttonClicked(event, 2)">Activate</button>
+    </div>
+    <div class="list-group-item" onclick="itemClicked(3)">
+        360 Survey
+        <button class="list-button" onclick="buttonClicked(event, 3)">Activate</button>
+    </div>
+</div>
+
+<script>
+    function itemClicked(id) {
+        alert("Survey " + id + " Activated!");
+    }
+
+    function buttonClicked(event, id) {
+        event.stopPropagation(); // Prevents the parent div's onclick from firing
+        alert("Setting " + id + " clicked!");
+    }
+</script>
+
+</body>
+</html>
