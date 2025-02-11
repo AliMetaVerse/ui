@@ -238,5 +238,26 @@
                 <i class="fa fa-chevron-up"></i>
             </button>
         </div>
+        
     </body>
+    <iframe id="chat_iframe" src="https://d3i1me03jxqazz.cloudfront.net?botId=67ab0678a2bb648690c8cc96" style="position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 625px;
+    height: 640px;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    z-index: 1000;"></iframe>
+    <script>
+        const iframe = document.getElementById('chat_iframe');
+        const payload = {
+            params: {
+                "<key1>": "<value1>"
+            }
+        };
+        iframe.onload = () => {
+            iframe.contentWindow.postMessage(payload, 'https://d3i1me03jxqazz.cloudfront.net');
+        };
+    </script>
 </html>
