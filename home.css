@@ -191,10 +191,6 @@ html {
   }
   /*@import "print.less";*/
   
-  @font-face {
-    font-family: "Glyphicons Halflings";
-    src: url("_shared/fonts/glyphicons/glyphicons-halflings-regular.eot");
-    src: url("_shared/fonts/glyphicons/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("_shared/fonts/glyphicons/glyphicons-halflings-regular.woff2") format("woff2"), url("_shared/fonts/glyphicons/glyphicons-halflings-regular.woff") format("woff"), url("_shared/fonts/glyphicons/glyphicons-halflings-regular.ttf") format("truetype"), url("_shared/fonts/glyphicons/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
   }
   .glyphicon {
     position: relative;
@@ -7282,8 +7278,8 @@ html {
   -----------------------------------------------------------*/
   /*@font-face {
       font-family: 'Flat-UI-Icons';
-      src: url('../fonts/Flat-UI-Icons.eot');
-      src: url('../fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('../fonts/Flat-UI-Icons.woff') format('woff'), url('../fonts/Flat-UI-Icons.ttf') format('truetype'), url('../fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
+      src: url(link));
+      src: url(link)) format('embedded-opentype'), url(link)) format('woff'), url(link)) format('truetype'), url(link)) format('svg');
       font-weight: normal;
       font-style: normal;
   }*/
@@ -7441,10 +7437,10 @@ html {
     outline-offset: unset;
   }
   .ico-element.ico-mandatory {
-    background-image: url(img/question-button-icons/not-mandatory.svg);
+    background-image: url(link));
   }
   .ico-element.ico-mandatory.selected {
-    background-image: url(img/question-button-icons/mandatory.svg);
+    background-image: url(link));
   }
   .ico-element.ico-tiny {
     width: 12px;
@@ -7461,34 +7457,34 @@ html {
     vertical-align: top;
   }
   .ico-element.ico-rules {
-    background-image: url(img/question-button-icons/rules.svg);
+    background-image: url(link));
   }
   .ico-element.ico-copy {
-    background-image: url(img/question-button-icons/question-copy.svg);
+    background-image: url(link));
   }
   .ico-element.ico-settings {
-    background-image: url(img/question-button-icons/question-settings.svg);
+    background-image: url(link));
   }
   .ico-element.ico-embeded-media {
-    background-image: url(img/question-button-icons/question-embeded-media.svg);
+    background-image: url(link));
   }
   .ico-element.ico-delete {
-    background-image: url(img/question-button-icons/question-delete.svg);
+    background-image: url(link));
   }
   .ico-element.ico-delete-gray-medium {
-    background-image: url(img/delete-icon-gray-medium.png);
+    background-image: url(link));
   }
   .ico-element.ico-delete-gray-small {
-    background-image: url(img/delete-icon-gray-small.png);
+    background-image: url(link));
   }
   .ico-element.ico-etest-settings {
-    background-image: url(img/question-button-icons/graduation-cap.svg);
+    background-image: url(link));
   }
   .ico-element.ico-etest-points-settings {
-    background-image: url(img/question-button-icons/bullseye.svg);
+    background-image: url(link));
   }
   .ico-element.ico-etest-points-settings.not-in-use {
-    background-image: url(img/question-button-icons/bullseye-disabled.svg);
+    background-image: url(link));
   }
   .right {
     float: right;
@@ -8026,7 +8022,7 @@ html {
     width: 200px;
     height: 153px;
     display: inline-block;
-    background-image: url(img/wlogo.png);
+    background-image: url(link));
   }
   .error-general-text {
     font-family: Arial;
@@ -8315,13 +8311,13 @@ html {
     vertical-align: middle;
   }
   .survey-creation .layoutMainContainer .survey-structure-menu-item .menu-item-icon.move-selected-items-icon {
-    background-image: url("img/move-selected-items-icon.png");
+    background-image: url(link));
   }
   .survey-creation .layoutMainContainer .survey-structure-menu-item .menu-item-icon.copy-selected-items-icon {
-    background-image: url("img/copy-selected-items-icon.png");
+    background-image: url(link));
   }
   .survey-creation .layoutMainContainer .survey-structure-menu-item .menu-item-icon.delete-selected-items-icon {
-    background-image: url("img/delete-selected-items-icon.png");
+    background-image: url(link));
   }
   .survey-creation .layoutMainContainer .survey-structure-menu-item .menu-item-text {
     vertical-align: middle;
@@ -8352,14 +8348,14 @@ html {
     padding-left: 35px;
     margin-top: 10px;
     text-align: left;
-    background: url(img/page.png) 5px no-repeat;
+    background: url(link)) 5px no-repeat;
   }
   .survey-creation .survey-manage-panel .add-segment {
     display: block;
     padding-left: 35px;
     margin-top: 10px;
     text-align: left;
-    background: url(img/segment.png) 5px no-repeat;
+    background: url(link)) 5px no-repeat;
   }
   .survey-creation .survey-manage-panel #questionTree {
     margin: -5px 0 15px 0;
@@ -8381,7 +8377,7 @@ html {
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .page {
     padding: 5px 0px 5px 0;
     font-weight: bold;
-    background-image: url(img/question-button-icons/file-regular.svg);
+    background-image: url(link));
     background-repeat: no-repeat;
     background-position-x: 25px;
     background-size: 12px;
@@ -8389,7 +8385,7 @@ html {
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .page:hover,
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .page.selected {
-    background-image: url(img/question-button-icons/file-regular-white.svg);
+    background-image: url(link));
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .page .question-name {
     padding-left: 40px;
@@ -8430,11 +8426,11 @@ html {
     background-position-x: 30px;
     background-size: 19px;
     background-position-y: 5px;
-    background-image: url(img/question-button-icons/page-break-light.svg);
+    background-image: url(link));
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .segment:hover,
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .segment.selected {
-    background-image: url(img/question-button-icons/page-break-light-white.svg);
+    background-image: url(link));
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .segment .question-name {
     padding-left: 40px;
@@ -8463,10 +8459,10 @@ html {
     color: #FFF;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item:hover .question-tree-action .logical-rules-link {
-    background: url(img/question-button-icons/rules-white.svg) 0 1px no-repeat;
+    background: url(link)) 0 1px no-repeat;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item:hover .question-tree-action .personal-data-icon {
-    background: url(img/question-button-icons/white-user-shield.svg) 0 1px no-repeat;
+    background: url(link)) 0 1px no-repeat;
     background-size: 18px;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item:hover .question-tree-action .pseudonymization-icon,
@@ -8500,16 +8496,16 @@ html {
     color: #FFF;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item.selected .question-tree-action .logical-rules-link {
-    background: url(img/question-button-icons/rules-white.svg) 0 1px no-repeat;
+    background: url(link)) 0 1px no-repeat;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item.selected .question-tree-action .etest-points-link {
     color: #FFF;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item.selected .question-tree-action .survey-rules-link {
-    background-image: url(img/question-button-icons/rules.svg);
+    background-image: url(link));
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item.selected .question-tree-action .personal-data-icon {
-    background: url(img/question-button-icons/white-user-shield.svg) 0 1px no-repeat;
+    background: url(link)) 0 1px no-repeat;
     background-size: 18px;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item.selected .question-tree-action .personal-data-icon-checked {
@@ -8544,18 +8540,18 @@ html {
     font-size: 16px;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item .logical-rules-link {
-    background-image: url(img/question-button-icons/rules.svg);
+    background-image: url(link));
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item .etest-points-link {
     padding: 0 5px;
     color: #759E5C;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item .survey-rules-link {
-    background-image: url(img/question-button-icons/rules.svg);
+    background-image: url(link));
     background-size: contain;
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root .question-tree-item .personal-data-icon {
-    background-image: url(img/question-button-icons/user-shield.svg);
+    background-image: url(link));
   }
   .survey-creation .survey-manage-panel #questionTree ul.survey-root > .page {
     padding-left: 0px;
@@ -8654,7 +8650,7 @@ html {
     float: right;
   }
   .survey-creation .survey-form .dnd-creation ul.root .header .merge-pages a {
-    background: url(img/merge-pages.png) no-repeat 0 6px;
+    background: url(link)) no-repeat 0 6px;
   }
   .survey-creation .survey-form .dnd-creation ul.root .header .merge-pages a span {
     margin-left: 20px;
@@ -8665,7 +8661,7 @@ html {
     text-decoration: none;
   }
   .survey-creation .survey-form .dnd-creation ul.root .header .merge-pages a:hover:not(.disabled) {
-    background-image: url(img/merge-pages-hover.png);
+    background-image: url(link));
   }
   .survey-creation .survey-form .dnd-creation ul.root .question-separator {
     display: inline;
@@ -8724,7 +8720,7 @@ html {
   .survey-creation .survey-form .dnd-creation ul.root .question-separator .separator-content .action-link-question .action-link-question-icon {
     float: left;
     margin-top: 5px;
-    background-image: url(img/add-question-unhover.png);
+    background-image: url(link));
     background-repeat: no-repeat;
     background-position: 0 8px;
   }
@@ -8732,7 +8728,7 @@ html {
     margin-left: 20px;
   }
   .survey-creation .survey-form .dnd-creation ul.root .question-separator .separator-content .action-link-question .action-link-question-icon:hover:not(.disabled) {
-    background-image: url(img/add-question-hover.png);
+    background-image: url(link));
   }
   .survey-creation .survey-form .dnd-creation ul.root .question-separator .separator-content .action-link-question-media {
     padding-left: 0;
@@ -8743,7 +8739,7 @@ html {
   .survey-creation .survey-form .dnd-creation ul.root .question-separator .separator-content .action-link-page .action-link-page-icon {
     float: left;
     margin-top: 5px;
-    background-image: url(img/page-break-unhover.png);
+    background-image: url(link));
     background-repeat: no-repeat;
     background-position: 0 8px;
   }
@@ -8751,7 +8747,7 @@ html {
     margin-left: 20px;
   }
   .survey-creation .survey-form .dnd-creation ul.root .question-separator .separator-content .action-link-page .action-link-page-icon:hover:not(.disabled) {
-    background-image: url(img/page-break-hover.png);
+    background-image: url(link));
   }
   .survey-creation .survey-form .dnd-creation ul.root .question-separator .separator-content:hover .action-link {
     color: #333;
@@ -9091,7 +9087,7 @@ html {
     max-height: 50px;
     display: inline-block;
     border-radius: 5px 0 0 5px;
-    background-image: url(img/question-move.png);
+    background-image: url(link));
     background-position: center center;
     background-repeat: no-repeat;
     cursor: move;
@@ -9460,7 +9456,7 @@ html {
   .survey-creation .survey-form .dnd-creation ul.root ul.page-children li.leaf > div .question-body .hierarchical-question-editing .export-hierarchical-excel-button .export-hierarchical-excel-icon,
   .survey-creation .survey-form .dnd-creation ul.root ul.page-children .child-question-item > div .question-body .hierarchical-question-editing .export-hierarchical-excel-button .export-hierarchical-excel-icon {
     display: block;
-    background: url(/Content/_shared/img/export-hierarchical-excel.png);
+    background: url(link));
     height: 58px;
     width: 54px;
     margin: 0 auto;
@@ -11777,7 +11773,7 @@ html {
   .etest-group-creation-form .well {
     border-radius: 0;
   }
-  .etest-group-creation-form .open-badge-url-input {
+  .etest-group-creation-form .open-badge-url(link)
     display: inline-block;
     width: 90%;
   }
@@ -11806,16 +11802,16 @@ html {
     background-position: center;
   }
   .survey-list .survey-status.survey-status-public {
-    background-image: url('img/survey-folders/public.svg');
+    background-image: url(link));
   }
   .survey-list .survey-status.survey-status-both {
-    background-image: url('img/survey-folders/public-private.svg');
+    background-image: url(link));
   }
   .survey-list .survey-status.survey-status-private {
-    background-image: url('img/survey-folders/private.svg');
+    background-image: url(link));
   }
   .survey-list .survey-status.survey-status-etest-group {
-    background-image: url('img/survey-folders/etest-group.png');
+    background-image: url(link));
   }
   .survey-list .parent-folders-path {
     color: #137a98;
@@ -11993,28 +11989,28 @@ html {
     margin: 5px 10px 5px 5px;
   }
   .custom-pager .prev-page-arrow {
-    background: url(img/prev-page-arrow.png) no-repeat;
+    background: url(link)) no-repeat;
     background-position: center center;
     width: 20px;
     height: 20px;
     float: left;
   }
   .custom-pager .next-page-arrow {
-    background: url(img/next-page-arrow.png) no-repeat;
+    background: url(link)) no-repeat;
     background-position: center center;
     width: 20px;
     height: 20px;
     float: right;
   }
   .custom-pager .first-page-arrow {
-    background: url(img/first-page-arrow.png) no-repeat;
+    background: url(link)) no-repeat;
     background-position: center center;
     width: 20px;
     height: 20px;
     float: left;
   }
   .custom-pager .last-page-arrow {
-    background: url(img/last-page-arrow.png) no-repeat;
+    background: url(link)) no-repeat;
     background-position: center center;
     width: 20px;
     height: 20px;
@@ -12120,27 +12116,27 @@ html {
   }
   .survey-list-survey-settings-menu a.shortcut-creation-stage,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-creation-stage:hover {
-    background: url(/Content/_shared/img/create-icon.png) 5px no-repeat #e1edd9;
+    background: url(link)) 5px no-repeat #e1edd9;
   }
   .survey-list-survey-settings-menu a.shortcut-case-management-stage,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-case-management-stage:hover,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-case-management-stage:focus {
-    background: url(/Content/_shared/img/case-management-icon.png) 5px no-repeat #ffa8ac;
+    background: url(link)) 5px no-repeat #ffa8ac;
   }
   .survey-list-survey-settings-menu a.shortcut-publishing-stage,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-publishing-stage:hover,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-publishing-stage:focus {
-    background: url(/Content/_shared/img/publish-icon.png) 5px no-repeat #cde9ed;
+    background: url(link)) 5px no-repeat #cde9ed;
   }
   .survey-list-survey-settings-menu a.shortcut-followup-stage,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-followup-stage:hover,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-followup-stage:focus {
-    background: url(/Content/_shared/img/followup-icon.png) 5px no-repeat #d8d6e4;
+    background: url(link)) 5px no-repeat #d8d6e4;
   }
   .survey-list-survey-settings-menu a.shortcut-reporting-stage,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-reporting-stage:hover,
   .survey-list-survey-settings-menu .nav > li > a.shortcut-reporting-stage:focus {
-    background: url(/Content/_shared/img/report-icon.png) 5px no-repeat #f6eaba;
+    background: url(link)) 5px no-repeat #f6eaba;
   }
   .survey-list-survey-preview-icon {
     cursor: pointer;
@@ -12412,7 +12408,7 @@ html {
     height: 16px;
     vertical-align: middle;
     display: inline-block;
-    background: url('img/hierarchy/remove-hierarchy-level.png') no-repeat;
+    background: url(link)) no-repeat;
     background-size: 16px 16px;
     background-position: center;
   }
@@ -12538,7 +12534,7 @@ html {
   }
   .survey-publish .sms-scheduling-region .send-survey-button .send-survey-icon,
   .survey-publish .sms-messages-region .send-survey-button .send-survey-icon {
-    background-image: url(img/survey-send.png);
+    background-image: url(link));
     background-repeat: no-repeat;
     padding-left: 20px;
     line-height: 18px;
@@ -12555,7 +12551,7 @@ html {
   }
   .survey-publish .sms-scheduling-region .send-survey-button[disabled] .send-survey-icon,
   .survey-publish .sms-messages-region .send-survey-button[disabled] .send-survey-icon {
-    background-image: url(img/survey-send-inactive.png);
+    background-image: url(link));
   }
   .survey-publish .sms-scheduling-region .create-schedule-btn,
   .survey-publish .sms-messages-region .create-schedule-btn {
@@ -12609,7 +12605,7 @@ html {
     background-position: center;
   }
   .survey-publish .survey-button-layout-regoin .mobile-device-view-direct-survey .frame-container .layout-button-container .layout-button-img.webropol-icon {
-    background: url("/Content/_shared/img/webropol-icons/w1/webropol-icon_48x40.png") no-repeat;
+    background: url(link)) no-repeat;
   }
   .survey-publish .survey-button-layout-regoin .mobile-device-view-direct-survey .frame-container .layout-button-container .layout-button-app-title {
     text-overflow: ellipsis;
@@ -13046,39 +13042,39 @@ html {
     height: 150px;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(../../Content/img/collect-answers/public-link-grey.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons .public-link .public-link-button:hover {
     background-color: #d5f1f3;
     cursor: pointer;
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons .public-link .public-link-button:hover .public-link-icon {
-    background-image: url(../../Content/img/collect-answers/public-link-black.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons .public-link:hover .public-link-button {
     background-color: #d5f1f3;
     cursor: pointer;
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons .public-link:hover .public-link-button .public-link-icon {
-    background-image: url(../../Content/img/collect-answers/public-link-black.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.private-link-email-button .private-link .private-link-button .private-link-icon {
-    background-image: url(../../Content/img/collect-answers/private-link-email-grey.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.private-link-email-button .private-link:hover .private-link-button .private-link-icon {
-    background-image: url(../../Content/img/collect-answers/private-link-email-black.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.private-link-sms-button .private-link .private-link-button .private-link-icon {
-    background-image: url(../../Content/img/collect-answers/private-link-sms-grey.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.private-link-sms-button .private-link:hover .private-link-button .private-link-icon {
-    background-image: url(../../Content/img/collect-answers/private-link-sms-black.png);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.collect-answers-hierarchy-button .private-link .private-link-button .private-link-icon {
-    background-image: url(../../Content/img/collect-answers/hierarchy-icon-grey.svg);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.collect-answers-hierarchy-button .private-link:hover .private-link-button .private-link-icon {
-    background-image: url(../../Content/img/collect-answers/hierarchy-icon-black.svg);
+    background-image: url(link));
   }
   .survey-publish .survey-publish-container .first-time-publish-buttons.mobile-connector-button .private-link .private-link-button .private-link-icon .fa-user-headset {
     color: #666666;
@@ -13194,13 +13190,13 @@ html {
     color: #137a98;
   }
   .survey-publish .panel-public-link .collapse-arrow-link {
-    background-image: url("img/Arrows/region-close.png");
+    background-image: url(link));
     background-repeat: no-repeat;
     background-position: right center;
     padding-right: 20px;
   }
   .survey-publish .panel-public-link .collapse-arrow-link.collapsed {
-    background-image: url("img/Arrows/region-open.png");
+    background-image: url(link));
   }
   .survey-publish .panel-public-link .close-public-link {
     color: red;
@@ -13379,7 +13375,7 @@ html {
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    background: url('img/collect-answers/email-invalid.png');
+    background: url(link));
     background-size: contain;
   }
   .survey-publish .panel-private-link .recipients-region .icon-email-valid {
@@ -13387,7 +13383,7 @@ html {
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    background: url('img/collect-answers/email-valid.png');
+    background: url(link));
     background-size: contain;
   }
   .survey-publish .panel-private-link .recipients-region .icon-print-help {
@@ -13694,20 +13690,20 @@ html {
     font-size: 18px;
   }
   .send-survey-panel .send-survey-button .send-survey-icon {
-    background: url('img/survey-send.png') no-repeat;
+    background: url(link)) no-repeat;
     padding-left: 20px;
     padding-right: 4px;
     line-height: 18px;
     vertical-align: middle;
   }
   .send-survey-panel .send-survey-button[disabled] .send-survey-icon {
-    background-image: url(img/survey-send-inactive.png);
+    background-image: url(link));
   }
   .send-survey-panel .preview-email-message-button {
     margin-bottom: 40px;
   }
   .send-survey-panel .preview-email-message-button .icon {
-    background: url('img/collect-answers/preview-email.png') no-repeat;
+    background: url(link)) no-repeat;
     padding-left: 20px;
     padding-right: 4px;
     line-height: 18px;
@@ -14284,39 +14280,39 @@ html {
   }
   .folder-settings-menu ul li .image-button.folder-rights,
   .survey-settings-menu ul li .image-button.folder-rights {
-    background-image: url(img/question-library/folder-settings/folder-rights.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button.move-folder,
   .survey-settings-menu ul li .image-button.move-folder,
   .folder-settings-menu ul li .image-button.move-survey,
   .survey-settings-menu ul li .image-button.move-survey {
-    background-image: url(img/question-library/folder-settings/move-folder.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button.add-sub-folder,
   .survey-settings-menu ul li .image-button.add-sub-folder {
-    background-image: url(img/question-library/folder-settings/add-sub-folder.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button.add-home-folder,
   .survey-settings-menu ul li .image-button.add-home-folder {
-    background-image: url(img/question-library/folder-settings/add-home-folder.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button.rename,
   .survey-settings-menu ul li .image-button.rename,
   .folder-settings-menu ul li .image-button.rename-survey,
   .survey-settings-menu ul li .image-button.rename-survey {
-    background-image: url(img/question-library/folder-settings/rename-folder.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button.delete,
   .survey-settings-menu ul li .image-button.delete,
   .folder-settings-menu ul li .image-button.delete-survey,
   .survey-settings-menu ul li .image-button.delete-survey {
-    background-image: url(img/question-library/folder-settings/delete-folder.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button.info,
   .survey-settings-menu ul li .image-button.info,
   .folder-settings-menu ul li .image-button.survey-info,
   .survey-settings-menu ul li .image-button.survey-info {
-    background-image: url(img/question-library/folder-settings/info.png);
+    background-image: url(link));
   }
   .folder-settings-menu ul li .image-button:hover,
   .survey-settings-menu ul li .image-button:hover {
@@ -14335,7 +14331,7 @@ html {
     background-size: 16px;
   }
   .survey-settings-menu ul li .image-button.freeze {
-    background-image: url(img/question-library/freezed-survey.png);
+    background-image: url(link));
   }
   .recipient-list table.table thead th {
     color: #C75000;
@@ -14463,7 +14459,7 @@ html {
     margin-left: 3px;
     width: 32px;
     height: 32px;
-    background: url('_shared/img/microsoft-icons/excel_32.png');
+    background: url(link));
   }
   .light-warning {
     background-color: #FCC6C9;
@@ -14506,19 +14502,19 @@ html {
     height: 25px;
   }
   .target-groups-grid table.table thead .sorting a {
-    background: url('img/sorting/sort_both.png') no-repeat center left;
+    background: url(link)) no-repeat center left;
   }
   .target-groups-grid table.table thead .sorting_asc a {
-    background: url('img/sorting/sort_asc.png') no-repeat center left;
+    background: url(link)) no-repeat center left;
   }
   .target-groups-grid table.table thead .sorting_desc a {
-    background: url('img/sorting/sort_desc.png') no-repeat center left;
+    background: url(link)) no-repeat center left;
   }
   .target-groups-gridtable.table thead .sorting_asc_disabled a {
-    background: url('img/sorting/sort_asc_disabled.png') no-repeat center left;
+    background: url(link)) no-repeat center left;
   }
   .target-groups-grid table.table thead .sorting_desc_disabled a {
-    background: url('img/sorting/sort_desc_disabled.png') no-repeat center left;
+    background: url(link)) no-repeat center left;
   }
   .target-groups-grid table.table thead .sorting_none {
     color: #4e4e4e;
@@ -14620,10 +14616,10 @@ html {
     display: inline-block;
     vertical-align: text-top;
     margin-left: 20px;
-    background-image: url(img/Arrows/region-close.png);
+    background-image: url(link));
   }
   .template-folder-questions-container .survey-container .quetion-menu .arrow.collapsed {
-    background-image: url(img/Arrows/region-open.png);
+    background-image: url(link));
   }
   .template-folder-questions-container .survey-container .question-header {
     cursor: pointer;
@@ -14850,21 +14846,21 @@ html {
   .option-manager-container .menu-link.logical-rules-link,
   .column-manager-container .menu-link.logical-rules-link,
   .child-question-custome-table-manager-container .menu-link.logical-rules-link {
-    background-image: url(img/question-button-icons/rules.svg);
+    background-image: url(link));
     background-size: 18px;
   }
   .dnd-manager-container .menu-link.option-mandatory,
   .option-manager-container .menu-link.option-mandatory,
   .column-manager-container .menu-link.option-mandatory,
   .child-question-custome-table-manager-container .menu-link.option-mandatory {
-    background-image: url(img/question-button-icons/not-mandatory.svg);
+    background-image: url(link));
     background-size: 16px;
   }
   .dnd-manager-container .menu-link.option-mandatory.selected-as-mandatory,
   .option-manager-container .menu-link.option-mandatory.selected-as-mandatory,
   .column-manager-container .menu-link.option-mandatory.selected-as-mandatory,
   .child-question-custome-table-manager-container .menu-link.option-mandatory.selected-as-mandatory {
-    background-image: url(img/question-button-icons/mandatory.svg);
+    background-image: url(link));
   }
   .option-manager-container,
   .column-manager-container,
@@ -14961,7 +14957,7 @@ html {
   .child-question-cell .option-cell-menu-container .cell-menu-item.logical-rules-link {
     width: 20px;
     height: 20px;
-    background: url(img/question-button-icons/rules.svg) 0 0 no-repeat;
+    background: url(link)) 0 0 no-repeat;
     background-position: center;
   }
   .option-cell .option-cell-menu-container .cell-menu-item.cell-setting-link,
@@ -15124,7 +15120,7 @@ html {
     content: '';
     width: 25px;
     height: 25px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS40E0BoxAAAAh1JREFUSEutlVuLQWEUhr8f7ZRTakKKQuQvOFz4Ay5ccEOKlOLCBUVKSlEOYZ69v8Vg9hh7z7wXu22t73v3Or2Lulhhs9l0u91isZhMJgOBgMfjCQaDqVSqXC73er3tdivnHvHMtd/va7VaKBRyu908C4VCqVSqVqs88/k8jNjD4XC9Xj8ej3LnigeuxWLBx10uVy6XGwwG8IrjCiz9fj+TyXAmnU4vl0txmPjiGo/HfBCQ3el0EqsV8LbbbXKPRCKTyUSsNy4igiUWi83nc235FdPp9MPEarXSFoOLyEkNrveJNAjK7/eTrK6dwUWxyZ/UzAP20Gq1uEsreFe0n35R7Nc1+gmHw4G5iUajJKcIhzbTNXHah2YYDoeKgSSu7+1/H7vdzufzMYCKCBlIMTsFJYJHMSZQis0pSA4ehdaQiNicAgZ4FBL7l7jgUUwpohWbU2SzWXgUawTKP/bR6/VWKhXFPmI6UL947KPT6cAwGo0Uiw0lskaczT0JJRKJeDyOAAw9oiY0xRrRbltoNpvcbTQavBtcqBytMyCsEfPAu2DlUSkG9Xw+81P2FxuSxcYyut9trwERV1D1er3WFuECsMDFPmKNkLxYrUCNSI2IIJrNZmK95wJsSJIlf8SF+mm2OK7AQtcoNmdI7RaRxgMXoHa0gg/SZtTPBWYaifBkIIkFO12j2LpG93jm0iAL9hHaevp/ZCCZI+sKXC6frzGQxMfmwbAAAAAASUVORK5CYII=");
+    background-image: url(link));
     background-color: white;
     position: absolute;
     top: -15px;
@@ -15137,7 +15133,7 @@ html {
     content: '';
     width: 25px;
     height: 25px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS40E0BoxAAAAypJREFUSEuNld9Lk1EYx1+NfkA/KCEv7CLpppuKoCKooLsuoj8h0qLL+g80pWWWaRRmhpGI3hg1DTIINnXT0VqTNdKJkdUof01b5s/pNl2f97xH9+68o/xyGC/nPOfLeZ7n+3ynpbJhaiHe+mmiyB46VOvdaevedMO5y9Z95JH3SnvoxUAkuhiXcZlQueaXkzbXt923unNLnfyefdZ3uS10vWOouC105qkfRvbzbrvu9YZjiRV5Zw0ZXIOT84drvVqJ43SD//XQFLzyYA1zy0l7KHKi3kfM8XrfcHRRHgikudzh6T0VrrwK1/P+ieTKqtzNhsTKalNgbIetK7/S7RuZkbvrXLwIosIaT39kztj5L/pGZwqqevZV9YSnY8aOzkUupMaLNk5kgEdtv9l17LFvKanXTuei2ORPaiIgjelYos7383zzx6N17y+0BBv8I9RLnq2hMTDK3areMN8a7adfFNtcIz7bByf3VrqJM6/8O+43n6fMtVyI6zntr/aQnIaOaDNdk4cCEG0ucypExtpW3un8GpVxAq39EzmljrdffmkIknfNx9OPJzXri8yr4G7Pn1hCRguhbC3vRIYaykaQcluAGimXrasxMCajBU41+OHRGBEo5Z4AxVZuWtfFlwMyWqDYHoJHY9YYEbknQNeUm9Z1rikgowWudQzBozFizJrcE6D9yk3rumTPeFeRfQAejelnaOWeADpSbiorp8TREhyX0QInn3yAR8NGoDSLkG90pNw3L+bGPPazSwkEdPXVoIYfoS+mX54IIEh0pFAYixq7vv+WcQLNwfHcUodjOKphbPgRNsL0y8NUii8EiY7MLKTGixQihHnwwbsD9z0MgD6PTBOh2IhxvA4EiY5oP12j2NTI6miGGB96f/Ctc+GQGBt+hI2IgI0Cy9tS1olQk6t6TtK/cEiMDT8ye9u/ARFXCqs9o7NLxo7kArDAhR9hIyQvd7OBGpEaL4IoOJ62vDQXwCExNvLHRrAzq1vRfrpGsYkhtfUXGcjgAjgkrcCPsBGmnwvMGiOCshEkOqL9dI1iGzUyQ+UyQL/wI2Ze+X9EkOgoewVSqb/R96cG6YHwUAAAAABJRU5ErkJggg==");
+    background-image: url(link));
     background-color: white;
     position: absolute;
     top: -15px;
@@ -15150,7 +15146,7 @@ html {
     content: '';
     width: 25px;
     height: 25px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS40E0BoxAAAAz5JREFUSEuVlVlPU1EUhe+fsBpiouKQ8OCLxgcf1BenRBMTf4BSBQXEEhJMMGpEjEo0olGEKMMTMUQjItCWllFmFCpFCTKjYFELAZlK6eTXnkOFtgyu9OHefc5Zd++z91pVPKEwbR9vsbzNMV++VnsgxrDtnG5TrCH8Rt2h3I6Ej6PFMwsTct9yBHLNO2eL+9LjjDvUuo1xxu1pzadyzQn5nVdzzJq7TSdhJB5v3KUfeLbgmpdnFrGMyzLdc732YKR2w53GE+2/DPDKhUXMO2daf5beajjKnpT6I79nB+WCD/+4usebLhl38vtgKXK5nTIaCi63o36kIMawVVMeMTBpklE/FxnBklS9d2SqS0TWxOBke2Llbn5jc8Mi4uWiFkqDa/1EAv2TpotlW1LqDztcdl69XMW96dRPab4N/4e64Zec1fVn8KzQfrrGZa9+RwFgc6e15o/danfOUVNS1R6KU5gj2kzX5K51wO1xl/Y95lTFUA6vLZYitVb12VqlMJDMUXD7VwIZlUCkVT1pPUNSRGyOmWj95lyzRmGyGUixb02QUUnfIzJ62nZW3LcAVwSPgkSYbBGyzn1r/vFmpYsjXtT7gIwyTGqRkR8UB4+C1pCICKEMvvn66+1gOpfb9a73oVqnymhTL81IIL8zGR4FiaE1EUJimaboSK2qoOsmh0UQ8FzYk0ZGmaaoYBmCbHN8jCFcQf2IVsa8dDa+zDGyc7odRLyl9XhLgyg4I4HUhmNMhoKNkBqilWGPhwNkx2Ffds7C7ns8Z326sBKRzTF9Xh+W15Go4EfcEeqXKz5wtWRHsfdbTq9OBBpHXsHQOfZewdjwI2wE9ctFH5yuhSxfds/bY3mW0SAwmMk1+69U7+PzXj3q+zPQFDYilv1guWwg0xHqsv2oHMrjbPlQNs9eLlqDseFH2Ihvw3qB5UXpw/xalv6FQ2JsmBE2IiJrAiJNRQSqnrCNiojkAjgkXPgRNhIw1gHgjiiNjCD6PvVFRpdyARwSY6N+hgU7Q7RyYRG0n65x2eyhNH9GAsu4AL3H2PggHUT9HEBrSITJTm04zhzRfrpWPvgiWGeBXAJUgR9hIwH/jwwkcxT6Bjyev/7nPIlW/CCHAAAAAElFTkSuQmCC");
+    background-image: url(link));
     background-color: white;
     position: absolute;
     top: -15px;
@@ -15163,7 +15159,7 @@ html {
     content: '';
     width: 25px;
     height: 25px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS40E0BoxAAAAvBJREFUSEuNlV9IU1Ecx2+G9VCJ9dBDL5UrfchpkZGUYdBDJf2hkOitDB/rLYWeCoIefCwqKggpAsOiB6UMijKIuHOz6Z0zQ5dFWWazud3tOrY7+2z3uHZ3b20fRHZ+v7Ov5/zO7/dVWrAjMTsT7OmaOH9K2V/tdq5ybVrqdpYpB2sC7WeCT7sToaDYZyZfS4+q365d9tSWy44Sd2356MnGQHvL5KVzgbbT/hMNKBL3bFvz/XaHHtfEdxYxaWnjfuWAU94o+Zt3/37Zo8dUkVhEj0Zm+x77ju5gj+9I3fzncZHI8Fcr7Or3bF3N3wz2PkwlkyJqRyqZmHnU6a5eOVi3Vh2SRTSrxYkQ8u7ZEBtTjEhBVMX9vn4dP/Gvk0YkrUWNuBonshVKRuZ+dt3RtahY56B6ZfeWFb7D21PxeZZpLYrN/blaZkM+oTfP5YolquIRazMz3Xf57tStDj5LPD+vRrH/VaNQ/zN2q8MDYm2G83Inb8N6LifRRzwzryaSFv6vBcHeLg4e6u+TaEj6yPr8WQpqJdXIQNXyQFuLRGfTkCJsR0Et8DfvQkdiROhsEbOjGC2mAh2JWWNERMyOYrQmL55Fh3OVoSpidhSjlS66s0xi+hlaEbOjGK2RYzuVphoJG0GSoRVhC2H5tWtzaezDsFhbSEbCrsrSwIVWCT+iv5h+kbGSSmmfPvJbLC38enJPriiZe/tCwtiYRGyE6RdJM7oWC797ZUycFRpzaF/V0F4HA5CeR4yNimAjRjqPqRtXyE4/uCnWZqbvXyf7o/MqnzM+EdcwNvwIG8lsMBH1ecZaD2kTo2KdA5bnqlw2crw+padnWfgXDomxYUbYiBEpCELGV+a/BIyI0AIckgR+hI3YulUWasTVOBH7oyODIpqrBTgkxsb9sRHsjKEViUV4fl6NYrOHq2VPZGDSAt4LY8OPsBGmn6FlKhgROpuGpI94fm+jg2IbNcolX8sAY8OPsBHT/8emGhqSPrKvwMLCH0V5NnwEXdixAAAAAElFTkSuQmCC");
+    background-image: url(link));
     background-color: white;
     position: absolute;
     top: -15px;
@@ -15184,7 +15180,7 @@ html {
     margin-left: 20px;
   }
   .add-sender-email .validate-email .loader {
-    background: url(img/ajax-loader.gif) no-repeat center center;
+    background: url(link)) no-repeat center center;
     height: 64px;
     width: 64px;
   }
@@ -15358,53 +15354,53 @@ html {
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.add-question-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.add-question-icon {
-    background-image: url(img/survey-settings/square-plus-solid.svg);
+    background-image: url(link));
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.add-question-icon-active,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.add-question-icon-active {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -32px 0px;
+    background: url(link)) -32px 0px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.add-question-icon-disabled,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.add-question-icon-disabled {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') 0px -32px;
+    background: url(link)) 0px -32px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.add-page-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.add-page-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -32px -32px;
+    background: url(link)) -32px -32px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.languages-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.languages-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') 0px -64px;
+    background: url(link)) 0px -64px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.images-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.images-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -64px -32px;
+    background: url(link)) -64px -32px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.layout-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.layout-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -32px -64px;
+    background: url(link)) -32px -64px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.survey-rules,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.survey-rules {
-    background-image: url(img/survey-settings/logic.png);
+    background-image: url(link));
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.settings-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.settings-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -64px 0px;
+    background: url(link)) -64px 0px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.etest-settings-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.etest-settings-icon {
@@ -15416,19 +15412,19 @@ html {
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.preview-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -96px 0px;
+    background: url(link)) -96px 0px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.library-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.library-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -64px -64px;
+    background: url(link)) -64px -64px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .first-line-image-icon.personal-data-icon,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .first-line-image-icon.personal-data-icon {
     width: 32px;
     height: 32px;
-    background: url('img/survey-settings/creation_tools_sprite.png?ver=1.0') -96px -32px;
+    background: url(link)) -96px -32px;
   }
   .toolbar .survey-creation-toolbar .image-and-text-button .second-line-text,
   .toolbar .survey-creation-toolbar .image-and-text-button-disabled .second-line-text {
@@ -15473,69 +15469,69 @@ html {
     color: #595959;
   }
   .toolbar .image-button.rounded-corners-icon {
-    background-image: url(img/rounded-corners.png);
+    background-image: url(link));
   }
   .toolbar .image-button.question-numbering-icon {
-    background-image: url(img/question-numbering.png);
+    background-image: url(link));
   }
   .toolbar .image-button.page-numbering-icon {
-    background-image: url(img/page-numbering.png);
+    background-image: url(link));
   }
   .toolbar .image-button.design-style-icon {
-    background-image: url(img/survey-settings/layout.png);
+    background-image: url(link));
   }
   .toolbar .image-button.background-icon {
-    background-image: url(img/background.png);
+    background-image: url(link));
   }
   .toolbar .image-button.images-icon {
-    background-image: url(img/images.png);
+    background-image: url(link));
   }
   .toolbar .image-button.layout-template-icon {
-    background-image: url(img/layout.png);
+    background-image: url(link));
   }
   .toolbar .image-button.undo-icon {
-    background-image: url(img/ico-undo.svg);
+    background-image: url(link));
     background-size: 24px;
   }
   .toolbar .image-button.slider-h-square-icon {
-    background-image: url(img/ico-slider-h-square.svg);
+    background-image: url(link));
     background-size: 24px;
   }
   .toolbar .image-button.responsive-settings-icon {
-    background-image: url(img/responsive-settings.png);
+    background-image: url(link));
   }
   .toolbar .image-button.sign-icon {
-    background-image: url(img/sign.png);
+    background-image: url(link));
   }
   .toolbar .image-button.survey-header-icon {
-    background-image: url(img/survey-header.png);
+    background-image: url(link));
   }
   .toolbar .image-button.fonts-icon {
-    background-image: url(img/fonts.png);
+    background-image: url(link));
   }
   .toolbar .image-button.navigation-icon {
-    background-image: url(img/navigation.png);
+    background-image: url(link));
   }
   .toolbar .image-button.sizes-icon {
-    background-image: url(img/sizes.png);
+    background-image: url(link));
   }
   .toolbar .image-button.progress-bar-icon {
-    background-image: url(img/progress-bar.png);
+    background-image: url(link));
   }
   .toolbar .image-button.questions-per-page-icon {
-    background-image: url(img/questions-per-page.png);
+    background-image: url(link));
   }
   .toolbar .image-button.add-question-from-library-icon {
-    background-image: url(img/question-button-icons/square-plus-solid.svg);
+    background-image: url(link));
   }
   .toolbar .image-button.add-survey-from-library-icon {
-    background-image: url(img/question-library/file-plus.svg);
+    background-image: url(link));
   }
   .toolbar .image-button.save-multi-questions-to-library-icon {
-    background-image: url(img/question-library/floppy-disk.svg);
+    background-image: url(link));
   }
   .toolbar .image-button.save-survey-to-library-icon {
-    background-image: url(img/question-library/floppy-disk.svg);
+    background-image: url(link));
   }
   .toolbar .image-and-text-button:focus,
   .toolbar .image-and-text-button:hover {
@@ -15594,90 +15590,90 @@ html {
   }
   .survey-settings .settings-icon {
     padding: 5px 5px 5px 40px;
-    background: url(img/settings.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .survey-settings .survey-settings-icon {
     background-repeat: no-repeat;
     padding: 10px 35px;
   }
   .survey-settings .survey-settings-icon.strong-authentication-icon {
-    background-image: url(img/survey-settings/id-card-light.svg);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.answer-by-voice-icon {
-    background-image: url(img/survey-settings/answer-by-voice.svg);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.allow-only-moving-forward-icon {
-    background-image: url(img/survey-settings/allow-only-moving-forward.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.notification-icon {
-    background-image: url(img/survey-settings/notifications.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.group-registration-icon {
-    background-image: url(img/survey-settings/group-registration.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.event-edit-cancel-settings-icon {
-    background-image: url(img/survey-settings/user-cancel_edit_icon.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.user-rights-icon {
-    background-image: url(img/survey-settings/user-rights.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.limit-nmber-of-respondents-icon {
-    background-image: url(img/survey-settings/limit.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.allow-multiple-answers-icon {
-    background-image: url(img/survey-settings/multiple.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.allow-pause-in-answering-icon {
-    background-image: url(img/survey-settings/pause.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.survey-type-icon {
-    background-image: url(img/survey-settings/survey-type.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.survey-logic-or-rules-icon {
-    background-image: url(img/survey-settings/logic.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.login-page-and-id-authentication-icon {
-    background-image: url(img/survey-settings/login.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.survey-profile-and-metadata-icon {
-    background-image: url(img/survey-settings/metadata.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.ip-address-limitations-icon {
-    background-image: url(img/survey-settings/ip-restrictions.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.add-to-library-icon {
-    background-image: url(img/survey-settings/library.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.anonymity-icon {
-    background-image: url(img/survey-settings/anonimity.svg);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.summary-page-icon {
-    background-image: url(img/survey-settings/summary.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.forwarding-icon {
-    background-image: url(img/survey-settings/forward.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.show-hide-icon {
-    background-image: url(img/survey-settings/show-hide.png);
+    background-image: url(link));
     padding-top: 5px;
   }
   .survey-settings .survey-settings-icon.circular-roles-icon {
-    background-image: url(img/survey-settings/circular-roles.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.categorize-questions-icon {
-    background-image: url(img/survey-settings/categorize-questions.png);
+    background-image: url(link));
     line-height: 26px;
     padding-top: 6px;
   }
   .survey-settings .survey-settings-icon.visibility-names-in-report-icon {
-    background-image: url(img/survey-settings/visibility-names-in-report.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.suomi-viestit-icon {
-    background-image: url(img/survey-settings/suomi-fi.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.cm-transfers-logo {
     padding-top: 6px;
-    background-image: url(img/survey-settings/cm-transfers.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.etest-question-group-icon,
   .survey-settings .survey-settings-icon.etest-feedback-icon,
@@ -15710,7 +15706,7 @@ html {
     content: "\f2f2";
   }
   .survey-settings .survey-settings-icon.etest-achievable-points-icon {
-    background-image: url(img/survey-settings/layout.png);
+    background-image: url(link));
   }
   .survey-settings .survey-settings-icon.randomization-icon:before {
     content: "\f522";
@@ -16321,7 +16317,7 @@ html {
     vertical-align: middle;
   }
   .survey-case-management-handler-groups .handler-groups-warning {
-    background: url('img/handler-groups-warning.png') no-repeat no-repeat;
+    background: url(link)) no-repeat no-repeat;
     padding-left: 16px;
     line-height: 15px;
   }
@@ -16430,10 +16426,10 @@ html {
     font-size: 16px;
   }
   .survey-case-management-access-rights-forwarding-rules .email-pause {
-    background: url('img/pause.png') no-repeat no-repeat;
+    background: url(link)) no-repeat no-repeat;
   }
   .survey-case-management-access-rights-forwarding-rules .email-ok {
-    background: url('img/ok.png') no-repeat no-repeat;
+    background: url(link)) no-repeat no-repeat;
   }
   .survey-case-management-access-rights-forwarding-rules .email-on-date-input {
     overflow: hidden;
@@ -16937,7 +16933,7 @@ html {
     right: 0;
     padding-left: 24px;
     line-height: 17px;
-    background: url('_shared/img/generic-grid/excel-filter/clear-filter.png') no-repeat center left;
+    background: url(link)) no-repeat center left;
   }
   .case-filter-rules .case-filter-rule-and {
     padding-left: 25px;
@@ -17160,7 +17156,7 @@ html {
   .case-management .header .webropol-menu-top .webropol-menu-top-small-bar .logo-container .logo {
     width: 26px;
     height: 18px;
-    background: url(img/case-management/logo/cm-logo-small.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .single-question-filter-description {
     background-color: linen;
@@ -17446,7 +17442,7 @@ html {
   }
   .settings-modal .time-series-unit-selection .btn-group.open .arrow-button,
   .settings-inline .time-series-unit-selection .btn-group.open .arrow-button {
-    background: url(images/dropdown-arrow-open.png) no-repeat;
+    background: url(link)) no-repeat;
     cursor: pointer;
     border: none;
     width: 22px;
@@ -17456,7 +17452,7 @@ html {
   }
   .settings-modal .time-series-unit-selection .btn-group .arrow-button,
   .settings-inline .time-series-unit-selection .btn-group .arrow-button {
-    background: url(images/dropdown-arrow.png) no-repeat;
+    background: url(link)) no-repeat;
     cursor: pointer;
     border: none;
     width: 15px;
@@ -17863,14 +17859,14 @@ html {
     width: 47px;
     margin: 0 16px;
     height: 35px;
-    background: url(img/hierarchical-answer-option-all-levels.png);
+    background: url(link));
   }
   .question-settings .hierarchical-settings label.hierarchical-answer-option-one-level .answer-option-image {
     display: inline-block;
     width: 47px;
     margin: 0 16px;
     height: 11px;
-    background: url(img/hierarchical-answer-option-one-level.png);
+    background: url(link));
   }
   .question-settings .hierarchical-settings label.selected {
     background-color: #eee;
@@ -18051,7 +18047,7 @@ html {
     height: 16px;
     vertical-align: middle;
     display: inline-block;
-    background: url('img/delete-icon-gray-medium.png') no-repeat;
+    background: url(link)) no-repeat;
     background-size: 16px 16px;
     background-position: center;
   }
@@ -18547,7 +18543,7 @@ html {
   .modal.user-management-surveys-access-rights-popup-dlg .survey-access-rights-icon-etest-group {
     width: 21px;
     height: 21px;
-    background-image: url('img/survey-folders/etest-group.png');
+    background-image: url(link));
     vertical-align: top;
     display: inline-block;
     margin-right: -10px;
@@ -18735,25 +18731,25 @@ html {
     background-color: #a2deeb !important;
   }
   .course-feedback-publish-button {
-    background: url(/Content/img/course-feedback/start.png) 5px no-repeat #cde9ed;
+    background: url(link)) 5px no-repeat #cde9ed;
     padding-top: 10px;
     padding-bottom: 12px;
     border-radius: 4px;
   }
   .course-feedback-preview-button {
-    background: url(/Content/img/preview.png) 5px no-repeat #e1edd9;
+    background: url(link)) 5px no-repeat #e1edd9;
     padding-top: 10px;
     padding-bottom: 12px;
     border-radius: 4px;
   }
   .course-feedback-reporting-button {
-    background: url(/Content/_shared/img/report-icon.png) 5px no-repeat #f6eaba;
+    background: url(link)) 5px no-repeat #f6eaba;
     padding-top: 10px;
     padding-bottom: 12px;
     border-radius: 4px;
   }
   .course-feedback-additional-functions-button {
-    /*background: url(/Content/_shared/img/report-icon.png) 5px no-repeat;*/
+    /*background: url(link)) 5px no-repeat;*/
     padding-top: 10px;
     padding-bottom: 12px;
     border-radius: 4px;
@@ -18775,19 +18771,19 @@ html {
     padding: 0;
   }
   a.course-feedback-arrow-marked {
-    background-image: url(img/latest_arrow.png);
+    background-image: url(link));
     background-position: right center;
     background-repeat: no-repeat;
     vertical-align: middle;
     padding-right: 30px;
   }
   a.course-feedback-arrow-marked:hover {
-    background-image: url(img/latest_arrow_active.png);
+    background-image: url(link));
   }
   /* element marked with "to the right" arrow */
   
   span.open a.course-feedback-arrow-marked {
-    background-image: url(img/latest_arrow_active_down.png);
+    background-image: url(link));
     background-position: right center;
     background-repeat: no-repeat;
     vertical-align: middle;
@@ -19440,7 +19436,7 @@ html {
     color: green;
   }
   .survey-rules.survey-rules-icon {
-    background-image: url(img/survey-settings/logic.png);
+    background-image: url(link));
   }
   .survey-rules .modal-body-survey-rules,
   .survey-rules .modal-body-survey-rule-details {
@@ -19607,7 +19603,7 @@ html {
   .folder-survey-access-right-grid .survey-type-etest-group {
     width: 21px;
     height: 21px;
-    background-image: url('img/survey-folders/etest-group.png');
+    background-image: url(link));
     vertical-align: top;
     display: inline-block;
   }
@@ -19782,7 +19778,7 @@ html {
   }
   .event-excel-export-control {
     cursor: pointer;
-    background-image: url("/Content/_shared/img/microsoft-icons/excel_32.png");
+    background-image: url(link));
     height: 32px;
     width: 32px;
     display: inline-block;
@@ -19807,13 +19803,13 @@ html {
     vertical-align: middle;
   }
   .event-setting .event-properties-icon {
-    background-image: url(/content/img/survey-folders/event-settings.png);
+    background-image: url(link));
   }
   .event-setting .event-settings-icon {
-    background-image: url(/content/img/event-calendar/event-settings.png);
+    background-image: url(link));
   }
   .event-setting .event-registration-history-icon {
-    background-image: url(/content/img/event-calendar/registration-history.png);
+    background-image: url(link));
   }
   .striped-rows .row-striped {
     padding-top: 5px;
@@ -19977,27 +19973,27 @@ html {
   }
   .event-list-event-settings-menu a.shortcut-creation-stage,
   .event-list-event-settings-menu .nav > li > a.shortcut-creation-stage:hover {
-    background: url(/Content/_shared/img/create-icon.png) 5px no-repeat #e1edd9;
+    background: url(link)) 5px no-repeat #e1edd9;
   }
   .event-list-event-settings-menu a.shortcut-case-management-stage,
   .event-list-event-settings-menu .nav > li > a.shortcut-case-management-stage:hover,
   .event-list-event-settings-menu .nav > li > a.shortcut-case-management-stage:focus {
-    background: url(/Content/_shared/img/case-management-icon.png) 5px no-repeat #ffa8ac;
+    background: url(link)) 5px no-repeat #ffa8ac;
   }
   .event-list-event-settings-menu a.shortcut-publishing-stage,
   .event-list-event-settings-menu .nav > li > a.shortcut-publishing-stage:hover,
   .event-list-event-settings-menu .nav > li > a.shortcut-publishing-stage:focus {
-    background: url(/Content/_shared/img/publish-icon.png) 5px no-repeat #cde9ed;
+    background: url(link)) 5px no-repeat #cde9ed;
   }
   .event-list-event-settings-menu a.shortcut-followup-stage,
   .event-list-event-settings-menu .nav > li > a.shortcut-followup-stage:hover,
   .event-list-event-settings-menu .nav > li > a.shortcut-followup-stage:focus {
-    background: url(/Content/_shared/img/followup-icon.png) 5px no-repeat #d8d6e4;
+    background: url(link)) 5px no-repeat #d8d6e4;
   }
   .event-list-event-settings-menu a.shortcut-reporting-stage,
   .event-list-event-settings-menu .nav > li > a.shortcut-reporting-stage:hover,
   .event-list-event-settings-menu .nav > li > a.shortcut-reporting-stage:focus {
-    background: url(/Content/_shared/img/report-icon.png) 5px no-repeat #f6eaba;
+    background: url(link)) 5px no-repeat #f6eaba;
   }
   .event-list-event-settings-menu .text-center {
     text-align: center;
@@ -20030,34 +20026,34 @@ html {
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-icon.shortcut-creation-stage,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-icon.shortcut-creation-stage {
-    background: url(/Content/_shared/img/create-icon.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-icon.shortcut-publishing-stage,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-icon.shortcut-publishing-stage {
-    background: url(/Content/_shared/img/publish-icon.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-icon.shortcut-followup-stage,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-icon.shortcut-followup-stage {
-    background: url(/Content/_shared/img/followUp-icon.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-icon.shortcut-reporting-stage,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-icon.shortcut-reporting-stage {
-    background: url(/Content/_shared/img/report-icon.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-icon.shortcut-manage-participants-stage,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-icon.shortcut-manage-participants-stage {
-    background: url(/Content/_shared/img/er-manage-participants-icon.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-icon.shortcut-event-settings-stage,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-icon.shortcut-event-settings-stage {
-    background: url(/Content/_shared/img/er-edit-event-settings.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-stage-title,
   .event-list-event-settings-menu ul.event-nav-shortcuts a:hover .shortcut-stage-title {
     vertical-align: middle;
   }
   .event-list-event-settings-menu ul.event-nav-shortcuts a .shortcut-creation-stage {
-    background: url(/Content/_shared/img/create-icon.png) 5px no-repeat #e1edd9;
+    background: url(link)) 5px no-repeat #e1edd9;
   }
   .event-settings .panel {
     border: none;
@@ -20494,7 +20490,7 @@ html {
   .event-settings .event-creation-settings-group .panel .event-feedback-groups .send-survey-panel-button .send-survey-button .send-survey-icon,
   .event-settings .event-creation-settings-group .panel-default .event-feedback-groups .send-survey-panel-button .send-survey-button .send-survey-icon,
   .event-settings .event-creation-settings-group .tab-pane .event-feedback-groups .send-survey-panel-button .send-survey-button .send-survey-icon {
-    background-image: url(img/survey-send.png);
+    background-image: url(link));
     background-repeat: no-repeat;
     padding-left: 20px;
     line-height: 18px;
@@ -20531,7 +20527,7 @@ html {
     padding-left: 0.6em;
   }
   .agreement .export-pdf-icon {
-    background-image: url(_shared/img/summary-page/export-to-pdf.png);
+    background-image: url(link));
     width: 32px;
     height: 32px;
     display: block;
@@ -20618,7 +20614,7 @@ html {
     height: 16px;
     vertical-align: middle;
     display: inline-block;
-    background: url('img/hierarchy/remove-hierarchy-level.png') no-repeat;
+    background: url(link)) no-repeat;
     background-size: 16px 16px;
     background-position: center;
   }
@@ -20735,7 +20731,7 @@ html {
     background-color: #F7F7F7;
     margin: 10px;
     box-shadow: grey 0px 0px 5px 0px;
-    background-image: url('/Content/_shared/img/webropol-icons/w1/w-cut-logo.png');
+    background-image: url(link));
     background-position: right bottom;
     background-repeat: no-repeat;
     display: flex;
@@ -20815,7 +20811,7 @@ html {
   .training-videos-container .video-thumbnail-container-flex .video-thumbnail .thumbnail-image {
     width: 230px;
     height: 200px;
-    background-image: url('https://webropol.fi/wp-content/uploads/2019/10/3.0-background.png');
+    background-image: url(link));
     background-size: cover;
     background-color: #1e6880;
     border-radius: 8px 8px 0 0;
@@ -21984,7 +21980,7 @@ html {
     color: #1E6880;
   }
   .wstore-container .license-shop .contact-request {
-    background: aliceblue url('/Content/img/w-store/form-bg.jpg');
+    background: aliceblue url(link));
     padding: 30px 20px;
     border-radius: 5px;
   }
@@ -23073,7 +23069,7 @@ html {
     padding-bottom: 3px;
   }
   .secure-email .export-pdf-icon {
-    background-image: url(_shared/img/summary-page/export-to-pdf.png);
+    background-image: url(link));
     width: 32px;
     height: 32px;
     display: block;
@@ -23852,19 +23848,19 @@ html {
           }
   
       #toast-container > .toast-info {
-          background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important;
+          background-image: url(link)) !important;
       }
   
       #toast-container > .toast-error {
-          background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=") !important;
+          background-image: url(link)) !important;
       }
   
       #toast-container > .toast-success {
-          background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==") !important;
+          background-image: url(link)) !important;
       }
   
       #toast-container > .toast-warning {
-          background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=") !important;
+          background-image: url(link)) !important;
       }
   
       #toast-container.toast-top-center > div,
@@ -27427,7 +27423,7 @@ html {
   .fa-page-break::before {
     content: "\f877"; }
   
-  .fa-bracket-curly-right::before {
+  .fa-bracket-curl(link)
     content: "\7d"; }
   
   .fa-spider::before {
@@ -31411,10 +31407,10 @@ html {
   .fa-tank-water::before {
     content: "\e452"; }
   
-  .fa-curling-stone::before {
+  .fa-curl(link)
     content: "\f44a"; }
   
-  .fa-curling::before {
+  .fa-curl(link)
     content: "\f44a"; }
   
   .fa-gamepad-modern::before {
@@ -31603,7 +31599,7 @@ html {
   .fa-circle-yen::before {
     content: "\e5d0"; }
   
-  .fa-brackets-curly::before {
+  .fa-brackets-curl(link)
     content: "\f7ea"; }
   
   .fa-ellipsis-stroke-vertical::before {
@@ -34255,10 +34251,10 @@ html {
   .fa-taxi-bus::before {
     content: "\e298"; }
   
-  .fa-bracket-curly::before {
+  .fa-bracket-curl(link)
     content: "\7b"; }
   
-  .fa-bracket-curly-left::before {
+  .fa-bracket-curl(link)
     content: "\7b"; }
   
   .fa-lobster::before {
@@ -37116,7 +37112,7 @@ html {
     font-style: normal;
     font-weight: 400;
     font-display: block;
-    src: url("../../webfontsfa-brands-400.woff2") format("woff2"), url("../../webfonts/fa-brands-400.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   .fab,
   .fa-brands {
@@ -38651,7 +38647,7 @@ html {
     font-style: normal;
     font-weight: 900;
     font-display: block;
-    src: url("../../webfonts/fa-duotone-900.woff2") format("woff2"), url("../../webfonts/fa-duotone-900.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   .fad,
   .fa-duotone {
@@ -41629,7 +41625,7 @@ html {
   .fad.fa-page-break::after, .fa-duotone.fa-page-break::after {
     content: "\f877\f877"; }
   
-  .fad.fa-bracket-curly-right::after, .fa-duotone.fa-bracket-curly-right::after {
+  .fad.fa-bracket-curl(link)
     content: "\7d\7d"; }
   
   .fad.fa-spider::after, .fa-duotone.fa-spider::after {
@@ -45613,10 +45609,10 @@ html {
   .fad.fa-tank-water::after, .fa-duotone.fa-tank-water::after {
     content: "\e452\e452"; }
   
-  .fad.fa-curling-stone::after, .fa-duotone.fa-curling-stone::after {
+  .fad.fa-curl(link)
     content: "\f44a\f44a"; }
   
-  .fad.fa-curling::after, .fa-duotone.fa-curling::after {
+  .fad.fa-curl(link)
     content: "\f44a\f44a"; }
   
   .fad.fa-gamepad-modern::after, .fa-duotone.fa-gamepad-modern::after {
@@ -45805,7 +45801,7 @@ html {
   .fad.fa-circle-yen::after, .fa-duotone.fa-circle-yen::after {
     content: "\e5d0\e5d0"; }
   
-  .fad.fa-brackets-curly::after, .fa-duotone.fa-brackets-curly::after {
+  .fad.fa-brackets-curl(link)
     content: "\f7ea\f7ea"; }
   
   .fad.fa-ellipsis-stroke-vertical::after, .fa-duotone.fa-ellipsis-stroke-vertical::after {
@@ -48457,10 +48453,10 @@ html {
   .fad.fa-taxi-bus::after, .fa-duotone.fa-taxi-bus::after {
     content: "\e298\e298"; }
   
-  .fad.fa-bracket-curly::after, .fa-duotone.fa-bracket-curly::after {
+  .fad.fa-bracket-curl(link)
     content: "\7b\7b"; }
   
-  .fad.fa-bracket-curly-left::after, .fa-duotone.fa-bracket-curly-left::after {
+  .fad.fa-bracket-curl(link)
     content: "\7b\7b"; }
   
   .fad.fa-lobster::after, .fa-duotone.fa-lobster::after {
@@ -51295,7 +51291,7 @@ html {
     font-style: normal;
     font-weight: 300;
     font-display: block;
-    src: url("../../webfonts/fa-light-300.woff2") format("woff2"), url("../../webfonts/fa-light-300.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   .fal,
   .fa-light {
@@ -51309,7 +51305,7 @@ html {
     font-style: normal;
     font-weight: 400;
     font-display: block;
-    src: url("../../webfonts/fa-regular-400.woff2") format("woff2"), url("../../webfonts/fa-regular-400.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   .far,
   .fa-regular {
@@ -51323,7 +51319,7 @@ html {
     font-style: normal;
     font-weight: 900;
     font-display: block;
-    src: url("../../webfonts/fa-solid-900.woff2") format("woff2"), url("../../webfonts/fa-solid-900.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   .fas,
   .fa-solid {
@@ -51337,14 +51333,14 @@ html {
     font-style: normal;
     font-weight: 100;
     font-display: block;
-    src: url("../../webfonts/fa-thin-100.woff2") format("woff2"), url("../../webfonts/fa-thin-100.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
       font-family: 'Font Awesome 6 Sharp';
       font-style: normal;
       font-weight: 400;
       font-display: block;
-      src: url("../../webfonts/fa-sharp-regular-400.woff2") format("woff2"), url("../../webfonts/fa-sharp-regular-400.ttf") format("truetype"); }
+      src: url(link)) format("woff2"), url(link)) format("truetype"); }
   .fat,
   .fa-thin {
     font-weight: 100; }
@@ -51352,51 +51348,51 @@ html {
     font-family: 'Font Awesome 5 Brands';
     font-display: block;
     font-weight: 400;
-    src: url("../../webfonts/fa-brands-400.woff2") format("woff2"), url("../../webfonts/fa-brands-400.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
     font-family: 'Font Awesome 5 Pro';
     font-display: block;
     font-weight: 900;
-    src: url("../../webfonts/fa-solid-900.woff2") format("woff2"), url("../../webfonts/fa-solid-900.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
     font-family: 'Font Awesome 5 Pro';
     font-display: block;
     font-weight: 400;
-    src: url("../../webfonts/fa-regular-400.woff2") format("woff2"), url("../../webfonts/fa-regular-400.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
     font-family: 'Font Awesome 5 Pro';
     font-display: block;
     font-weight: 300;
-    src: url("../../webfonts/fa-light-300.woff2") format("woff2"), url("../../webfonts/fa-light-300.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
     font-family: 'Font Awesome 5 Duotone';
     font-display: block;
     font-weight: 900;
-    src: url("../../webfonts/fa-duotone-900.woff2") format("woff2"), url("../../webfonts/fa-duotone-900.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   @font-face {
     font-family: 'FontAwesome';
     font-display: block;
-    src: url("../../webfonts/fa-solid-900.woff2") format("woff2"), url("../../webfonts/fa-solid-900.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
     font-family: 'FontAwesome';
     font-display: block;
-    src: url("../../webfonts/fa-brands-400.woff2") format("woff2"), url("../../webfonts/fa-brands-400.ttf") format("truetype"); }
+    src: url(link)) format("woff2"), url(link)) format("truetype"); }
   
   @font-face {
     font-family: 'FontAwesome';
     font-display: block;
-    src: url("../../webfonts/fa-regular-400.woff2") format("woff2"), url("../../webfonts/fa-regular-400.ttf") format("truetype");
+    src: url(link)) format("woff2"), url(link)) format("truetype");
     unicode-range: U+F003,U+F006,U+F014,U+F016-F017,U+F01A-F01B,U+F01D,U+F022,U+F03E,U+F044,U+F046,U+F05C-F05D,U+F06E,U+F070,U+F087-F088,U+F08A,U+F094,U+F096-F097,U+F09D,U+F0A0,U+F0A2,U+F0A4-F0A7,U+F0C5,U+F0C7,U+F0E5-F0E6,U+F0EB,U+F0F6-F0F8,U+F10C,U+F114-F115,U+F118-F11A,U+F11C-F11D,U+F133,U+F147,U+F14E,U+F150-F152,U+F185-F186,U+F18E,U+F190-F192,U+F196,U+F1C1-F1C9,U+F1D9,U+F1DB,U+F1E3,U+F1EA,U+F1F7,U+F1F9,U+F20A,U+F247-F248,U+F24A,U+F24D,U+F255-F25B,U+F25D,U+F271-F274,U+F278,U+F27B,U+F28C,U+F28E,U+F29C,U+F2B5,U+F2B7,U+F2BA,U+F2BC,U+F2BE,U+F2C0-F2C1,U+F2C3,U+F2D0,U+F2D2,U+F2D4,U+F2DC; }
   
   @font-face {
     font-family: 'FontAwesome';
     font-display: block;
-    src: url("../../webfonts/fa-v4compatibility.woff2") format("woff2"), url("../../webfonts/fa-v4compatibility.ttf") format("truetype");
+    src: url(link)) format("woff2"), url(link)) format("truetype");
     unicode-range: U+F041,U+F047,U+F065-F066,U+F07D-F07E,U+F080,U+F08B,U+F08E,U+F090,U+F09A,U+F0AC,U+F0AE,U+F0B2,U+F0D0,U+F0D6,U+F0E4,U+F0EC,U+F10A-F10B,U+F123,U+F13E,U+F148-F149,U+F14C,U+F156,U+F15E,U+F160-F161,U+F163,U+F175-F178,U+F195,U+F1F8,U+F219,U+F27A; }
   
   /* changed by Webropol */
@@ -51421,176 +51417,176 @@ html {
   
   @font-face {
     font-family: 'Latolight';
-    src: url(/Content/_shared/fonts/lato/lato-lig-webfont.eot);
-    src: local('latolight'), url(/Content/_shared/fonts/lato/lato-lig-webfont.eot?#iefix) format('embedded-opentype'), url(/Content/_shared/fonts/lato/lato-lig-webfont.woff) format('woff'), url(/Content/_shared/fonts/lato/lato-lig-webfont.ttf) format('truetype'), url(/Content/_shared/fonts/lato/lato-lig-webfont.svg#latolight) format('svg');
+    src: url(link));
+    src: local('latolight'), url(link)) format('embedded-opentype'), url(link)) format('woff'), url(link)) format('truetype'), url(link)) format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Latoregular';
-    src: url(/Content/_shared/fonts/lato/lato-reg-webfont.eot);
-    src: local('latoregular'), url(/Content/_shared/fonts/lato/lato-reg-webfont.eot?#iefix) format('embedded-opentype'), url(/Content/_shared/fonts/lato/lato-reg-webfont.woff) format('woff'), url(/Content/_shared/fonts/lato/lato-reg-webfont.ttf) format('truetype'), url(/Content/_shared/fonts/lato/lato-reg-webfont.svg#latoregular) format('svg');
+    src: url(link));
+    src: local('latoregular'), url(link)) format('embedded-opentype'), url(link)) format('woff'), url(link)) format('truetype'), url(link)) format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Latobold';
-    src: url(/Content/_shared/fonts/lato/lato-bol-webfont.eot);
-    src: url(/Content/_shared/fonts/lato/lato-bol-webfont.eot?#iefix) format('embedded-opentype'), url(/Content/_shared/fonts/lato/lato-bol-webfont.woff) format('woff'), url(/Content/_shared/fonts/lato/lato-bol-webfont.ttf) format('truetype'), url(/Content/_shared/fonts/lato/lato-bol-webfont.svg#latobold) format('svg');
+    src: url(link));
+    src: url(link)) format('embedded-opentype'), url(link)) format('woff'), url(link)) format('truetype'), url(link)) format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Rockwell';
-    src: url(/Content/_shared/fonts/rockwell/rockwell.eot);
-    src: local('Rockwell'), url(/Content/_shared/fonts/rockwell/rockwell.eot?#iefix) format('embedded-opentype'), url(/Content/_shared/fonts/rockwell/rockwell.woff) format('woff'), url(/Content/_shared/fonts/rockwell/rockwell.ttf) format('truetype'), url(/Content/_shared/fonts/rockwell/rockwell.svg#rockwell) format('svg');
+    src: url(link));
+    src: local('Rockwell'), url(link)) format('embedded-opentype'), url(link)) format('woff'), url(link)) format('truetype'), url(link)) format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Montserratlight';
-    src: url(/Content/_shared/fonts/montserrat/Montserrat-Light.ttf);
-    src: local('montserratlight'), url(/Content/_shared/fonts/montserrat/Montserrat-Light.ttf) format('truetype');
+    src: url(link));
+    src: local('montserratlight'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Montserratregular';
-    src: url(/Content/_shared/fonts/montserrat/Montserrat-Regular.ttf);
-    src: local('montserratregular'), url(/Content/_shared/fonts/montserrat/Montserrat-Regular.ttf) format('truetype');
+    src: url(link));
+    src: local('montserratregular'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Montserratbold';
-    src: url(/Content/_shared/fonts/montserrat/Montserrat-Bold.ttf);
-    src: local('montserratbold'), url(/Content/_shared/fonts/montserrat/Montserrat-Bold.ttf) format('truetype');
+    src: url(link));
+    src: local('montserratbold'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Segoeuilight';
-    src: url(/Content/_shared/fonts/segoeui/segoeuil.ttf);
-    src: local('segoeuilight'), url(/Content/_shared/fonts/segoeui/segoeuil.ttf) format('truetype');
+    src: url(link));
+    src: local('segoeuilight'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Segoeuiregular';
-    src: url(/Content/_shared/fonts/segoeui/segoeui.ttf);
-    src: local('segoeuiregular'), url(/Content/_shared/fonts/segoeui/segoeui.ttf) format('truetype');
+    src: url(link));
+    src: local('segoeuiregular'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Segoeuibold';
-    src: url(/Content/_shared/fonts/segoeui/segoeuib.ttf);
-    src: local('segoeuibold'), url(/Content/_shared/fonts/segoeui/segoeuib.ttf) format('truetype');
+    src: url(link));
+    src: local('segoeuibold'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Robotolight';
-    src: url(/Content/_shared/fonts/roboto/Roboto-Light.ttf);
-    src: local('robotolight'), url(/Content/_shared/fonts/roboto/Roboto-Light.ttf) format('truetype');
+    src: url(link));
+    src: local('robotolight'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Robotoregular';
-    src: url(/Content/_shared/fonts/roboto/Roboto-Regular.ttf);
-    src: local('robotoregular'), url(/Content/_shared/fonts/roboto/Roboto-Regular.ttf) format('truetype');
+    src: url(link));
+    src: local('robotoregular'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Robotomedium';
-    src: url(/Content/_shared/fonts/roboto/Roboto-Medium.ttf);
-    src: local('robotoregular'), url(/Content/_shared/fonts/roboto/Roboto-Medium.ttf) format('truetype');
+    src: url(link));
+    src: local('robotoregular'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Robotobold';
-    src: url(/Content/_shared/fonts/roboto/Roboto-Bold.ttf);
-    src: local('robotobold'), url(/Content/_shared/fonts/roboto/Roboto-Bold.ttf) format('truetype');
+    src: url(link));
+    src: local('robotobold'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'RobotoCondensedBold';
-    src: url(/Content/_shared/fonts/roboto/RobotoCondensed-Bold.ttf);
-    src: local('robotobold'), url(/Content/_shared/fonts/roboto/RobotoCondensed-Bold.ttf) format('truetype');
+    src: url(link));
+    src: local('robotobold'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Robotolight';
-    src: url(/Content/_shared/fonts/roboto/Roboto-Light.ttf);
-    src: local('robotolight'), url(/Content/_shared/fonts/roboto/Roboto-Light.ttf) format('truetype');
+    src: url(link));
+    src: local('robotolight'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Ubuntubold';
-    src: url(/Content/_shared/fonts/ubuntu/Ubuntu-Bold.ttf);
-    src: local('ubuntubold'), url(/Content/_shared/fonts/ubuntu/Ubuntu-Bold.ttf) format('truetype');
+    src: url(link));
+    src: local('ubuntubold'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Ubuntulight';
-    src: url(/Content/_shared/fonts/ubuntu/Ubuntu-Light.ttf);
-    src: local('ubuntulight'), url(/Content/_shared/fonts/ubuntu/Ubuntu-Light.ttf) format('truetype');
+    src: url(link));
+    src: local('ubuntulight'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Ubunturegular';
-    src: url(/Content/_shared/fonts/ubuntu/Ubuntu-Regular.ttf);
-    src: local('ubunturegular'), url(/Content/_shared/fonts/ubuntu/Ubuntu-Regular.ttf) format('truetype');
+    src: url(link));
+    src: local('ubunturegular'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Titilliumwebbold';
-    src: url(/Content/_shared/fonts/titilliumWeb/TitilliumWeb-Bold.ttf);
-    src: local('titilliumwebbold'), url(/Content/_shared/fonts/titilliumWeb/TitilliumWeb-Bold.ttf) format('truetype');
+    src: url(link));
+    src: local('titilliumwebbold'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Titilliumweblight';
-    src: url(/Content/_shared/fonts/titilliumWeb/TitilliumWeb-Light.ttf);
-    src: local('titilliumweblight'), url(/Content/_shared/fonts/titilliumWeb/TitilliumWeb-Light.ttf) format('truetype');
+    src: url(link));
+    src: local('titilliumweblight'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Titilliumwebregular';
-    src: url(/Content/_shared/fonts/titilliumWeb/TitilliumWeb-Regular.ttf);
-    src: local('titilliumwebregular'), url(/Content/_shared/fonts/titilliumWeb/TitilliumWeb-Regular.ttf) format('truetype');
+    src: url(link));
+    src: local('titilliumwebregular'), url(link)) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -51847,7 +51843,7 @@ html {
     padding: 0 20px;
   }
   .modal .modal-header .ico-dialog-close {
-    background: url(/Content/_shared/img/ico-close.png) no-repeat center left;
+    background: url(link)) no-repeat center left;
     width: 18px;
     height: 18px;
   }
@@ -52178,7 +52174,7 @@ html {
     background-color: #f7f7f7;
     margin: 10px;
     box-shadow: grey 0px 0px 5px 0px;
-    background-image: url(/Content/_shared/img/webropol-icons/w1/w-cut-logo.png);
+    background-image: url(link));
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 70px 70px;
@@ -52845,19 +52841,19 @@ html {
     color: black;
   }
   table.table thead .sorting button:first-of-type {
-    background: url(/Content/_shared/img/generic-grid/sorting/sort_both.png) no-repeat right center;
+    background: url(link)) no-repeat right center;
   }
   table.table thead .sorting_asc button:first-of-type {
-    background: url(/Content/_shared/img/generic-grid/sorting/sort_asc.png) no-repeat right center;
+    background: url(link)) no-repeat right center;
   }
   table.table thead .sorting_desc button:first-of-type {
-    background: url(/Content/_shared/img/generic-grid/sorting/sort_desc.png) no-repeat right center;
+    background: url(link)) no-repeat right center;
   }
   table.table thead .sorting_asc_disabled button:first-of-type {
-    background: url(/Content/_shared/img/generic-grid/sorting/sort_asc_disabled.png) no-repeat right center;
+    background: url(link)) no-repeat right center;
   }
   table.table thead .sorting_desc_disabled button:first-of-type {
-    background: url(/Content/_shared/img/generic-grid/sorting/sort_desc_disabled.png) no-repeat right center;
+    background: url(link)) no-repeat right center;
   }
   table.table thead .sorting_none {
     color: #4e4e4e;
@@ -52897,7 +52893,7 @@ html {
     margin: 6px 0px;
     vertical-align: middle;
     cursor: move;
-    background-image: url(/Content/_shared/img/drag-handle.png);
+    background-image: url(link));
     background-repeat: repeat-y;
     background-position: center center;
   }
@@ -53210,19 +53206,19 @@ html {
     width: 24px;
     height: 18px;
     margin: 0;
-    background: url(/Content/_shared/img/webropol-icons/w1/w-logo.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .logo-container .logo-events {
     width: 24px;
     height: 18px;
     margin: 0;
-    background: url(/Content/_shared/img/webropol-icons/w1/webropol-events-icon_24x18.png);
+    background: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .logo-container .logo-circular {
     width: 24px;
     height: 18px;
     margin: 0;
-    background: url(/Content/_shared/img/webropol-icons/w1/webropol-circular-icon.png);
+    background: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .simple-link a,
   .header .webropol-menu-top .webropol-menu-top-small-bar a.highlighted-button,
@@ -53349,7 +53345,7 @@ html {
     vertical-align: middle;
     width: 300px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-EN-logo-v2-white.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container-without-link .logo-login-with-text-fi {
     display: inline-block;
@@ -53359,7 +53355,7 @@ html {
     vertical-align: middle;
     width: 300px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-FI-logo-white.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container-without-link span {
     border: 1px solid #095267;
@@ -53390,7 +53386,7 @@ html {
     vertical-align: middle;
     width: 48px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-icons/w1/w-logo.svg) no-repeat left center;
+    background: url(link)) no-repeat left center;
     margin-left: 0px;
   }
   .header .logo-container a .logo-with-text-common {
@@ -53409,7 +53405,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 250px;
-    background: url(/Content/_shared/img/webropol-tagline/webrol-survey-reporting-logo.svg) no-repeat left center;
+    background: url(link)) no-repeat left center;
   }
   .header .logo-container a .logo-login-with-text {
     display: inline-block;
@@ -53419,7 +53415,7 @@ html {
     vertical-align: middle;
     width: 300px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-EN-logo-v2-white.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-login-with-text-fi {
     display: inline-block;
@@ -53429,7 +53425,7 @@ html {
     vertical-align: middle;
     width: 300px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-FI-logo-white.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-events-with-text {
     display: inline-block;
@@ -53439,7 +53435,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 131px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-events-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-direct-with-text {
     display: inline-block;
@@ -53449,7 +53445,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 185px;
-    background: url(/Content/_shared/img/webropol-tagline/header-direct-logo.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-videos-with-text {
     display: inline-block;
@@ -53459,7 +53455,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 156px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-videos-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-store-with-text {
     display: inline-block;
@@ -53469,7 +53465,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 141px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-store-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-circular-with-text {
     display: inline-block;
@@ -53479,7 +53475,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 98px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-circular-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-cm-with-text {
     display: inline-block;
@@ -53489,7 +53485,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 249px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-cm-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-etest-with-text {
     display: inline-block;
@@ -53499,7 +53495,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 114px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-etest-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-presentation-builder {
     display: inline-block;
@@ -53509,7 +53505,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 42px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-presentation-builder.svg) no-repeat;
+    background: url(link)) no-repeat;
     background-position-y: center;
   }
   .header .logo-container a .logo-presentation-builder-text {
@@ -53526,7 +53522,7 @@ html {
     vertical-align: middle;
     height: 56px;
     width: 122px;
-    background: url(/Content/_shared/img/webropol-tagline/webropol-wott-tagline.svg) no-repeat;
+    background: url(link)) no-repeat;
   }
   .header .logo-container a .logo-text {
     font-size: 36px;
@@ -53587,7 +53583,7 @@ html {
     height: 48px;
     border-radius: 4px;
     border-color: #949494 !important;
-    background-image: url(/Content/_shared/img/arrow-down.svg);
+    background-image: url(link));
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     -webkit-appearance: none;
@@ -54589,7 +54585,7 @@ html {
     vertical-align: middle;
     width: 300px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-tagline/webro-header_300.svg) no-repeat;
+    background: url(link)) no-repeat;
     margin: 5px 0 0 -28px;
     box-sizing: unset;
   }
@@ -54601,11 +54597,11 @@ html {
     vertical-align: middle;
     width: 300px;
     height: 56px;
-    background: url(/Content/_shared/img/webropol-tagline/webro-header_300.svg) no-repeat;
+    background: url(link)) no-repeat;
     margin: 5px 0 0 0;
   }
   .body-background-mobileConnector {
-    background: url(/Content/_shared/img/webropol-tagline/home-background.svg);
+    background: url(link));
     background-size: cover;
     background-position: 50% 69%;
     height: 617px;
@@ -54645,7 +54641,7 @@ html {
   @media screen and (max-width: 415px) {
     .body-background-mobileConnector {
       background-repeat: no-repeat;
-      background: url(/Content/_shared/img/webropol-tagline/home-background-mobile.svg);
+      background: url(link));
       height: 660px;
     }
   }
@@ -54929,73 +54925,73 @@ html {
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.v3-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.v3-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.v3-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/w-main.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.view-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.view-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.view-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.view-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/view.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.events-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.events-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.events-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.events-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/events.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.direct-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.direct-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.direct-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.direct-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/direct.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.circular-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.circular-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.circular-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.circular-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/360.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.e-test-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.e-test-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.e-test-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.e-test-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/e-test.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.cm-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.cm-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.cm-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.cm-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/case-management.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.t-videos-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.t-videos-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.t-videos-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.t-videos-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/w-videos.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.w-store-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.w-store-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.w-store-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.w-store-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/w-store.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.presentation-builder-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.presentation-builder-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.presentation-builder-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.presentation-builder-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/presentation-builder.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.wott-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.wott-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.wott-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.wott-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/wott.svg);
+    background-image: url(link));
   }
   .header .webropol-menu-top .webropol-menu-top-small-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.case-management-handler-menu-logo,
   .header .webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.case-management-handler-menu-logo,
   .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.case-management-handler-menu-logo,
   .view-header.webropol-menu-top .header-top .dropdown-menu.switch-apps-dropdown-menu .dropdown-menu-item-logo.case-management-handler-menu-logo {
-    background-image: url(/Content/_shared/img/switch-apps-menu-icons/case-management-handler-menu.png);
+    background-image: url(link));
   }
   @media (max-width: 767px) {
     .view-header.webropol-menu-top .webropol-menu-top-big-bar .dropdown-menu.switch-apps-dropdown-menu {
@@ -55065,7 +55061,7 @@ html {
   .footer .footer-container .company-info .w-logo {
     width: 39px;
     height: 30px;
-    background: url(/Content/_shared/img/webropol-icons/w1/webropol-icon-39x30.png);
+    background: url(link));
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
@@ -55105,12 +55101,12 @@ html {
     display: inline-block;
   }
   .footer .footer-container .social .social-icon.fb {
-    background: url(/Content/_shared/img/social-icons/fb_40x40.png) no-repeat;
+    background: url(link)) no-repeat;
     background-size: 30px 30px;
     background-position: center;
   }
   .footer .footer-container .social .social-icon.li {
-    background: url(/Content/_shared/img/social-icons/li_40x40.png) no-repeat;
+    background: url(link)) no-repeat;
     background-size: 30px 30px;
     background-position: center;
   }
@@ -55318,13 +55314,13 @@ html {
     display: inline-block;
     width: 25px;
     height: 25px;
-    background: url(/Content/_shared/img/workflow/actions/sprites.png) 0px 0px;
+    background: url(link)) 0px 0px;
   }
   .survey-workflow-nav .undo-redo-container .font-enabled-icon {
     display: inline-block;
     width: 25px;
     height: 25px;
-    background: url(/Content/_shared/img/workflow/actions/sprites.png) -25px 0px;
+    background: url(link)) -25px 0px;
   }
   .survey-workflow-nav .nav-tabs {
     border: none;
@@ -55362,49 +55358,49 @@ html {
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-creation-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) 0px 0px;
+    background: url(link)) 0px 0px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-case-management-settings-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-case-management-settings-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) -32px 0px;
+    background: url(link)) -32px 0px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-reporting-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-reporting-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) -64px 0px;
+    background: url(link)) -64px 0px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-publishing-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-publishing-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) 0px -32px;
+    background: url(link)) 0px -32px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-followup-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-followup-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) -32px -32px;
+    background: url(link)) -32px -32px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-manage-participants-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-manage-participants-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) -64px -32px;
+    background: url(link)) -64px -32px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-event-settings-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-event-settings-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) 0px -64px;
+    background: url(link)) 0px -64px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a .workflow-icon.workflow-analysis-stage,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a .workflow-icon.workflow-analysis-stage {
     width: 32px;
     height: 32px;
-    background: url(/Content/_shared/img/workflow/navigation/sprites.png?ver=1.0) -32px -64px;
+    background: url(link)) -32px -64px;
   }
   .survey-workflow-nav .nav-tabs > li.event-workflow-tab > a:hover,
   .survey-workflow-nav .nav-tabs > li.workflow-tab > a:hover,
@@ -55556,7 +55552,7 @@ html {
     height: 32px;
   }
   .scroll-loader {
-    background: url(/Content/_shared/img/ajax-loader.gif) no-repeat center center;
+    background: url(link)) no-repeat center center;
     height: 32px;
   }
   .gallery .action-btn {
@@ -55610,7 +55606,7 @@ html {
     position: absolute;
   }
   .gallery-thumbnail .thumbnail-img .thumbnail-loader {
-    background: url(/Content/_shared/img/ajax-loader.gif) no-repeat center center;
+    background: url(link)) no-repeat center center;
   }
   .gallery-thumbnail .thumbnail-img .thumbnail-error {
     text-align: center;
@@ -55669,7 +55665,7 @@ html {
     -moz-filter: blur(5px);
     -o-filter: blur(30px);
     -ms-filter: blur(5px);
-    filter: url(/Content/_shared/site/#blur);
+    filter: url(link));
     filter: blur(5px);
     filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
     /* IE lte 9 */
@@ -56028,7 +56024,7 @@ html {
     display: block;
     width: 24px;
     height: 24px;
-    background: url(/Content/_shared/img/generic-grid/add-icon.png) no-repeat !important;
+    background: url(link)) no-repeat !important;
   }
   .generic-grid table.table .add-or-edit-row .add-or-edit-item .edit-icon {
     position: absolute;
@@ -56096,7 +56092,7 @@ html {
   }
   .generic-grid a.excel-filter-link {
     display: inline-block;
-    background: url(/Content/_shared/img/generic-grid/excel-filter/btn-normal.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
     width: 17px;
     height: 17px;
     position: absolute;
@@ -56104,13 +56100,13 @@ html {
     top: 11px;
   }
   .generic-grid a.excel-filter-link.pressed {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/btn-pressed.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .generic-grid a.excel-filter-link.filtered {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/btn-filter-normal.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .generic-grid a.excel-filter-link.filtered.pressed {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/btn-filter-pressed.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .generic-grid.editable-grid {
     padding-left: 30px;
@@ -56153,19 +56149,19 @@ html {
     line-height: 17px;
   }
   .excel-filter-dlg .command-link.sort-asc {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/sort-asc.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .excel-filter-dlg .command-link.sort-asc.selected {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/sort-asc-selected.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .excel-filter-dlg .command-link.sort-desc {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/sort-desc.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .excel-filter-dlg .command-link.sort-desc.selected {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/sort-desc-selected.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .excel-filter-dlg .command-link.clear-filter {
-    background: url(/Content/_shared/img/generic-grid/excel-filter/clear-filter.png) no-repeat center left !important;
+    background: url(link)) no-repeat center left !important;
   }
   .excel-filter-dlg .select-container ul {
     list-style-type: none;
@@ -56281,7 +56277,7 @@ html {
     margin-left: 3px;
     width: 24px;
     height: 24px;
-    background: url(/Content/_shared/img/microsoft-icons/excel_24.png);
+    background: url(link));
   }
   .export-excel-for-Mobile-connector {
     padding-bottom: 0px !important;
@@ -56311,16 +56307,16 @@ html {
     height: 10px;
   }
   .generic-pager .prev-page-arrow {
-    background: url(/Content/_shared/img/generic-grid/prev-page-arrow.png) no-repeat !important;
+    background: url(link)) no-repeat !important;
   }
   .generic-pager .next-page-arrow {
-    background: url(/Content/_shared/img/generic-grid/next-page-arrow.png) no-repeat !important;
+    background: url(link)) no-repeat !important;
   }
   .generic-pager .first-page-arrow {
-    background: url(/Content/_shared/img/generic-grid/first-page-arrow.png) no-repeat !important;
+    background: url(link)) no-repeat !important;
   }
   .generic-pager .last-page-arrow {
-    background: url(/Content/_shared/img/generic-grid/last-page-arrow.png) no-repeat !important;
+    background: url(link)) no-repeat !important;
   }
   .generic-pager .navigation-link .enabled {
     text-decoration: none;
@@ -56774,7 +56770,7 @@ html {
     height: 176px;
     overflow: hidden;
     position: absolute;
-    background: url(/Content/_shared/img/colorpicker/custom_background.png);
+    background: url(link));
     font-family: Arial, Helvetica, sans-serif;
     display: none;
     z-index: 9999;
@@ -56795,7 +56791,7 @@ html {
     left: 0;
     width: 150px;
     height: 150px;
-    background: url(/Content/_shared/img/colorpicker/colorpicker_overlay.png);
+    background: url(link));
   }
   .colorpicker_color div div {
     position: absolute;
@@ -56804,7 +56800,7 @@ html {
     width: 11px;
     height: 11px;
     overflow: hidden;
-    background: url(/Content/_shared/img/colorpicker/colorpicker_select.gif);
+    background: url(link));
     margin: -5px 0 0 -5px;
   }
   .colorpicker_hue {
@@ -56820,7 +56816,7 @@ html {
     width: 35px;
     height: 9px;
     overflow: hidden;
-    background: url(/Content/_shared/img/colorpicker/custom_indic.gif) left top;
+    background: url(link)) left top;
     margin: -4px 0 0 0;
     left: 0px;
   }
@@ -56859,7 +56855,7 @@ html {
     position: absolute;
     width: 82px;
     height: 22px;
-    background: url(/Content/_shared/img/colorpicker/custom_hex.png) top;
+    background: url(link)) top;
     left: 212px;
     top: 142px;
   }
@@ -56883,32 +56879,32 @@ html {
     cursor: n-resize;
   }
   .colorpicker_rgb_r {
-    background-image: url(/Content/_shared/img/colorpicker/custom_rgb_r.png);
+    background-image: url(link));
     top: 52px;
     left: 212px;
   }
   .colorpicker_rgb_g {
-    background-image: url(/Content/_shared/img/colorpicker/custom_rgb_g.png);
+    background-image: url(link));
     top: 82px;
     left: 212px;
   }
   .colorpicker_rgb_b {
-    background-image: url(/Content/_shared/img/colorpicker/custom_rgb_b.png);
+    background-image: url(link));
     top: 112px;
     left: 212px;
   }
   .colorpicker_hsb_h {
-    background-image: url(/Content/_shared/img/colorpicker/custom_hsb_h.png);
+    background-image: url(link));
     top: 52px;
     left: 282px;
   }
   .colorpicker_hsb_s {
-    background-image: url(/Content/_shared/img/colorpicker/custom_hsb_s.png);
+    background-image: url(link));
     top: 82px;
     left: 282px;
   }
   .colorpicker_hsb_b {
-    background-image: url(/Content/_shared/img/colorpicker/custom_hsb_b.png);
+    background-image: url(link));
     top: 112px;
     left: 282px;
   }
@@ -56916,7 +56912,7 @@ html {
     position: absolute;
     width: 22px;
     height: 22px;
-    background: url(/Content/_shared/img/colorpicker/custom_submit.png) top;
+    background: url(link)) top;
     left: 324px;
     top: 142px;
     overflow: hidden;
@@ -56926,7 +56922,7 @@ html {
     position: absolute;
     width: 22px;
     height: 22px;
-    background: url(/Content/_shared/img/colorpicker/transparent.png);
+    background: url(link));
     left: 298px;
     top: 142px;
     overflow: hidden;
@@ -56938,7 +56934,7 @@ html {
     position: absolute;
     width: 60px;
     height: 30px;
-    background: url(/Content/_shared/img/colorpicker/transparent_example.png);
+    background: url(link));
     left: 213px;
     top: 13px;
     overflow: hidden;
@@ -56949,7 +56945,7 @@ html {
     position: absolute;
     width: 60px;
     height: 30px;
-    background: url(/Content/_shared/img/colorpicker/transparent_example.png);
+    background: url(link));
     left: 283px;
     top: 13px;
     overflow: hidden;
@@ -56972,7 +56968,7 @@ html {
     position: relative;
     width: 36px;
     height: 36px;
-    background: url(/Content/_shared/img/colorpicker/select2.png);
+    background: url(link));
     display: inline-block;
     vertical-align: middle;
     margin: 3px;
@@ -56988,11 +56984,11 @@ html {
     left: 4px;
     width: 28px;
     height: 28px;
-    background-image: url(/Content/_shared/img/colorpicker/select2.png);
+    background-image: url(link));
     background-position: center;
   }
   .color-selector-transparent div {
-    background-image: url(/Content/_shared/img/colorpicker/select2_transparent.png);
+    background-image: url(link));
   }
   /**
    * Bootstrap Multiselect (http://davidstutz.de/bootstrap-multiselect/)
@@ -57583,17 +57579,17 @@ html {
   .qr_page_logo.qr-code-logo {
     width: 250px;
     height: 250px;
-    background: url(/Content/_shared/img/survey/sample-qr-code.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .qr_page_logo.play-store-code-logo {
     width: 240px;
     height: 75px;
-    background: url(/Content/_shared/img/survey/google-play-logo.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .qr_page_logo.app-store-code-logo {
     width: 240px;
     height: 75px;
-    background: url(/Content/_shared/img/survey/apple-app-store-logo.png) no-repeat;
+    background: url(link)) no-repeat;
   }
   .qr_code_template_header {
     text-align: center;
@@ -57781,7 +57777,7 @@ html {
     padding-left: 20px;
     color: green;
     font-weight: bold;
-    background: url(/Content/_shared/img/plus-green.png) no-repeat;
+    background: url(link)) no-repeat;
     background-size: contain;
     cursor: pointer;
   }
@@ -63401,5 +63397,5 @@ html {
   }
   
   .tippy-box[data-animation=fade][data-state=hidden]{opacity:0}.tippy-iOS{cursor:pointer!important;-webkit-tap-highlight-color:transparent}[data-tippy-root]{max-width:calc(100vw - 10px)}.tippy-box{position:relative;background-color:#333;color:#fff;border-radius:4px;font-size:14px;line-height:1.4;outline:0;transition-property:transform,visibility,opacity}.tippy-box[data-placement^=top]>.tippy-arrow{bottom:0}.tippy-box[data-placement^=top]>.tippy-arrow:before{bottom:-7px;left:0;border-width:8px 8px 0;border-top-color:initial;transform-origin:center top}.tippy-box[data-placement^=bottom]>.tippy-arrow{top:0}.tippy-box[data-placement^=bottom]>.tippy-arrow:before{top:-7px;left:0;border-width:0 8px 8px;border-bottom-color:initial;transform-origin:center bottom}.tippy-box[data-placement^=left]>.tippy-arrow{right:0}.tippy-box[data-placement^=left]>.tippy-arrow:before{border-width:8px 0 8px 8px;border-left-color:initial;right:-7px;transform-origin:center left}.tippy-box[data-placement^=right]>.tippy-arrow{left:0}.tippy-box[data-placement^=right]>.tippy-arrow:before{left:-7px;border-width:8px 8px 8px 0;border-right-color:initial;transform-origin:center right}.tippy-box[data-inertia][data-state=visible]{transition-timing-function:cubic-bezier(.54,1.5,.38,1.11)}.tippy-arrow{width:16px;height:16px;color:#333}.tippy-arrow:before{content:"";position:absolute;border-color:transparent;border-style:solid}.tippy-content{position:relative;padding:5px 9px;z-index:1}
-  .tippy-box[data-theme~=light-border]{background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,8,16,.15);color:#333;box-shadow:0 4px 14px -2px rgba(0,8,16,.08)}.tippy-box[data-theme~=light-border]>.tippy-backdrop{background-color:#fff}.tippy-box[data-theme~=light-border]>.tippy-arrow:after,.tippy-box[data-theme~=light-border]>.tippy-svg-arrow:after{content:"";position:absolute;z-index:-1}.tippy-box[data-theme~=light-border]>.tippy-arrow:after{border-color:transparent;border-style:solid}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-arrow:before{border-top-color:#fff}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-arrow:after{border-top-color:rgba(0,8,16,.2);border-width:7px 7px 0;top:17px;left:1px}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-svg-arrow>svg{top:16px}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-svg-arrow:after{top:17px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-arrow:before{border-bottom-color:#fff;bottom:16px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-arrow:after{border-bottom-color:rgba(0,8,16,.2);border-width:0 7px 7px;bottom:17px;left:1px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-svg-arrow>svg{bottom:16px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-svg-arrow:after{bottom:17px}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-arrow:before{border-left-color:#fff}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-arrow:after{border-left-color:rgba(0,8,16,.2);border-width:7px 0 7px 7px;left:17px;top:1px}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-svg-arrow>svg{left:11px}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-svg-arrow:after{left:12px}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-arrow:before{border-right-color:#fff;right:16px}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-arrow:after{border-width:7px 7px 7px 0;right:17px;top:1px;border-right-color:rgba(0,8,16,.2)}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-svg-arrow>svg{right:11px}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-svg-arrow:after{right:12px}.tippy-box[data-theme~=light-border]>.tippy-svg-arrow{fill:#fff}.tippy-box[data-theme~=light-border]>.tippy-svg-arrow:after{background-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCA2czEuNzk2LS4wMTMgNC42Ny0zLjYxNUM1Ljg1MS45IDYuOTMuMDA2IDggMGMxLjA3LS4wMDYgMi4xNDguODg3IDMuMzQzIDIuMzg1QzE0LjIzMyA2LjAwNSAxNiA2IDE2IDZIMHoiIGZpbGw9InJnYmEoMCwgOCwgMTYsIDAuMikiLz48L3N2Zz4=);background-size:16px 6px;width:16px;height:6px}
+  .tippy-box[data-theme~=light-border]{background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,8,16,.15);color:#333;box-shadow:0 4px 14px -2px rgba(0,8,16,.08)}.tippy-box[data-theme~=light-border]>.tippy-backdrop{background-color:#fff}.tippy-box[data-theme~=light-border]>.tippy-arrow:after,.tippy-box[data-theme~=light-border]>.tippy-svg-arrow:after{content:"";position:absolute;z-index:-1}.tippy-box[data-theme~=light-border]>.tippy-arrow:after{border-color:transparent;border-style:solid}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-arrow:before{border-top-color:#fff}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-arrow:after{border-top-color:rgba(0,8,16,.2);border-width:7px 7px 0;top:17px;left:1px}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-svg-arrow>svg{top:16px}.tippy-box[data-theme~=light-border][data-placement^=top]>.tippy-svg-arrow:after{top:17px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-arrow:before{border-bottom-color:#fff;bottom:16px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-arrow:after{border-bottom-color:rgba(0,8,16,.2);border-width:0 7px 7px;bottom:17px;left:1px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-svg-arrow>svg{bottom:16px}.tippy-box[data-theme~=light-border][data-placement^=bottom]>.tippy-svg-arrow:after{bottom:17px}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-arrow:before{border-left-color:#fff}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-arrow:after{border-left-color:rgba(0,8,16,.2);border-width:7px 0 7px 7px;left:17px;top:1px}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-svg-arrow>svg{left:11px}.tippy-box[data-theme~=light-border][data-placement^=left]>.tippy-svg-arrow:after{left:12px}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-arrow:before{border-right-color:#fff;right:16px}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-arrow:after{border-width:7px 7px 7px 0;right:17px;top:1px;border-right-color:rgba(0,8,16,.2)}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-svg-arrow>svg{right:11px}.tippy-box[data-theme~=light-border][data-placement^=right]>.tippy-svg-arrow:after{right:12px}.tippy-box[data-theme~=light-border]>.tippy-svg-arrow{fill:#fff}.tippy-box[data-theme~=light-border]>.tippy-svg-arrow:after{background-image:url(link));background-size:16px 6px;width:16px;height:6px}
   .tippy-box[data-theme~=light]{color:#26323d;box-shadow:0 0 20px 4px rgba(154,161,177,.15),0 4px 80px -8px rgba(36,40,47,.25),0 4px 4px -2px rgba(91,94,105,.15);background-color:#fff}.tippy-box[data-theme~=light][data-placement^=top]>.tippy-arrow:before{border-top-color:#fff}.tippy-box[data-theme~=light][data-placement^=bottom]>.tippy-arrow:before{border-bottom-color:#fff}.tippy-box[data-theme~=light][data-placement^=left]>.tippy-arrow:before{border-left-color:#fff}.tippy-box[data-theme~=light][data-placement^=right]>.tippy-arrow:before{border-right-color:#fff}.tippy-box[data-theme~=light]>.tippy-backdrop{background-color:#fff}.tippy-box[data-theme~=light]>.tippy-svg-arrow{fill:#fff}
