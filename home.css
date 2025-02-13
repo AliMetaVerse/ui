@@ -57656,11 +57656,7 @@ html {
     -ms-writing-mode: bt-rl \9;
     filter: flipv fliph;
   }
-  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    .contact .contact-tab .tab-wrap .contact-tab-text {
-      -ms-writing-mode: lr-tb;
-    }
-  }
+
   .contact .contact-tab .tab-wrap .contact-tab-text::after {
     content: "";
     display: block;
