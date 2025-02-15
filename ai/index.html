@@ -17,34 +17,37 @@
             width: 80%; /* Adjust width as needed */
         }
         table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
-        thead th { position: sticky; top: 0; background: #0d6efd; color: white; text-transform: uppercase; }
+        thead th { position: sticky; top: 0; background: #fd0d5d; color: white; text-transform: uppercase; }
         tbody tr:nth-child(even) { background-color: #f9f9f9; }
+        .feature-description {font-size: 12px; color: gray}
+        .badge { margin-left: 10px; padding: 5px 10px; border-radius: 5px; font-size: 0.9em; }
+        .tr-height {height: 60px !important; vertical-align: middle;}
     </style>
 </head>
 <body>
-    <h2 class="text-center">Moicca vs AI Assistant</h2>
+    <h2 class="text-center">Moicca Project vs AI Assistant</h2>
     <div class="table-container">
         <table class="table table-hover table-bordered">
             <thead class="table-primary">
-                <tr>
-                    <th>Feature</th>
+                <tr class="tr-height">
+                    <th>Features</th>
                     <th>Moicca</th>
                     <th>AI Assistant</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Readiness for chatbot</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
-                <tr><td>Readiness for RAG</td><td><span class="badge bg-warning">No</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>Workflow Readiness</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
-                <tr><td>Easy Deployment</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>Easy Integration</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>API</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>Documentation</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>Change request life cycles</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
-                <tr><td>Possibility to fetch data from Webropol</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
-                <tr><td>Knowledge base or wiki</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>Docs</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
-                <tr><td>Website</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
+                <tr class="tr-height"><td>Readiness for chatbot<div class="feature-description">Ability to deploy Chatbot on demand</div></td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
+                <tr class="tr-height"><td>eSales Readiness with actions</td><td><span class="badge bg-info">60%</span></td><td><span class="badge bg-info">10%</span></td></tr>
+                <tr class="tr-height"><td>Readiness for RAG</td><td><span class="badge bg-warning">Maybe</span></td><td><span class="badge bg-success">Yes</span></td></tr>
+                <tr class="tr-height"><td>Workflow Readiness</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
+                <tr class="tr-height"><td>Easy Deployment</td><td><span class="badge bg-secondary">Unknown </span></td><td><span class="badge bg-warning">Long Cycle</span></td></tr>
+                <tr class="tr-height"><td>Easy Integration</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">Long Cycle</span></td></tr>
+                <tr class="tr-height"><td>API</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-secondary">Unknown</span></td></tr>
+                <tr class="tr-height"><td>Documentation</td><td><span class="badge bg-secondary">Unknown</span></td><td><span class="badge bg-warning">No</span></td></tr>
+                <tr class="tr-height"><td>Change / New feature request</td><td><span class="badge bg-secondary">Unknown</span></td><td><span class="badge bg-warning">Long Cycle</span></td></tr>
+                <tr class="tr-height"><td>Ability to retrieve data from Webropol</td><td><span class="badge bg-warning">No</span></td><td><span class="badge bg-success">Yes</span></td></tr>
+                <tr class="tr-height"><td>Ability to retrieve data from Documents</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-success">Yes</span></td></tr>
+                <tr class="tr-height"><td>Website scrapper</td><td><span class="badge bg-success">Yes</span></td><td><span class="badge bg-warning">No</span></td></tr>
             </tbody>
         </table>
     </div>
