@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .event-status {
+            color: green;
+            font-weight: bold;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #000;
+        }
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Coming</div>
+        
+        <div class="section">
+            <div class="section-title">January [2]</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Time & Date</th>
+                        <th>Registered/Max</th>
+                        <th>Venue</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ali's Party 1</td>
+                        <td>15.04.2025 12:34</td>
+                        <td>20/32</td>
+                        <td>Venue</td>
+                        <td class="event-status">Active</td>
+                    </tr>
+                    <tr>
+                        <td>Ali's Party 2</td>
+                        <td>15.04.2025 12:34</td>
+                        <td>20/32</td>
+                        <td>Venue</td>
+                        <td class="event-status">Active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">February [2]</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Time & Date</th>
+                        <th>Registered/Max</th>
+                        <th>Venue</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ali's Party 3</td>
+                        <td>15.04.2025 12:34</td>
+                        <td>20/32</td>
+                        <td>Venue</td>
+                        <td class="event-status">Active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">→</a>
+        </div>
+    </div>
+</body>
+</html>

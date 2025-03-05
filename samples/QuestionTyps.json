@@ -1,0 +1,93 @@
+{
+    "question_types": [
+      {
+        "type": "Open ended",
+        "tags": {
+          "en": ["open ended", "text", "free response", "open question"],
+          "fi": ["avoin", "teksti", "vapaa vastaus", "avoin kysymys"],
+          "sv": ["öppen", "text", "fri respons", "öppen fråga"]
+        }
+      },
+      {
+        "type": "Text field",
+        "tags": {
+          "en": ["text field", "short text", "single line"],
+          "fi": ["tekstikenttä", "lyhyt teksti", "yksi rivi"],
+          "sv": ["textfält", "kort text", "en rad"]
+        }
+      },
+      {
+        "type": "Contact form",
+        "tags": {
+          "en": ["contact form", "name", "email", "phone", "contact details"],
+          "fi": ["yhteydenottolomake", "nimi", "sähköposti", "puhelin", "yhteystiedot"],
+          "sv": ["kontaktformulär", "namn", "e-post", "telefon", "kontaktuppgifter"]
+        }
+      },
+      {
+        "type": "Numeric field",
+        "tags": {
+          "en": ["numeric field", "number", "numeric input"],
+          "fi": ["numeerinen kenttä", "numero", "numeerinen syöte"],
+          "sv": ["numeriskt fält", "nummer", "numerisk inmatning"]
+        }
+      },
+      {
+        "type": "Selection",
+        "tags": {
+          "en": ["selection", "single choice", "radio button"],
+          "fi": ["valinta", "yksi valinta", "radiopainike"],
+          "sv": ["val", "ett val", "radioknapp"]
+        }
+      },
+      {
+        "type": "Multiselections",
+        "tags": {
+          "en": ["multiselections", "multiple choices", "checkboxes"],
+          "fi": ["monivalinnat", "useita valintoja", "valintaruudut"],
+          "sv": ["fler val", "flera val", "kryssrutor"]
+        }
+      },
+      {
+        "type": "Dropdown selection",
+        "tags": {
+          "en": ["dropdown selection", "dropdown", "select list"],
+          "fi": ["alasvetovalinta", "alasvetovalikko", "valintalista"],
+          "sv": ["rullgardinsval", "rullgardinsmeny", "val lista"]
+        }
+      },
+      {
+        "type": "Picture selection",
+        "tags": {
+          "en": ["picture selection", "image choice", "picture option"],
+          "fi": ["kuvavalinta", "kuvan valinta", "kuvavaihtoehto"],
+          "sv": ["bildval", "bildval", "bildalternativ"]
+        }
+      },
+      {
+        "type": "Picture multiselections",
+        "tags": {
+          "en": ["picture multiselections", "multiple images", "select multiple pictures"],
+          "fi": ["kuvamonivalinta", "useita kuvia", "valitse useita kuvia"],
+          "sv": ["flera bildval", "flera bilder", "välj flera bilder"]
+        }
+      },
+      {
+        "type": "Scale selection",
+        "tags": {
+          "en": ["scale selection", "scale", "rating"],
+          "fi": ["asteikkovalinta", "asteikko", "arviointi"],
+          "sv": ["skalval", "skala", "betyg"]
+        }
+      },
+      {
+        "type": "Ranking",
+        "tags": {
+          "en": ["ranking", "order preference", "rank items"],
+          "fi": ["arvojärjestys", "järjestys", "arvota kohteet"],
+          "sv": ["rangordning", "prioritering", "prioritera objekt"]
+        }
+      }
+    ]
+  }
+  
