@@ -3,9 +3,9 @@
       {
         "type": "Open ended",
         "tags": {
-          "en": ["open ended", "text", "free response", "open question"],
-          "fi": ["avoin", "teksti", "vapaa vastaus", "avoin kysymys"],
-          "sv": ["öppen", "text", "fri respons", "öppen fråga"]
+          "en": ["open ended", "text", "free response", "open question", "long text"],
+          "fi": ["avoin", "teksti", "vapaa vastaus", "avoin kysymys", "pitkä teksti"],
+          "sv": ["öppen", "text", "fri respons", "öppen fråga", "lång text"]
         }
       },
       {

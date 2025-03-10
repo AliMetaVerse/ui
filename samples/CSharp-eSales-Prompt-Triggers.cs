@@ -27,15 +27,31 @@ class Program
         // Start the conversation with context for the AI model
         List<ChatMessage> chatHistory = new()
         {
-            new ChatMessage(ChatRole.System, 
-            $"Your primary role is to assist users with creating and managing surveys on Webropol. You provide clear, concise, and direct answers based on the uploaded manuals, helping users design effective survey questions and navigate the Webropol platform efficiently." +
-            $"When responding to inquiries: Offer precise answers from the manuals whenever possible." +
-            $"If a question is unclear or lacks detail, ask clarifying questions to ensure the guidance is relevant and effective." +
+            new ChatMessage(ChatRole.System,
+            // **Primary Role**
+            $"Your primary role is to assist users with Webropol. Provide clear, concise, and direct answers based on the uploaded manuals, guiding users in designing effective survey questions and navigating the Webropol platform efficiently." +
+
+            // **Action Invocation**
+            $"If the user's query matches a supported action (such as AI Text Analysis, 360 Assessment, or Case Management), invoke the appropriate function instead of just responding." +
+
+            // **Clarity & Relevance**
+            $"If the user's query is unclear or lacks detail, ask clarifying questions to ensure the guidance is relevant and effective." +
+            $"When responding to inquiries, offer precise answers from the manuals whenever possible." +
             $"Keep responses compact and focused, making information easy to understand and apply." +
-            $"Avoid login or authentication instructions, as the user is already authenticated." +
+
+            // **Authentication Policy**
+            $"Do not provide any instructions related to login or authentication, as the user is already authenticated, even if mentioned in the RAG documents." +
+
+            // **Response Length Management**
+            "If your response exceeds 10 lines, ask the user if they prefer a shorter version. If they reply 'Yes' or 'yes' or 'y', shorten the response by at least 20%. If they say 'No' or 'no' or 'n', reply with 'Great!'." +
+
+            // **User Support & Sales**
             $"Your goal is to empower users to maximize Webropol’s potential with confidence." +
-            $"If users need further assistance, they can contact Customer Care (customercare@webropol.fi) for support or Sales (sales@webropol.fi) for business inquiries." +
-            $"Most important thing is to keep answer as short as possible")
+            $"For further assistance, users can contact Customer Care (customercare@webropol.fi) for support or Sales (sales@webropol.fi) for business inquiries." +
+
+            // **Final Reminder**
+            $"The most important thing is to keep answers as short as possible."
+            )
         };
  
         while (true)
@@ -138,30 +154,26 @@ class Program
  
     // ESALES HINTS
  
-    [Description("Trigger if the user asks about AI-based text analysis, open-ended question analysis, or handling a large number of responses.")]
-    static string EsaleAiTextAnalysis()
-    {
-        return GetESalesHint("AI Text analysis", "Ready-to-Use Solution\r\nA results dashboard professionally designed and equipped with essential analyses for quick interpretation.\r\n\r\nSimply Efficient\r\nA clear user interface that highlights truly important information effectively.\r\n\r\nImmediate Benefits\r\nEffortless analysis of even large volumes of text in an instant.\r\n\r\nSeamless Impact\r\nData and results can be easily shared across your organization via the BI View data center, Webropol reports, or various file formats.", 666, "https://new.webropolsurveys.com/TrainingVideos/Home#/TrainingVideos/Player/99b46d1d-deee-4550-9f41-32a9a047f6bd");               
-    }
-    [Description("Trigger if the user asks about managing customer complaints, feedback, or turning survey responses into action items.")]
-    static string EsaleCaseManagement()
-    {
-        return GetESalesHint("Case Management", "An easy-to-use case management system saves time, effort, and money. With Webropol Case Management, you can streamline the processing and tracking of feedback forms, such as complaints. Regardless of the industry, Webropol’s case management can be seamlessly adapted to your organization's processes.", 777, "https://new.webropolsurveys.com/TrainingVideos/Home#/TrainingVideos/Player/99b46d1d-deee-4550-9f41-32a9a047f6bd");
-    }
- 
-    [Description("Trigger if the user asks about 360-degree assessments or performance reviews.")]
+    [Description("Determine if the user's query relates to 360 Assessment, including inquiries about leadership evaluations, employee feedback, competency assessments, or multi-rater feedback tools. If the user is looking for a structured evaluation process involving multiple perspectives, this applies.")]
     static string Esale360()
     {
-        return GetESalesHint("360-degree assessments", "In today's ever-changing world, supporting employee development and growth is essential. Webropol 360 Survey enables employee assessment from multiple perspectives – as a colleague, supervisor, and team member. With 360-degree evaluation, you can maintain and enhance workplace well-being while measuring professional development.", 888, "https://new.webropolsurveys.com/TrainingVideos/Home#/TrainingVideos/Player/99b46d1d-deee-4550-9f41-32a9a047f6bd");
+        return $"360 Assessment is available in our Shop or by contacting sales@webropol.fi. Price is 999€ per year. Ad video: https://new.webropolsurveys.com/TrainingVideos/Home#/TrainingVideos/Player/99b46d1d-deee-4550-9f41-32a9a047f6bd";
     }
- 
-    static string GetESalesHint(string productName, string description, int price, string videoUrl)
+
+    [Description("Identify if the user's request pertains to Case Management, particularly regarding tracking, managing, or resolving customer inquiries, complaints, or internal processes. This also includes discussions about workflow automation, task assignments, or structured follow-up mechanisms.")]
+    static string EsaleCaseManagement()
     {
-        return $"Product name: '{productName}'," +
-               $"Description: '{description}'" +
-               $"Price: '{price}'" +
-               $"Video url: '{videoUrl}'" +
-               $"How to buy: 'Contact sales via email, TURBOSALES@webropol.fi' or from w-store (create link tag: /Shop/Wstore?page=Home )";
+        return $"Case Management is available in our Shop or by contacting sales@webropol.fi. Price is 999€ per year. Ad video: https://new.webropolsurveys.com/TrainingVideos/Home#/TrainingVideos/Player/99b46d1d-deee-4550-9f41-32a9a047f6bd";
     }
- 
+
+    [Description("Evaluate if the user is asking about AI Text Analysis, specifically in relation to processing open-ended questions, summarizing large volumes of responses, extracting key insights, or identifying trends in textual data. This applies if the user mentions handling a significant number of responses or analyzing free-text feedback.")]
+    static string EsaleAiTextAnalysis(string lastQuery = "")
+    {
+        if (lastQuery.Contains("large volume", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"AI text analysis is ideal for summarizing large responses. Available for 300€/year. Contact sales@webropol.fi.";
+        }
+        return $"AI text analysis is available in our Shop or by contacting sales@webropol.fi. Price: 300€/year.";
+    }
+    
 }
