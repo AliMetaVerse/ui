@@ -153,7 +153,6 @@ class Program
  
  
     // ESALES HINTS
- 
     [Description("Determine if the user's query relates to 360 Assessment, including inquiries about leadership evaluations, employee feedback, competency assessments, or multi-rater feedback tools. If the user is looking for a structured evaluation process involving multiple perspectives, this applies.")]
     static string Esale360()
     {
