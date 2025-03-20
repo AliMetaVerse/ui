@@ -40,6 +40,42 @@
             </div>
         </nav>
         <div class="container">
+            
+            
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="5" result="blur" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.58  0 0 0 0 1  0 0 0 0 0.83  0 0 0 0.75 0" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <style>
+                    @keyframes eyeMove {
+                      0%, 100% { transform: translateX(-8px); }
+                      50% { transform: translateX(8px); }
+                    }
+                    .neon-glow {
+                      filter: url(#neonGlow);
+                    }
+                    .eye {
+                      animation: eyeMove 2s ease-in-out infinite;
+                    }
+                  </style>
+                </defs>
+                <rect x="4" y="4" width="56" height="56" rx="8" ry="8" class="neon-glow" fill="none" stroke="#00ffff" stroke-width="2" />
+                <g fill="#ff69b4" class="eye">
+                  <circle cx="24" cy="32" r="4" />
+                  <circle cx="40" cy="32" r="4" />
+                </g>
+              </svg>
+                      </div>
+
+
+
+        <div class="container">
             <div class="mt-5">
                 <h2>Fontawesome Stack, Kit and SVG Images</h2>
             </div>
