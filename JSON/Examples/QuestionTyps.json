@@ -183,6 +183,22 @@
           "fi": ["sijainti", "paikan valinta", "tilallinen valinta"],
           "sv": ["position", "platsval", "rumsligt val"]
         }
+      },
+      {
+        "type": "CustomTable",
+        "tags": {
+          "en": ["custom table", "data table", "flexible table"],
+          "fi": ["mukautettu taulukko", "datataulukko", "joustava taulukko"],
+          "sv": ["anpassad tabell", "datatabell", "flexibel tabell"]
+        }
+      },
+      {
+        "type": "Slider",
+        "tags": {
+          "en": ["slider", "range selector", "adjustable scale"],
+          "fi": ["liukusäädin", "alueen valitsin", "säädettävä asteikko"],
+          "sv": ["skjutreglage", "områdeväljare", "justerbar skala"]
+        }
       }
 
     ]
