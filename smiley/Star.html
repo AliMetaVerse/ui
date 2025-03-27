@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPS Smiley Rating</title>
+    <title>NPS star Rating</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
     <style>
@@ -26,18 +26,21 @@
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .smiley {
+        .star {
             font-size: 2rem;
             cursor: pointer;
-            padding: 10px;
+            padding: 12px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             border-radius: 50%;
         }
-        .smiley:hover {
-            transform: scale(1.6) rotate(9deg);
+        .star:hover {
+            transform: scale(1.6) rotate(12deg);
         }
         .selected {
-            transform: scale(1.5);
+            transform: scale(1.4);
+        }
+        .bold {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -45,46 +48,48 @@
     <div class="container mt-3">
         <div class="nps-container">
             <h3>How likely are you to recommend us to a friend or colleague?</h3>
-            <div class="d-flex justify-content-center flex-wrap" id="smileyContainer">
-                <span class="smiley text-danger" data-index="0"><i class="fa-thin fa-face-angry"></i></span>
-                <span class="smiley text-danger" data-index="1"><i class="fa-thin fa-face-frown"></i></span>
-                <span class="smiley text-danger" data-index="2"><i class="fa-thin fa-face-sad-tear"></i></span> 
-                <span class="smiley text-warning" data-index="3"><i class="fa-thin fa-face-frown-open"></i></span>
-                <span class="smiley text-warning" data-index="4"><i class="fa-thin fa-face-meh-blank"></i></span>
-                <span class="smiley text-secondary" data-index="5"><i class="fa-thin fa-face-meh"></i></span>
-                <span class="smiley text-success" data-index="6"><i class="fa-thin fa-face-smile-relaxed"></i></span>
-                <span class="smiley text-success" data-index="7"><i class="fa-thin fa-face-smile"></i></span>
-                <span class="smiley text-success" data-index="8"><i class="fa-thin fa-face-smile-beam"></i></span>
-                <span class="smiley text-success" data-index="9"><i class="fa-thin fa-face-laugh"></i></span>
-                <span class="smiley text-success" data-index="10"><i class="fa-thin fa-face-laugh-beam"></i></span>
+            <div class="d-flex justify-content-center flex-wrap" id="starContainer">
+                <span class="star text-danger" data-index="0"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-danger" data-index="1"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-danger" data-index="2"><i class="fa-thin fa-star"></i></span> 
+                <span class="star text-warning" data-index="3"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-warning" data-index="4"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-secondary" data-index="5"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-success" data-index="6"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-success" data-index="7"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-success" data-index="8"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-success" data-index="9"><i class="fa-thin fa-star"></i></span>
+                <span class="star text-success" data-index="10"><i class="fa-thin fa-star"></i></span>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const smileys = document.querySelectorAll(".smiley");
+            const stars = document.querySelectorAll(".star");
             let selectedIndex = -1;
             
-            smileys.forEach((smiley, index) => {
-                smiley.addEventListener("click", function() {
+            stars.forEach((star, index) => {
+                star.addEventListener("click", function() {
                     if (selectedIndex === index) {
                         selectedIndex = -1;
-                        smileys.forEach(s => {
+                        stars.forEach(s => {
                             s.innerHTML = `<i class='fa-thin ${s.querySelector('i').classList[1]}'></i>`;
-                            s.classList.remove("selected");
+                            s.classList.remove("selected", "bold");
                         });
                     } else {
                         selectedIndex = index;
-                        smileys.forEach((s, i) => {
-                            if (i === selectedIndex) {
+                        stars.forEach((s, i) => {
+                            if (i <= selectedIndex) {
                                 s.innerHTML = `<i class='fa-solid ${s.querySelector('i').classList[1]}'></i>`;
+                                s.classList.add("bold");
                             } else {
                                 s.innerHTML = `<i class='fa-thin ${s.querySelector('i').classList[1]}'></i>`;
+                                s.classList.remove("bold");
                             }
                             s.classList.remove("selected");
                         });
-                        smiley.classList.add("selected");
+                        star.classList.add("selected");
                     }
                 });
             });
