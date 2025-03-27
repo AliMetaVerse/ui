@@ -140,17 +140,17 @@
         <div class="widget-container">
             <h3>Rate us with Smileys</h3>
             <div class="d-flex justify-content-center flex-wrap" id="smileyContainer">
-                <span class="rating-icon text-danger" data-index="0"><i class="fa-thin fa-face-angry"></i></span>
-                <span class="rating-icon text-danger" data-index="1"><i class="fa-thin fa-face-frown"></i></span>
-                <span class="rating-icon text-danger" data-index="2"><i class="fa-thin fa-face-sad-tear"></i></span> 
-                <span class="rating-icon text-warning" data-index="3"><i class="fa-thin fa-face-frown-open"></i></span>
-                <span class="rating-icon text-warning" data-index="4"><i class="fa-thin fa-face-meh-blank"></i></span>
-                <span class="rating-icon text-secondary" data-index="5"><i class="fa-thin fa-face-meh"></i></span>
-                <span class="rating-icon text-success" data-index="6"><i class="fa-thin fa-face-smile-relaxed"></i></span>
-                <span class="rating-icon text-success" data-index="7"><i class="fa-thin fa-face-smile"></i></span>
-                <span class="rating-icon text-success" data-index="8"><i class="fa-thin fa-face-smile-beam"></i></span>
-                <span class="rating-icon text-success" data-index="9"><i class="fa-thin fa-face-laugh"></i></span>
-                <span class="rating-icon text-success" data-index="10"><i class="fa-thin fa-face-laugh-beam"></i></span>
+                <span class="rating-icon text-danger" data-index="0"><i class="fa-light fa-face-angry"></i></span>
+                <span class="rating-icon text-danger" data-index="1"><i class="fa-light fa-face-frown"></i></span>
+                <span class="rating-icon text-danger" data-index="2"><i class="fa-light fa-face-sad-tear"></i></span> 
+                <span class="rating-icon text-warning" data-index="3"><i class="fa-light fa-face-frown-open"></i></span>
+                <span class="rating-icon text-warning" data-index="4"><i class="fa-light fa-face-meh-blank"></i></span>
+                <span class="rating-icon text-secondary" data-index="5"><i class="fa-light fa-face-meh"></i></span>
+                <span class="rating-icon text-success" data-index="6"><i class="fa-light fa-face-smile-relaxed"></i></span>
+                <span class="rating-icon text-success" data-index="7"><i class="fa-light fa-face-smile"></i></span>
+                <span class="rating-icon text-success" data-index="8"><i class="fa-light fa-face-smile-beam"></i></span>
+                <span class="rating-icon text-success" data-index="9"><i class="fa-light fa-face-laugh"></i></span>
+                <span class="rating-icon text-success" data-index="10"><i class="fa-light fa-face-laugh-beam"></i></span>
             </div>
         </div>
     </div>
@@ -202,7 +202,7 @@
                     i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
                     i.classList.add("selected");
                 } else {
-                    i.innerHTML = `<i class='fa-thin ${iconClass}'></i>`;
+                    i.innerHTML = `<i class='fa-light ${iconClass}'></i>`;
                     if (containerId === "starContainer") {
                         i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
                     }
