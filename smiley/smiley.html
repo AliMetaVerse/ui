@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPS Smiley Rating</title>
+    <title>NPS Star & Smiley Rating</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
     <style>
@@ -17,80 +17,104 @@
             background-color: #ebf4f7;
             padding: 20px;
         }
-        .nps-container {
-            max-width: 800px;
-            width: 100%;
+        .container-wrapper {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 900px;
+        }
+        .widget-container {
+            flex: 1;
+            min-width: 400px;
             text-align: center;
             background-color: white;
             padding: 24px;
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .smiley {
+        .rating-icon {
             font-size: 2rem;
             cursor: pointer;
-            padding: 10px;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            padding: 12px;
+            transition: transform 0.3s ease-in-out;
             border-radius: 50%;
         }
-        .smiley:hover {
-            transform: scale(1.6) rotate(9deg);
+        .rating-icon:hover {
+            transform: scale(1.4) rotate(12deg);
         }
         .selected {
             transform: scale(1.5);
         }
+        .none { display: none;}
     </style>
 </head>
 <body>
-    <div class="container mt-3">
-        <div class="nps-container">
-            <h3>How likely are you to recommend us to a friend or colleague?</h3>
+    <div class="container-wrapper">
+        <div class="widget-container">
+            <h3>Rate us with Stars</h3>
+            <div class="d-flex justify-content-center flex-wrap" id="starContainer">
+                <span class="rating-icon text-warning" data-index="1"><i class="fa-thin fa-star"></i></span>
+                <span class="rating-icon text-warning" data-index="2"><i class="fa-thin fa-star"></i></span> 
+                <span class="rating-icon text-warning" data-index="3"><i class="fa-thin fa-star"></i></span>
+                <span class="rating-icon text-warning" data-index="4"><i class="fa-thin fa-star"></i></span>
+                <span class="rating-icon text-warning" data-index="5"><i class="fa-thin fa-star"></i></span>
+            </div>
+        </div>
+        
+        <div class="widget-container">
+            <h3>Rate us with Smileys</h3>
             <div class="d-flex justify-content-center flex-wrap" id="smileyContainer">
-                <span class="smiley text-danger" data-index="0"><i class="fa-thin fa-face-angry"></i></span>
-                <span class="smiley text-danger" data-index="1"><i class="fa-thin fa-face-frown"></i></span>
-                <span class="smiley text-danger" data-index="2"><i class="fa-thin fa-face-sad-tear"></i></span> 
-                <span class="smiley text-warning" data-index="3"><i class="fa-thin fa-face-frown-open"></i></span>
-                <span class="smiley text-warning" data-index="4"><i class="fa-thin fa-face-meh-blank"></i></span>
-                <span class="smiley text-secondary" data-index="5"><i class="fa-thin fa-face-meh"></i></span>
-                <span class="smiley text-success" data-index="6"><i class="fa-thin fa-face-smile-relaxed"></i></span>
-                <span class="smiley text-success" data-index="7"><i class="fa-thin fa-face-smile"></i></span>
-                <span class="smiley text-success" data-index="8"><i class="fa-thin fa-face-smile-beam"></i></span>
-                <span class="smiley text-success" data-index="9"><i class="fa-thin fa-face-laugh"></i></span>
-                <span class="smiley text-success" data-index="10"><i class="fa-thin fa-face-laugh-beam"></i></span>
+                <span class="rating-icon text-danger" data-index="0"><i class="fa-thin fa-face-angry"></i></span>
+                <span class="rating-icon text-danger" data-index="1"><i class="fa-thin fa-face-frown"></i></span>
+                <span class="rating-icon text-danger" data-index="2"><i class="fa-thin fa-face-sad-tear"></i></span> 
+                <span class="rating-icon text-warning" data-index="3"><i class="fa-thin fa-face-frown-open"></i></span>
+                <span class="rating-icon text-warning" data-index="4"><i class="fa-thin fa-face-meh-blank"></i></span>
+                <span class="rating-icon text-secondary" data-index="5"><i class="fa-thin fa-face-meh"></i></span>
+                <span class="rating-icon text-success" data-index="6"><i class="fa-thin fa-face-smile-relaxed"></i></span>
+                <span class="rating-icon text-success" data-index="7"><i class="fa-thin fa-face-smile"></i></span>
+                <span class="rating-icon text-success" data-index="8"><i class="fa-thin fa-face-smile-beam"></i></span>
+                <span class="rating-icon text-success" data-index="9"><i class="fa-thin fa-face-laugh"></i></span>
+                <span class="rating-icon text-success" data-index="10"><i class="fa-thin fa-face-laugh-beam"></i></span>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const smileys = document.querySelectorAll(".smiley");
+        function handleRatingSelection(containerId, iconClass) {
+            const icons = document.querySelectorAll(`#${containerId} .rating-icon`);
             let selectedIndex = -1;
             
-            smileys.forEach((smiley, index) => {
-                smiley.addEventListener("click", function() {
+            icons.forEach((icon, index) => {
+                icon.addEventListener("click", function() {
                     if (selectedIndex === index) {
                         selectedIndex = -1;
-                        smileys.forEach(s => {
-                            s.innerHTML = `<i class='fa-thin ${s.querySelector('i').classList[1]}'></i>`;
-                            s.classList.remove("selected");
+                        icons.forEach(i => {
+                            i.innerHTML = `<i class='fa-thin ${i.querySelector('i').classList[1]}'></i>`;
+                            i.classList.remove("selected");
                         });
                     } else {
                         selectedIndex = index;
-                        smileys.forEach((s, i) => {
-                            if (i === selectedIndex) {
-                                s.innerHTML = `<i class='fa-solid ${s.querySelector('i').classList[1]}'></i>`;
+                        icons.forEach((i, idx) => {
+                            if (idx <= selectedIndex) {
+                                i.innerHTML = `<i class='fa-solid ${i.querySelector('i').classList[1]}'></i>`;
                             } else {
-                                s.innerHTML = `<i class='fa-thin ${s.querySelector('i').classList[1]}'></i>`;
+                                i.innerHTML = `<i class='fa-thin ${i.querySelector('i').classList[1]}'></i>`;
                             }
-                            s.classList.remove("selected");
+                            i.classList.remove("selected");
                         });
-                        smiley.classList.add("selected");
+                        icon.classList.add("selected");
                     }
                 });
             });
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            handleRatingSelection("starContainer", "fa-star");
+            handleRatingSelection("smileyContainer", "fa-face");
         });
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
