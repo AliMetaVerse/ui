@@ -28,14 +28,17 @@
             font-size: 2rem;
             cursor: pointer;
             padding: 10px;
+            transition: transform 0.3s ease-in-out;
         }
         .smiley:hover {
             transform: scale(1.3) rotate(9deg);
-            transition: transform 0.3s ease-in-out;
         }
-        .fa-classic, .fa-light, .fa-regular, .fa-solid, .fa-thin, .fal, .far, .fas, .fat {
+        .fa-classic, .fa-thin, .fa-regular, .fa-solid, .fa-thin, .fal, .far, .fas, .fat {
             font-family: "Font Awesome 6 Pro";
             font-size: 2.7rem;
+        }
+        .selected {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -43,22 +46,39 @@
     <div class="container mt-5">
         <div class="nps-container">
             <h3>How likely are you to recommend us to a friend or colleague?</h3>
-            <div class="d-flex justify-content-center flex-wrap">
-                <span class="smiley text-danger"><i class="fa-solid fa-face-angry"></i></span>
-                <span class="smiley text-danger"><i class="fa-solid fa-face-frown"></i></span>
-                <span class="smiley text-danger"><i class="fa-solid fa-face-sad-tear"></i></span>
-                <span class="smiley text-warning"><i class="fa-solid fa-face-frown-open"></i></span>
-                <span class="smiley text-warning"><i class="fa-solid fa-face-meh-blank"></i></span>
-                <span class="smiley text-secondary"><i class="fa-solid fa-face-meh"></i></span>
-                <span class="smiley text-success"><i class="fa-solid fa-face-smile-relaxed"></i></span>
-                <span class="smiley text-success"><i class="fa-solid fa-face-smile"></i></span>
-                <span class="smiley text-success"><i class="fa-solid fa-face-smile-beam"></i></span>
-                <span class="smiley text-success"><i class="fa-solid fa-face-laugh"></i></span>
-                <span class="smiley text-success"><i class="fa-solid fa-face-laugh-beam"></i></span>
+            <div class="d-flex justify-content-center flex-wrap" id="smileyContainer">
+                <span class="smiley text-danger" data-index="0"><i class="fa-thin fa-face-angry"></i></span>
+                <span class="smiley text-danger" data-index="1"><i class="fa-thin fa-face-frown"></i></span>
+                <span class="smiley text-danger" data-index="2"><i class="fa-thin fa-face-sad-tear"></i></span> 
+                <span class="smiley text-warning" data-index="3"><i class="fa-thin fa-face-frown-open"></i></span>
+                <span class="smiley text-warning" data-index="4"><i class="fa-thin fa-face-meh-blank"></i></span>
+                <span class="smiley text-secondary" data-index="5"><i class="fa-thin fa-face-meh"></i></span>
+                <span class="smiley text-success" data-index="6"><i class="fa-thin fa-face-smile-relaxed"></i></span>
+                <span class="smiley text-success" data-index="7"><i class="fa-thin fa-face-smile"></i></span>
+                <span class="smiley text-success" data-index="8"><i class="fa-thin fa-face-smile-beam"></i></span>
+                <span class="smiley text-success" data-index="9"><i class="fa-thin fa-face-laugh"></i></span>
+                <span class="smiley text-success" data-index="10"><i class="fa-thin fa-face-laugh-beam"></i></span>
             </div>
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const smileys = document.querySelectorAll(".smiley");
+            
+            smileys.forEach((smiley, index) => {
+                smiley.addEventListener("click", function() {
+                    smileys.forEach((s, i) => {
+                        s.innerHTML = `<i class='fa-thin ${s.querySelector('i').classList[1]}'></i>`;
+                        if (i <= index) {
+                            s.innerHTML = `<i class='fa-solid ${s.querySelector('i').classList[1]}'></i>`;
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
