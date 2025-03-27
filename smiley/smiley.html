@@ -81,13 +81,14 @@
     </div>
 
     <script>
-        function handleRatingSelection(containerId, iconClass) {
+        function handleRatingSelection(containerId, selectionType) {
             const icons = document.querySelectorAll(`#${containerId} .rating-icon`);
             let selectedIndex = -1;
             
             icons.forEach((icon, index) => {
                 icon.addEventListener("click", function() {
                     if (selectedIndex === index) {
+                        // Clicking the same icon again deselects it
                         selectedIndex = -1;
                         icons.forEach(i => {
                             i.innerHTML = `<i class='fa-thin ${i.querySelector('i').classList[1]}'></i>`;
@@ -96,7 +97,11 @@
                     } else {
                         selectedIndex = index;
                         icons.forEach((i, idx) => {
-                            if (idx <= selectedIndex) {
+                            if (selectionType === "cumulative" && idx <= selectedIndex) {
+                                // For stars (cumulative selection)
+                                i.innerHTML = `<i class='fa-solid ${i.querySelector('i').classList[1]}'></i>`;
+                            } else if (idx === selectedIndex) {
+                                // For smileys (single selection)
                                 i.innerHTML = `<i class='fa-solid ${i.querySelector('i').classList[1]}'></i>`;
                             } else {
                                 i.innerHTML = `<i class='fa-thin ${i.querySelector('i').classList[1]}'></i>`;
@@ -110,8 +115,8 @@
         }
         
         document.addEventListener("DOMContentLoaded", function() {
-            handleRatingSelection("starContainer", "fa-star");
-            handleRatingSelection("smileyContainer", "fa-face");
+            handleRatingSelection("starContainer", "cumulative"); // Stars use cumulative selection
+            handleRatingSelection("smileyContainer", "single");   // Smileys use single selection
         });
     </script>
 
