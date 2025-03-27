@@ -39,6 +39,7 @@
             padding: 12px;
             transition: transform 0.3s ease-in-out;
             border-radius: 50%;
+            position: relative;
         }
         .rating-icon:hover {
             transform: scale(1.4) rotate(12deg);
@@ -48,6 +49,20 @@
         }
         .none { display: none;}
         .text-star { color: #f0ad4e; }
+        .star-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: #883803; /* Dark brown color */
+            pointer-events: none;
+            display: none;
+        }
+        .selected .star-number {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -55,11 +70,11 @@
         <div class="widget-container">
             <h3>Rate us with Stars</h3>
             <div class="d-flex justify-content-center flex-wrap" id="starContainer">
-                <span class="rating-icon text-star" data-index="1"><i class="fa-thin fa-star"></i></span>
-                <span class="rating-icon text-star" data-index="2"><i class="fa-thin fa-star"></i></span> 
-                <span class="rating-icon text-star" data-index="3"><i class="fa-thin fa-star"></i></span>
-                <span class="rating-icon text-star" data-index="4"><i class="fa-thin fa-star"></i></span>
-                <span class="rating-icon text-star" data-index="5"><i class="fa-thin fa-star"></i></span>
+                <span class="rating-icon text-star" data-index="1"><i class="fa-light fa-star"></i><span class="star-number">1</span></span>
+                <span class="rating-icon text-star" data-index="2"><i class="fa-light fa-star"></i><span class="star-number">2</span></span> 
+                <span class="rating-icon text-star" data-index="3"><i class="fa-light fa-star"></i><span class="star-number">3</span></span>
+                <span class="rating-icon text-star" data-index="4"><i class="fa-light fa-star"></i><span class="star-number">4</span></span>
+                <span class="rating-icon text-star" data-index="5"><i class="fa-light fa-star"></i><span class="star-number">5</span></span>
             </div>
         </div>
         
@@ -92,24 +107,36 @@
                         // Clicking the same icon again deselects it
                         selectedIndex = -1;
                         icons.forEach(i => {
-                            i.innerHTML = `<i class='fa-thin ${i.querySelector('i').classList[1]}'></i>`;
+                            const iconClass = i.querySelector('i').classList[1];
+                            i.innerHTML = `<i class='fa-thin ${iconClass}'></i>`;
+                            if (containerId === "starContainer") {
+                                i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
+                            }
                             i.classList.remove("selected");
                         });
                     } else {
                         selectedIndex = index;
                         icons.forEach((i, idx) => {
+                            const iconClass = i.querySelector('i').classList[1];
                             if (selectionType === "cumulative" && idx <= selectedIndex) {
                                 // For stars (cumulative selection)
-                                i.innerHTML = `<i class='fa-solid ${i.querySelector('i').classList[1]}'></i>`;
+                                i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
+                                if (containerId === "starContainer") {
+                                    i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
+                                }
+                                i.classList.add("selected");
                             } else if (idx === selectedIndex) {
                                 // For smileys (single selection)
-                                i.innerHTML = `<i class='fa-solid ${i.querySelector('i').classList[1]}'></i>`;
+                                i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
+                                i.classList.add("selected");
                             } else {
-                                i.innerHTML = `<i class='fa-thin ${i.querySelector('i').classList[1]}'></i>`;
+                                i.innerHTML = `<i class='fa-thin ${iconClass}'></i>`;
+                                if (containerId === "starContainer") {
+                                    i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
+                                }
+                                i.classList.remove("selected");
                             }
-                            i.classList.remove("selected");
                         });
-                        icon.classList.add("selected");
                     }
                 });
             });
