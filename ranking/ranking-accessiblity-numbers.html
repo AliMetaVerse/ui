@@ -5,30 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NPS Star Rating</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Add Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: sans-serif;
             margin: 0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background-color: #ebf4f7;
             padding: 20px;
         }
-        .container-wrapper {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 900px;
-        }
         .widget-container {
-            flex: 1;
-            min-width: 400px;
             text-align: center;
             background-color: white;
             padding: 24px;
@@ -47,82 +35,70 @@
             border-radius: 8px;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            font-family: "Font Awesome 5 Free", sans-serif; /* Apply Font Awesome */
-            color: #6c757d; /* Set color */
+            position: relative;
+            transition: transform 0.3s, background-color 0.3s, border-color 0.3s;
+            color: #6c757d;
         }
         .rating-icon:hover {
             transform: scale(1.2);
         }
-        .selected {
+        .selected, .selected-before {
             background-color: #6c757d;
             color: white;
             transform: scale(1.2);
+            border-color: #495057;
         }
-        .none { display: none; }
-        
-        /* Default text color */
-        .text-secondary { color: #6c757d; }
-
+        .underline {
+            width: 80%;
+            height: 3px;
+            background-color: #6c757d;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .selected .underline {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <div class="container-wrapper">
-        <div class="widget-container">
-            <h3>Rate us with Numbers</h3>
-            <div class="d-flex justify-content-center flex-wrap" id="starContainer">
-                <span class="rating-icon" data-index="1">1</span>
-                <span class="rating-icon" data-index="2">2</span>
-                <span class="rating-icon" data-index="3">3</span>
-                <span class="rating-icon" data-index="4">4</span>
-                <span class="rating-icon" data-index="5">5</span>
-                <span class="rating-icon" data-index="6">6</span>
-                <span class="rating-icon" data-index="7">7</span>
-                <span class="rating-icon" data-index="8">8</span>
-                <span class="rating-icon" data-index="9">9</span>
-                <span class="rating-icon" data-index="10">10</span>
-            </div>
-            <div class="d-flex">
-                <div class="text-secondary w-100 text-start ps-3" >1 (Very Bad)</div>
-                <div class="text-secondary w-100 text-end pe-3" >10 (Very Good)</div>
-            </div>
+    <div class="widget-container">
+        <h3>Rate us with Numbers</h3>
+        <div class="d-flex justify-content-center flex-wrap" id="starContainer">
+            <!-- Rating Buttons -->
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`
+                        <span class="rating-icon" data-index="${i}">
+                            <span class="rating-text">${i}</span>
+                            <div class="underline"></div>
+                        </span>
+                    `);
+                }
+            </script>
+        </div>
+        <div class="d-flex">
+            <div class="text-secondary w-100 text-start ps-3">1 (Very Bad)</div>
+            <div class="text-secondary w-100 text-end pe-3">10 (Very Good)</div>
         </div>
     </div>
 
     <script>
-        function handleRatingSelection(containerId, selectionType) {
-            const icons = document.querySelectorAll(`#${containerId} .rating-icon`);
-            let selectedIndex = -1;
-            
+        document.addEventListener("DOMContentLoaded", function() {
+            const icons = document.querySelectorAll(".rating-icon");
             icons.forEach((icon, index) => {
                 icon.addEventListener("click", function() {
-                    if (selectedIndex === index) {
-                        // Clicking the same icon again deselects it
-                        selectedIndex = -1;
-                        icons.forEach(i => {
-                            i.classList.remove("selected");
-                        });
-                    } else {
-                        selectedIndex = index;
-                        icons.forEach((i, idx) => {
-                            if (idx <= selectedIndex) {
-                                // Mark selected icons
-                                i.classList.add("selected");
-                            } else {
-                                // Remove selection
-                                i.classList.remove("selected");
-                            }
-                        });
-                    }
+                    icons.forEach((i, idx) => {
+                        i.classList.toggle("selected-before", idx < index + 1);
+                        i.classList.remove("selected");
+                    });
+                    this.classList.add("selected");
                 });
             });
-        }
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            handleRatingSelection("starContainer", "cumulative"); // Handle selection behavior
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
