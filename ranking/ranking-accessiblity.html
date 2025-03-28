@@ -48,7 +48,7 @@
             font-size: 2rem;
             cursor: pointer;
             padding: 12px;
-            transition: transform 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
             border-radius: 50%;
             position: relative;
         }
@@ -57,6 +57,17 @@
         }
         .selected {
             transform: scale(1.5);
+            position: relative;
+        }
+        .selected::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 2px;
+            background-color: currentColor;
         }
         .none { display: none;}
         
@@ -82,18 +93,21 @@
             display: block;
         }
         
-        /* High contrast colors - excludes body background */
-        .high-contrast-mode .text-star { color: #d48806; } /* Darker yellow */
-        .high-contrast-mode .text-danger { color: #a71d2a; } /* Darker red */
-        .high-contrast-mode .text-warning { color: #e0a800; } /* Darker orange */
-        .high-contrast-mode .text-secondary { color: #495057; } /* Darker gray */
-        .high-contrast-mode .text-success { color: #1e7e34; } /* Darker green */
-        .high-contrast-mode .star-number { color: #5a2d02; } /* Darker brown */
+        /* High contrast colors */
+        .high-contrast-mode .text-star { color: #d48806; }
+        .high-contrast-mode .text-danger { color: #a71d2a; }
+        .high-contrast-mode .text-warning { color: #e0a800; }
+        .high-contrast-mode .text-secondary { color: #495057; }
+        .high-contrast-mode .text-success { color: #1e7e34; }
+        .high-contrast-mode .star-number { color: #5a2d02; }
         .high-contrast-mode .widget-container {
             background-color: #fff;
         }
         .high-contrast-mode h3 {
             color: #212529;
+        }
+        .high-contrast-mode .selected::after {
+            background-color: #000;
         }
         
         /* Smiley specific contrast adjustments */
@@ -156,77 +170,102 @@
     </div>
 
     <script>
-        // Store selected items for both widgets
-        const selectedItems = {
-            starContainer: -1,
-            smileyContainer: -1
-        };
+        class RatingWidget {
+            constructor(containerId, selectionType) {
+                this.containerId = containerId;
+                this.selectionType = selectionType;
+                this.selectedIndex = -1;
+                this.icons = Array.from(document.querySelectorAll(`#${containerId} .rating-icon`));
+                this.init();
+            }
 
-        function handleRatingSelection(containerId, selectionType) {
-            const icons = document.querySelectorAll(`#${containerId} .rating-icon`);
-            
-            icons.forEach((icon, index) => {
-                icon.addEventListener("click", function() {
-                    if (selectedItems[containerId] === index) {
-                        // Clicking the same icon again deselects it
-                        selectedItems[containerId] = -1;
-                        updateIcons(containerId, selectionType, -1);
+            init() {
+                this.icons.forEach((icon, index) => {
+                    icon.addEventListener("click", () => this.handleClick(index));
+                    icon.addEventListener("keydown", (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.handleClick(index);
+                        }
+                    });
+                });
+
+                // Load from localStorage if available
+                const savedIndex = localStorage.getItem(this.containerId);
+                if (savedIndex !== null) {
+                    this.selectedIndex = parseInt(savedIndex);
+                    this.updateUI();
+                }
+            }
+
+            handleClick(index) {
+                if (this.selectedIndex === index) {
+                    // Deselect if clicking the same item
+                    this.selectedIndex = -1;
+                } else {
+                    this.selectedIndex = index;
+                }
+                this.updateUI();
+                localStorage.setItem(this.containerId, this.selectedIndex);
+            }
+
+            updateUI() {
+                this.icons.forEach((icon, idx) => {
+                    const iconClass = icon.querySelector('i').classList[1];
+                    
+                    // Update icon fill state
+                    if ((this.selectionType === "cumulative" && idx <= this.selectedIndex) || 
+                        (this.selectionType === "single" && idx === this.selectedIndex)) {
+                        icon.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
+                        if (this.containerId === "starContainer") {
+                            icon.innerHTML += `<span class="star-number">${icon.dataset.index}</span>`;
+                        }
                     } else {
-                        selectedItems[containerId] = index;
-                        updateIcons(containerId, selectionType, index);
+                        icon.innerHTML = `<i class='fa-light ${iconClass}'></i>`;
+                        if (this.containerId === "starContainer") {
+                            icon.innerHTML += `<span class="star-number">${icon.dataset.index}</span>`;
+                        }
+                    }
+
+                    // Update selected state (underline)
+                    if (idx === this.selectedIndex) {
+                        icon.classList.add("selected");
+                        icon.setAttribute('aria-selected', 'true');
+                    } else {
+                        icon.classList.remove("selected");
+                        icon.setAttribute('aria-selected', 'false');
                     }
                 });
-            });
-            
-            // Initialize with any stored selections
-            if (selectedItems[containerId] !== -1) {
-                updateIcons(containerId, selectionType, selectedItems[containerId]);
+            }
+
+            getSelectedValue() {
+                return this.selectedIndex;
             }
         }
-        
-        function updateIcons(containerId, selectionType, selectedIndex) {
-            const icons = document.querySelectorAll(`#${containerId} .rating-icon`);
-            
-            icons.forEach((i, idx) => {
-                const iconClass = i.querySelector('i').classList[1];
-                
-                if (selectionType === "cumulative" && idx <= selectedIndex) {
-                    // For stars (cumulative selection)
-                    i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
-                    if (containerId === "starContainer") {
-                        i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
-                    }
-                    i.classList.add("selected");
-                } else if (selectionType === "single" && idx === selectedIndex) {
-                    // For smileys (single selection)
-                    i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
-                    i.classList.add("selected");
-                } else {
-                    i.innerHTML = `<i class='fa-light ${iconClass}'></i>`;
-                    if (containerId === "starContainer") {
-                        i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
-                    }
-                    i.classList.remove("selected");
-                }
-            });
-        }
-        
+
         document.addEventListener("DOMContentLoaded", function() {
-            handleRatingSelection("starContainer", "cumulative");
-            handleRatingSelection("smileyContainer", "single");
-            
+            // Initialize widgets
+            const starWidget = new RatingWidget("starContainer", "cumulative");
+            const smileyWidget = new RatingWidget("smileyContainer", "single");
+
             // High contrast toggle
             const toggle = document.getElementById('highContrastToggle');
             toggle.addEventListener('change', function() {
                 document.body.classList.toggle('high-contrast-mode', this.checked);
                 
-                // Reapply selections after toggle to ensure proper styling
-                if (selectedItems.starContainer !== -1) {
-                    updateIcons("starContainer", "cumulative", selectedItems.starContainer);
-                }
-                if (selectedItems.smileyContainer !== -1) {
-                    updateIcons("smileyContainer", "single", selectedItems.smileyContainer);
-                }
+                // Reapply selections to ensure proper styling
+                starWidget.updateUI();
+                smileyWidget.updateUI();
+            });
+
+            // Load high contrast preference from localStorage
+            const highContrast = localStorage.getItem('highContrastMode') === 'true';
+            toggle.checked = highContrast;
+            document.body.classList.toggle('high-contrast-mode', highContrast);
+            
+            // Save high contrast preference
+            toggle.addEventListener('change', function() {
+                localStorage.setItem('highContrastMode', this.checked);
             });
         });
     </script>
