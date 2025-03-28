@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         body {
             font-family: "Roboto Condensed", sans-serif;
@@ -142,24 +144,26 @@
             font-size: 4rem; /* XLarge size */
             padding: 18px;
         }
+        .btn { border-radius: 99px;}
     </style>
 </head>
 <body>
-    <div class="accessibility-toggle">
-        <label for="highContrastToggle">High Contrast Mode:</label>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="highContrastToggle">
-            <label class="form-check-label" for="highContrastToggle"></label>
+    <div class="d-flex mb-4 align-items-center">
+        <div class="accessibility-toggle me-4">
+            <label for="highContrastToggle">High Contrast Mode:</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="highContrastToggle">
+                <label class="form-check-label" for="highContrastToggle"></label>
+            </div>
+        </div>
+
+        <!-- Size Selection Buttons -->
+        <div class="size-toggle mb-4 mt-1">
+            <button class="btn btn-outline-primary size-btn" data-size="size-default">Default</button>
+            <button class="btn btn-outline-primary size-btn" data-size="size-large">Large</button>
+            <button class="btn btn-outline-primary size-btn" data-size="size-xlarge">XLarge</button>
         </div>
     </div>
-
-    <!-- Size Selection Buttons -->
-    <div class="size-toggle mb-4">
-        <button class="btn btn-outline-primary size-btn" data-size="size-default">Default</button>
-        <button class="btn btn-outline-primary size-btn" data-size="size-large">Large</button>
-        <button class="btn btn-outline-primary size-btn" data-size="size-xlarge">XLarge</button>
-    </div>
-
     <div class="container-wrapper">
         <div class="widget-container">
             <h4 class="text-start">Rate us with Stars</h4>
