@@ -59,8 +59,9 @@
             transition: all 0.3s ease-in-out;
             border-radius: 50%;
             position: relative;
+            outline: none; /* Remove default focus outline */
         }
-        .rating-icon:hover {
+        .rating-icon:hover, .rating-icon:focus {
             transform: scale(1.4) translateY(-2px);
         }
         .selected {
@@ -78,6 +79,24 @@
             background-color: currentColor;
         }
         .none { display: none;}
+
+        /* Focus styles for keyboard accessibility */
+        .rating-icon:focus-visible::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 8px;
+            bottom: 12px;
+            left: 8px;
+            border: 2px solid #666;
+            border-radius: 12px;
+            pointer-events: none;
+        }
+        .high-contrast-mode .rating-icon:focus-visible {
+            outline: 2px solid #000;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
 
         /* Default colors */
         .text-star { color: #f0ad4e;}
@@ -168,11 +187,11 @@
         <div class="widget-container">
             <h4 class="text-start">Rate us with Stars</h4>
             <div class="d-flex justify-content-center flex-wrap" id="starContainer">
-                <span class="rating-icon text-star size-default" data-index="1"><i class="fa-light fa-star"></i><span class="star-number">1</span></span>
-                <span class="rating-icon text-star size-default" data-index="2"><i class="fa-light fa-star"></i><span class="star-number">2</span></span> 
-                <span class="rating-icon text-star size-default" data-index="3"><i class="fa-light fa-star"></i><span class="star-number">3</span></span>
-                <span class="rating-icon text-star size-default" data-index="4"><i class="fa-light fa-star"></i><span class="star-number">4</span></span>
-                <span class="rating-icon text-star size-default" data-index="5"><i class="fa-light fa-star"></i><span class="star-number">5</span></span>
+                <span tabindex="0" class="rating-icon text-star size-default" data-index="1"><i class="fa-light fa-star"></i><span class="star-number">1</span></span>
+                <span tabindex="0" class="rating-icon text-star size-default" data-index="2"><i class="fa-light fa-star"></i><span class="star-number">2</span></span> 
+                <span tabindex="0" class="rating-icon text-star size-default" data-index="3"><i class="fa-light fa-star"></i><span class="star-number">3</span></span>
+                <span tabindex="0" class="rating-icon text-star size-default" data-index="4"><i class="fa-light fa-star"></i><span class="star-number">4</span></span>
+                <span tabindex="0" class="rating-icon text-star size-default" data-index="5"><i class="fa-light fa-star"></i><span class="star-number">5</span></span>
             </div>
             <div class="d-flex mt-2">
                 <div class="text-secondary w-100 text-start ps-3">1 (Very Bad)</div>
@@ -184,17 +203,17 @@
         <div class="widget-container">
             <h4 class="text-start">Rate us with Smileys</h4>
             <div class="d-flex justify-content-center flex-wrap" id="smileyContainer">
-                <span class="rating-icon text-danger size-default" data-index="0"><i class="fa-light fa-face-angry"></i></span>
-                <span class="rating-icon text-danger size-default" data-index="1"><i class="fa-light fa-face-frown"></i></span>
-                <span class="rating-icon text-danger size-default" data-index="2"><i class="fa-light fa-face-sad-tear"></i></span> 
-                <span class="rating-icon text-warning size-default" data-index="3"><i class="fa-light fa-face-frown-open"></i></span>
-                <span class="rating-icon text-warning size-default" data-index="4"><i class="fa-light fa-face-meh-blank"></i></span>
-                <span class="rating-icon text-secondary size-default" data-index="5"><i class="fa-light fa-face-meh"></i></span>
-                <span class="rating-icon text-success size-default" data-index="6"><i class="fa-light fa-face-smile-relaxed"></i></span>
-                <span class="rating-icon text-success size-default" data-index="7"><i class="fa-light fa-face-smile"></i></span>
-                <span class="rating-icon text-success size-default" data-index="8"><i class="fa-light fa-face-smile-beam"></i></span>
-                <span class="rating-icon text-success size-default" data-index="9"><i class="fa-light fa-face-laugh"></i></span>
-                <span class="rating-icon text-success size-default" data-index="10"><i class="fa-light fa-face-laugh-beam"></i></span>
+                <span tabindex="0" class="rating-icon text-danger size-default" data-index="0"><i class="fa-light fa-face-angry"></i></span>
+                <span tabindex="0" class="rating-icon text-danger size-default" data-index="1"><i class="fa-light fa-face-frown"></i></span>
+                <span tabindex="0" class="rating-icon text-danger size-default" data-index="2"><i class="fa-light fa-face-sad-tear"></i></span> 
+                <span tabindex="0" class="rating-icon text-warning size-default" data-index="3"><i class="fa-light fa-face-frown-open"></i></span>
+                <span tabindex="0" class="rating-icon text-warning size-default" data-index="4"><i class="fa-light fa-face-meh-blank"></i></span>
+                <span tabindex="0" class="rating-icon text-secondary size-default" data-index="5"><i class="fa-light fa-face-meh"></i></span>
+                <span tabindex="0" class="rating-icon text-success size-default" data-index="6"><i class="fa-light fa-face-smile-relaxed"></i></span>
+                <span tabindex="0" class="rating-icon text-success size-default" data-index="7"><i class="fa-light fa-face-smile"></i></span>
+                <span tabindex="0" class="rating-icon text-success size-default" data-index="8"><i class="fa-light fa-face-smile-beam"></i></span>
+                <span tabindex="0" class="rating-icon text-success size-default" data-index="9"><i class="fa-light fa-face-laugh"></i></span>
+                <span tabindex="0" class="rating-icon text-success size-default" data-index="10"><i class="fa-light fa-face-laugh-beam"></i></span>
             </div>
             <div class="d-flex mt-2">
                 <div class="text-secondary w-100 text-start ps-3">First (Very Bad)</div>
@@ -221,6 +240,23 @@
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
                             this.handleClick(index);
+                        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            const prevIndex = (index - 1 + this.icons.length) % this.icons.length;
+                            this.icons[prevIndex].focus();
+                        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            // Only move right/down if not on the last item
+                            if (index < this.icons.length - 1) {
+                                const nextIndex = (index + 1) % this.icons.length;
+                                this.icons[nextIndex].focus();
+                            }
+                        } else if (e.key === 'Home') {
+                            e.preventDefault();
+                            this.icons[0].focus();
+                        } else if (e.key === 'End') {
+                            e.preventDefault();
+                            this.icons[this.icons.length - 1].focus();
                         }
                     });
                 });
