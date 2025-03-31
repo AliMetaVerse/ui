@@ -5,20 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NPS Star & Smiley Rating</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         body {
-            font-family: sans-serif;
+            font-family: "Roboto Condensed", sans-serif;
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background-color: #ebf4f7;
             padding: 20px;
         }
-        .container-wrapper {
+        h4 {
+            font-weight: bold; /* Optional if you need it bold specifically */
+        }
+        .accessibility-toggle {
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .container-wrapper {
+            display: block;
             gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
@@ -32,119 +50,267 @@
             padding: 24px;
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
         }
         .rating-icon {
             font-size: 2rem;
             cursor: pointer;
             padding: 12px;
-            transition: transform 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
             border-radius: 50%;
             position: relative;
         }
         .rating-icon:hover {
-            transform: scale(1.4) rotate(12deg);
+            transform: scale(1.4) translateY(-2px);
         }
         .selected {
             transform: scale(1.5);
+            position: relative;
+        }
+        .selected::after {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 2px;
+            background-color: currentColor;
         }
         .none { display: none;}
-        .text-star { color: #f0ad4e; }
+
+        /* Default colors */
+        .text-star { color: #f0ad4e;}
+        .text-danger { color: #dc3545; }
+        .text-warning { color: #ffc107; }
+        .text-secondary { color: #6c757d; }
+        .text-success { color: #28a745; }
+
         .star-number {
             position: absolute;
+            font-family: 'FontAwesome';
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 0.6rem;
-            font-weight: bold;
-            color: #883803; /* Dark brown color */
+            color: #883803;
             pointer-events: none;
             display: none;
         }
         .selected .star-number {
             display: block;
         }
+
+        /* High contrast colors */
+        .high-contrast-mode .text-star { color: #6e3b00; }
+        .high-contrast-mode .text-danger { color: #a71d2a; }
+        .high-contrast-mode .text-warning { color: #e0a800; }
+        .high-contrast-mode .text-secondary { color: #495057; }
+        .high-contrast-mode .text-success { color: #1e7e34; }
+        .high-contrast-mode .star-number { color: #fffbf7; }
+        .high-contrast-mode .widget-container {
+            background-color: #fff;
+        }
+        .high-contrast-mode h3 {
+            color: #212529;
+        }
+        .high-contrast-mode .selected::after {
+            background-color: #000;
+        }
+
+        /* Smiley specific contrast adjustments */
+        .high-contrast-mode .fa-face-angry { color: #8b0000; }
+        .high-contrast-mode .fa-face-frown { color: #8b0000; }
+        .high-contrast-mode .fa-face-sad-tear { color: #8b0000; }
+        .high-contrast-mode .fa-face-frown-open { color: #8b4513; }
+        .high-contrast-mode .fa-face-meh-blank { color: #8b4513; }
+        .high-contrast-mode .fa-face-meh { color: #556b2f; }
+        .high-contrast-mode .fa-face-smile-relaxed { color: #006400; }
+        .high-contrast-mode .fa-face-smile { color: #006400; }
+        .high-contrast-mode .fa-face-smile-beam { color: #006400; }
+        .high-contrast-mode .fa-face-laugh { color: #006400; }
+        .high-contrast-mode .fa-face-laugh-beam { color: #006400; }
+
+        /* Size classes */
+        .rating-icon.size-default {
+            font-size: 2rem; /* Default size */
+            padding: 12px;
+        }
+        .rating-icon.size-large {
+            font-size: 3rem; /* Large size */
+            padding: 15px;
+        }
+        .rating-icon.size-xlarge {
+            font-size: 4rem; /* XLarge size */
+            padding: 18px;
+        }
+        .btn { border-radius: 99px;}
     </style>
 </head>
 <body>
+    <div class="d-flex mb-4 align-items-center">
+        <div class="accessibility-toggle me-4">
+            <label for="highContrastToggle">High Contrast Mode:</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="highContrastToggle">
+                <label class="form-check-label" for="highContrastToggle"></label>
+            </div>
+        </div>
+
+        <!-- Size Selection Buttons -->
+        <div class="size-toggle mb-4 mt-1">
+            <button class="btn btn-outline-primary size-btn" data-size="size-default">Default</button>
+            <button class="btn btn-outline-primary size-btn" data-size="size-large">Large</button>
+            <button class="btn btn-outline-primary size-btn" data-size="size-xlarge">XLarge</button>
+        </div>
+    </div>
     <div class="container-wrapper">
         <div class="widget-container">
-            <h3>Rate us with Stars</h3>
+            <h4 class="text-start">Rate us with Stars</h4>
             <div class="d-flex justify-content-center flex-wrap" id="starContainer">
-                <span class="rating-icon text-star" data-index="1"><i class="fa-light fa-star"></i><span class="star-number">1</span></span>
-                <span class="rating-icon text-star" data-index="2"><i class="fa-light fa-star"></i><span class="star-number">2</span></span> 
-                <span class="rating-icon text-star" data-index="3"><i class="fa-light fa-star"></i><span class="star-number">3</span></span>
-                <span class="rating-icon text-star" data-index="4"><i class="fa-light fa-star"></i><span class="star-number">4</span></span>
-                <span class="rating-icon text-star" data-index="5"><i class="fa-light fa-star"></i><span class="star-number">5</span></span>
+                <span class="rating-icon text-star size-default" data-index="1"><i class="fa-light fa-star"></i><span class="star-number">1</span></span>
+                <span class="rating-icon text-star size-default" data-index="2"><i class="fa-light fa-star"></i><span class="star-number">2</span></span> 
+                <span class="rating-icon text-star size-default" data-index="3"><i class="fa-light fa-star"></i><span class="star-number">3</span></span>
+                <span class="rating-icon text-star size-default" data-index="4"><i class="fa-light fa-star"></i><span class="star-number">4</span></span>
+                <span class="rating-icon text-star size-default" data-index="5"><i class="fa-light fa-star"></i><span class="star-number">5</span></span>
             </div>
+            <div class="d-flex mt-2">
+                <div class="text-secondary w-100 text-start ps-3">1 (Very Bad)</div>
+                <div class="text-secondary w-100 text-end pe-3">5 (Excellent)</div>
+            </div>
+    
         </div>
         
         <div class="widget-container">
-            <h3>Rate us with Smileys</h3>
+            <h4 class="text-start">Rate us with Smileys</h4>
             <div class="d-flex justify-content-center flex-wrap" id="smileyContainer">
-                <span class="rating-icon text-danger" data-index="0"><i class="fa-thin fa-face-angry"></i></span>
-                <span class="rating-icon text-danger" data-index="1"><i class="fa-thin fa-face-frown"></i></span>
-                <span class="rating-icon text-danger" data-index="2"><i class="fa-thin fa-face-sad-tear"></i></span> 
-                <span class="rating-icon text-warning" data-index="3"><i class="fa-thin fa-face-frown-open"></i></span>
-                <span class="rating-icon text-warning" data-index="4"><i class="fa-thin fa-face-meh-blank"></i></span>
-                <span class="rating-icon text-secondary" data-index="5"><i class="fa-thin fa-face-meh"></i></span>
-                <span class="rating-icon text-success" data-index="6"><i class="fa-thin fa-face-smile-relaxed"></i></span>
-                <span class="rating-icon text-success" data-index="7"><i class="fa-thin fa-face-smile"></i></span>
-                <span class="rating-icon text-success" data-index="8"><i class="fa-thin fa-face-smile-beam"></i></span>
-                <span class="rating-icon text-success" data-index="9"><i class="fa-thin fa-face-laugh"></i></span>
-                <span class="rating-icon text-success" data-index="10"><i class="fa-thin fa-face-laugh-beam"></i></span>
+                <span class="rating-icon text-danger size-default" data-index="0"><i class="fa-light fa-face-angry"></i></span>
+                <span class="rating-icon text-danger size-default" data-index="1"><i class="fa-light fa-face-frown"></i></span>
+                <span class="rating-icon text-danger size-default" data-index="2"><i class="fa-light fa-face-sad-tear"></i></span> 
+                <span class="rating-icon text-warning size-default" data-index="3"><i class="fa-light fa-face-frown-open"></i></span>
+                <span class="rating-icon text-warning size-default" data-index="4"><i class="fa-light fa-face-meh-blank"></i></span>
+                <span class="rating-icon text-secondary size-default" data-index="5"><i class="fa-light fa-face-meh"></i></span>
+                <span class="rating-icon text-success size-default" data-index="6"><i class="fa-light fa-face-smile-relaxed"></i></span>
+                <span class="rating-icon text-success size-default" data-index="7"><i class="fa-light fa-face-smile"></i></span>
+                <span class="rating-icon text-success size-default" data-index="8"><i class="fa-light fa-face-smile-beam"></i></span>
+                <span class="rating-icon text-success size-default" data-index="9"><i class="fa-light fa-face-laugh"></i></span>
+                <span class="rating-icon text-success size-default" data-index="10"><i class="fa-light fa-face-laugh-beam"></i></span>
             </div>
+            <div class="d-flex mt-2">
+                <div class="text-secondary w-100 text-start ps-3">Left (Very Bad)</div>
+                <div class="text-secondary w-100 text-end pe-3">Right (Excellent)</div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        function handleRatingSelection(containerId, selectionType) {
-            const icons = document.querySelectorAll(`#${containerId} .rating-icon`);
-            let selectedIndex = -1;
-            
-            icons.forEach((icon, index) => {
-                icon.addEventListener("click", function() {
-                    if (selectedIndex === index) {
-                        // Clicking the same icon again deselects it
-                        selectedIndex = -1;
-                        icons.forEach(i => {
-                            const iconClass = i.querySelector('i').classList[1];
-                            i.innerHTML = `<i class='fa-thin ${iconClass}'></i>`;
-                            if (containerId === "starContainer") {
-                                i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
-                            }
-                            i.classList.remove("selected");
-                        });
+        class RatingWidget {
+            constructor(containerId, selectionType) {
+                this.containerId = containerId;
+                this.selectionType = selectionType;
+                this.selectedIndex = -1;
+                this.icons = Array.from(document.querySelectorAll(`#${containerId} .rating-icon`));
+                this.init();
+            }
+
+            init() {
+                this.icons.forEach((icon, index) => {
+                    icon.addEventListener("click", () => this.handleClick(index));
+                    icon.addEventListener("keydown", (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.handleClick(index);
+                        }
+                    });
+                });
+
+                const savedIndex = localStorage.getItem(this.containerId);
+                if (savedIndex !== null) {
+                    this.selectedIndex = parseInt(savedIndex);
+                    this.updateUI();
+                }
+            }
+
+            handleClick(index) {
+                if (this.selectedIndex === index) {
+                    this.selectedIndex = -1;
+                } else {
+                    this.selectedIndex = index;
+                }
+                this.updateUI();
+                localStorage.setItem(this.containerId, this.selectedIndex);
+            }
+
+            updateUI() {
+                this.icons.forEach((icon, idx) => {
+                    const iconClass = icon.querySelector('i').classList[1];
+                    
+                    if ((this.selectionType === "cumulative" && idx <= this.selectedIndex) || 
+                        (this.selectionType === "single" && idx === this.selectedIndex)) {
+                        icon.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
+                        if (this.containerId === "starContainer") {
+                            icon.innerHTML += `<span class="star-number">${icon.dataset.index}</span>`;
+                        }
                     } else {
-                        selectedIndex = index;
-                        icons.forEach((i, idx) => {
-                            const iconClass = i.querySelector('i').classList[1];
-                            if (selectionType === "cumulative" && idx <= selectedIndex) {
-                                // For stars (cumulative selection)
-                                i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
-                                if (containerId === "starContainer") {
-                                    i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
-                                }
-                                i.classList.add("selected");
-                            } else if (idx === selectedIndex) {
-                                // For smileys (single selection)
-                                i.innerHTML = `<i class='fa-solid ${iconClass}'></i>`;
-                                i.classList.add("selected");
-                            } else {
-                                i.innerHTML = `<i class='fa-thin ${iconClass}'></i>`;
-                                if (containerId === "starContainer") {
-                                    i.innerHTML += `<span class="star-number">${i.dataset.index}</span>`;
-                                }
-                                i.classList.remove("selected");
-                            }
-                        });
+                        icon.innerHTML = `<i class='fa-light ${iconClass}'></i>`;
+                        if (this.containerId === "starContainer") {
+                            icon.innerHTML += `<span class="star-number">${icon.dataset.index}</span>`;
+                        }
+                    }
+
+                    if (idx === this.selectedIndex) {
+                        icon.classList.add("selected");
+                    } else {
+                        icon.classList.remove("selected");
                     }
                 });
-            });
+            }
         }
-        
+
         document.addEventListener("DOMContentLoaded", function() {
-            handleRatingSelection("starContainer", "cumulative"); // Stars use cumulative selection
-            handleRatingSelection("smileyContainer", "single");   // Smileys use single selection
+            // Size button functionality
+            const sizeButtons = document.querySelectorAll('.size-btn');
+            const ratingIcons = document.querySelectorAll('.rating-icon');
+
+            let currentSize = 'size-default';
+
+            function updateSize(newSize) {
+                ratingIcons.forEach(icon => {
+                    icon.classList.remove('size-default', 'size-large', 'size-xlarge');
+                    icon.classList.add(newSize);
+                });
+                currentSize = newSize;
+            }
+
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const size = this.getAttribute('data-size');
+                    updateSize(size);
+                });
+            });
+
+            updateSize(currentSize);
+
+            // Initialize rating widgets
+            const starWidget = new RatingWidget("starContainer", "cumulative");
+            const smileyWidget = new RatingWidget("smileyContainer", "single");
+
+            // High contrast toggle
+            const toggle = document.getElementById('highContrastToggle');
+            toggle.addEventListener('change', function() {
+                document.body.classList.toggle('high-contrast-mode', this.checked);
+                starWidget.updateUI();
+                smileyWidget.updateUI();
+            });
+
+            const highContrast = localStorage.getItem('highContrastMode') === 'true';
+            toggle.checked = highContrast;
+            document.body.classList.toggle('high-contrast-mode', highContrast);
+
+            toggle.addEventListener('change', function() {
+                localStorage.setItem('highContrastMode', this.checked);
+            });
         });
     </script>
 
