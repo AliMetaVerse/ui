@@ -3,7 +3,7 @@
     {
       "type": "Open ended",
       "tags": {
-        "en": ["open ended", "text", "free response", "open question", "long text"],
+        "en": ["open ended", "text", "text response","Free Text", "Comment Box", "Text Response", "open question", "long text"],
         "fi": ["avoin", "teksti", "vapaa vastaus", "avoin kysymys", "pitkä teksti"],
         "sv": ["öppen", "text", "fri respons", "öppen fråga", "lång text"],
         "de": ["offene Frage", "Text", "freie Antwort", "offene Frage", "langer Text"],
@@ -23,7 +23,7 @@
     {
       "type": "Contact form",
       "tags": {
-        "en": ["contact form", "name", "email", "phone", "contact details"],
+        "en": ["contact form", "Contact info", "name", "email", "phone", "contact details"],
         "fi": ["yhteydenottolomake", "nimi", "sähköposti", "puhelin", "yhteystiedot"],
         "sv": ["kontaktformulär", "namn", "e-post", "telefon", "kontaktuppgifter"],
         "de": ["Kontaktformular", "Name", "E-Mail", "Telefon", "Kontaktdaten"],
@@ -33,7 +33,7 @@
     {
       "type": "Numeric field",
       "tags": {
-        "en": ["numeric field", "number", "numeric input"],
+        "en": ["numeric field", "Numeric response", "number", "numeric input"],
         "fi": ["numeerinen kenttä", "numero", "numeerinen syöte"],
         "sv": ["numeriskt fält", "nummer", "numerisk inmatning"],
         "de": ["numerisches Feld", "Zahl", "numerische Eingabe"],
@@ -93,7 +93,7 @@
     {
       "type": "Scale selection",
       "tags": {
-        "en": ["scale selection", "scale", "rating"],
+        "en": ["scale selection", "Likert", "scale", "rating"],
         "fi": ["asteikkovalinta", "asteikko", "arviointi"],
         "sv": ["skalval", "skala", "betyg"],
         "de": ["Skalaauswahl", "Skala", "Bewertung"],
