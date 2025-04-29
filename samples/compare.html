@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparison Groups Modal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+    .modal-overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    .modal-hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <!-- Trigger Button -->
+  <div class="flex justify-center mb-8">
+    <button id="openModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-3 rounded-full transition-colors duration-200 flex items-center">
+      <i class="fa-solid fa-chart-bar mr-2"></i>
+      Configure Comparison Groups
+    </button>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div id="modalOverlay" class="modal-overlay modal-hidden">
+    <!-- Modal Container -->
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl mx-4">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-800">Configure Comparison Groups</h2>
+        <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body - Scrollable Area -->
+      <div class="modal-body px-6 py-4">
+        <!-- Settings Section -->
+        <div class="mb-6">
+          <div class="flex items-center mb-4">
+            <input type="checkbox" id="specific-questions" class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+            <label for="specific-questions" class="ml-2 text-gray-700">Apply to specific question(s)</label>
+          </div>
+
+          <div class="flex items-center mb-4">
+            <span class="text-gray-700 mr-4">Show compare groups conditions:</span>
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center">
+                <input type="radio" id="top-report" name="show-conditions" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+                <label for="top-report" class="ml-2 text-gray-700">Top of Report</label>
+              </div>
+              <div class="flex items-center">
+                <input type="radio" id="per-question" name="show-conditions" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                <label for="per-question" class="ml-2 text-gray-700">Per Question</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group 1 -->
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center">
+              <label class="text-gray-700 font-medium mr-2">Group 1:</label>
+              <input type="text" value="One" class="border border-gray-300 rounded-md px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button class="text-blue-600 hover:text-blue-800 rounded-full px-3 py-1 hover:bg-blue-50 transition-colors duration-200">
+              <i class="fa-solid fa-trash-can mr-1"></i> Delete group
+            </button>
+          </div>
+
+          <!-- Condition 1 -->
+          <div class="ml-0 mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="font-medium text-gray-700">Condition 1</h3>
+              <button class="text-blue-600 hover:text-blue-800 rounded-full px-3 py-1 hover:bg-blue-50 transition-colors duration-200">
+                <i class="fa-solid fa-trash-can mr-1"></i> Delete condition
+              </button>
+            </div>
+            
+            <div class="flex items-center mb-4">
+              <label class="text-gray-600 mr-2">Filter by:</label>
+              <select class="border border-gray-300 rounded-md px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option selected>Answer option(s) of a question</option>
+                <option>Responses</option>
+                <option>Other filters</option>
+              </select>
+            </div>
+
+            <div class="border border-gray-300 rounded-md mb-3">
+              <div class="flex justify-between items-center px-4 py-3 cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                <span class="text-gray-700">Hidden background information</span>
+                <i class="fa-solid fa-chevron-down text-gray-500"></i>
+              </div>
+            </div>
+
+            <div class="border border-gray-300 rounded-md">
+              <div class="flex justify-between items-center px-4 py-3 cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+                <span class="text-gray-700">Select answer options</span>
+                <i class="fa-solid fa-chevron-down text-gray-500"></i>
+              </div>
+            </div>
+          </div>
+
+          <button class="flex items-center text-blue-600 hover:text-blue-800 rounded-full px-3 py-1 hover:bg-blue-50 transition-colors duration-200">
+            <i class="fa-solid fa-plus mr-1"></i> Add more conditions
+          </button>
+        </div>
+
+        <!-- Group 2 -->
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center">
+              <label class="text-gray-700 font-medium mr-2">Group 2:</label>
+              <input type="text" value="Two" class="border border-gray-300 rounded-md px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button class="text-blue-600 hover:text-blue-800 rounded-full px-3 py-1 hover:bg-blue-50 transition-colors duration-200">
+              <i class="fa-solid fa-trash-can mr-1"></i> Delete group
+            </button>
+          </div>
+
+          <!-- Condition 1 -->
+          <div class="ml-0 mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="font-medium text-gray-700">Condition 1</h3>
+              <button class="text-blue-600 hover:text-blue-800 rounded-full px-3 py-1 hover:bg-blue-50 transition-colors duration-200">
+                <i class="fa-solid fa-trash-can mr-1"></i> Delete condition
+              </button>
+            </div>
+            
+            <div class="flex items-center mb-4">
+              <label class="text-gray-600 mr-2">Filter by:</label>
+              <select class="border border-gray-300 rounded-md px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option>Answer option(s) of a question</option>
+                <option selected>Responses</option>
+                <option>Other filters</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <div class="flex items-center mb-2">
+                <span class="text-gray-600 mr-2 w-16">From</span>
+                <div class="relative w-48">
+                  <input type="text" placeholder="hh:mm" class="border border-gray-300 rounded-md pl-3 pr-10 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <button class="absolute right-2 top-2 text-gray-400">
+                    <i class="fa-regular fa-clock"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="flex items-center mb-2">
+                <span class="text-gray-600 mr-2 w-16">To</span>
+                <div class="relative w-48">
+                  <input type="text" placeholder="hh:mm" class="border border-gray-300 rounded-md pl-3 pr-10 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <button class="absolute right-2 top-2 text-gray-400">
+                    <i class="fa-regular fa-clock"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <p class="text-gray-600 text-sm mb-4">From and to time should be filled. End time cannot be before start time.</p>
+              
+              <div class="flex items-center mb-4">
+                <label class="text-gray-600 mr-2">Filter by:</label>
+                <select class="border border-gray-300 rounded-md px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option>Answer option(s) of a question</option>
+                  <option selected>Responses</option>
+                  <option>Other filters</option>
+                </select>
+              </div>
+              
+              <div class="mb-4">
+                <div class="flex items-center mb-2">
+                  <input type="radio" id="selected-responses" name="response-type" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+                  <label for="selected-responses" class="ml-2 text-gray-700">Selected responses</label>
+                </div>
+                
+                <div class="flex items-center ml-6 mb-2">
+                  <span class="text-gray-600">No responses selected</span>
+                  <a href="#" class="ml-2 text-blue-600 hover:text-blue-800">Select responses</a>
+                </div>
+                
+                <div class="flex items-center mb-2">
+                  <input type="radio" id="all-responses" name="response-type" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                  <label for="all-responses" class="ml-2 text-gray-700">All responses</label>
+                </div>
+                
+                <div class="flex items-center mb-2">
+                  <input type="radio" id="other-responses" name="response-type" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                  <label for="other-responses" class="ml-2 text-gray-700">All other responses which have not yet been selected</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="flex items-center text-blue-600 hover:text-blue-800 rounded-full px-3 py-1 hover:bg-blue-50 transition-colors duration-200">
+            <i class="fa-solid fa-plus mr-1"></i> Add more conditions
+          </button>
+        </div>
+
+        <!-- Add Group Button -->
+        <button class="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center">
+          <i class="fa-solid fa-plus mr-1"></i> Add Group
+        </button>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 border-t border-gray-200 flex justify-end space-x-4">
+        <button id="cancelBtn" class="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+          Cancel
+        </button>
+        <button class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal functionality
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+
+    // Open modal function
+    openModalBtn.addEventListener('click', () => {
+      modalOverlay.classList.remove('modal-hidden');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+
+    // Close modal function
+    const closeModal = () => {
+      modalOverlay.classList.add('modal-hidden');
+      document.body.style.overflow = ''; // Re-enable scrolling
+    };
+
+    // Add event listeners for closing
+    closeModalBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    
+    // Close on clicking outside the modal
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modalOverlay.classList.contains('modal-hidden')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
