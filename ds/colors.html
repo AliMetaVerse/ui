@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .roboto-condensed { font-family: 'Roboto Condensed', sans-serif; }
+        .roboto { font-family: 'Roboto', sans-serif; }
+        
+        /* Syntax highlighting */
+        .code-block {
+            background-color: #f8fafc;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #334155;
+            overflow-x: auto;
+        }
+        
+        /* Sidebar scroll */
+        .sidebar-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #b5bbbd transparent;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background-color: #b5bbbd;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-white flex h-screen overflow-hidden">
+    <!-- Left Sidebar -->
+    <div class="w-64 bg-[#f8fafc] border-r border-[#d1d5d6] flex flex-col h-full">
+        <div class="p-4 border-b border-[#d1d5d6]">
+            <h1 class="text-xl roboto-condensed font-bold text-[#272a2b]">Design System</h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto sidebar-scroll">
+            <ul class="py-2">
+                <li>
+                    <a href="#colors" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Colors</a>
+                </li>
+                <li>
+                    <a href="#typography" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Typography</a>
+                </li>
+                <li>
+                    <a href="#spacing" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Spacing</a>
+                </li>
+                <li>
+                    <a href="#grids" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Grids</a>
+                </li>
+                <li>
+                    <a href="#breakpoints" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Breakpoints</a>
+                </li>
+                <li>
+                    <a href="#shadows" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Drop Shadows</a>
+                </li>
+                <li>
+                    <a href="#tints" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Tints</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 overflow-y-auto">
+        <!-- Homepage/Overview -->
+        <div id="overview" class="p-8">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Design System Overview</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Colors</h2>
+                    <p class="roboto text-[#61686a] mb-4">Complete color palette including primary, accent, and semantic colors.</p>
+                    <a href="#colors" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Colors →</a>
+                </div>
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Typography</h2>
+                    <p class="roboto text-[#61686a] mb-4">Font styles and hierarchy for all text elements.</p>
+                    <a href="#typography" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Typography →</a>
+                </div>
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Spacing</h2>
+                    <p class="roboto text-[#61686a] mb-4">4-point grid system for consistent spacing.</p>
+                    <a href="#spacing" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Spacing →</a>
+                </div>
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Grids</h2>
+                    <p class="roboto text-[#61686a] mb-4">Layout grids for different screen sizes.</p>
+                    <a href="#grids" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Grids →</a>
+                </div>
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Breakpoints</h2>
+                    <p class="roboto text-[#61686a] mb-4">Responsive breakpoints for different devices.</p>
+                    <a href="#breakpoints" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Breakpoints →</a>
+                </div>
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Drop Shadows</h2>
+                    <p class="roboto text-[#61686a] mb-4">Shadow styles for elevation and depth.</p>
+                    <a href="#shadows" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Shadows →</a>
+                </div>
+                <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
+                    <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Tints</h2>
+                    <p class="roboto text-[#61686a] mb-4">Transparent layers for highlighting elements.</p>
+                    <a href="#tints" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Tints →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colors Section -->
+        <div id="colors" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Colors</h1>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Neutral</h2>
+            <p class="roboto text-[#61686a] mb-6">Used for supporting colors, e.g. text, background.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #19f4fa"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">50</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#19f4fa</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #13f4f4"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">100</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#13f4f4</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #b6e7e8"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">200</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#b6e7e8</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #d1d5d6"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">300</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#d1d5d6</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #b5bbbd"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">400</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#b5bbbd</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #9ba2a4"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">500</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#9ba2a4</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #787f81"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">600</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#787f81</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #61686a"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">700</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#61686a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #515557"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">800</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#515557</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #45464a"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">900</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#45464a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #272a2b"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">950</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#272a2b</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Primary</h2>
+            <p class="roboto text-[#61686a] mb-6">Used as primary brand color for all interactive elements, e.g. links, primary buttons.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #eefbfd"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">50</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#eefbfd</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #d5f4f8"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">100</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#d5f4f8</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #b0e8f1"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">200</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#b0e8f1</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #f3c6e7"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">300</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#f3c6e7</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #f1bcd5"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">400</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#f1bcd5</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #209fba"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">500</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#209fba</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #16809d"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">600</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#16809d</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #1e6880"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">700</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#1e6880</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #21568a"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">800</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#21568a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #20485b"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">900</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#20485b</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #102a3c"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">950</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#102a3c</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Accent</h2>
+            <p class="roboto text-[#61686a] mb-6">Used to emphasize secondary actions and highlight information, e.g. tabs, secondary buttons, illustrations.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fff4ed"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">50</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fff4ed</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ffe5d4"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">100</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ffe5d4</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ffc8a8"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">200</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ffc8a8</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ffa171"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">300</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ffa171</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ff6429"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">400</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ff6429</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fe4911"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">500</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fe4911</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ef2107"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">600</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ef2107</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #cf1e08"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">700</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#cf1e08</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #9afa0f"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">800</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#9afa0f</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #7e1910"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">900</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#7e1910</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #440806"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">950</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#440806</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Success</h2>
+            <p class="roboto text-[#61686a] mb-6">Used for indicating emotions of positivity, e.g. successful event, complete state.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ff5af3"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">50</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ff5af3</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #e8f4e4"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">100</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#e8f4e4</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #cfe9c9"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">200</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#cfe9c9</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ab66f"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">300</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ab66f</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #f9b258"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">400</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#f9b258</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #57948"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">500</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#57948</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #442237"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">600</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#442237</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #38672e"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">700</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#38672e</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #305229"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">800</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#305229</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #284423"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">900</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#284423</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #11240f"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">950</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#11240f</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Warning</h2>
+            <p class="roboto text-[#61686a] mb-6">Used for indicating emotions of holding, e.g. warning, on-hold state.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fffae9"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">50</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fffae9</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fe7c7"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">100</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fe7c7</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fde38a"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">200</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fde38a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fcce4d"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">300</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fcce4d</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fb5924"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">400</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fb5924</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #f5980b"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">500</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#f5980b</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #697106"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">600</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#697106</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #b44e09"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">700</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#b44e09</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #923c0e"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">800</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#923c0e</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #78320f"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">900</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#78320f</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #451803"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">950</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#451803</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Error</h2>
+            <p class="roboto text-[#61686a] mb-6">Used for indicating emotions of negativity, e.g. error state.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ffeeed"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">50</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ffeeed</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #ffe4e7"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">100</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#ffe4e7</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fecdd4"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">200</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fecdd4</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #f0a42a"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">300</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#f0a42a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #fb7189"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">400</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#fb7189</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #f43f83"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">500</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#f43f83</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #e11d4e"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">600</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#e11d4e</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #be1241"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">700</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#be1241</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #91123d"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">800</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#91123d</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #88133a"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">900</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#88133a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-20 w-full rounded-t-lg" style="background-color: #4051b"></div>
+                    <div class="p-2 bg-[#f8fafc] rounded-b-lg border border-t-0 border-[#d1d5d6]">
+                        <p class="roboto text-[12px] text-[#61686a]">950</p>
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">#4051b</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mt-8 mb-4">Color Palette</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #1e6880"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Primary / 700</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#1e6880</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #79d6e7"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Primary / 300</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#79d6e7</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #fe4911"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Accent / 500</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#fe4911</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #a9d69f"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Success / 500</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#a9d69f</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #fcced4d"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Warning / 300</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#fcced4d</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #fdadb2"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Error / 300</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#fdadb2</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #ebf4f7"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Webropol Alert Blue</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#ebf4f7</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg border border-[#d1d5d6]" style="background-color: #ffffff"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Neutral / 0</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#ffffff</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #61686a"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Neutral / 700</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#61686a</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #272a2b"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Neutral / 950</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#272a2b</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="h-32 w-full rounded-lg" style="background-color: #bbe8f1"></div>
+                    <div class="mt-2">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Info / 200</p>
+                        <p class="roboto text-[14px] text-[#61686a]">#bbe8f1</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>Use primary colors for all interactive elements like buttons and links</li>
+                    <li>Accent colors should be used sparingly for secondary actions</li>
+                    <li>Semantic colors (success, warning, error) should only be used for their intended purposes</li>
+                    <li>Neutral colors are for text, backgrounds, and non-interactive elements</li>
+                    <li>Always ensure sufficient color contrast for accessibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Typography Section -->
+        <div id="typography" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Typography</h1>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[48px] text-[#272a2b] mb-4">Display</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 48px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 48px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-4">Heading 1</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 32px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 32px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 26px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 26px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[29px] text-[#272a2b] mb-4">Heading 2</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 29px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 29px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 23px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 23px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Heading 3</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 26px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 26px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 20px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 20px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[23px] text-[#272a2b] mb-4">Heading 4</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 23px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 23px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 18px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 18px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Heading 5</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 20px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 20px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 16px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 16px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[18px] text-[#272a2b] mb-4">Heading 6</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 18px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 18px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Bold 14px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 700;<br>font-size: 14px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[18px] text-[#272a2b] mb-4">Subheading</h2>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Regular 18px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 400;<br>font-size: 18px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Tablet & Mobile</h3>
+                <p class="roboto text-[#61686a] mb-2">Roboto Condensed Regular 14px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto Condensed', sans-serif;<br>font-weight: 400;<br>font-size: 14px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Paragraph - Large</h2>
+                <p class="roboto text-[16px] text-[#61686a] mb-2">Roboto Regular 16px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 16px;</code>
+                </div>
+                <p class="roboto text-[16px] font-medium text-[#61686a] mb-2">Roboto Medium 16px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 500;<br>font-size: 16px;</code>
+                </div>
+                <p class="roboto text-[16px] font-bold text-[#61686a] mb-2">Roboto Bold 16px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 700;<br>font-size: 16px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Paragraph - Large - Special</h3>
+                <p class="roboto text-[16px] text-[#61686a] mb-2">Roboto Regular 16px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 16px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Paragraph - Medium</h2>
+                <p class="roboto text-[14px] text-[#61686a] mb-2">Roboto Regular 14px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 14px;</code>
+                </div>
+                <p class="roboto text-[14px] font-medium text-[#61686a] mb-2">Roboto Medium 14px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 500;<br>font-size: 14px;</code>
+                </div>
+                <p class="roboto text-[14px] font-bold text-[#61686a] mb-2">Roboto Bold 14px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 700;<br>font-size: 14px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Paragraph - Medium - Special</h3>
+                <p class="roboto text-[14px] text-[#61686a] mb-2">Roboto Regular 14px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 14px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Paragraph - Small</h2>
+                <p class="roboto text-[13px] text-[#61686a] mb-2">Roboto Regular 13px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 13px;</code>
+                </div>
+                <p class="roboto text-[13px] font-medium text-[#61686a] mb-2">Roboto Medium 13px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 500;<br>font-size: 13px;</code>
+                </div>
+                <p class="roboto text-[13px] font-bold text-[#61686a] mb-2">Roboto Bold 13px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 700;<br>font-size: 13px;</code>
+                </div>
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mt-6 mb-2">Paragraph - Small - Special</h3>
+                <p class="roboto text-[13px] text-[#61686a] mb-2">Roboto Regular 13px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 13px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Paragraph - Micro</h2>
+                <p class="roboto text-[12px] text-[#61686a] mb-2">Roboto Regular 12px</p>
+                <div class="code-block mb-4">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 400;<br>font-size: 12px;</code>
+                </div>
+                <p class="roboto text-[12px] font-medium text-[#61686a] mb-2">Roboto Medium 12px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-weight: 500;<br>font-size: 12px;</code>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h2 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Caption</h2>
+                <p class="roboto text-[12px] uppercase text-[#61686a] mb-2">Roboto Uppercase 12px</p>
+                <div class="code-block">
+                    <code>font-family: 'Roboto', sans-serif;<br>font-size: 12px;<br>text-transform: uppercase;</code>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>Use Display for marketing headlines and hero sections</li>
+                    <li>Heading 1-6 should be used in descending order for content hierarchy</li>
+                    <li>Subheadings work well for section introductions below main headings</li>
+                    <li>Paragraph styles should be used for body content with appropriate weights</li>
+                    <li>Caption text is ideal for image captions, table headers, and small labels</li>
+                    <li>Always use the mobile sizes for screens smaller than 768px</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Spacing Section -->
+        <div id="spacing" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Spacing</h1>
+            <p class="roboto text-[#61686a] mb-8">4 point grid system for spacing.</p>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-[#d1d5d6]">
+                    <thead>
+                        <tr class="bg-[#f8fafc]">
+                            <th class="py-3 px-4 border-b border-[#d1d5d6] text-left roboto-condensed font-bold text-[#272a2b]">Name</th>
+                            <th class="py-3 px-4 border-b border-[#d1d5d6] text-left roboto-condensed font-bold text-[#272a2b]">Token</th>
+                            <th class="py-3 px-4 border-b border-[#d1d5d6] text-left roboto-condensed font-bold text-[#272a2b]">Pixels</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">0.5</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxsm</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">2px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">1</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxsm</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">4px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">2</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xsm</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">8px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">3</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-sm</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">12px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">4</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-md</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">16px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">5</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-big</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">20px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">6</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xbig</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">24px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">7</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxbig</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">28px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">8</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxbig</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">32px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">10</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-lg</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">40px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">12</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xlg</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">48px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">16</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxlg</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">64px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">20</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxlg</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">80px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">24</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-huge</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">96px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">32</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xhuge</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">128px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">40</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxhuge</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">160px</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">48</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxhuge</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">192px</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>All spacing should be multiples of 4px</li>
+                    <li>Use smaller spacing values (2px-8px) for tight interfaces and micro-interactions</li>
+                    <li>Medium spacing values (12px-24px) work well for most component spacing</li>
+                    <li>Large spacing values (32px-64px) are ideal for section spacing</li>
+                    <li>Extra large spacing (96px-192px) should be used sparingly for hero sections and large content blocks</li>
+                    <li>Consistent spacing creates visual harmony and improves readability</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Grids Section -->
+        <div id="grids" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Grids</h1>
+            
+            <div class="mb-8">
+                <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Desktop</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">1920px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">1788px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">1920px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Tablet</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">768px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">224px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Side menu closed</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">Side menu open</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">68px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">24px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Mobile</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">320px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">16px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">16px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">8px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">8px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">8px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">288px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">32px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>Desktop layouts should use the full width with appropriate margins</li>
+                    <li>Tablet layouts should adapt to the smaller screen size with adjusted spacing</li>
+                    <li>Mobile layouts should be single column with minimal margins</li>
+                    <li>Side menu dimensions change between open and closed states</li>
+                    <li>Content areas should respect the grid margins for each breakpoint</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Breakpoints Section -->
+        <div id="breakpoints" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Breakpoints</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Breakpoint Values</h2>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">1 px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">480 px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">960 px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">1280 px</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">1920 px</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Columns</h2>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">4 columns</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">8 columns</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">12 columns</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Size Names</h2>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">small</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">medium</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">large</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6] mb-4">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">xlarge</p>
+                    </div>
+                    <div class="bg-[#f8fafc] p-4 rounded-lg border border-[#d1d5d6]">
+                        <p class="roboto text-[14px] font-medium text-[#272a2b]">xxlarge</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Device Types</h2>
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" class="mr-2">
+                        <p class="roboto text-[14px] text-[#61686a]">Laptop</p>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" class="mr-2">
+                        <p class="roboto text-[14px] text-[#61686a]">Tablet</p>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" class="mr-2">
+                        <p class="roboto text-[14px] text-[#61686a]">Mobile</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>Design should be mobile-first, starting with the smallest breakpoint</li>
+                    <li>Use 4 columns for mobile layouts, 8 for tablet, and 12 for desktop</li>
+                    <li>Breakpoints should trigger layout changes to optimize content display</li>
+                    <li>Test designs on actual devices to ensure proper rendering</li>
+                    <li>Consider landscape orientations for tablets and mobile devices</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Drop Shadows Section -->
+        <div id="shadows" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Drop Shadows</h1>
+            
+            <div class="p-8 bg-white rounded-lg shadow-lg mb-8" style="box-shadow: 0 4px 16px 4px rgba(39, 42, 43, 0.15);">
+                <p class="roboto text-[#61686a]">X:0, Y:4, Blur:16, Spread:4, Opacity:15%, Color: #272A2B</p>
+            </div>
+            
+            <div class="code-block mb-8">
+                <code>box-shadow: 0 4px 16px 4px rgba(39, 42, 43, 0.15);</code>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>Use shadows sparingly to create depth and hierarchy</li>
+                    <li>This shadow style should be used for elevated elements like modals and cards</li>
+                    <li>Avoid using multiple shadows on a single page to prevent visual noise</li>
+                    <li>Shadows should be subtle and not distract from the content</li>
+                    <li>Test shadows in different lighting conditions to ensure readability</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tints Section -->
+        <div id="tints" class="p-8 hidden">
+            <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Tints</h1>
+            <p class="roboto text-[#61686a] mb-8">Tints are somewhat transparent layers that are used to highlight something on the page, e.g. a modal.</p>
+            
+            <div class="mb-8">
+                <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Neutral dark</h2>
+                <p class="roboto text-[#61686a] mb-4">Use this only behind models and menus.</p>
+                <div class="h-20 w-full rounded-lg" style="background-color: rgba(39, 42, 43, 0.7);"></div>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="roboto-condensed font-bold text-[26px] text-[#272a2b] mb-4">Neutral regular</h2>
+                <p class="roboto text-[#61686a] mb-4">Use this to highlight neutral clickable and draggable elements, such as pressed state toggle switch (off-mode).</p>
+                <div class="h-20 w-full rounded-lg" style="background-color: rgba(209, 213, 214, 0.5);"></div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
+                <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
+                <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
+                    <li>Neutral dark tint should only be used behind modals and menus to focus attention</li>
+                    <li>Neutral regular tint works well for interactive element states</li>
+                    <li>Ensure tint opacity is sufficient to show the overlay effect but not obscure content completely</li>
+                    <li>Tints should be used consistently across the application</li>
+                    <li>Consider accessibility when using tints over text or important content</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!-- Add this right before the closing </body> tag -->
+<script>
+    // Enhanced navigation functionality with URL handling
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('nav a');
+        const contentSections = document.querySelectorAll('#main-content > div');
+        
+        // Function to show a section and update URL
+        function showSection(sectionId) {
+            // Hide all content sections
+            contentSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update active state in navigation
+            navLinks.forEach(navLink => {
+                navLink.classList.remove('border-l-[#1e6880]', 'text-[#1e6880]', 'bg-[#eefbfd]');
+                if (navLink.getAttribute('href') === `#${sectionId}`) {
+                    navLink.classList.add('border-l-[#1e6880]', 'text-[#1e6880]', 'bg-[#eefbfd]');
+                }
+            });
+            
+            // Update URL without page reload
+            history.pushState(null, null, `#${sectionId}`);
+        }
+        
+        // Handle initial load based on URL hash
+        const initialSection = window.location.hash ? 
+            window.location.hash.substring(1) : 
+            'overview';
+        showSection(initialSection);
+        
+        // Handle navigation clicks
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                showSection(targetId);
+            });
+        });
+        
+        // Handle back/forward navigation
+        window.addEventListener('popstate', function() {
+            const sectionId = window.location.hash ? 
+                window.location.hash.substring(1) : 
+                'overview';
+            showSection(sectionId);
+        });
+        
+        // Add copy functionality to code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'absolute top-2 right-2 p-1 bg-[#f1f5f9] rounded hover:bg-[#e2e8f0]';
+            copyBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#61686a">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+            `;
+            copyBtn.title = 'Copy to clipboard';
+            
+            // Position the code block relatively
+            block.style.position = 'relative';
+            block.appendChild(copyBtn);
+            
+            copyBtn.addEventListener('click', function() {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    copyBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    `;
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#61686a">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                        `;
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Add search functionality
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Search components...';
+        searchInput.className = 'w-full p-2 mb-4 border border-[#d1d5d6] rounded roboto text-[#61686a]';
+        
+        const sidebarHeader = document.querySelector('.p-4.border-b');
+        sidebarHeader.parentNode.insertBefore(searchInput, sidebarHeader.nextSibling);
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            navLinks.forEach(link => {
+                const linkText = link.textContent.toLowerCase();
+                if (linkText.includes(searchTerm)) {
+                    link.parentElement.style.display = 'block';
+                } else {
+                    link.parentElement.style.display = 'none';
+                }
+            });
+        });
+        
+        // Add mobile menu toggle
+        const mobileMenuButton = document.createElement('button');
+        mobileMenuButton.className = 'md:hidden fixed bottom-4 right-4 bg-[#1e6880] text-white p-3 rounded-full shadow-lg z-50';
+        mobileMenuButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        `;
+        document.body.appendChild(mobileMenuButton);
+        
+        const sidebar = document.querySelector('.w-64');
+        mobileMenuButton.addEventListener('click', function() {
+            sidebar.classList.toggle('hidden');
+        });
+        
+        // Hide sidebar on mobile when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Responsive sidebar behavior
+        function handleResize() {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize();
+    });
+</script>
+
+<!-- Add this to the head section for additional styling -->
+<style>
+    /* Smooth transitions for interactive elements */
+    .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+    }
+    
+    /* Better code block styling */
+    .code-block {
+        position: relative;
+        background-color: #f8fafc;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        font-family: 'Roboto Mono', monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: #334155;
+        overflow-x: auto;
+        border: 1px solid #d1d5d6;
+    }
+    
+    .code-block code {
+        display: block;
+        white-space: pre;
+    }
+    
+    /* Responsive sidebar */
+    @media (max-width: 767px) {
+        .w-64 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 40;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .w-64.hidden {
+            transform: translateX(-100%);
+        }
+        
+        .w-64:not(.hidden) {
+            transform: translateX(0);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        #main-content {
+            margin-left: 0;
+        }
+    }
+</style>
+
+<!-- Add this to the head section for additional fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+</body>
+</html>
