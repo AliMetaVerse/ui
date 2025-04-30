@@ -6,7 +6,7 @@
         "en": ["open ended", "text", "text response","Free Text", "Comment Box", "Text Response", "open question", "long text"],
         "fi": ["avoin", "teksti", "vapaa vastaus", "avoin kysymys", "pitkä teksti"],
         "sv": ["öppen", "text", "fri respons", "öppen fråga", "lång text"],
-        "de": ["offene Frage", "Text", "freie Antwort", "offene Frage", "langer Text"],
+        "de": ["Open Endes", "freier Text", "Kommentarfeld", "Textantwort", "offene Antwort", "offene Frage", "Text", "freie Antwort", "offene Frage", "langer Text"],
         "fr": ["question ouverte", "texte", "réponse libre", "question ouverte", "texte long"]
       }
     },
@@ -16,7 +16,7 @@
         "en": ["text field", "short text", "single line"],
         "fi": ["tekstikenttä", "lyhyt teksti", "yksi rivi"],
         "sv": ["textfält", "kort text", "en rad"],
-        "de": ["Textfeld", "kurzer Text", "einzelne Zeile"],
+        "de": ["Textfeld", "Kurztext", "kurzer Text", "einzelne Zeile"],
         "fr": ["champ de texte", "texte court", "ligne unique"]
       }
     },
@@ -203,11 +203,11 @@
     {
       "type": "MatrixSelection",
       "tags": {
-        "en": ["matrix selection", "grid choice", "table response"],
-        "fi": ["matriisivalinta", "ruudukko", "taulukkovastaus"],
-        "sv": ["matrisval", "rutnätsval", "tabellval"],
-        "de": ["Matrixauswahl", "Gitterwahl", "Tabellenantwort"],
-        "fr": ["sélection matricielle", "choix de grille", "réponse par tableau"]
+        "en": ["Likert", "matrix selection", "grid choice", "table response"],
+        "fi": ["Likert", "matriisivalinta", "ruudukko", "taulukkovastaus"],
+        "sv": ["Likert", "matrisval", "rutnätsval", "tabellval"],
+        "de": ["Likert", "Matrixauswahl", "Gitterwahl", "Tabellenantwort"],
+        "fr": ["Likert", "sélection matricielle", "choix de grille", "réponse par tableau"]
       }
     },
     {
