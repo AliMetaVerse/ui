@@ -36,43 +36,99 @@
             background-color: #b5bbbd;
             border-radius: 3px;
         }
+
+        /* Mobile navigation */
+        @media (max-width: 767px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                bottom: 0;
+                width: 100%;
+                max-width: 300px;
+                z-index: 50;
+                transition: left 0.3s ease-in-out;
+                background-color: #f8fafc;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(39, 42, 43, 0.7);
+                z-index: 40;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body class="bg-white flex h-screen overflow-hidden">
+    <!-- Mobile Navigation Toggle -->
+    <button id="mobile-nav-toggle" class="md:hidden fixed top-4 right-4 z-50 bg-[#1e6880] text-white p-2 rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div id="overlay" class="overlay"></div>
+
     <!-- Left Sidebar -->
-    <div class="w-64 bg-[#f8fafc] border-r border-[#d1d5d6] flex flex-col h-full">
-        <div class="p-4 border-b border-[#d1d5d6]">
+    <div class="sidebar w-64 bg-[#f8fafc] border-r border-[#d1d5d6] flex flex-col h-full">
+        <div class="p-4 border-b border-[#d1d5d6] flex items-center justify-between">
             <h1 class="text-xl roboto-condensed font-bold text-[#272a2b]">Design System</h1>
+            <button id="mobile-nav-close" class="md:hidden text-[#272a2b]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Search Box -->
+        <div class="p-4 border-b border-[#d1d5d6]">
+            <input type="text" id="nav-search" placeholder="Search..." class="w-full p-2 rounded-lg border border-[#d1d5d6] roboto text-[#61686a] text-sm focus:outline-none focus:border-[#1e6880] focus:ring-1 focus:ring-[#1e6880]">
         </div>
         <nav class="flex-1 overflow-y-auto sidebar-scroll">
             <ul class="py-2">
                 <li>
-                    <a href="#colors" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Colors</a>
+                    <a href="#overview" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Overview</a>
                 </li>
                 <li>
-                    <a href="#typography" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Typography</a>
+                    <a href="#colors" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Colors</a>
                 </li>
                 <li>
-                    <a href="#spacing" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Spacing</a>
+                    <a href="#typography" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Typography</a>
                 </li>
                 <li>
-                    <a href="#grids" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Grids</a>
+                    <a href="#spacing" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Spacing</a>
                 </li>
                 <li>
-                    <a href="#breakpoints" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Breakpoints</a>
+                    <a href="#grids" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Grids</a>
                 </li>
                 <li>
-                    <a href="#shadows" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Drop Shadows</a>
+                    <a href="#breakpoints" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Breakpoints</a>
                 </li>
                 <li>
-                    <a href="#tints" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent">Tints</a>
+                    <a href="#shadows" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Drop Shadows</a>
+                </li>
+                <li>
+                    <a href="#tints" class="block px-4 py-2 roboto text-[#272a2b] hover:bg-[#eefbfd] hover:text-[#1e6880] border-l-4 border-transparent transition-all">Tints</a>
                 </li>
             </ul>
         </nav>
     </div>
 
     <!-- Main Content -->
-    <div class="flex-1 overflow-y-auto">
+    <div class="flex-1 overflow-y-auto" id="main-content">
         <!-- Homepage/Overview -->
         <div id="overview" class="p-8">
             <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Design System Overview</h1>
@@ -965,57 +1021,21 @@
                         </tr>
                         <tr>
                             <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">10</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-lg</td>
+                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxxlg</td>
                             <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">40px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">12</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xlg</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">48px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">16</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxlg</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">64px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">20</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxlg</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">80px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">24</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-huge</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">96px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">32</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xhuge</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">128px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">40</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxhuge</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">160px</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">48</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">$spacing-xxxhuge</td>
-                            <td class="py-3 px-4 border-b border-[#d1d5d6] roboto text-[#61686a]">192px</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="mt-8 p-6 bg-[#f8fafc] rounded-lg border border-[#d1d5d6]">
                 <h3 class="roboto-condensed font-bold text-[20px] text-[#272a2b] mb-4">Usage Guidelines</h3>
                 <ul class="roboto text-[#61686a] list-disc pl-5 space-y-2">
-                    <li>All spacing should be multiples of 4px</li>
-                    <li>Use smaller spacing values (2px-8px) for tight interfaces and micro-interactions</li>
-                    <li>Medium spacing values (12px-24px) work well for most component spacing</li>
-                    <li>Large spacing values (32px-64px) are ideal for section spacing</li>
-                    <li>Extra large spacing (96px-192px) should be used sparingly for hero sections and large content blocks</li>
-                    <li>Consistent spacing creates visual harmony and improves readability</li>
+                    <li>Use spacing tokens for consistent spacing throughout the application</li>
+                    <li>Refer to the grid system for layout spacing</li>
+                    <li>Maintain the 4-point grid system for alignment and positioning</li>
+                    <li>Use larger spacings for main sections and smaller spacings for elements within a section</li>
+                    <li>Ensure sufficient touch target sizes for interactive elements</li>
                 </ul>
             </div>
         </div>
@@ -1244,208 +1264,89 @@
         </div>
     </div>
 
-<!-- Add this right before the closing body tag -->
-<script>
-    // Enhanced navigation functionality with URL handling
-    document.addEventListener('DOMContentLoaded', function() {
-        const navLinks = document.querySelectorAll('nav a');
-        const contentSections = document.querySelectorAll('#main-content > div');
-        
-        // Function to show a section and update URL
-        function showSection(sectionId) {
-            // Hide all content sections
-            contentSections.forEach(section => {
-                section.classList.add('hidden');
-            });
-            
-            // Show the selected section
-            document.getElementById(sectionId).classList.remove('hidden');
-            
-            // Update active state in navigation
-            navLinks.forEach(navLink => {
-                navLink.classList.remove('border-l-[#1e6880]', 'text-[#1e6880]', 'bg-[#eefbfd]');
-                if (navLink.getAttribute('href') === `#${sectionId}`) {
-                    navLink.classList.add('border-l-[#1e6880]', 'text-[#1e6880]', 'bg-[#eefbfd]');
-                }
-            });
-            
-            // Update URL without page reload
-            history.pushState(null, null, `#${sectionId}`);
-        }
-        
-        // Handle initial load based on URL hash
-        const initialSection = window.location.hash ? 
-            window.location.hash.substring(1) : 
-            'overview';
-        showSection(initialSection);
-        
-        // Handle navigation clicks
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                showSection(targetId);
-            });
-        });
-        
-        // Handle back/forward navigation
-        window.addEventListener('popstate', function() {
-            const sectionId = window.location.hash ? 
-                window.location.hash.substring(1) : 
-                'overview';
-            showSection(sectionId);
-        });
-        
-        // Add copy functionality to code blocks
-        document.querySelectorAll('.code-block').forEach(block => {
-            const copyBtn = document.createElement('button');
-            copyBtn.className = 'absolute top-2 right-2 p-1 bg-[#f1f5f9] rounded hover:bg-[#e2e8f0]';
-            copyBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#61686a">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-            `;
-            copyBtn.title = 'Copy to clipboard';
-            
-            // Position the code block relatively
-            block.style.position = 'relative';
-            block.appendChild(copyBtn);
-            
-            copyBtn.addEventListener('click', function() {
-                const code = block.querySelector('code').textContent;
-                navigator.clipboard.writeText(code).then(() => {
-                    copyBtn.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    `;
-                    setTimeout(() => {
-                        copyBtn.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#61686a">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                            </svg>
-                        `;
-                    }, 2000);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+            const mobileNavClose = document.getElementById('mobile-nav-close');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('overlay');
+            const navSearch = document.getElementById('nav-search');
+            const navLinks = document.querySelectorAll('nav a');
+            const contentSections = document.querySelectorAll('#main-content > div[id]');
+
+            // Mobile navigation toggle
+            mobileNavToggle.addEventListener('click', toggleNav);
+            mobileNavClose.addEventListener('click', toggleNav);
+            overlay.addEventListener('click', toggleNav);
+
+            function toggleNav() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+
+            // Search functionality
+            navSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                navLinks.forEach(link => {
+                    const text = link.textContent.toLowerCase();
+                    link.parentElement.style.display = text.includes(searchTerm) ? 'block' : 'none';
                 });
             });
-        });
-        
-        // Add search functionality
-        const searchInput = document.createElement('input');
-        searchInput.type = 'text';
-        searchInput.placeholder = 'Search components...';
-        searchInput.className = 'w-full p-2 mb-4 border border-[#d1d5d6] rounded roboto text-[#61686a]';
-        
-        const sidebarHeader = document.querySelector('.p-4.border-b');
-        sidebarHeader.parentNode.insertBefore(searchInput, sidebarHeader.nextSibling);
-        
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            navLinks.forEach(link => {
-                const linkText = link.textContent.toLowerCase();
-                if (linkText.includes(searchTerm)) {
-                    link.parentElement.style.display = 'block';
-                } else {
-                    link.parentElement.style.display = 'none';
+
+            // Function to show a section
+            function showSection(sectionId) {
+                // Hide all sections first
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show the selected section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
                 }
-            });
-        });
-        
-        // Add mobile menu toggle
-        const mobileMenuButton = document.createElement('button');
-        mobileMenuButton.className = 'md:hidden fixed bottom-4 right-4 bg-[#1e6880] text-white p-3 rounded-full shadow-lg z-50';
-        mobileMenuButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        `;
-        document.body.appendChild(mobileMenuButton);
-        
-        const sidebar = document.querySelector('.w-64');
-        mobileMenuButton.addEventListener('click', function() {
-            sidebar.classList.toggle('hidden');
-        });
-        
-        // Hide sidebar on mobile when clicking a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth < 768) {
-                    sidebar.classList.add('hidden');
-                }
-            });
-        });
-        
-        // Responsive sidebar behavior
-        function handleResize() {
-            if (window.innerWidth >= 768) {
-                sidebar.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('hidden');
+
+                // Update active state in navigation
+                navLinks.forEach(link => {
+                    const isActive = link.getAttribute('href') === `#${sectionId}`;
+                    link.classList.toggle('border-l-[#1e6880]', isActive);
+                    link.classList.toggle('text-[#1e6880]', isActive);
+                    link.classList.toggle('bg-[#eefbfd]', isActive);
+                });
+
+                // Update URL without reload
+                history.pushState(null, null, `#${sectionId}`);
             }
-        }
-        
-        window.addEventListener('resize', handleResize);
-        handleResize();
-    });
-</script>
 
-<!-- Add this to the head section for additional styling -->
-<style>
-    /* Smooth transitions for interactive elements */
-    .transition-all {
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-    }
-    
-    /* Better code block styling */
-    .code-block {
-        position: relative;
-        background-color: #f8fafc;
-        border-radius: 0.375rem;
-        padding: 1rem;
-        font-family: 'Roboto Mono', monospace;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        color: #334155;
-        overflow-x: auto;
-        border: 1px solid #d1d5d6;
-    }
-    
-    .code-block code {
-        display: block;
-        white-space: pre;
-    }
-    
-    /* Responsive sidebar */
-    @media (max-width: 767px) {
-        .w-64 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            z-index: 40;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        
-        .w-64.hidden {
-            transform: translateX(-100%);
-        }
-        
-        .w-64:not(.hidden) {
-            transform: translateX(0);
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        #main-content {
-            margin-left: 0;
-        }
-    }
-</style>
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    showSection(targetId);
+                    if (window.innerWidth < 768) {
+                        toggleNav();
+                    }
+                });
+            });
 
-<!-- Add this to the head section for additional fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+            // Handle initial load and back/forward navigation
+            function handleHashChange() {
+                const hash = window.location.hash.substring(1) || 'overview';
+                showSection(hash);
+            }
+
+            window.addEventListener('hashchange', handleHashChange);
+            handleHashChange(); // Handle initial load
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
