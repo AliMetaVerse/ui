@@ -221,8 +221,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const options = document.querySelectorAll('.smiley-option');
+            const radioGroup = document.querySelector('.smiley-container');
             
-            options.forEach(option => {
+            options.forEach((option, index) => {
                 const input = option.querySelector('input[type="radio"]');
                 
                 input.addEventListener('change', function() {
@@ -235,13 +236,47 @@
                     }
                 });
 
-                // Keyboard navigation
-                option.addEventListener('keydown', function(e) {
-                    if (e.key === ' ' || e.key === 'Enter') {
-                        e.preventDefault();
-                        input.click();
-                    }
+                // Update ARIA attributes for better accessibility
+                option.setAttribute('aria-checked', 'false');
+                input.addEventListener('change', function() {
+                    options.forEach(opt => opt.setAttribute('aria-checked', 'false'));
+                    option.setAttribute('aria-checked', 'true');
                 });
+            });
+
+            // Handle keyboard navigation
+            radioGroup.addEventListener('keydown', function(e) {
+                const selectedOption = document.querySelector('.smiley-option input[type="radio"]:checked');
+                let currentIndex = selectedOption ? Array.from(options).findIndex(option => 
+                    option.querySelector('input[type="radio"]') === selectedOption) : -1;
+
+                switch(e.key) {
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        currentIndex = (currentIndex + 1) % options.length;
+                        break;
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        currentIndex = (currentIndex - 1 + options.length) % options.length;
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        currentIndex = 0;
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        currentIndex = options.length - 1;
+                        break;
+                    default:
+                        return;
+                }
+
+                const nextInput = options[currentIndex].querySelector('input[type="radio"]');
+                nextInput.checked = true;
+                nextInput.focus();
+                nextInput.dispatchEvent(new Event('change'));
             });
         });
     </script>
