@@ -85,6 +85,12 @@
             margin-bottom: 0.1rem;
             padding: 0.2rem;
         }
+        .icon-wrapper-v2 {
+            font-size: 2rem;
+            margin-bottom: 0.1rem;
+            margin-left: -44px;
+            padding: 0.2rem;
+        }
 
         .label-text {
             font-size: 0.75rem;
@@ -120,6 +126,63 @@
             .label-text {
                 color: #000;
             }
+        }
+
+        /* Styles for the second version */
+        .smiley-container-v2 {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-top: 1rem;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: absolute;
+            bottom: -2rem;
+        }
+
+        .range-label {
+            font-size: 0.875rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .smiley-option-v2 {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 60px;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .smiley-option-v2:hover, .smiley-option-v2:focus-within {
+            transform: translateY(-4px);
+            background-color: #f8f9fa;
+        }
+
+        .smiley-option-v2 input[type="radio"] {
+            position: relative;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .smiley-option-v2.selected {
+            border-color: #0d6efd;
+            background-color: #f8f9fa;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -216,6 +279,92 @@
                 <span class="label-text">Excellent</span>
             </label>
         </div>
+
+        <h2 class="question-text mt-5">How would you rate your experience? (Version 2)</h2>
+        
+        <div class="smiley-container-v2" role="radiogroup" aria-label="Rating options from very bad to excellent">
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="1" aria-label="Very Bad - 1" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 very-negative">
+                    <i class="fa-light fa-face-angry"></i>
+                </div>
+            </label>
+            
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="2" aria-label="Bad - 2" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 very-negative">
+                    <i class="fa-light fa-face-frown"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="3" aria-label="Poor - 3" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 negative">
+                    <i class="fa-light fa-face-sad-tear"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="4" aria-label="Below Average - 4" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 slightly-negative">
+                    <i class="fa-light fa-face-frown-open"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="5" aria-label="Average - 5" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 neutral">
+                    <i class="fa-light fa-face-meh"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="6" aria-label="Fair - 6" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 neutral">
+                    <i class="fa-light fa-face-rolling-eyes"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="7" aria-label="Good - 7" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 slightly-positive">
+                    <i class="fa-light fa-face-smile-relaxed"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="8" aria-label="Very Good - 8" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 positive">
+                    <i class="fa-light fa-face-smile"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="9" aria-label="Great - 9" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 positive">
+                    <i class="fa-light fa-face-smile-beam"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="10" aria-label="Outstanding - 10" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 very-positive">
+                    <i class="fa-light fa-face-laugh"></i>
+                </div>
+            </label>
+
+            <label class="smiley-option-v2" tabindex="0">
+                <input type="radio" name="rating2" value="11" aria-label="Excellent - 11" role="radio" aria-checked="false" tabindex="-1">
+                <div class="icon-wrapper-v2 very-positive">
+                    <i class="fa-light fa-face-laugh-beam"></i>
+                </div>
+            </label>
+
+            <div class="range-labels">
+                <span class="range-label">Start (Very Bad)</span>
+                <span class="range-label">End (Excellent)</span>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -274,6 +423,62 @@
                 }
 
                 const nextInput = options[currentIndex].querySelector('input[type="radio"]');
+                nextInput.checked = true;
+                nextInput.focus();
+                nextInput.dispatchEvent(new Event('change'));
+            });
+
+            // Add handlers for the second version
+            const optionsV2 = document.querySelectorAll('.smiley-option-v2');
+            const radioGroupV2 = document.querySelector('.smiley-container-v2');
+            
+            optionsV2.forEach((option, index) => {
+                const input = option.querySelector('input[type="radio"]');
+                
+                input.addEventListener('change', function() {
+                    optionsV2.forEach(opt => opt.classList.remove('selected'));
+                    if (this.checked) {
+                        option.classList.add('selected');
+                    }
+                });
+
+                option.setAttribute('aria-checked', 'false');
+                input.addEventListener('change', function() {
+                    optionsV2.forEach(opt => opt.setAttribute('aria-checked', 'false'));
+                    option.setAttribute('aria-checked', 'true');
+                });
+            });
+
+            // Handle keyboard navigation for version 2
+            radioGroupV2.addEventListener('keydown', function(e) {
+                const selectedOption = document.querySelector('.smiley-option-v2 input[type="radio"]:checked');
+                let currentIndex = selectedOption ? Array.from(optionsV2).findIndex(option => 
+                    option.querySelector('input[type="radio"]') === selectedOption) : -1;
+
+                switch(e.key) {
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        currentIndex = (currentIndex + 1) % optionsV2.length;
+                        break;
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        currentIndex = (currentIndex - 1 + optionsV2.length) % optionsV2.length;
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        currentIndex = 0;
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        currentIndex = optionsV2.length - 1;
+                        break;
+                    default:
+                        return;
+                }
+
+                const nextInput = optionsV2[currentIndex].querySelector('input[type="radio"]');
                 nextInput.checked = true;
                 nextInput.focus();
                 nextInput.dispatchEvent(new Event('change'));
