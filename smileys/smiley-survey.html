@@ -377,13 +377,21 @@
             options.forEach((option, index) => {
                 const input = option.querySelector('input[type="radio"]');
                 
+                // Add click and change handlers
                 input.addEventListener('change', function() {
-                    // Remove selected class from all options
                     options.forEach(opt => opt.classList.remove('selected'));
-                    
-                    // Add selected class to chosen option
                     if (this.checked) {
                         option.classList.add('selected');
+                    }
+                });
+
+                // Add keyboard handler for individual options
+                option.addEventListener('keydown', function(e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        input.checked = true;
+                        input.focus();
+                        input.dispatchEvent(new Event('change'));
                     }
                 });
 
@@ -437,10 +445,21 @@
             optionsV2.forEach((option, index) => {
                 const input = option.querySelector('input[type="radio"]');
                 
+                // Add click and change handlers
                 input.addEventListener('change', function() {
                     optionsV2.forEach(opt => opt.classList.remove('selected'));
                     if (this.checked) {
                         option.classList.add('selected');
+                    }
+                });
+
+                // Add keyboard handler for individual options
+                option.addEventListener('keydown', function(e) {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        input.checked = true;
+                        input.focus();
+                        input.dispatchEvent(new Event('change'));
                     }
                 });
 
@@ -489,3 +508,4 @@
     </script>
 </body>
 </html>
+``` 
