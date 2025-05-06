@@ -73,7 +73,7 @@
     {
       "type": "Picture selection",
       "tags": {
-        "en": ["picture selection", "image choice", "picture option"],
+        "en": ["picture selection", "image choice", "picture option", "single image choice"],
         "fi": ["kuvavalinta", "kuvan valinta", "kuvavaihtoehto"],
         "sv": ["bildval", "bildval", "bildalternativ"],
         "de": ["Bildauswahl", "Bildwahl", "Bildoption"],
@@ -83,7 +83,7 @@
     {
       "type": "Picture multiselections",
       "tags": {
-        "en": ["picture multiselections", "multiple images", "select multiple pictures"],
+        "en": ["picture multiselections", "multiple images", "select multiple pictures", "Multiple image choice"],
         "fi": ["kuvamonivalinta", "useita kuvia", "valitse useita kuvia"],
         "sv": ["flera bildval", "flera bilder", "välj flera bilder"],
         "de": ["Mehrfachbildauswahl", "mehrere Bilder", "mehrere Bilder auswählen"],
@@ -93,7 +93,7 @@
     {
       "type": "Scale selection",
       "tags": {
-        "en": ["scale selection", "Likert", "scale", "rating"],
+        "en": ["scale selection", "Likert", "scale", "rating", "matrix", "single choice matrix", "radio button matrix"],
         "fi": ["asteikkovalinta", "asteikko", "arviointi"],
         "sv": ["skalval", "skala", "betyg"],
         "de": ["Skalaauswahl", "Skala", "Bewertung"],
@@ -203,7 +203,7 @@
     {
       "type": "MatrixSelection",
       "tags": {
-        "en": ["Likert", "matrix selection", "grid choice", "table response"],
+        "en": ["Likert", "matrix selection", "grid choice", "table response", "matrix single choice", "matrix radio buttons"],
         "fi": ["Likert", "matriisivalinta", "ruudukko", "taulukkovastaus"],
         "sv": ["Likert", "matrisval", "rutnätsval", "tabellval"],
         "de": ["Likert", "Matrixauswahl", "Gitterwahl", "Tabellenantwort"],
@@ -213,7 +213,7 @@
     {
       "type": "MatrixMultiSelection",
       "tags": {
-        "en": ["matrix multi-selection", "multiple grid choices", "multi-table response"],
+        "en": ["matrix multi-selection", "multiple grid choices", "multi-table response", "matrix multiple choice", "matrix check box"],
         "fi": ["matriisimonivalinta", "useita ruutuvalintoja", "monitaulukkovastaus"],
         "sv": ["matrisflerval", "flera rutnätsval", "fler-tabellval"],
         "de": ["Matrix-Multi-Auswahl", "mehrere Gitterauswahlen", "Multi-Tabellenantwort"],
@@ -223,7 +223,7 @@
     {
       "type": "Position",
       "tags": {
-        "en": ["position", "location selection", "spatial choice"],
+        "en": ["position", "location selection", "spatial choice", " value scale", "importance scale", "preference ranking", "preference scale"],
         "fi": ["sijainti", "paikan valinta", "tilallinen valinta"],
         "sv": ["position", "platsval", "rumsligt val"],
         "de": ["Position", "Standortwahl", "räumliche Auswahl"],
