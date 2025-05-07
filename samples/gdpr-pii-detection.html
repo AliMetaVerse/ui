@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GDPR PII Detection - Open-ended Answers</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        >
+        <link rel="stylesheet" href="https://kit.fontawesome.com/50ef2d3cf8.css" crossorigin="anonymous">
+    </head>
+    <style>
+        .feature-locked {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        .pii-highlight {
+            background-color: rgba(255, 255, 0, 0.2);
+            padding: 2px 4px;
+        }
+        .settings-panel {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .azure-notice {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+        .modal-dialog {
+            max-width: 700px;
+        }
+    </style>
+    <body>
+        <nav class="navbar bg-body-tertiary mb-4">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">
+                    <a href="../index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">UI Design</a>
+                </span>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#piiSettingsModal">
+                Open PII Detection Settings
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="piiSettingsModal" tabindex="-1" aria-labelledby="piiSettingsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="piiSettingsModalLabel">GDPR PII Detection Settings</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="settings-panel">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Personal Data
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="piiDetectionToggle">
+                                                <label class="form-check-label" for="piiDetectionToggle">
+                                                    Enable PII Detection & Removal
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="featureLockedMessage" class="alert alert-warning mt-3">
+                                <i class="fas fa-lock"></i> This feature requires a subscription. Contact sales to enable automatic PII detection.
+                            </div>
+                            <div id="azureNotice" class="azure-notice d-none">
+                                <p><strong>Note:</strong> By enabling this feature, you confirm that you have the authority to accept Microsoft Azure as a data processor for PII detection. See our <a href="#">Terms & Conditions</a> for more information.</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-section mt-4">
+                            <h4>PII Detection Preview</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Original Response:</h5>
+                                    <p id="originalResponse">My name is John Smith</p>
+                                    <h5>Processed Response:</h5>
+                                    <p id="processedResponse">My name is [Personal Data Removed]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveSettings()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const piiToggle = document.getElementById('piiDetectionToggle');
+            const azureNotice = document.getElementById('azureNotice');
+            const featureLockedMessage = document.getElementById('featureLockedMessage');
+
+            piiToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    azureNotice.classList.remove('d-none');
+                    document.getElementById('processedResponse').textContent = 'My name is [Personal Data Removed]';
+                } else {
+                    azureNotice.classList.add('d-none');
+                    document.getElementById('processedResponse').textContent = document.getElementById('originalResponse').textContent;
+                }
+            });
+
+            function saveSettings() {
+                // Here you would typically save the settings to your backend
+                const modal = bootstrap.Modal.getInstance(document.getElementById('piiSettingsModal'));
+                modal.hide();
+            }
+        </script>
+    </body>
+</html>
