@@ -17,9 +17,26 @@
         <header class="mb-12">
             <h1 class="text-4xl font-bold text-gray-900 mb-4">UI Components Directory</h1>
             <p class="text-lg text-gray-600">A comprehensive collection of UI components and examples</p>
+            
+            <!-- Search Input -->
+            <div class="mt-6">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        class="w-full px-4 py-2 pl-10 pr-4 text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Search components..."
+                    >
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="componentsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Backend & Components Section -->
             <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
@@ -156,6 +173,40 @@
             });
             card.addEventListener('mouseout', () => {
                 card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const componentsGrid = document.getElementById('componentsGrid');
+        const cards = componentsGrid.querySelectorAll('.bg-white');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            cards.forEach(card => {
+                const links = card.querySelectorAll('a');
+                const cardTitle = card.querySelector('h2').textContent.toLowerCase();
+                let hasMatch = false;
+
+                // Check card title
+                if (cardTitle.includes(searchTerm)) {
+                    hasMatch = true;
+                }
+
+                // Check all links in the card
+                links.forEach(link => {
+                    const linkText = link.textContent.toLowerCase();
+                    if (linkText.includes(searchTerm)) {
+                        hasMatch = true;
+                        link.style.backgroundColor = searchTerm ? '#f0f9ff' : 'transparent';
+                    } else {
+                        link.style.backgroundColor = 'transparent';
+                    }
+                });
+
+                // Show/hide the entire card based on matches
+                card.style.display = hasMatch ? 'block' : 'none';
             });
         });
     </script>
