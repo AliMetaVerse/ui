@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Question</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-select {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-items {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .select-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .select-item:hover {
+            background-color: #f0f7f9;
+        }
+
+        .select-item.selected {
+            background-color: #eefbfd;
+        }
+
+        .checkbox-wrapper {
+            display: none;
+        }
+
+        .multi-select .checkbox-wrapper {
+            display: block;
+        }
+
+        .disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .settings-disabled {
+            opacity: 0.7;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-2xl mx-auto">
+        <!-- Survey Controls -->
+        <div class="mb-8 flex gap-4">
+            <button onclick="publishSurvey()" 
+                    class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    id="publishBtn">
+                <i class="fa-solid fa-paper-plane mr-2"></i>
+                Publish Survey
+            </button>
+            <button onclick="resetSurvey()" 
+                    class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                    id="resetBtn">
+                <i class="fa-solid fa-rotate-left mr-2"></i>
+                Reset Survey
+            </button>
+        </div>
+
+        <!-- Survey Settings -->
+        <div class="mb-8 p-6 bg-white rounded-lg shadow" id="settingsPanel">
+            <h2 class="text-xl font-bold mb-4">Survey Settings</h2>
+            <div class="flex items-center gap-4">
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="selectionMode" value="single" checked 
+                           class="text-blue-600" id="singleSelect">
+                    <span>Single Selection</span>
+                </label>
+                <label class="flex items-center gap-2">
+                    <input type="radio" name="selectionMode" value="multiple" 
+                           class="text-blue-600" id="multiSelect">
+                    <span>Multiple Selection</span>
+                </label>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">
+                Note: Selection mode cannot be changed after survey is published
+            </p>
+        </div>
+
+        <!-- Dropdown Question -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-semibold mb-4">Sample Question</h3>
+            <div class="custom-select">
+                <button class="w-full px-4 py-2 text-left border rounded-lg bg-white hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" id="dropdownButton">
+                    <div class="flex justify-between items-center">
+                        <span>Select an option...</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                    </div>
+                </button>
+                <div class="select-items hidden absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10">
+                    <div class="select-item" data-value="1">
+                        <span class="checkbox-wrapper">
+                            <input type="checkbox" class="form-checkbox text-blue-600">
+                        </span>
+                        Option 1
+                    </div>
+                    <div class="select-item" data-value="2">
+                        <span class="checkbox-wrapper">
+                            <input type="checkbox" class="form-checkbox text-blue-600">
+                        </span>
+                        Option 2
+                    </div>
+                    <div class="select-item" data-value="3">
+                        <span class="checkbox-wrapper">
+                            <input type="checkbox" class="form-checkbox text-blue-600">
+                        </span>
+                        Option 3
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selection Summary -->
+        <div class="mt-8 p-4 bg-gray-100 rounded-lg">
+            <h4 class="font-medium mb-2">Current Selection:</h4>
+            <div id="selectionSummary" class="text-gray-600">No options selected</div>
+        </div>
+    </div>
+
+    <script>
+        const dropdownButton = document.getElementById('dropdownButton');
+        const selectItems = document.querySelector('.select-items');
+        const singleSelect = document.getElementById('singleSelect');
+        const multiSelect = document.getElementById('multiSelect');
+        const customSelect = document.querySelector('.custom-select');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const selectionSummary = document.getElementById('selectionSummary');
+        const publishBtn = document.getElementById('publishBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        let selectedValues = [];
+
+        // Toggle dropdown
+        dropdownButton.addEventListener('click', () => {
+            selectItems.classList.toggle('hidden');
+            // Toggle chevron rotation
+            const chevron = dropdownButton.querySelector('.fa-chevron-down');
+            chevron.style.transform = selectItems.classList.contains('hidden') ? '' : 'rotate(180deg)';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!customSelect.contains(e.target)) {
+                selectItems.classList.add('hidden');
+                const chevron = dropdownButton.querySelector('.fa-chevron-down');
+                chevron.style.transform = '';
+            }
+        });
+
+        // Handle selection mode change
+        function handleModeChange() {
+            const isMulti = multiSelect.checked;
+            customSelect.classList.toggle('multi-select', isMulti);
+            selectedValues = []; // Reset selections
+            updateButtonText();
+            updateSelectionSummary();
+            
+            // Update checkbox states
+            document.querySelectorAll('.select-item input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+        }
+
+        singleSelect.addEventListener('change', handleModeChange);
+        multiSelect.addEventListener('change', handleModeChange);
+
+        // Handle item selection
+        document.querySelectorAll('.select-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const value = item.dataset.value;
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                
+                if (multiSelect.checked) {
+                    // Multi-select mode
+                    const index = selectedValues.indexOf(value);
+                    if (index === -1) {
+                        selectedValues.push(value);
+                        checkbox.checked = true;
+                    } else {
+                        selectedValues.splice(index, 1);
+                        checkbox.checked = false;
+                    }
+                } else {
+                    // Single-select mode
+                    selectedValues = [value];
+                    selectItems.classList.add('hidden');
+                }
+                
+                updateButtonText();
+                updateSelectionSummary();
+            });
+        });
+
+        // Update button text based on selection
+        function updateButtonText() {
+            const buttonContent = dropdownButton.querySelector('div');
+            if (selectedValues.length === 0) {
+                buttonContent.innerHTML = `
+                    <span>Select an option...</span>
+                    <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                `;
+            } else if (selectedValues.length === 1) {
+                buttonContent.innerHTML = `
+                    <span>Option ${selectedValues[0]}</span>
+                    <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                `;
+            } else {
+                buttonContent.innerHTML = `
+                    <span>${selectedValues.length} options selected</span>
+                    <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                `;
+            }
+        }
+
+        // Update selection summary
+        function updateSelectionSummary() {
+            if (selectedValues.length === 0) {
+                selectionSummary.textContent = 'No options selected';
+            } else {
+                const optionText = selectedValues.map(v => `Option ${v}`).join(', ');
+                selectionSummary.textContent = optionText;
+            }
+        }
+
+        // Simulate survey published state
+        let isPublished = false;
+        function publishSurvey() {
+            isPublished = true;
+            // Disable selection mode changes
+            singleSelect.disabled = true;
+            multiSelect.disabled = true;
+            settingsPanel.classList.add('settings-disabled');
+            publishBtn.disabled = true;
+            publishBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+
+        // Function to reset survey
+        function resetSurvey() {
+            isPublished = false;
+            singleSelect.disabled = false;
+            multiSelect.disabled = false;
+            settingsPanel.classList.remove('settings-disabled');
+            publishBtn.disabled = false;
+            publishBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            selectedValues = [];
+            updateButtonText();
+            updateSelectionSummary();
+        }
+    </script>
+</body>
+</html>

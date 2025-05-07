@@ -16,7 +16,7 @@
         "en": ["text field", "short text", "single line"],
         "fi": ["tekstikenttä", "lyhyt teksti", "yksi rivi"],
         "sv": ["textfält", "kort text", "en rad"],
-        "de": ["Textfeld", "Kurztext", "kurzer Text", "einzelne Zeile"],
+        "de": ["Textfeld", "Kurztext", "kurzer Text", "einzelne Zeile", "Freitextfeld", "Textantwort", "Antwortfeld",  "Freie Texteingabe"],
         "fr": ["champ de texte", "texte court", "ligne unique"]
       }
     },
@@ -26,7 +26,7 @@
         "en": ["contact form", "Contact info", "name", "email", "phone", "contact details"],
         "fi": ["yhteydenottolomake", "nimi", "sähköposti", "puhelin", "yhteystiedot"],
         "sv": ["kontaktformulär", "namn", "e-post", "telefon", "kontaktuppgifter"],
-        "de": ["Kontaktformular", "Name", "E-Mail", "Telefon", "Kontaktdaten"],
+        "de": ["Kontaktformular", "Name", "E-Mail", "Telefon", "Kontaktdaten", "Kontaktfeld", "Kontaktinfos", "Kontakt", "persönliche Daten"],
         "fr": ["formulaire de contact", "nom", "email", "téléphone", "coordonnées"]
       }
     },
@@ -36,7 +36,7 @@
         "en": ["numeric field", "Numeric response", "number", "numeric input"],
         "fi": ["numeerinen kenttä", "numero", "numeerinen syöte"],
         "sv": ["numeriskt fält", "nummer", "numerisk inmatning"],
-        "de": ["numerisches Feld", "Zahl", "numerische Eingabe"],
+        "de": ["numerisches Feld", "Zahl", "numerische Eingabe", "Zahlenfeld", "Nummernfeld", "Wert", "Zahlenantwort"],
         "fr": ["champ numérique", "numéro", "entrée numérique"]
       }
     },
@@ -46,7 +46,7 @@
         "en": ["selection", "single choice", "radio button"],
         "fi": ["valinta", "yksi valinta", "radiopainike"],
         "sv": ["val", "ett val", "radioknapp"],
-        "de": ["Auswahl", "einzelne Wahl", "Radiobutton"],
+        "de": ["Auswahl", "einzelne Wahl", "Radiobutton", "Einfachauswahl", "Einzelauswahl", "Einfaches Auswahlfeld", "Einzelne Antwortmöglichkeit"],
         "fr": ["sélection", "choix unique", "bouton radio"]
       }
     },
@@ -56,7 +56,7 @@
         "en": ["multiselections", "multiple choices", "checkboxes"],
         "fi": ["monivalinnat", "useita valintoja", "valintaruudut"],
         "sv": ["fler val", "flera val", "kryssrutor"],
-        "de": ["Mehrfachauswahl", "mehrere Auswahlmöglichkeiten", "Kontrollkästchen"],
+        "de": ["Mehrfachauswahl", "mehrere Auswahlmöglichkeiten", "Kontrollkästchen", "Mehrfachantwort", "Kontrollkästchenauswahl", "Multiple Choice"],
         "fr": ["sélections multiples", "choix multiples", "cases à cocher"]
       }
     },
@@ -66,7 +66,7 @@
         "en": ["dropdown selection", "dropdown", "select list"],
         "fi": ["alasvetovalinta", "alasvetovalikko", "valintalista"],
         "sv": ["rullgardinsval", "rullgardinsmeny", "val lista"],
-        "de": ["Dropdown-Auswahl", "Dropdown", "Auswahlliste"],
+        "de": ["Dropdown-Auswahl", "Dropdown", "Auswahlliste", "Auswahlmenü", "Auswahl aus Liste"],
         "fr": ["sélection déroulante", "menu déroulant", "liste de sélection"]
       }
     },
@@ -76,7 +76,7 @@
         "en": ["picture selection", "image choice", "picture option", "single image choice"],
         "fi": ["kuvavalinta", "kuvan valinta", "kuvavaihtoehto"],
         "sv": ["bildval", "bildval", "bildalternativ"],
-        "de": ["Bildauswahl", "Bildwahl", "Bildoption"],
+        "de": ["Bildauswahl", "Bildwahl", "Bildoption", "Einzelbildauswahl", "Bildantwort"],
         "fr": ["sélection d'image", "choix d'image", "option d'image"]
       }
     },
@@ -86,7 +86,7 @@
         "en": ["picture multiselections", "multiple images", "select multiple pictures", "Multiple image choice"],
         "fi": ["kuvamonivalinta", "useita kuvia", "valitse useita kuvia"],
         "sv": ["flera bildval", "flera bilder", "välj flera bilder"],
-        "de": ["Mehrfachbildauswahl", "mehrere Bilder", "mehrere Bilder auswählen"],
+        "de": ["Mehrfachbildauswahl", "mehrere Bilder", "mehrere Bilder auswählen", "Bild-Mehrfachauswahl", "Bildbasierte Mehrfachauswahl"],
         "fr": ["sélections d'images multiples", "plusieurs images", "sélectionner plusieurs images"]
       }
     },
@@ -96,7 +96,7 @@
         "en": ["scale selection", "Likert", "scale", "rating", "matrix", "single choice matrix", "radio button matrix"],
         "fi": ["asteikkovalinta", "asteikko", "arviointi"],
         "sv": ["skalval", "skala", "betyg"],
-        "de": ["Skalaauswahl", "Skala", "Bewertung"],
+        "de": ["Skalaauswahl", "Skala", "Bewertung", "Bewertungsskala", "Einstufung", "Antwortskala", "Skalenbewertung", "Einschätzungsfrage"],
         "fr": ["sélection de l'échelle", "échelle", "évaluation"]
       }
     },
@@ -106,7 +106,7 @@
         "en": ["ranking", "order preference", "rank items"],
         "fi": ["arvojärjestys", "järjestys", "arvota kohteet"],
         "sv": ["rangordning", "prioritering", "prioritera objekt"],
-        "de": ["Ranking", "Präferenzordnung", "Objekte bewerten"],
+        "de": ["Ranking", "Präferenzordnung", "Objekte bewerten", "Rangfolge", "Reihenfolge festlegen", "Priorisierung"],
         "fr": ["classement", "ordre de préférence", "classer les éléments"]
       }
     },
@@ -116,7 +116,7 @@
         "en": ["predictive search", "autocomplete", "smart search"],
         "fi": ["ennakoiva haku", "automaattitäydennys", "älykäs haku"],
         "sv": ["prediktiv sökning", "autofullständning", "smart sökning"],
-        "de": ["vorausschauende Suche", "Autovervollständigung", "intelligente Suche"],
+        "de": ["vorausschauende Suche", "Autovervollständigung", "intelligente Suche", "Suchvorschläge", "intelligente Vorschläge", "dynamische Suche"],
         "fr": ["recherche prédictive", "autocomplétion", "recherche intelligente"]
       }
     },
@@ -126,7 +126,7 @@
         "en": ["attendee registration", "event sign-up", "participant form"],
         "fi": ["osallistujan rekisteröinti", "tapahtumaan ilmoittautuminen", "osallistujalomake"],
         "sv": ["deltagarregistrering", "evenemangsanmälan", "deltagarformulär"],
-        "de": ["Teilnehmerregistrierung", "Veranstaltungsanmeldung", "Teilnehmerformular"],
+        "de": ["Teilnehmerregistrierung", "Veranstaltungsanmeldung", "Teilnehmerformular", "Anmeldeformular", "Registrierung", "Teilnahmeformular", "Anmeldung" ],
         "fr": ["inscription des participants", "inscription à l'événement", "formulaire de participation"]
       }
     },
@@ -136,7 +136,7 @@
         "en": ["fourfold", "quadrant selection", "4-way choice"],
         "fi": ["nelikenttä", "nelikenttävalinta", "4-suuntainen valinta"],
         "sv": ["fyrfält", "kvadrantval", "4-vägsval"],
-        "de": ["Vierfachauswahl", "Quadrantenauswahl", "4-Wege-Auswahl"],
+        "de": ["Vierfachauswahl", "Quadrantenauswahl", "4-Wege-Auswahl", "Vierfelderwahl"],
         "fr": ["quatre parties", "sélection de quadrant", "choix à 4 voies"]
       }
     },
@@ -146,7 +146,7 @@
         "en": ["hierarchical", "tree structure", "nested selection"],
         "fi": ["hierarkinen", "puurakenne", "sisäkkäinen valinta"],
         "sv": ["hierarkisk", "trädstruktur", "inbäddat val"],
-        "de": ["hierarchisch", "Baumstruktur", "verschachtelte Auswahl"],
+        "de": ["hierarchisch", "Baumstruktur", "verschachtelte Auswahl", "Stufenstruktur"],
         "fr": ["hiérarchique", "structure en arbre", "sélection imbriquée"]
       }
     },
@@ -156,7 +156,7 @@
         "en": ["calendar", "date picker", "event scheduling"],
         "fi": ["kalenteri", "päivämäärän valitsin", "tapahtuman ajoitus"],
         "sv": ["kalender", "datumväljare", "händelseplanering"],
-        "de": ["Kalender", "Datumswähler", "Veranstaltungsplanung"],
+        "de": ["Kalender", "Datumswähler", "Veranstaltungsplanung", "Datumswahl", "Kalenderauswahl", "Terminplanung"],
         "fr": ["calendrier", "sélecteur de date", "planification d'événements"]
       }
     },
@@ -166,7 +166,7 @@
         "en": ["attachment", "file upload", "document submission"],
         "fi": ["liite", "tiedoston lataus", "asiakirjan lähetys"],
         "sv": ["bilaga", "filuppladdning", "dokumentsinlämning"],
-        "de": ["Anhang", "Dateiupload", "Dokumenteinreichung"],
+        "de": ["Anhang", "Dateiupload", "Dokumenteinreichung", "Datei anhängen", "Dokument hochladen"],
         "fr": ["pièce jointe", "téléchargement de fichier", "soumission de document"]
       }
     },
@@ -176,7 +176,7 @@
         "en": ["NPS", "net promoter score", "customer loyalty"],
         "fi": ["NPS", "nettisuositteluindeksi", "asiakasuskollisuus"],
         "sv": ["NPS", "net promoter score", "kundlojalitet"],
-        "de": ["NPS", "Net Promoter Score", "Kundenloyalität"],
+        "de": ["NPS", "Net Promoter Score", "Kundenloyalität", "Weiterempfehlung", "Empfehlungsbereitschaft"],
         "fr": ["NPS", "net promoter score", "fidélité client"]
       }
     },
@@ -186,7 +186,7 @@
         "en": ["CSAT", "customer satisfaction", "satisfaction rating"],
         "fi": ["CSAT", "asiakastyytyväisyys", "tyytyväisyysarvio"],
         "sv": ["CSAT", "kundnöjdhet", "nöjdhetsbedömning"],
-        "de": ["CSAT", "Kundenzufriedenheit", "Zufriedenheitsbewertung"],
+        "de": ["CSAT", "Kundenzufriedenheit", "Zufriedenheitsbewertung", "Zufriedenheitsabfrage", "Kundenzufriedenheitsskala"],
         "fr": ["CSAT", "satisfaction client", "évaluation de la satisfaction"]
       }
     },
@@ -196,7 +196,7 @@
         "en": ["CES", "customer effort score", "ease of use"],
         "fi": ["CES", "asiakasponnistusindeksi", "käytön helppous"],
         "sv": ["CES", "kundinsatsindex", "lätt att använda"],
-        "de": ["CES", "Kundenaufwandsindex", "Benutzerfreundlichkeit"],
+        "de": ["CES", "Kundenaufwandsindex", "Benutzerfreundlichkeit", "Aufwandseinschätzung", "Bedienungsaufwand"],
         "fr": ["CES", "indice d'effort client", "facilité d'utilisation"]
       }
     },
@@ -206,7 +206,7 @@
         "en": ["Likert", "matrix selection", "grid choice", "table response", "matrix single choice", "matrix radio buttons"],
         "fi": ["Likert", "matriisivalinta", "ruudukko", "taulukkovastaus"],
         "sv": ["Likert", "matrisval", "rutnätsval", "tabellval"],
-        "de": ["Likert", "Matrixauswahl", "Gitterwahl", "Tabellenantwort"],
+        "de": ["Likert", "Matrixauswahl", "Gitterwahl", "Tabellenantwort", "Matrixantwort", "Tabellarische Auswahl", "Antwortgitter"],
         "fr": ["Likert", "sélection matricielle", "choix de grille", "réponse par tableau"]
       }
     },
@@ -216,7 +216,7 @@
         "en": ["matrix multi-selection", "multiple grid choices", "multi-table response", "matrix multiple choice", "matrix check box"],
         "fi": ["matriisimonivalinta", "useita ruutuvalintoja", "monitaulukkovastaus"],
         "sv": ["matrisflerval", "flera rutnätsval", "fler-tabellval"],
-        "de": ["Matrix-Multi-Auswahl", "mehrere Gitterauswahlen", "Multi-Tabellenantwort"],
+        "de": ["Matrix-Multi-Auswahl", "mehrere Gitterauswahlen", "Multi-Tabellenantwort", "Multiple Checkbox-Matrix", "Mehrfachantwortgitter", "Tabellarische Mehrfachauswahl"],
         "fr": ["sélection matricielle multiple", "choix multiples de grille", "réponse multi-table"]
       }
     },
@@ -226,7 +226,7 @@
         "en": ["position", "location selection", "spatial choice", " value scale", "importance scale", "preference ranking", "preference scale"],
         "fi": ["sijainti", "paikan valinta", "tilallinen valinta"],
         "sv": ["position", "platsval", "rumsligt val"],
-        "de": ["Position", "Standortwahl", "räumliche Auswahl"],
+        "de": ["Position", "Standortwahl", "räumliche Auswahl", "Positionsauswahl", "Lagebewertung"],
         "fr": ["position", "sélection de lieu", "choix spatial"]
       }
     },
@@ -236,7 +236,7 @@
         "en": ["custom table", "data table", "flexible table"],
         "fi": ["mukautettu taulukko", "datataulukko", "joustava taulukko"],
         "sv": ["anpassad tabell", "datatabell", "flexibel tabell"],
-        "de": ["benutzerdefinierte Tabelle", "Datentabelle", "flexible Tabelle"],
+        "de": ["benutzerdefinierte Tabelle", "Datentabelle", "flexible Tabelle", "Eigene Tabelle", "Individualisierte Datentabelle", "Frei gestaltbare Tabelle"],
         "fr": ["tableau personnalisé", "tableau de données", "tableau flexible"]
       }
     },
@@ -246,7 +246,7 @@
         "en": ["slider", "range selector", "adjustable scale"],
         "fi": ["liukusäädin", "alueen valitsin", "säädettävä asteikko"],
         "sv": ["skjutreglage", "områdeväljare", "justerbar skala"],
-        "de": ["Schieberegler", "Bereichsauswahl", "justierbare Skala"],
+        "de": ["Schieberegler", "Bereichsauswahl", "justierbare Skala", "Schiebeskala", "Skalenregler",  "Einstellbarer Regler"],
         "fr": ["curseur", "sélecteur de plage", "échelle ajustable"]
       }
     }
