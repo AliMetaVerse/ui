@@ -41,14 +41,60 @@
             display: block;
         }
 
-        .disabled {
-            opacity: 0.6;
-            pointer-events: none;
+        .selection-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            border-width: 2px;
+            border-radius: 0.75rem;
+            transition: all 300ms;
+            min-height: 160px;
+            width: 200px;
         }
 
-        .settings-disabled {
-            opacity: 0.7;
-            background-color: #f3f4f6;
+        .selection-button.active {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .sub-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .sub-options.visible {
+            max-height: 500px;
+        }
+
+        .selected-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            background: #e5f0ff;
+            padding: 4px 8px;
+            border-radius: 16px;
+            font-size: 14px;
+            gap: 4px;
+        }
+
+        .tag .remove {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .tag .remove:hover {
+            background-color: #cce0ff;
         }
     </style>
 </head>
@@ -94,6 +140,7 @@
         <div class="bg-white rounded-lg shadow p-6">
             <h3 class="text-lg font-semibold mb-4">Sample Question</h3>
             <div class="custom-select">
+                <div class="selected-tags hidden" id="selectedTags"></div>
                 <button class="w-full px-4 py-2 text-left border rounded-lg bg-white hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" id="dropdownButton">
                     <div class="flex justify-between items-center">
                         <span>Select an option...</span>
@@ -159,6 +206,50 @@
             }
         });
 
+        // Show/hide selected tags based on selection mode
+        function updateInterfaceVisibility() {
+            const selectedTags = document.getElementById('selectedTags');
+            selectedTags.classList.toggle('hidden', !multiSelect.checked);
+        }
+
+        singleSelect.addEventListener('change', updateInterfaceVisibility);
+        multiSelect.addEventListener('change', updateInterfaceVisibility);
+
+        // Update selected tags display
+        function updateSelectedTags() {
+            const tagsContainer = document.getElementById('selectedTags');
+            tagsContainer.innerHTML = '';
+            
+            if (multiSelect.checked && selectedValues.length > 0) {
+                selectedValues.forEach(value => {
+                    const tag = document.createElement('span');
+                    tag.className = 'tag';
+                    tag.innerHTML = `
+                        Option ${value}
+                        <span class="remove" data-value="${value}">×</span>
+                    `;
+                    tagsContainer.appendChild(tag);
+                });
+
+                // Add click handlers for tag removal
+                tagsContainer.querySelectorAll('.remove').forEach(removeBtn => {
+                    removeBtn.addEventListener('click', (e) => {
+                        const value = e.target.dataset.value;
+                        const index = selectedValues.indexOf(value);
+                        if (index > -1) {
+                            selectedValues.splice(index, 1);
+                            updateButtonText();
+                            updateSelectionSummary();
+                            updateSelectedTags();
+                            // Update checkbox state
+                            const checkbox = document.querySelector(`.select-item[data-value="${value}"] input[type="checkbox"]`);
+                            if (checkbox) checkbox.checked = false;
+                        }
+                    });
+                });
+            }
+        }
+
         // Handle selection mode change
         function handleModeChange() {
             const isMulti = multiSelect.checked;
@@ -166,6 +257,8 @@
             selectedValues = []; // Reset selections
             updateButtonText();
             updateSelectionSummary();
+            updateInterfaceVisibility();
+            updateSelectedTags();
             
             // Update checkbox states
             document.querySelectorAll('.select-item input[type="checkbox"]').forEach(cb => {
@@ -192,6 +285,7 @@
                         selectedValues.splice(index, 1);
                         checkbox.checked = false;
                     }
+                    updateSelectedTags();
                 } else {
                     // Single-select mode
                     selectedValues = [value];
