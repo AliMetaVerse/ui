@@ -6,6 +6,8 @@
     <title>Dropdown Question</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+
     <style>
         .custom-select {
             position: relative;
@@ -278,10 +280,10 @@
             <div id="selectionSummary" class="text-gray-600">No options selected</div>
         </div>
 
-        <!-- Settings Modal -->
+        <!-- Dropdown Modal -->
         <div id="settingsModal" class="modal">
             <div class="modal-content">
-                <h2 class="text-xl font-bold mb-4">Select Dropdown Type</h2>
+                <h2 class="text-xl font-bold mb-4">Select Dropdown Type <i class="fa-light fa-circle-info"></i></h2>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="modalSelectionMode" value="single" checked>
@@ -295,6 +297,9 @@
                             <h3 class="font-semibold">Multiple Selection Dropdown</h3>
                         </div>
                     </label>
+                    <p class="mt-2 text-sm text-gray-500">
+                        Note: Selection mode cannot be changed after survey is published uless reset.
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button onclick="closeModal()" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200">Cancel</button>
