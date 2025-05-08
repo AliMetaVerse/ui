@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography - Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js"></script>
+  <script src="nav.js"></script>
+  <style>
+    .type-demo {
+      transition: all 0.3s ease;
+    }
+    
+    .type-demo:hover {
+      background-color: var(--primary-50);
+    }
+    
+    .font-scale {
+      display: grid;
+      gap: 2rem;
+    }
+    
+    .font-scale > div {
+      position: relative;
+      padding-left: 6rem;
+    }
+    
+    .font-scale > div::before {
+      content: attr(data-size);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.875rem;
+      color: var(--neutral-600);
+      font-family: 'Roboto Mono', monospace;
+    }
+    
+    .copy-text {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .type-demo:hover .copy-text {
+      opacity: 1;
+    }
+    
+    .text-sample {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .text-sample::after {
+      content: 'Click to copy';
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--neutral-950);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+    
+    .text-sample:hover::after {
+      opacity: 1;
+      visibility: visible;
+      top: -1.5rem;
+    }
+  </style>
+</head>
+<body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
+  <!-- Navigation will be injected by nav.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="flex-grow max-w-6xl mx-auto py-8 px-4 w-full">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold roboto-condensed text-[#1e6880] mb-4">Typography</h2>
+      <p class="text-[#61686a] max-w-3xl mb-8">Our typography system is designed to create clear visual hierarchy and ensure readability across all platforms.</p>
+
+      <!-- Font Families -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Font Families</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Roboto Condensed -->
+          <div class="type-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-medium">Roboto Condensed</h4>
+              <button class="copy-text p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-font="'Roboto Condensed', sans-serif">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+            <div class="space-y-4">
+              <div class="roboto-condensed font-normal">Regular - The quick brown fox jumps over the lazy dog</div>
+              <div class="roboto-condensed font-bold">Bold - The quick brown fox jumps over the lazy dog</div>
+            </div>
+          </div>
+
+          <!-- Roboto -->
+          <div class="type-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-medium">Roboto</h4>
+              <button class="copy-text p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-font="'Roboto', sans-serif">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+            <div class="space-y-4">
+              <div class="roboto font-normal">Regular - The quick brown fox jumps over the lazy dog</div>
+              <div class="roboto font-medium">Medium - The quick brown fox jumps over the lazy dog</div>
+              <div class="roboto font-bold">Bold - The quick brown fox jumps over the lazy dog</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type Scale -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Type Scale</h3>
+        <div class="type-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+          <div class="font-scale">
+            <div data-size="2.5rem" class="text-4xl roboto-condensed font-bold text-sample" data-style="font-size: 2.5rem;">
+              Display Heading
+            </div>
+            <div data-size="2rem" class="text-3xl roboto-condensed font-bold text-sample" data-style="font-size: 2rem;">
+              Heading 1
+            </div>
+            <div data-size="1.5rem" class="text-2xl roboto-condensed font-bold text-sample" data-style="font-size: 1.5rem;">
+              Heading 2
+            </div>
+            <div data-size="1.25rem" class="text-xl roboto-condensed font-bold text-sample" data-style="font-size: 1.25rem;">
+              Heading 3
+            </div>
+            <div data-size="1rem" class="text-base roboto text-sample" data-style="font-size: 1rem;">
+              Body Text - The quick brown fox jumps over the lazy dog
+            </div>
+            <div data-size="0.875rem" class="text-sm roboto text-sample" data-style="font-size: 0.875rem;">
+              Small Text - The quick brown fox jumps over the lazy dog
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Styles -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Text Styles</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Paragraphs -->
+          <div class="type-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Paragraphs</h4>
+            <div class="space-y-4">
+              <p class="text-sample" data-style="line-height: 1.6;">
+                Primary paragraph text with comfortable line height for better readability. This text demonstrates the default paragraph style used throughout the interface.
+              </p>
+              <p class="text-sm text-[#61686a] text-sample" data-style="color: var(--neutral-600);">
+                Secondary paragraph text is slightly smaller and uses a muted color to create visual hierarchy within content sections.
+              </p>
+            </div>
+          </div>
+
+          <!-- Lists -->
+          <div class="type-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Lists</h4>
+            <div class="space-y-4">
+              <ul class="list-disc list-inside text-sample" data-style="list-style-type: disc;">
+                <li>Unordered list item one</li>
+                <li>Unordered list item two</li>
+                <li>Unordered list item three</li>
+              </ul>
+              <ol class="list-decimal list-inside text-sample" data-style="list-style-type: decimal;">
+                <li>Ordered list item one</li>
+                <li>Ordered list item two</li>
+                <li>Ordered list item three</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Text -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Interactive Text</h3>
+        <div class="type-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+          <div class="space-y-4">
+            <a href="#" class="text-[#1e6880] hover:text-[#16809d] transition text-sample" data-style="color: var(--primary-600);">
+              Link Text - Click here to learn more
+            </a>
+            <div class="text-[#61686a] hover:text-[#272a2b] transition cursor-pointer text-sample" data-style="color: var(--neutral-600);">
+              Hover Text - Move your mouse over me
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by nav.js -->
+  <footer class="bg-white border-t border-[#d1d5d6] mt-12"></footer>
+
+  <script>
+    // Copy functionality for font families
+    document.querySelectorAll('.copy-text').forEach(button => {
+      button.addEventListener('click', async () => {
+        const font = button.getAttribute('data-font');
+        try {
+          await navigator.clipboard.writeText(font);
+          
+          // Show success feedback
+          const originalHTML = button.innerHTML;
+          button.innerHTML = `
+            <svg class="w-5 h-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          `;
+          
+          setTimeout(() => {
+            button.innerHTML = originalHTML;
+          }, 2000);
+          
+          // Show toast notification
+          if (window.componentManager) {
+            window.componentManager.showToast({
+              title: 'Font Family Copied',
+              message: 'Font family copied to clipboard',
+              titleColor: 'text-[#448237]',
+              messageColor: 'text-[#38672e]',
+              icon: `<svg class="h-5 w-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>`
+            });
+          }
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    });
+
+    // Copy functionality for text samples
+    document.querySelectorAll('.text-sample').forEach(sample => {
+      sample.addEventListener('click', async () => {
+        const style = sample.getAttribute('data-style');
+        try {
+          await navigator.clipboard.writeText(style);
+          
+          // Show toast notification
+          if (window.componentManager) {
+            window.componentManager.showToast({
+              title: 'Style Copied',
+              message: 'Text style copied to clipboard',
+              titleColor: 'text-[#448237]',
+              messageColor: 'text-[#38672e]',
+              icon: `<svg class="h-5 w-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>`
+            });
+          }
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

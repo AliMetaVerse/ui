@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Components - Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    .feedback-component {
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: slideDown 0.3s ease-out forwards;
+    }
+    
+    @keyframes slideDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .alert {
+      animation: alertEntrance 0.5s ease-out;
+    }
+    
+    @keyframes alertEntrance {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .tooltip {
+      position: relative;
+    }
+    
+    .tooltip-content {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem;
+      background: var(--neutral-950);
+      color: white;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+    
+    .tooltip:hover .tooltip-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-0.25rem);
+    }
+    
+    .toast {
+      animation: toastSlide 0.3s ease-out;
+    }
+    
+    @keyframes toastSlide {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .progress-ring {
+      transition: stroke-dashoffset 0.35s;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+  </style>
+</head>
+<body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <a href="index.html" class="flex items-center space-x-2">
+          <div class="w-10 h-10 bg-[#1e6880] rounded-md flex items-center justify-center">
+            <span class="text-white font-bold roboto-condensed text-xl">W</span>
+          </div>
+          <h1 class="text-xl md:text-2xl font-bold roboto-condensed text-[#1e6880]">Feedback Components</h1>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="text-[#61686a] hover:text-[#1e6880] transition font-medium">Home</a>
+        <a href="components.html" class="text-[#61686a] hover:text-[#1e6880] transition font-medium">Components</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-6xl mx-auto py-8 px-4 w-full">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold roboto-condensed text-[#1e6880] mb-4">Feedback Components</h2>
+      <p class="text-[#61686a] max-w-3xl mb-8">Interactive components that provide feedback and information to users. These components help create a more engaging and responsive user experience.</p>
+
+      <!-- Alerts Section -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Alerts</h3>
+        
+        <div class="grid gap-4">
+          <!-- Success Alert -->
+          <div class="alert bg-[#f5faf3] border-l-4 border-[#579f48] p-4 flex items-start">
+            <svg class="h-5 w-5 text-[#579f48] mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <h4 class="font-medium text-[#448237]">Success</h4>
+              <p class="text-[#38672e] text-sm">Your changes have been saved successfully.</p>
+            </div>
+          </div>
+
+          <!-- Warning Alert -->
+          <div class="alert bg-[#fffae9] border-l-4 border-[#f5980b] p-4 flex items-start">
+            <svg class="h-5 w-5 text-[#f5980b] mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <div>
+              <h4 class="font-medium text-[#d97106]">Warning</h4>
+              <p class="text-[#b44e09] text-sm">Please save your changes before leaving this page.</p>
+            </div>
+          </div>
+
+          <!-- Error Alert -->
+          <div class="alert bg-[#ffebed] border-l-4 border-[#f43f63] p-4 flex items-start">
+            <svg class="h-5 w-5 text-[#f43f63] mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <h4 class="font-medium text-[#e11d4e]">Error</h4>
+              <p class="text-[#be1241] text-sm">An error occurred while processing your request.</p>
+            </div>
+          </div>
+
+          <!-- Info Alert -->
+          <div class="alert bg-[#eefbfd] border-l-4 border-[#209fba] p-4 flex items-start">
+            <svg class="h-5 w-5 text-[#209fba] mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <h4 class="font-medium text-[#16809d]">Information</h4>
+              <p class="text-[#1e6880] text-sm">Updated features are now available in your dashboard.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tooltips Section -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Tooltips</h3>
+        
+        <div class="grid gap-8 md:grid-cols-2">
+          <!-- Basic Tooltip -->
+          <div class="bg-white p-6 rounded-lg border border-[#d1d5d6]">
+            <h4 class="font-medium mb-4">Basic Tooltip</h4>
+            <div class="flex justify-center">
+              <button class="tooltip bg-[#1e6880] text-white px-4 py-2 rounded">
+                Hover me
+                <span class="tooltip-content">This is a tooltip</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Positioned Tooltips -->
+          <div class="bg-white p-6 rounded-lg border border-[#d1d5d6]">
+            <h4 class="font-medium mb-4">Positioned Tooltips</h4>
+            <div class="flex justify-center gap-4">
+              <button class="tooltip bg-[#1e6880] text-white px-4 py-2 rounded">
+                Top
+                <span class="tooltip-content">Top tooltip</span>
+              </button>
+              <button class="tooltip bg-[#1e6880] text-white px-4 py-2 rounded">
+                Bottom
+                <span class="tooltip-content" style="top: 100%; bottom: auto">Bottom tooltip</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Notifications -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Toast Notifications</h3>
+        
+        <div class="grid gap-4">
+          <!-- Success Toast -->
+          <div class="toast fixed bottom-4 right-4 bg-white rounded-lg shadow-lg border border-[#d1d5d6] p-4 max-w-sm">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-[#448237]">Successfully saved!</p>
+                <p class="mt-1 text-sm text-[#38672e]">Your changes have been saved.</p>
+              </div>
+              <div class="ml-4 flex-shrink-0 flex">
+                <button class="text-[#61686a] hover:text-[#272a2b]">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Indicators -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Progress Indicators</h3>
+        
+        <div class="grid gap-8 md:grid-cols-2">
+          <!-- Linear Progress -->
+          <div class="bg-white p-6 rounded-lg border border-[#d1d5d6]">
+            <h4 class="font-medium mb-4">Linear Progress</h4>
+            <div class="w-full bg-[#f3f4f4] rounded-full h-2">
+              <div class="bg-[#1e6880] h-2 rounded-full w-3/4"></div>
+            </div>
+          </div>
+
+          <!-- Circular Progress -->
+          <div class="bg-white p-6 rounded-lg border border-[#d1d5d6]">
+            <h4 class="font-medium mb-4">Circular Progress</h4>
+            <div class="flex justify-center">
+              <svg class="w-16 h-16">
+                <circle class="text-[#f3f4f4]" stroke-width="4" stroke="currentColor" fill="none" r="30" cx="32" cy="32"/>
+                <circle class="text-[#1e6880] progress-ring" stroke-width="4" stroke="currentColor" fill="none" r="30" cx="32" cy="32" style="stroke-dasharray: 188.5; stroke-dashoffset: 47.125"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-[#d1d5d6] mt-12">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center">
+          <div class="w-8 h-8 bg-[#1e6880] rounded-md flex items-center justify-center mr-2">
+            <span class="text-white font-bold roboto-condensed text-sm">W</span>
+          </div>
+          <span class="text-sm text-[#61686a] roboto">&copy; 2025 Webropol. All rights reserved.</span>
+        </div>
+        
+        <div class="flex space-x-6">
+          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Privacy Policy</a>
+          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Terms of Use</a>
+          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Demo functionality for toasts
+    document.addEventListener('DOMContentLoaded', () => {
+      const toasts = document.querySelectorAll('.toast');
+      toasts.forEach(toast => {
+        const closeButton = toast.querySelector('button');
+        closeButton.addEventListener('click', () => {
+          toast.style.opacity = '0';
+          setTimeout(() => {
+            toast.style.display = 'none';
+          }, 300);
+        });
+      });
+    });
+
+    // Demo functionality for circular progress
+    const circle = document.querySelector('.progress-ring');
+    if (circle) {
+      const radius = circle.r.baseVal.value;
+      const circumference = radius * 2 * Math.PI;
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      
+      function setProgress(percent) {
+        const offset = circumference - percent / 100 * circumference;
+        circle.style.strokeDashoffset = offset;
+      }
+      
+      // Set initial progress
+      setProgress(75);
+    }
+  </script>
+</body>
+</html>
