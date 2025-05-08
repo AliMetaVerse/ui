@@ -141,6 +141,56 @@
             opacity: 0.7;
             cursor: not-allowed;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .modal .radio-group {
+            margin: 1rem 0;
+        }
+
+        .modal .radio-option {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .modal .radio-option:hover {
+            background-color: #f8fafc;
+        }
+
+        .modal .radio-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
     </style>
 </head>
 <body class="bg-gray-50 p-8">
@@ -162,7 +212,12 @@
             </button>
         </div>
 
-        
+        <!-- Add Settings Button -->
+        <button onclick="openModal()" class="mb-4 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+            <i class="fa-solid fa-square mr-2"></i>
+            Trigger Dropdown Modal
+        </button>
+
         <!-- Survey Settings -->
         <div class="mb-8 p-6 bg-white rounded-lg shadow" id="settingsPanel">
             <h2 class="text-xl font-bold mb-4">Select Dropdown Type</h2>
@@ -177,7 +232,7 @@
                 </button>
             </div>
             <p class="mt-2 text-sm text-gray-500">
-                Note: Selection mode cannot be changed after survey is published
+                Note: Selection mode cannot be changed after survey is published uless reset.
             </p>
             <input type="radio" name="selectionMode" value="single" checked class="hidden" id="singleSelect">
             <input type="radio" name="selectionMode" value="multiple" class="hidden" id="multiSelect">
@@ -222,6 +277,32 @@
             <h4 class="font-medium mb-2">Current Selection:</h4>
             <div id="selectionSummary" class="text-gray-600">No options selected</div>
         </div>
+
+        <!-- Settings Modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <h2 class="text-xl font-bold mb-4">Select Dropdown Type</h2>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="modalSelectionMode" value="single" checked>
+                        <div>
+                            <h3 class="font-semibold">Single Selection Dropdown</h3>
+                        </div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="modalSelectionMode" value="multiple">
+                        <div>
+                            <h3 class="font-semibold">Multiple Selection Dropdown</h3>
+                        </div>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="closeModal()" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200">Cancel</button>
+                    <button onclick="applySettings()" class="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700">Apply</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -437,6 +518,58 @@
             selectionTypeButtons.forEach(button => {
                 button.style.pointerEvents = '';
             });
+        }
+
+        // Modal functions
+        const modal = document.getElementById('settingsModal');
+
+        function openModal() {
+            if (!isPublished) {
+                modal.style.display = 'block';
+                // Set modal radio button to match current selection
+                const modalRadios = document.getElementsByName('modalSelectionMode');
+                modalRadios.forEach(radio => {
+                    radio.checked = radio.value === (multiSelect.checked ? 'multiple' : 'single');
+                });
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function applySettings() {
+            const modalRadios = document.getElementsByName('modalSelectionMode');
+            const selectedValue = Array.from(modalRadios).find(radio => radio.checked).value;
+            
+            // Update main radio buttons and trigger change
+            if (selectedValue === 'single') {
+                singleSelect.checked = true;
+            } else {
+                multiSelect.checked = true;
+            }
+            
+            // Update selection type buttons
+            selectionTypeButtons.forEach(button => {
+                button.classList.toggle('active', button.dataset.type === selectedValue);
+            });
+            
+            // Trigger change event to update interface
+            const event = new Event('change');
+            if (selectedValue === 'single') {
+                singleSelect.dispatchEvent(event);
+            } else {
+                multiSelect.dispatchEvent(event);
+            }
+            
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
