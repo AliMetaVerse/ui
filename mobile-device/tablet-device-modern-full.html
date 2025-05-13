@@ -2,80 +2,83 @@
 <html>
 <head>
   <title>Modern Tablet Device Mockup | Webropol Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-body {
-  font-family: sans-serif;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f0f0;
-}
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
 
-.phone-frame {
-  width: 768px; /* Tablet width */
-  height: 432px; /* Tablet height */
-  background-color: #333;
-  border-radius: 30px;
-  padding: 30px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  position: relative;
-}
+  .phone-frame {
+    width: 768px; /* Tablet width */
+    height: 432px; /* Tablet height */
+    background-color: #333;
+    border-radius: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+  }
 
-.container {
-  width: 100%;
-  height: 100%;
-  border: 0.5px solid #ccc; /* Make the border thinner */
-  border-radius: 18px; /* Match the frame's reduced roundness */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Make the shadow more subtle */  border-radius: 20px;
-  overflow: hidden;
-  background-color: white;
-}
+  .container {
+    width: 100%;
+    height: 100%;
+    border: 0.5px solid #ccc; /* Make the border thinner */
+    border-radius: 18px; /* Match the frame's reduced roundness */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Make the shadow more subtle */  border-radius: 20px;
+    overflow: hidden;
+    background-color: white;
+  }
 
-.header {
-  background-color: #1E6880;
-  color: white;
-  text-align: left;
-  padding: 15px;
-  font-weight: bold;
-  font-size: 1.2em;
-}
+  .header {
+    background-color: #1E6880;
+    color: white;
+    text-align: left;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 
-.chat-row {
-  display: flex;
-  justify-content: space-between;
-  width: 100%; /* Make rows full width */
-}
+  .chat-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Make rows full width */
+  }
 
-.chat-bubble {
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 20px;
-  display: inline-block;
-  max-width: 80%; /* Increased for tablet */
-  box-sizing: border-box; /* Include padding in width */
-}
+  .chat-bubble {
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 80%; /* Increased for tablet */
+    box-sizing: border-box; /* Include padding in width */
+  }
 
-.chat-bubble.left {
-  background-color: #e8e8e8;
-  float: left;
-  text-align: left; /* Align text left */
-}
+  .chat-bubble.left {
+    background-color: #e8e8e8;
+    float: left;
+    text-align: left; /* Align text left */
+  }
 
-.chat-bubble.right {
-  background-color: #1E6880;
-  color: white;
-  float: right;
-  text-align: center; /* Align text center */
-  min-width: 30px; /* Ensure a minimum width */
-}
+  .chat-bubble.right {
+    background-color: #1E6880;
+    color: white;
+    float: right;
+    text-align: center; /* Align text center */
+    min-width: 30px; /* Ensure a minimum width */
+  }
 
-</style>
+  </style>
 </head>
 <body>
   <div class="phone-frame">
