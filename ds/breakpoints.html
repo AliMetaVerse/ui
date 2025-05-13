@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakpoints | Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .breakpoint-example {
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .breakpoint-indicator {
+      background-color: var(--primary-100);
+      border: 1px solid var(--primary-300);
+      padding: 1rem;
+      text-align: center;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 1rem;
+    }
+    
+    .breakpoint-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+    
+    .breakpoint-table th {
+      background-color: var(--primary-50);
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--neutral-200);
+    }
+    
+    .breakpoint-table td {
+      padding: 0.75rem;
+      border: 1px solid var(--neutral-200);
+    }
+    
+    .breakpoint-table tr:nth-child(even) {
+      background-color: var(--neutral-50);
+    }
+    
+    pre {
+      background-color: var(--neutral-100);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: monospace;
+    }
+    
+    code {
+      font-family: monospace;
+    }
+    
+    .device-visual {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1rem;
+    }
+    
+    .device {
+      border: 2px solid var(--primary-600);
+      border-radius: 4px;
+      padding: 0.25rem;
+      margin: 0 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .device-screen {
+      background-color: var(--primary-100);
+      border-radius: 2px;
+    }
+    
+    .device-label {
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      color: var(--neutral-600);
+    }
+  </style>
+</head>
+<body class="bg-[var(--neutral-50)] text-[var(--neutral-800)] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 font-roboto-condensed text-[var(--primary-600)]">Breakpoints</h1>
+      <p class="text-[var(--neutral-500)] text-lg">Responsive breakpoints for adapting layouts to different screen sizes.</p>
+    </div>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Breakpoint System</h2>
+      <p class="mb-6">Our design system uses Tailwind CSS breakpoints that follow common device widths. These breakpoints help create responsive layouts that work well across different screen sizes.</p>
+      
+      <div class="breakpoint-example">
+        <div class="breakpoint-indicator block sm:hidden">
+          <strong>Extra Small (xs)</strong>: Default - Less than 640px
+        </div>
+        <div class="breakpoint-indicator hidden sm:block md:hidden">
+          <strong>Small (sm)</strong>: 640px and larger
+        </div>
+        <div class="breakpoint-indicator hidden md:block lg:hidden">
+          <strong>Medium (md)</strong>: 768px and larger
+        </div>
+        <div class="breakpoint-indicator hidden lg:block xl:hidden">
+          <strong>Large (lg)</strong>: 1024px and larger
+        </div>
+        <div class="breakpoint-indicator hidden xl:block 2xl:hidden">
+          <strong>Extra Large (xl)</strong>: 1280px and larger
+        </div>
+        <div class="breakpoint-indicator hidden 2xl:block">
+          <strong>2X Large (2xl)</strong>: 1536px and larger
+        </div>
+        <p class="text-center mt-4 text-[var(--neutral-600)]">Resize your browser to see the active breakpoint change</p>
+      </div>
+      
+      <div class="overflow-x-auto mt-8">
+        <table class="breakpoint-table">
+          <thead>
+            <tr>
+              <th>Breakpoint Prefix</th>
+              <th>Minimum Width</th>
+              <th>CSS Media Query</th>
+              <th>Typical Devices</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>(none)</code></td>
+              <td>0px</td>
+              <td><code>@media (min-width: 0px) { ... }</code></td>
+              <td>Mobile phones (portrait)</td>
+            </tr>
+            <tr>
+              <td><code>sm</code></td>
+              <td>640px</td>
+              <td><code>@media (min-width: 640px) { ... }</code></td>
+              <td>Mobile phones (landscape), small tablets</td>
+            </tr>
+            <tr>
+              <td><code>md</code></td>
+              <td>768px</td>
+              <td><code>@media (min-width: 768px) { ... }</code></td>
+              <td>Tablets (portrait)</td>
+            </tr>
+            <tr>
+              <td><code>lg</code></td>
+              <td>1024px</td>
+              <td><code>@media (min-width: 1024px) { ... }</code></td>
+              <td>Tablets (landscape), small laptops</td>
+            </tr>
+            <tr>
+              <td><code>xl</code></td>
+              <td>1280px</td>
+              <td><code>@media (min-width: 1280px) { ... }</code></td>
+              <td>Laptops, desktops</td>
+            </tr>
+            <tr>
+              <td><code>2xl</code></td>
+              <td>1536px</td>
+              <td><code>@media (min-width: 1536px) { ... }</code></td>
+              <td>Large desktop screens</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Using Breakpoints</h2>
+      <p class="mb-6">Apply responsive designs by prefixing Tailwind utility classes with breakpoint prefixes. This enables different styles at different screen sizes.</p>
+      
+      <pre><code class="language-html">&lt;div class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+  This text will change size at different breakpoints
+&lt;/div>
+
+&lt;div class="flex flex-col md:flex-row">
+  Changes from vertical to horizontal layout on md screens and larger
+&lt;/div>
+
+&lt;div class="w-full sm:w-1/2 lg:w-1/3">
+  Full width on mobile, half width on tablets, one-third on desktops
+&lt;/div></code></pre>
+
+      <div class="breakpoint-example mt-8">
+        <div class="bg-[var(--neutral-100)] p-4 rounded-lg">
+          <div class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-center p-4">
+            This text changes size at different breakpoints
+          </div>
+          
+          <div class="flex flex-col md:flex-row gap-4 my-4">
+            <div class="bg-[var(--primary-200)] p-4 rounded">Item 1</div>
+            <div class="bg-[var(--primary-200)] p-4 rounded">Item 2</div>
+            <div class="bg-[var(--primary-200)] p-4 rounded">Item 3</div>
+          </div>
+          
+          <div class="flex flex-wrap">
+            <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+              <div class="bg-[var(--primary-300)] p-4 rounded text-center">Block 1</div>
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+              <div class="bg-[var(--primary-300)] p-4 rounded text-center">Block 2</div>
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
+              <div class="bg-[var(--primary-300)] p-4 rounded text-center">Block 3</div>
+            </div>
+          </div>
+        </div>
+        <p class="text-center mt-4 text-[var(--neutral-600)]">Resize your browser to see these elements change layout</p>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Visual Device Representation</h2>
+      <p class="mb-6">Common device sizes and their corresponding breakpoints:</p>
+      
+      <div class="device-visual">
+        <div class="device">
+          <div class="device-screen" style="width: 20px; height: 40px;"></div>
+          <div class="device-label">Mobile<br>&lt; 640px</div>
+        </div>
+        <div class="device">
+          <div class="device-screen" style="width: 40px; height: 45px;"></div>
+          <div class="device-label">Small Tablet<br>640px+</div>
+        </div>
+        <div class="device">
+          <div class="device-screen" style="width: 55px; height: 50px;"></div>
+          <div class="device-label">Tablet<br>768px+</div>
+        </div>
+        <div class="device">
+          <div class="device-screen" style="width: 70px; height: 50px;"></div>
+          <div class="device-label">Laptop<br>1024px+</div>
+        </div>
+        <div class="device">
+          <div class="device-screen" style="width: 85px; height: 55px;"></div>
+          <div class="device-label">Desktop<br>1280px+</div>
+        </div>
+        <div class="device">
+          <div class="device-screen" style="width: 100px; height: 60px;"></div>
+          <div class="device-label">Large Desktop<br>1536px+</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Container Behavior</h2>
+      <p class="mb-6">Our container class sets maximum widths at each breakpoint for consistent layouts:</p>
+      
+      <div class="overflow-x-auto">
+        <table class="breakpoint-table">
+          <thead>
+            <tr>
+              <th>Breakpoint</th>
+              <th>Container Max-Width</th>
+              <th>CSS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Default (xs)</td>
+              <td>100%</td>
+              <td><code>max-width: 100%;</code></td>
+            </tr>
+            <tr>
+              <td>sm (640px+)</td>
+              <td>640px</td>
+              <td><code>max-width: 640px;</code></td>
+            </tr>
+            <tr>
+              <td>md (768px+)</td>
+              <td>768px</td>
+              <td><code>max-width: 768px;</code></td>
+            </tr>
+            <tr>
+              <td>lg (1024px+)</td>
+              <td>1024px</td>
+              <td><code>max-width: 1024px;</code></td>
+            </tr>
+            <tr>
+              <td>xl (1280px+)</td>
+              <td>1280px</td>
+              <td><code>max-width: 1280px;</code></td>
+            </tr>
+            <tr>
+              <td>2xl (1536px+)</td>
+              <td>1536px</td>
+              <td><code>max-width: 1536px;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-6">
+        <pre><code class="language-html">&lt;div class="container mx-auto px-4">
+  This container will adapt its maximum width at different screen sizes
+&lt;/div></code></pre>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Best Practices</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Design for mobile first, then enhance for larger screens</li>
+        <li>Test designs at all breakpoints to ensure a smooth experience</li>
+        <li>Use relative units (rem, em, %) instead of pixels when possible for better scaling</li>
+        <li>Avoid setting specific heights on elements that contain variable content</li>
+        <li>Consider touch targets (minimum 44×44px) for mobile interfaces</li>
+        <li>Don't rely solely on screen width—account for different aspect ratios and orientations</li>
+        <li>Use fewer breakpoints when possible to maintain simplicity</li>
+        <li>Test with real devices, not just browser resizing</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[var(--neutral-200)] mt-auto"></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize code highlighting if available
+      if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+      }
+      
+      // Function to update active breakpoint indicator
+      function updateBreakpointIndicator() {
+        const width = window.innerWidth;
+        document.getElementById('current-width').textContent = width + 'px';
+        
+        if (width >= 1536) {
+          document.getElementById('current-breakpoint').textContent = '2xl';
+        } else if (width >= 1280) {
+          document.getElementById('current-breakpoint').textContent = 'xl';
+        } else if (width >= 1024) {
+          document.getElementById('current-breakpoint').textContent = 'lg';
+        } else if (width >= 768) {
+          document.getElementById('current-breakpoint').textContent = 'md';
+        } else if (width >= 640) {
+          document.getElementById('current-breakpoint').textContent = 'sm';
+        } else {
+          document.getElementById('current-breakpoint').textContent = 'xs (default)';
+        }
+      }
+      
+      // Update on page load and resize
+      window.addEventListener('resize', updateBreakpointIndicator);
+      updateBreakpointIndicator();
+    });
+  </script>
+</body>
+</html>

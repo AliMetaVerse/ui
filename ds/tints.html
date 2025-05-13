@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tints & Shades | Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    
+    .color-swatch {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .color-box {
+      height: 100px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.5rem;
+    }
+    
+    .color-info {
+      background-color: white;
+      padding: 0.75rem;
+      font-size: 0.875rem;
+    }
+    
+    .color-name {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .color-hex {
+      color: var(--neutral-500);
+      font-family: monospace;
+    }
+
+    .color-example {
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: var(--border-radius);
+    }
+
+    .accessibility-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-[var(--neutral-50)] text-[var(--neutral-800)] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 font-roboto-condensed text-[var(--primary-600)]">Color Tints & Shades</h1>
+      <p class="text-[var(--neutral-500)] text-lg">A comprehensive system of tints and shades for creating depth and hierarchy with our color palette.</p>
+    </div>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Understanding Tints & Shades</h2>
+      <p class="mb-4">Our color system utilizes a scale of tints and shades to ensure consistency and accessibility across the UI. Each color in our palette has variations ranging from 50 (lightest) to 900 (darkest).</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <h3 class="font-bold mb-2">Tints</h3>
+          <p class="text-sm text-[var(--neutral-600)]">Tints are lighter variations of a color, created by adding white. We use tints for backgrounds, hover states, and subtle UI elements.</p>
+        </div>
+        
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <h3 class="font-bold mb-2">Base Colors</h3>
+          <p class="text-sm text-[var(--neutral-600)]">Base colors (500 level) are the core brand colors that define our visual identity. These are used for primary UI elements.</p>
+        </div>
+        
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <h3 class="font-bold mb-2">Shades</h3>
+          <p class="text-sm text-[var(--neutral-600)]">Shades are darker variations of a color, created by adding black. We use shades for text, borders, and for emphasis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Primary Color Scale</h2>
+      <p class="mb-6">Our primary color represents our brand identity and is used for primary actions, navigation elements, and key highlights.</p>
+      
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-50)">
+            <span class="text-xs font-medium text-[var(--primary-900)]">50</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 50</div>
+            <div class="color-hex">#f0f7ff</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-100)">
+            <span class="text-xs font-medium text-[var(--primary-900)]">100</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 100</div>
+            <div class="color-hex">#e0efff</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-200)">
+            <span class="text-xs font-medium text-[var(--primary-900)]">200</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 200</div>
+            <div class="color-hex">#c2dfff</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-300)">
+            <span class="text-xs font-medium text-[var(--primary-900)]">300</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 300</div>
+            <div class="color-hex">#94c3ff</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-400)">
+            <span class="text-xs font-medium text-white">400</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 400</div>
+            <div class="color-hex">#5a98fd</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-500)">
+            <span class="text-xs font-medium text-white">500</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 500</div>
+            <div class="color-hex">#3a77f4</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-600)">
+            <span class="text-xs font-medium text-white">600</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 600</div>
+            <div class="color-hex">#2257d1</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-700)">
+            <span class="text-xs font-medium text-white">700</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 700</div>
+            <div class="color-hex">#1241ad</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-800)">
+            <span class="text-xs font-medium text-white">800</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 800</div>
+            <div class="color-hex">#0a2f86</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--primary-900)">
+            <span class="text-xs font-medium text-white">900</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Primary 900</div>
+            <div class="color-hex">#061e5a</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Neutral Color Scale</h2>
+      <p class="mb-6">Neutral colors provide balance to our design system and are used for text, backgrounds, borders, and non-highlighted UI elements.</p>
+      
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-50)">
+            <span class="text-xs font-medium text-[var(--neutral-900)]">50</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 50</div>
+            <div class="color-hex">#f9fafb</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-100)">
+            <span class="text-xs font-medium text-[var(--neutral-900)]">100</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 100</div>
+            <div class="color-hex">#f3f4f6</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-200)">
+            <span class="text-xs font-medium text-[var(--neutral-900)]">200</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 200</div>
+            <div class="color-hex">#e5e7eb</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-300)">
+            <span class="text-xs font-medium text-[var(--neutral-900)]">300</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 300</div>
+            <div class="color-hex">#d1d5db</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-400)">
+            <span class="text-xs font-medium text-[var(--neutral-900)]">400</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 400</div>
+            <div class="color-hex">#9ca3af</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-500)">
+            <span class="text-xs font-medium text-white">500</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 500</div>
+            <div class="color-hex">#6b7280</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-600)">
+            <span class="text-xs font-medium text-white">600</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 600</div>
+            <div class="color-hex">#4b5563</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-700)">
+            <span class="text-xs font-medium text-white">700</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 700</div>
+            <div class="color-hex">#374151</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-800)">
+            <span class="text-xs font-medium text-white">800</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 800</div>
+            <div class="color-hex">#1f2937</div>
+          </div>
+        </div>
+        
+        <div class="color-swatch">
+          <div class="color-box" style="background-color: var(--neutral-900)">
+            <span class="text-xs font-medium text-white">900</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Neutral 900</div>
+            <div class="color-hex">#111827</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Semantic Colors</h2>
+      <p class="mb-6">Our semantic colors convey meaning and provide feedback to users. Each has its own range of tints and shades for different use cases.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold mb-3">Success Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--success-100)">
+                <span class="text-xs font-medium text-[var(--success-900)]">100</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Success 100</div>
+                <div class="color-hex">#dcfce7</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--success-500)">
+                <span class="text-xs font-medium text-white">500</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Success 500</div>
+                <div class="color-hex">#16a34a</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--success-700)">
+                <span class="text-xs font-medium text-white">700</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Success 700</div>
+                <div class="color-hex">#15803d</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Error Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--error-100)">
+                <span class="text-xs font-medium text-[var(--error-900)]">100</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Error 100</div>
+                <div class="color-hex">#fee2e2</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--error-500)">
+                <span class="text-xs font-medium text-white">500</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Error 500</div>
+                <div class="color-hex">#dc2626</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--error-700)">
+                <span class="text-xs font-medium text-white">700</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Error 700</div>
+                <div class="color-hex">#b91c1c</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Warning Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--warning-100)">
+                <span class="text-xs font-medium text-[var(--warning-900)]">100</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Warning 100</div>
+                <div class="color-hex">#fef3c7</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--warning-500)">
+                <span class="text-xs font-medium text-[var(--warning-900)]">500</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Warning 500</div>
+                <div class="color-hex">#f59e0b</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--warning-700)">
+                <span class="text-xs font-medium text-white">700</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Warning 700</div>
+                <div class="color-hex">#b45309</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Info Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--info-100)">
+                <span class="text-xs font-medium text-[var(--info-900)]">100</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Info 100</div>
+                <div class="color-hex">#e0f2fe</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--info-500)">
+                <span class="text-xs font-medium text-white">500</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Info 500</div>
+                <div class="color-hex">#0284c7</div>
+              </div>
+            </div>
+            
+            <div class="color-swatch">
+              <div class="color-box" style="background-color: var(--info-700)">
+                <span class="text-xs font-medium text-white">700</span>
+              </div>
+              <div class="color-info">
+                <div class="color-name">Info 700</div>
+                <div class="color-hex">#0369a1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Usage Guidelines</h2>
+      
+      <div class="mb-8">
+        <h3 class="text-lg font-bold mb-3">Text Accessibility</h3>
+        <p class="mb-4">Ensure that text colors meet WCAG 2.1 AA standards for accessibility. Here are examples of accessible text color combinations:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div>
+            <div class="accessibility-box bg-white">
+              <span class="text-[var(--neutral-900)]">Text on White</span>
+            </div>
+            <div class="text-sm text-center">Neutral 900 on White</div>
+          </div>
+          
+          <div>
+            <div class="accessibility-box bg-[var(--primary-600)]">
+              <span class="text-white">Text on Primary</span>
+            </div>
+            <div class="text-sm text-center">White on Primary 600</div>
+          </div>
+          
+          <div>
+            <div class="accessibility-box bg-[var(--neutral-100)]">
+              <span class="text-[var(--neutral-700)]">Text on Light</span>
+            </div>
+            <div class="text-sm text-center">Neutral 700 on Neutral 100</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-8">
+        <h3 class="text-lg font-bold mb-3">State Changes</h3>
+        <p class="mb-4">Use consistent color variations to indicate different states:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold mb-2">Button States</h4>
+            <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+              <div class="flex flex-col gap-3">
+                <button class="px-4 py-2 rounded bg-[var(--primary-600)] text-white">Default (Primary 600)</button>
+                <button class="px-4 py-2 rounded bg-[var(--primary-700)] text-white">Hover (Primary 700)</button>
+                <button class="px-4 py-2 rounded bg-[var(--primary-800)] text-white">Active (Primary 800)</button>
+                <button class="px-4 py-2 rounded bg-[var(--primary-300)] text-[var(--primary-800)]">Disabled (Primary 300)</button>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="font-bold mb-2">Input States</h4>
+            <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+              <div class="flex flex-col gap-3">
+                <input type="text" class="px-3 py-2 border border-[var(--neutral-300)] rounded w-full" placeholder="Default (Neutral 300)">
+                <input type="text" class="px-3 py-2 border-2 border-[var(--primary-500)] rounded w-full" placeholder="Focus (Primary 500)">
+                <input type="text" class="px-3 py-2 border border-[var(--error-500)] rounded w-full" placeholder="Error (Error 500)">
+                <input type="text" class="px-3 py-2 border border-[var(--neutral-200)] bg-[var(--neutral-100)] rounded w-full" placeholder="Disabled" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-lg font-bold mb-3">Notification Examples</h3>
+        <div class="grid grid-cols-1 gap-3">
+          <div class="p-3 bg-[var(--success-100)] border-l-4 border-[var(--success-500)] rounded">
+            <div class="font-bold text-[var(--success-700)]">Success Message</div>
+            <div class="text-[var(--success-700)]">Your changes have been saved successfully.</div>
+          </div>
+          
+          <div class="p-3 bg-[var(--error-100)] border-l-4 border-[var(--error-500)] rounded">
+            <div class="font-bold text-[var(--error-700)]">Error Message</div>
+            <div class="text-[var(--error-700)]">There was a problem processing your request.</div>
+          </div>
+          
+          <div class="p-3 bg-[var(--warning-100)] border-l-4 border-[var(--warning-500)] rounded">
+            <div class="font-bold text-[var(--warning-700)]">Warning Message</div>
+            <div class="text-[var(--warning-700)]">Your session will expire in 5 minutes.</div>
+          </div>
+          
+          <div class="p-3 bg-[var(--info-100)] border-l-4 border-[var(--info-500)] rounded">
+            <div class="font-bold text-[var(--info-700)]">Information Message</div>
+            <div class="text-[var(--info-700)]">A new version is available. Please update at your convenience.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Best Practices</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold mb-2">Do</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Use colors consistently across the interface to maintain visual harmony</li>
+            <li>Use light tints (50-200) for backgrounds and subtle UI elements</li>
+            <li>Use mid-range tints/shades (400-600) for interactive elements and emphasis</li>
+            <li>Use darker shades (700-900) for text to ensure readability</li>
+            <li>Always check color contrast for accessibility compliance</li>
+            <li>Use semantic colors for their intended purposes (success, error, warning, info)</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-2">Don't</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Don't use too many colors in a single view</li>
+            <li>Avoid using colors in ways that contradict their semantic meaning</li>
+            <li>Don't use light text on light backgrounds or dark text on dark backgrounds</li>
+            <li>Avoid relying solely on color to convey meaning (for color-blind users)</li>
+            <li>Don't create custom color variations outside the defined palette</li>
+            <li>Avoid using primary colors for large background areas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[var(--neutral-200)] mt-auto"></footer>
+</body>
+</html>
