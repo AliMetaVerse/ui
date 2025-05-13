@@ -25,10 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     `;
     document.head.appendChild(style);
-    
-    // Load the design system core script
+      // Load the design system core script
     const script = document.createElement('script');
-    script.src = 'ds-core.js';
+    script.src = './ds-core.js';
     script.onload = function() {
       console.log('Webropol Design System initialized');
       

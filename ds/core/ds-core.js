@@ -3,16 +3,14 @@
  * Core Design System functionality 
  * Unified implementation that follows Tailwind best practices and uses ds.css color variables
  */
-class DesignSystem {
-  constructor() {
-    this.pages = [
+class DesignSystem {  constructor() {    this.pages = [
       { id: 'index', title: 'Overview', path: '/ds/index.html', icon: 'home' },
-      { id: 'components', title: 'Components', path: '/ds/components.html', icon: 'puzzle' },
-      { id: 'colors', title: 'Colors', path: '/ds/colors.html', icon: 'palette' },
-      { id: 'typography', title: 'Typography', path: '/ds/typography.html', icon: 'text' },
-      { id: 'spacing', title: 'Spacing', path: '/ds/spacing.html', icon: 'ruler' },
-      { id: 'tokens', title: 'Design Tokens', path: '/ds/tokens.html', icon: 'code' },
-      { id: 'feedback', title: 'Feedback', path: '/ds/feedback.html', icon: 'bell' }
+      { id: 'components', title: 'Components', path: '/ds/components/components.html', icon: 'puzzle' },
+      { id: 'colors', title: 'Colors', path: '/ds/foundations/colors.html', icon: 'palette' },
+      { id: 'typography', title: 'Typography', path: '/ds/foundations/typography.html', icon: 'text' },
+      { id: 'spacing', title: 'Spacing', path: '/ds/foundations/spacing.html', icon: 'ruler' },
+      { id: 'tokens', title: 'Design Tokens', path: '/ds/foundations/tokens.html', icon: 'code' },
+      { id: 'feedback', title: 'Feedback', path: '/ds/components/feedback.html', icon: 'bell' }
     ];
     this.currentPage = this.getCurrentPage();
     this.darkMode = localStorage.getItem('darkMode') === 'true';

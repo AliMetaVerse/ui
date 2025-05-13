@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../ds.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="inject-components.js" defer></script>
+  <script src="../core/inject-components.js" defer></script>
   <style>
     .responsive-table {
       overflow-x: auto;
@@ -58,7 +58,7 @@
     }
     
     .column-sortable::after {
-      content: "↕";
+      content: "â†•";
       display: inline-block;
       margin-left: 0.5rem;
       opacity: 0.5;
@@ -69,12 +69,12 @@
     }
     
     .column-sorted-asc::after {
-      content: "↑";
+      content: "â†‘";
       opacity: 1;
     }
     
     .column-sorted-desc::after {
-      content: "↓";
+      content: "â†“";
       opacity: 1;
     }
     
@@ -195,31 +195,31 @@
               <tr>
                 <td>Webropol Survey Tool</td>
                 <td>Software</td>
-                <td>€499</td>
+                <td>â‚¬499</td>
                 <td>In Stock</td>
               </tr>
               <tr>
                 <td>Analytics Pro Package</td>
                 <td>Service</td>
-                <td>€299</td>
+                <td>â‚¬299</td>
                 <td>In Stock</td>
               </tr>
               <tr>
                 <td>Enterprise Survey License</td>
                 <td>License</td>
-                <td>€1,499</td>
+                <td>â‚¬1,499</td>
                 <td>Limited</td>
               </tr>
               <tr>
                 <td>Consulting Services</td>
                 <td>Service</td>
-                <td>€150/hr</td>
+                <td>â‚¬150/hr</td>
                 <td>Available</td>
               </tr>
               <tr>
                 <td>Custom Development</td>
                 <td>Service</td>
-                <td>€200/hr</td>
+                <td>â‚¬200/hr</td>
                 <td>Available</td>
               </tr>
             </tbody>
@@ -454,7 +454,7 @@
         </div>
         
         <div class="hidden md:block text-sm text-[var(--neutral-500)] mt-4">
-          ↑ This example shows as cards on mobile and a standard table on larger screens.
+          â†‘ This example shows as cards on mobile and a standard table on larger screens.
         </div>
       </div>
     </section>
@@ -525,3 +525,4 @@
   </script>
 </body>
 </html>
+
