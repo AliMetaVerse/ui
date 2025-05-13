@@ -7,10 +7,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../ds.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  
+  <!-- Highlight.js for code syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  
+  <!-- Design System Loader -->
+  <script src="inject-components.js" defer></script>
+  
   <style>
-    .roboto-condensed { font-family: 'Roboto Condensed', sans-serif; }
-    .roboto { font-family: 'Roboto', sans-serif; }
+    .font-roboto-condensed { font-family: 'Roboto Condensed', sans-serif; }
+    .font-roboto { font-family: 'Roboto', sans-serif; }
     
     /* Enhanced hover effects */
     .section-card:hover .arrow-icon {
@@ -122,27 +129,8 @@
   </style>
 </head>
 <body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
-  <!-- Top Navigation Bar -->
-  <header class="bg-white shadow sticky top-0 z-10">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <div class="w-10 h-10 bg-[#1e6880] rounded-md flex items-center justify-center">
-          <span class="text-white font-bold roboto-condensed text-xl">W</span>
-        </div>
-        <h1 class="text-xl md:text-2xl font-bold roboto-condensed text-[#1e6880]">Webropol Design System</h1>
-      </div>
-      <div class="hidden md:flex items-center space-x-6">
-        <a href="#" class="text-[#61686a] hover:text-[#1e6880] transition font-medium">Documentation</a>
-        <a href="#" class="text-[#61686a] hover:text-[#1e6880] transition font-medium">Resources</a>
-        <a href="#" class="bg-[#1e6880] text-white py-2 px-4 rounded hover:bg-[#16809d] transition font-medium">Get Started</a>
-      </div>
-      <button class="md:hidden text-[#61686a]">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-  </header>
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
 
   <main class="flex-grow max-w-6xl mx-auto py-8 px-4 w-full">
     <!-- Introduction Section -->
@@ -166,15 +154,13 @@
           </a>
         </div>
       </div>
-    </section>
-
-    <!-- Category Tabs -->
+    </section>    <!-- Category Tabs -->
     <div class="border-b border-[#d1d5d6] mb-8">
       <div class="flex overflow-x-auto hide-scrollbar space-x-8">
-        <button class="category-tab active py-3 px-1 font-medium roboto text-[#1e6880] border-b-2 border-[#1e6880] whitespace-nowrap">Foundations</button>
-        <button class="category-tab py-3 px-1 font-medium roboto text-[#61686a] border-b-2 border-transparent whitespace-nowrap hover:text-[#1e6880]">Components</button>
-        <button class="category-tab py-3 px-1 font-medium roboto text-[#61686a] border-b-2 border-transparent whitespace-nowrap hover:text-[#1e6880]">Patterns</button>
-        <button class="category-tab py-3 px-1 font-medium roboto text-[#61686a] border-b-2 border-transparent whitespace-nowrap hover:text-[#1e6880]">Resources</button>
+        <button class="category-tab active py-3 px-1 font-medium roboto text-[#1e6880] border-b-2 border-[#1e6880] whitespace-nowrap" data-category="foundations">Foundations</button>
+        <button class="category-tab py-3 px-1 font-medium roboto text-[#61686a] border-b-2 border-transparent whitespace-nowrap hover:text-[#1e6880]" data-category="components">Components</button>
+        <button class="category-tab py-3 px-1 font-medium roboto text-[#61686a] border-b-2 border-transparent whitespace-nowrap hover:text-[#1e6880]" data-category="patterns">Patterns</button>
+        <button class="category-tab py-3 px-1 font-medium roboto text-[#61686a] border-b-2 border-transparent whitespace-nowrap hover:text-[#1e6880]" data-category="resources">Resources</button>
       </div>
     </div>
 
@@ -200,12 +186,12 @@
           </svg>
         </button>
       </div>
-    </div>
-
-    <h3 class="text-lg font-semibold roboto-condensed text-[#272a2b] mb-4">Foundation Elements</h3>
-    
-    <!-- Design System Sections -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+    </div>    <!-- Category Content Sections -->
+    <div class="category-content" data-category="foundations">
+      <h3 class="text-lg font-semibold roboto-condensed text-[#272a2b] mb-4">Foundation Elements</h3>
+      
+      <!-- Design System Sections -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
       <!-- Colors Card -->
       <a href="colors.html" class="section-card group bg-white border border-[#d1d5d6] rounded-lg p-6 hover:shadow-md transition flex flex-col">
         <div class="flex justify-between items-start mb-6">
@@ -361,11 +347,197 @@
           <div class="absolute inset-0 bg-[#1e6880] opacity-25 right-1/2 left-1/4"></div>
           <div class="absolute inset-0 bg-[#1e6880] opacity-50 right-1/4 left-1/2"></div>
           <div class="absolute inset-0 bg-[#1e6880] opacity-75 left-3/4"></div>
-        </div>
-      </a>
+        </div>      </a>
     </section>
-
-    <!-- Recent Updates Section -->
+    </div>
+    
+    <!-- Components Section -->
+    <div class="category-content hidden" data-category="components">
+      <h3 class="text-lg font-semibold roboto-condensed text-[#272a2b] mb-4">UI Components</h3>
+      
+      <!-- Components Grid -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <!-- Buttons Card -->
+        <a href="buttons.html" class="section-card group bg-white border border-[#d1d5d6] rounded-lg p-6 hover:shadow-md transition flex flex-col">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-1">Buttons</h2>
+              <p class="roboto text-sm text-[#61686a]">Call-to-action elements</p>
+            </div>
+            <div class="transition-transform duration-200 arrow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#1e6880]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </div>
+          <div class="flex space-x-3 mt-auto">
+            <button class="bg-[#1e6880] text-white px-3 py-1 rounded text-sm">Primary</button>
+            <button class="border border-[#1e6880] text-[#1e6880] px-3 py-1 rounded text-sm">Secondary</button>
+          </div>
+        </a>
+        
+        <!-- Form Controls Card -->
+        <a href="components.html#forms" class="section-card group bg-white border border-[#d1d5d6] rounded-lg p-6 hover:shadow-md transition flex flex-col">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-1">Form Controls</h2>
+              <p class="roboto text-sm text-[#61686a]">Inputs, selects and more</p>
+            </div>
+            <div class="transition-transform duration-200 arrow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#1e6880]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2 mt-auto">
+            <input type="text" class="border border-[#d1d5d6] rounded px-2 py-1 text-sm" placeholder="Text input">
+            <select class="border border-[#d1d5d6] rounded px-2 py-1 text-sm">
+              <option>Select menu</option>
+            </select>
+          </div>
+        </a>
+        
+        <!-- Feedback Elements Card -->
+        <a href="feedback.html" class="section-card group bg-white border border-[#d1d5d6] rounded-lg p-6 hover:shadow-md transition flex flex-col">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-1">Feedback</h2>
+              <p class="roboto text-sm text-[#61686a]">Alerts, toasts and tooltips</p>
+            </div>
+            <div class="transition-transform duration-200 arrow-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#1e6880]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </div>
+          <div class="flex flex-col mt-auto">
+            <div class="bg-[#f5faf3] border-l-2 border-[#579f48] p-2 text-xs text-[#38672e] mb-2">
+              Success message
+            </div>
+            <div class="bg-[#ffebed] border-l-2 border-[#f43f63] p-2 text-xs text-[#be1241]">
+              Error message
+            </div>
+          </div>
+        </a>
+      </section>
+    </div>
+    
+    <!-- Patterns Section -->
+    <div class="category-content hidden" data-category="patterns">
+      <h3 class="text-lg font-semibold roboto-condensed text-[#272a2b] mb-4">Design Patterns</h3>
+      
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-12">
+        <!-- Page Layouts Card -->
+        <div class="bg-white border border-[#d1d5d6] rounded-lg p-6 hover:shadow-md transition">
+          <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-2">Page Layouts</h2>
+          <p class="roboto text-sm text-[#61686a] mb-4">Common page layout patterns for consistency across applications</p>
+          <div class="flex flex-col items-center space-y-1 mt-4">
+            <div class="w-full h-6 bg-[#1e6880] opacity-25 rounded"></div>
+            <div class="w-full flex space-x-2">
+              <div class="w-1/4 h-40 bg-[#1e6880] opacity-15 rounded"></div>
+              <div class="w-3/4 h-40 bg-[#1e6880] opacity-10 rounded"></div>
+            </div>
+            <div class="w-full h-6 bg-[#1e6880] opacity-25 rounded"></div>
+          </div>
+        </div>
+        
+        <!-- Navigation Patterns Card -->
+        <div class="bg-white border border-[#d1d5d6] rounded-lg p-6 hover:shadow-md transition">
+          <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-2">Navigation Patterns</h2>
+          <p class="roboto text-sm text-[#61686a] mb-4">Standard navigation solutions for different application types</p>
+          <div class="flex flex-col items-center space-y-3 mt-4">
+            <div class="flex w-full space-x-1">
+              <div class="w-6 h-6 rounded bg-[#1e6880]"></div>
+              <div class="h-6 flex-grow bg-[#1e6880] opacity-15 rounded"></div>
+              <div class="w-24 h-6 bg-[#1e6880] opacity-25 rounded flex space-x-1">
+                <div class="w-6 h-6 rounded"></div>
+                <div class="w-6 h-6 rounded"></div>
+                <div class="w-6 h-6 rounded"></div>
+              </div>
+            </div>
+            <div class="w-3/4 h-6 bg-[#1e6880] opacity-25 rounded self-center"></div>
+            <div class="w-1/2 h-20 bg-[#1e6880] opacity-15 rounded self-center"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Resources Section -->
+    <div class="category-content hidden" data-category="resources">
+      <h3 class="text-lg font-semibold roboto-condensed text-[#272a2b] mb-4">Resources & Downloads</h3>
+      
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="bg-white border border-[#d1d5d6] rounded-lg p-6">
+          <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-2">Design Files</h2>
+          <p class="text-sm text-[#61686a] mb-4">Design resources and assets for designers</p>
+          <ul class="space-y-3">
+            <li class="flex items-center p-3 border border-[#d1d5d6] rounded bg-[#f9fafa] hover:bg-[#f0f7f9]">
+              <svg class="w-5 h-5 text-[#1e6880] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              <div>
+                <div class="text-sm font-medium">Figma UI Kit</div>
+                <div class="text-xs text-[#61686a]">Complete component library</div>
+              </div>
+              <button class="ml-auto bg-[#1e6880] text-white p-1 rounded">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+            </li>
+            <li class="flex items-center p-3 border border-[#d1d5d6] rounded bg-[#f9fafa] hover:bg-[#f0f7f9]">
+              <svg class="w-5 h-5 text-[#1e6880] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <div>
+                <div class="text-sm font-medium">Icon Pack</div>
+                <div class="text-xs text-[#61686a]">SVG icons for all products</div>
+              </div>
+              <button class="ml-auto bg-[#1e6880] text-white p-1 rounded">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-white border border-[#d1d5d6] rounded-lg p-6">
+          <h2 class="roboto-condensed font-bold text-xl text-[#1e6880] mb-2">Development Resources</h2>
+          <p class="text-sm text-[#61686a] mb-4">Code and documentation for developers</p>
+          <ul class="space-y-3">
+            <li class="flex items-center p-3 border border-[#d1d5d6] rounded bg-[#f9fafa] hover:bg-[#f0f7f9]">
+              <svg class="w-5 h-5 text-[#1e6880] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              <div>
+                <div class="text-sm font-medium">CSS Library</div>
+                <div class="text-xs text-[#61686a]">Core stylesheet with variables</div>
+              </div>
+              <button class="ml-auto bg-[#1e6880] text-white p-1 rounded">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+            </li>
+            <li class="flex items-center p-3 border border-[#d1d5d6] rounded bg-[#f9fafa] hover:bg-[#f0f7f9]">
+              <svg class="w-5 h-5 text-[#1e6880] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <div>
+                <div class="text-sm font-medium">Documentation</div>
+                <div class="text-xs text-[#61686a]">Implementation guidelines</div>
+              </div>
+              <button class="ml-auto bg-[#1e6880] text-white p-1 rounded">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>    <!-- Recent Updates Section -->
     <section class="mb-12">
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold roboto-condensed text-[#272a2b]">Recent Updates</h3>
@@ -380,9 +552,9 @@
             </svg>
           </div>
           <div>
-            <h4 class="font-medium">New color palette additions</h4>
-            <p class="text-sm text-[#61686a] mb-1">Extended primary color with new tints and shades for better accessibility</p>
-            <span class="text-xs text-[#61686a]">April 25, 2025</span>
+            <h4 class="font-medium">Unified Design System Launched</h4>
+            <p class="text-sm text-[#61686a] mb-1">All design system files now use a centralized core with standardized components</p>
+            <span class="text-xs text-[#61686a]">May 13, 2025</span>
           </div>
         </div>
         
@@ -393,9 +565,128 @@
             </svg>
           </div>
           <div>
+            <h4 class="font-medium">New color palette additions</h4>
+            <p class="text-sm text-[#61686a] mb-1">Extended primary color with new tints and shades for better accessibility</p>
+            <span class="text-xs text-[#61686a]">April 25, 2025</span>
+          </div>
+        </div>
+        
+        <div class="p-4 flex items-start">
+          <div class="bg-[#f0f7f9] text-[#1e6880] p-2 rounded mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
             <h4 class="font-medium">Typography guidelines updated</h4>
             <p class="text-sm text-[#61686a] mb-1">Improved line height specifications for better readability</p>
             <span class="text-xs text-[#61686a]">April 18, 2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Design System Information -->
+    <section class="mb-12">
+      <div class="bg-[#f0f7f9] border border-[#d1d5d6] rounded-lg p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+          <div>
+            <h3 class="text-lg font-bold roboto-condensed text-[#1e6880] mb-2">Webropol Design System</h3>
+            <p class="text-sm text-[#61686a]">Version 1.0.0 - Last updated May 13, 2025</p>
+          </div>
+          <div class="flex items-center space-x-3 mt-4 md:mt-0">
+            <a href="https://github.com/webropol/design-system" target="_blank" class="inline-flex items-center bg-white border border-[#d1d5d6] py-2 px-4 rounded hover:bg-[#f9fafa] transition text-sm">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>View on GitHub</span>
+            </a>
+            <a href="test-ds.html" class="inline-flex items-center bg-[#1e6880] text-white py-2 px-4 rounded hover:bg-[#16809d] transition text-sm">
+              <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              <span>Run Tests</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-white p-4 rounded border border-[#d1d5d6]">
+            <h4 class="font-medium mb-2">Features</h4>
+            <ul class="text-[#61686a] space-y-1">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Unified component architecture
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Responsive design patterns
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Dark mode support
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-white p-4 rounded border border-[#d1d5d6]">
+            <h4 class="font-medium mb-2">Technologies</h4>
+            <ul class="text-[#61686a] space-y-1">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#1e6880] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                TailwindCSS
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#1e6880] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Vanilla JavaScript
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#1e6880] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                CSS Custom Properties
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-white p-4 rounded border border-[#d1d5d6]">
+            <h4 class="font-medium mb-2">Browser Support</h4>
+            <ul class="text-[#61686a] space-y-1">
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Chrome (latest)
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Firefox (latest)
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Edge (latest)
+              </li>
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-[#579f48] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Safari (latest)
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -445,40 +736,7 @@
     </section>
   </main>
 
-  <footer class="bg-white border-t border-[#d1d5d6] mt-12">
-    <div class="max-w-6xl mx-auto px-4 py-6">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center">
-          <div class="w-8 h-8 bg-[#1e6880] rounded-md flex items-center justify-center mr-2">
-            <span class="text-white font-bold roboto-condensed text-sm">W</span>
-          </div>
-          <span class="text-sm text-[#61686a] roboto">&copy; 2025 Webropol. All rights reserved.</span>
-        </div>
-        
-        <div class="flex space-x-6">
-          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Privacy Policy</a>
-          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Terms of Use</a>
-          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Contact</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Simple script to demonstrate tab functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const tabs = document.querySelectorAll('.category-tab');
-      
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // Remove active class from all tabs
-          tabs.forEach(t => t.classList.remove('active'));
-          
-          // Add active class to clicked tab
-          this.classList.add('active');
-        });
-      });
-    });
-  </script>
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[#d1d5d6] mt-12"></footer>
 </body>
 </html>

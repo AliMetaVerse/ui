@@ -2,11 +2,10 @@
 <html lang="en">
 <head>  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buttons | Webropol Design System</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Buttons | Webropol Design System</title>  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../ds.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="inject-components.js"></script>
+  <script src="inject-components.js" defer></script>
   <style>
     .button-demo {
       transition: all 0.3s ease;
@@ -40,8 +39,9 @@
   </style>
 </head>
 <body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
-  <header></header>
-
+    <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+  
   <main class="flex-grow max-w-6xl mx-auto py-8 px-4 w-full">
     <!-- Introduction -->
     <section class="mb-12">
@@ -253,7 +253,8 @@
     </section>
   </main>
 
-  <footer></footer>
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[#d1d5d6] mt-12"></footer>
 
   <script>
     // Copy code functionality
