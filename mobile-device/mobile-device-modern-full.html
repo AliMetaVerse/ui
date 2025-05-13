@@ -6,8 +6,7 @@
   <title>Modern Mobile Device - Full View | Webropol Design System</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+  <script src="https://cdn.tailwindcss.com"></script>  <script>
     tailwind.config = {
       theme: {
         extend: {
@@ -28,121 +27,210 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
           },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+          }
         }
       }
     }
   </script>
+  <style>
+    .bg-mesh {
+      background-color: #ffffff;
+      background-image: radial-gradient(at 47% 33%, hsl(194.93, 66%, 70%) 0, transparent 59%), 
+                        radial-gradient(at 82% 65%, hsl(190.66, 66%, 30%) 0, transparent 55%);
+    }
+    
+    .bg-chat-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='temple' fill='%231e6880' fill-opacity='0.05'%3E%3Cpath d='M152 150v2H0v-2h28v-8H8v-20H0v-2h8V80h42v20h20v42H30v8h90v-8H80v-42h20V80h42v40h8V30h-8v40h-42V50H80V8h40V0h2v8h20v20h8V0h2v150zm-2 0v-28h-8v20h-20v8h28zM82 30v18h18V30H82zm20 18h20v20h18V30h-20V10H82v18h20v20zm0 2v18h18V50h-18zm20-22h18V10h-18v18zm-54 92v-18H50v18h18zm-20-18H28V82H10v38h20v20h38v-18H48v-20zm0-2V82H30v18h18zm-20 22H10v18h18v-18zm54 0v18h38v-20h20V82h-18v20h-20v20H82zm18-20H82v18h18v-18zm2-2h18V82h-18v18zm20 40v-18h18v18h-18zM30 0h-2v8H8v20H0v2h8v40h42V50h20V8H30V0zm20 48h18V30H50v18zm18-20H48v20H28v20H10V30h20V10h38v18zM30 50h18v18H30V50zm-2-40H10v18h18V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
-  <div class="min-h-screen flex items-center justify-center p-4">
+<body class="font-sans">
+  <div class="min-h-screen flex items-center justify-center p-4 bg-mesh">
+    <!-- Phone Floating Elements -->
+    <div class="absolute w-48 h-48 rounded-full bg-primary-200/20 blur-3xl -top-10 -left-10 animate-pulse"></div>
+    <div class="absolute w-72 h-72 rounded-full bg-primary-400/10 blur-3xl bottom-10 right-10 animate-pulse" style="animation-delay: 2s;"></div>
+    
     <!-- Modern Phone Frame -->
-    <div class="relative w-[375px] h-[720px] bg-gray-800 rounded-[40px] shadow-[0_8px_40px_rgba(0,0,0,0.3)] flex items-center justify-center p-3">
+    <div class="relative w-[375px] h-[720px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-[40px] shadow-[0_8px_40px_rgba(0,0,0,0.4),inset_0_0_0_1px_rgba(255,255,255,0.1)] flex items-center justify-center p-3 border border-gray-700 backdrop-blur-md">
       <!-- Phone Notch -->
-      <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-[150px] h-[30px] bg-gray-800 rounded-b-xl z-10"></div>
+      <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-[150px] h-[30px] bg-gray-900 rounded-b-xl z-10"></div>
       
       <!-- Side Button -->
-      <div class="absolute top-[100px] right-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-l-sm"></div>
-      <div class="absolute top-[150px] right-[-2px] w-[4px] h-[70px] bg-gray-700 rounded-l-sm"></div>
-      <div class="absolute top-[250px] right-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-l-sm"></div>
+      <div class="absolute top-[100px] right-[-2px] w-[4px] h-[40px] bg-gray-600 rounded-l-sm"></div>
+      <div class="absolute top-[150px] right-[-2px] w-[4px] h-[70px] bg-gray-600 rounded-l-sm"></div>
+      <div class="absolute top-[250px] right-[-2px] w-[4px] h-[40px] bg-gray-600 rounded-l-sm"></div>
       
       <!-- Volume Buttons -->
-      <div class="absolute top-[100px] left-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-r-sm"></div>
-      <div class="absolute top-[150px] left-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-r-sm"></div>
-      
-      <!-- Screen Container -->
+      <div class="absolute top-[100px] left-[-2px] w-[4px] h-[40px] bg-gray-600 rounded-r-sm"></div>
+      <div class="absolute top-[150px] left-[-2px] w-[4px] h-[40px] bg-gray-600 rounded-r-sm"></div>
+        <!-- Screen Container -->
       <div class="relative w-full h-full rounded-[35px] bg-white overflow-hidden shadow-inner">
         <!-- Status Bar -->
-        <div class="h-[45px] bg-primary-500 w-full"></div>
+        <div class="h-[45px] bg-gradient-to-r from-primary-600 to-primary-500 w-full flex items-center justify-between px-5">
+          <span class="text-white text-xs font-medium">9:41 AM</span>
+          <div class="flex space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+            </svg>
+          </div>
+        </div>
         
         <!-- Chat Header -->
-        <div class="bg-primary-500 text-white p-4 flex items-center space-x-4 shadow-md">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <h1 class="text-lg font-semibold">Lorem Ipsum</h1>
-          <div class="ml-auto">
+        <div class="bg-gradient-to-r from-primary-600 to-primary-500 text-white p-4 flex items-center space-x-4 shadow-md">
+          <div class="flex items-center space-x-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
+            <div class="h-8 w-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-medium">LI</div>
+          </div>
+          <div>
+            <h1 class="text-base font-semibold">Lorem Ipsum</h1>
+            <p class="text-xs text-primary-100/80">Online • Typing...</p>
           </div>
         </div>
         
         <!-- Chat Content -->
-        <div class="p-4 space-y-4 h-[calc(100%-145px)] overflow-y-auto bg-gray-50">
+        <div class="p-4 space-y-4 h-[calc(100%-145px)] overflow-y-auto bg-chat-pattern bg-gradient-to-br from-gray-50 to-primary-50/30">          <!-- Date Header -->
+          <div class="flex justify-center my-4">
+            <span class="bg-primary-100/70 text-primary-800 text-xs px-3 py-1 rounded-full shadow-sm backdrop-blur-sm">Today</span>
+          </div>
+          
           <!-- Received Message -->
-          <div class="flex flex-col max-w-[75%]">
-            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
-              <p class="text-sm">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 1-10</p>
+          <div class="flex items-start space-x-2">
+            <div class="w-8 h-8 bg-primary-200 rounded-full flex items-center justify-center text-xs text-primary-800 font-medium">LI</div>
+            <div class="flex flex-col max-w-[75%]">
+              <div class="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+                <p class="text-sm">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 1-10</p>
+              </div>
+              <span class="text-xs text-gray-500 ml-2 mt-1 flex items-center">
+                <span>9:41 AM</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
             </div>
-            <span class="text-xs text-gray-500 ml-2 mt-1">9:41 AM</span>
           </div>
           
           <!-- Sent Message -->
           <div class="flex flex-col items-end w-full">
-            <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
-              <p class="text-sm">8</p>
+            <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm backdrop-blur-sm">
+              <p class="text-sm font-medium">8</p>
             </div>
-            <span class="text-xs text-gray-500 mr-2 mt-1">9:42 AM</span>
+            <span class="text-xs text-gray-500 mr-2 mt-1 flex items-center justify-end">
+              <span>9:42 AM</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </span>
           </div>
           
           <!-- Received Message -->
-          <div class="flex flex-col max-w-[75%]">
-            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
-              <p class="text-sm">Neque porro quisquam est qui.</p>
+          <div class="flex items-start space-x-2">
+            <div class="w-8 h-8 bg-primary-200 rounded-full flex items-center justify-center text-xs text-primary-800 font-medium">LI</div>
+            <div class="flex flex-col max-w-[75%]">
+              <div class="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+                <p class="text-sm">Neque porro quisquam est qui.</p>
+              </div>
+              <span class="text-xs text-gray-500 ml-2 mt-1">9:45 AM</span>
             </div>
-            <span class="text-xs text-gray-500 ml-2 mt-1">9:45 AM</span>
           </div>
           
           <!-- Sent Message -->
           <div class="flex flex-col items-end w-full">
-            <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
-              <p class="text-sm">Neque porro</p>
+            <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
+              <p class="text-sm font-medium">Neque porro</p>
             </div>
-            <span class="text-xs text-gray-500 mr-2 mt-1">9:46 AM</span>
+            <span class="text-xs text-gray-500 mr-2 mt-1 flex items-center justify-end">
+              <span>9:46 AM</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </span>
           </div>
           
           <!-- Received Message -->
-          <div class="flex flex-col max-w-[75%]">
-            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
-              <p class="text-sm">Dolor sit amet, consectetur, adipisci velit. 1-5</p>
+          <div class="flex items-start space-x-2">
+            <div class="w-8 h-8 bg-primary-200 rounded-full flex items-center justify-center text-xs text-primary-800 font-medium">LI</div>
+            <div class="flex flex-col max-w-[75%]">
+              <div class="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+                <p class="text-sm">Dolor sit amet, consectetur, adipisci velit. 1-5</p>
+              </div>
+              <span class="text-xs text-gray-500 ml-2 mt-1">9:48 AM</span>
             </div>
-            <span class="text-xs text-gray-500 ml-2 mt-1">9:48 AM</span>
           </div>
           
           <!-- Sent Message -->
           <div class="flex flex-col items-end w-full">
-            <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
-              <p class="text-sm">4</p>
+            <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
+              <p class="text-sm font-medium">4</p>
             </div>
-            <span class="text-xs text-gray-500 mr-2 mt-1">9:49 AM</span>
+            <span class="text-xs text-gray-500 mr-2 mt-1 flex items-center justify-end">
+              <span>9:49 AM</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812a3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </span>
           </div>
           
           <!-- Received Message -->
-          <div class="flex flex-col max-w-[75%]">
-            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
-              <p class="text-sm">Ipsum quia dolor</p>
+          <div class="flex items-start space-x-2">
+            <div class="w-8 h-8 bg-primary-200 rounded-full flex items-center justify-center text-xs text-primary-800 font-medium">LI</div>
+            <div class="flex flex-col max-w-[75%]">
+              <div class="bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+                <p class="text-sm">Ipsum quia dolor</p>
+              </div>
+              <span class="text-xs text-gray-500 ml-2 mt-1">
+                <span class="inline-flex items-center">9:50 AM 
+                <svg class="ml-1 h-3 w-3 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </span>
+              </span>
             </div>
-            <span class="text-xs text-gray-500 ml-2 mt-1">9:50 AM</span>
+          </div>
+        </div>
+          <!-- Small typing indicator -->
+        <div class="mx-8 my-2">
+          <div class="inline-flex bg-gray-200 rounded-full px-4 py-2 items-center space-x-1">
+            <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+            <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+            <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
           </div>
         </div>
         
         <!-- Input Area -->
-        <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3">
-          <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <input type="text" placeholder="Message" class="flex-1 bg-transparent border-none outline-none px-3 py-1 text-sm" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
+        <div class="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-gray-200 p-3">
+          <div class="flex items-center space-x-2">
+            <div class="flex-1 flex bg-gray-100 rounded-full px-4 py-2">
+              <input type="text" placeholder="Message" class="flex-1 bg-transparent border-none outline-none text-sm" />
+              <button class="text-gray-400 p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+            </div>
+            <button class="p-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
       
       <!-- Home Bar -->
-      <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[140px] h-[5px] bg-gray-600 rounded-full"></div>
+      <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[140px] h-[5px] bg-white/20 rounded-full backdrop-blur-sm"></div>
     </div>
   </div>
 </body>

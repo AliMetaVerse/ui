@@ -7,8 +7,7 @@
     <title>Modern Mobile Device Mockup | Webropol Design System</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    <script src="https://cdn.tailwindcss.com"></script>    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -30,29 +29,62 @@
                         sans: ['Inter', 'sans-serif'],
                         display: ['"Roboto Condensed"', 'sans-serif'],
                     },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                    }
                 }
             }
         }
     </script>
+    <style>
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231d809d' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .chat-bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231d809d' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
-    <div class="flex justify-center items-center min-h-[calc(100vh-56px)] py-8 px-4">
+<body class="bg-pattern font-sans bg-gray-100">
+    <div class="flex justify-center items-center min-h-[calc(100vh-56px)] py-8 px-4 bg-gradient-to-br from-primary-500/5 to-primary-100/30">
         <!-- Modern Mobile Device Mockup -->
-        <div class="w-[375px] h-[720px] rounded-[40px] bg-white shadow-2xl relative overflow-hidden flex flex-col border border-gray-200">
+        <div class="w-[375px] h-[720px] rounded-[40px] bg-white shadow-[0_8px_32px_rgba(0,0,0,0.2),0_0_0_1px_rgba(255,255,255,0.1)_inset] backdrop-blur-sm relative overflow-hidden flex flex-col border border-white/20">
             <!-- Phone Notch -->
-            <div class="hidden absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-2xl z-10"></div>
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-2xl z-10"></div>
             
             <!-- Status Bar -->
-            <div class="h-12 bg-primary-500 w-full pt-6 z-0"></div>
+            <div class="h-12 bg-gradient-to-r from-primary-600 to-primary-500 w-full pt-6 z-0 flex items-center justify-between px-6">
+                <div class="text-xs text-white font-medium">10:25 AM</div>
+                <div class="flex space-x-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                      <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+                    </svg>
+                </div>
+            </div>
             
             <!-- Header -->
-            <div class="bg-primary-500 text-white py-4 px-4 flex items-center justify-center border-b border-primary-600">
+            <div class="bg-gradient-to-r from-primary-600 to-primary-500 text-white py-4 px-4 flex items-center justify-between border-b border-primary-600/50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
                 <h2 class="font-display text-xl font-bold tracking-wide">SMS message</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>
             </div>
             
             <!-- Chat Body -->
-            <div class="flex-1 bg-gray-50 p-4 overflow-y-auto flex flex-col space-y-6">
+            <div class="flex-1 chat-bg-pattern p-4 overflow-y-auto flex flex-col space-y-6 bg-gradient-to-br from-gray-50 to-primary-50/30">
                 <!-- Message Thread -->
                 <div class="flex flex-col w-full">
                     <!-- Left Message (Question) -->
@@ -65,10 +97,9 @@
                     </div>
                 </div>
                 
-                <!-- Right Message (Response) -->
-                <div class="flex flex-col items-end w-full">
+                <!-- Right Message (Response) -->                <div class="flex flex-col items-end w-full">
                     <div class="self-end max-w-[80%]">
-                        <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
+                        <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm backdrop-blur-sm">
                             <p class="text-sm">The response</p>
                         </div>
                         <div class="text-xs text-gray-500 mr-2 mt-1 text-right">10:26 AM</div>
@@ -76,8 +107,20 @@
                 </div>
             </div>
             
+            <!-- Message Input -->
+            <div class="px-4 py-3 bg-white border-t border-gray-200 flex items-center">
+                <div class="flex-1 mx-2 bg-gray-100 rounded-full px-4 py-2 flex items-center">
+                    <input type="text" placeholder="Type a message..." class="bg-transparent border-none w-full focus:outline-none text-sm" />
+                </div>
+                <button class="p-2 text-primary-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+            
             <!-- Phone Bottom Bar -->
-            <div class="h-1 w-32 bg-gray-300 rounded-full absolute bottom-2 left-1/2 -translate-x-1/2"></div>
+            <div class="h-1 w-32 bg-white/30 rounded-full absolute bottom-2 left-1/2 -translate-x-1/2 backdrop-blur-sm"></div>
         </div>
     </div>
 </body>
