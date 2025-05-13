@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Components | Webropol Design System</title>  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+</head>
+<body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+    <div class="mb-12">
+      <h1>Components</h1>
+      <p class="text-[#61686a] text-lg">A collection of reusable interface components built with our design system.</p>
+    </div>
+
+    <!-- Buttons -->
+    <section class="mb-12">
+      <h2 class="mb-6">Buttons</h2>
+      <div class="preview-container">
+        <div class="preview-header">
+          <h3 class="text-lg font-medium">Button Variants</h3>
+        </div>
+        <div class="preview-content space-y-4">
+          <div class="space-x-4">
+            <button class="button button-primary">Primary Button</button>
+            <button class="button button-secondary">Secondary Button</button>
+            <button class="button button-outline">Outline Button</button>
+          </div>
+          <div class="space-x-4">
+            <button class="button button-primary" disabled>Disabled Primary</button>
+            <button class="button button-secondary" disabled>Disabled Secondary</button>
+            <button class="button button-outline" disabled>Disabled Outline</button>
+          </div>
+        </div>
+        <div class="preview-code">
+          <pre><code class="language-html">&lt;button class="button button-primary"&gt;Primary Button&lt;/button&gt;
+&lt;button class="button button-secondary"&gt;Secondary Button&lt;/button&gt;
+&lt;button class="button button-outline"&gt;Outline Button&lt;/button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Controls -->
+    <section class="mb-12">
+      <h2 class="mb-6">Form Controls</h2>
+      <div class="preview-container">
+        <div class="preview-header">
+          <h3 class="text-lg font-medium">Input Fields</h3>
+        </div>
+        <div class="preview-content space-y-4">
+          <div class="max-w-md space-y-4">
+            <input type="text" class="input" placeholder="Text input">
+            <input type="email" class="input" placeholder="Email input">
+            <textarea class="input" rows="3" placeholder="Textarea"></textarea>
+            <select class="input">
+              <option>Select option</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+            </select>
+          </div>
+        </div>
+        <div class="preview-code">
+          <pre><code class="language-html">&lt;input type="text" class="input" placeholder="Text input"&gt;
+&lt;textarea class="input" rows="3" placeholder="Textarea"&gt;&lt;/textarea&gt;
+&lt;select class="input"&gt;
+    &lt;option&gt;Select option&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="mb-12">
+      <h2 class="mb-6">Cards</h2>
+      <div class="preview-container">
+        <div class="preview-header">
+          <h3 class="text-lg font-medium">Card Examples</h3>
+        </div>
+        <div class="preview-content">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card p-6">
+              <h4 class="text-lg font-medium mb-2">Basic Card</h4>
+              <p class="text-[#61686a]">A simple card with some content inside.</p>
+            </div>
+            <div class="card p-6">
+              <img src="../images/logo/W-logo-dark.png" alt="Card image" class="w-full h-32 object-cover mb-4 rounded">
+              <h4 class="text-lg font-medium mb-2">Card with Image</h4>
+              <p class="text-[#61686a]">A card with an image and some content.</p>
+            </div>
+            <div class="card p-6">
+              <h4 class="text-lg font-medium mb-2">Interactive Card</h4>
+              <p class="text-[#61686a] mb-4">A card with a button inside.</p>
+              <button class="button button-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="preview-code">
+          <pre><code class="language-html">&lt;div class="card p-6"&gt;
+    &lt;h4 class="text-lg font-medium mb-2"&gt;Card Title&lt;/h4&gt;
+    &lt;p class="text-[#61686a]"&gt;Card content&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alerts -->
+    <section class="mb-12">
+      <h2 class="mb-6">Alerts</h2>
+      <div class="preview-container">
+        <div class="preview-header">
+          <h3 class="text-lg font-medium">Alert Variants</h3>
+        </div>
+        <div class="preview-content space-y-4">
+          <div class="p-4 bg-[#f5faf3] border border-[#579f48] rounded text-[#448237]">
+            <strong>Success!</strong> Your changes have been saved.
+          </div>
+          <div class="p-4 bg-[#fffae9] border border-[#f5980b] rounded text-[#cc7a09]">
+            <strong>Warning!</strong> Please review your input.
+          </div>
+          <div class="p-4 bg-[#ffebed] border border-[#f43f63] rounded text-[#d92b57]">
+            <strong>Error!</strong> Something went wrong.
+          </div>
+          <div class="p-4 bg-[#eefbfd] border border-[#2aafd0] rounded text-[#1e6880]">
+            <strong>Info!</strong> Here's something you should know.
+          </div>
+        </div>
+        <div class="preview-code">
+          <pre><code class="language-html">&lt;div class="p-4 bg-[#f5faf3] border border-[#579f48] rounded text-[#448237]"&gt;
+    &lt;strong&gt;Success!&lt;/strong&gt; Your changes have been saved.
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Badges -->
+    <section class="mb-12">
+      <h2 class="mb-6">Badges</h2>
+      <div class="preview-container">
+        <div class="preview-header">
+          <h3 class="text-lg font-medium">Badge Variants</h3>
+        </div>
+        <div class="preview-content space-x-4">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#1e6880] text-white">
+            Primary
+          </span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#579f48] text-white">
+            Success
+          </span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f5980b] text-white">
+            Warning
+          </span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f43f63] text-white">
+            Error
+          </span>
+        </div>
+        <div class="preview-code">
+          <pre><code class="language-html">&lt;span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#1e6880] text-white"&gt;
+    Primary
+&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Notifications -->
+    <section class="mb-12">
+      <h2 class="mb-6">Toast Notifications</h2>
+      <div class="preview-container">
+        <div class="preview-header">
+          <h3 class="text-lg font-medium">Toast Examples</h3>
+        </div>
+        <div class="preview-content">
+          <button class="button button-primary" onclick="showToast('Success toast message')">
+            Show Toast
+          </button>
+          <div id="toastContainer"></div>
+        </div>
+        <div class="preview-code">
+          <pre><code class="language-html">&lt;div class="toast"&gt;
+    Success toast message
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast animate-slide-in';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

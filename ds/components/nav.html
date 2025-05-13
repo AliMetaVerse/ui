@@ -1,0 +1,74 @@
+<!-- Navigation Component -->
+<nav class="bg-white shadow sticky top-0 z-10">
+  <!-- Navigation Header -->
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <a href="index.html" class="flex items-center space-x-2">
+        <div class="w-10 h-10 bg-[#1e6880] rounded-md flex items-center justify-center">
+          <span class="text-white font-bold roboto-condensed text-xl">W</span>
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold roboto-condensed text-[#1e6880]">Design System</h1>
+      </a>
+    </div>
+    
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center space-x-6"></nav>
+    
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button md:hidden text-[#61686a] hover:text-[#1e6880]">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    
+    <!-- Theme Toggle -->
+    <button class="dark-mode-toggle hidden md:flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#f0f7f9] text-[#1e6880]">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-menu hidden md:hidden">
+    <div class="px-4 py-3 space-y-3">
+      <!-- Will be populated by nav.js -->
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.querySelector('.mobile-menu-button');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Set current page title and active link
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
+    const titleElement = document.querySelector('.current-page-title');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Set page title
+    const titles = {
+      'index': 'Design System',
+      'colors': 'Colors',
+      'typography': 'Typography',
+      'spacing': 'Spacing',
+      'components': 'Components'
+    };
+    
+    titleElement.textContent = titles[currentPage] || 'Design System';
+    
+    // Set active link
+    navLinks.forEach(link => {
+      if (link.getAttribute('href').includes(currentPage)) {
+        link.classList.add('text-[#1e6880]', 'font-semibold');
+        link.classList.remove('text-[#61686a]');
+      }
+    });
+  });
+</script>

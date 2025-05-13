@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens | Webropol Design System</title>  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .token-card {
+      transition: all 0.3s ease;
+    }
+    
+    .token-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .token-preview {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .token-preview::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .token-card:hover .token-preview::after {
+      left: 100%;
+    }
+    
+    .copy-token {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    .token-card:hover .copy-token {
+      opacity: 1;
+    }
+    
+    .token-value {
+      font-family: 'Roboto Mono', monospace;
+    }
+  </style>
+</head>
+<body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="flex-grow max-w-6xl mx-auto py-8 px-4 w-full">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold roboto-condensed text-[#1e6880] mb-4">Design Tokens</h2>
+      <p class="text-[#61686a] max-w-3xl mb-8">Design tokens are the visual design atoms of the design system — specifically, they are named entities that store visual design attributes.</p>
+
+      <!-- Color Tokens -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Color Tokens</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Primary Colors -->
+          <div class="token-card bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Primary Colors</h4>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 rounded bg-[#1e6880] mr-3"></div>
+                  <div>
+                    <div class="text-sm font-medium">Primary</div>
+                    <div class="text-xs text-[#61686a] token-value">var(--primary-600)</div>
+                  </div>
+                </div>
+                <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="var(--primary-600)">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Neutral Colors -->
+          <div class="token-card bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Neutral Colors</h4>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 rounded bg-[#61686a] mr-3"></div>
+                  <div>
+                    <div class="text-sm font-medium">Text</div>
+                    <div class="text-xs text-[#61686a] token-value">var(--neutral-700)</div>
+                  </div>
+                </div>
+                <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="var(--neutral-700)">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Semantic Colors -->
+          <div class="token-card bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Semantic Colors</h4>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 rounded bg-[#579f48] mr-3"></div>
+                  <div>
+                    <div class="text-sm font-medium">Success</div>
+                    <div class="text-xs text-[#61686a] token-value">var(--success-500)</div>
+                  </div>
+                </div>
+                <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="var(--success-500)">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Tokens -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Typography Tokens</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Font Family -->
+          <div class="token-card bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Font Family</h4>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-lg roboto-condensed">Heading Font</div>
+                  <div class="text-xs text-[#61686a] token-value">font-family: 'Roboto Condensed'</div>
+                </div>
+                <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="font-family: 'Roboto Condensed', sans-serif;">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-lg roboto">Body Font</div>
+                  <div class="text-xs text-[#61686a] token-value">font-family: 'Roboto'</div>
+                </div>
+                <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="font-family: 'Roboto', sans-serif;">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Font Sizes -->
+          <div class="token-card bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Font Sizes</h4>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-2xl">Heading 1</div>
+                  <div class="text-xs text-[#61686a] token-value">font-size: 2rem</div>
+                </div>
+                <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="font-size: 2rem;">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacing Tokens -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Spacing Tokens</h3>
+        <div class="token-card bg-white rounded-lg border border-[#d1d5d6] p-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <div class="w-16 h-16 border-2 border-[#1e6880] mr-3"></div>
+                <div>
+                  <div class="text-sm font-medium">Base Spacing</div>
+                  <div class="text-xs text-[#61686a] token-value">var(--spacing-4)</div>
+                </div>
+              </div>
+              <button class="copy-token p-2 text-[#1e6880] hover:bg-[#f0f7f9] rounded" data-token="var(--spacing-4)">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by nav.js -->
+  <footer class="bg-white border-t border-[#d1d5d6] mt-12"></footer>
+
+  <script>
+    // Copy token functionality
+    document.querySelectorAll('.copy-token').forEach(button => {
+      button.addEventListener('click', async () => {
+        const token = button.getAttribute('data-token');
+        try {
+          await navigator.clipboard.writeText(token);
+          
+          // Show success feedback
+          const originalHTML = button.innerHTML;
+          button.innerHTML = `
+            <svg class="w-5 h-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          `;
+          
+          setTimeout(() => {
+            button.innerHTML = originalHTML;
+          }, 2000);
+          
+          // Show toast notification
+          if (window.componentManager) {
+            window.componentManager.showToast({
+              title: 'Token Copied',
+              message: 'Design token copied to clipboard',
+              titleColor: 'text-[#448237]',
+              messageColor: 'text-[#38672e]',
+              icon: `<svg class="h-5 w-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>`
+            });
+          }
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

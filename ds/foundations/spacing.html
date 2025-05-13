@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spacing Guidelines | Webropol Design System</title>  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .spacing-demo {
+      transition: all 0.3s ease;
+    }
+    
+    .spacing-demo:hover {
+      background-color: var(--primary-50);
+    }
+    
+    .spacing-box {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .spacing-box::after {
+      content: attr(data-size);
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: var(--neutral-600);
+      white-space: nowrap;
+    }
+    
+    .spacing-box:hover {
+      transform: scale(1.05);
+    }
+    
+    .grid-demo {
+      transition: all 0.3s ease;
+    }
+    
+    .grid-demo:hover .grid-item {
+      border-color: var(--primary-400);
+    }
+    
+    .grid-item {
+      transition: all 0.3s ease;
+    }
+    
+    .animation-container {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .animation-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: sweep 2s infinite;
+    }
+    
+    @keyframes sweep {
+      100% {
+        left: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#f9fafa] text-[#272a2b] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="flex-grow max-w-6xl mx-auto py-8 px-4 w-full">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold roboto-condensed text-[#1e6880] mb-4">Spacing System</h2>
+      <p class="text-[#61686a] max-w-3xl mb-8">Our spacing system is built on a 4-point grid, ensuring consistent and harmonious spacing across all components and layouts.</p>
+
+      <!-- Spacing Scale -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Spacing Scale</h3>
+        <div class="bg-white rounded-lg border border-[#d1d5d6] p-8">
+          <div class="flex items-end space-x-8">
+            <div class="spacing-box" data-size="4px">
+              <div class="w-4 h-4 bg-[#1e6880]"></div>
+            </div>
+            <div class="spacing-box" data-size="8px">
+              <div class="w-8 h-8 bg-[#1e6880]"></div>
+            </div>
+            <div class="spacing-box" data-size="12px">
+              <div class="w-12 h-12 bg-[#1e6880]"></div>
+            </div>
+            <div class="spacing-box" data-size="16px">
+              <div class="w-16 h-16 bg-[#1e6880]"></div>
+            </div>
+            <div class="spacing-box" data-size="24px">
+              <div class="w-24 h-24 bg-[#1e6880]"></div>
+            </div>
+            <div class="spacing-box" data-size="32px">
+              <div class="w-32 h-32 bg-[#1e6880]"></div>
+            </div>
+          </div>
+          <div class="mt-12 text-sm text-[#61686a]">
+            <p>Our spacing scale uses multiples of 4 to maintain consistent rhythm throughout the interface.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacing Examples -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Spacing Examples</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Margin Example -->
+          <div class="spacing-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Margin</h4>
+            <div class="border-2 border-dashed border-[#1e6880] p-4">
+              <div class="bg-[#1e6880] text-white p-4 m-4">
+                Element with margin
+              </div>
+            </div>
+          </div>
+
+          <!-- Padding Example -->
+          <div class="spacing-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Padding</h4>
+            <div class="border-2 border-dashed border-[#1e6880] p-4">
+              <div class="bg-[#1e6880] text-white p-8">
+                Element with padding
+              </div>
+            </div>
+          </div>
+
+          <!-- Gap Example -->
+          <div class="spacing-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Gap</h4>
+            <div class="flex gap-4">
+              <div class="bg-[#1e6880] text-white p-4">Item 1</div>
+              <div class="bg-[#1e6880] text-white p-4">Item 2</div>
+              <div class="bg-[#1e6880] text-white p-4">Item 3</div>
+            </div>
+          </div>
+
+          <!-- Space Between Example -->
+          <div class="spacing-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+            <h4 class="font-medium mb-4">Space Between</h4>
+            <div class="flex justify-between">
+              <div class="bg-[#1e6880] text-white p-4">Start</div>
+              <div class="bg-[#1e6880] text-white p-4">Center</div>
+              <div class="bg-[#1e6880] text-white p-4">End</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout Grid -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Layout Grid</h3>
+        <div class="grid-demo bg-white rounded-lg border border-[#d1d5d6] p-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid-item border-2 border-[#d1d5d6] p-4 text-center">1</div>
+            <div class="grid-item border-2 border-[#d1d5d6] p-4 text-center">2</div>
+            <div class="grid-item border-2 border-[#d1d5d6] p-4 text-center">3</div>
+            <div class="grid-item border-2 border-[#d1d5d6] p-4 text-center">4</div>
+            <div class="grid-item border-2 border-[#d1d5d6] p-4 text-center">5</div>
+            <div class="grid-item border-2 border-[#d1d5d6] p-4 text-center">6</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Responsive Spacing -->
+      <div class="mb-12">
+        <h3 class="text-xl font-bold roboto-condensed text-[#272a2b] mb-6">Responsive Spacing</h3>
+        <div class="bg-white rounded-lg border border-[#d1d5d6] p-6">
+          <div class="space-y-4 md:space-y-0 md:flex md:space-x-4">
+            <div class="bg-[#1e6880] text-white p-4 md:p-6 lg:p-8 text-center flex-1">
+              Responsive Padding
+            </div>
+            <div class="bg-[#1e6880] text-white p-4 md:p-6 lg:p-8 text-center flex-1">
+              Adjusts with Breakpoints
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by nav.js -->
+  <footer class="bg-white border-t border-[#d1d5d6] mt-12"></footer>
+
+  <script>
+    // Interactive spacing demonstrations
+    document.querySelectorAll('.spacing-demo').forEach(demo => {
+      demo.addEventListener('mouseenter', function() {
+        const boxes = this.querySelectorAll('.bg-[#1e6880]');
+        boxes.forEach(box => {
+          box.style.transition = 'all 0.3s ease';
+          box.style.transform = 'scale(1.05)';
+        });
+      });
+
+      demo.addEventListener('mouseleave', function() {
+        const boxes = this.querySelectorAll('.bg-[#1e6880]');
+        boxes.forEach(box => {
+          box.style.transform = 'scale(1)';
+        });
+      });
+    });
+
+    // Grid demonstration interactivity
+    document.querySelector('.grid-demo').addEventListener('mouseenter', function() {
+      const items = this.querySelectorAll('.grid-item');
+      items.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.05}s`;
+      });
+    });
+
+    // Show spacing measurements on hover
+    document.querySelectorAll('.spacing-box').forEach(box => {
+      box.addEventListener('mouseenter', function() {
+        const size = this.getAttribute('data-size');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-[#272a2b] text-white px-2 py-1 rounded text-xs';
+        tooltip.textContent = size;
+        this.appendChild(tooltip);
+      });
+
+      box.addEventListener('mouseleave', function() {
+        const tooltip = this.querySelector('.absolute');
+        if (tooltip) {
+          tooltip.remove();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

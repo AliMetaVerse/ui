@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Components | Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .nav-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--neutral-200);
+      margin-bottom: 1rem;
+      overflow-x: auto;
+    }
+    
+    .nav-tab {
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+      color: var(--neutral-600);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-tab:hover {
+      color: var(--primary-600);
+    }
+    
+    .nav-tab.active {
+      color: var(--primary-600);
+      border-bottom-color: var(--primary-600);
+    }
+    
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--neutral-600);
+      font-size: 0.875rem;
+    }
+    
+    .breadcrumb-item.active {
+      color: var(--neutral-800);
+      font-weight: 500;
+    }
+    
+    .breadcrumb-separator {
+      margin: 0 0.5rem;
+      color: var(--neutral-400);
+    }
+    
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    
+    .pagination-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      height: 2rem;
+      padding: 0 0.5rem;
+      margin: 0 0.25rem;
+      border-radius: var(--border-radius);
+      color: var(--neutral-700);
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    
+    .pagination-item:hover {
+      background-color: var(--neutral-100);
+    }
+    
+    .pagination-item.active {
+      background-color: var(--primary-600);
+      color: white;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 10;
+      min-width: 10rem;
+      padding: 0.5rem 0;
+      margin-top: 0.25rem;
+      background-color: white;
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      display: none;
+    }
+    
+    .dropdown.open .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-item {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: var(--neutral-700);
+      cursor: pointer;
+    }
+    
+    .dropdown-item:hover {
+      background-color: var(--neutral-100);
+    }
+    
+    .sidebar-nav {
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+    
+    .sidebar-nav-item {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--neutral-200);
+      color: var(--neutral-700);
+      transition: all 0.2s ease;
+    }
+    
+    .sidebar-nav-item:last-child {
+      border-bottom: none;
+    }
+    
+    .sidebar-nav-item:hover {
+      background-color: var(--neutral-50);
+    }
+    
+    .sidebar-nav-item.active {
+      background-color: var(--primary-50);
+      color: var(--primary-700);
+      font-weight: 500;
+      border-left: 3px solid var(--primary-600);
+    }
+    
+    .code-example {
+      background-color: var(--neutral-50);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: monospace;
+    }
+    
+    .component-example {
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      margin: 1rem 0;
+      background-color: white;
+    }
+  </style>
+</head>
+<body class="bg-[var(--neutral-50)] text-[var(--neutral-800)] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 font-roboto-condensed text-[var(--primary-600)]">Navigation Components</h1>
+      <p class="text-[var(--neutral-500)] text-lg">A collection of components for user interface navigation across applications.</p>
+    </div>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Tab Navigation</h2>
+      <p class="mb-6">Tabs organize content into different sections, with only one section visible at a time.</p>
+      
+      <div class="component-example">
+        <div class="nav-tabs">
+          <div class="nav-tab active">Overview</div>
+          <div class="nav-tab">Analytics</div>
+          <div class="nav-tab">Reports</div>
+          <div class="nav-tab">Settings</div>
+        </div>
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <p>Content for the Overview tab panel is displayed here.</p>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Usage Guidelines</h3>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Use tabs to organize content that belongs to the same context but can be clearly separated.</li>
+          <li>Label tabs with short, clear text (1-2 words) that describes the content within.</li>
+          <li>Maintain the same tab order across different pages for consistency.</li>
+          <li>Highlight the active tab clearly to indicate the current view.</li>
+          <li>Limit the number of tabs to 5-7 to avoid overwhelming users.</li>
+        </ul>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Code Example</h3>
+        <div class="code-example">
+<pre>&lt;div class="nav-tabs">
+  &lt;div class="nav-tab active">Overview&lt;/div>
+  &lt;div class="nav-tab">Analytics&lt;/div>
+  &lt;div class="nav-tab">Reports&lt;/div>
+  &lt;div class="nav-tab">Settings&lt;/div>
+&lt;/div>
+&lt;div class="tab-content">
+  &lt;div class="tab-pane active">
+    &lt;p>Content for the Overview tab panel...&lt;/p>
+  &lt;/div>
+&lt;/div></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Breadcrumbs</h2>
+      <p class="mb-6">Breadcrumbs show the hierarchical path to the current page and provide navigation to parent pages.</p>
+      
+      <div class="component-example">
+        <div class="breadcrumbs">
+          <div class="breadcrumb-item">
+            <a href="#" class="text-[var(--primary-600)]">Home</a>
+          </div>
+          <div class="breadcrumb-separator">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="breadcrumb-item">
+            <a href="#" class="text-[var(--primary-600)]">Surveys</a>
+          </div>
+          <div class="breadcrumb-separator">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="breadcrumb-item active">
+            Employee Satisfaction Survey
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Usage Guidelines</h3>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Use breadcrumbs for interfaces with hierarchical navigation and multiple levels.</li>
+          <li>Place breadcrumbs near the top of the page, below the main navigation.</li>
+          <li>Keep breadcrumb labels concise and descriptive.</li>
+          <li>Make each breadcrumb item a clickable link, except for the current page.</li>
+          <li>Use a clear separator between breadcrumb items.</li>
+        </ul>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Code Example</h3>
+        <div class="code-example">
+<pre>&lt;div class="breadcrumbs">
+  &lt;div class="breadcrumb-item">
+    &lt;a href="#">Home&lt;/a>
+  &lt;/div>
+  &lt;div class="breadcrumb-separator">
+    &lt;svg>...&lt;/svg>
+  &lt;/div>
+  &lt;div class="breadcrumb-item">
+    &lt;a href="#">Surveys&lt;/a>
+  &lt;/div>
+  &lt;div class="breadcrumb-separator">
+    &lt;svg>...&lt;/svg>
+  &lt;/div>
+  &lt;div class="breadcrumb-item active">
+    Employee Satisfaction Survey
+  &lt;/div>
+&lt;/div></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Pagination</h2>
+      <p class="mb-6">Pagination divides content into separate pages and provides navigation between them.</p>
+      
+      <div class="component-example">
+        <div class="pagination">
+          <div class="pagination-item">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </div>
+          <div class="pagination-item">1</div>
+          <div class="pagination-item active">2</div>
+          <div class="pagination-item">3</div>
+          <div class="pagination-item">4</div>
+          <div class="pagination-item">...</div>
+          <div class="pagination-item">10</div>
+          <div class="pagination-item">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Usage Guidelines</h3>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Use pagination when displaying large sets of data or content items.</li>
+          <li>Show the current page clearly with proper styling.</li>
+          <li>Include previous/next controls for easy sequential navigation.</li>
+          <li>Use ellipsis (...) to indicate skipped pages when there are many pages.</li>
+          <li>Consider showing the total number of pages or items for context.</li>
+          <li>For smaller datasets, infinite scrolling or "load more" might be more appropriate.</li>
+        </ul>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Code Example</h3>
+        <div class="code-example">
+<pre>&lt;div class="pagination">
+  &lt;div class="pagination-item">&lt;svg>...&lt;/svg>&lt;/div>
+  &lt;div class="pagination-item">1&lt;/div>
+  &lt;div class="pagination-item active">2&lt;/div>
+  &lt;div class="pagination-item">3&lt;/div>
+  &lt;div class="pagination-item">4&lt;/div>
+  &lt;div class="pagination-item">...&lt;/div>
+  &lt;div class="pagination-item">10&lt;/div>
+  &lt;div class="pagination-item">&lt;svg>...&lt;/svg>&lt;/div>
+&lt;/div></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Dropdown Menu</h2>
+      <p class="mb-6">Dropdown menus display a list of options that appear when triggered by a button.</p>
+      
+      <div class="component-example">
+        <div class="dropdown open">
+          <button class="px-4 py-2 bg-white border border-[var(--neutral-300)] rounded-lg flex items-center space-x-2">
+            <span>Actions</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Edit Survey</div>
+            <div class="dropdown-item">Duplicate</div>
+            <div class="dropdown-item">Share</div>
+            <div class="dropdown-item">Export Results</div>
+            <div class="dropdown-item text-[var(--error-600)]">Delete</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Usage Guidelines</h3>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Use dropdowns to conserve space when there are multiple related actions or options.</li>
+          <li>Label the dropdown button clearly to indicate what options it contains.</li>
+          <li>Include a visual indicator (like a chevron) to show that it's a dropdown.</li>
+          <li>Close the dropdown when a user clicks outside it or selects an option.</li>
+          <li>Group related actions and consider using dividers for different categories.</li>
+          <li>Place destructive actions (like Delete) at the bottom and highlight them appropriately.</li>
+        </ul>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Code Example</h3>
+        <div class="code-example">
+<pre>&lt;div class="dropdown">
+  &lt;button class="dropdown-toggle">
+    &lt;span>Actions&lt;/span>
+    &lt;svg>...&lt;/svg>
+  &lt;/button>
+  &lt;div class="dropdown-menu">
+    &lt;div class="dropdown-item">Edit Survey&lt;/div>
+    &lt;div class="dropdown-item">Duplicate&lt;/div>
+    &lt;div class="dropdown-item">Share&lt;/div>
+    &lt;div class="dropdown-item">Export Results&lt;/div>
+    &lt;div class="dropdown-item text-error">Delete&lt;/div>
+  &lt;/div>
+&lt;/div></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Sidebar Navigation</h2>
+      <p class="mb-6">Sidebar navigation provides vertical menu options for navigating between different sections or pages.</p>
+      
+      <div class="component-example">
+        <div class="w-64">
+          <div class="sidebar-nav">
+            <div class="sidebar-nav-item active">Dashboard</div>
+            <div class="sidebar-nav-item">Surveys</div>
+            <div class="sidebar-nav-item">Reports</div>
+            <div class="sidebar-nav-item">Analytics</div>
+            <div class="sidebar-nav-item">Settings</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Usage Guidelines</h3>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Use sidebar navigation for applications with multiple sections or pages.</li>
+          <li>Highlight the active item to show the current location.</li>
+          <li>Consider collapsible sections for complex navigation structures.</li>
+          <li>Ensure the sidebar is responsive and adapts to different screen sizes.</li>
+          <li>Use consistent icons and labels for easy recognition.</li>
+          <li>Consider a collapsible/expandable sidebar for better space utilization.</li>
+        </ul>
+      </div>
+      
+      <div class="mt-6">
+        <h3 class="font-bold mb-3">Code Example</h3>
+        <div class="code-example">
+<pre>&lt;div class="sidebar-nav">
+  &lt;div class="sidebar-nav-item active">Dashboard&lt;/div>
+  &lt;div class="sidebar-nav-item">Surveys&lt;/div>
+  &lt;div class="sidebar-nav-item">Reports&lt;/div>
+  &lt;div class="sidebar-nav-item">Analytics&lt;/div>
+  &lt;div class="sidebar-nav-item">Settings&lt;/div>
+&lt;/div></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Accessibility Considerations</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold mb-3">Keyboard Navigation</h3>
+          <ul class="list-disc pl-6 space-y-2 text-sm">
+            <li><strong>Tab focus:</strong> Ensure all interactive navigation elements can be accessed with keyboard tabbing.</li>
+            <li><strong>Arrow keys:</strong> Support arrow key navigation within components like tabs and dropdown menus.</li>
+            <li><strong>Enter/Space:</strong> Allow activation of navigation elements with Enter or Space keys.</li>
+            <li><strong>Escape:</strong> Close dropdowns and menus when the Escape key is pressed.</li>
+            <li><strong>Focus indicators:</strong> Provide visible focus states for all interactive elements.</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Screen Reader Support</h3>
+          <ul class="list-disc pl-6 space-y-2 text-sm">
+            <li><strong>ARIA roles:</strong> Use appropriate ARIA roles (e.g., <code>role="navigation"</code>, <code>role="menu"</code>).</li>
+            <li><strong>ARIA states:</strong> Include states like <code>aria-expanded</code>, <code>aria-current</code>, and <code>aria-selected</code>.</li>
+            <li><strong>Hidden content:</strong> Use <code>aria-hidden="true"</code> for decorative elements.</li>
+            <li><strong>Clear labels:</strong> Provide descriptive labels for navigation landmarks.</li>
+            <li><strong>Skip links:</strong> Include skip navigation links for keyboard users.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[var(--neutral-200)] mt-auto"></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Simple demo functionality for tabs
+      const tabs = document.querySelectorAll('.nav-tab');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables | Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .responsive-table {
+      overflow-x: auto;
+    }
+    
+    .table-example {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .table-example th {
+      background-color: var(--neutral-100);
+      color: var(--neutral-700);
+      font-weight: 500;
+      text-align: left;
+      padding: 0.75rem;
+      border-bottom: 2px solid var(--neutral-200);
+    }
+    
+    .table-example td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--neutral-200);
+    }
+    
+    .table-example tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .table-example tr:hover {
+      background-color: var(--neutral-50);
+    }
+    
+    .table-interactive tr {
+      cursor: pointer;
+    }
+    
+    .table-striped tbody tr:nth-child(odd) {
+      background-color: var(--neutral-50);
+    }
+    
+    .table-striped tbody tr:hover {
+      background-color: var(--neutral-100);
+    }
+    
+    .column-sortable {
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .column-sortable::after {
+      content: "↕";
+      display: inline-block;
+      margin-left: 0.5rem;
+      opacity: 0.5;
+    }
+    
+    .column-sortable:hover::after {
+      opacity: 1;
+    }
+    
+    .column-sorted-asc::after {
+      content: "↑";
+      opacity: 1;
+    }
+    
+    .column-sorted-desc::after {
+      content: "↓";
+      opacity: 1;
+    }
+    
+    .color-swatch {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    
+    .code-example {
+      background-color: var(--neutral-50);
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body class="bg-[var(--neutral-50)] text-[var(--neutral-800)] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 font-roboto-condensed text-[var(--primary-600)]">Tables</h1>
+      <p class="text-[var(--neutral-500)] text-lg">Structured tabular data presentation components.</p>
+    </div>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Basic Table</h2>
+      <p class="mb-6">Standard table structure for displaying tabular data with consistent styling.</p>
+      
+      <div class="responsive-table mb-6">
+        <table class="table-example">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Department</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Maria Johnson</td>
+              <td>Product Manager</td>
+              <td>Product</td>
+              <td><span class="inline-block px-2 py-1 text-xs bg-[var(--success-100)] text-[var(--success-700)] rounded">Active</span></td>
+            </tr>
+            <tr>
+              <td>Alex Williams</td>
+              <td>UX Designer</td>
+              <td>Design</td>
+              <td><span class="inline-block px-2 py-1 text-xs bg-[var(--success-100)] text-[var(--success-700)] rounded">Active</span></td>
+            </tr>
+            <tr>
+              <td>Samantha Lee</td>
+              <td>Frontend Developer</td>
+              <td>Engineering</td>
+              <td><span class="inline-block px-2 py-1 text-xs bg-[var(--warning-100)] text-[var(--warning-700)] rounded">On Leave</span></td>
+            </tr>
+            <tr>
+              <td>Robert Taylor</td>
+              <td>Data Analyst</td>
+              <td>Analytics</td>
+              <td><span class="inline-block px-2 py-1 text-xs bg-[var(--neutral-100)] text-[var(--neutral-700)] rounded">Inactive</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="code-example">
+<pre>&lt;table class="table-example">
+  &lt;thead>
+    &lt;tr>
+      &lt;th>Name&lt;/th>
+      &lt;th>Position&lt;/th>
+      &lt;th>Department&lt;/th>
+      &lt;th>Status&lt;/th>
+    &lt;/tr>
+  &lt;/thead>
+  &lt;tbody>
+    &lt;tr>
+      &lt;td>Maria Johnson&lt;/td>
+      &lt;td>Product Manager&lt;/td>
+      &lt;td>Product&lt;/td>
+      &lt;td>&lt;span class="status-badge status-active">Active&lt;/span>&lt;/td>
+    &lt;/tr>
+    &lt;!-- More rows -->
+  &lt;/tbody>
+&lt;/table></pre>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Table Variations</h2>
+      
+      <div class="mb-8">
+        <h3 class="font-bold mb-3">Striped Table</h3>
+        <p class="mb-4 text-sm">Alternating row colors improve readability for tables with many rows.</p>
+        
+        <div class="responsive-table">
+          <table class="table-example table-striped">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Webropol Survey Tool</td>
+                <td>Software</td>
+                <td>€499</td>
+                <td>In Stock</td>
+              </tr>
+              <tr>
+                <td>Analytics Pro Package</td>
+                <td>Service</td>
+                <td>€299</td>
+                <td>In Stock</td>
+              </tr>
+              <tr>
+                <td>Enterprise Survey License</td>
+                <td>License</td>
+                <td>€1,499</td>
+                <td>Limited</td>
+              </tr>
+              <tr>
+                <td>Consulting Services</td>
+                <td>Service</td>
+                <td>€150/hr</td>
+                <td>Available</td>
+              </tr>
+              <tr>
+                <td>Custom Development</td>
+                <td>Service</td>
+                <td>€200/hr</td>
+                <td>Available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mb-8">
+        <h3 class="font-bold mb-3">Sortable Table</h3>
+        <p class="mb-4 text-sm">Interactive table with sortable columns for data organization.</p>
+        
+        <div class="responsive-table">
+          <table class="table-example table-interactive">
+            <thead>
+              <tr>
+                <th class="column-sortable column-sorted-asc">Campaign</th>
+                <th class="column-sortable">Response Rate</th>
+                <th class="column-sortable">Completion Rate</th>
+                <th class="column-sortable">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Employee Satisfaction</td>
+                <td>78%</td>
+                <td>92%</td>
+                <td>2025-03-15</td>
+              </tr>
+              <tr>
+                <td>Product Feedback</td>
+                <td>42%</td>
+                <td>85%</td>
+                <td>2025-04-02</td>
+              </tr>
+              <tr>
+                <td>Market Research Study</td>
+                <td>35%</td>
+                <td>79%</td>
+                <td>2025-04-18</td>
+              </tr>
+              <tr>
+                <td>Customer Support Survey</td>
+                <td>61%</td>
+                <td>88%</td>
+                <td>2025-05-01</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="font-bold mb-3">Compact Table</h3>
+        <p class="mb-4 text-sm">Reduced padding for displaying more data in limited space.</p>
+        
+        <div class="responsive-table">
+          <table class="table-example">
+            <thead>
+              <tr>
+                <th class="py-2 px-3">ID</th>
+                <th class="py-2 px-3">User</th>
+                <th class="py-2 px-3">Action</th>
+                <th class="py-2 px-3">Time</th>
+                <th class="py-2 px-3">IP Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 px-3">#4582</td>
+                <td class="py-2 px-3">admin@webropol.com</td>
+                <td class="py-2 px-3">Login</td>
+                <td class="py-2 px-3">08:42 AM</td>
+                <td class="py-2 px-3">192.168.1.105</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3">#4581</td>
+                <td class="py-2 px-3">user@example.com</td>
+                <td class="py-2 px-3">Export Data</td>
+                <td class="py-2 px-3">08:30 AM</td>
+                <td class="py-2 px-3">192.168.1.106</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3">#4580</td>
+                <td class="py-2 px-3">manager@company.com</td>
+                <td class="py-2 px-3">Create Survey</td>
+                <td class="py-2 px-3">08:15 AM</td>
+                <td class="py-2 px-3">192.168.1.107</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3">#4579</td>
+                <td class="py-2 px-3">analyst@dept.org</td>
+                <td class="py-2 px-3">View Reports</td>
+                <td class="py-2 px-3">08:03 AM</td>
+                <td class="py-2 px-3">192.168.1.108</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Data Visualization Table</h2>
+      <p class="mb-6">Tables enhanced with visual elements to better represent data.</p>
+      
+      <div class="responsive-table">
+        <table class="table-example">
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Responses</th>
+              <th>Distribution</th>
+              <th>Conversion</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="color-swatch" style="background-color: #4285F4;"></span>Email</td>
+              <td>3,842</td>
+              <td>
+                <div class="w-full bg-[var(--neutral-100)] rounded-full h-2.5">
+                  <div class="bg-[#4285F4] h-2.5 rounded-full" style="width: 65%"></div>
+                </div>
+              </td>
+              <td>65%</td>
+              <td>
+                <svg height="20" width="80" viewBox="0 0 80 20">
+                  <polyline points="0,15 10,10 20,12 30,8 40,9 50,5 60,8 70,4 80,2" 
+                    fill="none" stroke="#4285F4" stroke-width="1.5" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="color-swatch" style="background-color: #34A853;"></span>Social Media</td>
+              <td>2,156</td>
+              <td>
+                <div class="w-full bg-[var(--neutral-100)] rounded-full h-2.5">
+                  <div class="bg-[#34A853] h-2.5 rounded-full" style="width: 42%"></div>
+                </div>
+              </td>
+              <td>42%</td>
+              <td>
+                <svg height="20" width="80" viewBox="0 0 80 20">
+                  <polyline points="0,10 10,12 20,8 30,14 40,6 50,10 60,5 70,8 80,4" 
+                    fill="none" stroke="#34A853" stroke-width="1.5" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="color-swatch" style="background-color: #FBBC05;"></span>Website</td>
+              <td>1,874</td>
+              <td>
+                <div class="w-full bg-[var(--neutral-100)] rounded-full h-2.5">
+                  <div class="bg-[#FBBC05] h-2.5 rounded-full" style="width: 38%"></div>
+                </div>
+              </td>
+              <td>38%</td>
+              <td>
+                <svg height="20" width="80" viewBox="0 0 80 20">
+                  <polyline points="0,12 10,14 20,10 30,8 40,12 50,10 60,6 70,8 80,5" 
+                    fill="none" stroke="#FBBC05" stroke-width="1.5" />
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="color-swatch" style="background-color: #EA4335;"></span>Direct Link</td>
+              <td>928</td>
+              <td>
+                <div class="w-full bg-[var(--neutral-100)] rounded-full h-2.5">
+                  <div class="bg-[#EA4335] h-2.5 rounded-full" style="width: 25%"></div>
+                </div>
+              </td>
+              <td>25%</td>
+              <td>
+                <svg height="20" width="80" viewBox="0 0 80 20">
+                  <polyline points="0,15 10,14 20,16 30,12 40,15 50,10 60,12 70,8 80,10" 
+                    fill="none" stroke="#EA4335" stroke-width="1.5" />
+                </svg>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Responsive Tables</h2>
+      <p class="mb-6">Tables adapt to different screen sizes for optimal viewing experience across devices.</p>
+      
+      <div class="mb-6 text-sm">
+        <h3 class="font-bold mb-3">Horizontal Scrolling</h3>
+        <p class="mb-4">On small screens, tables can be wrapped in a scrollable container to maintain their structure.</p>
+        <div class="code-example">
+<pre>&lt;div class="responsive-table">
+  &lt;table class="table-example">
+    &lt;!-- Table content -->
+  &lt;/table>
+&lt;/div></pre>
+        </div>
+      </div>
+      
+      <div class="mb-6 text-sm">
+        <h3 class="font-bold mb-3">Collapsible Table</h3>
+        <p class="mb-4">For mobile devices, tables can be collapsed to display each row as a card with labeled data.</p>
+        
+        <div class="block md:hidden border border-[var(--neutral-200)] rounded-lg divide-y divide-[var(--neutral-200)]">
+          <div class="p-4">
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-[var(--neutral-500)] text-xs">Name:</div>
+              <div>Maria Johnson</div>
+              <div class="text-[var(--neutral-500)] text-xs">Position:</div>
+              <div>Product Manager</div>
+              <div class="text-[var(--neutral-500)] text-xs">Department:</div>
+              <div>Product</div>
+              <div class="text-[var(--neutral-500)] text-xs">Status:</div>
+              <div><span class="inline-block px-2 py-1 text-xs bg-[var(--success-100)] text-[var(--success-700)] rounded">Active</span></div>
+            </div>
+          </div>
+          <div class="p-4">
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-[var(--neutral-500)] text-xs">Name:</div>
+              <div>Alex Williams</div>
+              <div class="text-[var(--neutral-500)] text-xs">Position:</div>
+              <div>UX Designer</div>
+              <div class="text-[var(--neutral-500)] text-xs">Department:</div>
+              <div>Design</div>
+              <div class="text-[var(--neutral-500)] text-xs">Status:</div>
+              <div><span class="inline-block px-2 py-1 text-xs bg-[var(--success-100)] text-[var(--success-700)] rounded">Active</span></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hidden md:block text-sm text-[var(--neutral-500)] mt-4">
+          ↑ This example shows as cards on mobile and a standard table on larger screens.
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Best Practices</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold mb-2">Do</h3>
+          <ul class="list-disc pl-6 space-y-2 text-sm">
+            <li>Use clear, descriptive column headers</li>
+            <li>Align text appropriately (left for text, right for numbers)</li>
+            <li>Use consistent styling across all tables</li>
+            <li>Provide sorting functionality for large datasets</li>
+            <li>Consider responsive behavior for mobile devices</li>
+            <li>Use appropriate white space for readability</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-2">Don't</h3>
+          <ul class="list-disc pl-6 space-y-2 text-sm">
+            <li>Overcrowd tables with excessive data</li>
+            <li>Use complex formatting that distracts from the data</li>
+            <li>Implement tables without considering accessibility</li>
+            <li>Mix different styles or color schemes within the same table</li>
+            <li>Use tables when a different visualization would be more effective</li>
+            <li>Neglect responsive design considerations</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[var(--neutral-200)] mt-auto"></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add interactive behavior for sortable tables
+      const sortableHeaders = document.querySelectorAll('.column-sortable');
+      
+      sortableHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+          // For demo purposes, just toggle the sorting indicator
+          if (this.classList.contains('column-sorted-asc')) {
+            sortableHeaders.forEach(h => {
+              h.classList.remove('column-sorted-asc');
+              h.classList.remove('column-sorted-desc');
+            });
+            this.classList.add('column-sorted-desc');
+          } else if (this.classList.contains('column-sorted-desc')) {
+            sortableHeaders.forEach(h => {
+              h.classList.remove('column-sorted-asc');
+              h.classList.remove('column-sorted-desc');
+            });
+            this.classList.add('column-sorted-asc');
+          } else {
+            sortableHeaders.forEach(h => {
+              h.classList.remove('column-sorted-asc');
+              h.classList.remove('column-sorted-desc');
+            });
+            this.classList.add('column-sorted-asc');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

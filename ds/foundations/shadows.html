@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadows | Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .shadow-example {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--neutral-200);
+    }
+    
+    .shadow-box {
+      width: 150px;
+      height: 150px;
+      background-color: white;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+    }
+    
+    pre {
+      background-color: var(--neutral-100);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    
+    code {
+      font-family: monospace;
+    }
+    
+    .interactive-shadow {
+      transition: all 0.3s ease;
+    }
+    
+    .interactive-shadow:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body class="bg-[var(--neutral-50)] text-[var(--neutral-800)] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 font-roboto-condensed text-[var(--primary-600)]">Shadow System</h1>
+      <p class="text-[var(--neutral-500)] text-lg">Elevation and depth cues using consistent shadow styles across the design system.</p>
+    </div>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Shadow Principles</h2>
+      <p class="mb-6">Our shadow system creates visual hierarchy and indicates elevation, helping users understand the relationship between interface elements. Shadows should be used purposefully to indicate states, enhance usability, and create a sense of depth.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <h3 class="font-bold mb-2">Elevation</h3>
+          <p class="text-sm text-[var(--neutral-600)]">Shadows indicate how close an element is to the user in the z-axis. Higher elevation means a larger, more diffused shadow.</p>
+        </div>
+        
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <h3 class="font-bold mb-2">Hierarchy</h3>
+          <p class="text-sm text-[var(--neutral-600)]">Shadow intensity helps establish visual hierarchy, with more important or interactive elements having stronger shadows.</p>
+        </div>
+        
+        <div class="p-4 border border-[var(--neutral-200)] rounded-lg">
+          <h3 class="font-bold mb-2">Interactivity</h3>
+          <p class="text-sm text-[var(--neutral-600)]">Shadows can change on hover or active states to provide visual feedback for interactive elements.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Shadow Scale</h2>
+      <p class="mb-6">Our design system uses five levels of shadows to create a consistent elevation system. Each level is defined by specific values for offset, blur, spread, and opacity.</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="shadow-example">
+          <div class="shadow-box shadow-none">No Shadow</div>
+          <div class="text-center">
+            <p class="font-bold">Level 0</p>
+            <p class="text-sm text-[var(--neutral-500)]">Flat elements, no elevation</p>
+          </div>
+          <pre><code>box-shadow: none;</code></pre>
+        </div>
+        
+        <div class="shadow-example">
+          <div class="shadow-box shadow-sm interactive-shadow">Shadow SM</div>
+          <div class="text-center">
+            <p class="font-bold">Level 1</p>
+            <p class="text-sm text-[var(--neutral-500)]">Subtle elevation, cards, containers</p>
+          </div>
+          <pre><code>box-shadow: 0 1px 3px rgba(0,0,0,0.1);</code></pre>
+        </div>
+        
+        <div class="shadow-example">
+          <div class="shadow-box shadow interactive-shadow">Shadow Default</div>
+          <div class="text-center">
+            <p class="font-bold">Level 2</p>
+            <p class="text-sm text-[var(--neutral-500)]">Interactive elements, hover states</p>
+          </div>
+          <pre><code>box-shadow: 0 2px 5px rgba(0,0,0,0.15);</code></pre>
+        </div>
+        
+        <div class="shadow-example">
+          <div class="shadow-box shadow-md interactive-shadow">Shadow MD</div>
+          <div class="text-center">
+            <p class="font-bold">Level 3</p>
+            <p class="text-sm text-[var(--neutral-500)]">Dropdowns, popovers</p>
+          </div>
+          <pre><code>box-shadow: 0 4px 8px rgba(0,0,0,0.2);</code></pre>
+        </div>
+        
+        <div class="shadow-example">
+          <div class="shadow-box shadow-lg interactive-shadow">Shadow LG</div>
+          <div class="text-center">
+            <p class="font-bold">Level 4</p>
+            <p class="text-sm text-[var(--neutral-500)]">Modals, dialog windows</p>
+          </div>
+          <pre><code>box-shadow: 0 8px 16px rgba(0,0,0,0.2);</code></pre>
+        </div>
+        
+        <div class="shadow-example">
+          <div class="shadow-box shadow-xl interactive-shadow">Shadow XL</div>
+          <div class="text-center">
+            <p class="font-bold">Level 5</p>
+            <p class="text-sm text-[var(--neutral-500)]">Maximum elevation, important UI</p>
+          </div>
+          <pre><code>box-shadow: 0 12px 24px rgba(0,0,0,0.25);</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Usage Examples</h2>
+      <p class="mb-6">Here are examples of how shadows should be applied to various UI elements to create appropriate visual hierarchy.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+        <div>
+          <h3 class="font-bold mb-3">Cards</h3>
+          <div class="flex justify-center">
+            <div class="bg-white rounded-lg shadow-sm p-4 w-full max-w-sm">
+              <h4 class="font-bold mb-2">Card Title</h4>
+              <p class="text-sm text-[var(--neutral-600)]">Cards use a subtle shadow (level 1) to create a slight elevation from the background.</p>
+              <div class="flex justify-end mt-3">
+                <button class="px-3 py-1 bg-[var(--primary-600)] text-white rounded">Action</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Dropdown Menu</h3>
+          <div class="flex justify-center">
+            <div class="relative">
+              <button class="px-4 py-2 bg-white border border-[var(--neutral-300)] rounded-lg">
+                Dropdown Menu
+              </button>
+              <div class="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-md p-2 w-48">
+                <div class="py-1 px-3 hover:bg-[var(--neutral-100)] rounded">Option 1</div>
+                <div class="py-1 px-3 hover:bg-[var(--neutral-100)] rounded">Option 2</div>
+                <div class="py-1 px-3 hover:bg-[var(--neutral-100)] rounded">Option 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Modal Dialog</h3>
+          <div class="relative p-8 bg-[var(--neutral-100)] rounded-lg">
+            <div class="bg-white rounded-lg shadow-lg p-4 max-w-sm mx-auto">
+              <h4 class="font-bold mb-2">Confirm Action</h4>
+              <p class="text-sm text-[var(--neutral-600)] mb-4">Modals use a stronger shadow (level 4) to emphasize their importance.</p>
+              <div class="flex justify-end gap-2">
+                <button class="px-3 py-1 bg-[var(--neutral-200)] rounded">Cancel</button>
+                <button class="px-3 py-1 bg-[var(--primary-600)] text-white rounded">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-3">Interactive Button States</h3>
+          <div class="flex flex-col items-center gap-4">
+            <button class="px-5 py-2 bg-[var(--primary-600)] text-white rounded shadow-sm transition-all hover:shadow">Default → Hover</button>
+            <button class="px-5 py-2 bg-white border border-[var(--primary-600)] text-[var(--primary-600)] rounded shadow-none transition-all hover:shadow-sm">Flat → Hover</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Best Practices</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold mb-2">Do</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Use shadows consistently to indicate elevation levels</li>
+            <li>Apply shadows to elements that need to stand out from the background</li>
+            <li>Increase shadow intensity for elements with higher importance</li>
+            <li>Use shadows to indicate interactive states (hover, active)</li>
+            <li>Consider light source direction when applying shadows (typically top-left)</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-2">Don't</h3>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Overuse shadows which can create visual noise</li>
+            <li>Use inconsistent shadow directions</li>
+            <li>Apply heavy shadows to non-interactive elements</li>
+            <li>Create unrealistic shadow effects that don't follow natural light behavior</li>
+            <li>Use shadows as the only means of indicating interactivity</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[var(--neutral-200)] mt-auto"></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize code highlighting if available
+      if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+      }
+    });
+  </script>
+</body>
+</html>

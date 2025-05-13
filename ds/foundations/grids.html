@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grids | Webropol Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../ds.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="inject-components.js" defer></script>
+  <style>
+    .grid-example {
+      border: 1px solid var(--neutral-200);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .grid-item {
+      background-color: var(--primary-100);
+      border: 1px solid var(--primary-300);
+      padding: 1rem;
+      text-align: center;
+      border-radius: var(--border-radius-sm);
+    }
+    
+    .grid-item:nth-child(odd) {
+      background-color: var(--primary-200);
+    }
+    
+    pre {
+      background-color: var(--neutral-100);
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    
+    code {
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body class="bg-[var(--neutral-50)] text-[var(--neutral-800)] min-h-screen flex flex-col">
+  <!-- Header will be injected by ds-core.js -->
+  <header class="bg-white shadow sticky top-0 z-10"></header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2 font-roboto-condensed text-[var(--primary-600)]">Grid System</h1>
+      <p class="text-[var(--neutral-500)] text-lg">A responsive grid system based on Tailwind CSS for consistent layouts across all screen sizes.</p>
+    </div>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Basic Grid</h2>
+      <p class="mb-6">Our grid system uses Tailwind's grid utilities, with a default 12-column layout. Use <code>grid-cols-*</code> classes to define columns.</p>
+      
+      <div class="grid-example">
+        <div class="grid grid-cols-12 gap-4">
+          <div class="grid-item col-span-12">col-span-12</div>
+          <div class="grid-item col-span-6">col-span-6</div>
+          <div class="grid-item col-span-6">col-span-6</div>
+          <div class="grid-item col-span-4">col-span-4</div>
+          <div class="grid-item col-span-4">col-span-4</div>
+          <div class="grid-item col-span-4">col-span-4</div>
+          <div class="grid-item col-span-3">col-span-3</div>
+          <div class="grid-item col-span-3">col-span-3</div>
+          <div class="grid-item col-span-3">col-span-3</div>
+          <div class="grid-item col-span-3">col-span-3</div>
+        </div>
+      </div>
+      
+      <pre><code class="language-html">&lt;div class="grid grid-cols-12 gap-4">
+  &lt;div class="col-span-12">...&lt;/div>
+  &lt;div class="col-span-6">...&lt;/div>
+  &lt;div class="col-span-6">...&lt;/div>
+  &lt;div class="col-span-4">...&lt;/div>
+  &lt;div class="col-span-4">...&lt;/div>
+  &lt;div class="col-span-4">...&lt;/div>
+  &lt;div class="col-span-3">...&lt;/div>
+  &lt;div class="col-span-3">...&lt;/div>
+  &lt;div class="col-span-3">...&lt;/div>
+  &lt;div class="col-span-3">...&lt;/div>
+&lt;/div></code></pre>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Responsive Grid</h2>
+      <p class="mb-6">Use responsive grid classes like <code>sm:grid-cols-*</code>, <code>md:grid-cols-*</code>, etc., to create layouts that adapt to different screen sizes.</p>
+      
+      <div class="grid-example">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div class="grid-item">1 col (xs)<br>2 cols (sm)<br>3 cols (md)<br>4 cols (lg)</div>
+          <div class="grid-item">1 col (xs)<br>2 cols (sm)<br>3 cols (md)<br>4 cols (lg)</div>
+          <div class="grid-item">1 col (xs)<br>2 cols (sm)<br>3 cols (md)<br>4 cols (lg)</div>
+          <div class="grid-item">1 col (xs)<br>2 cols (sm)<br>3 cols (md)<br>4 cols (lg)</div>
+        </div>
+      </div>
+      
+      <pre><code class="language-html">&lt;div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+&lt;/div></code></pre>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Grid Gap</h2>
+      <p class="mb-6">Control the space between grid items using the <code>gap-*</code> utilities. Our design system uses consistent spacing values.</p>
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-lg font-bold mb-2">Small Gap (gap-2)</h3>
+          <div class="grid-example">
+            <div class="grid grid-cols-4 gap-2">
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-2">Medium Gap (gap-4)</h3>
+          <div class="grid-example">
+            <div class="grid grid-cols-4 gap-4">
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-2">Large Gap (gap-8)</h3>
+          <div class="grid-example">
+            <div class="grid grid-cols-4 gap-8">
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+              <div class="grid-item">Item</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Auto Grid</h2>
+      <p class="mb-6">Use <code>grid-cols-auto-fill</code> or <code>grid-cols-auto-fit</code> with <code>grid-template-columns</code> to create flexible grids.</p>
+      
+      <div class="grid-example">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
+          <div class="grid-item">Auto-fill</div>
+          <div class="grid-item">Auto-fill</div>
+          <div class="grid-item">Auto-fill</div>
+          <div class="grid-item">Auto-fill</div>
+          <div class="grid-item">Auto-fill</div>
+        </div>
+      </div>
+      
+      <pre><code class="language-html">&lt;div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+  &lt;div>...&lt;/div>
+&lt;/div></code></pre>
+    </section>
+
+    <section class="mb-12 bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Grid Layout Examples</h2>
+      <p class="mb-6">Common layout patterns using our grid system.</p>
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-lg font-bold mb-2">Sidebar Layout</h3>
+          <div class="grid-example">
+            <div class="grid grid-cols-12 gap-4">
+              <div class="grid-item col-span-12 md:col-span-3">Sidebar</div>
+              <div class="grid-item col-span-12 md:col-span-9">Main Content</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-2">Card Grid</h3>
+          <div class="grid-example">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="grid-item">Card 1</div>
+              <div class="grid-item">Card 2</div>
+              <div class="grid-item">Card 3</div>
+              <div class="grid-item">Card 4</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-2">Holy Grail Layout</h3>
+          <div class="grid-example">
+            <div class="grid grid-cols-12 gap-4">
+              <div class="grid-item col-span-12">Header</div>
+              <div class="grid-item col-span-12 md:col-span-3">Left Sidebar</div>
+              <div class="grid-item col-span-12 md:col-span-6">Main Content</div>
+              <div class="grid-item col-span-12 md:col-span-3">Right Sidebar</div>
+              <div class="grid-item col-span-12">Footer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg shadow-sm p-6 border border-[var(--neutral-200)]">
+      <h2 class="text-xl font-bold mb-4 font-roboto-condensed">Best Practices</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Use the 12-column grid system for most layouts</li>
+        <li>Design mobile-first and add responsive breakpoints as needed</li>
+        <li>Keep grid gaps consistent throughout your interface</li>
+        <li>Avoid nesting too many grids (limit to 2-3 levels deep)</li>
+        <li>Use appropriate column spans to maintain visual hierarchy</li>
+        <li>Ensure content fits within grid cells (avoid overflow)</li>
+        <li>Use auto-fill/auto-fit for dynamic content that needs to reflow</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer will be injected by ds-core.js -->
+  <footer class="bg-white border-t border-[var(--neutral-200)] mt-auto"></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize code highlighting if available
+      if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+      }
+    });
+  </script>
+</body>
+</html>

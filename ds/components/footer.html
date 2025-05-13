@@ -1,0 +1,93 @@
+<!-- Footer Component -->
+<footer class="bg-white border-t border-[#d1d5d6] mt-12">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Branding -->
+      <div class="space-y-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-[#1e6880] rounded-md flex items-center justify-center mr-3">
+            <span class="text-white font-bold roboto-condensed text-xl">W</span>
+          </div>
+          <span class="text-lg font-medium text-[#272a2b]">Webropol</span>
+        </div>
+        <p class="text-sm text-[#61686a]">Building better digital experiences through consistent design.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-[#272a2b] uppercase tracking-wider mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="text-sm text-[#61686a] hover:text-[#1e6880]">Home</a></li>
+          <li><a href="components.html" class="text-sm text-[#61686a] hover:text-[#1e6880]">Components</a></li>
+          <li><a href="colors.html" class="text-sm text-[#61686a] hover:text-[#1e6880]">Colors</a></li>
+          <li><a href="typography.html" class="text-sm text-[#61686a] hover:text-[#1e6880]">Typography</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h3 class="text-sm font-semibold text-[#272a2b] uppercase tracking-wider mb-4">Resources</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Documentation</a></li>
+          <li><a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Design Files</a></li>
+          <li><a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Development Guide</a></li>
+          <li><a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Release Notes</a></li>
+        </ul>
+      </div>
+
+      <!-- Updates -->
+      <div>
+        <h3 class="text-sm font-semibold text-[#272a2b] uppercase tracking-wider mb-4">Stay Updated</h3>
+        <form class="mt-4">
+          <div class="flex">
+            <input type="email" placeholder="Enter your email" class="flex-1 px-3 py-2 border border-[#d1d5d6] rounded-l text-sm focus:outline-none focus:ring-2 focus:ring-[#1e6880] focus:border-transparent" />
+            <button type="submit" class="bg-[#1e6880] text-white px-4 py-2 rounded-r hover:bg-[#16809d] transition text-sm">
+              Subscribe
+            </button>
+          </div>
+        </form>
+        <p class="mt-2 text-xs text-[#61686a]">Get notified about design system updates.</p>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-8 pt-8 border-t border-[#d1d5d6]">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm text-[#61686a]">&copy; 2025 Webropol. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Privacy Policy</a>
+          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Terms of Use</a>
+          <a href="#" class="text-sm text-[#61686a] hover:text-[#1e6880]">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Handle newsletter subscription
+      const form = document.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = form.querySelector('input[type="email"]').value;
+          
+          // Show success message using componentManager
+          if (window.componentManager) {
+            window.componentManager.showToast({
+              title: 'Success',
+              message: 'Thank you for subscribing to our newsletter!',
+              titleColor: 'text-[#448237]',
+              messageColor: 'text-[#38672e]',
+              icon: `<svg class="h-5 w-5 text-[#579f48]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>`
+            });
+          }
+          
+          form.reset();
+        });
+      }
+    });
+  </script>
+</footer>
