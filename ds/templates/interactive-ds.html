@@ -43,121 +43,166 @@
     <style>
         .roboto-condensed { font-family: 'Roboto Condensed', sans-serif; }
         .roboto { font-family: 'Roboto', sans-serif; }
-        
         .sidebar-scroll {
             scrollbar-width: thin;
-            scrollbar-color: #b5bbbd transparent;
+            scrollbar-color: var(--ds-neutral-300, #b5bbbd) transparent;
         }
-        
         .sidebar-scroll::-webkit-scrollbar {
             width: 6px;
         }
-        
         .sidebar-scroll::-webkit-scrollbar-thumb {
-            background-color: #b5bbbd;
+            background-color: var(--ds-neutral-300, #b5bbbd);
             border-radius: 3px;
         }
-
         .code-block {
-            background-color: rgb(249 250 251);
-            border-radius: 0.5rem;
-            padding: 1rem;
+            background-color: var(--ds-neutral-50, rgb(249 250 251));
+            border-radius: var(--ds-radius-md, 0.5rem);
+            padding: var(--ds-spacing-4, 1rem);
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-size: 0.875rem;
             line-height: 1.75;
             overflow-x: auto;
         }
-
         .dark .code-block {
-            background-color: rgb(31 41 55);
+            background-color: var(--ds-neutral-800, rgb(31 41 55));
         }
-
         @keyframes copySuccess {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-
         .copy-success {
             animation: copySuccess 0.3s ease-in-out;
         }
-
         .color-preview {
             transition: transform 0.2s ease-in-out;
         }
-
         .color-preview:hover {
             transform: scale(1.05);
+        }
+        /* DS Button Styles (if not already in ds.css) */
+        .ds-btn {
+            padding: var(--ds-spacing-4, 1rem) var(--ds-spacing-6, 1.5rem);
+            border-radius: var(--ds-radius-md, 0.5rem);
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+            outline: none;
+            box-shadow: none;
+        }
+        .ds-btn:focus {
+            outline: 2px solid var(--ds-primary-600, #1e6880);
+            outline-offset: 2px;
+        }
+        .ds-btn-primary {
+            background-color: var(--ds-primary-600, #1e6880);
+            color: #fff;
+        }
+        .ds-btn-primary:hover {
+            background-color: var(--ds-primary-700, #175566);
+        }
+        .ds-btn-secondary {
+            background-color: var(--ds-neutral-200, #d1d5d6);
+            color: var(--ds-primary-600, #1e6880);
+        }
+        .ds-btn-secondary:hover {
+            background-color: var(--ds-neutral-300, #b0b6b7);
+        }
+        /* DS Tab Styles */
+        .ds-tab {
+            padding: var(--ds-spacing-4, 1rem) var(--ds-spacing-6, 1.5rem);
+            border-radius: var(--ds-radius-md, 0.5rem) 0.5rem 0 0;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+            outline: none;
+            background: var(--ds-neutral-100, #f3f4f4);
+            color: var(--ds-neutral-700, #333637);
+        }
+        .ds-tab:focus {
+            outline: 2px solid var(--ds-primary-600, #1e6880);
+            outline-offset: 2px;
+        }
+        .ds-tab-active {
+            background: var(--ds-primary-50, #eefbfd);
+            color: var(--ds-primary-700, #175566);
+            border-bottom: 2px solid var(--ds-primary-600, #1e6880);
+        }
+        /* Modal fade-in/fade-out (for toast) */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.3s ease;
         }
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 transition-colors duration-200">
-    <!-- Theme Toggle Button -->
-    <button id="theme-toggle" class="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg bg-webro-primary text-white hover:bg-opacity-90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-webro-primary">
-        <svg class="w-6 h-6 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 9.003 0 008.354-5.646z"/>
-        </svg>
-        <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-        </svg>
-    </button>
-
-    <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <nav class="w-64 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-shrink-0 transition-all duration-200">
+    <!-- DS Sticky Header -->
+    <header class="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 py-3 shadow-sm">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-webro-primary rounded flex items-center justify-center">
+                <span class="text-white font-bold roboto-condensed text-xl">W</span>
+            </div>
+            <h1 class="text-2xl font-bold roboto-condensed text-webro-primary">Interactive Design System</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button id="open-modal-demo" class="ds-btn ds-btn-primary">Open Modal</button>
+            <button id="show-toast-demo" class="ds-btn ds-btn-secondary">Show Toast</button>
+            <button id="theme-toggle" class="ml-4 p-2 rounded-full bg-webro-primary text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-webro-primary" aria-label="Toggle dark mode">
+                <svg class="w-6 h-6 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+                <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+    <div class="flex h-[calc(100vh-64px)] overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <nav class="w-64 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-shrink-0 transition-all duration-200" aria-label="Main navigation">
             <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                 <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-[#1e6880] rounded-md flex items-center justify-center">
-                      <span class="text-white font-bold roboto-condensed text-xl">W</span>
+                    <div class="w-8 h-8 bg-webro-primary rounded flex items-center justify-center">
+                        <span class="text-white font-bold roboto-condensed text-lg">W</span>
                     </div>
-                    <h1 class="text-xl md:text-lg font-bold roboto-condensed text-[#1e6880]">Webropol Design System</h1>
-                  </div>            </div>
-
-            <!-- Search Box -->
-            <div class="p-4">
-                <div class="relative">
-                    <input type="text" 
-                           id="search-docs" 
-                           placeholder="Search documentation..." 
-                           class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-webro-primary focus:border-transparent">
-                    <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
+                    <span class="text-lg font-bold roboto-condensed text-webro-primary">DS Menu</span>
                 </div>
             </div>
-
-            <!-- Navigation Links -->
-            <div class="px-4 py-2 space-y-1 sidebar-scroll overflow-y-auto h-full">
-                <a href="#overview" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200">
-                    <div class="w-1.5 h-1.5 rounded-full bg-webro-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <span>Overview</span>
-                </a>
-                <!-- Additional nav items -->
+            <div class="p-4">
+                <input type="text" id="search-docs" placeholder="Search..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-webro-primary focus:border-transparent" aria-label="Search documentation">
             </div>
+            <ul class="px-4 py-2 space-y-1 sidebar-scroll overflow-y-auto h-full" role="list">
+                <li><a href="#overview" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Overview</a></li>
+                <li><a href="#colors" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Colors</a></li>
+                <li><a href="#typography" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Typography</a></li>
+                <li><a href="#spacing" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Spacing</a></li>
+                <li><a href="#grid" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Grid</a></li>
+                <li><a href="#accessibility" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Accessibility</a></li>
+                <li><a href="#components" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:bg-opacity-10 dark:hover:bg-opacity-20 group transition-all duration-200" tabindex="0">Interactive Components</a></li>
+            </ul>
         </nav>
-
         <!-- Main Content -->
         <main class="flex-1 overflow-y-auto bg-white dark:bg-gray-900 transition-colors duration-200">
-            <div id="overview" class="p-8">
-                <h1 class="roboto-condensed font-bold text-[32px] text-[#272a2b] mb-6">Webropol Design System Overview</h1>
+            <section id="overview" class="p-8">
+                <h2 class="roboto-condensed font-bold text-3xl text-webro-neutral mb-6">Webropol Design System Overview</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
-                        <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Colors</h2>
-                        <p class="roboto text-[#61686a] mb-4">Complete color palette including primary, accent, and semantic colors.</p>
-                        <a href="#colors" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Colors →</a>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <h3 class="roboto-condensed font-bold text-xl text-webro-primary mb-2">Colors</h3>
+                        <p class="roboto text-webro-neutral mb-4">Complete color palette including primary, accent, and semantic colors.</p>
+                        <a href="#colors" class="roboto text-base font-medium text-webro-primary hover:text-webro-accent">View Colors →</a>
                     </div>
-                    <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
-                        <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Typography</h2>
-                        <p class="roboto text-[#61686a] mb-4">Font styles and hierarchy for all text elements.</p>
-                        <a href="#typography" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Typography →</a>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <h3 class="roboto-condensed font-bold text-xl text-webro-primary mb-2">Typography</h3>
+                        <p class="roboto text-webro-neutral mb-4">Font styles and hierarchy for all text elements.</p>
+                        <a href="#typography" class="roboto text-base font-medium text-webro-primary hover:text-webro-accent">View Typography →</a>
                     </div>
-                    <div class="bg-[#f8fafc] p-6 rounded-lg border border-[#d1d5d6]">
-                        <h2 class="roboto-condensed font-bold text-[20px] text-[#1e6880] mb-2">Spacing</h2>
-                        <p class="roboto text-[#61686a] mb-4">4-point grid system for consistent spacing.</p>
-                        <a href="#spacing" class="roboto text-[14px] font-medium text-[#1e6880] hover:text-[#16809d]">View Spacing →</a>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <h3 class="roboto-condensed font-bold text-xl text-webro-primary mb-2">Spacing</h3>
+                        <p class="roboto text-webro-neutral mb-4">4-point grid system for consistent spacing.</p>
+                        <a href="#spacing" class="roboto text-base font-medium text-webro-primary hover:text-webro-accent">View Spacing →</a>
                     </div>
                 </div>
-            </div>
-
+            </section>
             <!-- Color Playground -->
             <div id="color-playground" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Color Playground</h2>
@@ -390,24 +435,45 @@
             </div>
 
             <!-- Interactive Components -->
-            <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-4">
-                <button id="fontSize-decrease" class="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                    </svg>
-                </button>
-                <button id="fontSize-reset" class="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                    <span class="text-sm font-medium">Reset</span>
-                </button>
-                <button id="fontSize-increase" class="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                </button>
-            </div>
+            <section id="components" class="p-8">
+                <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral mb-6">Interactive Components</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Toggle Switch Demo -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col items-start">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <span class="roboto text-webro-neutral">DS Toggle</span>
+                            <input type="checkbox" id="ds-toggle-demo" class="sr-only">
+                            <span class="w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 duration-300" id="toggle-track">
+                                <span class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300" id="toggle-thumb"></span>
+                            </span>
+                        </label>
+                        <span id="toggle-status" class="mt-2 roboto text-sm text-webro-neutral">Off</span>
+                    </div>
+                    <!-- Tabs Demo -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="flex space-x-2 mb-4" role="tablist">
+                            <button class="ds-tab ds-tab-active" id="tab-1" role="tab" aria-selected="true">Tab 1</button>
+                            <button class="ds-tab" id="tab-2" role="tab" aria-selected="false">Tab 2</button>
+                            <button class="ds-tab" id="tab-3" role="tab" aria-selected="false">Tab 3</button>
+                        </div>
+                        <div id="tab-content-1" class="tab-content">Tab 1 content goes here.</div>
+                        <div id="tab-content-2" class="tab-content hidden">Tab 2 content goes here.</div>
+                        <div id="tab-content-3" class="tab-content hidden">Tab 3 content goes here.</div>
+                    </div>
+                </div>
+                <!-- Modal Demo -->
+                <div id="ds-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                    <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 max-w-md w-full">
+                        <h3 id="modal-title" class="roboto-condensed font-bold text-xl text-webro-primary mb-4">DS Modal Demo</h3>
+                        <p class="roboto text-webro-neutral mb-6">This is a modal dialog. It uses DS styles and can be closed with the button below or by pressing Escape.</p>
+                        <button id="close-modal-demo" class="ds-btn ds-btn-primary w-full">Close Modal</button>
+                    </div>
+                </div>
+                <!-- Toast Demo (container) -->
+                <div id="ds-toast-container" class="fixed bottom-8 right-8 z-50 flex flex-col space-y-2"></div>
+            </section>
         </main>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Theme Toggle
@@ -419,21 +485,20 @@
             // Font Size Controls
             const root = document.documentElement;
             let currentSize = 16;
-            
-            document.getElementById('fontSize-increase').addEventListener('click', () => {
-                currentSize = Math.min(currentSize + 1, 20);
-                root.style.fontSize = currentSize + 'px';
-            });
-            
-            document.getElementById('fontSize-decrease').addEventListener('click', () => {
-                currentSize = Math.max(currentSize - 1, 12);
-                root.style.fontSize = currentSize + 'px';
-            });
-            
-            document.getElementById('fontSize-reset').addEventListener('click', () => {
-                currentSize = 16;
-                root.style.fontSize = currentSize + 'px';
-            });
+            if (document.getElementById('fontSize-increase')) {
+                document.getElementById('fontSize-increase').addEventListener('click', () => {
+                    currentSize = Math.min(currentSize + 1, 20);
+                    root.style.fontSize = currentSize + 'px';
+                });
+                document.getElementById('fontSize-decrease').addEventListener('click', () => {
+                    currentSize = Math.max(currentSize - 1, 12);
+                    root.style.fontSize = currentSize + 'px';
+                });
+                document.getElementById('fontSize-reset').addEventListener('click', () => {
+                    currentSize = 16;
+                    root.style.fontSize = currentSize + 'px';
+                });
+            }
 
             // Copy to Clipboard for Code Blocks
             document.querySelectorAll('.code-block').forEach(block => {
@@ -476,12 +541,10 @@
             const accentColorInput = document.getElementById('accent-color');
             const previewButton = document.getElementById('preview-button');
             const previewText = document.getElementById('preview-text');
-
             function updateColorPreview() {
                 previewButton.style.backgroundColor = primaryColorInput.value;
                 previewText.style.color = accentColorInput.value;
             }
-
             primaryColorInput.addEventListener('input', updateColorPreview);
             accentColorInput.addEventListener('input', updateColorPreview);
             updateColorPreview();
@@ -491,18 +554,16 @@
             const previewDisplay = document.getElementById('preview-display');
             const previewHeading = document.getElementById('preview-heading');
             const previewBody = document.getElementById('preview-body');
-
             function updateTypographyPreviews() {
                 const text = typographyInput.value;
                 previewDisplay.textContent = text;
                 previewHeading.textContent = text;
                 previewBody.textContent = text;
             }
-
             typographyInput.addEventListener('input', updateTypographyPreviews);
             updateTypographyPreviews();
 
-            // Add smooth scrolling for anchor links
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -512,49 +573,32 @@
                 });
             });
 
-            // Add hover animation to color swatches
-            document.querySelectorAll('.color-swatch').forEach(swatch => {
-                swatch.addEventListener('mouseenter', () => {
-                    swatch.style.transform = 'scale(1.05)';
-                });
-                swatch.addEventListener('mouseleave', () => {
-                    swatch.style.transform = 'scale(1)';
-                });
-            });
-
             // Spacing Visualizer
             const spacingRange = document.getElementById('spacing-range');
             const spacingValue = document.getElementById('spacing-value');
             const spacingPreview = document.getElementById('spacing-preview');
-
-            spacingRange.addEventListener('input', () => {
+            function updateSpacingVisualizer() {
                 const value = parseInt(spacingRange.value);
                 const pixels = value * 4;
                 spacingValue.textContent = `${pixels}px`;
-                
-                const boxes = spacingPreview.querySelectorAll('div > div');
+                const boxes = spacingPreview.querySelectorAll('.flex.flex-wrap.gap-4 > div');
                 boxes.forEach((box, index) => {
                     const size = pixels * (index + 1);
                     box.style.width = `${size}px`;
                     box.style.height = `${size}px`;
                 });
-            });
+            }
+            spacingRange.addEventListener('input', updateSpacingVisualizer);
+            updateSpacingVisualizer();
 
             // Grid Playground
             const gridColumns = document.getElementById('grid-columns');
             const gridGap = document.getElementById('grid-gap');
             const gridPreview = document.getElementById('grid-preview').querySelector('div');
-
             function updateGrid() {
                 const columns = parseInt(gridColumns.value);
-                const gap = parseInt(gridGap.value) * 4;
-                
                 gridPreview.className = `grid grid-cols-${columns} gap-${gridGap.value}`;
-                
-                // Clear existing grid items
                 gridPreview.innerHTML = '';
-                
-                // Add new grid items
                 for (let i = 0; i < columns * 2; i++) {
                     const item = document.createElement('div');
                     item.className = 'bg-webro-primary bg-opacity-20 dark:bg-opacity-40 rounded-lg p-4 aspect-video flex items-center justify-center';
@@ -562,23 +606,18 @@
                     gridPreview.appendChild(item);
                 }
             }
-
             gridColumns.addEventListener('change', updateGrid);
             gridGap.addEventListener('change', updateGrid);
             updateGrid();
 
             // Live Preview Mode
-            const previewContainer = document.getElementById('preview-container');
             const previewContent = document.getElementById('preview-content');
-            
             document.getElementById('preview-mobile').addEventListener('click', () => {
                 previewContent.style.maxWidth = '375px';
             });
-            
             document.getElementById('preview-tablet').addEventListener('click', () => {
                 previewContent.style.maxWidth = '768px';
             });
-            
             document.getElementById('preview-desktop').addEventListener('click', () => {
                 previewContent.style.maxWidth = '100%';
             });
@@ -590,17 +629,13 @@
             const wcagAANormal = document.getElementById('wcag-aa-normal');
             const wcagAALarge = document.getElementById('wcag-aa-large');
             const wcagAAA = document.getElementById('wcag-aaa');
-
             function calculateContrastRatio(color1, color2) {
-                // Convert hex to RGB
                 const getRGB = (hex) => {
                     const r = parseInt(hex.slice(1, 3), 16);
                     const g = parseInt(hex.slice(3, 5), 16);
                     const b = parseInt(hex.slice(5, 7), 16);
                     return [r, g, b];
                 };
-
-                // Calculate relative luminance
                 const getLuminance = (r, g, b) => {
                     const [rs, gs, bs] = [r, g, b].map(c => {
                         c = c / 255;
@@ -608,35 +643,26 @@
                     });
                     return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
                 };
-
                 const [r1, g1, b1] = getRGB(color1);
                 const [r2, g2, b2] = getRGB(color2);
-                
                 const l1 = getLuminance(r1, g1, b1);
                 const l2 = getLuminance(r2, g2, b2);
-                
                 const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
                 return ratio;
             }
-
             function updateContrastResults() {
                 const ratio = calculateContrastRatio(textColorInput.value, bgColorInput.value);
                 contrastValue.textContent = ratio.toFixed(2) + ':1';
-                
                 const passesAA = ratio >= 4.5;
                 const passesAALarge = ratio >= 3;
                 const passesAAA = ratio >= 7;
-                
                 wcagAANormal.textContent = passesAA ? '✓ Pass' : '✗ Fail';
                 wcagAANormal.className = passesAA ? 'text-green-500' : 'text-red-500';
-                
                 wcagAALarge.textContent = passesAALarge ? '✓ Pass' : '✗ Fail';
                 wcagAALarge.className = passesAALarge ? 'text-green-500' : 'text-red-500';
-                
                 wcagAAA.textContent = passesAAA ? '✓ Pass' : '✗ Fail';
                 wcagAAA.className = passesAAA ? 'text-green-500' : 'text-red-500';
             }
-
             textColorInput.addEventListener('input', updateContrastResults);
             bgColorInput.addEventListener('input', updateContrastResults);
             updateContrastResults();
@@ -647,22 +673,18 @@
             const spacingDemo = document.getElementById('spacing-demo');
             const spacingCss = document.getElementById('spacing-css');
             const copySpacingCss = document.getElementById('copy-spacing-css');
-
             function updateSpacing() {
                 const property = spacingProperty.value;
                 const values = Array.from(spacingInputs).map(input => input.value * 4);
                 const [top, right, bottom, left] = values;
-                
                 const css = `${property}: ${top}px ${right}px ${bottom}px ${left}px;`;
                 spacingDemo.style[property] = `${top}px ${right}px ${bottom}px ${left}px`;
                 spacingCss.textContent = css;
             }
-
             spacingProperty.addEventListener('change', updateSpacing);
             spacingInputs.forEach(input => {
                 input.addEventListener('input', updateSpacing);
             });
-
             copySpacingCss.addEventListener('click', () => {
                 navigator.clipboard.writeText(spacingCss.textContent);
                 copySpacingCss.textContent = 'Copied!';
@@ -670,10 +692,103 @@
                     copySpacingCss.textContent = 'Copy CSS';
                 }, 2000);
             });
-
             updateSpacing();
+
+            // DS Toggle Switch
+            const dsToggle = document.getElementById('ds-toggle-demo');
+            const toggleStatus = document.getElementById('toggle-status');
+            dsToggle.addEventListener('change', function() {
+                if (dsToggle.checked) {
+                    toggleStatus.textContent = 'On';
+                    document.getElementById('toggle-track').classList.add('bg-webro-primary');
+                } else {
+                    toggleStatus.textContent = 'Off';
+                    document.getElementById('toggle-track').classList.remove('bg-webro-primary');
+                }
+            });
+            // Keyboard accessibility for toggle
+            dsToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    dsToggle.checked = !dsToggle.checked;
+                    dsToggle.dispatchEvent(new Event('change'));
+                }
+            });
+
+            // DS Tabs
+            const tabButtons = [
+                document.getElementById('tab-1'),
+                document.getElementById('tab-2'),
+                document.getElementById('tab-3')
+            ];
+            const tabContents = [
+                document.getElementById('tab-content-1'),
+                document.getElementById('tab-content-2'),
+                document.getElementById('tab-content-3')
+            ];
+            tabButtons.forEach((btn, idx) => {
+                btn.addEventListener('click', () => {
+                    tabButtons.forEach((b, i) => {
+                        b.classList.toggle('ds-tab-active', i === idx);
+                        b.setAttribute('aria-selected', i === idx);
+                        tabContents[i].classList.toggle('hidden', i !== idx);
+                    });
+                });
+                // Keyboard navigation for tabs
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight') {
+                        tabButtons[(idx + 1) % tabButtons.length].focus();
+                    } else if (e.key === 'ArrowLeft') {
+                        tabButtons[(idx - 1 + tabButtons.length) % tabButtons.length].focus();
+                    }
+                });
+            });
+
+            // DS Modal
+            const openModalBtn = document.getElementById('open-modal-demo');
+            const closeModalBtn = document.getElementById('close-modal-demo');
+            const dsModal = document.getElementById('ds-modal');
+            openModalBtn.addEventListener('click', () => {
+                dsModal.classList.remove('hidden');
+                dsModal.querySelector('button').focus();
+            });
+            closeModalBtn.addEventListener('click', () => {
+                dsModal.classList.add('hidden');
+                openModalBtn.focus();
+            });
+            // Close modal on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !dsModal.classList.contains('hidden')) {
+                    dsModal.classList.add('hidden');
+                    openModalBtn.focus();
+                }
+            });
+            // Trap focus in modal
+            dsModal.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    const focusable = dsModal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+                        e.preventDefault();
+                        (e.shiftKey ? last : first).focus();
+                    }
+                }
+            });
+
+            // DS Toast
+            const showToastBtn = document.getElementById('show-toast-demo');
+            const toastContainer = document.getElementById('ds-toast-container');
+            showToastBtn.addEventListener('click', () => {
+                const toast = document.createElement('div');
+                toast.className = 'bg-webro-primary text-white px-4 py-2 rounded shadow mb-2 animate-fade-in';
+                toast.textContent = 'This is a DS Toast notification!';
+                toastContainer.appendChild(toast);
+                setTimeout(() => {
+                    toast.classList.add('opacity-0');
+                    setTimeout(() => toast.remove(), 500);
+                }, 2500);
+            });
         });
     </script>
 </body>
 </html>
-``` 
