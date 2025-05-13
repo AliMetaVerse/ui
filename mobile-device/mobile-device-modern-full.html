@@ -1,124 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modern Mobile Device - Full View | Webropol Design System</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-  body {
-    font-family: sans-serif;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-  }
-
-  .phone-frame {
-    width: 375px;
-    height: 812px;
-    background-color: #333;
-    border-radius: 40px;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow */
-    position: relative; /* For notch and buttons */
-  }
-
-  /* Optional: Add a notch */
-  .phone-frame::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 20px;
-    background-color: #333; /* Slightly darker */
-    border-radius: 0 0 10px 10px;
-  }
-
-  /* Optional: Add side buttons */
-  .phone-frame::after {
-    content: "";
-    position: absolute;
-    top: 100px;
-    right: -5px; /* Adjust as needed */
-    width: 4px;
-    height: 40px;
-    background-color: #555;
-    border-radius: 2px;
-    box-shadow: 0 50px 0 #555, 0 100px 0 #555; /* Three buttons */
-  }
-
-  .container {
-    width: 100%;
-    height: 100%; /* Fill the phone frame */
-    border: 1px solid #ccc;
-    border-radius: 30px; /* Slightly smaller radius for inner container */
-    overflow: hidden;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .header {
-    background-color: #1E6880; /* Teal header */
-    color: white;
-    text-align: left;
-    padding: 15px;
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-
-  .chat-bubble {
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 20px;
-    clear: both; /* Prevent floating issues */
-    display: inline-block;
-    max-width: 70%; /* Limit bubble width */
-  }
-
-  .chat-bubble.left {
-    background-color: #e8e8e8; /* Light gray for left bubbles */
-    float: left;
-  }
-
-  .chat-bubble.right {
-    background-color: #1E6880; /* Teal for right bubbles */
-    color: white;
-    float: right;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#e6f1f5',
+              100: '#cce3ea',
+              200: '#99c7d5',
+              300: '#66abc0',
+              400: '#338fab',
+              500: '#1e6880',
+              600: '#17536a',
+              700: '#124050',
+              800: '#0c2a35',
+              900: '#06151a',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
-  <div class="phone-frame"> <div class="container">
-      <div class="header">Lorem Ipsum</div>
-      <div class="chat-bubble left">
-        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 1-10
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen flex items-center justify-center p-4">
+    <!-- Modern Phone Frame -->
+    <div class="relative w-[375px] h-[812px] bg-gray-800 rounded-[40px] shadow-[0_8px_40px_rgba(0,0,0,0.3)] flex items-center justify-center p-3">
+      <!-- Phone Notch -->
+      <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-[150px] h-[30px] bg-gray-800 rounded-b-xl z-10"></div>
+      
+      <!-- Side Button -->
+      <div class="absolute top-[100px] right-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-l-sm"></div>
+      <div class="absolute top-[150px] right-[-2px] w-[4px] h-[70px] bg-gray-700 rounded-l-sm"></div>
+      <div class="absolute top-[250px] right-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-l-sm"></div>
+      
+      <!-- Volume Buttons -->
+      <div class="absolute top-[100px] left-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-r-sm"></div>
+      <div class="absolute top-[150px] left-[-2px] w-[4px] h-[40px] bg-gray-700 rounded-r-sm"></div>
+      
+      <!-- Screen Container -->
+      <div class="relative w-full h-full rounded-[35px] bg-white overflow-hidden shadow-inner">
+        <!-- Status Bar -->
+        <div class="h-[45px] bg-primary-500 w-full"></div>
+        
+        <!-- Chat Header -->
+        <div class="bg-primary-500 text-white p-4 flex items-center space-x-4 shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <h1 class="text-lg font-semibold">Lorem Ipsum</h1>
+          <div class="ml-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+            </svg>
+          </div>
+        </div>
+        
+        <!-- Chat Content -->
+        <div class="p-4 space-y-4 h-[calc(100%-145px)] overflow-y-auto bg-gray-50">
+          <!-- Received Message -->
+          <div class="flex flex-col max-w-[75%]">
+            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+              <p class="text-sm">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. 1-10</p>
+            </div>
+            <span class="text-xs text-gray-500 ml-2 mt-1">9:41 AM</span>
+          </div>
+          
+          <!-- Sent Message -->
+          <div class="flex flex-col items-end w-full">
+            <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
+              <p class="text-sm">8</p>
+            </div>
+            <span class="text-xs text-gray-500 mr-2 mt-1">9:42 AM</span>
+          </div>
+          
+          <!-- Received Message -->
+          <div class="flex flex-col max-w-[75%]">
+            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+              <p class="text-sm">Neque porro quisquam est qui.</p>
+            </div>
+            <span class="text-xs text-gray-500 ml-2 mt-1">9:45 AM</span>
+          </div>
+          
+          <!-- Sent Message -->
+          <div class="flex flex-col items-end w-full">
+            <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
+              <p class="text-sm">Neque porro</p>
+            </div>
+            <span class="text-xs text-gray-500 mr-2 mt-1">9:46 AM</span>
+          </div>
+          
+          <!-- Received Message -->
+          <div class="flex flex-col max-w-[75%]">
+            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+              <p class="text-sm">Dolor sit amet, consectetur, adipisci velit. 1-5</p>
+            </div>
+            <span class="text-xs text-gray-500 ml-2 mt-1">9:48 AM</span>
+          </div>
+          
+          <!-- Sent Message -->
+          <div class="flex flex-col items-end w-full">
+            <div class="bg-primary-500 rounded-2xl rounded-tr-sm px-4 py-3 text-white shadow-sm">
+              <p class="text-sm">4</p>
+            </div>
+            <span class="text-xs text-gray-500 mr-2 mt-1">9:49 AM</span>
+          </div>
+          
+          <!-- Received Message -->
+          <div class="flex flex-col max-w-[75%]">
+            <div class="bg-gray-200 rounded-2xl rounded-tl-sm px-4 py-3 text-gray-800 shadow-sm">
+              <p class="text-sm">Ipsum quia dolor</p>
+            </div>
+            <span class="text-xs text-gray-500 ml-2 mt-1">9:50 AM</span>
+          </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3">
+          <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <input type="text" placeholder="Message" class="flex-1 bg-transparent border-none outline-none px-3 py-1 text-sm" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="chat-bubble right">8</div>
-      <div class="chat-bubble left">
-        Neque porro quisquam est qui.
-      </div>
-      <div class="chat-bubble right">Neque porro</div>
-      <div class="chat-bubble left">
-        Dolor sit amet, consectetur, adipisci velit. 1-5
-      </div>
-      <div class="chat-bubble right">4</div>
-      <div class="chat-bubble left">
-        Ipsum quia dolor
-      </div>
+      
+      <!-- Home Bar -->
+      <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[140px] h-[5px] bg-gray-600 rounded-full"></div>
     </div>
   </div>
 </body>
