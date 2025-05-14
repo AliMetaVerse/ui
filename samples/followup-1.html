@@ -36,103 +36,274 @@
       font-size: 11px;
       color: #666;
       opacity: 0.8;
-    }
+    }    
     .success-dot {
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       margin-right: 4px;
+      position: relative;
+      transition: transform 0.2s ease;
     }
+    
+    .success-dot:hover {
+      transform: scale(1.3);
+    }
+    
     .dot-sent {
       background-color: #1976d2;
+      position: relative;
     }
+    
     .dot-submitted {
       background-color: #4caf50;
-    }    .dot-pending {
+      position: relative;
+    }
+    
+    .dot-pending {
       background-color: #9e9e9e;
     }
-      /* Table layout styles */
-    .table-border-collapse {
-      width: 100%;
-      table-layout: fixed;
+    
+    /* Add tooltip style for better UX */
+    .dot-sent:hover::after {
+      content: "Email survey links sent";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+      .dot-submitted:hover::after {
+      content: "Survey submitted";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 10;
     }
     
-    /* When only one column is visible */
-    .table-border-collapse.single-column td:first-child {
-      width: 100% !important;
+    .dot-pending:hover::after {
+      content: "No activity";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 10;
     }
     
-    /* Responsive width adjustments */
-    .table-border-collapse.n-only th:nth-child(1),
-    .table-border-collapse.n-only td:nth-child(1) {
-      width: 60% !important;
-    }
-    
-    .table-border-collapse.n-only th:nth-child(2),
-    .table-border-collapse.n-only th:nth-child(4),
-    .table-border-collapse.n-only td:nth-child(2),
-    .table-border-collapse.n-only td:nth-child(4) {
-      width: 20% !important;
-    }
-    
-    .table-border-collapse.pct-only th:nth-child(1),
-    .table-border-collapse.pct-only td:nth-child(1) {
-      width: 60% !important;
-    }
-    
-    .table-border-collapse.pct-only th:nth-child(3),
-    .table-border-collapse.pct-only th:nth-child(5),
-    .table-border-collapse.pct-only td:nth-child(3), 
-    .table-border-collapse.pct-only td:nth-child(5) {
-      width: 20% !important;
-    }
-    
+    /* Simple transitions for smooth width changes */
     .table-border-collapse th,
     .table-border-collapse td {
       transition: width 0.3s ease;
     }
     
-    /* Ensure footer rows maintain proper layout when filtering */
-    .table-border-collapse tfoot tr td {
+    /* Simplified table layout styles */
+    .table-border-collapse {
+      width: 100%;
+      table-layout: fixed;
+    }
+    
+    /* Simple transitions for smooth width changes */
+    .table-border-collapse th,
+    .table-border-collapse td {
+      transition: width 0.3s ease, display 0.3s ease;
+    }
+    
+    /* Add visual distinction between rows */
+    .table-border-collapse tbody tr:nth-child(odd) {
+      background-color: #f9fbfd;
+    }
+    
+    /* Enhance header visual styling */
+    .table-border-collapse thead th {
+      background-color: #f5f8fa;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    
+    /* Ensure all cells have proper box model */
+    .table-border-collapse tfoot tr td,
+    .table-border-collapse tbody tr td,
+    .table-border-collapse thead tr th {
       box-sizing: border-box;
-    }
-
-    /* Additional column visibility styles */
-    .n-only .col-pct, .pct-only .col-n {
+    }    
+    /* Individual column visibility styles */
+    .hide-sent-n .col-sent-n {
       display: none !important;
     }
     
-    .single-column .col-n,
-    .single-column .col-pct {
+    .hide-sent-pct .col-sent-pct {
       display: none !important;
     }
     
-    /* For automatic width adjustment */
-    .table-border-collapse.both-visible td:first-child {
-      width: 40% !important;
+    .hide-sub-n .col-sub-n {
+      display: none !important;
     }
     
-    .table-border-collapse.both-visible td.col-n,
-    .table-border-collapse.both-visible td.col-pct {
-      width: 15% !important;
+    .hide-sub-pct .col-sub-pct {
+      display: none !important;
+    }
+    
+    /* Responsive width adjustment based on visible columns */
+    .table-border-collapse {
+      table-layout: fixed;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Default - survey column takes 40%, data columns 15% each */
+    .table-border-collapse td:first-child {
+      width: 40%;
+    }
+    
+    /* When all columns are visible, each data column gets 15% */
+    .table-border-collapse .col-sent-n,
+    .table-border-collapse .col-sent-pct,
+    .table-border-collapse .col-sub-n,
+    .table-border-collapse .col-sub-pct {
+      width: 15%;
+    }
+    
+    /* When 3 data columns are visible */
+    .table-border-collapse.hide-sent-n:not(.hide-sent-pct):not(.hide-sub-n):not(.hide-sub-pct) .col-sent-pct,
+    .table-border-collapse.hide-sent-n:not(.hide-sent-pct):not(.hide-sub-n):not(.hide-sub-pct) .col-sub-n,
+    .table-border-collapse.hide-sent-n:not(.hide-sent-pct):not(.hide-sub-n):not(.hide-sub-pct) .col-sub-pct,
+    .table-border-collapse:not(.hide-sent-n).hide-sent-pct:not(.hide-sub-n):not(.hide-sub-pct) .col-sent-n,
+    .table-border-collapse:not(.hide-sent-n).hide-sent-pct:not(.hide-sub-n):not(.hide-sub-pct) .col-sub-n,
+    .table-border-collapse:not(.hide-sent-n).hide-sent-pct:not(.hide-sub-n):not(.hide-sub-pct) .col-sub-pct,
+    .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct).hide-sub-n:not(.hide-sub-pct) .col-sent-n,
+    .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct).hide-sub-n:not(.hide-sub-pct) .col-sent-pct,
+    .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct).hide-sub-n:not(.hide-sub-pct) .col-sub-pct,
+    .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct):not(.hide-sub-n).hide-sub-pct .col-sent-n,
+    .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct):not(.hide-sub-n).hide-sub-pct .col-sent-pct,
+    .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct):not(.hide-sub-n).hide-sub-pct .col-sub-n {
+      width: 20%;
+    }
+    
+    /* When 2 data columns are visible */
+    .table-border-collapse[class*="hide-"][class*="hide-"] td:not(:first-child):not([style*="display: none"]) {
+      width: 30%;
+    }
+    
+    /* When 1 data column is visible */
+    .table-border-collapse[class*="hide-"][class*="hide-"][class*="hide-"] td:not(:first-child):not([style*="display: none"]) {
+      width: 60%;
+    }
+    
+    /* When no data columns are visible */
+    .table-border-collapse.hide-sent-n.hide-sent-pct.hide-sub-n.hide-sub-pct td:first-child {
+      width: 100%;
+    }
+    
+    /* Add visual distinction between rows */
+    .table-border-collapse tbody tr:nth-child(odd) {
+      background-color: #f9fbfd;
+    }
+    
+    .table-border-collapse tbody tr:hover {
+      background-color: #eef5fe;
+    }
+    
+    /* Enhance header visual styling */
+    .table-border-collapse thead th {
+      background-color: #f5f8fa;
+      border-bottom: 2px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+    }
+    
+    /* Add subtle border to cells */
+    .table-border-collapse td {
+      border-right: 1px solid #f0f0f0;
+    }
+    
+    .table-border-collapse td:last-child {
+      border-right: none;
+    }
+    
+    /* Special styling for footer rows */
+    .table-border-collapse tfoot tr {
+      background-color: #f8fafc;
+    }
+    
+    .table-border-collapse tfoot tr#totalRow,
+    .table-border-collapse tfoot tr#totalSubmittedRow {
+      font-weight: 500;
+    }
+    
+    /* Format percentage values consistently */
+    .table-border-collapse td.col-sent-pct .value,
+    .table-border-collapse td.col-sub-pct .value {
+      position: relative;
+      padding-right: 2px;
     }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
   <div class="w-full max-w-6xl bg-white rounded-xl shadow p-6 border border-[#e3eaf3]">
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-medium text-primary">Email survey link responses</h2>
-      <div class="flex items-center gap-2">
-        <span class="text-sm text-gray-700">Show:</span>
-        <label class="inline-flex items-center text-xs mr-2">
-          <input type="checkbox" checked class="accent-[#1976d2] mr-1" id="toggle-n"> n
-        </label>
-        <label class="inline-flex items-center text-xs">
-          <input type="checkbox" checked class="accent-[#1976d2] mr-1" id="toggle-pct"> %
-        </label>
-        <button class="ml-4 px-2 py-1 bg-[#e6f4ea] border border-[#b7e1cd] rounded text-[#217346] flex items-center text-xs font-medium hover:bg-[#d2f0db] transition" title="Export to Excel">
-          <i class="fas fa-file-excel mr-1"></i> Excel
+      <h2 class="text-lg font-medium text-primary">Email survey link responses</h2>      
+      <div class="flex items-center gap-2">        <span class="text-sm text-gray-700">Show:</span>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-3 bg-gray-100 rounded-md py-1 px-3">
+            <div class="flex items-center gap-2 border-r border-gray-300 pr-2">
+              <span class="text-xs text-gray-600 font-medium flex items-center">
+                <span class="success-dot dot-sent mr-1.5"></span>Email Links:
+              </span>
+              <label class="inline-flex items-center text-xs font-medium" title="Show count of email links sent">
+                <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sent-n">
+                <span class="text-gray-700">n</span>
+              </label>
+              <label class="inline-flex items-center text-xs font-medium" title="Show percentage of email links sent">
+                <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sent-pct">
+                <span class="text-gray-700">%</span>
+              </label>
+            </div>
+            <div class="flex items-center gap-2 border-r border-gray-300 pr-2">
+              <span class="text-xs text-gray-600 font-medium flex items-center">
+                <span class="success-dot dot-submitted mr-1.5"></span>Submitted:
+              </span>
+              <label class="inline-flex items-center text-xs font-medium" title="Show count of surveys submitted">
+                <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sub-n">
+                <span class="text-gray-700">n</span>
+              </label>
+              <label class="inline-flex items-center text-xs font-medium" title="Show percentage of surveys submitted">
+                <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sub-pct">
+                <span class="text-gray-700">%</span>
+              </label>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="toggle-all" class="text-xs text-primary hover:text-blue-700 font-medium" title="Show all columns">
+                All
+              </button>
+              <span class="text-gray-400 mx-0.5">|</span>
+              <button id="toggle-none" class="text-xs text-primary hover:text-blue-700 font-medium" title="Hide all columns">
+                None
+              </button>
+            </div>
+          </div>
+        </div>        <button class="ml-4 px-3 py-1.5 bg-[#217346] text-white rounded flex items-center text-xs font-medium hover:bg-[#1a5c38] transition-colors shadow-sm" title="Export to Excel">
+          <i class="fas fa-file-excel mr-1.5"></i> Export to Excel
         </button>
       </div>
     </div>
@@ -161,31 +332,36 @@
     <!-- Main Data Table -->
     <div class="border-t border-[#bfc9d1] pt-4">
       <div class="overflow-auto">
-        <table class="w-full text-sm table-border-collapse">          <thead>
-            <tr class="border-b border-[#bfc9d1]">
-              <th class="py-3 px-4 text-left font-medium text-gray-700">Survey</th>
-              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-n1">
-                <div class="flex items-center justify-center gap-2">
+        <table class="w-full text-sm table-border-collapse">          
+          <thead>            
+            <tr>
+              <th class="py-3 px-4 text-left font-medium text-gray-700 border-b border-[#e2e8f0]">Survey</th>              
+              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-n">
+                <div class="flex items-center justify-center gap-1">
                   <span class="success-dot dot-sent"></span>
-                  <span>Email links sent (n)</span>
+                  <span>Email Links Sent</span>
+                  <span class="text-xs text-gray-500 ml-1">(n)</span>
                 </div>
               </th>
-              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-pct1">
-                <div class="flex items-center justify-center gap-2">
+              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-pct">
+                <div class="flex items-center justify-center gap-1">
                   <span class="success-dot dot-sent"></span>
-                  <span>Email links sent (%)</span>
+                  <span>Email Links Sent</span>
+                  <span class="text-xs text-gray-500 ml-1">(%)</span>
                 </div>
               </th>
-              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-n2">
-                <div class="flex items-center justify-center gap-2">
+              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-n">
+                <div class="flex items-center justify-center gap-1">
                   <span class="success-dot dot-submitted"></span>
-                  <span>Survey submitted (n)</span>
+                  <span>Survey Submitted</span>
+                  <span class="text-xs text-gray-500 ml-1">(n)</span>
                 </div>
               </th>
-              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-pct2">
-                <div class="flex items-center justify-center gap-2">
+              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-pct">
+                <div class="flex items-center justify-center gap-1">
                   <span class="success-dot dot-submitted"></span>
-                  <span>Survey submitted (%)</span>
+                  <span>Survey Submitted</span>
+                  <span class="text-xs text-gray-500 ml-1">(%)</span>
                 </div>
               </th>
             </tr>
@@ -196,33 +372,35 @@
           <tfoot>
             <tr>
               <td colspan="5" class="px-0 py-0">
-                <div class="flex justify-end items-center py-2 px-4 text-xs text-gray-600 gap-2">
-                  <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                <div class="flex justify-end items-center py-2 px-4 text-xs text-gray-600 gap-2">              
+                  <button class="flex items-center text-gray-400 hover:text-primary transition-colors px-2 py-1 border border-gray-200 rounded-l-md">
                     <i class="fas fa-chevron-left mr-1"></i> Previous
                   </button>
-                  <span class="font-medium">1 / 1</span>
-                  <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                  <span class="font-medium px-3 border-t border-b border-gray-200 py-1">1 / 1</span>
+                  <button class="flex items-center text-gray-400 hover:text-primary transition-colors px-2 py-1 border border-gray-200 rounded-r-md">
                     Next <i class="fas fa-chevron-right ml-1"></i>
                   </button>
                 </div>
               </td>
-            </tr>            <tr class="border-t border-[#bfc9d1]" id="totalRow">
-              <td class="py-3 px-4 text-left font-medium text-gray-700">Total emails sent</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-n">10</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-pct">100</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-n">0</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-pct">0</td>
+            </tr>            
+            <tr class="border-t-2 border-[#e2e8f0] bg-gray-50" id="totalRow">
+              <td class="py-3 px-4 text-left font-medium text-gray-800">Total emails sent</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sent-n">10</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct">100%</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n">0</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct">0%</td>
             </tr>
-            <tr class="border-t border-b border-[#bfc9d1]" id="publicRow">
+            <tr class="border-t border-b border-[#e2e8f0]" id="publicRow">
               <td class="py-3 px-4 text-left font-medium text-gray-700">Public weblink</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-n">-</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-pct">-</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-n">1</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-pct">-</td>
-            </tr>            <tr id="totalSubmittedRow">
-              <td class="py-3 px-4 text-right font-medium text-gray-700" colspan="3">Total submitted surveys:</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-n" colspan="1">1</td>
-              <td class="py-3 px-4 text-center font-medium text-gray-900 col-pct" colspan="1"></td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sent-n">-</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct">-</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n">1</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct">-</td>
+            </tr>
+            <tr class="bg-blue-50" id="totalSubmittedRow">
+              <td class="py-3 px-4 text-right font-medium text-gray-800" colspan="3">Total submitted surveys:</td>
+              <td class="py-3 px-4 text-center font-medium text-blue-600 col-sub-n" colspan="1">1</td>
+              <td class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct" colspan="1"></td>
             </tr>
           </tfoot>
         </table>
@@ -240,68 +418,31 @@
       { label: 'Email survey link sending 05.12.2024, 07:37', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
       { label: 'Email survey link sending 05.12.2024, 07:33', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
       { label: 'Email survey link sending 05.12.2024, 07:30', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
-    ];    function updateFooter(showN, showPct) {
-      // Get all tfoot rows except the first one (which is pagination)
-      const footerRows = document.querySelectorAll('.table-border-collapse tfoot tr:not(:first-child)');
-      
-      // Calculate total columns
-      const visibleColumns = 1 + (showN ? 2 : 0) + (showPct ? 2 : 0); // 1 for label column
-      
-      footerRows.forEach(row => {
-        // Get all cells in the row
-        const cells = row.querySelectorAll('td');
-        
-        // Skip if no cells (shouldn't happen)
-        if (cells.length === 0) return;
-        
-        // Handle the label cell first
-        const labelCell = cells[0];
-        
-        // Skip first cell (label)
-        for (let i = 1; i < cells.length; i++) {
-          const isN = i === 1 || i === 3; // First and third data cells are "n" columns
-          const isPct = i === 2 || i === 4; // Second and fourth data cells are "%" columns
-          
-          if ((isN && !showN) || (isPct && !showPct)) {
-            cells[i].style.display = 'none';
-          } else {
-            cells[i].style.display = 'table-cell';
-          }
-        }
-      });
-    }
-
+    ];    
     function renderMainTable() {
-      const showN = document.getElementById('toggle-n').checked;
-      const showPct = document.getElementById('toggle-pct').checked;
+      const showSentN = document.getElementById('toggle-sent-n').checked;
+      const showSentPct = document.getElementById('toggle-sent-pct').checked;
+      const showSubN = document.getElementById('toggle-sub-n').checked;
+      const showSubPct = document.getElementById('toggle-sub-pct').checked;
       
       // Get the table element
       const table = document.querySelector('.table-border-collapse');
-        // Update table column count and width distribution
-      table.classList.remove('single-column', 'n-only', 'pct-only', 'both-visible');
       
-      if (!showN && !showPct) {
-        // If both are hidden, just show one column
-        table.classList.add('single-column');
-      } else if (showN && !showPct) {
-        // Only N columns visible
-        table.classList.add('n-only');
-      } else if (!showN && showPct) {
-        // Only PCT columns visible
-        table.classList.add('pct-only');
-      } else {
-        // Both visible
-        table.classList.add('both-visible');
+      // Individual class management for each column
+      table.classList.toggle('hide-sent-n', !showSentN);
+      table.classList.toggle('hide-sent-pct', !showSentPct);
+      table.classList.toggle('hide-sub-n', !showSubN);
+      table.classList.toggle('hide-sub-pct', !showSubPct);      // Update colspan for footer row containing pagination based on visible columns
+      const visibleColumns = [showSentN, showSentPct, showSubN, showSubPct].filter(Boolean).length;
+      const paginationRow = document.querySelector('tfoot tr:first-child td');
+      paginationRow.colSpan = 1 + visibleColumns;
+      
+      // Update total submitted row layout based on visible columns
+      const totalSubmittedRow = document.getElementById('totalSubmittedRow');
+      if (totalSubmittedRow) {
+        const firstCell = totalSubmittedRow.querySelector('td:first-child');
+        firstCell.colSpan = 1 + (showSentN ? 1 : 0) + (showSentPct ? 1 : 0);
       }
-      
-      // Toggle column headers - now with single row header
-      document.getElementById('col-n1').style.display = showN ? 'table-cell' : 'none';
-      document.getElementById('col-pct1').style.display = showPct ? 'table-cell' : 'none';
-      document.getElementById('col-n2').style.display = showN ? 'table-cell' : 'none';
-      document.getElementById('col-pct2').style.display = showPct ? 'table-cell' : 'none';
-      
-      // Update footer rows
-      updateFooter(showN, showPct);
       
       // Render rows
       const tbody = document.getElementById('mainTableBody');
@@ -309,36 +450,61 @@
       
       mainTableData.forEach((row, idx) => {
         const sentStatus = row.sentN > 0 ? 'dot-sent' : 'dot-pending';
-        const subStatus = row.subN > 0 ? 'dot-submitted' : 'dot-pending';        tbody.innerHTML += `
-          <tr class="border-b border-[#bfc9d1] ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}">
+        const subStatus = row.subN > 0 ? 'dot-submitted' : 'dot-pending';
+        
+        tbody.innerHTML += `
+          <tr class="border-b border-[#e2e8f0]">
             <td class="py-3 px-4 text-left text-gray-700">${row.label}</td>
-            <td class="py-3 px-4 text-center col-n">
+            <td class="py-3 px-4 text-center col-sent-n">
               <div class="data-indicator">
-                <span class="value">${row.sentN}</span>
+                <span class="success-dot ${sentStatus} mr-1.5"></span>
+                <span class="value font-medium">${row.sentN}</span>
               </div>
             </td>
-            <td class="py-3 px-4 text-center col-pct">
+            <td class="py-3 px-4 text-center col-sent-pct">
               <div class="data-indicator">
-                <span class="value">${row.sentPct}</span>
+                <span class="success-dot ${sentStatus} mr-1.5"></span>
+                <span class="value">${row.sentPct}%</span>
               </div>
             </td>
-            <td class="py-3 px-4 text-center col-n">
+            <td class="py-3 px-4 text-center col-sub-n">
               <div class="data-indicator">
-                <span class="value">${row.subN}</span>
+                <span class="success-dot ${subStatus} mr-1.5"></span>
+                <span class="value font-medium">${row.subN}</span>
               </div>
             </td>
-            <td class="py-3 px-4 text-center col-pct">
+            <td class="py-3 px-4 text-center col-sub-pct">
               <div class="data-indicator">
-                <span class="value">${row.subPct}</span>
+                <span class="success-dot ${subStatus} mr-1.5"></span>
+                <span class="value">${row.subPct}%</span>
               </div>
             </td>
           </tr>
         `;
       });
     }
+      document.getElementById('toggle-sent-n').addEventListener('change', renderMainTable);
+    document.getElementById('toggle-sent-pct').addEventListener('change', renderMainTable);
+    document.getElementById('toggle-sub-n').addEventListener('change', renderMainTable);
+    document.getElementById('toggle-sub-pct').addEventListener('change', renderMainTable);
     
-    document.getElementById('toggle-n').addEventListener('change', renderMainTable);
-    document.getElementById('toggle-pct').addEventListener('change', renderMainTable);
+    // Add All/None toggle functionality
+    document.getElementById('toggle-all').addEventListener('click', function() {
+      document.getElementById('toggle-sent-n').checked = true;
+      document.getElementById('toggle-sent-pct').checked = true;
+      document.getElementById('toggle-sub-n').checked = true;
+      document.getElementById('toggle-sub-pct').checked = true;
+      renderMainTable();
+    });
+    
+    document.getElementById('toggle-none').addEventListener('click', function() {
+      document.getElementById('toggle-sent-n').checked = false;
+      document.getElementById('toggle-sent-pct').checked = false;
+      document.getElementById('toggle-sub-n').checked = false;
+      document.getElementById('toggle-sub-pct').checked = false;
+      renderMainTable();
+    });
+    
     renderMainTable();
   </script>
 </body>
