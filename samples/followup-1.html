@@ -305,6 +305,37 @@
       }
     </style>    <!-- Essential embedded styles for sidebar and header -->
     <style id="embedded-common-styles">
+      /* Body and global styles */
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f6fbfd;
+        background-image: none;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      
+      /* Fix flexbox layout */
+      .flex {
+        display: flex;
+      }
+      
+      .min-h-screen {
+        min-height: 100vh;
+      }
+      
+      .w-full {
+        width: 100%;
+      }
+      
+      .flex-grow {
+        flex-grow: 1;
+      }
+      
+      .flex-col {
+        flex-direction: column;
+      }
+      
       /* Essential sidebar styles */
       .sidebar {
         width: 250px;
@@ -313,7 +344,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
         display: flex;
         flex-direction: column;
-        overflow: hidden !important; /* Remove scrollbar */
+        overflow: hidden !important;
       }
       
       .sidebar-opened {
@@ -326,22 +357,53 @@
         margin-bottom: 15px;
       }
       
-      /* Fix for features list to take available space but not overflow */
+      /* Features list styling */
       .features-list-top {
         flex: 1;
         overflow-y: auto;
         padding-bottom: 20px;
       }
       
-      /* Make Contact Us always visible */
+      .features-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .features-item {
+        margin-bottom: 2px;
+      }
+      
+      .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        transition: background-color 0.2s;
+      }
+      
+      .nav-link i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+      }
+      
+      .nav-link.active {
+        background-color: #e3f2fd;
+        color: #1976d2;
+      }
+      
+      /* Contact Us section at bottom */
       .sidebar-contact {
-        position: sticky;
-        bottom: 0;
-        background-color: #fff;
-        padding: 15px;
-        border-top: 1px solid #f0f0f0;
-        margin-top: auto;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+        position: sticky !important;
+        bottom: 0 !important;
+        background-color: #fff !important;
+        padding: 15px !important;
+        border-top: 1px solid #f0f0f0 !important;
+        margin-top: auto !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.03) !important;
+        z-index: 5 !important;
       }
       
       /* Essential header styles */
@@ -358,6 +420,16 @@
         margin-right: 20px;
       }
       
+      /* Logo styles */
+      .mainheader-logo span,
+      .app-logo span {
+        background-color: transparent !important;
+        background-image: none !important;
+        display: flex;
+        align-items: center;
+      }
+      
+      /* Container styles */
       .container-new {
         width: 100%;
         padding-right: 15px;
@@ -366,18 +438,19 @@
         margin-left: auto;
       }
       
+      /* Link styles */
       .link-new {
         text-decoration: none;
         color: inherit;
       }
       
-      /* Fix background image issues */
-      body {
-        background-color: #f6fbfd;
-        background-image: none; /* Ensure no unexpected background */
+      /* Main content area */
+      main.flex-grow {
+        padding: 20px;
+        overflow: auto;
       }
       
-      /* Customize scrollbar for feature list only */
+      /* Scrollbar styling for features list only */
       .features-list-top.scrollbar {
         overflow-y: auto;
       }
@@ -392,9 +465,58 @@
         border-radius: 6px;
       }
       
-      /* Prevent main content from having scrollbar issues */
-      main.overflow-auto {
-        overflow: auto !important;
+      /* Fixed positioning for included elements */
+      [include-html="../common/sidebar.html"] {
+        min-width: 250px;
+        width: 250px;
+        background-color: #fff;
+        border-right: 1px solid #e3eaf3;
+      }
+      
+      [include-html="../common/header.html"] {
+        width: 100%;
+        background-color: #fff;
+        border-bottom: 1px solid #e3eaf3;
+        z-index: 5;
+      }
+    </style>
+    
+    <!-- Additional fixes for specific issues -->
+    <style>
+      /* Fix for W logo background */
+      .mainheader-logo span {
+        background-color: transparent !important;
+        background-image: none !important;
+      }
+      
+      /* Fix font icons */
+      .fa-light {
+        font-family: "Font Awesome 6 Pro";
+        font-weight: 300;
+      }
+      
+      /* Match the image shown in screenshot */
+      .p-6 {
+        padding: 1.5rem;
+      }
+      
+      /* Table adjustments to match the screenshot */
+      .table-border-separate {
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      
+      /* Ensure proper content width */
+      .max-w-6xl {
+        max-width: 72rem;
+      }
+      
+      /* Override any conflicting styles */
+      .mainheader-inner {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        justify-content: space-between;
       }
     </style>
     <!-- Additional fixes for specific issues -->
@@ -431,18 +553,19 @@
         overflow: hidden;
       }
     </style>
-  </head>
-  <body class="flex min-h-screen">    <!-- Sidebar -->
-    <div include-html="../common/sidebar.html" class="flex-shrink-0">
-      <!-- Sidebar content will be injected here by main.js -->
-    </div>
-
-    <!-- Main content area (Header + Page Content) -->
-    <div class="flex-grow flex flex-col">
-      <!-- Header -->
-      <div include-html="../common/header.html">
-        <!-- Header content will be injected here by main.js -->
+  </head>  <body>
+    <div class="flex min-h-screen w-full">
+      <!-- Sidebar -->
+      <div include-html="../common/sidebar.html" class="flex-shrink-0" style="min-width: 250px; width: 250px;">
+        <!-- Sidebar content will be injected here by main.js -->
       </div>
+
+      <!-- Main content area (Header + Page Content) -->
+      <div class="flex-grow flex flex-col w-full">
+        <!-- Header -->
+        <div include-html="../common/header.html" style="width: 100%;">
+          <!-- Header content will be injected here by main.js -->
+        </div>
 
       <!-- Page Content -->
       <main class="flex-grow p-6 overflow-auto">
@@ -865,5 +988,54 @@
     }
     </script>
     <script src="../common/main.js"></script>
+    <script>
+    // Additional styling fixes after everything loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fix sidebar styling
+      setTimeout(function() {
+        const sidebarContainer = document.querySelector('[include-html="../common/sidebar.html"]');
+        if (sidebarContainer) {
+          sidebarContainer.style.minWidth = '250px';
+          sidebarContainer.style.width = '250px';
+          
+          const sidebar = sidebarContainer.querySelector('.sidebar');
+          if (sidebar) {
+            sidebar.style.display = 'flex';
+            sidebar.style.flexDirection = 'column';
+            sidebar.style.height = '100vh';
+            sidebar.style.overflowX = 'hidden';
+            
+            const contactUs = sidebar.querySelector('.sidebar-contact');
+            if (contactUs) {
+              contactUs.style.position = 'sticky';
+              contactUs.style.bottom = '0';
+              contactUs.style.zIndex = '10';
+              contactUs.style.backgroundColor = '#fff';
+            }
+            
+            const featuresList = sidebar.querySelector('.features-list-top');
+            if (featuresList) {
+              featuresList.style.flex = '1';
+              featuresList.style.overflowY = 'auto';
+            }
+          }
+        }
+        
+        // Fix header styling
+        const headerContainer = document.querySelector('[include-html="../common/header.html"]');
+        if (headerContainer) {
+          headerContainer.style.width = '100%';
+          headerContainer.style.boxShadow = '0 1px 4px rgba(0, 0, 0, 0.05)';
+          
+          const header = headerContainer.querySelector('.mainheader');
+          if (header) {
+            header.style.width = '100%';
+            header.style.display = 'flex';
+            header.style.alignItems = 'center';
+          }
+        }
+      }, 100);
+    });
+    </script>
   </body>
 </html>

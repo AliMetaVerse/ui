@@ -17,24 +17,25 @@
 </style>
 
 <!-- Original sidebar content from common/main.html -->
-<div class="sidebar sidebar-opened">
-    <div class="logo-name-wrapper">
+<div class="sidebar sidebar-opened" style="width: 250px; min-height: 100vh; display: flex; flex-direction: column;">
+    <div class="logo-name-wrapper" style="padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
         <a href="" class="link-new link-new-large link-new-primary app-logo" data-testid="homepage-logo">
-            <span>
+            <span style="background: transparent !important;">
                 <img
                     src="https://webropol.com/wp-content/themes/webropol/images/icons/webropol-logo-color.svg"
                     width="87"
                     height="23"
                     class="logo-part"
                     alt="logo app"
+                    style="max-width: 100%; height: auto;"
                 >
             </span>
         </a>
-        <button type="button" class="nav-link nav-link-lg nav-link-primary">
+        <button type="button" class="nav-link nav-link-lg nav-link-primary" style="padding: 8px; margin: 0;">
             <i class="fa-light fa-square-chevron-left" id="logo-name__icon"></i>
         </button>
     </div>
-    <ul class="features-list features-list-top scrollbar">
+    <ul class="features-list features-list-top scrollbar" style="flex: 1; overflow-y: auto; padding: 0; margin: 0; list-style: none;">
         <li class="features-item">
             <a href="" class="nav-link nav-link-lg nav-link-primary nav-link-responsive" data-testid="home-tab">
                 <i class="fa-light fa-house"></i>
@@ -137,9 +138,9 @@
                 <span>Shop</span>
             </a>
         </li>
-    </ul>    <div class="sidebar-contact" style="position: sticky; bottom: 0; background-color: #fff; padding: 15px; border-top: 1px solid #f0f0f0; margin-top: auto;">
-        <button class="nav-link nav-link-lg nav-link-primary nav-link-responsive" data-testid="contact-us">
-            <i class="fa-light fa-headset"></i>
+    </ul>    <div class="sidebar-contact" style="position: sticky; bottom: 0; background-color: #fff; padding: 15px; border-top: 1px solid #f0f0f0; margin-top: auto; z-index: 10;">
+        <button class="nav-link nav-link-lg nav-link-primary nav-link-responsive" data-testid="contact-us" style="width: 100%; text-align: left; border: none; background: none; cursor: pointer; display: flex; align-items: center; padding: 10px 15px;">
+            <i class="fa-light fa-headset" style="margin-right: 10px; width: 20px; text-align: center;"></i>
             <span>Contact Us</span>
         </button>
     </div>
