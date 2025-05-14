@@ -19,6 +19,7 @@
                     animation: {
                         'gradient': 'gradient 8s linear infinite',
                         'float': 'float 3s ease-in-out infinite',
+                        'fade-in': 'fade-in 0.5s ease-in-out',
                     },
                     keyframes: {
                         gradient: {
@@ -34,6 +35,10 @@
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: 0, transform: 'translateY(10px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
                         },
                     },
                 },
@@ -84,7 +89,7 @@
             padding: var(--ds-spacing-4, 1rem) var(--ds-spacing-6, 1.5rem);
             border-radius: var(--ds-radius-md, 0.5rem);
             font-weight: 500;
-            transition: background-color 0.2s, color 0.2s;
+            transition: background-color 0.2s, color 0.2s, transform 0.2s;
             outline: none;
             box-shadow: none;
         }
@@ -133,57 +138,114 @@
         .animate-fade-in {
             animation: fade-in 0.3s ease;
         }
+        #ds-sidebar {
+            transition: width 0.3s ease-in-out;
+        }
+        #ds-sidebar.collapsed {
+            width: 4.5rem !important; /* w-18, slightly more than w-16 to fit icons better */
+        }
+        #ds-sidebar.collapsed .sidebar-text-label {
+            display: none;
+        }
+        #ds-sidebar.collapsed .sidebar-link {
+            justify-content: center; /* Center icon */
+        }
+        #ds-sidebar.collapsed #sidebar-toggle-icon-collapse {
+            display: none;
+        }
+        #ds-sidebar.collapsed #sidebar-toggle-icon-expand {
+            display: block !important; /* Tailwind 'hidden' has high specificity */
+        }
+        #ds-sidebar:not(.collapsed) #sidebar-toggle-icon-expand {
+            display: none;
+        }
+        #ds-sidebar:not(.collapsed) #sidebar-toggle-icon-collapse {
+            display: block;
+        }
+
+        .sidebar-link.active-link {
+            background-color: #1e6880; /* webro-primary */
+            color: white;
+        }
+        .sidebar-link.active-link svg {
+            stroke: white;
+        }
+        #main-content {
+            transition: margin-left 0.3s ease-in-out;
+        }
+        /* Ensure toggle button is visually distinct and accessible */
+        #sidebar-toggle {
+            transition: background-color 0.2s ease;
+        }
     </style>
 </head>
-<body class="bg-white dark:bg-gray-900 transition-colors duration-200">
-    <!-- DS Sticky Header -->
-    <header class="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 py-3 shadow-sm">
+<body class="bg-white dark:bg-gray-900 transition-colors duration-200 min-h-screen" style="background: linear-gradient(135deg, #eefbfd 0%, #f8fafc 100%);">
+    <!-- Modern Glass Header -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-10 py-4 shadow-lg rounded-b-2xl">
+        <h1 class="text-3xl md:text-4xl font-extrabold roboto-condensed tracking-tight text-webro-primary animate-fade-in">Webropol DS Playground</h1>
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-webro-primary rounded flex items-center justify-center">
-                <span class="text-white font-bold roboto-condensed text-xl">W</span>
-            </div>
-            <h1 class="text-2xl font-bold roboto-condensed text-webro-primary">Interactive Design System</h1>
-        </div>
-        <div class="flex items-center space-x-2">
-            <button id="open-modal-demo" class="ds-btn ds-btn-primary">Open Modal</button>
-            <button id="show-toast-demo" class="ds-btn ds-btn-secondary">Show Toast</button>
-            <button id="theme-toggle" class="ml-4 p-2 rounded-full bg-webro-primary text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-webro-primary" aria-label="Toggle dark mode">
-                <svg class="w-6 h-6 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 9.003 0 008.354-5.646z"/>
+            <button id="dark-mode-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode">
+                <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
                 </svg>
-                <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                 </svg>
             </button>
+            <button id="open-modal-demo" class="ds-btn ds-btn-primary shadow-md hover:scale-105 animate-fade-in">Open Modal</button>
+            <button id="show-toast-demo" class="ds-btn ds-btn-secondary shadow-md hover:scale-105 animate-fade-in">Show Toast</button>
         </div>
     </header>
-    <div class="flex h-[calc(100vh-64px)] overflow-hidden">
-        <!-- Sidebar Navigation -->
-        <nav class="w-64 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-shrink-0 transition-all duration-200" aria-label="Main navigation">
-            <div class="h-4"></div> <!-- Minimal top margin for modern look -->
-            <div class="p-4 pb-2">
-                <div class="relative">
-                    <input type="text" id="search-docs" placeholder="Search..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-webro-primary focus:border-transparent shadow-sm" aria-label="Search documentation">
-                    <svg class="absolute left-3 top-3 h-5 w-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
-                </div>
+    <div class="flex h-[calc(100vh-80px)] overflow-hidden">
+        <!-- Floating Glass Sidebar -->
+        <nav id="ds-sidebar" class="fixed top-8 left-8 w-24 h-[90vh] bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl flex flex-col items-center py-8 z-30 border border-gray-100 dark:border-gray-700 gap-6 transition-all duration-300">
+            <button id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true" class="absolute -right-3 top-1/2 -translate-y-1/2 z-40 bg-white dark:bg-gray-700 p-1.5 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-webro-primary">
+                <svg id="sidebar-toggle-icon-collapse" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-webro-primary dark:text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                <svg id="sidebar-toggle-icon-expand" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-webro-primary dark:text-white hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            </button>
+            <div class="flex flex-col items-center gap-4 w-full pt-6 pb-4 overflow-y-auto">
+                <a href="#overview" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Overview">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Overview</span>
+                </a>
+                <a href="#color-playground" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Color Playground">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Colors</span>
+                </a>
+                <a href="#typography-tester" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Typography">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v12M11 17l-5-5 5-5M19.5 17.5l-5-5 5-5" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Typography</span>
+                </a>
+                <a href="#spacing-visualizer" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Spacing">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1v4m0 0h-4m4 0l-5-5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5 5" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Spacing</span>
+                </a>
+                <a href="#grid-playground" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Grid">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Grid</span>
+                </a>
+                <a href="#live-preview" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Live Preview">
+                    <svg class="w-6 h-6 mb-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Preview</span>
+                </a>
+                <a href="#accessibility-checker" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Accessibility">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">A11y</span>
+                </a>
+                <a href="#components" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Components">
+                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    <span class="sidebar-text-label text-xs font-semibold">Components</span>
+                </a>
             </div>
-            <ul class="px-4 py-2 space-y-1 sidebar-scroll overflow-y-auto h-full border-t border-gray-100 dark:border-gray-700 mt-2">
-                <li><a href="#overview" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:text-white hover:shadow-md dark:hover:bg-webro-primary dark:hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary" tabindex="0">Overview</a></li>
-                <li><a href="#grid" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:text-white hover:shadow-md dark:hover:bg-webro-primary dark:hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary" tabindex="0">Grid</a></li>
-                <li><a href="#accessibility" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:text-white hover:shadow-md dark:hover:bg-webro-primary dark:hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary" tabindex="0">Accessibility</a></li>
-                <li><a href="#components" class="nav-item flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-webro-primary hover:text-white hover:shadow-md dark:hover:bg-webro-primary dark:hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary" tabindex="0">Interactive Components</a></li>
-            </ul>
         </nav>
         <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto bg-white dark:bg-gray-900 transition-colors duration-200">
-            <section id="overview" class="p-8">
-                <h2 class="roboto-condensed font-bold text-3xl text-webro-neutral mb-6">Webropol Design System Overview</h2>
-                <!-- Cards removed for modern minimal look -->
+        <main id="main-content" class="flex-1 ml-32 lg:ml-36 xl:ml-40 overflow-y-auto bg-transparent transition-colors duration-200">
+            <section id="overview" class="p-12 md:p-16 lg:p-20 animate-fade-in">
+                <h2 class="roboto-condensed font-extrabold text-4xl md:text-5xl text-webro-neutral mb-8 tracking-tight animate-fade-in">Webropol Design System Overview</h2>
+                <p class="roboto text-lg md:text-xl text-webro-neutral/80 max-w-2xl mb-8 animate-fade-in">A modern, interactive playground for exploring and testing Webropol’s design system components, colors, spacing, and accessibility. Use the sidebar to jump between sections and try out live features below.</p>
             </section>
             <!-- Color Playground -->
-            <div id="color-playground" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="color-playground" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Color Playground</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
@@ -208,7 +270,7 @@
             </div>
 
             <!-- Typography Tester -->
-            <div id="typography-tester" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="typography-tester" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Typography Tester</h2>
                 <div class="space-y-6">
                     <div>
@@ -235,7 +297,7 @@
             </div>
 
             <!-- Spacing Visualizer -->
-            <div id="spacing-visualizer" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="spacing-visualizer" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Spacing Visualizer</h2>
                 <div class="space-y-6">
                     <div class="flex items-center space-x-4">
@@ -262,7 +324,7 @@
             </div>
 
             <!-- Grid Playground -->
-            <div id="grid-playground" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="grid-playground" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Grid Playground</h2>
                 <div class="space-y-6">
                     <div class="flex flex-wrap gap-4">
@@ -299,36 +361,29 @@
             </div>
 
             <!-- Live Preview Mode -->
-            <div id="live-preview" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="live-preview" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white">Live Preview</h2>
                     <div class="flex items-center space-x-4">
-                        <button id="preview-mobile" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                            </svg>
-                        </button>
-                        <button id="preview-tablet" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                            </svg>
-                        </button>
-                        <button id="preview-desktop" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </button>
+                        <button id="preview-mobile" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm">Mobile</button>
+                        <button id="preview-tablet" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm">Tablet</button>
+                        <button id="preview-desktop" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm">Desktop</button>
                     </div>
                 </div>
-                <div id="preview-container" class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 w-full transition-all duration-300">
+                <div class="mb-6">
+                    <label for="html-input" class="block mb-2 roboto text-sm text-webro-neutral dark:text-white">Enter HTML to Preview:</label>
+                    <textarea id="html-input" class="w-full h-40 p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-webro-neutral dark:text-white focus:ring-webro-primary focus:border-webro-primary font-mono text-sm" placeholder="e.g., <button class='ds-btn ds-btn-primary'>Click me</button>"></textarea>
+                    <button id="render-html-btn" class="mt-3 px-4 py-2 bg-webro-primary text-white rounded-lg hover:bg-opacity-90 transition-colors ds-btn">Render HTML</button>
+                </div>
+                <div id="preview-container" class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 w-full transition-all duration-300 min-h-[200px]">
                     <div id="preview-content" class="mx-auto transition-all duration-300">
-                        <!-- Preview content will be generated here -->
+                        <!-- Initial content will be set by JS -->
                     </div>
                 </div>
             </div>
 
             <!-- Accessibility Checker -->
-            <div id="accessibility-checker" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="accessibility-checker" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Accessibility Checker</h2>
                 <div class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -365,7 +420,7 @@
             </div>
 
             <!-- Enhanced Spacing Visualizer -->
-            <div id="enhanced-spacing" class="p-8 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div id="enhanced-spacing" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Spacing Generator</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
@@ -414,20 +469,9 @@
             </div>
 
             <!-- Interactive Components -->
-            <section id="components" class="p-8">
+            <section id="components" class="p-12 md:p-16 lg:p-20">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral mb-6">Interactive Components</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Toggle Switch Demo -->
-                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col items-start">
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <span class="roboto text-webro-neutral">DS Toggle</span>
-                            <input type="checkbox" id="ds-toggle-demo" class="sr-only">
-                            <span class="w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 duration-300" id="toggle-track">
-                                <span class="bg-white w-4 h-4 rounded-full shadow-md transform duration-300" id="toggle-thumb"></span>
-                            </span>
-                        </label>
-                        <span id="toggle-status" class="mt-2 roboto text-sm text-webro-neutral">Off</span>
-                    </div>
                     <!-- Tabs Demo -->
                     <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
                         <div class="flex space-x-2 mb-4" role="tablist">
@@ -439,8 +483,23 @@
                         <div id="tab-content-2" class="tab-content hidden">Tab 2 content goes here.</div>
                         <div id="tab-content-3" class="tab-content hidden">Tab 3 content goes here.</div>
                     </div>
+                </div> <!-- End of grid -->
+
+                <!-- Buttons for Modal and Toast Demos -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col items-start">
+                        <h3 class="roboto-condensed font-semibold text-lg text-webro-neutral dark:text-white mb-2">Modal Demo</h3>
+                        <p class="roboto text-sm text-webro-neutral/80 dark:text-gray-300 mb-4">Click the button to open a sample modal dialog.</p>
+                        <button id="open-modal-demo" class="ds-btn ds-btn-secondary">Open Modal</button>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col items-start">
+                        <h3 class="roboto-condensed font-semibold text-lg text-webro-neutral dark:text-white mb-2">Toast Notification Demo</h3>
+                        <p class="roboto text-sm text-webro-neutral/80 dark:text-gray-300 mb-4">Click the button to show a toast notification.</p>
+                        <button id="show-toast-demo" class="ds-btn ds-btn-secondary">Show Toast</button>
+                    </div>
                 </div>
-                <!-- Modal Demo -->
+
+                <!-- Modal Demo (definition) -->
                 <div id="ds-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
                     <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 max-w-md w-full">
                         <h3 id="modal-title" class="roboto-condensed font-bold text-xl text-webro-primary mb-4">DS Modal Demo</h3>
@@ -455,66 +514,6 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Theme Toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-            });
-
-            // Font Size Controls
-            const root = document.documentElement;
-            let currentSize = 16;
-            if (document.getElementById('fontSize-increase')) {
-                document.getElementById('fontSize-increase').addEventListener('click', () => {
-                    currentSize = Math.min(currentSize + 1, 20);
-                    root.style.fontSize = currentSize + 'px';
-                });
-                document.getElementById('fontSize-decrease').addEventListener('click', () => {
-                    currentSize = Math.max(currentSize - 1, 12);
-                    root.style.fontSize = currentSize + 'px';
-                });
-                document.getElementById('fontSize-reset').addEventListener('click', () => {
-                    currentSize = 16;
-                    root.style.fontSize = currentSize + 'px';
-                });
-            }
-
-            // Copy to Clipboard for Code Blocks
-            document.querySelectorAll('.code-block').forEach(block => {
-                const copyButton = document.createElement('button');
-                copyButton.innerHTML = `
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                    </svg>`;
-                copyButton.className = 'absolute top-2 right-2 p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors';
-                copyButton.addEventListener('click', () => {
-                    navigator.clipboard.writeText(block.textContent);
-                    copyButton.classList.add('copy-success');
-                    setTimeout(() => copyButton.classList.remove('copy-success'), 300);
-                });
-                block.appendChild(copyButton);
-            });
-
-            // Interactive Color Swatches
-            document.querySelectorAll('.color-swatch').forEach(swatch => {
-                swatch.addEventListener('click', () => {
-                    const color = swatch.dataset.color;
-                    navigator.clipboard.writeText(color);
-                    swatch.classList.add('copy-success');
-                    setTimeout(() => swatch.classList.remove('copy-success'), 300);
-                });
-            });
-
-            // Search Functionality
-            const searchInput = document.getElementById('search-docs');
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(searchTerm) ? 'flex' : 'none';
-                });
-            });
-
             // Color Playground
             const primaryColorInput = document.getElementById('primary-color');
             const accentColorInput = document.getElementById('accent-color');
@@ -590,7 +589,18 @@
             updateGrid();
 
             // Live Preview Mode
+            const htmlInput = document.getElementById('html-input');
+            const renderHtmlBtn = document.getElementById('render-html-btn');
             const previewContent = document.getElementById('preview-content');
+
+            function renderCustomHTML() {
+                // Sanitize HTML to prevent XSS - in a real app, use a proper sanitizer library
+                // For this demo, we'll directly set it, assuming trusted input or simple HTML structures.
+                previewContent.innerHTML = htmlInput.value;
+            }
+
+            renderHtmlBtn.addEventListener('click', renderCustomHTML);
+
             document.getElementById('preview-mobile').addEventListener('click', () => {
                 previewContent.style.maxWidth = '375px';
             });
@@ -600,6 +610,10 @@
             document.getElementById('preview-desktop').addEventListener('click', () => {
                 previewContent.style.maxWidth = '100%';
             });
+
+            // Set initial content for live preview
+            htmlInput.value = '<div class="p-4 bg-webro-secondary text-white rounded-lg">\n  <h3 class="text-lg font-semibold">Hello Webropol!</h3>\n  <p>This is a live preview. Try editing the HTML above!</p>\n  <button class="ds-btn ds-btn-primary mt-2">Sample Button</button>\n</div>';
+            renderCustomHTML();
 
             // Accessibility Checker
             const textColorInput = document.getElementById('text-color');
@@ -688,6 +702,7 @@
             // Keyboard accessibility for toggle
             dsToggle.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault(); // Prevent scrolling
                     dsToggle.checked = !dsToggle.checked;
                     dsToggle.dispatchEvent(new Event('change'));
                 }
@@ -767,6 +782,102 @@
                     setTimeout(() => toast.remove(), 500);
                 }, 2500);
             });
+
+            // Dark Mode Toggle
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const htmlElement = document.documentElement;
+
+            // Sidebar Toggle Functionality
+            const sidebar = document.getElementById('ds-sidebar');
+            const mainContent = document.getElementById('main-content');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const initialSidebarState = localStorage.getItem('sidebarState');
+
+            function setSidebarState(collapsed) {
+                if (collapsed) {
+                    sidebar.classList.add('collapsed');
+                    mainContent.classList.remove('ml-32', 'lg:ml-36', 'xl:ml-40');
+                    mainContent.classList.add('ml-[calc(4.5rem+2rem)]', 'lg:ml-[calc(4.5rem+2rem+4rem)]', 'xl:ml-[calc(4.5rem+2rem+8rem)]');
+                    sidebarToggle.setAttribute('aria-expanded', 'false');
+                    localStorage.setItem('sidebarState', 'collapsed');
+                } else {
+                    sidebar.classList.remove('collapsed');
+                    mainContent.classList.remove('ml-[calc(4.5rem+2rem)]', 'lg:ml-[calc(4.5rem+2rem+4rem)]', 'xl:ml-[calc(4.5rem+2rem+8rem)]');
+                    mainContent.classList.add('ml-32', 'lg:ml-36', 'xl:ml-40');
+                    sidebarToggle.setAttribute('aria-expanded', 'true');
+                    localStorage.setItem('sidebarState', 'expanded');
+                }
+            }
+
+            sidebarToggle.addEventListener('click', () => {
+                setSidebarState(!sidebar.classList.contains('collapsed'));
+            });
+
+            if (initialSidebarState === 'collapsed') {
+                setSidebarState(true);
+            } else {
+                setSidebarState(false);
+            }
+            
+            // Active Link on Scroll
+            const sections = document.querySelectorAll('#main-content section[id], #main-content div[id].p-12');
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const mainScrollContainer = document.getElementById('main-content');
+
+            const observerOptions = {
+                root: mainScrollContainer, 
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0.1
+            };
+
+            function activateLink(id) {
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+            
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activateLink(entry.target.id);
+                    }
+                });
+            };
+
+            const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => {
+                if (section.id) {
+                    scrollObserver.observe(section);
+                }
+            });
+
+            const currentHash = window.location.hash.substring(1);
+            if (currentHash) {
+                activateLink(currentHash);
+                const targetSection = document.getElementById(currentHash);
+                if (targetSection) {
+                }
+            } else if (sections.length > 0 && sections[0].id) {
+                activateLink(sections[0].id);
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+            if (localStorage.getItem('theme') === 'dark') {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
         });
     </script>
 </body>
