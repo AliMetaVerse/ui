@@ -265,10 +265,9 @@
       <h2 class="text-lg font-medium text-primary">Email survey link responses</h2>      
       <div class="flex items-center gap-2">        <span class="text-sm text-gray-700">Show:</span>
         <div class="flex flex-col">
-          <div class="flex items-center gap-3 bg-gray-100 rounded-md py-1 px-3">
-            <div class="flex items-center gap-2 border-r border-gray-300 pr-2">
+          <div class="flex items-center gap-3 bg-gray-100 rounded-md py-1 px-3">            <div class="flex items-center gap-2 border-r border-gray-300 pr-2">
               <span class="text-xs text-gray-600 font-medium flex items-center">
-                <span class="success-dot dot-sent mr-1.5"></span>Email Links:
+                Email Links:
               </span>
               <label class="inline-flex items-center text-xs font-medium" title="Show count of email links sent">
                 <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sent-n">
@@ -281,7 +280,7 @@
             </div>
             <div class="flex items-center gap-2 border-r border-gray-300 pr-2">
               <span class="text-xs text-gray-600 font-medium flex items-center">
-                <span class="success-dot dot-submitted mr-1.5"></span>Submitted:
+                Submitted:
               </span>
               <label class="inline-flex items-center text-xs font-medium" title="Show count of surveys submitted">
                 <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sub-n">
@@ -291,19 +290,16 @@
                 <input type="checkbox" checked class="accent-[#1976d2] mr-1 h-3.5 w-3.5" id="toggle-sub-pct">
                 <span class="text-gray-700">%</span>
               </label>
-            </div>
+            </div>            
             <div class="flex items-center gap-2">
               <button id="toggle-all" class="text-xs text-primary hover:text-blue-700 font-medium" title="Show all columns">
                 All
               </button>
-              <span class="text-gray-400 mx-0.5">|</span>
-              <button id="toggle-none" class="text-xs text-primary hover:text-blue-700 font-medium" title="Hide all columns">
-                None
-              </button>
             </div>
           </div>
-        </div>        <button class="ml-4 px-3 py-1.5 bg-[#217346] text-white rounded flex items-center text-xs font-medium hover:bg-[#1a5c38] transition-colors shadow-sm" title="Export to Excel">
-          <i class="fas fa-file-excel mr-1.5"></i> Export to Excel
+        </div>        
+        <button class="ml-4 w-8 p-2 bg-[#e0f2ea] text-[#217346] border border-[#b2dcc8] rounded-lg flex items-center justify-center text-sm hover:bg-[#d0ebdf] transition-colors shadow-sm" title="Export to Excel">
+          <i class="fas fa-file-excel"></i>
         </button>
       </div>
     </div>
@@ -335,31 +331,26 @@
         <table class="w-full text-sm table-border-collapse">          
           <thead>            
             <tr>
-              <th class="py-3 px-4 text-left font-medium text-gray-700 border-b border-[#e2e8f0]">Survey</th>              
-              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-n">
+              <th class="py-3 px-4 text-left font-medium text-gray-700 border-b border-[#e2e8f0]">Survey</th>                <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-n">
                 <div class="flex items-center justify-center gap-1">
-                  <span class="success-dot dot-sent"></span>
                   <span>Email Links Sent</span>
                   <span class="text-xs text-gray-500 ml-1">(n)</span>
                 </div>
               </th>
               <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-pct">
                 <div class="flex items-center justify-center gap-1">
-                  <span class="success-dot dot-sent"></span>
                   <span>Email Links Sent</span>
                   <span class="text-xs text-gray-500 ml-1">(%)</span>
                 </div>
               </th>
               <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-n">
                 <div class="flex items-center justify-center gap-1">
-                  <span class="success-dot dot-submitted"></span>
                   <span>Survey Submitted</span>
                   <span class="text-xs text-gray-500 ml-1">(n)</span>
                 </div>
               </th>
               <th class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-pct">
                 <div class="flex items-center justify-center gap-1">
-                  <span class="success-dot dot-submitted"></span>
                   <span>Survey Submitted</span>
                   <span class="text-xs text-gray-500 ml-1">(%)</span>
                 </div>
@@ -451,31 +442,26 @@
       mainTableData.forEach((row, idx) => {
         const sentStatus = row.sentN > 0 ? 'dot-sent' : 'dot-pending';
         const subStatus = row.subN > 0 ? 'dot-submitted' : 'dot-pending';
-        
-        tbody.innerHTML += `
+          tbody.innerHTML += `
           <tr class="border-b border-[#e2e8f0]">
             <td class="py-3 px-4 text-left text-gray-700">${row.label}</td>
             <td class="py-3 px-4 text-center col-sent-n">
               <div class="data-indicator">
-                <span class="success-dot ${sentStatus} mr-1.5"></span>
                 <span class="value font-medium">${row.sentN}</span>
               </div>
             </td>
             <td class="py-3 px-4 text-center col-sent-pct">
               <div class="data-indicator">
-                <span class="success-dot ${sentStatus} mr-1.5"></span>
                 <span class="value">${row.sentPct}%</span>
               </div>
             </td>
             <td class="py-3 px-4 text-center col-sub-n">
               <div class="data-indicator">
-                <span class="success-dot ${subStatus} mr-1.5"></span>
                 <span class="value font-medium">${row.subN}</span>
               </div>
             </td>
             <td class="py-3 px-4 text-center col-sub-pct">
               <div class="data-indicator">
-                <span class="success-dot ${subStatus} mr-1.5"></span>
                 <span class="value">${row.subPct}%</span>
               </div>
             </td>
@@ -487,21 +473,12 @@
     document.getElementById('toggle-sent-pct').addEventListener('change', renderMainTable);
     document.getElementById('toggle-sub-n').addEventListener('change', renderMainTable);
     document.getElementById('toggle-sub-pct').addEventListener('change', renderMainTable);
-    
-    // Add All/None toggle functionality
+      // Add All toggle functionality
     document.getElementById('toggle-all').addEventListener('click', function() {
       document.getElementById('toggle-sent-n').checked = true;
       document.getElementById('toggle-sent-pct').checked = true;
       document.getElementById('toggle-sub-n').checked = true;
       document.getElementById('toggle-sub-pct').checked = true;
-      renderMainTable();
-    });
-    
-    document.getElementById('toggle-none').addEventListener('click', function() {
-      document.getElementById('toggle-sent-n').checked = false;
-      document.getElementById('toggle-sent-pct').checked = false;
-      document.getElementById('toggle-sub-n').checked = false;
-      document.getElementById('toggle-sub-pct').checked = false;
       renderMainTable();
     });
     
