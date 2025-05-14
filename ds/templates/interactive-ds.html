@@ -6,6 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -48,17 +49,6 @@
     <style>
         .roboto-condensed { font-family: 'Roboto Condensed', sans-serif; }
         .roboto { font-family: 'Roboto', sans-serif; }
-        .sidebar-scroll {
-            scrollbar-width: thin;
-            scrollbar-color: var(--ds-neutral-300, #b5bbbd) transparent;
-        }
-        .sidebar-scroll::-webkit-scrollbar {
-            width: 6px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-thumb {
-            background-color: var(--ds-neutral-300, #b5bbbd);
-            border-radius: 3px;
-        }
         .code-block {
             background-color: var(--ds-neutral-50, rgb(249 250 251));
             border-radius: var(--ds-radius-md, 0.5rem);
@@ -163,59 +153,97 @@
             display: block;
         }
 
-        /* Custom Scrollbar Styles */
+        /* Custom Scrollbar Styles - Remove sidebar specific ones */
         html, body {
             overflow-y: hidden; /* Prevent body from scrolling */
         }
 
         /* For Webkit browsers (Chrome, Safari, Edge) */
         body::-webkit-scrollbar, 
-        #main-content::-webkit-scrollbar, 
-        #ds-sidebar > div::-webkit-scrollbar { /* Target the scrollable div inside sidebar */
+        #main-content::-webkit-scrollbar { /* Removed #ds-sidebar > div::-webkit-scrollbar */
             width: 3px; /* Very thin scrollbar */
             height: 3px; /* For horizontal scrollbars */
         }
         body::-webkit-scrollbar-track, 
-        #main-content::-webkit-scrollbar-track, 
-        #ds-sidebar > div::-webkit-scrollbar-track {
+        #main-content::-webkit-scrollbar-track { /* Removed #ds-sidebar > div::-webkit-scrollbar-track */
             background: transparent;
         }
         body::-webkit-scrollbar-thumb, 
-        #main-content::-webkit-scrollbar-thumb, 
-        #ds-sidebar > div::-webkit-scrollbar-thumb {
+        #main-content::-webkit-scrollbar-thumb { /* Removed #ds-sidebar > div::-webkit-scrollbar-thumb */
             background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent thumb */
             border-radius: 1.5px; /* Adjusted for thinner scrollbar */
         }
         body::-webkit-scrollbar-thumb:hover, 
-        #main-content::-webkit-scrollbar-thumb:hover, 
-        #ds-sidebar > div::-webkit-scrollbar-thumb:hover {
+        #main-content::-webkit-scrollbar-thumb:hover { /* Removed #ds-sidebar > div::-webkit-scrollbar-thumb:hover */
             background-color: rgba(0, 0, 0, 0.3);
         }
         /* Dark mode scrollbar thumbs */
         .dark body::-webkit-scrollbar-thumb, 
-        .dark #main-content::-webkit-scrollbar-thumb, 
-        .dark #ds-sidebar > div::-webkit-scrollbar-thumb {
+        .dark #main-content::-webkit-scrollbar-thumb { /* Removed .dark #ds-sidebar > div::-webkit-scrollbar-thumb */
             background-color: rgba(255, 255, 255, 0.2);
         }
         .dark body::-webkit-scrollbar-thumb:hover, 
-        .dark #main-content::-webkit-scrollbar-thumb:hover, 
-        .dark #ds-sidebar > div::-webkit-scrollbar-thumb:hover {
+        .dark #main-content::-webkit-scrollbar-thumb:hover { /* Removed .dark #ds-sidebar > div::-webkit-scrollbar-thumb:hover */
             background-color: rgba(255, 255, 255, 0.3);
         }
 
         /* For Firefox */
         /* Keep body targeting here for consistency, though overflow-y: hidden makes its scrollbar non-visible */
         body, 
-        #main-content, 
-        #ds-sidebar > div { /* Target the scrollable div inside sidebar */
+        #main-content { /* Removed #ds-sidebar > div */
             scrollbar-width: thin; /* 'thin' is the thinnest keyword option */
             scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* thumb color track color */
         }
         /* Dark mode scrollbar for Firefox */
         .dark body, 
-        .dark #main-content, 
-        .dark #ds-sidebar > div {
+        .dark #main-content { /* Removed .dark #ds-sidebar > div */
             scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        /* Sidebar scroll shadow styles */
+        #ds-sidebar .sidebar-scroll-container {
+            position: relative;
+            overflow-y: auto;
+            /* Hide scrollbar */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+        #ds-sidebar .sidebar-scroll-container::-webkit-scrollbar {
+            display: none; /* Webkit */
+        }
+
+        #ds-sidebar .sidebar-scroll-container::before,
+        #ds-sidebar .sidebar-scroll-container::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 20px; /* Adjust height of shadow */
+            z-index: 10;
+            pointer-events: none; /* Allow clicking through */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 0;
+        }
+
+        #ds-sidebar .sidebar-scroll-container::before {
+            top: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+        }
+        .dark #ds-sidebar .sidebar-scroll-container::before {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+        }
+
+        #ds-sidebar .sidebar-scroll-container::after {
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+        }
+        .dark #ds-sidebar .sidebar-scroll-container::after {
+            background: linear-gradient(to top, rgba(255,255,255,0.1), transparent);
+        }
+
+        #ds-sidebar .sidebar-scroll-container.show-top-shadow::before,
+        #ds-sidebar .sidebar-scroll-container.show-bottom-shadow::after {
+            opacity: 1;
         }
 
         .sidebar-link.active-link {
@@ -236,16 +264,12 @@
 </head>
 <body class="bg-white dark:bg-gray-900 transition-colors duration-200 min-h-screen" style="background: linear-gradient(135deg, #eefbfd 0%, #f8fafc 100%);">
     <!-- Modern Glass Header -->
-    <header class="sticky top-1 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-10 py-4 shadow-lg rounded-b-2xl">
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-10 py-4 shadow-lg rounded-b-2xl">
         <h1 class="text-3xl md:text-4xl font-extrabold roboto-condensed tracking-tight text-webro-primary animate-fade-in">Webropol DS Playground</h1>
         <div class="flex items-center space-x-3">
             <button id="dark-mode-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode">
-                <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
-                </svg>
-                <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
+                <i id="sun-icon" class="fas fa-sun w-5 h-5 hidden dark:block"></i>
+                <i id="moon-icon" class="fas fa-moon w-5 h-5 block dark:hidden"></i>
             </button>
             <button id="open-modal-demo" class="ds-btn ds-btn-primary shadow-md hover:scale-105 animate-fade-in">Open Modal</button>
             <button id="show-toast-demo" class="ds-btn ds-btn-secondary shadow-md hover:scale-105 animate-fade-in">Show Toast</button>
@@ -255,52 +279,52 @@
         <!-- Floating Glass Sidebar -->
         <nav id="ds-sidebar" class="fixed left-8 top-[90px] w-24 h-[calc(100vh-100px)] bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl flex flex-col items-center py-8 z-30 border border-gray-100 dark:border-gray-700 gap-6 transition-all duration-300">
             <button id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true" class="absolute -right-3 top-1/2 -translate-y-1/2 z-40 bg-white dark:bg-gray-700 p-1.5 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-webro-primary">
-                <svg id="sidebar-toggle-icon-collapse" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-webro-primary dark:text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-                <svg id="sidebar-toggle-icon-expand" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-webro-primary dark:text-white hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                <i id="sidebar-toggle-icon-collapse" class="fas fa-chevron-left w-5 h-5 text-webro-primary dark:text-white"></i>
+                <i id="sidebar-toggle-icon-expand" class="fas fa-chevron-right w-5 h-5 text-webro-primary dark:text-white hidden"></i>
             </button>
-            <div class="flex flex-col items-center gap-4 w-full pt-6 pb-4 overflow-y-auto">
+            <div class="sidebar-scroll-container flex flex-col items-center gap-4 w-full pt-6 pb-4 overflow-y-auto">
                 <a href="#overview" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Overview">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    <i class="fas fa-home w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Overview</span>
                 </a>
                 <a href="#color-playground" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Color Playground">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                    <i class="fas fa-palette w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Colors</span>
                 </a>
                 <a href="#typography-tester" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Typography">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v12M11 17l-5-5 5-5M19.5 17.5l-5-5 5-5" /></svg>
+                    <i class="fas fa-font w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Typography</span>
                 </a>
                 <a href="#spacing-visualizer" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Spacing">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1v4m0 0h-4m4 0l-5-5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5 5" /></svg>
+                    <i class="fas fa-ruler-combined w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Spacing</span>
                 </a>
                 <a href="#grid-playground" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Grid">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    <i class="fas fa-th-large w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Grid</span>
                 </a>
                 <a href="#live-preview" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Live Preview">
-                    <svg class="w-6 h-6 mb-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" /></svg>
+                    <i class="fas fa-eye w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Preview</span>
                 </a>
                 <a href="#accessibility-checker" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Accessibility">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" /></svg>
+                    <i class="fas fa-universal-access w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">A11y</span>
                 </a>
                 <a href="#components" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Components">
-                    <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    <i class="fas fa-cubes w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Components</span>
                 </a>
             </div>
         </nav>
         <!-- Main Content -->
         <main id="main-content" class="flex-1 ml-32 lg:ml-36 xl:ml-40 overflow-y-auto bg-transparent transition-colors duration-200">
-            <section id="overview" class="p-12 md:p-16 lg:p-20 animate-fade-in">
+            <section id="overview" class="mb-4 p-12 md:p-16 lg:p-20 animate-fade-in">
                 <h2 class="roboto-condensed font-extrabold text-4xl md:text-5xl text-webro-neutral mb-8 tracking-tight animate-fade-in">Webropol Design System Overview</h2>
                 <p class="roboto text-lg md:text-xl text-webro-neutral/80 max-w-2xl mb-8 animate-fade-in">A modern, interactive playground for exploring and testing Webropol’s design system components, colors, spacing, and accessibility. Use the sidebar to jump between sections and try out live features below.</p>
             </section>
             <!-- Color Playground -->
-            <div id="color-playground" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="color-playground" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Color Playground</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
@@ -325,7 +349,7 @@
             </div>
 
             <!-- Typography Tester -->
-            <div id="typography-tester" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="typography-tester" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Typography Tester</h2>
                 <div class="space-y-6">
                     <div>
@@ -352,7 +376,7 @@
             </div>
 
             <!-- Spacing Visualizer -->
-            <div id="spacing-visualizer" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="spacing-visualizer" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Spacing Visualizer</h2>
                 <div class="space-y-6">
                     <div class="flex items-center space-x-4">
@@ -379,7 +403,7 @@
             </div>
 
             <!-- Grid Playground -->
-            <div id="grid-playground" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="grid-playground" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Grid Playground</h2>
                 <div class="space-y-6">
                     <div class="flex flex-wrap gap-4">
@@ -416,7 +440,7 @@
             </div>
 
             <!-- Live Preview Mode -->
-            <div id="live-preview" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="live-preview" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white">Live Preview</h2>
                     <div class="flex items-center space-x-4">
@@ -438,7 +462,7 @@
             </div>
 
             <!-- Accessibility Checker -->
-            <div id="accessibility-checker" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="accessibility-checker" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Accessibility Checker</h2>
                 <div class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -475,7 +499,7 @@
             </div>
 
             <!-- Enhanced Spacing Visualizer -->
-            <div id="enhanced-spacing" class="p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
+            <div id="enhanced-spacing" class="mb-4 p-12 md:p-16 lg:p-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-md rounded-lg">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral dark:text-white mb-6">Spacing Generator</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
@@ -524,7 +548,7 @@
             </div>
 
             <!-- Interactive Components -->
-            <section id="components" class="p-12 md:p-16 lg:p-20">
+            <section id="components" class="mb-4 p-12 md:p-16 lg:p-20">
                 <h2 class="roboto-condensed font-bold text-2xl text-webro-neutral mb-6">Interactive Components</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Tabs Demo -->
@@ -847,6 +871,7 @@
             const mainContent = document.getElementById('main-content');
             const sidebarToggle = document.getElementById('sidebar-toggle');
             const initialSidebarState = localStorage.getItem('sidebarState');
+            const sidebarScrollContainer = sidebar.querySelector('.sidebar-scroll-container');
 
             function setSidebarState(collapsed) {
                 if (collapsed) {
@@ -874,6 +899,41 @@
                 setSidebarState(false);
             }
             
+            // Sidebar scroll shadow handler
+            function handleSidebarScroll() {
+                if (!sidebarScrollContainer) return;
+                const { scrollTop, scrollHeight, clientHeight } = sidebarScrollContainer;
+                const atTop = scrollTop <= 5; // Add a small threshold
+                const atBottom = scrollTop + clientHeight >= scrollHeight - 5; // Add a small threshold
+
+                if (!atTop) {
+                    sidebarScrollContainer.classList.add('show-top-shadow');
+                } else {
+                    sidebarScrollContainer.classList.remove('show-top-shadow');
+                }
+
+                if (!atBottom && scrollHeight > clientHeight) { // only show bottom if there's actually scrollable content
+                    sidebarScrollContainer.classList.add('show-bottom-shadow');
+                } else {
+                    sidebarScrollContainer.classList.remove('show-bottom-shadow');
+                }
+            }
+
+            if (sidebarScrollContainer) {
+                sidebarScrollContainer.addEventListener('scroll', handleSidebarScroll);
+                // Initial check
+                handleSidebarScroll();
+
+                // Re-check on window resize or sidebar toggle as content/height might change
+                window.addEventListener('resize', handleSidebarScroll);
+                sidebarToggle.addEventListener('click', () => {
+                    // Allow transition to complete before recalculating
+                    setTimeout(handleSidebarScroll, 350); 
+                });
+                // Also check when sidebar initially loads in case it's already scrollable
+                setTimeout(handleSidebarScroll, 100); // Small delay for initial render
+            }
+
             // Active Link on Scroll
             const sections = document.querySelectorAll('#main-content section[id], #main-content div[id].p-12');
             const sidebarLinks = document.querySelectorAll('.sidebar-link');
@@ -937,4 +997,3 @@
     </script>
 </body>
 </html>
-``` 
