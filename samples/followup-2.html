@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survey Follow-up Status | Webropol Design System</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+  <link href="../ds.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f6fbfd;
+    }
+    .card-hover:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .badge-blue {
+      background-color: rgba(25, 118, 210, 0.1);
+      color: #1976d2;
+    }
+    .badge-green {
+      background-color: rgba(56, 142, 60, 0.1);
+      color: #388e3c;
+    }
+    .badge-gray {
+      background-color: rgba(97, 97, 97, 0.1);
+      color: #616161;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-5xl bg-white rounded-xl shadow p-6 border border-[#e3eaf3]">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-lg font-medium text-primary">Email survey link responses</h2>
+      <button class="px-3 py-1.5 bg-[#e6f4ea] border border-[#b7e1cd] rounded text-[#217346] flex items-center text-xs font-medium hover:bg-[#d2f0db] transition" title="Export to Excel">
+        <i class="fas fa-file-excel mr-1"></i> Export to Excel
+      </button>
+    </div>
+    
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-[#f8fafc] rounded-lg p-4 border border-[#e3eaf3]">
+        <div class="text-xs text-gray-500 mb-1">Individual recipients</div>
+        <div class="text-lg font-medium">6</div>
+      </div>
+      <div class="bg-[#f8fafc] rounded-lg p-4 border border-[#e3eaf3]">
+        <div class="text-xs text-gray-500 mb-1">Total emails sent</div>
+        <div class="text-lg font-medium">10</div>
+      </div>
+      <div class="bg-[#f8fafc] rounded-lg p-4 border border-[#e3eaf3]">
+        <div class="text-xs text-gray-500 mb-1">Survey responses</div>
+        <div class="text-lg font-medium">0</div>
+      </div>
+    </div>
+    
+    <!-- Filters -->
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-sm font-medium">Quick filters:</span>
+      <button class="badge badge-blue">All</button>
+      <button class="badge badge-gray">Sent</button>
+      <button class="badge badge-gray">Responded</button>
+      <button class="badge badge-gray">Pending</button>
+    </div>
+    
+    <!-- Survey Links List -->
+    <div class="space-y-3 mb-8" id="surveyLinks">
+      <!-- Cards will be injected by JS -->
+    </div>
+    
+    <!-- Pagination -->
+    <div class="flex justify-between items-center border-t border-[#e3eaf3] pt-4">
+      <div class="text-sm font-medium">
+        Total: <span class="text-primary">10</span> emails sent, <span class="text-primary">1</span> survey submitted
+      </div>
+      <div class="flex items-center gap-2 text-xs">
+        <button class="px-2 py-1 rounded border border-gray-200 text-gray-400 flex items-center">
+          <i class="fas fa-chevron-left mr-1"></i> Previous
+        </button>
+        <span class="px-2">Page 1 of 1</span>
+        <button class="px-2 py-1 rounded border border-gray-200 text-gray-400 flex items-center">
+          Next <i class="fas fa-chevron-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Survey data
+    const surveyData = [
+      { 
+        date: '05.12.2024, 08:38', 
+        recipients: 5,
+        sent: true, 
+        submitted: false,
+        label: 'Email survey link sending 05.12.2024, 08:38'
+      },
+      { 
+        date: '05.12.2024, 07:51', 
+        recipients: 1,
+        sent: true, 
+        submitted: false,
+        label: 'Email survey link sending 05.12.2024, 07:51'
+      },
+      { 
+        date: '05.12.2024, 07:40', 
+        recipients: 1,
+        sent: true, 
+        submitted: false,
+        label: 'Email survey link sending 05.12.2024, 07:40'
+      },
+      { 
+        date: '05.12.2024, 07:37', 
+        recipients: 1,
+        sent: true, 
+        submitted: false,
+        label: 'Email survey link sending 05.12.2024, 07:37'
+      },
+      { 
+        date: '05.12.2024, 07:33', 
+        recipients: 1,
+        sent: true, 
+        submitted: false,
+        label: 'Email survey link sending 05.12.2024, 07:33'
+      },
+      { 
+        date: '05.12.2024, 07:30', 
+        recipients: 1,
+        sent: true, 
+        submitted: false,
+        label: 'Email survey link sending 05.12.2024, 07:30'
+      }
+    ];
+
+    function renderSurveyLinks() {
+      const container = document.getElementById('surveyLinks');
+      container.innerHTML = '';
+      
+      surveyData.forEach(survey => {
+        const sentBadge = survey.sent 
+          ? '<span class="badge badge-blue"><i class="fas fa-paper-plane"></i> Sent</span>'
+          : '<span class="badge badge-gray"><i class="far fa-paper-plane"></i> Not sent</span>';
+          
+        const submittedBadge = survey.submitted
+          ? '<span class="badge badge-green"><i class="fas fa-check-circle"></i> Submitted</span>'
+          : '<span class="badge badge-gray"><i class="fas fa-clock"></i> Pending</span>';
+          
+        container.innerHTML += `
+          <div class="bg-white rounded-lg border border-[#e3eaf3] p-4 transition-all card-hover">
+            <div class="flex justify-between items-center mb-2">
+              <div class="font-medium">Survey Link</div>
+              <div class="text-xs text-gray-500">${survey.date}</div>
+            </div>
+            <div class="flex justify-between items-center mb-3">
+              <div class="text-sm text-gray-600">Recipients: <span class="font-medium">${survey.recipients}</span></div>
+              <div class="flex gap-2">
+                ${sentBadge}
+                ${submittedBadge}
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button class="text-xs text-primary hover:underline">View details</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+    
+    // Initialize
+    renderSurveyLinks();
+  </script>
+</body>
+</html>
