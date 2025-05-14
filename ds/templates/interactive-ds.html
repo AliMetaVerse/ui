@@ -130,15 +130,22 @@
         }
         #ds-sidebar {
             transition: width 0.3s ease-in-out;
-        }
-        #ds-sidebar.collapsed {
-            width: 4.5rem !important; /* w-18, slightly more than w-16 to fit icons better */
+        }        #ds-sidebar.collapsed {
+            width: 5.5rem !important; /* 4.5rem + padding */
         }
         #ds-sidebar.collapsed .sidebar-text-label {
             display: none;
         }
         #ds-sidebar.collapsed .sidebar-link {
             justify-content: center; /* Center icon */
+            padding: 0.5rem; /* Smaller padding for collapsed mode */
+            border-radius: 0.5rem; /* Smaller rounded corners when collapsed */
+        }
+        #ds-sidebar.collapsed .sidebar-link i {
+            width: 1.25rem; /* 20px - smaller icon in collapsed mode */
+            height: 1.25rem;
+            margin-bottom: 0; /* Remove margin */
+            font-size: 0.875rem; /* Smaller font size for the icon */
         }
         #ds-sidebar.collapsed #sidebar-toggle-icon-collapse {
             display: none;
@@ -250,8 +257,29 @@
             background-color: #1e6880; /* webro-primary */
             color: white;
         }
-        .sidebar-link.active-link svg {
+        .sidebar-link.active-link svg,
+        .sidebar-link.active-link i {
             stroke: white;
+            color: white;
+        }
+        #ds-sidebar.collapsed .sidebar-link.active-link {
+            /* Ensure active style looks good in collapsed mode */
+            background-color: #1e6880;
+            color: white;
+        }
+
+        /* Improve sidebar link spacing */
+        .sidebar-link {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            transition: padding 0.3s ease, border-radius 0.3s ease;
+            border-radius: 0.75rem; /* Default rounded corners */
+        }
+        .sidebar-link i {
+            transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, font-size 0.3s ease;
+            width: 1.5rem; /* 24px - normal size */
+            height: 1.5rem;
+            font-size: 1rem; /* Default font size */
         }
         #main-content {
             transition: margin-left 0.3s ease-in-out;
@@ -276,13 +304,12 @@
         </div>
     </header>
     <div class="flex h-[calc(100vh-80px)] overflow-hidden">
-        <!-- Floating Glass Sidebar -->
-        <nav id="ds-sidebar" class="fixed left-8 top-[90px] w-24 h-[calc(100vh-100px)] bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl flex flex-col items-center py-8 z-30 border border-gray-100 dark:border-gray-700 gap-6 transition-all duration-300">
+        <!-- Floating Glass Sidebar -->        <nav id="ds-sidebar" class="fixed left-5 top-[95px] w-24 h-[calc(100vh-100px)] bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl flex flex-col items-center py-8 px-3 z-30 border border-gray-100 dark:border-gray-700 gap-6 transition-all duration-300">
             <button id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true" class="absolute -right-3 top-1/2 -translate-y-1/2 z-40 bg-white dark:bg-gray-700 p-1.5 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-webro-primary">
                 <i id="sidebar-toggle-icon-collapse" class="fas fa-chevron-left w-5 h-5 text-webro-primary dark:text-white"></i>
                 <i id="sidebar-toggle-icon-expand" class="fas fa-chevron-right w-5 h-5 text-webro-primary dark:text-white hidden"></i>
             </button>
-            <div class="sidebar-scroll-container flex flex-col items-center gap-4 w-full pt-6 pb-4 overflow-y-auto">
+            <div class="sidebar-scroll-container flex flex-col items-center gap-4 w-full pt-6 pb-4 overflow-y-auto px-1">
                 <a href="#overview" class="sidebar-link group flex flex-col items-center justify-center gap-1 p-3 rounded-xl hover:bg-webro-primary hover:text-white transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-webro-primary w-full" tabindex="0" aria-label="Overview">
                     <i class="fas fa-home w-6 h-6 mb-1"></i>
                     <span class="sidebar-text-label text-xs font-semibold">Overview</span>
@@ -602,9 +629,11 @@
                 previewButton.style.backgroundColor = primaryColorInput.value;
                 previewText.style.color = accentColorInput.value;
             }
-            primaryColorInput.addEventListener('input', updateColorPreview);
-            accentColorInput.addEventListener('input', updateColorPreview);
-            updateColorPreview();
+            primaryColorInput?.addEventListener('input', updateColorPreview);
+            accentColorInput?.addEventListener('input', updateColorPreview);
+            if (primaryColorInput && accentColorInput && previewButton && previewText) {
+                updateColorPreview();
+            }
 
             // Typography Tester
             const typographyInput = document.getElementById('typography-input');
@@ -613,20 +642,40 @@
             const previewBody = document.getElementById('preview-body');
             function updateTypographyPreviews() {
                 const text = typographyInput.value;
-                previewDisplay.textContent = text;
-                previewHeading.textContent = text;
-                previewBody.textContent = text;
+                if (previewDisplay) previewDisplay.textContent = text;
+                if (previewHeading) previewHeading.textContent = text;
+                if (previewBody) previewBody.textContent = text;
             }
-            typographyInput.addEventListener('input', updateTypographyPreviews);
-            updateTypographyPreviews();
+            typographyInput?.addEventListener('input', updateTypographyPreviews);
+            if (typographyInput && (previewDisplay || previewHeading || previewBody)) {
+                updateTypographyPreviews();
+            }
 
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetId = this.getAttribute('href').substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        // If in main content, scroll the main content container
+                        const mainContent = document.getElementById('main-content');
+                        if (target.closest('#main-content') && mainContent) {
+                            mainContent.scrollTo({
+                                top: target.offsetTop - 80, // Account for header
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                        
+                        // Update active link state
+                        document.querySelectorAll('.sidebar-link').forEach(link => {
+                            link.classList.toggle('active-link', link.getAttribute('href') === `#${targetId}`);
+                        });
+                    }
                 });
             });
 
@@ -635,26 +684,72 @@
             const spacingValue = document.getElementById('spacing-value');
             const spacingPreview = document.getElementById('spacing-preview');
             function updateSpacingVisualizer() {
+                if (!spacingRange || !spacingValue || !spacingPreview) return;
+                
                 const value = parseInt(spacingRange.value);
                 const pixels = value * 4;
                 spacingValue.textContent = `${pixels}px`;
-                const boxes = spacingPreview.querySelectorAll('.flex.flex-wrap.gap-4 > div');
-                boxes.forEach((box, index) => {
+                
+                // Find or create the flex container
+                let boxesContainer = spacingPreview.querySelector('.flex.flex-wrap.gap-4');
+                if (!boxesContainer) {
+                    boxesContainer = document.createElement('div');
+                    boxesContainer.className = 'flex flex-wrap gap-4';
+                    spacingPreview.appendChild(boxesContainer);
+                }
+                
+                // Ensure we have exactly 3 boxes
+                while (boxesContainer.children.length < 3) {
+                    const box = document.createElement('div');
+                    box.className = 'bg-webro-primary rounded-lg text-white flex items-center justify-center';
+                    box.textContent = boxesContainer.children.length + 1;
+                    boxesContainer.appendChild(box);
+                }
+                
+                // Update sizes
+                Array.from(boxesContainer.children).forEach((box, index) => {
                     const size = pixels * (index + 1);
                     box.style.width = `${size}px`;
                     box.style.height = `${size}px`;
                 });
             }
-            spacingRange.addEventListener('input', updateSpacingVisualizer);
-            updateSpacingVisualizer();
+            spacingRange?.addEventListener('input', updateSpacingVisualizer);
+            if (spacingRange && spacingValue && spacingPreview) {
+                updateSpacingVisualizer();
+            }
 
             // Grid Playground
             const gridColumns = document.getElementById('grid-columns');
             const gridGap = document.getElementById('grid-gap');
-            const gridPreview = document.getElementById('grid-preview').querySelector('div');
+            const gridPreviewContainer = document.getElementById('grid-preview');
             function updateGrid() {
+                if (!gridColumns || !gridGap || !gridPreviewContainer) return;
+                
                 const columns = parseInt(gridColumns.value);
-                gridPreview.className = `grid grid-cols-${columns} gap-${gridGap.value}`;
+                const gapValue = gridGap.value;
+                
+                // Find or create the grid container
+                let gridPreview = gridPreviewContainer.querySelector('div');
+                if (!gridPreview) {
+                    gridPreview = document.createElement('div');
+                    gridPreviewContainer.appendChild(gridPreview);
+                }
+                
+                // Set grid classes
+                gridPreview.className = `grid gap-${gapValue}`;
+                
+                // Support different column counts
+                switch (columns) {
+                    case 1: gridPreview.classList.add('grid-cols-1'); break;
+                    case 2: gridPreview.classList.add('grid-cols-2'); break;
+                    case 3: gridPreview.classList.add('grid-cols-3'); break;
+                    case 4: gridPreview.classList.add('grid-cols-4'); break;
+                    case 6: gridPreview.classList.add('grid-cols-6'); break;
+                    case 12: gridPreview.classList.add('grid-cols-12'); break;
+                    default: gridPreview.classList.add('grid-cols-4');
+                }
+                
+                // Create grid items
                 gridPreview.innerHTML = '';
                 for (let i = 0; i < columns * 2; i++) {
                     const item = document.createElement('div');
@@ -663,36 +758,43 @@
                     gridPreview.appendChild(item);
                 }
             }
-            gridColumns.addEventListener('change', updateGrid);
-            gridGap.addEventListener('change', updateGrid);
-            updateGrid();
+            gridColumns?.addEventListener('change', updateGrid);
+            gridGap?.addEventListener('change', updateGrid);
+            if (gridColumns && gridGap && gridPreviewContainer) {
+                updateGrid();
+            }
 
             // Live Preview Mode
             const htmlInput = document.getElementById('html-input');
             const renderHtmlBtn = document.getElementById('render-html-btn');
             const previewContent = document.getElementById('preview-content');
+            const previewContainer = document.getElementById('preview-container');
 
             function renderCustomHTML() {
+                if (!htmlInput || !previewContent) return;
                 // Sanitize HTML to prevent XSS - in a real app, use a proper sanitizer library
-                // For this demo, we'll directly set it, assuming trusted input or simple HTML structures.
                 previewContent.innerHTML = htmlInput.value;
             }
 
-            renderHtmlBtn.addEventListener('click', renderCustomHTML);
+            renderHtmlBtn?.addEventListener('click', renderCustomHTML);
 
-            document.getElementById('preview-mobile').addEventListener('click', () => {
-                previewContent.style.maxWidth = '375px';
+            document.getElementById('preview-mobile')?.addEventListener('click', () => {
+                if (previewContent) previewContent.style.maxWidth = '375px';
             });
-            document.getElementById('preview-tablet').addEventListener('click', () => {
-                previewContent.style.maxWidth = '768px';
+            document.getElementById('preview-tablet')?.addEventListener('click', () => {
+                if (previewContent) previewContent.style.maxWidth = '768px';
             });
-            document.getElementById('preview-desktop').addEventListener('click', () => {
-                previewContent.style.maxWidth = '100%';
+            document.getElementById('preview-desktop')?.addEventListener('click', () => {
+                if (previewContent) previewContent.style.maxWidth = '100%';
             });
 
             // Set initial content for live preview
-            htmlInput.value = '<div class="p-4 bg-webro-secondary text-white rounded-lg">\n  <h3 class="text-lg font-semibold">Hello Webropol!</h3>\n  <p>This is a live preview. Try editing the HTML above!</p>\n  <button class="ds-btn ds-btn-primary mt-2">Sample Button</button>\n</div>';
-            renderCustomHTML();
+            if (htmlInput && previewContent) {
+                if (!htmlInput.value) {
+                    htmlInput.value = '<div class="p-4 bg-webro-primary text-white rounded-lg">\n  <h3 class="text-lg font-semibold">Hello Webropol!</h3>\n  <p>This is a live preview. Try editing the HTML above!</p>\n  <button class="ds-btn ds-btn-primary mt-2">Sample Button</button>\n</div>';
+                }
+                renderCustomHTML();
+            }
 
             // Accessibility Checker
             const textColorInput = document.getElementById('text-color');
@@ -701,13 +803,17 @@
             const wcagAANormal = document.getElementById('wcag-aa-normal');
             const wcagAALarge = document.getElementById('wcag-aa-large');
             const wcagAAA = document.getElementById('wcag-aaa');
+
             function calculateContrastRatio(color1, color2) {
+                // Convert hex color to RGB
                 const getRGB = (hex) => {
                     const r = parseInt(hex.slice(1, 3), 16);
                     const g = parseInt(hex.slice(3, 5), 16);
                     const b = parseInt(hex.slice(5, 7), 16);
                     return [r, g, b];
                 };
+                
+                // Calculate relative luminance
                 const getLuminance = (r, g, b) => {
                     const [rs, gs, bs] = [r, g, b].map(c => {
                         c = c / 255;
@@ -715,6 +821,7 @@
                     });
                     return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
                 };
+                
                 const [r1, g1, b1] = getRGB(color1);
                 const [r2, g2, b2] = getRGB(color2);
                 const l1 = getLuminance(r1, g1, b1);
@@ -722,22 +829,32 @@
                 const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
                 return ratio;
             }
+
             function updateContrastResults() {
+                if (!textColorInput || !bgColorInput || !contrastValue || !wcagAANormal || !wcagAALarge || !wcagAAA) return;
+                
                 const ratio = calculateContrastRatio(textColorInput.value, bgColorInput.value);
                 contrastValue.textContent = ratio.toFixed(2) + ':1';
+                
                 const passesAA = ratio >= 4.5;
                 const passesAALarge = ratio >= 3;
                 const passesAAA = ratio >= 7;
+                
                 wcagAANormal.textContent = passesAA ? '✓ Pass' : '✗ Fail';
-                wcagAANormal.className = passesAA ? 'text-green-500' : 'text-red-500';
+                wcagAANormal.className = passesAA ? 'text-green-500 font-medium' : 'text-red-500 font-medium';
+                
                 wcagAALarge.textContent = passesAALarge ? '✓ Pass' : '✗ Fail';
-                wcagAALarge.className = passesAALarge ? 'text-green-500' : 'text-red-500';
+                wcagAALarge.className = passesAALarge ? 'text-green-500 font-medium' : 'text-red-500 font-medium';
+                
                 wcagAAA.textContent = passesAAA ? '✓ Pass' : '✗ Fail';
-                wcagAAA.className = passesAAA ? 'text-green-500' : 'text-red-500';
+                wcagAAA.className = passesAAA ? 'text-green-500 font-medium' : 'text-red-500 font-medium';
             }
-            textColorInput.addEventListener('input', updateContrastResults);
-            bgColorInput.addEventListener('input', updateContrastResults);
-            updateContrastResults();
+
+            textColorInput?.addEventListener('input', updateContrastResults);
+            bgColorInput?.addEventListener('input', updateContrastResults);
+            if (textColorInput && bgColorInput && contrastValue) {
+                updateContrastResults();
+            }
 
             // Enhanced Spacing Generator
             const spacingProperty = document.getElementById('spacing-property');
@@ -745,255 +862,337 @@
             const spacingDemo = document.getElementById('spacing-demo');
             const spacingCss = document.getElementById('spacing-css');
             const copySpacingCss = document.getElementById('copy-spacing-css');
+
             function updateSpacing() {
+                if (!spacingProperty || !spacingInputs.length || !spacingDemo || !spacingCss) return;
+                
                 const property = spacingProperty.value;
-                const values = Array.from(spacingInputs).map(input => input.value * 4);
+                
+                // Get values, defaulting to 0 if fewer than 4 inputs
+                const values = [];
+                spacingInputs.forEach(input => values.push(parseInt(input.value) * 4));
+                while (values.length < 4) values.push(0); // Ensure we have 4 values
+                
                 const [top, right, bottom, left] = values;
                 const css = `${property}: ${top}px ${right}px ${bottom}px ${left}px;`;
+                
+                // Apply to demo element
                 spacingDemo.style[property] = `${top}px ${right}px ${bottom}px ${left}px`;
                 spacingCss.textContent = css;
             }
-            spacingProperty.addEventListener('change', updateSpacing);
+
+            spacingProperty?.addEventListener('change', updateSpacing);
             spacingInputs.forEach(input => {
-                input.addEventListener('input', updateSpacing);
+                input?.addEventListener('input', updateSpacing);
             });
-            copySpacingCss.addEventListener('click', () => {
-                navigator.clipboard.writeText(spacingCss.textContent);
-                copySpacingCss.textContent = 'Copied!';
-                setTimeout(() => {
+            
+            copySpacingCss?.addEventListener('click', () => {
+                if (spacingCss) {
+                    navigator.clipboard.writeText(spacingCss.textContent);
+                    copySpacingCss.textContent = 'Copied!';
+                    copySpacingCss.classList.add('bg-green-500');
+                    setTimeout(() => {
+                        copySpacingCss.textContent = 'Copy CSS';
+                        copySpacingCss.classList.remove('bg-green-500');
+                    }, 2000);
+                }
+            });
+            
+            if (spacingProperty && spacingInputs.length && spacingDemo && spacingCss) {
+                updateSpacing();
+                
+                if (copySpacingCss && !copySpacingCss.textContent) {
                     copySpacingCss.textContent = 'Copy CSS';
-                }, 2000);
-            });
-            updateSpacing();
-
-            // DS Toggle Switch
-            const dsToggle = document.getElementById('ds-toggle-demo');
-            const toggleStatus = document.getElementById('toggle-status');
-            dsToggle.addEventListener('change', function() {
-                if (dsToggle.checked) {
-                    toggleStatus.textContent = 'On';
-                    document.getElementById('toggle-track').classList.add('bg-webro-primary');
-                } else {
-                    toggleStatus.textContent = 'Off';
-                    document.getElementById('toggle-track').classList.remove('bg-webro-primary');
+                    copySpacingCss.className = 'mt-2 px-4 py-2 bg-webro-primary text-white rounded-lg hover:bg-opacity-90 transition-colors';
                 }
-            });
-            // Keyboard accessibility for toggle
-            dsToggle.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault(); // Prevent scrolling
-                    dsToggle.checked = !dsToggle.checked;
-                    dsToggle.dispatchEvent(new Event('change'));
-                }
-            });
+            }
 
-            // DS Tabs
-            const tabButtons = [
-                document.getElementById('tab-1'),
-                document.getElementById('tab-2'),
-                document.getElementById('tab-3')
-            ];
-            const tabContents = [
-                document.getElementById('tab-content-1'),
-                document.getElementById('tab-content-2'),
-                document.getElementById('tab-content-3')
-            ];
-            tabButtons.forEach((btn, idx) => {
-                btn.addEventListener('click', () => {
-                    tabButtons.forEach((b, i) => {
-                        b.classList.toggle('ds-tab-active', i === idx);
-                        b.setAttribute('aria-selected', i === idx);
-                        tabContents[i].classList.toggle('hidden', i !== idx);
+            // Tabs Demo
+            const tabContainer = document.querySelector('[role="tablist"]');
+            if (tabContainer) {
+                // Create tabs if they don't exist
+                if (!tabContainer.children.length) {
+                    for (let i = 1; i <= 3; i++) {
+                        const tab = document.createElement('button');
+                        tab.id = `tab-${i}`;
+                        tab.className = i === 1 ? 'ds-tab ds-tab-active' : 'ds-tab';
+                        tab.setAttribute('role', 'tab');
+                        tab.setAttribute('aria-selected', i === 1 ? 'true' : 'false');
+                        tab.setAttribute('aria-controls', `tab-content-${i}`);
+                        tab.textContent = `Tab ${i}`;
+                        tabContainer.appendChild(tab);
+                    }
+                }
+                
+                const tabButtons = tabContainer.querySelectorAll('[role="tab"]');
+                const tabContents = document.querySelectorAll('[id^="tab-content-"]');
+                
+                tabButtons.forEach((btn, idx) => {
+                    btn.addEventListener('click', () => {
+                        tabButtons.forEach((b, i) => {
+                            b.classList.toggle('ds-tab-active', i === idx);
+                            b.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+                            if (tabContents[i]) {
+                                tabContents[i].classList.toggle('hidden', i !== idx);
+                            }
+                        });
+                    });
+                    
+                    // Keyboard navigation for tabs
+                    btn.addEventListener('keydown', (e) => {
+                        if (e.key === 'ArrowRight') {
+                            tabButtons[(idx + 1) % tabButtons.length].focus();
+                        } else if (e.key === 'ArrowLeft') {
+                            tabButtons[(idx - 1 + tabButtons.length) % tabButtons.length].focus();
+                        }
                     });
                 });
-                // Keyboard navigation for tabs
-                btn.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowRight') {
-                        tabButtons[(idx + 1) % tabButtons.length].focus();
-                    } else if (e.key === 'ArrowLeft') {
-                        tabButtons[(idx - 1 + tabButtons.length) % tabButtons.length].focus();
-                    }
-                });
-            });
+            }
 
             // DS Modal
             const openModalBtn = document.getElementById('open-modal-demo');
-            const closeModalBtn = document.getElementById('close-modal-demo');
             const dsModal = document.getElementById('ds-modal');
-            openModalBtn.addEventListener('click', () => {
-                dsModal.classList.remove('hidden');
-                dsModal.querySelector('button').focus();
-            });
-            closeModalBtn.addEventListener('click', () => {
-                dsModal.classList.add('hidden');
-                openModalBtn.focus();
-            });
-            // Close modal on Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !dsModal.classList.contains('hidden')) {
+            
+            if (openModalBtn && dsModal) {
+                // Create modal content if it doesn't exist
+                const modalContent = dsModal.querySelector('.bg-white');
+                if (modalContent && !modalContent.children.length) {
+                    const title = document.createElement('h3');
+                    title.id = 'modal-title';
+                    title.className = 'text-xl font-bold mb-4 text-webro-neutral dark:text-white';
+                    title.textContent = 'DS Modal Example';
+                    
+                    const content = document.createElement('p');
+                    content.className = 'mb-6 text-webro-neutral/80 dark:text-gray-300';
+                    content.textContent = 'This is a sample modal dialog from the Webropol Design System.';
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.id = 'close-modal-demo';
+                    closeBtn.className = 'ds-btn ds-btn-primary';
+                    closeBtn.textContent = 'Close Modal';
+                    
+                    modalContent.appendChild(title);
+                    modalContent.appendChild(content);
+                    modalContent.appendChild(closeBtn);
+                }
+                
+                const closeModalBtn = document.getElementById('close-modal-demo');
+                
+                openModalBtn.addEventListener('click', () => {
+                    dsModal.classList.remove('hidden');
+                    dsModal.querySelector('button').focus();
+                });
+                
+                closeModalBtn?.addEventListener('click', () => {
                     dsModal.classList.add('hidden');
                     openModalBtn.focus();
-                }
-            });
-            // Trap focus in modal
-            dsModal.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    const focusable = dsModal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
-                    const first = focusable[0];
-                    const last = focusable[focusable.length - 1];
-                    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
-                        e.preventDefault();
-                        (e.shiftKey ? last : first).focus();
+                });
+                
+                // Close modal on Escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !dsModal.classList.contains('hidden')) {
+                        dsModal.classList.add('hidden');
+                        openModalBtn.focus();
                     }
-                }
-            });
+                });
+                
+                // Trap focus in modal
+                dsModal.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab') {
+                        const focusable = dsModal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+                        const first = focusable[0];
+                        const last = focusable[focusable.length - 1];
+                        if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+                            e.preventDefault();
+                            (e.shiftKey ? last : first).focus();
+                        }
+                    }
+                });
+                
+                // Close modal when clicking outside
+                dsModal.addEventListener('click', (e) => {
+                    if (e.target === dsModal) {
+                        dsModal.classList.add('hidden');
+                        openModalBtn.focus();
+                    }
+                });
+            }
 
             // DS Toast
             const showToastBtn = document.getElementById('show-toast-demo');
             const toastContainer = document.getElementById('ds-toast-container');
-            showToastBtn.addEventListener('click', () => {
-                const toast = document.createElement('div');
-                toast.className = 'bg-webro-primary text-white px-4 py-2 rounded shadow mb-2 animate-fade-in';
-                toast.textContent = 'This is a DS Toast notification!';
-                toastContainer.appendChild(toast);
-                setTimeout(() => {
-                    toast.classList.add('opacity-0');
-                    setTimeout(() => toast.remove(), 500);
-                }, 2500);
-            });
+            
+            if (showToastBtn && toastContainer) {
+                showToastBtn.addEventListener('click', () => {
+                    const toast = document.createElement('div');
+                    toast.className = 'bg-webro-primary text-white px-4 py-2 rounded shadow mb-2 animate-fade-in flex justify-between items-center';
+                    
+                    const text = document.createElement('span');
+                    text.textContent = 'This is a DS Toast notification!';
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'ml-4 text-white hover:text-gray-200';
+                    closeBtn.innerHTML = '&times;';
+                    closeBtn.addEventListener('click', () => {
+                        toast.classList.add('opacity-0');
+                        setTimeout(() => toast.remove(), 300);
+                    });
+                    
+                    toast.appendChild(text);
+                    toast.appendChild(closeBtn);
+                    toastContainer.appendChild(toast);
+                    
+                    // Auto-dismiss after a delay
+                    setTimeout(() => {
+                        toast.style.transition = 'opacity 0.3s ease';
+                        toast.style.opacity = '0';
+                        setTimeout(() => toast.remove(), 300);
+                    }, 3000);
+                });
+            }
 
             // Dark Mode Toggle
             const darkModeToggle = document.getElementById('dark-mode-toggle');
             const htmlElement = document.documentElement;
+            
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', () => {
+                    if (htmlElement.classList.contains('dark')) {
+                        htmlElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        htmlElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+                
+                // Set initial dark mode from localStorage or system preference
+                if (localStorage.getItem('theme') === 'dark' || 
+                    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                }
+            }
 
             // Sidebar Toggle Functionality
             const sidebar = document.getElementById('ds-sidebar');
             const mainContent = document.getElementById('main-content');
             const sidebarToggle = document.getElementById('sidebar-toggle');
-            const initialSidebarState = localStorage.getItem('sidebarState');
-            const sidebarScrollContainer = sidebar.querySelector('.sidebar-scroll-container');
-
-            function setSidebarState(collapsed) {
+            const sidebarScrollContainer = sidebar?.querySelector('.sidebar-scroll-container');
+              function setSidebarState(collapsed) {
+                if (!sidebar || !mainContent || !sidebarToggle) return;
+                
                 if (collapsed) {
                     sidebar.classList.add('collapsed');
-                    mainContent.classList.remove('ml-32', 'lg:ml-36', 'xl:ml-40');
-                    mainContent.classList.add('ml-[calc(4.5rem+2rem)]', 'lg:ml-[calc(4.5rem+2rem+4rem)]', 'xl:ml-[calc(4.5rem+2rem+8rem)]');
+                    mainContent.style.marginLeft = '7rem'; // 4.5rem + left-offset + side-padding
                     sidebarToggle.setAttribute('aria-expanded', 'false');
                     localStorage.setItem('sidebarState', 'collapsed');
                 } else {
                     sidebar.classList.remove('collapsed');
-                    mainContent.classList.remove('ml-[calc(4.5rem+2rem)]', 'lg:ml-[calc(4.5rem+2rem+4rem)]', 'xl:ml-[calc(4.5rem+2rem+8rem)]');
-                    mainContent.classList.add('ml-32', 'lg:ml-36', 'xl:ml-40');
+                    mainContent.style.marginLeft = '9rem'; // 6rem + left-offset + side-padding
                     sidebarToggle.setAttribute('aria-expanded', 'true');
                     localStorage.setItem('sidebarState', 'expanded');
                 }
             }
-
-            sidebarToggle.addEventListener('click', () => {
-                setSidebarState(!sidebar.classList.contains('collapsed'));
-            });
-
-            if (initialSidebarState === 'collapsed') {
-                setSidebarState(true);
-            } else {
-                setSidebarState(false);
+            
+            if (sidebar && mainContent && sidebarToggle) {
+                sidebarToggle.addEventListener('click', () => {
+                    setSidebarState(!sidebar.classList.contains('collapsed'));
+                });
+                
+                // Initialize sidebar state from localStorage
+                const initialSidebarState = localStorage.getItem('sidebarState');
+                setSidebarState(initialSidebarState === 'collapsed');
             }
             
             // Sidebar scroll shadow handler
             function handleSidebarScroll() {
                 if (!sidebarScrollContainer) return;
+                
                 const { scrollTop, scrollHeight, clientHeight } = sidebarScrollContainer;
                 const atTop = scrollTop <= 5; // Add a small threshold
                 const atBottom = scrollTop + clientHeight >= scrollHeight - 5; // Add a small threshold
-
-                if (!atTop) {
-                    sidebarScrollContainer.classList.add('show-top-shadow');
-                } else {
-                    sidebarScrollContainer.classList.remove('show-top-shadow');
-                }
-
-                if (!atBottom && scrollHeight > clientHeight) { // only show bottom if there's actually scrollable content
-                    sidebarScrollContainer.classList.add('show-bottom-shadow');
-                } else {
-                    sidebarScrollContainer.classList.remove('show-bottom-shadow');
-                }
+                
+                // Show/hide top shadow
+                sidebarScrollContainer.classList.toggle('show-top-shadow', !atTop);
+                
+                // Show/hide bottom shadow
+                // Only show if there's actually scrollable content and not at the bottom
+                const hasScrollableContent = scrollHeight > clientHeight;
+                sidebarScrollContainer.classList.toggle('show-bottom-shadow', hasScrollableContent && !atBottom);
             }
-
+            
             if (sidebarScrollContainer) {
                 sidebarScrollContainer.addEventListener('scroll', handleSidebarScroll);
+                
                 // Initial check
                 handleSidebarScroll();
-
-                // Re-check on window resize or sidebar toggle as content/height might change
+                
+                // Re-check on window resize or sidebar toggle as content might change
                 window.addEventListener('resize', handleSidebarScroll);
-                sidebarToggle.addEventListener('click', () => {
+                sidebarToggle?.addEventListener('click', () => {
                     // Allow transition to complete before recalculating
-                    setTimeout(handleSidebarScroll, 350); 
+                    setTimeout(handleSidebarScroll, 350);
                 });
-                // Also check when sidebar initially loads in case it's already scrollable
-                setTimeout(handleSidebarScroll, 100); // Small delay for initial render
+                
+                // Check after small delay for initial render
+                setTimeout(handleSidebarScroll, 100);
             }
 
             // Active Link on Scroll
             const sections = document.querySelectorAll('#main-content section[id], #main-content div[id].p-12');
             const sidebarLinks = document.querySelectorAll('.sidebar-link');
             const mainScrollContainer = document.getElementById('main-content');
-
-            const observerOptions = {
-                root: mainScrollContainer, 
-                rootMargin: '-20% 0px -60% 0px',
-                threshold: 0.1
-            };
-
-            function activateLink(id) {
-                sidebarLinks.forEach(link => {
-                    link.classList.remove('active-link');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active-link');
-                    }
-                });
-            }
             
-            const observerCallback = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        activateLink(entry.target.id);
+            if (sections.length > 0 && sidebarLinks.length > 0 && mainScrollContainer) {
+                const observerOptions = {
+                    root: mainScrollContainer,
+                    rootMargin: '-20% 0px -60% 0px',
+                    threshold: 0.1
+                };
+                
+                function activateLink(id) {
+                    sidebarLinks.forEach(link => {
+                        link.classList.toggle('active-link', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+                
+                const observerCallback = (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            activateLink(entry.target.id);
+                        }
+                    });
+                };
+                
+                // Set up intersection observer for section visibility
+                const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+                sections.forEach(section => {
+                    if (section.id) {
+                        scrollObserver.observe(section);
                     }
                 });
-            };
-
-            const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
-            sections.forEach(section => {
-                if (section.id) {
-                    scrollObserver.observe(section);
+                
+                // Activate link based on initial hash or first section
+                const currentHash = window.location.hash.substring(1);
+                if (currentHash) {
+                    activateLink(currentHash);
+                    const targetSection = document.getElementById(currentHash);
+                    if (targetSection) {
+                        setTimeout(() => {
+                            mainScrollContainer.scrollTo({
+                                top: targetSection.offsetTop - 80, // Account for header
+                                behavior: 'auto'
+                            });
+                        }, 100);
+                    }
+                } else if (sections.length > 0 && sections[0].id) {
+                    activateLink(sections[0].id);
                 }
-            });
-
-            const currentHash = window.location.hash.substring(1);
-            if (currentHash) {
-                activateLink(currentHash);
-                const targetSection = document.getElementById(currentHash);
-                if (targetSection) {
-                }
-            } else if (sections.length > 0 && sections[0].id) {
-                activateLink(sections[0].id);
-            }
-
-            darkModeToggle.addEventListener('click', () => {
-                if (htmlElement.classList.contains('dark')) {
-                    htmlElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    htmlElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-            if (localStorage.getItem('theme') === 'dark') {
-                htmlElement.classList.add('dark');
-            } else {
-                htmlElement.classList.remove('dark');
             }
         });
     </script>
 </body>
 </html>
+``` 
