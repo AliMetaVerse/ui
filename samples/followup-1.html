@@ -156,10 +156,6 @@
         display: none !important;
       }
 
-      .hide-sent-pct .col-sent-pct {
-        display: none !important;
-      }
-
       .hide-sub-n .col-sub-n {
         display: none !important;
       }
@@ -184,60 +180,23 @@
 
       /* When all columns are visible, each data column gets 15% */
       .table-border-collapse .col-sent-n,
-      .table-border-collapse .col-sent-pct,
       .table-border-collapse .col-sub-n,
       .table-border-collapse .col-sub-pct {
         width: 15%;
       }
 
       /* When 3 data columns are visible */
-      .table-border-collapse.hide-sent-n:not(.hide-sent-pct):not(
-          .hide-sub-n
-        ):not(.hide-sub-pct)
-        .col-sent-pct,
-      .table-border-collapse.hide-sent-n:not(.hide-sent-pct):not(
-          .hide-sub-n
-        ):not(.hide-sub-pct)
+      .table-border-collapse.hide-sent-n:not(.hide-sub-n):not(.hide-sub-pct)
         .col-sub-n,
-      .table-border-collapse.hide-sent-n:not(.hide-sent-pct):not(
-          .hide-sub-n
-        ):not(.hide-sub-pct)
+      .table-border-collapse.hide-sent-n:not(.hide-sub-n):not(.hide-sub-pct)
         .col-sub-pct,
-      .table-border-collapse:not(.hide-sent-n).hide-sent-pct:not(
-          .hide-sub-n
-        ):not(.hide-sub-pct)
+      .table-border-collapse:not(.hide-sent-n).hide-sub-n:not(.hide-sub-pct)
         .col-sent-n,
-      .table-border-collapse:not(.hide-sent-n).hide-sent-pct:not(
-          .hide-sub-n
-        ):not(.hide-sub-pct)
-        .col-sub-n,
-      .table-border-collapse:not(.hide-sent-n).hide-sent-pct:not(
-          .hide-sub-n
-        ):not(.hide-sub-pct)
+      .table-border-collapse:not(.hide-sent-n).hide-sub-n:not(.hide-sub-pct)
         .col-sub-pct,
-      .table-border-collapse:not(.hide-sent-n):not(
-          .hide-sent-pct
-        ).hide-sub-n:not(.hide-sub-pct)
+      .table-border-collapse:not(.hide-sent-n):not(.hide-sub-n).hide-sub-pct
         .col-sent-n,
-      .table-border-collapse:not(.hide-sent-n):not(
-          .hide-sent-pct
-        ).hide-sub-n:not(.hide-sub-pct)
-        .col-sent-pct,
-      .table-border-collapse:not(.hide-sent-n):not(
-          .hide-sent-pct
-        ).hide-sub-n:not(.hide-sub-pct)
-        .col-sub-pct,
-      .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct):not(
-          .hide-sub-n
-        ).hide-sub-pct
-        .col-sent-n,
-      .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct):not(
-          .hide-sub-n
-        ).hide-sub-pct
-        .col-sent-pct,
-      .table-border-collapse:not(.hide-sent-n):not(.hide-sent-pct):not(
-          .hide-sub-n
-        ).hide-sub-pct
+      .table-border-collapse:not(.hide-sent-n):not(.hide-sub-n).hide-sub-pct
         .col-sub-n {
         width: 20%;
       }
@@ -255,8 +214,7 @@
       }
 
       /* When no data columns are visible */
-      .table-border-collapse.hide-sent-n.hide-sent-pct.hide-sub-n.hide-sub-pct
-        td:first-child {
+      .table-border-collapse.hide-sent-n.hide-sub-n.hide-sub-pct td:first-child {
         width: 100%;
       }
 
@@ -297,7 +255,6 @@
       }
 
       /* Format percentage values consistently */
-      .table-border-collapse td.col-sent-pct .value,
       .table-border-collapse td.col-sub-pct .value {
         position: relative;
         padding-right: 2px;
@@ -351,18 +308,6 @@
                         id="toggle-sent-n"
                       />
                       <span class="text-gray-700">n</span>
-                    </label>
-                    <label
-                      class="inline-flex items-center text-xs font-medium"
-                      title="Show percentage of Private Links Sent"
-                    >
-                      <input
-                        type="checkbox"
-                        checked
-                        class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
-                        id="toggle-sent-pct"
-                      />
-                      <span class="text-gray-700">%</span>
                     </label>
                   </div>
                   <div
@@ -514,14 +459,6 @@
                     </div>
                   </th>
                   <th
-                    class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-pct"
-                  >
-                    <div class="flex items-center justify-center gap-1">
-                      <span>Private Links Sent</span>
-                      <span class="text-xs text-gray-500 ml-1">(%)</span>
-                    </div>
-                  </th>
-                  <th
                     class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-n"
                   >
                     <div class="flex items-center justify-center gap-1">
@@ -544,7 +481,7 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <td colspan="5" class="px-0 py-0">
+                  <td colspan="4" class="px-0 py-0">
                     <div
                       class="flex justify-end items-center py-2 px-4 text-xs text-gray-600 gap-2"
                     >
@@ -578,11 +515,6 @@
                     10
                   </td>
                   <td
-                    class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct"
-                  >
-                    100%
-                  </td>
-                  <td
                     class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n"
                   >
                     0
@@ -603,11 +535,6 @@
                     -
                   </td>
                   <td
-                    class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct"
-                  >
-                    -
-                  </td>
-                  <td
                     class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n"
                   >
                     1
@@ -621,7 +548,7 @@
                 <tr class="bg-blue-50" id="totalSubmittedRow">
                   <td
                     class="py-3 px-4 text-right font-medium text-gray-800"
-                    colspan="3"
+                    colspan="2"
                   >
                     Total submitted surveys:
                   </td>
@@ -649,49 +576,42 @@
         {
           label: "Email survey link sending 05.12.2024, 08:38",
           sentN: 5,
-          sentPct: 100,
           subN: 0,
           subPct: 0,
         },
         {
           label: "Email survey link sending 05.12.2024, 07:51",
           sentN: 1,
-          sentPct: 100,
           subN: 0,
           subPct: 0,
         },
         {
           label: "Email survey link sending 05.12.2024, 07:40",
           sentN: 1,
-          sentPct: 100,
           subN: 0,
           subPct: 0,
         },
         {
           label: "Email survey link sending 05.12.2024, 07:37",
           sentN: 1,
-          sentPct: 100,
           subN: 0,
           subPct: 0,
         },
         {
           label: "Email survey link sending 05.12.2024, 07:33",
           sentN: 1,
-          sentPct: 100,
           subN: 0,
           subPct: 0,
         },
         {
           label: "Email survey link sending 05.12.2024, 07:30",
           sentN: 1,
-          sentPct: 100,
           subN: 0,
           subPct: 0,
         },
       ];
       function renderMainTable() {
         const showSentN = document.getElementById("toggle-sent-n").checked;
-        const showSentPct = document.getElementById("toggle-sent-pct").checked;
         const showSubN = document.getElementById("toggle-sub-n").checked;
         const showSubPct = document.getElementById("toggle-sub-pct").checked;
 
@@ -700,12 +620,11 @@
 
         // Individual class management for each column
         table.classList.toggle("hide-sent-n", !showSentN);
-        table.classList.toggle("hide-sent-pct", !showSentPct);
         table.classList.toggle("hide-sub-n", !showSubN);
-        table.classList.toggle("hide-sub-pct", !showSubPct); // Update colspan for footer row containing pagination based on visible columns
+        table.classList.toggle("hide-sub-pct", !showSubPct); 
+        // Update colspan for footer row containing pagination based on visible columns
         const visibleColumns = [
           showSentN,
-          showSentPct,
           showSubN,
           showSubPct,
         ].filter(Boolean).length;
@@ -716,7 +635,7 @@
         const totalSubmittedRow = document.getElementById("totalSubmittedRow");
         if (totalSubmittedRow) {
           const firstCell = totalSubmittedRow.querySelector("td:first-child");
-          firstCell.colSpan = 1 + (showSentN ? 1 : 0) + (showSentPct ? 1 : 0);
+          firstCell.colSpan = 1 + (showSentN ? 1 : 0);
         }
 
         // Render rows
@@ -732,11 +651,6 @@
             <td class="py-3 px-4 text-center col-sent-n">
               <div class="data-indicator">
                 <span class="value font-medium">${row.sentN}</span>
-              </div>
-            </td>
-            <td class="py-3 px-4 text-center col-sent-pct">
-              <div class="data-indicator">
-                <span class="value">${row.sentPct}%</span>
               </div>
             </td>
             <td class="py-3 px-4 text-center col-sub-n">
@@ -757,9 +671,6 @@
         .getElementById("toggle-sent-n")
         .addEventListener("change", renderMainTable);
       document
-        .getElementById("toggle-sent-pct")
-        .addEventListener("change", renderMainTable);
-      document
         .getElementById("toggle-sub-n")
         .addEventListener("change", renderMainTable);
       document
@@ -770,7 +681,6 @@
         .getElementById("toggle-all")
         .addEventListener("click", function () {
           document.getElementById("toggle-sent-n").checked = true;
-          document.getElementById("toggle-sent-pct").checked = true;
           document.getElementById("toggle-sub-n").checked = true;
           document.getElementById("toggle-sub-pct").checked = true;
           renderMainTable();
