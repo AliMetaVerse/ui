@@ -304,453 +304,335 @@
       }
     </style>
   </head>
-  <body class="p-24 flex items-center justify-center">
-    <div
-      class="w-full max-w-6xl bg-white rounded-xl shadow p-6 border border-[#e3eaf3]"
-    >
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-lg font-medium text-primary">
-          Email survey link responses
-        </h2>
-        <div class="flex items-center gap-2">
-          <span class="text-sm text-gray-700">Show:</span>
-          <div class="flex flex-col">
-            <div
-              class="flex items-center gap-3 bg-gray-100 rounded-md py-1 px-3"
-            >
-              <div
-                class="flex items-center gap-2 border-r border-gray-300 pr-2"
+  <body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div include-html="../common/sidebar.html" class="flex-shrink-0">
+      <!-- Sidebar content will be injected here by main.js -->
+    </div>
+
+    <!-- Main content area (Header + Page Content) -->
+    <div class="flex-grow flex flex-col">
+      <!-- Header -->
+      <div include-html="../common/header.html">
+        <!-- Header content will be injected here by main.js -->
+      </div>
+
+      <!-- Page Content -->
+      <main class="flex-grow p-6 overflow-auto">
+        <div
+          class="w-full max-w-6xl bg-white rounded-xl shadow p-6 border border-[#e3eaf3]"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-medium text-primary">
+              Email survey link responses
+            </h2>
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-gray-700">Show:</span>
+              <div class="flex flex-col">
+                <div
+                  class="flex items-center gap-3 bg-gray-100 rounded-md py-1 px-3"
+                >
+                  <div
+                    class="flex items-center gap-2 border-r border-gray-300 pr-2"
+                  >
+                    <span
+                      class="text-xs text-gray-600 font-medium flex items-center"
+                    >
+                      Email Links:
+                    </span>
+                    <label
+                      class="inline-flex items-center text-xs font-medium"
+                      title="Show count of email links sent"
+                    >
+                      <input
+                        type="checkbox"
+                        checked
+                        class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
+                        id="toggle-sent-n"
+                      />
+                      <span class="text-gray-700">n</span>
+                    </label>
+                    <label
+                      class="inline-flex items-center text-xs font-medium"
+                      title="Show percentage of email links sent"
+                    >
+                      <input
+                        type="checkbox"
+                        checked
+                        class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
+                        id="toggle-sent-pct"
+                      />
+                      <span class="text-gray-700">%</span>
+                    </label>
+                  </div>
+                  <div
+                    class="flex items-center gap-2 border-r border-gray-300 pr-2"
+                  >
+                    <span
+                      class="text-xs text-gray-600 font-medium flex items-center"
+                    >
+                      Submitted:
+                    </span>
+                    <label
+                      class="inline-flex items-center text-xs font-medium"
+                      title="Show count of surveys submitted"
+                    >
+                      <input
+                        type="checkbox"
+                        checked
+                        class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
+                        id="toggle-sub-n"
+                      />
+                      <span class="text-gray-700">n</span>
+                    </label>
+                    <label
+                      class="inline-flex items-center text-xs font-medium"
+                      title="Show percentage of surveys submitted"
+                    >
+                      <input
+                        type="checkbox"
+                        checked
+                        class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
+                        id="toggle-sub-pct"
+                      />
+                      <span class="text-gray-700">%</span>
+                    </label>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button
+                      id="toggle-all"
+                      class="text-xs text-primary hover:text-blue-700 font-medium"
+                      title="Show all columns"
+                    >
+                      All
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="ml-4 w-8 p-2 bg-[#e0f2ea] text-[#217346] border border-[#b2dcc8] rounded-lg flex items-center justify-center text-sm hover:bg-[#d0ebdf] transition-colors shadow-sm"
+                title="Export to Excel"
               >
-                <span
-                  class="text-xs text-gray-600 font-medium flex items-center"
-                >
-                  Email Links:
-                </span>
-                <label
-                  class="inline-flex items-center text-xs font-medium"
-                  title="Show count of email links sent"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
-                    id="toggle-sent-n"
-                  />
-                  <span class="text-gray-700">n</span>
-                </label>
-                <label
-                  class="inline-flex items-center text-xs font-medium"
-                  title="Show percentage of email links sent"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
-                    id="toggle-sent-pct"
-                  />
-                  <span class="text-gray-700">%</span>
-                </label>
-              </div>
-              <div
-                class="flex items-center gap-2 border-r border-gray-300 pr-2"
-              >
-                <span
-                  class="text-xs text-gray-600 font-medium flex items-center"
-                >
-                  Submitted:
-                </span>
-                <label
-                  class="inline-flex items-center text-xs font-medium"
-                  title="Show count of surveys submitted"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
-                    id="toggle-sub-n"
-                  />
-                  <span class="text-gray-700">n</span>
-                </label>
-                <label
-                  class="inline-flex items-center text-xs font-medium"
-                  title="Show percentage of surveys submitted"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="accent-[#1976d2] mr-1 h-3.5 w-3.5"
-                    id="toggle-sub-pct"
-                  />
-                  <span class="text-gray-700">%</span>
-                </label>
-              </div>
-              <div class="flex items-center gap-2">
-                <button
-                  id="toggle-all"
-                  class="text-xs text-primary hover:text-blue-700 font-medium"
-                  title="Show all columns"
-                >
-                  All
-                </button>
-              </div>
+                <i class="fas fa-file-excel"></i>
+              </button>
             </div>
           </div>
-          <button
-            class="ml-4 w-8 p-2 bg-[#e0f2ea] text-[#217346] border border-[#b2dcc8] rounded-lg flex items-center justify-center text-sm hover:bg-[#d0ebdf] transition-colors shadow-sm"
-            title="Export to Excel"
+          <!-- Summary Table -->
+          <table
+            class="w-full text-sm table-border-separate mb-5 border border-[#e2e8f0] rounded-md overflow-hidden shadow-sm"
           >
-            <i class="fas fa-file-excel"></i>
-          </button>
-        </div>
-      </div>
-      <!-- Summary Table -->
-      <table
-        class="w-full text-sm table-border-separate mb-5 border border-[#e2e8f0] rounded-md overflow-hidden shadow-sm"
-      >
-        <thead>
-          <tr class="bg-[#f5f8fa] border-b border-[#e2e8f0]">
-            <th
-              class="py-3 px-4 text-left font-medium text-gray-700 border-r border-[#e2e8f0]"
-            >
-              Email survey link responses
-            </th>
-            <th
-              class="py-3 px-4 text-center font-medium text-gray-700 w-32 border-r border-[#e2e8f0]"
-            >
-              Count (n)
-            </th>
-            <th class="py-3 px-4 text-center font-medium text-gray-700 w-32">
-              Percentage (%)
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-[#bfc9d1] hover:bg-[#eef5fe]">
-            <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
-              Individual recipients
-            </td>
-            <td
-              class="py-2 px-2 text-center text-gray-900 font-medium border-r border-[#e2e8f0]"
-              id="indiv-n"
-            >
-              6
-            </td>
-            <td class="py-2 px-2 text-center text-gray-500" id="indiv-pct">
-              -
-            </td>
-          </tr>
-          <tr class="border-b border-[#bfc9d1] hover:bg-[#eef5fe]">
-            <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
-              Total amount of emails with email survey link sent (reminders
-              included)
-            </td>
-            <td
-              class="py-2 px-2 text-center text-gray-900 font-medium border-r border-[#e2e8f0]"
-              id="total-n"
-            >
-              10
-            </td>
-            <td class="py-2 px-2 text-center text-gray-500" id="total-pct">
-              -
-            </td>
-          </tr>
-          <tr class="hover:bg-[#eef5fe]">
-            <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
-              Email survey link responses
-            </td>
-            <td
-              class="py-2 px-2 text-center text-gray-900 font-medium border-r border-[#e2e8f0]"
-              id="resp-n"
-            >
-              0
-            </td>
-            <td class="py-2 px-2 text-center text-gray-500" id="resp-pct">
-              0 %
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Main Data Table -->
-      <div class="overflow-auto">
-        <table
-          class="w-full text-sm table-border-separate mb-5 border border-[#e2e8f0] rounded-md overflow-hidden shadow-sm table-border-collapse"
-        >
-          <thead>
-            <tr>
-              <th
-                class="py-3 px-4 text-left font-medium text-gray-700 border-b border-[#e2e8f0]"
-              >
-                Survey
-              </th>
-              <th
-                class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-n"
-              >
-                <div class="flex items-center justify-center gap-1">
-                  <span>Email Links Sent</span>
-                  <span class="text-xs text-gray-500 ml-1">(n)</span>
-                </div>
-              </th>
-              <th
-                class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-pct"
-              >
-                <div class="flex items-center justify-center gap-1">
-                  <span>Email Links Sent</span>
-                  <span class="text-xs text-gray-500 ml-1">(%)</span>
-                </div>
-              </th>
-              <th
-                class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-n"
-              >
-                <div class="flex items-center justify-center gap-1">
-                  <span>Survey Submitted</span>
-                  <span class="text-xs text-gray-500 ml-1">(n)</span>
-                </div>
-              </th>
-              <th
-                class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-pct"
-              >
-                <div class="flex items-center justify-center gap-1">
-                  <span>Survey Submitted</span>
-                  <span class="text-xs text-gray-500 ml-1">(%)</span>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody id="mainTableBody">
-            <!-- Rows injected by JS -->
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5" class="px-0 py-0">
-                <div
-                  class="flex justify-end items-center py-2 px-4 text-xs text-gray-600 gap-2"
+            <thead>
+              <tr class="bg-[#f5f8fa] border-b border-[#e2e8f0]">
+                <th
+                  class="py-3 px-4 text-left font-medium text-gray-700 border-r border-[#e2e8f0]"
                 >
-                  <button
-                    class="flex items-center text-gray-400 hover:text-primary transition-colors px-2 py-1 border border-gray-200 rounded-l-md"
+                  Email survey link responses
+                </th>
+                <th
+                  class="py-3 px-4 text-center font-medium text-gray-700 w-32 border-r border-[#e2e8f0]"
+                >
+                  Count (n)
+                </th>
+                <th class="py-3 px-4 text-center font-medium text-gray-700 w-32">
+                  Percentage (%)
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[#bfc9d1] hover:bg-[#eef5fe]">
+                <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
+                  Individual recipients
+                </td>
+                <td
+                  class="py-2 px-2 text-center text-gray-900 font-medium border-r border-[#e2e8f0]"
+                  id="indiv-n"
+                >
+                  6
+                </td>
+                <td class="py-2 px-2 text-center text-gray-500" id="indiv-pct">
+                  -
+                </td>
+              </tr>
+              <tr class="border-b border-[#bfc9d1] hover:bg-[#eef5fe]">
+                <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
+                  Total amount of emails with email survey link sent (reminders
+                  included)
+                </td>
+                <td
+                  class="py-2 px-2 text-center text-gray-900 font-medium border-r border-[#e2e8f0]"
+                  id="total-n"
+                >
+                  10
+                </td>
+                <td class="py-2 px-2 text-center text-gray-500" id="total-pct">
+                  -
+                </td>
+              </tr>
+              <tr class="hover:bg-[#eef5fe]">
+                <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
+                  Email survey link responses
+                </td>
+                <td
+                  class="py-2 px-2 text-center text-gray-900 font-medium border-r border-[#e2e8f0]"
+                  id="resp-n"
+                >
+                  0
+                </td>
+                <td class="py-2 px-2 text-center text-gray-500" id="resp-pct">
+                  0 %
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Main Data Table -->
+          <div class="overflow-auto">
+            <table
+              class="w-full text-sm table-border-separate mb-5 border border-[#e2e8f0] rounded-md overflow-hidden shadow-sm table-border-collapse"
+            >
+              <thead>
+                <tr>
+                  <th
+                    class="py-3 px-4 text-left font-medium text-gray-700 border-b border-[#e2e8f0]"
                   >
-                    <i class="fas fa-chevron-left mr-1"></i> Previous
-                  </button>
-                  <span
-                    class="font-medium px-3 border-t border-b border-gray-200 py-1"
-                    >1 / 1</span
+                    Survey
+                  </th>
+                  <th
+                    class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-n"
                   >
-                  <button
-                    class="flex items-center text-gray-400 hover:text-primary transition-colors px-2 py-1 border border-gray-200 rounded-r-md"
+                    <div class="flex items-center justify-center gap-1">
+                      <span>Email Links Sent</span>
+                      <span class="text-xs text-gray-500 ml-1">(n)</span>
+                    </div>
+                  </th>
+                  <th
+                    class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sent-pct"
                   >
-                    Next <i class="fas fa-chevron-right ml-1"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr class="border-t-2 border-[#e2e8f0] bg-gray-50" id="totalRow">
-              <td class="py-3 px-4 text-left font-medium text-gray-800">
-                Total emails sent
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sent-n"
-              >
-                10
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct"
-              >
-                100%
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n"
-              >
-                0
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct"
-              >
-                0%
-              </td>
-            </tr>
-            <tr class="border-t border-b border-[#e2e8f0]" id="publicRow">
-              <td class="py-3 px-4 text-left font-medium text-gray-700">
-                Public weblink
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sent-n"
-              >
-                -
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct"
-              >
-                -
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n"
-              >
-                1
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct"
-              >
-                -
-              </td>
-            </tr>
-            <tr class="bg-blue-50" id="totalSubmittedRow">
-              <td
-                class="py-3 px-4 text-right font-medium text-gray-800"
-                colspan="3"
-              >
-                Total submitted surveys:
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-blue-600 col-sub-n"
-                colspan="1"
-              >
-                1
-              </td>
-              <td
-                class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct"
-                colspan="1"
-              ></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+                    <div class="flex items-center justify-center gap-1">
+                      <span>Email Links Sent</span>
+                      <span class="text-xs text-gray-500 ml-1">(%)</span>
+                    </div>
+                  </th>
+                  <th
+                    class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-n"
+                  >
+                    <div class="flex items-center justify-center gap-1">
+                      <span>Survey Submitted</span>
+                      <span class="text-xs text-gray-500 ml-1">(n)</span>
+                    </div>
+                  </th>
+                  <th
+                    class="py-3 px-3 text-center font-medium text-gray-700 border-b border-[#e2e8f0] col-sub-pct"
+                  >
+                    <div class="flex items-center justify-center gap-1">
+                      <span>Survey Submitted</span>
+                      <span class="text-xs text-gray-500 ml-1">(%)</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="mainTableBody">
+                <!-- Rows injected by JS -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="px-0 py-0">
+                    <div
+                      class="flex justify-end items-center py-2 px-4 text-xs text-gray-600 gap-2"
+                    >
+                      <button
+                        class="flex items-center text-gray-400 hover:text-primary transition-colors px-2 py-1 border border-gray-200 rounded-l-md"
+                      >
+                        <i class="fas fa-chevron-left mr-1"></i> Previous
+                      </button>
+                      <span
+                        class="font-medium px-3 border-t border-b border-gray-200 py-1"
+                        >1 / 1</span
+                      >
+                      <button
+                        class="flex items-center text-gray-400 hover:text-primary transition-colors px-2 py-1 border border-gray-200 rounded-r-md"
+                      >
+                        Next <i class="fas fa-chevron-right ml-1"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-t-2 border-[#e2e8f0] bg-gray-50" id="totalRow">
+                  <td class="py-3 px-4 text-left font-medium text-gray-800">
+                    Total emails sent
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sent-n"
+                  >
+                    10
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct"
+                  >
+                    100%
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n"
+                  >
+                    0
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct"
+                  >
+                    0%
+                  </td>
+                </tr>
+                <tr class="border-t border-b border-[#e2e8f0]" id="publicRow">
+                  <td class="py-3 px-4 text-left font-medium text-gray-700">
+                    Public weblink
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sent-n"
+                  >
+                    -
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sent-pct"
+                  >
+                    -
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sub-n"
+                  >
+                    1
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct"
+                  >
+                    -
+                  </td>
+                </tr>
+                <tr class="bg-blue-50" id="totalSubmittedRow">
+                  <td
+                    class="py-3 px-4 text-right font-medium text-gray-800"
+                    colspan="3"
+                  >
+                    Total submitted surveys:
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-blue-600 col-sub-n"
+                    colspan="1"
+                  >
+                    1
+                  </td>
+                  <td
+                    class="py-3 px-4 text-center font-medium text-gray-900 col-sub-pct"
+                    colspan="1"
+                  ></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Table data
-      const mainTableData = [
-        {
-          label: "Email survey link sending 05.12.2024, 08:38",
-          sentN: 5,
-          sentPct: 100,
-          subN: 0,
-          subPct: 0,
-        },
-        {
-          label: "Email survey link sending 05.12.2024, 07:51",
-          sentN: 1,
-          sentPct: 100,
-          subN: 0,
-          subPct: 0,
-        },
-        {
-          label: "Email survey link sending 05.12.2024, 07:40",
-          sentN: 1,
-          sentPct: 100,
-          subN: 0,
-          subPct: 0,
-        },
-        {
-          label: "Email survey link sending 05.12.2024, 07:37",
-          sentN: 1,
-          sentPct: 100,
-          subN: 0,
-          subPct: 0,
-        },
-        {
-          label: "Email survey link sending 05.12.2024, 07:33",
-          sentN: 1,
-          sentPct: 100,
-          subN: 0,
-          subPct: 0,
-        },
-        {
-          label: "Email survey link sending 05.12.2024, 07:30",
-          sentN: 1,
-          sentPct: 100,
-          subN: 0,
-          subPct: 0,
-        },
-      ];
-      function renderMainTable() {
-        const showSentN = document.getElementById("toggle-sent-n").checked;
-        const showSentPct = document.getElementById("toggle-sent-pct").checked;
-        const showSubN = document.getElementById("toggle-sub-n").checked;
-        const showSubPct = document.getElementById("toggle-sub-pct").checked;
-
-        // Get the table element
-        const table = document.querySelector(".table-border-collapse");
-
-        // Individual class management for each column
-        table.classList.toggle("hide-sent-n", !showSentN);
-        table.classList.toggle("hide-sent-pct", !showSentPct);
-        table.classList.toggle("hide-sub-n", !showSubN);
-        table.classList.toggle("hide-sub-pct", !showSubPct); // Update colspan for footer row containing pagination based on visible columns
-        const visibleColumns = [
-          showSentN,
-          showSentPct,
-          showSubN,
-          showSubPct,
-        ].filter(Boolean).length;
-        const paginationRow = document.querySelector("tfoot tr:first-child td");
-        paginationRow.colSpan = 1 + visibleColumns;
-
-        // Update total submitted row layout based on visible columns
-        const totalSubmittedRow = document.getElementById("totalSubmittedRow");
-        if (totalSubmittedRow) {
-          const firstCell = totalSubmittedRow.querySelector("td:first-child");
-          firstCell.colSpan = 1 + (showSentN ? 1 : 0) + (showSentPct ? 1 : 0);
-        }
-
-        // Render rows
-        const tbody = document.getElementById("mainTableBody");
-        tbody.innerHTML = "";
-
-        mainTableData.forEach((row, idx) => {
-          const sentStatus = row.sentN > 0 ? "dot-sent" : "dot-pending";
-          const subStatus = row.subN > 0 ? "dot-submitted" : "dot-pending";
-          tbody.innerHTML += `
-          <tr class="border-b border-[#e2e8f0]">
-            <td class="py-3 px-4 text-left text-gray-700">${row.label}</td>
-            <td class="py-3 px-4 text-center col-sent-n">
-              <div class="data-indicator">
-                <span class="value font-medium">${row.sentN}</span>
-              </div>
-            </td>
-            <td class="py-3 px-4 text-center col-sent-pct">
-              <div class="data-indicator">
-                <span class="value">${row.sentPct}%</span>
-              </div>
-            </td>
-            <td class="py-3 px-4 text-center col-sub-n">
-              <div class="data-indicator">
-                <span class="value font-medium">${row.subN}</span>
-              </div>
-            </td>
-            <td class="py-3 px-4 text-center col-sub-pct">
-              <div class="data-indicator">
-                <span class="value">${row.subPct}%</span>
-              </div>
-            </td>
-          </tr>
-        `;
-        });
-      }
-      document
-        .getElementById("toggle-sent-n")
-        .addEventListener("change", renderMainTable);
-      document
-        .getElementById("toggle-sent-pct")
-        .addEventListener("change", renderMainTable);
-      document
-        .getElementById("toggle-sub-n")
-        .addEventListener("change", renderMainTable);
-      document
-        .getElementById("toggle-sub-pct")
-        .addEventListener("change", renderMainTable);
-      // Add All toggle functionality
-      document
-        .getElementById("toggle-all")
-        .addEventListener("click", function () {
-          document.getElementById("toggle-sent-n").checked = true;
-          document.getElementById("toggle-sent-pct").checked = true;
-          document.getElementById("toggle-sub-n").checked = true;
-          document.getElementById("toggle-sub-pct").checked = true;
-          renderMainTable();
-        });
-
-      renderMainTable();
-    </script>
+    <script src="../common/main.js"></script>
   </body>
 </html>
