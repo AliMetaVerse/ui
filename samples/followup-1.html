@@ -433,14 +433,18 @@
                 >
                   Count (n)
                 </th>
-                <th class="py-3 px-4 text-center font-medium text-gray-700 w-32">
+                <th
+                  class="py-3 px-4 text-center font-medium text-gray-700 w-32"
+                >
                   Percentage (%)
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr class="border-b border-[#bfc9d1] hover:bg-[#eef5fe]">
-                <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
+                <td
+                  class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]"
+                >
                   Individual recipients
                 </td>
                 <td
@@ -454,7 +458,9 @@
                 </td>
               </tr>
               <tr class="border-b border-[#bfc9d1] hover:bg-[#eef5fe]">
-                <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
+                <td
+                  class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]"
+                >
                   Total amount of emails with email survey link sent (reminders
                   included)
                 </td>
@@ -469,7 +475,9 @@
                 </td>
               </tr>
               <tr class="hover:bg-[#eef5fe]">
-                <td class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]">
+                <td
+                  class="py-2 pl-4 pr-4 text-gray-700 border-r border-[#e2e8f0]"
+                >
                   Email survey link responses
                 </td>
                 <td
@@ -557,7 +565,10 @@
                     </div>
                   </td>
                 </tr>
-                <tr class="border-t-2 border-[#e2e8f0] bg-gray-50" id="totalRow">
+                <tr
+                  class="border-t-2 border-[#e2e8f0] bg-gray-50"
+                  id="totalRow"
+                >
                   <td class="py-3 px-4 text-left font-medium text-gray-800">
                     Total emails sent
                   </td>
@@ -631,7 +642,142 @@
         </div>
       </main>
     </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Table data
+      const mainTableData = [
+        {
+          label: "Email survey link sending 05.12.2024, 08:38",
+          sentN: 5,
+          sentPct: 100,
+          subN: 0,
+          subPct: 0,
+        },
+        {
+          label: "Email survey link sending 05.12.2024, 07:51",
+          sentN: 1,
+          sentPct: 100,
+          subN: 0,
+          subPct: 0,
+        },
+        {
+          label: "Email survey link sending 05.12.2024, 07:40",
+          sentN: 1,
+          sentPct: 100,
+          subN: 0,
+          subPct: 0,
+        },
+        {
+          label: "Email survey link sending 05.12.2024, 07:37",
+          sentN: 1,
+          sentPct: 100,
+          subN: 0,
+          subPct: 0,
+        },
+        {
+          label: "Email survey link sending 05.12.2024, 07:33",
+          sentN: 1,
+          sentPct: 100,
+          subN: 0,
+          subPct: 0,
+        },
+        {
+          label: "Email survey link sending 05.12.2024, 07:30",
+          sentN: 1,
+          sentPct: 100,
+          subN: 0,
+          subPct: 0,
+        },
+      ];
+      function renderMainTable() {
+        const showSentN = document.getElementById("toggle-sent-n").checked;
+        const showSentPct = document.getElementById("toggle-sent-pct").checked;
+        const showSubN = document.getElementById("toggle-sub-n").checked;
+        const showSubPct = document.getElementById("toggle-sub-pct").checked;
 
+        // Get the table element
+        const table = document.querySelector(".table-border-collapse");
+
+        // Individual class management for each column
+        table.classList.toggle("hide-sent-n", !showSentN);
+        table.classList.toggle("hide-sent-pct", !showSentPct);
+        table.classList.toggle("hide-sub-n", !showSubN);
+        table.classList.toggle("hide-sub-pct", !showSubPct); // Update colspan for footer row containing pagination based on visible columns
+        const visibleColumns = [
+          showSentN,
+          showSentPct,
+          showSubN,
+          showSubPct,
+        ].filter(Boolean).length;
+        const paginationRow = document.querySelector("tfoot tr:first-child td");
+        paginationRow.colSpan = 1 + visibleColumns;
+
+        // Update total submitted row layout based on visible columns
+        const totalSubmittedRow = document.getElementById("totalSubmittedRow");
+        if (totalSubmittedRow) {
+          const firstCell = totalSubmittedRow.querySelector("td:first-child");
+          firstCell.colSpan = 1 + (showSentN ? 1 : 0) + (showSentPct ? 1 : 0);
+        }
+
+        // Render rows
+        const tbody = document.getElementById("mainTableBody");
+        tbody.innerHTML = "";
+
+        mainTableData.forEach((row, idx) => {
+          const sentStatus = row.sentN > 0 ? "dot-sent" : "dot-pending";
+          const subStatus = row.subN > 0 ? "dot-submitted" : "dot-pending";
+          tbody.innerHTML += `
+          <tr class="border-b border-[#e2e8f0]">
+            <td class="py-3 px-4 text-left text-gray-700">${row.label}</td>
+            <td class="py-3 px-4 text-center col-sent-n">
+              <div class="data-indicator">
+                <span class="value font-medium">${row.sentN}</span>
+              </div>
+            </td>
+            <td class="py-3 px-4 text-center col-sent-pct">
+              <div class="data-indicator">
+                <span class="value">${row.sentPct}%</span>
+              </div>
+            </td>
+            <td class="py-3 px-4 text-center col-sub-n">
+              <div class="data-indicator">
+                <span class="value font-medium">${row.subN}</span>
+              </div>
+            </td>
+            <td class="py-3 px-4 text-center col-sub-pct">
+              <div class="data-indicator">
+                <span class="value">${row.subPct}%</span>
+              </div>
+            </td>
+          </tr>
+        `;
+        });
+      }
+      document
+        .getElementById("toggle-sent-n")
+        .addEventListener("change", renderMainTable);
+      document
+        .getElementById("toggle-sent-pct")
+        .addEventListener("change", renderMainTable);
+      document
+        .getElementById("toggle-sub-n")
+        .addEventListener("change", renderMainTable);
+      document
+        .getElementById("toggle-sub-pct")
+        .addEventListener("change", renderMainTable);
+      // Add All toggle functionality
+      document
+        .getElementById("toggle-all")
+        .addEventListener("click", function () {
+          document.getElementById("toggle-sent-n").checked = true;
+          document.getElementById("toggle-sent-pct").checked = true;
+          document.getElementById("toggle-sub-n").checked = true;
+          document.getElementById("toggle-sub-pct").checked = true;
+          renderMainTable();
+        });
+
+      renderMainTable();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../common/main.js"></script>
   </body>
