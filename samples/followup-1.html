@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Zoom Control | Webropol Design System</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+  <link href="../ds.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#f6fbfd] font-['Roboto']">
+  <div class="w-full max-w-5xl bg-white rounded-xl shadow p-6 border border-[#e3eaf3]">
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="text-lg font-semibold ds-primary-text">Email survey link responses</h2>
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-700">Show:</span>
+        <label class="inline-flex items-center text-xs mr-2">
+          <input type="checkbox" checked class="accent-[#1976d2] mr-1" id="toggle-n"> n
+        </label>
+        <label class="inline-flex items-center text-xs">
+          <input type="checkbox" checked class="accent-[#1976d2] mr-1" id="toggle-pct"> %
+        </label>
+        <button class="ml-4 px-2 py-1 bg-[#e6f4ea] border border-[#b7e1cd] rounded text-[#217346] flex items-center text-xs font-medium hover:bg-[#d2f0db] transition" title="Export to Excel">
+          <i class="fas fa-file-excel mr-1"></i> Excel
+        </button>
+      </div>
+    </div>
+    <table class="w-full text-sm border-separate border-spacing-0">
+      <tbody>
+        <tr class="border-b border-[#bfc9d1]">
+          <td class="py-1 pl-2 pr-4 text-gray-700">Individual recipients</td>
+          <td class="py-1 px-2 text-right text-gray-900 font-medium" id="indiv-n">6</td>
+          <td class="py-1 px-2 text-right text-gray-500" id="indiv-pct">-</td>
+        </tr>
+        <tr class="border-b border-[#bfc9d1]">
+          <td class="py-1 pl-2 pr-4 text-gray-700">Total amount of emails with email survey link sent (reminders included)</td>
+          <td class="py-1 px-2 text-right text-gray-900 font-medium" id="total-n">10</td>
+          <td class="py-1 px-2 text-right text-gray-500" id="total-pct">-</td>
+        </tr>
+        <tr>
+          <td class="py-1 pl-2 pr-4 text-gray-700">Email survey link responses</td>
+          <td class="py-1 px-2 text-right text-gray-900 font-medium" id="resp-n">0</td>
+          <td class="py-1 px-2 text-right text-gray-500" id="resp-pct">0 %</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mt-4 border-t border-[#bfc9d1] pt-2">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-separate border-spacing-0">
+          <thead>
+            <tr>
+              <th class="py-2 pl-2 pr-4 text-left align-bottom text-gray-700 font-medium border-b border-[#bfc9d1]" rowspan="2"> </th>
+              <th class="py-2 px-2 text-center align-bottom text-gray-700 font-medium border-b border-[#bfc9d1]" colspan="2">Email survey links sent</th>
+              <th class="py-2 px-2 text-center align-bottom text-gray-700 font-medium border-b border-[#bfc9d1]" colspan="2">Survey submitted</th>
+            </tr>
+            <tr>
+              <th class="py-1 px-2 text-center text-xs text-gray-500 border-b border-[#bfc9d1]" id="col-n1">(n)</th>
+              <th class="py-1 px-2 text-center text-xs text-gray-500 border-b border-[#bfc9d1]" id="col-pct1">%</th>
+              <th class="py-1 px-2 text-center text-xs text-gray-500 border-b border-[#bfc9d1]" id="col-n2">(n)</th>
+              <th class="py-1 px-2 text-center text-xs text-gray-500 border-b border-[#bfc9d1]" id="col-pct2">%</th>
+            </tr>
+          </thead>
+          <tbody id="mainTableBody">
+            <!-- Rows injected by JS -->
+          </tbody>
+          <tfoot>
+            <tr class="font-semibold border-t border-[#bfc9d1]">
+              <td class="py-2 pl-2 pr-4 text-gray-700">Total: Emails with email survey link sent</td>
+              <td class="py-2 px-2 text-center text-gray-900" id="total-sent-n">10</td>
+              <td class="py-2 px-2 text-center text-gray-900" id="total-sent-pct">100</td>
+              <td class="py-2 px-2 text-center text-gray-900" id="total-sub-n">0</td>
+              <td class="py-2 px-2 text-center text-gray-900" id="total-sub-pct">0</td>
+            </tr>
+            <tr class="font-semibold">
+              <td class="py-2 pl-2 pr-4 text-gray-700">Total: Public weblink</td>
+              <td class="py-2 px-2 text-center text-gray-900">-</td>
+              <td class="py-2 px-2 text-center text-gray-900">-</td>
+              <td class="py-2 px-2 text-center text-gray-900">1</td>
+              <td class="py-2 px-2 text-center text-gray-900">-</td>
+            </tr>
+            <tr class="font-semibold">
+              <td class="py-2 pl-2 pr-4 text-gray-700 text-right" colspan="5">Total submitted surveys: <span class="text-gray-900">1</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="flex justify-end items-center mt-2 text-xs text-gray-600 gap-2">
+        <span class="opacity-50">&lt; Previous</span>
+        <span class="font-semibold">1 / 1</span>
+        <span class="opacity-50">Next &gt;</span>
+      </div>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Table data
+    const mainTableData = [
+      { label: 'Email survey link sending 05.12.2024, 08:38', sentN: 5, sentPct: 100, subN: 0, subPct: 0 },
+      { label: 'Email survey link sending 05.12.2024, 07:51', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
+      { label: 'Email survey link sending 05.12.2024, 07:40', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
+      { label: 'Email survey link sending 05.12.2024, 07:37', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
+      { label: 'Email survey link sending 05.12.2024, 07:33', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
+      { label: 'Email survey link sending 05.12.2024, 07:30', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
+    ];
+
+    function renderMainTable() {
+      const showN = document.getElementById('toggle-n').checked;
+      const showPct = document.getElementById('toggle-pct').checked;
+      // Toggle column headers
+      document.getElementById('col-n1').style.display = showN ? '' : 'none';
+      document.getElementById('col-pct1').style.display = showPct ? '' : 'none';
+      document.getElementById('col-n2').style.display = showN ? '' : 'none';
+      document.getElementById('col-pct2').style.display = showPct ? '' : 'none';
+      // Render rows
+      const tbody = document.getElementById('mainTableBody');
+      tbody.innerHTML = '';
+      mainTableData.forEach(row => {
+        tbody.innerHTML += `
+          <tr class="border-b border-[#e3eaf3]">
+            <td class="py-1 pl-2 pr-4 text-gray-700">${row.label}</td>
+            <td class="py-1 px-2 text-center text-gray-900" style="display:${showN ? '' : 'none'}">${row.sentN}</td>
+            <td class="py-1 px-2 text-center text-gray-900" style="display:${showPct ? '' : 'none'}">${row.sentPct}</td>
+            <td class="py-1 px-2 text-center text-gray-900" style="display:${showN ? '' : 'none'}">${row.subN}</td>
+            <td class="py-1 px-2 text-center text-gray-900" style="display:${showPct ? '' : 'none'}">${row.subPct}</td>
+          </tr>
+        `;
+      });
+    }
+    document.getElementById('toggle-n').addEventListener('change', renderMainTable);
+    document.getElementById('toggle-pct').addEventListener('change', renderMainTable);
+    renderMainTable();
+  </script>
+</body>
+</html>
