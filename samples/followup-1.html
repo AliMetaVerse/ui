@@ -17,6 +17,50 @@
       body {
         font-family: "Roboto", sans-serif;
         background-color: #f6fbfd;
+      }      /* Fix for sidebar and header styles */
+      [include-html="../common/sidebar.html"] {
+        width: 250px;
+        transition: width 0.3s ease;
+        background-color: #fff;
+        border-right: 1px solid #e3eaf3;
+        overflow: hidden;
+      }
+      
+      [include-html="../common/header.html"] {
+        background-color: #fff;
+        border-bottom: 1px solid #e3eaf3;
+        z-index: 10;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      }
+      
+      /* Fix for missing assets */
+      .sidebar img.logo-part,
+      .mainheader-logo img {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Fix logo background */
+      .mainheader-logo span {
+        background: transparent !important;
+      }
+      
+      /* Make sure the header and sidebar are visible */
+      .sidebar, .mainheader {
+        display: block !important;
+        visibility: visible !important;
+      }
+      
+      /* Fix sidebar scrollbar */
+      .sidebar.scrollbar {
+        overflow: hidden !important;
+      }
+      
+      /* Ensure contact us button stays at bottom */
+      .sidebar-contact {
+        position: sticky !important;
+        bottom: 0 !important;
+        z-index: 5;
       }
       .table-border-collapse {
         border-collapse: collapse;
@@ -259,18 +303,144 @@
         position: relative;
         padding-right: 2px;
       }
+    </style>    <!-- Essential embedded styles for sidebar and header -->
+    <style id="embedded-common-styles">
+      /* Essential sidebar styles */
+      .sidebar {
+        width: 250px;
+        min-height: 100vh;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden !important; /* Remove scrollbar */
+      }
+      
+      .sidebar-opened {
+        width: 250px;
+      }
+      
+      .logo-name-wrapper {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 15px;
+      }
+      
+      /* Fix for features list to take available space but not overflow */
+      .features-list-top {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 20px;
+      }
+      
+      /* Make Contact Us always visible */
+      .sidebar-contact {
+        position: sticky;
+        bottom: 0;
+        background-color: #fff;
+        padding: 15px;
+        border-top: 1px solid #f0f0f0;
+        margin-top: auto;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+      }
+      
+      /* Essential header styles */
+      .mainheader {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+      }
+      
+      .mainheader-logo {
+        margin-right: 20px;
+      }
+      
+      .container-new {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      
+      .link-new {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      /* Fix background image issues */
+      body {
+        background-color: #f6fbfd;
+        background-image: none; /* Ensure no unexpected background */
+      }
+      
+      /* Customize scrollbar for feature list only */
+      .features-list-top.scrollbar {
+        overflow-y: auto;
+      }
+      
+      .features-list-top.scrollbar::-webkit-scrollbar {
+        width: 4px;
+        background-color: #F5F5F5;
+      }
+      
+      .features-list-top.scrollbar::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        border-radius: 6px;
+      }
+      
+      /* Prevent main content from having scrollbar issues */
+      main.overflow-auto {
+        overflow: auto !important;
+      }
+    </style>
+    <!-- Additional fixes for specific issues -->
+    <style>
+      /* Fix for W logo background */
+      .mainheader-logo span {
+        background-color: transparent !important;
+        background-image: none !important;
+      }
+      
+      /* Ensure sidebar doesn't scroll and contact stays at bottom */
+      .sidebar {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .sidebar .features-list-top {
+        flex: 1 !important;
+        overflow-y: auto !important;
+      }
+      
+      .sidebar .sidebar-contact {
+        margin-top: auto !important;
+      }
+      
+      /* Fix any image loading issues */
+      img[src*="Survey publish_files"] {
+        content: url("https://webropol.com/wp-content/themes/webropol/images/icons/webropol-logo-color.svg");
+      }
+      
+      /* Ensure proper layout */
+      body > div.flex-grow {
+        min-height: 100vh;
+        overflow: hidden;
+      }
     </style>
   </head>
-  <body class="flex min-h-screen">
-    <!-- Sidebar -->
-    <div include-html="../common/sidebar.html" class="hidden flex-shrink-0">
+  <body class="flex min-h-screen">    <!-- Sidebar -->
+    <div include-html="../common/sidebar.html" class="flex-shrink-0">
       <!-- Sidebar content will be injected here by main.js -->
     </div>
 
     <!-- Main content area (Header + Page Content) -->
     <div class="flex-grow flex flex-col">
       <!-- Header -->
-      <div include-html="../common/header.html" class="hidden">
+      <div include-html="../common/header.html">
         <!-- Header content will be injected here by main.js -->
       </div>
 
@@ -568,9 +738,7 @@
           </div>
         </div>
       </main>
-    </div>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    </div>    <script>
       // Table data
       const mainTableData = [
         {
@@ -687,8 +855,15 @@
         });
 
       renderMainTable();
+    </script>    <script>
+    // Prevent loading tailwindcss multiple times
+    if (!window.tailwindCSSLoaded) {
+      const tailwindScript = document.createElement('script');
+      tailwindScript.src = "https://cdn.tailwindcss.com";
+      document.body.appendChild(tailwindScript);
+      window.tailwindCSSLoaded = true;
+    }
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="../common/main.js"></script>
   </body>
 </html>
