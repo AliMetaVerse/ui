@@ -97,33 +97,32 @@
     <!-- Main Data Table -->
     <div class="border-t border-[#bfc9d1] pt-4">
       <div class="overflow-auto">
-        <table class="w-full text-sm table-border-collapse">
-          <thead>
+        <table class="w-full text-sm table-border-collapse">          <thead>
             <tr class="border-b border-[#bfc9d1]">
-              <th class="py-3 px-4 text-left font-medium text-gray-700" rowspan="2">Survey</th>
-              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b-0" colspan="2">
+              <th class="py-3 px-4 text-left font-medium text-gray-700">Survey</th>
+              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-n1">
                 <div class="flex items-center justify-center gap-2">
-                  <span class="success-dot dot-sent"></span>Email survey links sent
+                  <span class="success-dot dot-sent"></span>
+                  <span>Email links sent (n)</span>
                 </div>
               </th>
-              <th class="py-3 px-3 text-center font-medium text-gray-700 border-b-0" colspan="2">
+              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-pct1">
                 <div class="flex items-center justify-center gap-2">
-                  <span class="success-dot dot-submitted"></span>Survey submitted
+                  <span class="success-dot dot-sent"></span>
+                  <span>Email links sent (%)</span>
                 </div>
               </th>
-            </tr>
-            <tr class="border-b border-[#bfc9d1]">
-              <th class="py-2 px-4 text-center" id="col-n1">
-                <div class="px-2 py-1 bg-gray-100 rounded-md text-xs text-gray-700">Count (n)</div>
+              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-n2">
+                <div class="flex items-center justify-center gap-2">
+                  <span class="success-dot dot-submitted"></span>
+                  <span>Survey submitted (n)</span>
+                </div>
               </th>
-              <th class="py-2 px-4 text-center" id="col-pct1">
-                <div class="px-2 py-1 bg-gray-100 rounded-md text-xs text-gray-700">Percent (%)</div>
-              </th>
-              <th class="py-2 px-4 text-center" id="col-n2">
-                <div class="px-2 py-1 bg-gray-100 rounded-md text-xs text-gray-700">Count (n)</div>
-              </th>
-              <th class="py-2 px-4 text-center" id="col-pct2">
-                <div class="px-2 py-1 bg-gray-100 rounded-md text-xs text-gray-700">Percent (%)</div>
+              <th class="py-3 px-3 text-center font-medium text-gray-700" id="col-pct2">
+                <div class="flex items-center justify-center gap-2">
+                  <span class="success-dot dot-submitted"></span>
+                  <span>Survey submitted (%)</span>
+                </div>
               </th>
             </tr>
           </thead>
@@ -179,13 +178,11 @@
       { label: 'Email survey link sending 05.12.2024, 07:37', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
       { label: 'Email survey link sending 05.12.2024, 07:33', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
       { label: 'Email survey link sending 05.12.2024, 07:30', sentN: 1, sentPct: 100, subN: 0, subPct: 0 },
-    ];
-
-    function renderMainTable() {
+    ];    function renderMainTable() {
       const showN = document.getElementById('toggle-n').checked;
       const showPct = document.getElementById('toggle-pct').checked;
       
-      // Toggle column headers
+      // Toggle column headers - now with single row header
       document.getElementById('col-n1').style.display = showN ? 'table-cell' : 'none';
       document.getElementById('col-pct1').style.display = showPct ? 'table-cell' : 'none';
       document.getElementById('col-n2').style.display = showN ? 'table-cell' : 'none';
