@@ -5,6 +5,48 @@
   survey page structure panel component.
 */
 
+/* Custom Scrollbar Styling - Thin and Light Blue */
+/* For WebKit browsers (Chrome, Safari, Edge) */
+.panel-content::-webkit-scrollbar,
+.question-list::-webkit-scrollbar,
+.editor-area::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.panel-content::-webkit-scrollbar-track,
+.question-list::-webkit-scrollbar-track,
+.editor-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.panel-content::-webkit-scrollbar-thumb,
+.question-list::-webkit-scrollbar-thumb,
+.editor-area::-webkit-scrollbar-thumb {
+    background-color: #a8c6fa;
+    border-radius: 20px;
+}
+
+.panel-content:hover::-webkit-scrollbar-thumb,
+.question-list:hover::-webkit-scrollbar-thumb,
+.editor-area:hover::-webkit-scrollbar-thumb {
+    background-color: #4a90e2;
+}
+
+/* For Firefox */
+.panel-content,
+.question-list,
+.editor-area {
+    scrollbar-width: thin;
+    scrollbar-color: #a8c6fa transparent;
+}
+
+.panel-content:hover,
+.question-list:hover,
+.editor-area:hover {
+    scrollbar-color: #4a90e2 transparent;
+}
+
 /* Panel container */
 .page-structure-panel {
     display: flex;
@@ -16,6 +58,7 @@
     transition: width 0.3s ease;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
 }
 
 .page-structure-panel.collapsed {
@@ -30,6 +73,9 @@
     padding: 12px 15px;
     background-color: #fff;
     border-bottom: 1px solid #dee2e6;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .panel-title {
@@ -61,16 +107,30 @@
 
 /* Panel content */
 .panel-content {
-    flex-grow: 1;
+    flex: 1;
     overflow-y: auto;
     padding: 10px;
+    min-height: 0; /* Critical for proper flex scrolling in Firefox */
+    box-sizing: border-box; /* Include padding in height calculation */
 }
 
 /* Structure tree */
+.structure-tree {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .structure-tree ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Page list container */
+.page-list {
+    width: 100%;
 }
 
 /* Page items */
@@ -144,6 +204,9 @@
 /* Question items */
 .question-list {
     padding: 5px 15px;
+    max-height: 250px; /* Fixed height for consistency */
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .question-item {
@@ -184,6 +247,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 150px; /* Prevent extremely long titles from breaking layout */
 }
 
 .question-actions {
@@ -217,6 +281,10 @@
     padding: 10px;
     border-top: 1px solid #dee2e6;
     background-color: #fff;
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+    position: relative; /* Ensure it stays in flow but can receive box-shadow */
+    z-index: 1;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
 }
 
 .add-btn {
@@ -336,4 +404,19 @@
 
 .btn-confirm:hover {
     background-color: #c82333;
+}
+
+/* Editor layout styles */
+.editor-layout-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.editor-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
 }

@@ -9,6 +9,7 @@
  * - Deletion with confirmation
  * - Duplication of pages and questions
  * - Adding new pages and questions
+ * - Thin, light blue scrollbars for better navigation
  */
 
 class PageStructurePanelManager {
@@ -20,9 +21,7 @@ class PageStructurePanelManager {
         };
         this.activePage = null;
         this.activeQuestion = null;
-    }
-
-    /**
+    }    /**
      * Initialize the page structure panel
      */
     async init() {
@@ -61,9 +60,7 @@ class PageStructurePanelManager {
         } catch (error) {
             console.error('Error loading page structure panel HTML:', error);
         }
-    }
-
-    /**
+    }    /**
      * Insert the panel into the DOM
      */
     insertPanelIntoDOM() {
@@ -78,6 +75,15 @@ class PageStructurePanelManager {
             console.error('Could not find main-content-body element');
             return;
         }
+        
+        // Get the header height for more precise calculations
+        const headerHeight = document.querySelector('.main-header-area')?.offsetHeight || 180;
+        const availableHeight = `calc(100vh - ${headerHeight}px)`;
+        
+        // Ensure main content body takes full available height and doesn't scroll
+        mainContentBody.style.overflow = 'hidden';
+        mainContentBody.style.height = availableHeight;
+        mainContentBody.style.boxSizing = 'border-box';
 
         // Create a container for the editor layout
         const editorLayoutContainer = document.createElement('div');
@@ -102,18 +108,29 @@ class PageStructurePanelManager {
         styleElement.textContent = `
             .editor-layout-container {
                 display: flex;
-                height: calc(100vh - 180px); /* Adjust based on your header height */
+                height: ${availableHeight};
                 overflow: hidden;
+                box-sizing: border-box;
             }
             
             .editor-area {
                 flex: 1;
                 overflow-y: auto;
                 padding: 20px;
+                height: 100%;
+                box-sizing: border-box;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            }
+            
+            /* Fix height calculations for nested elements */
+            .main-content-body {
+                height: ${availableHeight} !important;
+                overflow: hidden !important;
+                box-sizing: border-box;
             }
         `;
         document.head.appendChild(styleElement);
-    }
+    }    /* Removed context-aware scrollbars implementation in favor of CSS-only approach */
 
     /**
      * Set up event listeners for the panel
@@ -770,10 +787,15 @@ class PageStructurePanelManager {
     
     /**
      * Render the panel based on the survey data
+     */    /**
+     * Render the panel based on the survey data
      */
     renderPanel() {
         const pageList = this.panel.querySelector('#surveyPageList');
         if (!pageList) return;
+        
+        // Use document fragment for better performance
+        const fragment = document.createDocumentFragment();
         
         // Clear the list
         pageList.innerHTML = '';
@@ -789,33 +811,53 @@ class PageStructurePanelManager {
                 pageElement.classList.add('active');
             }
             
-            pageElement.innerHTML = `
-                <div class="page-header">
-                    <div class="page-drag-handle">
-                        <i class="fa-light fa-grip-dots-vertical"></i>
-                    </div>
-                    <div class="page-collapse-toggle">
-                        <i class="fa-light fa-chevron-down"></i>
-                    </div>
-                    <div class="page-title" contenteditable="true">${page.title}</div>
-                    <div class="page-actions">
-                        <button class="action-btn" title="Delete page">
-                            <i class="fa-light fa-trash"></i>
-                        </button>
-                        <button class="action-btn" title="Duplicate page">
-                            <i class="fa-light fa-copy"></i>
-                        </button>
-                        <button class="action-btn" title="Move page">
-                            <i class="fa-light fa-arrows-up-down"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
+            // Create the page header
+            const pageHeader = document.createElement('div');
+            pageHeader.className = 'page-header';
             
-            // Add question list
+            // Create page drag handle
+            const dragHandle = document.createElement('div');
+            dragHandle.className = 'page-drag-handle';
+            dragHandle.innerHTML = '<i class="fa-light fa-grip-dots-vertical"></i>';
+            pageHeader.appendChild(dragHandle);
+            
+            // Create page collapse toggle
+            const collapseToggle = document.createElement('div');
+            collapseToggle.className = 'page-collapse-toggle';
+            collapseToggle.innerHTML = '<i class="fa-light fa-chevron-down"></i>';
+            pageHeader.appendChild(collapseToggle);
+            
+            // Create page title
+            const pageTitle = document.createElement('div');
+            pageTitle.className = 'page-title';
+            pageTitle.contentEditable = true;
+            pageTitle.textContent = page.title;
+            pageHeader.appendChild(pageTitle);
+            
+            // Create page actions
+            const pageActions = document.createElement('div');
+            pageActions.className = 'page-actions';
+            pageActions.innerHTML = `
+                <button class="action-btn" title="Delete page">
+                    <i class="fa-light fa-trash"></i>
+                </button>
+                <button class="action-btn" title="Duplicate page">
+                    <i class="fa-light fa-copy"></i>
+                </button>
+                <button class="action-btn" title="Move page">
+                    <i class="fa-light fa-arrows-up-down"></i>
+                </button>
+            `;
+            pageHeader.appendChild(pageActions);
+            
+            // Add header to page element
+            pageElement.appendChild(pageHeader);
+            
+            // Create question list
             const questionList = document.createElement('ul');
             questionList.className = 'question-list';
             
+            // Add questions
             page.questions.forEach(question => {
                 const questionElement = document.createElement('li');
                 questionElement.className = 'question-item';
@@ -860,12 +902,28 @@ class PageStructurePanelManager {
                 questionList.appendChild(questionElement);
             });
             
+            // Add question list to page
             pageElement.appendChild(questionList);
-            pageList.appendChild(pageElement);
+            
+            // Add page to fragment
+            fragment.appendChild(pageElement);
         });
         
-        // Setup event listeners for the newly created elements
-        this.setupEventListeners();
+        // Add all pages to the DOM at once
+        pageList.appendChild(fragment);
+        
+        // Setup event listeners
+        this.setupDragAndDrop();
+        
+        // Page collapse toggles
+        this.panel.querySelectorAll('.page-collapse-toggle').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                const pageItem = e.target.closest('.page-item');
+                if (pageItem) {
+                    this.togglePageCollapse(pageItem);
+                }
+            });
+        });
     }
 }
 

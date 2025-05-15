@@ -2505,7 +2505,7 @@ button {
   flex-basis: 0;
   position: relative;
   min-height: 0;
-  padding: 20px 32px 32px 32px;
+  padding: 0 32px 32px 32px;
   z-index: 174;
   overflow-y: auto;
 }
