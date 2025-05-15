@@ -28,7 +28,8 @@ button {
   flex-wrap: nowrap;
   gap: 10px;
   position: relative;
-  width: 1920px;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
   background: #ebf4f7;
   overflow: hidden;
@@ -39,8 +40,9 @@ button {
   flex-wrap: nowrap;
   flex-shrink: 0;
   position: relative;
-  width: 1920px;
-  height: 1080px;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 .nav-pseudo {
   display: flex;
@@ -75,11 +77,13 @@ button {
   gap: 16px;
   position: relative;
   width: 224px;
-  padding: 12px 12px 20px 12px;
+  padding: 12px 12px 60px 12px; /* Increased bottom padding to make room for fixed Contact us */
   background: #ffffff;
   border-right: 1px solid #d1d5d6;
   z-index: 3;
-  overflow: hidden;
+  overflow-y: auto; /* Allow scrolling if content is tall */
+  overflow-x: hidden;
+  height: 100%;
 }
 .logo {
   display: flex;
@@ -839,13 +843,15 @@ button {
   flex-wrap: nowrap;
   flex-shrink: 0;
   gap: 12px;
-  position: relative;
+  position: fixed;
+  bottom: 20px;
   width: 200px;
   padding: 12px 12px 12px 12px;
   background: #ffffff;
-  z-index: 60;
+  z-index: 999;
   overflow: hidden;
   border-radius: 4px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05);
 }
 .icons-28 {
   flex-shrink: 0;
@@ -898,7 +904,8 @@ button {
   flex-basis: 0;
   position: relative;
   min-width: 0;
-  height: 1080px;
+  height: 100%;
+  overflow: hidden;
   z-index: 64;
 }
 .top {
@@ -1285,7 +1292,7 @@ button {
   position: relative;
   width: 67px;
   padding: 8px 2px 8px 2px;
-  border-top: 1px solid #215669;
+  border-bottom: 2px solid #215669;
   z-index: 95;
 }
 .edit-toolbar-icons {
@@ -2408,6 +2415,232 @@ button {
   flex-basis: 0;
   position: relative;
   min-height: 0;
-  padding: 0 32px 0 32px;
+  padding: 20px 32px 32px 32px;
   z-index: 174;
+  background-color: #f5f7f8;
+  overflow-y: auto;
+}
+
+/* Edit Page Content Styles */
+.edit-page-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+/* Survey Title Section */
+.survey-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.survey-title {
+  color: #215669;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.edit-title-btn {
+  background: transparent;
+  border: none;
+  color: #215669;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.edit-title-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.survey-description {
+  color: #4c5659;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Questions Container */
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Question Block */
+.question-block {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.question-number {
+  color: #215669;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.question-title {
+  flex: 1;
+  font-family: Roboto, var(--default-font-family);
+  color: #215669;
+  font-size: 16px;
+}
+
+.question-actions {
+  display: flex;
+}
+
+.question-action-btn {
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.question-action-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.question-content {
+  padding: 24px;
+}
+
+/* Rating Scale */
+.rating-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.scale-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 50%;
+  color: #0369a1;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.rating-number:hover {
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+}
+
+.rating-label {
+  color: #4c5659;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #215669;
+}
+
+.checkbox-option label {
+  font-family: Roboto, var(--default-font-family);
+  color: #4c5659;
+  font-size: 14px;
+}
+
+/* Textarea */
+.feedback-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 14px;
+  color: #4c5659;
+  resize: vertical;
+}
+
+.feedback-textarea:focus {
+  outline: none;
+  border-color: #215669;
+  box-shadow: 0 0 0 2px rgba(33, 86, 105, 0.2);
+}
+
+/* Add Question Button */
+.add-question-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.add-question-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #215669;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: Roboto, var(--default-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-question-btn:hover {
+  background-color: #184756;
 }
