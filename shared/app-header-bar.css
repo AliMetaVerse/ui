@@ -6,14 +6,183 @@
  */
 .app-header-bar {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  align-self: stretch;
+  width: 100%;
+  border-bottom: 1px solid #e0e6ea;
+  padding: 0 16px;
+  height: 56px;
+  box-sizing: border-box;
+  z-index: 100;
+  margin: 0;
   flex-wrap: nowrap;
-  flex-shrink: 0;
+}
+
+.create-new-dropdown {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-shrink: 0; /* Prevent shrinking */
+  margin-right: auto; /* Push it to the left */
+}
+
+.create-new-dropdown-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.create-new-dropdown-container:hover {
+  background: #f5f5f5;
+}
+
+.icons-2a, .icons-2b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icons-2a i {
+  color: #215669;
+  font-size: 16px;
+}
+
+.icons-2b i {
+  color: #215669;
+  font-size: 12px;
+}
+
+.label-create-new {
+  font-family: Roboto, Arial, sans-serif;
+  color: #215669;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.header-action-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0; /* Prevent shrinking */
+  flex-wrap: nowrap;
+  margin-left: auto; /* Force it to the right side */
+}
+
+.navigation-links-2c, .navigation-links-2e, .navigation-links-31 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.navigation-links-2c:hover, .navigation-links-2e:hover, .navigation-links-31:hover {
+  background: #f5f5f5;
+}
+
+.icons-2d, .icons-2f, .icons-32 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icons-2d i, .icons-2f i, .icons-32 i {
+  color: #626e73;
+  font-size: 18px;
+}
+
+.ellipse {
+  width: 1px;
+  height: 24px;
+  background: #e0e6ea;
+  margin: 0 4px;
+}
+
+.user-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-image-33 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #21748a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Remove the unnecessary JD span and display it in the user-image-33 div */
+.jd {
+  display: none;
+}
+
+.user-image-33:after {
+  content: "JD";
+}
+
+/* Notification dot for bell icon */
+.icons-32 {
   position: relative;
-  padding: 12px 32px 12px 16px;
-  background: #ffffff;
-  border-top: 1px solid #d1d5d6;
-  z-index: 67;
+}
+
+.icons-32 i.fa-bell:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  background: #e74c3c;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* Clean up the header area */
+.main-header-area {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive fix for header - always keep horizontal layout */
+@media (max-width: 900px) {
+  .app-header-bar {
+    padding: 0 8px;
+    /* Keep horizontal layout */
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .header-action-links {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 8px; /* Reduce gap on small screens */
+  }
+  .create-new-dropdown-container {
+    padding: 6px 8px; /* Smaller padding on small screens */
+  }
 }
