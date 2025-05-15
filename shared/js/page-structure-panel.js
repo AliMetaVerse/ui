@@ -116,7 +116,7 @@ class PageStructurePanelManager {
             .editor-area {
                 flex: 1;
                 overflow-y: auto;
-                padding: 20px;
+                padding: 1px 20px;
                 height: 100%;
                 box-sizing: border-box;
                 -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */

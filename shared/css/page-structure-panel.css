@@ -51,9 +51,10 @@
 .page-structure-panel {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - 20px); /* Full height minus some margin */
     background-color: #f8f9fa;
     border-right: 1px solid #dee2e6;
+    border-radius: 8px;
     width: 300px;
     transition: width 0.3s ease;
     overflow: hidden;
