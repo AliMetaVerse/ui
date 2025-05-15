@@ -1,9 +1,7 @@
 <!-- Survey Editor Content -->
-<div class="edit-page-content">
-    <!-- Survey title section -->
+<div class="edit-page-content">    <!-- Survey title section -->
     <div class="survey-title-section">
-        <div class="title-container">
-            <h1 class="survey-title">Customer Satisfaction Survey</h1>
+        <div class="title-container">            <h1 class="survey-title">Customer Satisfaction Survey</h1>
             <div class="title-actions">
                 <button class="edit-title-btn">
                     <i class="fa-light fa-pen" aria-hidden="true"></i>
@@ -136,15 +134,163 @@
                 <button class="action-btn add-media-btn">
                     <i class="fa-light fa-images" aria-hidden="true"></i>
                     <span>Add Media</span>
+                </button>            </div>
+        </div>    </div>
+    
+    <!-- Translation Floating Action Button -->
+    <button id="translation-fab" class="translation-fab" aria-label="Translate Survey">
+        <i class="fa-light fa-language" aria-hidden="true"></i>
+    </button>
+    
+    <!-- Translation Modal -->
+    <div id="translation-modal" class="modal-overlay">
+        <div class="translation-modal-content">
+            <div class="modal-header">
+                <h2>Survey Translation</h2>
+                <button class="close-modal-btn">
+                    <i class="fa-light fa-times" aria-hidden="true"></i>
                 </button>
             </div>
+            <div class="modal-body">
+                <div class="translation-intro">
+                    <p>Translate your survey while preserving its original structure. The original language version will always be maintained.</p>
+                </div>
+                
+                <div class="translation-tabs">
+                    <div class="tab-header">
+                        <button class="tab-btn active" data-tab="language-selection">1. Select Languages</button>
+                        <button class="tab-btn" data-tab="translation-preview" disabled>2. Review Translations</button>
+                        <button class="tab-btn" data-tab="translation-settings" disabled>3. Settings</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- Tab 1: Language Selection -->
+                        <div class="tab-pane active" id="language-selection">
+                            <div class="language-options">
+                                <div class="source-language">
+                                    <label for="source-language">Source Language:</label>
+                                    <select id="source-language" class="language-select">
+                                        <option value="en" selected>English</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="target-languages">
+                                    <label>Target Languages:</label>
+                                    <div class="language-checkboxes">
+                                        <div class="language-checkbox">
+                                            <input type="checkbox" id="lang-sv" value="sv">
+                                            <label for="lang-sv">Swedish</label>
+                                        </div>
+                                        <div class="language-checkbox">
+                                            <input type="checkbox" id="lang-fi" value="fi">
+                                            <label for="lang-fi">Finnish</label>
+                                        </div>
+                                        <div class="language-checkbox">
+                                            <input type="checkbox" id="lang-de" value="de">
+                                            <label for="lang-de">German</label>
+                                        </div>
+                                        <div class="language-checkbox">
+                                            <input type="checkbox" id="lang-fr" value="fr">
+                                            <label for="lang-fr">French</label>
+                                        </div>
+                                        <div class="language-checkbox">
+                                            <input type="checkbox" id="lang-es" value="es">
+                                            <label for="lang-es">Spanish</label>
+                                        </div>
+                                        <div class="language-checkbox">
+                                            <input type="checkbox" id="lang-no" value="no">
+                                            <label for="lang-no">Norwegian</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tab 2: Translation Preview -->
+                        <div class="tab-pane" id="translation-preview">
+                            <div class="translation-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="progress-text">Translation in progress...</span>
+                            </div>
+                            
+                            <div class="language-preview-tabs">
+                                <!-- These tabs will be dynamically generated -->
+                                <div class="language-tab-header">
+                                    <button class="language-tab-btn active" data-lang="en">English</button>
+                                    <button class="language-tab-btn" data-lang="sv">Swedish</button>
+                                    <button class="language-tab-btn" data-lang="fi">Finnish</button>
+                                </div>
+                                
+                                <div class="language-tab-content">
+                                    <!-- Preview content generated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tab 3: Settings -->
+                        <div class="tab-pane" id="translation-settings">
+                            <div class="translation-settings-options">
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" id="setting-save-versions" checked>
+                                        Save as separate language versions
+                                    </label>
+                                    <p class="setting-desc">Each translation will be saved as a separate language version of the survey</p>
+                                </div>
+                                
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" id="setting-language-selector" checked>
+                                        Add language selector to published survey
+                                    </label>
+                                    <p class="setting-desc">Respondents will be able to switch between available languages</p>
+                                </div>
+                                
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" id="setting-auto-detect">
+                                        Auto-detect respondent's language
+                                    </label>
+                                    <p class="setting-desc">Survey will automatically display in the respondent's browser language if available</p>
+                                </div>
+                                
+                                <div class="setting-item">
+                                    <label for="setting-translation-service">Translation Service:</label>
+                                    <select id="setting-translation-service" class="setting-select">
+                                        <option value="azure">Azure AI Translator</option>
+                                        <option value="deepl">DeepL API</option>
+                                        <option value="openai">OpenAI</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="translation-result">
+                    <div class="result-message success">
+                        <i class="fa-light fa-check-circle" aria-hidden="true"></i>
+                        <span>Translation completed successfully!</span>
+                    </div>
+                    <div class="result-message error">
+                        <i class="fa-light fa-times-circle" aria-hidden="true"></i>
+                        <span>An error occurred during translation. Please try again.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-footer-left">
+                    <button class="action-btn back-btn" disabled>Back</button>
+                </div>
+                <div class="modal-footer-right">
+                    <button class="action-btn cancel-btn">Cancel</button>
+                    <button class="action-btn next-btn">Next</button>
+                    <button class="action-btn translate-btn" style="display: none;">Translate</button>
+                    <button class="action-btn apply-btn" style="display: none;">Apply Translations</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <!-- Add question button -->
-    <div class="add-question-container">
-        <button class="add-question-btn">
-            <i class="fa-light fa-plus" aria-hidden="true"></i>
-            <span>Add Question</span>
-        </button>
     </div>
 </div>

@@ -52,8 +52,8 @@
 .action-btn {
     display: flex;
     align-items: center;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 8px 20px;
+    border-radius: 50px; /* Fully rounded corners */
     border: 1px solid #ddd;
     background-color: #fff;
     color: #333;
@@ -82,4 +82,394 @@
 
 .add-media-btn {
     color: #f39c12;
+}
+
+/* Translation Floating Action Button */
+.translation-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 900;
+}
+
+.translation-fab:hover {
+    background-color: #1976d2;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.translation-fab i {
+    font-size: 24px;
+}
+
+/* Translation Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.translation-modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 550px;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.translation-intro {
+    margin-bottom: 25px;
+}
+
+/* Tabs Navigation */
+.translation-tabs {
+    margin-bottom: 20px;
+}
+
+.tab-header {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    color: #1e88e5;
+    border-bottom-color: #1e88e5;
+}
+
+.tab-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Language Selection Tab */
+.language-options {
+    margin-bottom: 20px;
+}
+
+.source-language {
+    margin-bottom: 20px;
+}
+
+.language-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.target-languages label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.language-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.language-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.language-checkbox input {
+    margin-right: 8px;
+}
+
+.translation-progress {
+    display: none;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #1e88e5;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Translation Preview Tab */
+.language-preview-tabs {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.language-tab-header {
+    display: flex;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.language-tab-btn {
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.language-tab-btn.active {
+    background-color: #fff;
+    font-weight: 500;
+}
+
+.language-tab-content {
+    padding: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.preview-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.preview-item:last-child {
+    border-bottom: none;
+}
+
+.preview-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.preview-text {
+    font-size: 14px;
+}
+
+/* Translation Settings Tab */
+.translation-settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.setting-item {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-desc {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #666;
+    margin-left: 24px;
+}
+
+.setting-select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.translation-result {
+    margin: 20px 0;
+}
+
+.result-message {
+    display: none;
+    padding: 12px;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.result-message i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.result-message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.result-message.error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid #eaeaea;
+}
+
+.modal-footer-left {
+    display: flex;
+}
+
+.modal-footer-right {
+    display: flex;
+    gap: 10px;
+}
+
+.cancel-btn {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.back-btn {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.back-btn:disabled {
+    background-color: #eaeaea;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.next-btn {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.translate-btn {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.apply-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-btn:disabled {
+    background-color: #cccccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Translation notification */
+.survey-notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #323232;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1200;
+    font-size: 14px;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.survey-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.survey-notification.success {
+    background-color: #43a047;
+}
+
+.survey-notification.error {
+    background-color: #d32f2f;
 }
