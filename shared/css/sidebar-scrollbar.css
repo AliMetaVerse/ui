@@ -1,0 +1,28 @@
+/* Custom scrollbar styling for sidebar - matching editor page */
+.sidebar-menu::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+  background-color: #a8c6fa;
+  border-radius: 20px;
+}
+
+.sidebar-menu:hover::-webkit-scrollbar-thumb {
+  background-color: #4a90e2;
+}
+
+/* For Firefox */
+.sidebar-menu {
+  scrollbar-width: thin;
+  scrollbar-color: #a8c6fa transparent;
+}
+
+.sidebar-menu:hover {
+  scrollbar-color: #4a90e2 transparent;
+}
