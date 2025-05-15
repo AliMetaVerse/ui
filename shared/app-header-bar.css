@@ -1,0 +1,19 @@
+/**
+ * App Header Bar Component Stylesheet
+ * 
+ * This file contains styles for the application header bar.
+ * Extracted from the main stylesheet to improve modularity and maintainability.
+ */
+.app-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  padding: 12px 32px 12px 16px;
+  background: #ffffff;
+  border-top: 1px solid #d1d5d6;
+  z-index: 67;
+}

@@ -1,11 +1,15 @@
 {
-  "name": "html-template",
+  "name": "webropol-ui",
   "version": "1.0.0",
-  "description": "A modern HTML template with live server support",
+  "description": "Webropol UI components with semantic class names and consistent styling",
   "scripts": {
     "dev": "vite"
   },
   "dependencies": {},
+  "cssFiles": [
+    "index.css",
+    "app-header-bar.css"
+  ],
   "devDependencies": {
     "vite": "^4.4.0"
   }

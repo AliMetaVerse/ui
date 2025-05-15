@@ -1,3 +1,12 @@
+/**
+ * Main Application Stylesheet
+ * 
+ * CHANGELOG:
+ * - Renamed CSS classes to more semantic, meaningful names
+ * - Fixed Contact Us element to be always visible at the bottom of sidebar
+ * - Implemented responsive layout for homepage based on design specifications
+ * - Added proper Font Awesome icons with consistent styling
+ */
 :root {
   --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
@@ -5,12 +14,12 @@
     "Source Han Sans CN", sans-serif;
 }
 
-.main-container {
+.app-container {
   overflow: hidden;
 }
 
-.main-container,
-.main-container * {
+.app-container,
+.app-container * {
   box-sizing: border-box;
 }
 
@@ -21,7 +30,7 @@ button {
   outline: 0;
 }
 
-.main-container {
+.app-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -34,7 +43,7 @@ button {
   background: #ebf4f7;
   overflow: hidden;
 }
-.body {
+.app-layout {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
@@ -44,7 +53,7 @@ button {
   height: 100vh;
   overflow: hidden;
 }
-.nav-pseudo {
+.sidebar-container {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
@@ -54,7 +63,7 @@ button {
   height: 1080px;
   z-index: 1;
 }
-.main-menu-custom {
+.sidebar-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -66,7 +75,7 @@ button {
   min-height: 0;
   z-index: 2;
 }
-.main-menu {
+.sidebar-menu {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -152,7 +161,7 @@ button {
   white-space: nowrap;
   z-index: 9;
 }
-.module-links {
+.sidebar-module-links {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -602,7 +611,7 @@ button {
   white-space: nowrap;
   z-index: 42;
 }
-.supportive-links {
+.sidebar-utility-links {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -837,7 +846,7 @@ button {
   white-space: nowrap;
   z-index: 59;
 }
-.navigation-links-27 {
+.contact-us-fixed {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -894,7 +903,7 @@ button {
   white-space: nowrap;
   z-index: 63;
 }
-.right {
+.main-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -908,7 +917,7 @@ button {
   overflow: hidden;
   z-index: 64;
 }
-.top {
+.main-header-area {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -919,7 +928,7 @@ button {
   padding: 0 0 2px 0;
   z-index: 65;
 }
-.header-component {
+.app-header-wrapper {
   display: flex;
   align-items: flex-start;
   align-self: stretch;
@@ -928,7 +937,7 @@ button {
   position: relative;
   z-index: 66;
 }
-.header {
+.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -942,7 +951,7 @@ button {
   border-top: 1px solid #d1d5d6;
   z-index: 67;
 }
-.dropdown-field {
+.create-new-dropdown {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -955,7 +964,7 @@ button {
   z-index: 68;
   border-radius: 4px;
 }
-.dropdown-frame {
+.create-new-dropdown-container {
   display: flex;
   align-items: center;
   align-self: stretch;
@@ -1034,7 +1043,7 @@ button {
   white-space: nowrap;
   z-index: 74;
 }
-.header-links {
+.header-action-links {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -1232,7 +1241,7 @@ button {
   position: relative;
   z-index: 90;
 }
-.edit-tabs-legacy {
+.tabs-navigation {
   display: flex;
   align-items: center;
   align-self: stretch;
@@ -1255,7 +1264,7 @@ button {
   position: relative;
   z-index: 92;
 }
-.tabs-34 {
+.tabs-container {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
@@ -1267,7 +1276,7 @@ button {
   border-right: 1px solid #d1d5d6;
   z-index: 93;
 }
-.edit-tab-items {
+.tab-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1636,7 +1645,7 @@ button {
   white-space: nowrap;
   z-index: 118;
 }
-.label-legacy {
+.survey-title-label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1721,7 +1730,7 @@ button {
   background-size: cover;
   z-index: 124;
 }
-.edit-toolbar-legacy-new {
+.toolbar-container {
   display: flex;
   align-items: flex-start;
   align-self: stretch;
@@ -1734,7 +1743,7 @@ button {
   border-bottom: 1px solid #d1d5d6;
   z-index: 125;
 }
-.icons-4c {
+.toolbar-icons-container {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -1744,7 +1753,7 @@ button {
   width: 1092px;
   z-index: 126;
 }
-.edit-toolbar-menu {
+.toolbar-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1756,7 +1765,7 @@ button {
   z-index: 127;
   border-radius: 8px;
 }
-.edit-toolbar-icons-4d {
+.toolbar-icon-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2406,7 +2415,7 @@ button {
   white-space: nowrap;
   z-index: 173;
 }
-.body-78 {
+.main-content-body {
   display: flex;
   align-items: flex-start;
   align-self: stretch;
