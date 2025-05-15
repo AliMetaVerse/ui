@@ -7,7 +7,28 @@
  * - Implemented responsive layout for homepage based on design specifications
  * - Added proper Font Awesome icons with consistent styling
  * - Added and adjusted CSS for the new header layout: light blue background, card-style buttons, colored avatar, tab bar with colored icons, and toolbar
+ * - Unified edit-toolbar-menu-XX classes to a single edit-toolbar-menu-item class
  */
+
+/* Unified toolbar menu item class */
+.edit-toolbar-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  width: 102px;
+  padding: 4px 8px 6px 8px;
+  border-radius: 8px;
+  z-index: 1; /* Base z-index, adjusted as needed */
+}
+
+/* Hover effect for toolbar menu items */
+.edit-toolbar-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
 :root {
   --default-font-family: "Roboto", "Noto Sans", "Noto Sans SC", "Noto Sans TC",
 }

@@ -49,6 +49,40 @@ The "Contact us" element in the sidebar is now fixed at the bottom:
 .contact-us-fixed {
   position: fixed;
   bottom: 20px;
+```
+
+### 4. Class Unification
+We've unified multiple similar classes into a single reusable class for better maintainability:
+
+| Old Classes | New Class | Purpose |
+|-------------|-----------|---------|
+| .edit-toolbar-menu-4f, .edit-toolbar-menu-53, .edit-toolbar-menu-57, etc. | .edit-toolbar-menu-item | Toolbar menu items |
+
+This change simplifies the CSS structure by replacing numerous nearly identical classes that only differed in their z-index values with a single class with a consistent style. The new class includes:
+
+```css
+.edit-toolbar-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  width: 102px;
+  padding: 4px 8px 6px 8px;
+  border-radius: 8px;
+  z-index: 1; /* Base z-index */
+}
+```
+
+We also added a hover effect for better user experience:
+
+```css
+.edit-toolbar-menu-item:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+```
   width: 200px;
   padding: 12px;
   background: #ffffff;
