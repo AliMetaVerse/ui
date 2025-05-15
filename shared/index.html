@@ -8,327 +8,365 @@
   - Fixed Contact Us element in sidebar
 -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webropol UI Application</title>
-        <link
-      href="https://fonts.googleapis.com/css?family=Roboto:400,500"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/50ef2d3cf8.js"
-      crossorigin="anonymous"
-    ></script>
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" />
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="app-header-bar.css" />
-  </head>
-  <body>
-    <div class="app-container">
-      <div class="app-layout">
-        <div class="sidebar-container">
-          <div class="sidebar-wrapper">
-            <div class="sidebar-menu">              <div class="logo">
-                <div class="logo-1"><div class="mobiili"></div></div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-square-chevron-left"></i>
-                  </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webropol UI Application</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/app-header-bar.css">
+    </head>
+    <body>
+        <div class="app-container">
+            <div class="app-layout">
+                <div class="sidebar-container">
+                    <div class="sidebar-wrapper">
+                        <div class="sidebar-menu">
+                            <div class="logo">
+                                <div class="logo-1">
+                                    <div class="mobiili"></div>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-square-chevron-left"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar-module-links">
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-home"></i>
+                                    </div>
+                                    <span class="label">Home</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-user-magnifying-glass"></i>
+                                    </div>
+                                    <span class="label-6">Surveys</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-microphone"></i>
+                                    </div>
+                                    <span class="label-9">Events</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-comment-sms"></i>
+                                    </div>
+                                    <span class="label-d">SMS Surveys</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-leaf"></i>
+                                    </div>
+                                    <span class="label-11">ESG</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-chart-column"></i>
+                                    </div>
+                                    <span class="label-14">Dashboards</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-list-check"></i>
+                                    </div>
+                                    <span class="label-17">Case management</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-columns"></i>
+                                    </div>
+                                    <span class="label-1a">Case form setup</span>
+                                </div>
+                            </div>
+                            <div class="sidebar-utility-links">
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-books"></i>
+                                    </div>
+                                    <span class="label-1d">Library</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                    </div>
+                                    <span class="label-20">Admin tools</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-video"></i>
+                                    </div>
+                                    <span class="label-23">Training videos</span>
+                                </div>
+                                <div class="nav-link-item">
+                                    <div class="nav-icon-container">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                    </div>
+                                    <span class="label-26">Shop</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contact us element positioned outside the main-menu for fixed positioning -->
+                        <div class="contact-us-fixed">
+                            <div class="nav-icon-container">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <span class="label-29">Contact us</span>
+                        </div>
+                    </div>
                 </div>
-              </div><div class="sidebar-module-links">
-                <div class="nav-link-item">
-                  <div class="nav-icon-container"><i class="fa-solid fa-home"></i></div>
-                  <span class="label">Home</span>
+                <div class="main-content">
+                    <div class="main-header-area">
+                        <div class="app-header-wrapper">
+                            <div class="app-header-bar">
+                                <div class="create-new-dropdown">
+                                    <div class="create-new-dropdown-container">
+                                        <div class="nav-icon-container">
+                                            <i class="fa-solid fa-circle-plus"></i>
+                                        </div>
+                                        <span class="label-create-new">Create new</span>
+                                        <div class="nav-icon-container">
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="header-action-links">
+                                    <div class="header-nav-link-item">
+                                        <div class="nav-icon-container">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </div>
+                                    </div>
+                                    <div class="header-nav-link-item">
+                                        <div class="nav-icon-container">
+                                            <div class="square-question">
+                                                <i class="fa-solid fa-square-question"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header-nav-link-item">
+                                        <div class="nav-icon-container">
+                                            <i class="fa-solid fa-bell"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ellipse"></div>
+                                    <div class="user-image">
+                                        <div class="user-image-33"></div>
+                                        <span class="jd">JD</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs-edit-toolbar">
+                            <div class="tabs-navigation">
+                                <div class="tabs">
+                                    <div class="tabs-container">
+                                        <div class="tab-item">
+                                            <div class="items">
+                                                <div class="edit-icon-green">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </div>
+                                                <span class="edits">Edit</span>
+                                            </div>
+                                        </div>
+                                        <div class="edit-tab-items-35">
+                                            <div class="items-36">
+                                                <div class="collect-icon-blue">
+                                                    <i class="fa-solid fa-clipboard-list"></i>
+                                                </div>
+                                                <span class="edits-39">Collect Answers</span>
+                                            </div>
+                                        </div>
+                                        <div class="edit-tab-items-3a">
+                                            <div class="items-3b">
+                                                <div class="followup-icon-pink">
+                                                    <i class="fa-solid fa-arrow-right"></i>
+                                                </div>
+                                                <span class="edits-3e">Follow up</span>
+                                            </div>
+                                        </div>
+                                        <div class="edit-tab-items-3f">
+                                            <div class="items-40">
+                                                <div class="report-icon-yellow">
+                                                    <i class="fa-solid fa-chart-pie"></i>
+                                                </div>
+                                                <span class="edits-43">Report</span>
+                                            </div>
+                                        </div>
+                                        <div class="edit-tab-items-44">
+                                            <div class="items-45">
+                                                <div class="ai-icon-orange">
+                                                    <i class="fa-solid fa-robot"></i>
+                                                </div>
+                                                <span class="edits-48">AI Text Analysis</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="survey-title-label">
+                                        <span class="sample-text">Survey: Survey Name</span>
+                                    </div>
+                                </div>
+                                <div class="nav-icon-container">
+                                    <i class="fa-solid fa-money-check-pen"></i>
+                                </div>
+                                <div class="nav-icon-container">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                            </div>
+                            <div class="toolbar-container">
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span>Add Question</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-book"></i>
+                                    <span>Survey Library</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-file-plus"></i>
+                                    <span>Add page</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-language"></i>
+                                    <span>Languages</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-images"></i>
+                                    <span>Image gallery</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-table-columns"></i>
+                                    <span>Layout</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-user-shield"></i>
+                                    <span>Personal data</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-gear"></i>
+                                    <span>Settings</span>
+                                </div>
+                                <div class="toolbar-item">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>Preview & test</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-content-body">
+                        <div class="edit-page-content">
+                            <!-- Survey title section -->
+                            <div class="survey-title-section">
+                                <div class="title-container">
+                                    <h1 class="survey-title">Customer Satisfaction Survey</h1>
+                                    <div class="title-actions">
+                                        <button class="edit-title-btn">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="survey-description">Please help us improve our service by answering a few questions about your recent experience.</p>
+                            </div>
+                            <!-- Question blocks section -->
+                            <div class="questions-container">
+                                <!-- Question 1 -->
+                                <div class="question-block">
+                                    <div class="question-header">
+                                        <div class="question-number">1.</div>
+                                        <div class="question-title">How satisfied were you with our service?</div>
+                                        <div class="question-actions">
+                                            <button class="question-action-btn">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="question-content">
+                                        <div class="rating-scale">
+                                            <div class="scale-option">
+                                                <div class="rating-number">1</div>
+                                                <div class="rating-label">Very Dissatisfied</div>
+                                            </div>
+                                            <div class="scale-option">
+                                                <div class="rating-number">2</div>
+                                            </div>
+                                            <div class="scale-option">
+                                                <div class="rating-number">3</div>
+                                            </div>
+                                            <div class="scale-option">
+                                                <div class="rating-number">4</div>
+                                            </div>
+                                            <div class="scale-option">
+                                                <div class="rating-number">5</div>
+                                                <div class="rating-label">Very Satisfied</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Question 2 -->
+                                <div class="question-block">
+                                    <div class="question-header">
+                                        <div class="question-number">2.</div>
+                                        <div class="question-title">What aspects of our service did you appreciate the most?</div>
+                                        <div class="question-actions">
+                                            <button class="question-action-btn">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="question-content">
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-option">
+                                                <input type="checkbox" id="option1" name="option1">
+                                                <label for="option1">Speed of service</label>
+                                            </div>
+                                            <div class="checkbox-option">
+                                                <input type="checkbox" id="option2" name="option2">
+                                                <label for="option2">Quality of products</label>
+                                            </div>
+                                            <div class="checkbox-option">
+                                                <input type="checkbox" id="option3" name="option3">
+                                                <label for="option3">Staff knowledge</label>
+                                            </div>
+                                            <div class="checkbox-option">
+                                                <input type="checkbox" id="option4" name="option4">
+                                                <label for="option4">Value for money</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Question 3 -->
+                                <div class="question-block">
+                                    <div class="question-header">
+                                        <div class="question-number">3.</div>
+                                        <div class="question-title">Please provide any additional feedback or suggestions.</div>
+                                        <div class="question-actions">
+                                            <button class="question-action-btn">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="question-content">
+                                        <textarea class="feedback-textarea" placeholder="Enter your feedback here..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add question button -->
+                            <div class="add-question-container">
+                                <button class="add-question-btn">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span>Add Question</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-user-magnifying-glass"></i>
-                  </div>
-                  <span class="label-6">Surveys</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-microphone"></i>
-                  </div>
-                  <span class="label-9">Events</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-comment-sms"></i>
-                  </div>
-                  <span class="label-d">SMS Surveys</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-leaf"></i>
-                  </div>
-                  <span class="label-11">ESG</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-chart-column"></i>
-                  </div>
-                  <span class="label-14">Dashboards</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-list-check"></i>
-                  </div>
-                  <span class="label-17">Case management</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container"><i class="fa-solid fa-columns"></i></div>
-                  <span class="label-1a">Case form setup</span>
-                </div>
-              </div>              <div class="sidebar-utility-links">
-                <div class="nav-link-item">
-                  <div class="nav-icon-container"><i class="fa-solid fa-books"></i></div>
-                  <span class="label-1d">Library</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                  </div>
-                  <span class="label-20">Admin tools</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-video"></i>
-                  </div>
-                  <span class="label-23">Training videos</span>
-                </div>
-                <div class="nav-link-item">
-                  <div class="nav-icon-container">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </div>
-                  <span class="label-26">Shop</span>
-                </div>
-              </div>
-            </div>            <!-- Contact us element positioned outside the main-menu for fixed positioning -->
-            <div class="contact-us-fixed">
-              <div class="nav-icon-container"><i class="fa-solid fa-headset"></i></div>
-              <span class="label-29">Contact us</span>            </div>
-          </div>
+            </div>
         </div>
-        <div class="main-content">
-          <div class="main-header-area">
-            <div class="app-header-wrapper">
-              <div class="app-header-bar">                <div class="create-new-dropdown">
-                  <div class="create-new-dropdown-container">
-                    <div class="nav-icon-container">
-                      <i class="fa-solid fa-circle-plus"></i>
-                    </div>
-                    <span class="label-create-new">Create new </span>
-                    <div class="nav-icon-container">
-                      <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                  </div>
-                </div><div class="header-action-links">
-                  <div class="header-nav-link-item">
-                    <div class="nav-icon-container">
-                      <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                  </div>
-                  <div class="header-nav-link-item">
-                    <div class="nav-icon-container">
-                      <div class="square-question">
-                        <i class="fa-solid fa-square-question"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="header-nav-link-item">
-                    <div class="nav-icon-container"><i class="fa-solid fa-bell"></i></div>
-                  </div>
-                  <div class="ellipse"></div>
-                  <div class="user-image">
-                    <div class="user-image-33"></div>
-                    <span class="jd">JD</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tabs-edit-toolbar">
-              <div class="tabs-navigation">
-                <div class="tabs">
-                  <div class="tabs-container">                    <div class="tab-item">
-                      <div class="items">
-                        <div class="edit-icon-green">
-                          <i class="fa-solid fa-pen-to-square"></i>
-                        </div>
-                        <span class="edits">Edit</span>
-                      </div>
-                    </div>
-                    <div class="edit-tab-items-35">
-                      <div class="items-36">
-                        <div class="collect-icon-blue">
-                          <i class="fa-solid fa-clipboard-list"></i>
-                        </div>
-                        <span class="edits-39">Collect Answers</span>
-                      </div>
-                    </div>
-                    <div class="edit-tab-items-3a">
-                      <div class="items-3b">
-                        <div class="followup-icon-pink">
-                          <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-                        <span class="edits-3e">Follow up</span>
-                      </div>
-                    </div>
-                    <div class="edit-tab-items-3f">
-                      <div class="items-40">
-                        <div class="report-icon-yellow">
-                          <i class="fa-solid fa-chart-pie"></i>
-                        </div>
-                        <span class="edits-43">Report</span>
-                      </div>
-                    </div>
-                    <div class="edit-tab-items-44">
-                      <div class="items-45">
-                        <div class="ai-icon-orange">
-                          <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <span class="edits-48">AI Text Analysis</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="survey-title-label">
-                    <span class="sample-text">Survey: Survey Name</span>
-                  </div>
-                </div>                <div class="nav-icon-container">
-                  <i class="fa-solid fa-money-check-pen"></i>
-                </div>
-                <div class="nav-icon-container">
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-              </div>              <div class="toolbar-container">
-                <div class="toolbar-item"><i class="fa-solid fa-plus"></i><span>Add Question</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-book"></i><span>Survey Library</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-file-plus"></i><span>Add page</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-language"></i><span>Languages</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-images"></i><span>Image gallery</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-table-columns"></i><span>Layout</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-user-shield"></i><span>Personal data</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-gear"></i><span>Settings</span></div>
-                <div class="toolbar-item"><i class="fa-solid fa-eye"></i><span>Preview & test</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="main-content-body">
-            <div class="edit-page-content">
-              <!-- Survey title section -->
-              <div class="survey-title-section">
-                <div class="title-container">
-                  <h1 class="survey-title">Customer Satisfaction Survey</h1>
-                  <div class="title-actions">
-                    <button class="edit-title-btn">
-                      <i class="fa-solid fa-pen"></i>
-                    </button>
-                  </div>
-                </div>
-                <p class="survey-description">Please help us improve our service by answering a few questions about your recent experience.</p>
-              </div>
-              
-              <!-- Question blocks section -->
-              <div class="questions-container">
-                <!-- Question 1 -->
-                <div class="question-block">
-                  <div class="question-header">
-                    <div class="question-number">1.</div>
-                    <div class="question-title">How satisfied were you with our service?</div>
-                    <div class="question-actions">
-                      <button class="question-action-btn">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="question-content">
-                    <div class="rating-scale">
-                      <div class="scale-option">
-                        <div class="rating-number">1</div>
-                        <div class="rating-label">Very Dissatisfied</div>
-                      </div>
-                      <div class="scale-option">
-                        <div class="rating-number">2</div>
-                      </div>
-                      <div class="scale-option">
-                        <div class="rating-number">3</div>
-                      </div>
-                      <div class="scale-option">
-                        <div class="rating-number">4</div>
-                      </div>
-                      <div class="scale-option">
-                        <div class="rating-number">5</div>
-                        <div class="rating-label">Very Satisfied</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Question 2 -->
-                <div class="question-block">
-                  <div class="question-header">
-                    <div class="question-number">2.</div>
-                    <div class="question-title">What aspects of our service did you appreciate the most?</div>
-                    <div class="question-actions">
-                      <button class="question-action-btn">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="question-content">
-                    <div class="checkbox-group">
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="option1" name="option1">
-                        <label for="option1">Speed of service</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="option2" name="option2">
-                        <label for="option2">Quality of products</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="option3" name="option3">
-                        <label for="option3">Staff knowledge</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="option4" name="option4">
-                        <label for="option4">Value for money</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Question 3 -->
-                <div class="question-block">
-                  <div class="question-header">
-                    <div class="question-number">3.</div>
-                    <div class="question-title">Please provide any additional feedback or suggestions.</div>
-                    <div class="question-actions">
-                      <button class="question-action-btn">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="question-content">
-                    <textarea class="feedback-textarea" placeholder="Enter your feedback here..."></textarea>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Add question button -->
-              <div class="add-question-container">
-                <button class="add-question-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  <span>Add Question</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Generated by Codia AI - https://codia.ai/ -->
-  </body>
+        <!-- Generated by Codia AI - https://codia.ai/ -->
+    </body>
 </html>
