@@ -1,0 +1,151 @@
+<!-- 
+  Survey Page Structure Panel
+  
+  This component provides a hierarchical view of survey pages and questions,
+  allowing users to manage the structure of their survey through an intuitive UI.
+  
+  Features:
+  - Drag and drop reordering of pages and questions
+  - Quick access actions (delete, duplicate, move)
+  - Visual indication of the active page/question
+  - Collapsible for responsive layouts
+-->
+<div class="page-structure-panel">
+    <div class="panel-header">
+        <div class="panel-title">
+            <i class="fa-light fa-sitemap"></i>
+            <span>Page Structure</span>
+        </div>
+        <div class="panel-actions">
+            <button class="panel-toggle" title="Collapse panel">
+                <i class="fa-light fa-angle-left"></i>
+            </button>
+        </div>
+    </div>
+    <div class="panel-content">
+        <div class="structure-tree">
+            <!-- Pages and their questions will be dynamically loaded here -->
+            <ul class="page-list" id="surveyPageList">
+                <!-- Example structure (will be generated dynamically) -->
+                <li class="page-item" data-page-id="page1">
+                    <div class="page-header">
+                        <div class="page-drag-handle">
+                            <i class="fa-light fa-grip-dots-vertical"></i>
+                        </div>
+                        <div class="page-collapse-toggle">
+                            <i class="fa-light fa-chevron-down"></i>
+                        </div>
+                        <div class="page-title" contenteditable="true">Page 1</div>
+                        <div class="page-actions">
+                            <button class="action-btn" title="Delete page">
+                                <i class="fa-light fa-trash"></i>
+                            </button>
+                            <button class="action-btn" title="Duplicate page">
+                                <i class="fa-light fa-copy"></i>
+                            </button>
+                            <button class="action-btn" title="Move page">
+                                <i class="fa-light fa-arrows-up-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="question-list">
+                        <li class="question-item active" data-question-id="q1">
+                            <div class="question-drag-handle">
+                                <i class="fa-light fa-grip-dots-vertical"></i>
+                            </div>
+                            <div class="question-type-icon">
+                                <i class="fa-light fa-square-poll-horizontal"></i>
+                            </div>
+                            <div class="question-title">What is your age?</div>
+                            <div class="question-actions">
+                                <button class="action-btn" title="Delete question">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                                <button class="action-btn" title="Duplicate question">
+                                    <i class="fa-light fa-copy"></i>
+                                </button>
+                                <button class="action-btn" title="Move question">
+                                    <i class="fa-light fa-arrows-up-down"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="question-item" data-question-id="q2">
+                            <div class="question-drag-handle">
+                                <i class="fa-light fa-grip-dots-vertical"></i>
+                            </div>
+                            <div class="question-type-icon">
+                                <i class="fa-light fa-circle-check"></i>
+                            </div>
+                            <div class="question-title">Select your gender</div>
+                            <div class="question-actions">
+                                <button class="action-btn" title="Delete question">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                                <button class="action-btn" title="Duplicate question">
+                                    <i class="fa-light fa-copy"></i>
+                                </button>
+                                <button class="action-btn" title="Move question">
+                                    <i class="fa-light fa-arrows-up-down"></i>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="page-item" data-page-id="page2">
+                    <div class="page-header">
+                        <div class="page-drag-handle">
+                            <i class="fa-light fa-grip-dots-vertical"></i>
+                        </div>
+                        <div class="page-collapse-toggle">
+                            <i class="fa-light fa-chevron-down"></i>
+                        </div>
+                        <div class="page-title" contenteditable="true">Page 2</div>
+                        <div class="page-actions">
+                            <button class="action-btn" title="Delete page">
+                                <i class="fa-light fa-trash"></i>
+                            </button>
+                            <button class="action-btn" title="Duplicate page">
+                                <i class="fa-light fa-copy"></i>
+                            </button>
+                            <button class="action-btn" title="Move page">
+                                <i class="fa-light fa-arrows-up-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="question-list">
+                        <li class="question-item" data-question-id="q3">
+                            <div class="question-drag-handle">
+                                <i class="fa-light fa-grip-dots-vertical"></i>
+                            </div>
+                            <div class="question-type-icon">
+                                <i class="fa-light fa-align-left"></i>
+                            </div>
+                            <div class="question-title">Describe your experience</div>
+                            <div class="question-actions">
+                                <button class="action-btn" title="Delete question">
+                                    <i class="fa-light fa-trash"></i>
+                                </button>
+                                <button class="action-btn" title="Duplicate question">
+                                    <i class="fa-light fa-copy"></i>
+                                </button>
+                                <button class="action-btn" title="Move question">
+                                    <i class="fa-light fa-arrows-up-down"></i>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="add-btn add-page-btn">
+            <i class="fa-light fa-file-plus"></i>
+            <span>Add Page</span>
+        </button>
+        <button class="add-btn add-question-btn">
+            <i class="fa-light fa-plus"></i>
+            <span>Add Question</span>
+        </button>
+    </div>
+</div>
