@@ -146,7 +146,7 @@ button {
   flex-shrink: 0;
   position: relative;
   width: 224px;
-  height: 1080px;
+  height: 100%; /* Changed from fixed 1080px to 100% to fit viewport */
   z-index: 1;
 }
 .sidebar-wrapper {
@@ -178,7 +178,7 @@ button {
   z-index: 3;
   overflow-y: auto; /* Allow scrolling if content is tall */
   overflow-x: hidden;
-  height: 100%;
+  height: calc(100% - 48px); /* Adjust height to account for contact-us element */
 }
 .logo {
   display: flex;
@@ -939,14 +939,14 @@ button {
   flex-shrink: 0;
   gap: 12px;
   position: fixed;
-  bottom: 20px;
-  width: 200px;
+  bottom: 0;
+  width: 224px;
   padding: 12px 12px 12px 12px;
   background: #ffffff;
   z-index: 999;
   overflow: hidden;
-  border-radius: 4px;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 }
 .icons-28 {
   flex-shrink: 0;
