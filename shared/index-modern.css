@@ -19,6 +19,9 @@ body {
   color: #272a2b;
   background-color: #f8f9fa;
 }
+body, html, .app-container, .app-layout, .sidebar-container, .sidebar-wrapper, .sidebar-menu, .logo, .navigation-links, .sidebar-module-links, .sidebar-utility-links, .main-content, .main-header-area, .custom-app-header, .custom-tab-bar, .custom-toolbar, .main-content-body, .edit-page-content, .survey-title-section, .questions-container, .question-block, .question-header, .question-content, .add-question-container, button, input, textarea, select, label, span, div, h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif !important;
+}
 .app-container {
   overflow: hidden;
 }
