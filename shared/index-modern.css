@@ -8,7 +8,68 @@
  * - Added proper Font Awesome icons with consistent styling
  * - Added and adjusted CSS for the new header layout: light blue background, card-style buttons, colored avatar, tab bar with colored icons, and toolbar
  * - Unified edit-toolbar-menu-XX classes to a single edit-toolbar-menu-item class
+ * - Unified navigation-links-XX classes to a single nav-link-item class
+ * - Unified icons-XX classes to a single nav-icon-container class
  */
+
+/* Unified navigation link and icon classes */
+.nav-link-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 12px;
+  position: relative;
+  width: 200px;
+  padding: 12px;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.nav-icon-container {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon-container i {
+  font-size: 16px;
+  color: #272a2b;
+}
+
+/* For header navigation items */
+.header-nav-link-item {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 12px;
+  position: relative;
+  width: 44px;
+  padding: 12px;
+  background: #ffffff;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.header-nav-link-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
 
 /* Unified toolbar menu item class */
 .edit-toolbar-menu-item {
@@ -990,9 +1051,7 @@ button {
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   cursor: pointer;
 }
-.header-center {
-  margin-left: 32px;
-}
+
 .create-new-btn {
   background: #fff;
   border: none;

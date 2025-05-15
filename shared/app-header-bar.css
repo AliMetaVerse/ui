@@ -4,6 +4,42 @@
  * This file contains styles for the application header bar.
  * Extracted from the main stylesheet to improve modularity and maintainability.
  */
+
+/* Unified navigation and icon classes for the header */
+.header-nav-link-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  width: 44px;
+  padding: 12px;
+  background: transparent;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.header-nav-link-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.nav-icon-container {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon-container i {
+  font-size: 16px;
+  color: #272a2b;
+}
 .app-header-bar {
   display: flex;
   flex-direction: row;

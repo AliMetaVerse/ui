@@ -54,6 +54,7 @@ The "Contact us" element in the sidebar is now fixed at the bottom:
 ### 4. Class Unification
 We've unified multiple similar classes into a single reusable class for better maintainability:
 
+#### 4.1 Toolbar Menu Items
 | Old Classes | New Class | Purpose |
 |-------------|-----------|---------|
 | .edit-toolbar-menu-4f, .edit-toolbar-menu-53, .edit-toolbar-menu-57, etc. | .edit-toolbar-menu-item | Toolbar menu items |
@@ -69,6 +70,90 @@ This change simplifies the CSS structure by replacing numerous nearly identical 
   flex-shrink: 0;
   position: relative;
   width: 102px;
+  padding: 4px 8px 6px 8px;
+  border-radius: 8px;
+}
+```
+
+#### 4.2 Navigation Links
+| Old Classes | New Class | Purpose |
+|-------------|-----------|---------|
+| .navigation-links-2, .navigation-links-4, .navigation-links-7, etc. | .nav-link-item | Navigation link items |
+| **Exception:** Tab icons retain original classes for color-coding | n/a | Tab icons (edit-toolbar-icons-XX) |
+
+```css
+.nav-link-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 12px;
+  position: relative;
+  width: 200px;
+  padding: 12px;
+  border-radius: 4px;
+}
+```
+
+#### 4.3 Icon Containers
+| Old Classes | New Class | Purpose |
+|-------------|-----------|---------|
+| .icons-3, .icons-5, .icons-8, .icons-b, etc. | .nav-icon-container | Icon containers |
+| **Exception:** Tab icons (.edit-toolbar-icons-XX) | Preserved original classes | Colored tab icons |
+
+```css
+.nav-icon-container {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+**Note on Tab Colors:** We preserved the original tab icon classes (.edit-toolbar-icons, .edit-toolbar-icons-37, etc.) to maintain the distinct color-coded backgrounds for each tab:
+- Edit tab: #cfe9c9 (light green)
+- Collect Answers tab: #b0e8f1 (light blue)
+- Follow up tab: #fecdd4 (light pink)
+- Report tab: #fde38a (yellow)
+- AI Text Analysis tab: #ffc8a8 (light orange)
+```
+
+#### 4.4 Header Navigation Items
+| Old Classes | New Class | Purpose |
+|-------------|-----------|---------|
+| .navigation-links-2c, .navigation-links-2e, .navigation-links-31, etc. | .header-nav-link-item | Header navigation links |
+
+```css
+.header-nav-link-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  width: 44px;
+  padding: 12px;
+  border-radius: 4px;
+}
+```
+
+### 5. Benefits of Class Unification
+
+The unification of these classes brings several important benefits:
+
+1. **Reduced CSS Bloat**: We've eliminated dozens of nearly identical CSS class definitions that were only needed to set different z-index values, reducing our CSS file size significantly.
+
+2. **Improved Maintainability**: When design changes are needed, we now only need to update a single class definition rather than dozens of similar ones.
+
+3. **Consistent UI Experience**: By using the same CSS classes across similar elements, we ensure that all navigation items and icons have a consistent look and behavior.
+
+4. **Better Readability**: The HTML markup is now cleaner and more semantic, making it easier for developers to understand the document structure.
+
+5. **Simplified Responsive Design**: With fewer classes to manage, implementing responsive behavior will be more straightforward.
+
+6. **Improved Developer Experience**: New team members will be able to understand the codebase more easily with these semantic, unified class names.
   padding: 4px 8px 6px 8px;
   border-radius: 8px;
   z-index: 1; /* Base z-index */
@@ -93,7 +178,29 @@ We also added a hover effect for better user experience:
 }
 ```
 
-### 4. Code Organization
+### 4. Class Unification and Semantic Naming
+- Unified various related classes to improve consistency and maintainability:
+  - Unified `edit-toolbar-menu-XX` classes into a single `edit-toolbar-menu-item` class
+  - Unified `navigation-links-XX` classes into `nav-link-item` for sidebar and `header-nav-link-item` for header navigation
+  - Unified `icons-XX` classes into a single `nav-icon-container` class
+
+- Renamed tab icon classes to use semantic, descriptive names based on functionality and color:
+  | Old Name | New Name | Purpose |
+  |----------|----------|---------|
+  | .edit-toolbar-icons | .edit-icon-green | Edit tab icon with green background |
+  | .edit-toolbar-icons-37 | .collect-icon-blue | Collect Answers tab icon with blue background |
+  | .edit-toolbar-icons-3c | .followup-icon-pink | Follow up tab icon with pink background |
+  | .edit-toolbar-icons-41 | .report-icon-yellow | Report tab icon with yellow background |
+  | .edit-toolbar-icons-46 | .ai-icon-orange | AI Text Analysis tab icon with orange background |
+
+- The modern CSS version already uses semantic classes for tab icons:
+  - `.tab-edit` (green background)
+  - `.tab-collect` (blue background)
+  - `.tab-follow` (pink background)
+  - `.tab-report` (yellow background)
+  - `.tab-ai` (orange background)
+
+### 5. Code Organization
 - Created a separate CSS file (`app-header-bar.css`) for header bar styling to improve modularity
 - Added appropriate comments to document changes and important components
 
@@ -101,3 +208,4 @@ We also added a hover effect for better user experience:
 - Add more comprehensive documentation for components
 - Consider implementing a CSS preprocessor for better organization and maintainability
 - Create additional component-specific CSS files for better separation of concerns
+- Continue refactoring remaining numeric-suffix classes to use semantic names
