@@ -1,7 +1,9 @@
 <!-- Survey Editor Content -->
-<div class="edit-page-content">    <!-- Survey title section -->
+<div class="edit-page-content">
+    <!-- Survey title section -->
     <div class="survey-title-section">
-        <div class="title-container">            <h1 class="survey-title">Customer Satisfaction Survey</h1>
+        <div class="title-container">
+            <h1 class="survey-title">Customer Satisfaction Survey</h1>
             <div class="title-actions">
                 <button class="edit-title-btn">
                     <i class="fa-light fa-pen" aria-hidden="true"></i>
@@ -134,14 +136,140 @@
                 <button class="action-btn add-media-btn">
                     <i class="fa-light fa-images" aria-hidden="true"></i>
                     <span>Add Media</span>
-                </button>            </div>
-        </div>    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+<!-- Create New Content Page -->
+<div class="create-content-container">
+    <div class="create-content-header">
+        <h1 class="create-content-title">Create new</h1>
+        <p class="create-content-subtitle">Select to add content</p>
+    </div>    <!-- Common Question Types Card - Full Width -->
+    <div class="common-question-types-card">
+        <div class="content-card">
+            <div class="content-card-icon card-theme-blue">
+                <i class="fa-light fa-plus"></i>
+            </div>
+            <h3 class="content-card-title">Common Question Types</h3>
+            <p class="content-card-description">Choose from a variety of question types to gather responses</p>
+            
+            <div class="question-types-section">
+                <div class="question-types-grid">
+                    <div class="question-type-item">
+                        <div class="question-type-icon">
+                            <i class="fa-light fa-table-cells-large"></i>
+                        </div>
+                        <div class="question-type-text">Matrix (Scale selection)</div>
+                        <div class="question-info-icon">
+                            <i class="fa-light fa-circle-info"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type-item">
+                        <div class="question-type-icon">
+                            <i class="fa-light fa-list-check"></i>
+                        </div>
+                        <div class="question-type-text">Selection</div>
+                        <div class="question-info-icon">
+                            <i class="fa-light fa-circle-info"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type-item">
+                        <div class="question-type-icon">
+                            <i class="fa-light fa-list-ul"></i>
+                        </div>
+                        <div class="question-type-text">Multiselections</div>
+                        <div class="question-info-icon">
+                            <i class="fa-light fa-circle-info"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type-item">
+                        <div class="question-type-icon">
+                            <i class="fa-light fa-align-left"></i>
+                        </div>
+                        <div class="question-type-text">Open ended</div>
+                        <div class="question-info-icon">
+                            <i class="fa-light fa-circle-info"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type-item">
+                        <div class="question-type-icon">
+                            <i class="fa-light fa-address-card"></i>
+                        </div>
+                        <div class="question-type-text">Contact form</div>
+                        <div class="question-info-icon">
+                            <i class="fa-light fa-circle-info"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="question-type-item">
+                        <div class="question-type-icon">
+                            <i class="fa-light fa-robot"></i>
+                        </div>
+                        <div class="question-type-text">CSAT</div>
+                        <div class="question-info-icon">
+                            <i class="fa-light fa-circle-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
+    <!-- Other Cards in a Row -->
+    <div class="create-content-grid three-column-grid">
+        <!-- Import from Library Card -->
+        <div class="content-card">
+            <div class="content-card-icon card-theme-purple">
+                <i class="fa-light fa-books"></i>
+            </div>
+            <h3 class="content-card-title">Import from Library</h3>
+            <p class="content-card-description">Reuse questions, pages, or entire surveys from your library</p>
+            <button class="action-button action-button-outlined">
+                <i class="fa-light fa-folder-open"></i>
+                Browse Library
+            </button>
+        </div>
+        
+        <!-- Free Text & Media Card -->
+        <div class="content-card">
+            <div class="content-card-icon card-theme-green">
+                <i class="fa-light fa-file-lines"></i>
+            </div>
+            <h3 class="content-card-title">Free Text & Media</h3>
+            <p class="content-card-description">Add descriptive text, images, videos, or other media content</p>
+            <button class="action-button action-button-outlined">
+                <i class="fa-light fa-pen-to-square"></i>
+                Add Content
+            </button>
+        </div>
+        
+        <!-- Add More Question Types Card -->
+        <div class="content-card">
+            <div class="content-card-icon card-theme-orange">
+                <i class="fa-light fa-layer-plus"></i>
+            </div>
+            <h3 class="content-card-title">Add More Question Types</h3>
+            <p class="content-card-description">Access advanced or special question types for complex surveys</p>
+            <button class="action-button action-button-outlined">
+                <i class="fa-light fa-list-tree"></i>
+                Explore More Types
+            </button>
+        </div>
+    </div>
+    
+    <div class="optional-text-container">
+        <div class="optional-text">Add optional text here</div>
+    </div>
+</div>
     <!-- Translation Floating Action Button -->
     <button id="translation-fab" class="translation-fab" aria-label="Translate Survey">
         <i class="fa-light fa-language" aria-hidden="true"></i>
     </button>
-    
     <!-- Translation Modal -->
     <div id="translation-modal" class="modal-overlay">
         <div class="translation-modal-content">
@@ -155,14 +283,12 @@
                 <div class="translation-intro">
                     <p>Translate your survey while preserving its original structure. The original language version will always be maintained.</p>
                 </div>
-                
                 <div class="translation-tabs">
                     <div class="tab-header">
                         <button class="tab-btn active" data-tab="language-selection">1. Select Languages</button>
                         <button class="tab-btn" data-tab="translation-preview" disabled>2. Review Translations</button>
                         <button class="tab-btn" data-tab="translation-settings" disabled>3. Settings</button>
                     </div>
-                    
                     <div class="tab-content">
                         <!-- Tab 1: Language Selection -->
                         <div class="tab-pane active" id="language-selection">
@@ -173,7 +299,6 @@
                                         <option value="en" selected>English</option>
                                     </select>
                                 </div>
-                                
                                 <div class="target-languages">
                                     <label>Target Languages:</label>
                                     <div class="language-checkboxes">
@@ -205,7 +330,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <!-- Tab 2: Translation Preview -->
                         <div class="tab-pane" id="translation-preview">
                             <div class="translation-progress">
@@ -214,7 +338,6 @@
                                 </div>
                                 <span class="progress-text">Translation in progress...</span>
                             </div>
-                            
                             <div class="language-preview-tabs">
                                 <!-- These tabs will be dynamically generated -->
                                 <div class="language-tab-header">
@@ -222,13 +345,10 @@
                                     <button class="language-tab-btn" data-lang="sv">Swedish</button>
                                     <button class="language-tab-btn" data-lang="fi">Finnish</button>
                                 </div>
-                                
                                 <div class="language-tab-content">
-                                    <!-- Preview content generated dynamically -->
-                                </div>
+                                    <!-- Preview content generated dynamically --></div>
                             </div>
                         </div>
-                        
                         <!-- Tab 3: Settings -->
                         <div class="tab-pane" id="translation-settings">
                             <div class="translation-settings-options">
@@ -239,7 +359,6 @@
                                     </label>
                                     <p class="setting-desc">Each translation will be saved as a separate language version of the survey</p>
                                 </div>
-                                
                                 <div class="setting-item">
                                     <label>
                                         <input type="checkbox" id="setting-language-selector" checked>
@@ -247,7 +366,6 @@
                                     </label>
                                     <p class="setting-desc">Respondents will be able to switch between available languages</p>
                                 </div>
-                                
                                 <div class="setting-item">
                                     <label>
                                         <input type="checkbox" id="setting-auto-detect">
@@ -255,7 +373,6 @@
                                     </label>
                                     <p class="setting-desc">Survey will automatically display in the respondent's browser language if available</p>
                                 </div>
-                                
                                 <div class="setting-item">
                                     <label for="setting-translation-service">Translation Service:</label>
                                     <select id="setting-translation-service" class="setting-select">
@@ -268,7 +385,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="translation-result">
                     <div class="result-message success">
                         <i class="fa-light fa-check-circle" aria-hidden="true"></i>

@@ -32,6 +32,22 @@
     margin-bottom: 2.5rem;
 }
 
+/* Three-column grid specifically for the three cards in a row */
+.three-column-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Common Question Types Card - Full Width */
+.common-question-types-card {
+    margin-bottom: 1.5rem;
+}
+
+.common-question-types-card .content-card {
+    width: 100%;
+}
+
 /* Content Card Styling */
 .content-card {
     background-color: #fff;
@@ -130,9 +146,10 @@
 /* Question Type Grid */
 .question-types-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-top: 1.5rem;
+    width: 100%;
 }
 
 .question-type-item {
@@ -243,6 +260,27 @@
     color: #666;
 }
 
+/* Responsive Layouts */
+@media (max-width: 992px) {
+    .three-column-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .question-types-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .three-column-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .question-types-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Animations for Page */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -273,6 +311,7 @@
 
 .question-types-section {
     margin-top: 2rem;
+    width: 100%;
 }
 
 .section-title {
@@ -281,4 +320,13 @@
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #eee;
+}
+
+/* Enhanced styles for the full-width question types card */
+.common-question-types-card .content-card {
+    padding: 2rem;
+}
+
+.common-question-types-card .question-types-grid {
+    margin-top: 2rem;
 }

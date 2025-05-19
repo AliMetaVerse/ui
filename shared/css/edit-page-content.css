@@ -1,5 +1,7 @@
 /* Styles for the survey editor page content */
 
+/* Create Content */
+@import url('create-content.css');
 /* Rating scale styling */
 .rating-scale {
     display: flex;
