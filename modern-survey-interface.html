@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Survey Interface | Webropol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
+    <link rel="stylesheet" href="ds.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: 'var(--primary-50)',
+                            100: 'var(--primary-100)',
+                            200: 'var(--primary-200)',
+                            300: 'var(--primary-300)',
+                            400: 'var(--primary-400)',
+                            500: 'var(--primary-500)',
+                            600: 'var(--primary-600)',
+                            700: 'var(--primary-700)',
+                            800: 'var(--primary-800)',
+                            900: 'var(--primary-900)',
+                        },
+                        neutral: {
+                            50: 'var(--neutral-50)',
+                            100: 'var(--neutral-100)',
+                            200: 'var(--neutral-200)',
+                            300: 'var(--neutral-300)',
+                            400: 'var(--neutral-400)',
+                            500: 'var(--neutral-500)',
+                            600: 'var(--neutral-600)',
+                            700: 'var(--neutral-700)',
+                            800: 'var(--neutral-800)',
+                            900: 'var(--neutral-900)',
+                        },
+                        success: {
+                            50: 'var(--success-50)',
+                            100: 'var(--success-100)',
+                            500: 'var(--success-500)',
+                            600: 'var(--success-600)',
+                        },
+                        warning: {
+                            50: 'var(--warning-50)',
+                            100: 'var(--warning-100)',
+                            500: 'var(--warning-500)',
+                        },
+                        error: {
+                            50: 'var(--error-50)',
+                            100: 'var(--error-100)',
+                            500: 'var(--error-500)',
+                        },
+                    },
+                    borderRadius: {
+                        '2xl': '1rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'medium': '0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--neutral-50);
+        }
+        .survey-container {
+            max-width: 1000px;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-neutral-50">
+    <!-- Main Container -->
+    <div class="survey-container mx-auto p-4 md:p-6 lg:p-8">
+        <!-- Header Section -->
+        <header class="mb-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-neutral-800 mb-2">Survey Name</h1>
+            <p class="text-lg text-neutral-600">Quick Start: Click Below to Add Content</p>
+        </header>
+
+        <!-- Primary Action Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <!-- Add More Questions Button -->
+            <button class="flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white py-3 px-4 rounded-2xl shadow-soft transition-all duration-300 ease-in-out">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                <span>Add More Questions</span>
+            </button>
+
+            <!-- Import From Library Button -->
+            <button class="flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-neutral-800 border border-neutral-200 py-3 px-4 rounded-2xl shadow-soft transition-all duration-300 ease-in-out">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                <span>Import From Library</span>
+            </button>
+
+            <!-- Free Text & Media Dropdown -->
+            <div class="relative">
+                <button class="w-full flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-neutral-800 border border-neutral-200 py-3 px-4 rounded-2xl shadow-soft transition-all duration-300 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Free Text & Media</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Popular Questions Section -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-neutral-700 mb-4">Most Popular Questions: Click Below to Quickly Add a Question</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Matrix Question Type -->
+                <div class="question-card bg-white rounded-2xl shadow-soft p-4 cursor-pointer hover:shadow-medium transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                        <div class="tooltip relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text invisible absolute z-10 w-48 bg-neutral-800 text-white text-xs rounded-lg py-2 px-3 -left-20 bottom-full opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                Matrix questions allow for rating scales across multiple items
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-neutral-800">Matrix (Scale selection)</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Rate multiple items on a scale</p>
+                </div>
+
+                <!-- Selection Question Type -->
+                <div class="question-card bg-white rounded-2xl shadow-soft p-4 cursor-pointer hover:shadow-medium transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="tooltip relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text invisible absolute z-10 w-48 bg-neutral-800 text-white text-xs rounded-lg py-2 px-3 -left-20 bottom-full opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                Selection questions allow users to choose a single option
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-neutral-800">Selection</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Choose one from multiple options</p>
+                </div>
+
+                <!-- Multiselection Question Type -->
+                <div class="question-card bg-white rounded-2xl shadow-soft p-4 cursor-pointer hover:shadow-medium transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="tooltip relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text invisible absolute z-10 w-48 bg-neutral-800 text-white text-xs rounded-lg py-2 px-3 -left-20 bottom-full opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                Multiselection questions allow users to choose multiple options
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-neutral-800">Multiselections</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Choose multiple options</p>
+                </div>
+
+                <!-- Open Ended Question Type -->
+                <div class="question-card bg-white rounded-2xl shadow-soft p-4 cursor-pointer hover:shadow-medium transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="tooltip relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text invisible absolute z-10 w-48 bg-neutral-800 text-white text-xs rounded-lg py-2 px-3 -left-20 bottom-full opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                Open ended questions allow for free-form text responses
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-neutral-800">Open ended</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Free text response field</p>
+                </div>
+
+                <!-- Contact Form Question Type -->
+                <div class="question-card bg-white rounded-2xl shadow-soft p-4 cursor-pointer hover:shadow-medium transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="tooltip relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text invisible absolute z-10 w-48 bg-neutral-800 text-white text-xs rounded-lg py-2 px-3 -left-20 bottom-full opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                Contact forms collect personal information from respondents
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-neutral-800">Contact form</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Collect personal information</p>
+                </div>
+
+                <!-- CSAT Question Type -->
+                <div class="question-card bg-white rounded-2xl shadow-soft p-4 cursor-pointer hover:shadow-medium transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        <div class="tooltip relative group">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text invisible absolute z-10 w-48 bg-neutral-800 text-white text-xs rounded-lg py-2 px-3 -left-20 bottom-full opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                CSAT questions measure customer satisfaction with a product or service
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="font-medium text-neutral-800">CSAT</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Measure customer satisfaction</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center mb-6">
+            <button class="flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white py-3 px-6 rounded-2xl shadow-soft transition-all duration-300 ease-in-out">
+                <span>Submit</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Footer Input Field -->
+        <div class="w-full max-w-lg mx-auto">
+            <input type="text" placeholder="Add optional text here..." class="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300" />
+        </div>
+    </div>
+
+    <!-- Mobile Responsiveness Script -->
+    <script>
+        // JavaScript can be added here if needed for additional interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            // Example: Add click events for dropdowns
+            const dropdownButtons = document.querySelectorAll('.dropdown-button');
+            dropdownButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const dropdown = button.nextElementSibling;
+                    dropdown.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
