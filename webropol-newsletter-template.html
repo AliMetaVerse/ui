@@ -8,11 +8,47 @@
     <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
     <title>Webropol Newsletter</title>
     
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    
+    <!--[if gte mso 9]>
+    <style>
+        li {
+            text-indent: -1em;
+        }
+    </style>
+    <![endif]-->
+    
+    <!--[if mso]>
+    <style type="text/css">
+        .fallback-font {
+            font-family: Arial, sans-serif !important;
+        }
+    </style>
+    <![endif]-->
+    
     <!--[if mso]>
     <style>
         * {
             font-family: 'Roboto', Arial, sans-serif !important;
         }
+        table {border-collapse: collapse;}
+        .mso-container {width: 600px;}
     </style>
     <![endif]-->
     
@@ -20,8 +56,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet" type="text/css">
     <!--<![endif]-->
     
-    <style>
-        /* Reset styles */
+    <style>        /* Reset styles */
         html,
         body {
             margin: 0 auto !important;
@@ -40,12 +75,7 @@
             margin: 0 !important;
         }
         
-        table,
-        td {
-            mso-table-lspace: 0pt !important;
-            mso-table-rspace: 0pt !important;
-        }
-        
+        /* Outlook specific fixes */
         table {
             border-spacing: 0 !important;
             border-collapse: collapse !important;
@@ -53,6 +83,20 @@
             margin: 0 auto !important;
         }
         
+        .ExternalClass {
+            width: 100%;
+        }
+        
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+        
+        /* Image fixes */
         img {
             -ms-interpolation-mode: bicubic;
             border: 0;
@@ -209,97 +253,210 @@
                 height: auto;
             }
         }
-        
-        /* Outlook-specific fixes */
+          /* Outlook-specific fixes */
         @media screen and (min-width: 0\0) {
             .content {
                 padding: 20px;
             }
         }
+        
+        /* Additional Outlook fixes */
+        @media all {
+            .ExternalClass {width: 100%;}
+            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+            .outlook-group-fix {width:100% !important;}
+        }
+        
+        /* Fix for older Outlook clients */
+        .mso-fix {
+            mso-style-priority: 99 !important;
+        }
     </style>
+    <!--[if mso]>
+    <style type="text/css">
+    .fallback-text {
+        font-family: Arial, sans-serif;
+    }
+    .highlight-box {
+        background-color: #eefbfd !important;
+        border: 1px solid #d5f3f8 !important;
+    }
+    .outlook-table {
+        width: 600px;
+    }
+    .cta-button {
+        background-color: #1e6880;
+        border-radius: 4px;
+        color: #ffffff;
+        display: block;
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid #1e6880;
+    }
+    </style>
+    <![endif]-->
 </head>
-<body>
+<body class="body" style="background-color:#f9fafa;">
+    <!-- Outlook wrapper -->
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;" class="outlook-table">
+    <tr>
+    <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+    <![endif]-->
+    
     <!-- Email Body -->
     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f9fafa">
         <tr>
             <td style="padding: 20px 0;">
-                <div class="container">
-                    <!-- Top Bar -->
+                <div class="container" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">                    <!-- Top Bar -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff">
                         <tr>
-                            <td class="top-bar">
+                            <td class="top-bar" style="background-color:#ffffff; padding:15px 20px; border-bottom:1px solid #d1d5d6;">
+                                <!--[if mso]>
+                                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                                <tr>
+                                <td width="50%" valign="middle">
+                                <![endif]-->
                                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
-                                        <td width="50%">
+                                        <td width="50%" style="vertical-align:middle;">
                                             <!-- Webropol Logo -->
+                                            <!--[if mso]>
+                                            <img src="https://ali-ui-dev.github.io/ui/images/logo/Logo_128.png" alt="Webropol Logo" width="150" style="width:150px; height:auto; display:block; border:0;">
+                                            <![endif]-->
+                                            <!--[if !mso]><!-->
                                             <img src="https://ali-ui-dev.github.io/ui/images/logo/Logo_128.png" alt="Webropol Logo" width="150" style="max-width: 150px;">
+                                            <!--<![endif]-->
                                         </td>
-                                        <td width="50%" align="right" style="font-size: 14px; color: #61686a;">
+                                        <td width="50%" align="right" style="font-size: 14px; color: #61686a; vertical-align:middle;">
                                             AI-Powered Insights Made Easy
                                         </td>
                                     </tr>
                                 </table>
+                                <!--[if mso]>
+                                </td>
+                                </tr>
+                                </table>
+                                <![endif]-->
                             </td>
                         </tr>
                     </table>
-                    
-                    <!-- Header with Title -->
+                      <!-- Header with Title -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
-                            <td class="header" bgcolor="#1e6880">
+                            <td class="header" bgcolor="#1e6880" style="background-color:#1e6880; color:#ffffff; padding:30px 20px;">
+                                <!--[if mso]>
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                <td style="font-family:'Roboto',Arial,sans-serif; font-size:24px; font-weight:700; color:#ffffff;">
+                                Discover the Power of Intelligent Surveys
+                                </td>
+                                </tr>
+                                </table>
+                                <![endif]-->
+                                <!--[if !mso]><!-->
                                 <h1>Discover the Power of Intelligent Surveys</h1>
+                                <!--<![endif]-->
                             </td>
                         </tr>
                     </table>
-                    
-                    <!-- Hero Image -->
+                      <!-- Hero Image -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td>
-                                <img src="https://ali-ui-dev.github.io/ui/images/img/webropol_130423-235-web.jpg" alt="Data dashboard with insights" class="hero-img" width="600">
+                                <!--[if mso]>
+                                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr>
+                                <td>
+                                <img src="https://ali-ui-dev.github.io/ui/images/img/webropol_130423-235-web.jpg" alt="Data dashboard with insights" width="600" style="width:600px; display:block; border:0; height:auto;" />
+                                </td>
+                                </tr>
+                                </table>
+                                <![endif]-->
+                                <!--[if !mso]><!-->
+                                <img src="https://ali-ui-dev.github.io/ui/images/img/webropol_130423-235-web.jpg" alt="Data dashboard with insights" class="hero-img" width="600" style="width:100%; max-width:600px; height:auto; display:block; border:0;">
+                                <!--<![endif]-->
                             </td>
                         </tr>
                     </table>
-                    
-                    <!-- Main Content -->
+                      <!-- Main Content -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff">
                         <tr>
-                            <td class="content">
+                            <!--[if mso]>
+                            <td style="padding:30px 20px; background-color:#ffffff;">
+                            <![endif]-->
+                            <!--[if !mso]><!-->
+                            <td class="content" style="padding:30px 20px; background-color:#ffffff;">
+                            <!--<![endif]-->
+                                <!--[if mso]>
+                                <p style="font-family:'Roboto',Arial,sans-serif; font-size:16px; line-height:1.6; color:#61686a;">
+                                Webropol's AI-powered surveys are helping businesses make smarter decisions, faster. Unlock deep insights with zero complexity.
+                                </p>
+                                <![endif]-->
+                                <!--[if !mso]><!-->
                                 <p style="font-size: 16px; line-height: 1.6;">
                                     Webropol's AI-powered surveys are helping businesses make smarter decisions, faster. Unlock deep insights with zero complexity.
                                 </p>
-                                
-                                <!-- CTA Button -->
+                                <!--<![endif]-->
+                                  <!-- CTA Button -->
                                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                         <td align="center" style="padding: 15px 0;">
+                                            <!--[if mso]>
+                                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://webropol.com/explore" style="height:45px;v-text-anchor:middle;width:180px;" arcsize="10%" stroke="f" fillcolor="#1e6880">
+                                                <w:anchorlock/>
+                                                <center>
+                                                    <span style="color:#ffffff;font-family:Roboto, Arial, sans-serif;font-size:16px;font-weight:500;">Explore Features</span>
+                                                </center>
+                                            </v:roundrect>
+                                            <![endif]-->
+                                            <!--[if !mso]><!-->
                                             <a href="https://webropol.com/explore" class="cta-button">Explore Features</a>
+                                            <!--<![endif]-->
                                         </td>
                                     </tr>
                                 </table>
-                                
-                                <!-- Secondary Highlight Box -->
+                                  <!-- Secondary Highlight Box -->
                                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
+                                        <!--[if mso]>
+                                        <td style="background-color:#eefbfd; border:1px solid #d5f3f8; border-radius:4px; padding:20px; margin:20px 0;">
+                                        <![endif]-->
+                                        <!--[if !mso]><!-->
                                         <td class="highlight-box">
+                                        <!--<![endif]-->
                                             <p style="font-style: italic; margin-bottom: 0;">
                                                 "Over 10,000 companies trust Webropol to transform feedback into results."
                                             </p>
                                         </td>
                                     </tr>
                                 </table>
-                                
-                                <!-- Social Media Icons -->
+                                  <!-- Social Media Icons -->
                                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
-                                        <td class="social-icons">
+                                        <td class="social-icons" style="text-align:center; padding:20px 0;">
                                             <!-- LinkedIn Icon -->
-                                            <a href="https://linkedin.com/company/webropol" target="_blank" aria-label="Follow us on LinkedIn">
-                                                <img src="https://ali-ui-dev.github.io/ui/images/brands/linkedin-logo-64.png" alt="LinkedIn" class="social-icon" width="32">
+                                            <a href="https://linkedin.com/company/webropol" target="_blank" aria-label="Follow us on LinkedIn" style="display:inline-block; margin:0 5px;">
+                                                <!--[if mso]>
+                                                <img src="https://ali-ui-dev.github.io/ui/images/brands/linkedin-logo-64.png" alt="LinkedIn" width="32" style="width:32px; height:auto; display:block; border:0;">
+                                                <![endif]-->
+                                                <!--[if !mso]><!-->
+                                                <img src="https://ali-ui-dev.github.io/ui/images/brands/linkedin-logo-64.png" alt="LinkedIn" class="social-icon" width="32" style="width:32px; height:auto; display:block; border:0;">
+                                                <!--<![endif]-->
                                             </a>
                                             <!-- Website Icon -->
-                                            <a href="https://webropol.com" target="_blank" aria-label="Visit our website">
-                                                <img src="https://ali-ui-dev.github.io/ui/images/logo/W-logo-dark-64.png" alt="Website" class="social-icon" width="32">
+                                            <a href="https://webropol.com" target="_blank" aria-label="Visit our website" style="display:inline-block; margin:0 5px;">
+                                                <!--[if mso]>
+                                                <img src="https://ali-ui-dev.github.io/ui/images/logo/W-logo-dark-square-64.png" alt="Website" width="32" style="width:32px; height:auto; display:block; border:0;">
+                                                <![endif]-->
+                                                <!--[if !mso]><!-->
+                                                <img src="https://ali-ui-dev.github.io/ui/images/logo/W-logo-dark-square-64.png" alt="Website" class="social-icon" width="32" style="width:32px; height:auto; display:block; border:0;">
+                                                <!--<![endif]-->
                                             </a>
                                         </td>
                                     </tr>
@@ -307,21 +464,31 @@
                             </td>
                         </tr>
                     </table>
-                    
-                    <!-- Footer -->
+                      <!-- Footer -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
-                            <td class="footer">
-                                <p>Webropol Oy</p>
-                                <p>Huovitie 3, 00400 Helsinki, Finland</p>
-                                <p>Email: <a href="mailto:info@webropol.com" style="color: #61686a;">info@webropol.com</a></p>
-                                <p><a href="https://webropol.com/unsubscribe" class="unsubscribe">Unsubscribe</a></p>
+                            <!--[if mso]>
+                            <td style="background-color:#f3f4f4; color:#61686a; font-size:12px; text-align:center; padding:20px; border-top:1px solid #d1d5d6;">
+                            <![endif]-->
+                            <!--[if !mso]><!-->
+                            <td class="footer" style="background-color:#f3f4f4; color:#61686a; font-size:12px; text-align:center; padding:20px; border-top:1px solid #d1d5d6;">
+                            <!--<![endif]-->
+                                <p style="margin:5px 0;">Webropol Oy</p>
+                                <p style="margin:5px 0;">Huovitie 3, 00400 Helsinki, Finland</p>
+                                <p style="margin:5px 0;">Email: <a href="mailto:info@webropol.com" style="color:#61686a;">info@webropol.com</a></p>
+                                <p style="margin:5px 0;"><a href="https://webropol.com/unsubscribe" class="unsubscribe" style="color:#61686a; text-decoration:underline;">Unsubscribe</a></p>
                             </td>
-                        </tr>
-                    </table>
+                        </tr>                    </table>
                 </div>
             </td>
         </tr>
     </table>
+    
+    <!--[if mso | IE]>
+    </td>
+    </tr>
+    </table>
+    <![endif]-->
+    
 </body>
 </html>
