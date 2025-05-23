@@ -31,11 +31,11 @@ function preConfigureEmailJS() {
     if (!localStorage.getItem('emailServiceConfig')) {
         const defaultConfig = {
             service: 'emailjs',
-            serviceId: '',  // You'll need to set this from the UI
+            serviceId: 'service_6t8hyif',  // Pre-filled with your service ID
             templateId: 'email_template', 
-            publicKey: '',  // You'll need to set this from the UI
-            fromEmail: 'your.email@example.com',
-            fromName: 'Your Name or Organization'
+            publicKey: '',  // You'll still need to set this from the UI
+            fromEmail: 'ali.zuh.fin@gmail.com',
+            fromName: 'Webropol Newsletter'
         };
         localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
         console.log('EmailJS configuration template created');
