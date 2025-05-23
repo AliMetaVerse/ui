@@ -13,8 +13,8 @@ function preConfigureMailtrap() {    // Only set default if no existing config
             service: 'mailtrap',
             apiKey: 'dd79bf6ee20ede946ece14f162b3f2ac', // Your Mailtrap API key
             serviceUrl: 'https://send.api.mailtrap.io/api/send',
-            fromEmail: 'campaign@yourdomain.com',  // Update this with your preferred sender
-            fromName: 'Email Campaign Tool'        // Update this with your preferred name
+            fromEmail: 'ali.al-zuhairi@webropol.com',  // Update this with your preferred sender
+            fromName: 'Webropol Newsletter'        // Update this with your preferred name
         };
         localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
         console.log('Mailtrap configuration pre-set successfully');
