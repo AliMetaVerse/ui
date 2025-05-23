@@ -9,11 +9,45 @@ document.head.appendChild(emailjsScript);
 emailjsScript.onload = function() {
     // Initialize with your public key
     (function() {
-        // You'll need to update this with your actual EmailJS public key
+        // You'll need to update this with your actu                errorDiv.innerHTML = `
+                    <h3 style="margin-top:0">Email Sending Failed</h3>
+                    <p>There was an error sending your email:</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 4px; margin: 10px 0; overflow-wrap: break-word;">
+                        ${error.text || 'Unknown error'}
+                    </div>
+                    <p style="margin-bottom:0">
+                        <strong>Troubleshooting tips:</strong><br>
+                        - Check your EmailJS configuration (Service ID, Template ID, Public Key)<br>
+                        - Verify your template exists in the EmailJS dashboard<br>
+                        - Ensure your template has these variables: to_email, from_name, from_email, subject, message_html<br>
+                        - Verify your email service (Gmail, etc.) is properly connected in EmailJS<br>
+                        - Check if your EmailJS public key is correct and properly initialized<br>
+                        - <a href="https://dashboard.emailjs.com/admin" target="_blank" style="color: white; text-decoration: underline;">Open EmailJS Dashboard</a> to configure your template
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <strong>Template Setup Guide:</strong><br>
+                        1. Add a new template in EmailJS dashboard<br>
+                        2. Set template name as "newsletter"<br>
+                        3. Add all variables: {{to_email}}, {{from_name}}, {{subject}}, {{message_html}}<br>
+                        4. Save the template and copy the template ID<br>
+                        5. Update the template ID in your configuration
+                    </p>`ublic key
         const publicKey = localStorage.getItem('emailjs_public_key') || '';
         if (publicKey) {
-            emailjs.init(publicKey);
-            console.log('EmailJS initialized with stored public key');
+            try {
+                emailjs.init(publicKey);
+                console.log('EmailJS initialized with stored public key');
+                
+                // Log initialization success with subtle notification
+                setTimeout(() => {
+                    showNotification('Email system initialized successfully', 'success');
+                }, 1000);
+            } catch (error) {
+                console.error('Failed to initialize EmailJS:', error);
+                showNotification('Email system initialization failed', 'error');
+            }
+        } else {
+            console.warn('No EmailJS public key found. Email sending will not work until configured.');
         }
     })();
     console.log('EmailJS SDK loaded successfully');
@@ -32,8 +66,8 @@ function preConfigureEmailJS() {
         const defaultConfig = {
             service: 'emailjs',
             serviceId: 'service_6t8hyif',  // Pre-filled with your service ID
-            templateId: 'email_template', 
-            publicKey: '',  // You'll still need to set this from the UI
+            templateId: 'template_newsletter',  // Updated with more conventional template naming
+            publicKey: 'YOUR_PUBLIC_KEY_HERE',  // Replace with your actual public key from EmailJS dashboard
             fromEmail: 'ali.zuh.fin@gmail.com',
             fromName: 'Webropol Newsletter'
         };
@@ -165,6 +199,11 @@ window.showEmailServiceConfigDialog = function(emailData, type) {
             <input type="text" id="from-name-input" placeholder="Your Name or Organization" 
                 value="${existingConfig.fromName || ''}"
                 style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
+        </div>
+          <div id="emailjs-test-connection" style="${existingConfig.service !== 'mailtrap' ? '' : 'display: none;'} margin-bottom: 20px; background-color: #f9fafb; padding: 15px; border-radius: 5px; text-align: center;">
+            <p style="margin: 0 0 10px 0;">Test your EmailJS configuration before sending emails</p>
+            <button id="test-connection-btn" style="padding: 10px 15px; background-color: #6366f1; color: white; border: none; border-radius: 4px; cursor: pointer;">Test Connection</button>
+            <div id="connection-result" style="margin-top: 10px; font-size: 14px;"></div>
         </div>
         
         <div style="display: flex; justify-content: space-between; margin-top: 20px;">
@@ -309,11 +348,11 @@ window.sendEmailToServer = function(emailData, type) {
         showEmailServiceConfigDialog(emailData, type);
         return;
     }
-    
-    if (emailConfig.service === 'emailjs') {
-        // Check if EmailJS is properly configured
-        if (!emailConfig.serviceId || !emailConfig.templateId || !emailConfig.publicKey) {
-            showNotification('EmailJS is not properly configured', 'error');
+      if (emailConfig.service === 'emailjs') {
+        // Validate EmailJS configuration
+        const validationResult = validateEmailJSConfig(emailConfig);
+        if (!validationResult.valid) {
+            showNotification(validationResult.message, 'error');
             showEmailServiceConfigDialog(emailData, type);
             return;
         }
@@ -321,35 +360,177 @@ window.sendEmailToServer = function(emailData, type) {
         // Check if EmailJS is loaded
         if (!window.emailjs) {
             showNotification('EmailJS SDK is not loaded yet. Please try again in a few seconds.', 'error');
+            
+            // Try to reload the SDK
+            const reloadScript = document.createElement('script');
+            reloadScript.src = 'https://cdn.emailjs.com/dist/email.min.js';
+            reloadScript.onload = function() {
+                emailjs.init(emailConfig.publicKey);
+                showNotification('EmailJS reloaded successfully. Please try sending again.', 'info');
+            };
+            document.head.appendChild(reloadScript);
             return;
         }
-        
-        // Prepare parameters for the template
+          // Prepare parameters for the template
         const templateParams = {
             to_email: type === 'test' ? emailData.to : emailData.to.join(', '),
             from_name: emailConfig.fromName,
             from_email: emailConfig.fromEmail,
             subject: emailData.subject,
             message_html: emailData.html,
-            campaign_name: emailData.campaignName
+            campaign_name: emailData.campaignName,
+            // Add additional parameters that might be expected in the template
+            reply_to: emailConfig.fromEmail,
+            content: emailData.html,  // Some templates use 'content' instead of 'message_html'
+            recipient: type === 'test' ? emailData.to : 'Multiple Recipients',
+            recipient_name: type === 'test' ? emailData.to.split('@')[0] : 'Recipients'
         };
         
         // Show sending indicator
         showNotification(`Sending email via EmailJS...`, 'info');
-        
-        // Send email using EmailJS
+          // Send email using EmailJS
         emailjs.send(emailConfig.serviceId, emailConfig.templateId, templateParams)
             .then(function(response) {
                 console.log('EmailJS SUCCESS:', response);
+                
+                // Create more persistent notification
+                const notificationDiv = document.createElement('div');
+                notificationDiv.style.position = 'fixed';
+                notificationDiv.style.top = '50%';
+                notificationDiv.style.left = '50%';
+                notificationDiv.style.transform = 'translate(-50%, -50%)';
+                notificationDiv.style.backgroundColor = '#10b981';
+                notificationDiv.style.color = 'white';
+                notificationDiv.style.padding = '20px 30px';
+                notificationDiv.style.borderRadius = '8px';
+                notificationDiv.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                notificationDiv.style.zIndex = '10000';
+                notificationDiv.style.textAlign = 'center';
+                notificationDiv.style.minWidth = '300px';
+                
                 if (type === 'test') {
+                    notificationDiv.innerHTML = `
+                        <h3 style="margin-top:0">Email Sent Successfully!</h3>
+                        <p>Test email was sent to: ${emailData.to}</p>
+                        <p style="margin-bottom:0">Check your inbox shortly.</p>
+                    `;
                     showNotification(`Test email sent successfully to ${emailData.to}`, 'success');
                 } else {
                     const recipientCount = Array.isArray(emailData.to) ? emailData.to.length : 1;
+                    notificationDiv.innerHTML = `
+                        <h3 style="margin-top:0">Campaign Sent!</h3>
+                        <p>Campaign "${emailData.campaignName}" was sent to ${recipientCount} recipients.</p>
+                        <p style="margin-bottom:0">Emails should arrive shortly.</p>
+                    `;
                     showNotification(`Campaign "${emailData.campaignName}" sent to ${recipientCount} recipients`, 'success');
                 }
+                
+                // Add close button
+                const closeBtn = document.createElement('button');
+                closeBtn.innerText = 'Close';
+                closeBtn.style.marginTop = '15px';
+                closeBtn.style.padding = '8px 16px';
+                closeBtn.style.border = 'none';
+                closeBtn.style.borderRadius = '4px';
+                closeBtn.style.backgroundColor = 'white';
+                closeBtn.style.color = '#10b981';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.onclick = function() {
+                    document.body.removeChild(notificationDiv);
+                };
+                notificationDiv.appendChild(closeBtn);
+                
+                document.body.appendChild(notificationDiv);
+                
+                // Remove after 8 seconds automatically
+                setTimeout(() => {
+                    if (document.body.contains(notificationDiv)) {
+                        document.body.removeChild(notificationDiv);
+                    }
+                }, 8000);
             }, function(error) {
                 console.error('EmailJS FAILED:', error);
-                showNotification(`Failed to send email: ${error.text}`, 'error');
+                showNotification(`Failed to send email: ${error.text || 'Unknown error'}`, 'error');
+                
+                // Show detailed error popup
+                const errorDiv = document.createElement('div');
+                errorDiv.style.position = 'fixed';
+                errorDiv.style.top = '50%';
+                errorDiv.style.left = '50%';
+                errorDiv.style.transform = 'translate(-50%, -50%)';
+                errorDiv.style.backgroundColor = '#ef4444';
+                errorDiv.style.color = 'white';
+                errorDiv.style.padding = '20px 30px';
+                errorDiv.style.borderRadius = '8px';
+                errorDiv.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                errorDiv.style.zIndex = '10000';
+                errorDiv.style.textAlign = 'left';
+                errorDiv.style.minWidth = '300px';
+                errorDiv.style.maxWidth = '500px';
+                  errorDiv.innerHTML = `
+                    <h3 style="margin-top:0">Email Sending Failed</h3>
+                    <p>There was an error sending your email:</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 4px; margin: 10px 0; overflow-wrap: break-word;">
+                        ${error.text || 'Unknown error'}
+                    </div>
+                    <p style="margin-bottom:0">
+                        <strong>Troubleshooting tips:</strong><br>
+                        - Check your EmailJS configuration<br>
+                        - Verify the template exists and has all required variables<br>
+                        - Make sure your email service (Gmail, etc.) is properly connected<br>
+                        - Check that your Public Key is correct
+                    </p>
+                    <div style="margin-top: 15px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 4px;">
+                        <p style="margin: 0 0 10px 0;"><strong>Need help?</strong> Click the "Setup Guide" button for complete instructions.</p>
+                        <button id="open-guide-btn" style="background: white; color: #ef4444; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Open Setup Guide</button>
+                    </div>
+                `;
+                  // Add guide suggestion
+                const guideParagraph = document.createElement('p');
+                guideParagraph.style.marginTop = '15px'; 
+                guideParagraph.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                guideParagraph.style.padding = '10px';
+                guideParagraph.style.borderRadius = '4px';
+                guideParagraph.innerHTML = '<strong>Need help?</strong> Use our Setup Guide for complete instructions.';
+                errorDiv.appendChild(guideParagraph);
+                
+                // Add buttons container
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.style.display = 'flex';
+                buttonsDiv.style.gap = '10px';
+                buttonsDiv.style.marginTop = '15px';
+                
+                // Add guide button
+                const guideBtn = document.createElement('button');
+                guideBtn.innerText = 'Open Setup Guide';
+                guideBtn.style.padding = '8px 16px';
+                guideBtn.style.border = 'none';
+                guideBtn.style.borderRadius = '4px';
+                guideBtn.style.backgroundColor = 'white';
+                guideBtn.style.color = '#3b82f6';
+                guideBtn.style.cursor = 'pointer';
+                guideBtn.onclick = function() {
+                    window.open('emailjs-setup-guide.html', '_blank');
+                };
+                buttonsDiv.appendChild(guideBtn);
+                
+                // Add close button
+                const closeBtn = document.createElement('button');
+                closeBtn.innerText = 'Close';
+                closeBtn.style.padding = '8px 16px';
+                closeBtn.style.border = 'none';
+                closeBtn.style.borderRadius = '4px';
+                closeBtn.style.backgroundColor = 'white';
+                closeBtn.style.color = '#ef4444';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.onclick = function() {
+                    document.body.removeChild(errorDiv);
+                };
+                buttonsDiv.appendChild(closeBtn);
+                
+                errorDiv.appendChild(buttonsDiv);
+                
+                document.body.appendChild(errorDiv);
             });
             
     } else if (emailConfig.service === 'mailtrap') {
@@ -416,3 +597,142 @@ function showNotification(message, type) {
         console.log(`Notification (${type}): ${message}`);
     }
 }
+
+// Function to validate EmailJS configuration
+function validateEmailJSConfig(config) {
+    if (!config) {
+        return {
+            valid: false,
+            message: 'No email configuration found'
+        };
+    }
+    
+    if (config.service !== 'emailjs') {
+        return { valid: true }; // Not EmailJS, so other validation will handle it
+    }
+    
+    const issues = [];
+    
+    if (!config.serviceId) issues.push('Service ID is missing');
+    if (!config.templateId) issues.push('Template ID is missing');
+    if (!config.publicKey) issues.push('Public Key is missing');
+    if (!config.fromEmail) issues.push('From Email is missing');
+    
+    if (issues.length > 0) {
+        return {
+            valid: false,
+            message: `EmailJS configuration issues: ${issues.join(', ')}`
+        };
+    }
+    
+    return { valid: true };
+}
+
+// Add a function to test the EmailJS connection
+window.testEmailJSConnection = function() {
+    const config = getEmailServiceConfig();
+    const validationResult = validateEmailJSConfig(config);
+    
+    if (!validationResult.valid) {
+        showNotification(validationResult.message, 'error');
+        return;
+    }
+    
+    if (!window.emailjs) {
+        showNotification('EmailJS SDK not loaded yet. Please try again in a few seconds.', 'error');
+        return;
+    }
+    
+    // Create loading indicator
+    const loadingDiv = document.createElement('div');
+    loadingDiv.style.position = 'fixed';
+    loadingDiv.style.top = '50%';
+    loadingDiv.style.left = '50%';
+    loadingDiv.style.transform = 'translate(-50%, -50%)';
+    loadingDiv.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    loadingDiv.style.color = 'white';
+    loadingDiv.style.padding = '20px';
+    loadingDiv.style.borderRadius = '8px';
+    loadingDiv.style.zIndex = '10000';
+    loadingDiv.innerHTML = 'Testing Email Connection...';
+    document.body.appendChild(loadingDiv);
+    
+    // Test the connection with a minimal payload
+    emailjs.send(config.serviceId, config.templateId, {
+        to_email: 'test@example.com',
+        subject: 'Connection Test',
+        message_html: 'This is a connection test.',
+        from_name: config.fromName,
+        from_email: config.fromEmail
+    })
+    .then(function(response) {
+        document.body.removeChild(loadingDiv);
+        
+        const successDiv = document.createElement('div');
+        successDiv.style.position = 'fixed';
+        successDiv.style.top = '50%';
+        successDiv.style.left = '50%';
+        successDiv.style.transform = 'translate(-50%, -50%)';
+        successDiv.style.backgroundColor = '#10b981';
+        successDiv.style.color = 'white';
+        successDiv.style.padding = '20px';
+        successDiv.style.borderRadius = '8px';
+        successDiv.style.zIndex = '10000';
+        successDiv.style.textAlign = 'center';
+        
+        successDiv.innerHTML = `
+            <h3 style="margin-top: 0">Connection Successful!</h3>
+            <p>Your EmailJS configuration is working correctly.</p>
+            <button style="padding: 8px 16px; border: none; border-radius: 4px; background: white; color: #10b981; cursor: pointer; margin-top: 10px;">
+                Close
+            </button>
+        `;
+        
+        document.body.appendChild(successDiv);
+        
+        const closeBtn = successDiv.querySelector('button');
+        closeBtn.addEventListener('click', function() {
+            document.body.removeChild(successDiv);
+        });
+        
+        setTimeout(() => {
+            if (document.body.contains(successDiv)) {
+                document.body.removeChild(successDiv);
+            }
+        }, 5000);
+    })
+    .catch(function(error) {
+        document.body.removeChild(loadingDiv);
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.top = '50%';
+        errorDiv.style.left = '50%';
+        errorDiv.style.transform = 'translate(-50%, -50%)';
+        errorDiv.style.backgroundColor = '#ef4444';
+        errorDiv.style.color = 'white';
+        errorDiv.style.padding = '20px 30px';
+        errorDiv.style.borderRadius = '8px';
+        errorDiv.style.zIndex = '10000';
+        errorDiv.style.textAlign = 'center';
+        errorDiv.style.maxWidth = '500px';
+        
+        errorDiv.innerHTML = `
+            <h3 style="margin-top: 0">Connection Failed</h3>
+            <p>There's an issue with your EmailJS configuration:</p>
+            <div style="background: rgba(0,0,0,0.2); padding: 10px; margin: 10px 0; text-align: left; border-radius: 4px; max-height: 100px; overflow-y: auto;">
+                ${error.text || 'Unknown error'}
+            </div>
+            <button style="padding: 8px 16px; border: none; border-radius: 4px; background: white; color: #ef4444; cursor: pointer; margin-top: 10px;">
+                Close
+            </button>
+        `;
+        
+        document.body.appendChild(errorDiv);
+        
+        const closeBtn = errorDiv.querySelector('button');
+        closeBtn.addEventListener('click', function() {
+            document.body.removeChild(errorDiv);
+        });
+    });
+};

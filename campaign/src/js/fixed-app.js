@@ -98,9 +98,11 @@ function setupEventListeners() {
     
     // Setup email recipient handling
     setupEmailRecipients();
-    
-    // Setup campaign send buttons
+      // Setup campaign send buttons
     setupSendButtons();
+    
+    // Setup guide button
+    setupGuideButton();
     
     // Initialize fallback email sending function if not already defined
     initEmailSendingFallback();
@@ -571,4 +573,15 @@ function getEmailTemplate() {
         </tr>
     </table>
     `;
+}
+
+// Setup guide button to open EmailJS setup instructions
+function setupGuideButton() {
+    const guideBtn = document.getElementById('email-guide-btn');
+    if (guideBtn) {
+        guideBtn.addEventListener('click', () => {
+            // Open the guide in a new window or tab
+            window.open('emailjs-setup-guide.html', '_blank');
+        });
+    }
 }

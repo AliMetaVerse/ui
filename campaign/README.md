@@ -28,7 +28,7 @@ You have two options for sending emails:
 
 #### 1. EmailJS (Recommended for Real Email Sending)
 
-The tool now uses EmailJS to send real emails to recipients. To configure:
+The tool now uses EmailJS to send real emails to recipients. A detailed setup guide is available within the application (click the "Setup Guide" button). To configure:
 
 1. Create a free account at [emailjs.com](https://www.emailjs.com/)
 2. Set up an email service (Gmail, Outlook, etc.)
@@ -40,6 +40,12 @@ The tool now uses EmailJS to send real emails to recipients. To configure:
    - `{{message_html}}` - Email HTML content
 4. Get your Service ID, Template ID, and Public Key
 5. Enter these details in the "Email Settings" dialog in the app
+
+For detailed instructions with screenshots and troubleshooting tips, use the "Setup Guide" button in the application. The guide contains:
+- Step-by-step instructions for EmailJS setup
+- Example template code
+- Template variable requirements
+- Troubleshooting common issues
 
 #### 2. Mailtrap (For Testing Only)
 
@@ -59,9 +65,32 @@ You can switch between EmailJS and Mailtrap in the Email Settings dialog.
    - Paste HTML from clipboard
 3. Click "Apply HTML" to update the visual editor with your changes
 
+## Troubleshooting Email Sending
+
+The campaign tool includes several features to help diagnose and fix email sending issues:
+
+### Setup Guide
+Click the "Setup Guide" button for comprehensive instructions on setting up EmailJS with screenshots and examples.
+
+### Verification Checklist
+Use the verification checklist (linked from the setup guide) to ensure you've completed all necessary steps for EmailJS integration.
+
+### Debug Tool
+Click the "Debug" button to access the EmailJS diagnostics tool, which helps identify and resolve common issues:
+
+- **Diagnostics tab**: Runs tests on your EmailJS configuration and identifies problems
+- **Configuration tab**: View, reset, or repair your EmailJS settings
+- **Template Helper tab**: Get example templates and copy them to your clipboard
+- **Logs tab**: Review a history of email sending attempts and errors
+
 ## Testing Email Sending
 
-When you click "Send Test Email" you will be prompted to enter a recipient email address. The email will be sent to your Mailtrap inbox rather than to the actual recipient.
+When you click "Send Test Email" you will be prompted to enter a recipient email address. 
+
+- If using EmailJS, the test email will be sent to the actual recipient email address.
+- If using Mailtrap, the email will be sent to your Mailtrap inbox rather than to the actual recipient.
+
+You can use the "Connection Test" feature in the Email Settings dialog to verify your EmailJS configuration is working properly without sending an actual email.
 
 ## Customizing Templates
 
