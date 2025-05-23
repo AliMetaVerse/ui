@@ -1,0 +1,517 @@
+// Simple Email Campaign Tool
+
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing email campaign tool');
+    initCKEditor();
+    setupEventListeners();
+});
+
+// Initialize CKEditor
+function initCKEditor() {
+    console.log('Loading CKEditor...');
+    
+    // First, check if CKEditor is loaded
+    if (typeof DecoupledEditor === 'undefined') {
+        console.error('CKEditor is not loaded. Please check if the CKEditor script is properly included.');
+        showNotification('CKEditor failed to load. Please refresh the page or check your internet connection.', 'error');
+        
+        // Add a button to reload the page
+        const editorContainer = document.querySelector('.document-editor__editable-container');
+        if (editorContainer) {
+            editorContainer.innerHTML = `
+                <div style="padding: 20px; text-align: center;">
+                    <h3>CKEditor failed to load</h3>
+                    <p>This might be due to network issues or script loading problems.</p>
+                    <button onclick="location.reload()" style="padding: 10px 15px; margin-top: 15px;">Reload Page</button>
+                </div>
+            `;
+        }
+        return;
+    }
+    
+    try {
+        // Use a preset configuration from CKEditor 5 builder
+        const editorConfig = {
+            toolbar: [
+                'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                'outdent', 'indent', '|', 'imageUpload', 'blockQuote', 'insertTable', '|',
+                'undo', 'redo', '|', 'fontBackgroundColor', 'fontColor', 'fontSize', 'fontFamily'
+            ],
+            image: {
+                toolbar: [
+                    'imageStyle:inline',
+                    'imageStyle:block',
+                    'imageStyle:side',
+                    '|',
+                    'toggleImageCaption',
+                    'imageTextAlternative'
+                ]
+            },
+            table: {
+                contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+            }
+        };
+
+        // Create the editor instance
+        DecoupledEditor
+            .create(document.querySelector('.document-editor__editable'), editorConfig)
+            .then(editor => {
+                window.editor = editor;
+                
+                // Set initial template
+                editor.setData(getEmailTemplate());
+                
+                // Attach the editor's toolbar to the container
+                const toolbarContainer = document.querySelector('.document-editor__toolbar');
+                toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                
+                console.log('CKEditor initialized successfully');
+                
+                // Generate initial preview
+                setTimeout(() => {
+                    const previewBtn = document.getElementById('preview-btn');
+                    if (previewBtn) {
+                        previewBtn.click();
+                    }
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('CKEditor initialization failed:', error);
+                showNotification('Error initializing the editor. Some features might not work properly.', 'error');
+            });
+    } catch (err) {
+        console.error('Fatal CKEditor error:', err);
+        showNotification('Failed to initialize the editor.', 'error');
+    }
+}
+
+// Setup all event listeners
+function setupEventListeners() {
+    // Setup preview button
+    const previewBtn = document.getElementById('preview-btn');
+    if (previewBtn) {
+        previewBtn.addEventListener('click', generatePreview);
+    }
+    
+    // Setup source view toggle
+    setupSourceViewToggle();
+    
+    // Setup email recipient handling
+    setupEmailRecipients();
+    
+    // Setup campaign send buttons
+    setupSendButtons();
+    
+    // Initialize fallback email sending function if not already defined
+    initEmailSendingFallback();
+}
+
+// Initialize fallback for email sending if the mailtrap-config.js is not loaded
+function initEmailSendingFallback() {
+    // Only define if it doesn't exist yet (won't override mailtrap-config.js)
+    if (typeof window.sendEmailToServer !== 'function') {
+        console.log('Setting up fallback email sending function');
+        
+        window.sendEmailToServer = function(emailData, type) {
+            console.log(`Fallback email sending (${type}):`, emailData);
+            
+            // Simulate API call with a delay
+            setTimeout(() => {
+                if (type === 'test') {
+                    showNotification(`Test email sent to ${emailData.to} (simulated)`, 'success');
+                } else {
+                    const recipientCount = Array.isArray(emailData.to) ? emailData.to.length : 1;
+                    showNotification(`Campaign sent to ${recipientCount} recipients (simulated)`, 'success');
+                }
+            }, 1500);
+        };
+        
+        // Also provide a fallback for email service config dialog
+        if (typeof window.showEmailServiceConfigDialog !== 'function') {
+            window.showEmailServiceConfigDialog = function() {
+                showNotification('Email service configuration would be shown here', 'info');
+            };
+        }
+        
+        if (typeof window.getEmailServiceConfig !== 'function') {
+            window.getEmailServiceConfig = function() {
+                return null;
+            };
+        }
+    }
+}
+
+// Setup source view toggle
+function setupSourceViewToggle() {
+    const wysiwygBtn = document.getElementById('wysiwyg-view-btn');
+    const sourceBtn = document.getElementById('source-view-btn');
+    const wysiwygEditor = document.getElementById('wysiwyg-editor');
+    const sourceEditor = document.getElementById('source-editor');
+    const htmlSource = document.getElementById('html-source');
+    const applyBtn = document.getElementById('apply-source-btn');
+    
+    // Check if elements exist
+    if (!wysiwygBtn || !sourceBtn || !wysiwygEditor || !sourceEditor) return;
+    
+    // Source view button
+    sourceBtn.addEventListener('click', () => {
+        if (window.editor) {
+            htmlSource.value = window.editor.getData();
+            wysiwygEditor.style.display = 'none';
+            sourceEditor.style.display = 'block';
+            wysiwygBtn.classList.remove('active');
+            sourceBtn.classList.add('active');
+        }
+    });
+    
+    // WYSIWYG view button
+    wysiwygBtn.addEventListener('click', () => {
+        wysiwygEditor.style.display = 'block';
+        sourceEditor.style.display = 'none';
+        wysiwygBtn.classList.add('active');
+        sourceBtn.classList.remove('active');
+    });
+    
+    // Apply HTML button
+    if (applyBtn) {
+        applyBtn.addEventListener('click', () => {
+            if (window.editor && htmlSource) {
+                window.editor.setData(htmlSource.value);
+                showNotification('HTML applied to editor', 'success');
+                wysiwygBtn.click(); // Switch back to WYSIWYG view
+            }
+        });
+    }
+    
+    // Setup HTML import/copy buttons
+    setupHtmlSourceTools();
+}
+
+// Setup HTML source tools (import, copy, paste)
+function setupHtmlSourceTools() {
+    const importBtn = document.getElementById('import-html-btn');
+    const fileInput = document.getElementById('html-file-input');
+    const copyBtn = document.getElementById('copy-html-btn');
+    const pasteBtn = document.getElementById('paste-html-btn');
+    const htmlSource = document.getElementById('html-source');
+    
+    // Import HTML button
+    if (importBtn && fileInput) {
+        importBtn.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    htmlSource.value = e.target.result;
+                    showNotification('HTML file imported', 'success');
+                };
+                reader.readAsText(e.target.files[0]);
+            }
+        });
+    }
+    
+    // Copy HTML button
+    if (copyBtn && htmlSource) {
+        copyBtn.addEventListener('click', () => {
+            htmlSource.select();
+            document.execCommand('copy');
+            showNotification('HTML copied to clipboard', 'success');
+        });
+    }
+    
+    // Paste HTML button
+    if (pasteBtn && htmlSource) {
+        pasteBtn.addEventListener('click', () => {
+            htmlSource.focus();
+            document.execCommand('paste');
+            showNotification('Ready to paste from clipboard', 'info');
+        });
+    }
+}
+
+// Setup email recipients handling
+function setupEmailRecipients() {
+    const recipientsInput = document.getElementById('email-recipients');
+    const tagsContainer = document.getElementById('recipient-tags');
+    
+    if (recipientsInput && tagsContainer) {
+        recipientsInput.addEventListener('blur', () => {
+            const emails = parseEmails(recipientsInput.value);
+            displayEmailTags(emails, tagsContainer, recipientsInput);
+        });
+    }
+}
+
+// Parse emails from input
+function parseEmails(text) {
+    if (!text) return [];
+    return [...new Set(
+        text.split(/[,\n]/)
+            .map(email => email.trim())
+            .filter(email => email && validateEmail(email))
+    )];
+}
+
+// Validate email format
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Display email tags
+function displayEmailTags(emails, container, inputElem) {
+    container.innerHTML = '';
+    
+    emails.forEach(email => {
+        const tag = document.createElement('div');
+        tag.className = 'tag';
+        tag.innerHTML = `
+            <span>${email}</span>
+            <span class="remove" data-email="${email}">×</span>
+        `;
+        container.appendChild(tag);
+        
+        // Add remove action
+        const removeBtn = tag.querySelector('.remove');
+        removeBtn.addEventListener('click', () => {
+            // Remove from list
+            const currentEmails = parseEmails(inputElem.value);
+            const updatedEmails = currentEmails.filter(e => e !== email);
+            inputElem.value = updatedEmails.join(', ');
+            
+            // Remove tag
+            tag.remove();
+        });
+    });
+}
+
+// Setup send buttons
+function setupSendButtons() {
+    // Test email button
+    const testBtn = document.getElementById('test-send-btn');
+    if (testBtn) {
+        testBtn.addEventListener('click', () => {
+            const campaign = document.getElementById('campaign-name')?.value;
+            if (!campaign) {
+                showNotification('Please enter a campaign name', 'error');
+                return;
+            }
+            
+            const subject = document.getElementById('campaign-subject')?.value;
+            if (!subject) {
+                showNotification('Please enter an email subject', 'error');
+                return;
+            }
+            
+            // Prompt for test email address
+            const testEmail = prompt('Enter email address for test message:');
+            if (!testEmail || !validateEmail(testEmail)) {
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            const content = window.editor.getData();
+            if (!content) {
+                showNotification('Email content cannot be empty', 'error');
+                return;
+            }
+            
+            // Show loading notification
+            showNotification('Sending test email...', 'info');
+            
+            // Prepare email data
+            const emailData = {
+                to: testEmail,
+                subject: subject,
+                html: content,
+                campaignName: campaign,
+                isTest: true
+            };
+            
+            // Send to server if sendEmailToServer function exists
+            if (typeof window.sendEmailToServer === 'function') {
+                window.sendEmailToServer(emailData, 'test');
+            } else {
+                // Fallback for when mailtrap integration is not available
+                console.log('Simulated email send:', emailData);
+                showNotification(`Test email would be sent to: ${testEmail}`, 'success');
+            }
+        });
+    }
+    
+    // Send campaign button
+    const sendBtn = document.getElementById('send-campaign-btn');
+    if (sendBtn) {
+        sendBtn.addEventListener('click', () => {
+            const campaign = document.getElementById('campaign-name')?.value;
+            if (!campaign) {
+                showNotification('Please enter a campaign name', 'error');
+                return;
+            }
+            
+            const subject = document.getElementById('campaign-subject')?.value;
+            if (!subject) {
+                showNotification('Please enter an email subject', 'error');
+                return;
+            }
+            
+            const emails = parseEmails(document.getElementById('email-recipients')?.value || '');
+            if (emails.length === 0) {
+                showNotification('Please add at least one email recipient', 'error');
+                return;
+            }
+            
+            const content = window.editor.getData();
+            if (!content) {
+                showNotification('Email content cannot be empty', 'error');
+                return;
+            }
+            
+            // Confirm before sending
+            const confirmSend = confirm(`Are you sure you want to send this campaign to ${emails.length} recipients?`);
+            if (!confirmSend) {
+                return;
+            }
+            
+            // Show loading notification
+            showNotification(`Sending campaign "${campaign}" to ${emails.length} recipients...`, 'info');
+            
+            // Prepare email data
+            const emailData = {
+                to: emails,
+                subject: subject,
+                html: content,
+                campaignName: campaign,
+                isTest: false
+            };
+            
+            // Send to server if sendEmailToServer function exists
+            if (typeof window.sendEmailToServer === 'function') {
+                window.sendEmailToServer(emailData, 'campaign');
+            } else {
+                // Fallback for when mailtrap integration is not available
+                console.log('Simulated campaign send:', emailData);
+                showNotification(`Campaign "${campaign}" would be sent to ${emails.length} recipients`, 'success');
+            }
+        });
+    }
+    
+    // Email settings button
+    const settingsBtn = document.getElementById('email-settings-btn');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => {
+            // Check if the showEmailServiceConfigDialog function exists (from mailtrap-config.js)
+            if (typeof window.showEmailServiceConfigDialog === 'function') {
+                window.showEmailServiceConfigDialog(null, null);
+            } else {
+                showNotification('Email settings would be configured here', 'info');
+            }
+        });
+    }
+}
+
+// Generate email preview
+function generatePreview() {
+    if (!window.editor) return;
+    
+    const previewFrame = document.getElementById('preview-frame');
+    if (!previewFrame) return;
+    
+    const content = window.editor.getData();
+    const subject = document.getElementById('campaign-subject')?.value || 'Email Preview';
+    
+    const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    previewDoc.open();
+    previewDoc.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${subject}</title>
+            <meta charset="UTF-8">
+        </head>
+        <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            ${content}
+        </body>
+        </html>
+    `);
+    previewDoc.close();
+    
+    showNotification('Preview generated', 'success');
+}
+
+// Show notification
+function showNotification(message, type) {
+    console.log(`Notification (${type}): ${message}`);
+    
+    let container = document.querySelector('.notification-container');
+    
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'notification-container';
+        container.style.position = 'fixed';
+        container.style.top = '20px';
+        container.style.right = '20px';
+        container.style.zIndex = '9999';
+        document.body.appendChild(container);
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.padding = '12px 20px';
+    notification.style.marginBottom = '10px';
+    notification.style.borderRadius = '4px';
+    notification.style.color = 'white';
+    notification.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+    
+    // Set color based on type
+    switch (type) {
+        case 'success': notification.style.backgroundColor = '#10b981'; break;
+        case 'error': notification.style.backgroundColor = '#ef4444'; break;
+        case 'info': notification.style.backgroundColor = '#3b82f6'; break;
+        default: notification.style.backgroundColor = '#6b7280';
+    }
+    
+    notification.textContent = message;
+    container.appendChild(notification);
+    
+    // Auto remove after delay
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.5s';
+        
+        setTimeout(() => {
+            container.removeChild(notification);
+            if (container.children.length === 0) {
+                document.body.removeChild(container);
+            }
+        }, 500);
+    }, 5000);
+}
+
+// Get sample email template
+function getEmailTemplate() {
+    return `
+    <h2 style="color: #2c6ecb; margin-bottom: 20px;">Your Email Campaign</h2>
+    
+    <p>Hello,</p>
+    
+    <p>Welcome to our newsletter! We're excited to share our latest updates with you.</p>
+    
+    <h3 style="color: #3a82f6; margin-top: 25px;">Featured Content</h3>
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.</p>
+    
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Product</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Price</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">Product 1</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">$99.99</td>
+        </tr>
+    </table>
+    
+    <p>Best regards,<br>The Team</p>
+    `;
+}

@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Campaign Sender</title>
     <link rel="stylesheet" href="src/css/styles.css">
-    <!-- CKEditor CDN -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/decoupled-document/ckeditor.js"></script>
+    <!-- CKEditor CDN with necessary plugins -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/decoupled-document/ckeditor.js"></script>
+    <!-- Ensure proper plugin loading -->
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded. Starting application initialization.');
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -35,16 +41,28 @@
                     <div class="helper-text">Enter multiple email addresses separated by commas or new lines</div>
                 </div>
                 <div class="recipient-tags" id="recipient-tags"></div>
-            </section>
-
-            <section class="editor-section">
+            </section>            <section class="editor-section">
                 <h2>Email Content</h2>
-                <div class="editor-container">
+                <div class="view-toggle">
+                    <button id="wysiwyg-view-btn" class="view-btn active">Visual Editor</button>
+                    <button id="source-view-btn" class="view-btn">HTML Source</button>
+                </div>
+                <div class="editor-container" id="wysiwyg-editor">
                     <div class="document-editor">
                         <div class="document-editor__toolbar"></div>
                         <div class="document-editor__editable-container">
                             <div class="document-editor__editable"></div>
                         </div>
+                    </div>
+                </div>                <div class="source-editor-container" id="source-editor" style="display: none;">                    <div class="source-tools">
+                        <button id="import-html-btn" class="btn btn-secondary">Import HTML</button>
+                        <input type="file" id="html-file-input" accept=".html, .htm" style="display: none;">
+                        <button id="copy-html-btn" class="btn btn-secondary">Copy HTML</button>
+                        <button id="paste-html-btn" class="btn btn-secondary">Paste HTML</button>
+                    </div>
+                    <textarea id="html-source" class="html-source-textarea" spellcheck="false"></textarea>
+                    <div class="source-actions">
+                        <button id="apply-source-btn" class="btn btn-primary">Apply HTML</button>
                     </div>
                 </div>
             </section>
@@ -56,9 +74,8 @@
                         <iframe id="preview-frame" title="Email Preview"></iframe>
                     </div>
                 </div>
-            </section>
-
-            <section class="action-buttons">
+            </section>            <section class="action-buttons">
+                <button id="email-settings-btn" class="btn btn-secondary">Email Settings</button>
                 <button id="preview-btn" class="btn btn-secondary">Preview Email</button>
                 <button id="test-send-btn" class="btn btn-secondary">Send Test Email</button>
                 <button id="send-campaign-btn" class="btn btn-primary">Send Campaign</button>
@@ -67,9 +84,7 @@
 
         <footer>
             <p>&copy; 2025 Email Campaign Sender</p>
-        </footer>
-    </div>
-
-    <script src="src/js/app.js"></script>
+        </footer>    </div>    <script src="src/js/fixed-app.js"></script>
+    <script src="src/js/mailtrap-config.js"></script>
 </body>
 </html>
