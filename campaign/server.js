@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
     res.end();
     return;
   }
-    // Handle Mailtrap email API proxy (simulate success for testing)
+  // Handle Mailtrap email API proxy (simulate success for testing)
   if (req.url.includes('/api/send') && req.method === 'POST') {
     let body = '';
     req.on('data', (chunk) => {
@@ -91,6 +91,42 @@ const server = http.createServer((req, res) => {
         success: true, 
         message: 'Mailtrap API request successful (simulated)',
         id: 'mt_' + Date.now()
+      }));
+    });
+    
+    return;
+  }
+  
+  // Handle EmailJS API simulation for local testing
+  if (req.url.includes('emailjs') || req.url.includes('api/send-email')) {
+    console.log('Intercepting EmailJS API request:', req.url);
+    
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk.toString();
+    });
+    
+    req.on('end', () => {
+      try {
+        // Parse JSON body to display email details
+        const emailData = JSON.parse(body);
+        console.log('EmailJS Request:', emailData);
+        console.log('- To:', emailData.to_email || emailData.templateParams?.to_email);
+        console.log('- From:', emailData.from_email || emailData.templateParams?.from_email);
+        console.log('- Subject:', emailData.subject || emailData.templateParams?.subject);
+      } catch (e) {
+        console.log('Could not parse EmailJS data:', e.message);
+      }
+      
+      // Always respond with success
+      res.writeHead(200, { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(JSON.stringify({ 
+        success: true, 
+        message: 'EmailJS request successful (simulated)',
+        id: 'emailjs_' + Date.now()
       }));
     });
     

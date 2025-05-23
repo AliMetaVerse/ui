@@ -22,16 +22,33 @@ node server.js
 ```
 3. Open your browser and go to http://localhost:3000
 
-### Mailtrap Setup
+### Email Service Configuration
 
-The tool is pre-configured with your Mailtrap API key. When you send emails, they will be delivered to your Mailtrap inbox rather than to actual recipients - perfect for testing!
+You have two options for sending emails:
 
-- Mailtrap API Key: dd79bf6ee20ede946ece14f162b3f2ac
-- Endpoint: https://send.api.mailtrap.io/api/send
+#### 1. EmailJS (Recommended for Real Email Sending)
 
-### Other Email Services
+The tool now uses EmailJS to send real emails to recipients. To configure:
 
-You can configure other email services like SendGrid, Mailchimp, or AWS SES by clicking on the "Email Settings" button in the interface.
+1. Create a free account at [emailjs.com](https://www.emailjs.com/)
+2. Set up an email service (Gmail, Outlook, etc.)
+3. Create an email template that includes these variables:
+   - `{{to_email}}` - Recipient email(s)
+   - `{{from_name}}` - Sender name
+   - `{{from_email}}` - Sender email
+   - `{{subject}}` - Email subject
+   - `{{message_html}}` - Email HTML content
+4. Get your Service ID, Template ID, and Public Key
+5. Enter these details in the "Email Settings" dialog in the app
+
+#### 2. Mailtrap (For Testing Only)
+
+Alternatively, you can still use Mailtrap for testing. This will deliver emails to your Mailtrap inbox rather than to actual recipients.
+
+- Default API Key: dd79bf6ee20ede946ece14f162b3f2ac
+- Default Endpoint: https://send.api.mailtrap.io/api/send
+
+You can switch between EmailJS and Mailtrap in the Email Settings dialog.
 
 ## Using the HTML Source Editor
 

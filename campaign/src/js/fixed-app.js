@@ -491,27 +491,84 @@ function showNotification(message, type) {
 // Get sample email template
 function getEmailTemplate() {
     return `
-    <h2 style="color: #2c6ecb; margin-bottom: 20px;">Your Email Campaign</h2>
-    
-    <p>Hello,</p>
-    
-    <p>Welcome to our newsletter! We're excited to share our latest updates with you.</p>
-    
-    <h3 style="color: #3a82f6; margin-top: 25px;">Featured Content</h3>
-    
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.</p>
-    
-    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f9fafa">
         <tr>
-            <td style="border: 1px solid #ddd; padding: 8px;">Product</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">Price</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #ddd; padding: 8px;">Product 1</td>
-            <td style="border: 1px solid #ddd; padding: 8px;">$99.99</td>
+            <td style="padding: 20px 0;">
+                <div class="container" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+                    <!-- Top Bar with Logo -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td class="top-bar" style="background-color: #ffffff; padding: 15px 20px; border-bottom: 1px solid #d1d5d6;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td width="50%" style="vertical-align: middle;">
+                                            <img src="https://ali-ui-dev.github.io/ui/images/logo/Logo_128.png" alt="Webropol Logo" width="150" style="max-width: 150px;">
+                                        </td>
+                                        <td width="50%" align="right" style="font-size: 14px; vertical-align: middle;">
+                                            Weekly Update - May 23, 2025
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Header with Title -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td class="header" style="background-color: #1e6880; color: #ffffff; padding: 30px 20px;">
+                                <h1 style="font-size: 24px; font-weight: 700; color: #ffffff; margin: 0;">Webropol Marketing Update</h1>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Main Content -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td class="content" style="padding: 30px 20px; background-color: #ffffff;">
+                                <p style="font-size: 16px;">
+                                    Hi all, and greetings from the marketing department!
+                                </p>
+                                
+                                <p>
+                                    We're excited to share our latest updates with you. This is your weekly newsletter from Webropol.
+                                </p>
+                                
+                                <h2>Current Campaign</h2>
+                                <p>
+                                    Currently, we are running a campaign with a special discount. Feel free to ask for more information and share with your customers.
+                                </p>
+                                
+                                <!-- CTA Button -->
+                                <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td align="center" style="padding: 20px 0;">
+                                            <a href="mailto:sales@example.com?subject=Campaign%20Inquiry" style="display: inline-block; background-color: #1e6880; color: #ffffff; font-size: 16px; font-weight: 500; line-height: 1; text-decoration: none; text-align: center; border-radius: 4px; padding: 12px 24px; margin: 10px 0;">Request More Info</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <p>
+                                    Thanks for reading our update! Have a great day!
+                                </p>
+                                
+                                <!-- Footer -->
+                                <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td style="padding-top: 20px; border-top: 1px solid #d1d5d6; text-align: center; font-size: 12px; color: #61686a;">
+                                            <p style="margin: 5px 0;">Your Company Name</p>
+                                            <p style="margin: 5px 0;">123 Street Address, City, Country</p>
+                                            <p style="margin: 5px 0;">Email: <a href="mailto:contact@example.com" style="color:#61686a;">contact@example.com</a></p>
+                                            <p style="margin: 5px 0;"><a href="#unsubscribe" style="color: #61686a; text-decoration: underline;">Unsubscribe</a></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
         </tr>
     </table>
-    
-    <p>Best regards,<br>The Team</p>
     `;
 }
