@@ -1,0 +1,232 @@
+/* Main Styles for Email Campaign Sender Tool */
+:root {
+    --primary-color: #2c6ecb;
+    --secondary-color: #3a82f6;
+    --accent-color: #60a5fa;
+    --bg-color: #f9fafb;
+    --text-color: #111827;
+    --border-color: #d1d5db;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+}
+
+h2 {
+    color: var(--secondary-color);
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+}
+
+section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--box-shadow);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.helper-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* CKEditor Styles */
+.document-editor {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.document-editor__toolbar {
+    background-color: #f3f4f6;
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px;
+}
+
+.document-editor__editable-container {
+    padding: 20px;
+    background-color: white;
+    min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.document-editor__editable {
+    min-height: 350px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Preview Section */
+.preview-container {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: #f3f4f6;
+    padding: 20px;
+}
+
+.preview-frame-container {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    height: 500px;
+}
+
+#preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Recipient Tags */
+.recipient-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+}
+
+.tag .remove {
+    margin-left: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+}

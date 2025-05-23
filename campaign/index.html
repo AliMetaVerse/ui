@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Campaign Sender</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <!-- CKEditor CDN -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/decoupled-document/ckeditor.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Email Campaign Sender Tool</h1>
+        </header>
+        
+        <main>
+            <section class="campaign-details">
+                <div class="form-group">
+                    <label for="campaign-name">Campaign Name</label>
+                    <input type="text" id="campaign-name" placeholder="Enter campaign name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="campaign-subject">Email Subject</label>
+                    <input type="text" id="campaign-subject" placeholder="Enter email subject line">
+                </div>
+            </section>
+
+            <section class="recipients-section">
+                <h2>Recipients</h2>
+                <div class="form-group">
+                    <label for="email-recipients">Email Addresses</label>
+                    <textarea id="email-recipients" placeholder="Enter email addresses (comma or line separated)"></textarea>
+                    <div class="helper-text">Enter multiple email addresses separated by commas or new lines</div>
+                </div>
+                <div class="recipient-tags" id="recipient-tags"></div>
+            </section>
+
+            <section class="editor-section">
+                <h2>Email Content</h2>
+                <div class="editor-container">
+                    <div class="document-editor">
+                        <div class="document-editor__toolbar"></div>
+                        <div class="document-editor__editable-container">
+                            <div class="document-editor__editable"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="preview-section">
+                <h2>Preview</h2>
+                <div class="preview-container">
+                    <div class="preview-frame-container">
+                        <iframe id="preview-frame" title="Email Preview"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <section class="action-buttons">
+                <button id="preview-btn" class="btn btn-secondary">Preview Email</button>
+                <button id="test-send-btn" class="btn btn-secondary">Send Test Email</button>
+                <button id="send-campaign-btn" class="btn btn-primary">Send Campaign</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Email Campaign Sender</p>
+        </footer>
+    </div>
+
+    <script src="src/js/app.js"></script>
+</body>
+</html>
