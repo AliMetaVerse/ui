@@ -7,18 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Pre-configure Mailtrap if no configuration exists
-function preConfigureMailtrap() {    // Only set default if no existing config
-    if (!localStorage.getItem('emailServiceConfig')) {
-        const defaultConfig = {
-            service: 'mailtrap',
-            apiKey: 'dd79bf6ee20ede946ece14f162b3f2ac', // Your Mailtrap API key
-            serviceUrl: 'https://send.api.mailtrap.io/api/send',
-            fromEmail: 'ali.al-zuhairi@webropol.com',  // Update this with your preferred sender
-            fromName: 'Webropol Newsletter'        // Update this with your preferred name
-        };
-        localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
-        console.log('Mailtrap configuration pre-set successfully');
-    }
+function preConfigureMailtrap() {
+    // Don't auto-configure Mailtrap - let EmailJS be the default
+    // Only set Mailtrap if explicitly requested
+    console.log('Mailtrap configuration available but not set as default');
 }
 
 // Extend the sendEmailToServer function

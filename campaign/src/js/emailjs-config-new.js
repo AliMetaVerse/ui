@@ -9,20 +9,15 @@ document.head.appendChild(emailjsScript);
 emailjsScript.onload = function() {
     // Initialize with stored public key if available
     (function() {
-        const publicKey = localStorage.getItem('emailjs_public_key') || 'WkloAEeQols8UpWuh';
+        const publicKey = localStorage.getItem('emailjs_public_key') || '';
         if (publicKey) {
             try {
                 emailjs.init(publicKey);
-                console.log('EmailJS initialized with public key');
-                
-                // Store the public key if not already stored
-                if (!localStorage.getItem('emailjs_public_key')) {
-                    localStorage.setItem('emailjs_public_key', publicKey);
-                }
+                console.log('EmailJS initialized with stored public key');
                 
                 // Log initialization success with subtle notification
                 setTimeout(() => {
-                    showNotification('EmailJS initialized and ready to send real emails', 'success');
+                    showNotification('Email system initialized successfully', 'success');
                 }, 1000);
             } catch (error) {
                 console.error('Failed to initialize EmailJS:', error);
@@ -47,19 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Pre-configure EmailJS as the default service if no configuration exists
 function preConfigureEmailJS() {
     // Set EmailJS as the default service
-    if (!localStorage.getItem('emailServiceConfig')) {        const defaultConfig = {
+    if (!localStorage.getItem('emailServiceConfig')) {
+        const defaultConfig = {
             service: 'emailjs',
             serviceId: 'service_6t8hyif',  // Pre-filled with your service ID
             templateId: 'template_newsletter',  // Updated with more conventional template naming
-            publicKey: 'WkloAEeQols8UpWuh',  // Your EmailJS public key
+            publicKey: '',  // User needs to provide their actual public key from EmailJS dashboard
             fromEmail: 'ali.zuh.fin@gmail.com',
             fromName: 'Webropol Newsletter'
-        };        localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
-        
-        // Also store the public key separately for immediate initialization
-        localStorage.setItem('emailjs_public_key', defaultConfig.publicKey);
-        
-        console.log('EmailJS set as default email service with Public Key - ready to send real emails!');
+        };
+        localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
+        console.log('EmailJS set as default email service - configure your Public Key to start sending real emails');
     }
 }
 
