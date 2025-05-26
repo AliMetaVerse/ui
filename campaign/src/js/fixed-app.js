@@ -64,15 +64,19 @@ function initCKEditor() {
                 // Attach the editor's toolbar to the container
                 const toolbarContainer = document.querySelector('.document-editor__toolbar');
                 toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+                  console.log('CKEditor initialized successfully');
                 
-                console.log('CKEditor initialized successfully');
-                
-                // Generate initial preview
-                setTimeout(() => {
-                    const previewBtn = document.getElementById('preview-btn');
-                    if (previewBtn) {
-                        previewBtn.click();
+                // Set up automatic preview updates
+                editor.model.document.on('change:data', () => {
+                    // Auto-update preview if it's currently visible
+                    const previewEditor = document.getElementById('preview-editor');
+                    if (previewEditor && previewEditor.style.display !== 'none') {
+                        generatePreview();
                     }
+                });
+                  // Generate initial preview
+                setTimeout(() => {
+                    generatePreview();
                 }, 1000);
             })
             .catch(error => {
@@ -87,12 +91,6 @@ function initCKEditor() {
 
 // Setup all event listeners
 function setupEventListeners() {
-    // Setup preview button
-    const previewBtn = document.getElementById('preview-btn');
-    if (previewBtn) {
-        previewBtn.addEventListener('click', generatePreview);
-    }
-    
     // Setup source view toggle
     setupSourceViewToggle();
     
@@ -147,31 +145,58 @@ function initEmailSendingFallback() {
 function setupSourceViewToggle() {
     const wysiwygBtn = document.getElementById('wysiwyg-view-btn');
     const sourceBtn = document.getElementById('source-view-btn');
+    const previewBtn = document.getElementById('preview-view-btn');
     const wysiwygEditor = document.getElementById('wysiwyg-editor');
     const sourceEditor = document.getElementById('source-editor');
+    const previewEditor = document.getElementById('preview-editor');
     const htmlSource = document.getElementById('html-source');
     const applyBtn = document.getElementById('apply-source-btn');
     
     // Check if elements exist
-    if (!wysiwygBtn || !sourceBtn || !wysiwygEditor || !sourceEditor) return;
+    if (!wysiwygBtn || !sourceBtn || !previewBtn || !wysiwygEditor || !sourceEditor || !previewEditor) return;
     
-    // Source view button
-    sourceBtn.addEventListener('click', () => {
-        if (window.editor) {
-            htmlSource.value = window.editor.getData();
-            wysiwygEditor.style.display = 'none';
+    // Function to show only one panel
+    function showPanel(panelToShow) {
+        // Hide all panels
+        wysiwygEditor.style.display = 'none';
+        sourceEditor.style.display = 'none';
+        previewEditor.style.display = 'none';
+        
+        // Remove active class from all buttons
+        wysiwygBtn.classList.remove('active');
+        sourceBtn.classList.remove('active');
+        previewBtn.classList.remove('active');
+        
+        // Show selected panel and activate button
+        if (panelToShow === 'wysiwyg') {
+            wysiwygEditor.style.display = 'block';
+            wysiwygBtn.classList.add('active');
+        } else if (panelToShow === 'source') {
             sourceEditor.style.display = 'block';
-            wysiwygBtn.classList.remove('active');
             sourceBtn.classList.add('active');
+            if (window.editor) {
+                htmlSource.value = window.editor.getData();
+            }
+        } else if (panelToShow === 'preview') {
+            previewEditor.style.display = 'block';
+            previewBtn.classList.add('active');
+            generatePreview();
         }
-    });
+    }
     
     // WYSIWYG view button
     wysiwygBtn.addEventListener('click', () => {
-        wysiwygEditor.style.display = 'block';
-        sourceEditor.style.display = 'none';
-        wysiwygBtn.classList.add('active');
-        sourceBtn.classList.remove('active');
+        showPanel('wysiwyg');
+    });
+    
+    // Source view button
+    sourceBtn.addEventListener('click', () => {
+        showPanel('source');
+    });
+    
+    // Preview view button
+    previewBtn.addEventListener('click', () => {
+        showPanel('preview');
     });
     
     // Apply HTML button
@@ -180,7 +205,7 @@ function setupSourceViewToggle() {
             if (window.editor && htmlSource) {
                 window.editor.setData(htmlSource.value);
                 showNotification('HTML applied to editor', 'success');
-                wysiwygBtn.click(); // Switch back to WYSIWYG view
+                showPanel('wysiwyg'); // Switch back to WYSIWYG view
             }
         });
     }

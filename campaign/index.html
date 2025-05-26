@@ -46,38 +46,38 @@
                 <div class="view-toggle">
                     <button id="wysiwyg-view-btn" class="view-btn active">Visual Editor</button>
                     <button id="source-view-btn" class="view-btn">HTML Source</button>
+                    <button id="preview-view-btn" class="view-btn">Preview</button>
                 </div>
-                <div class="editor-container" id="wysiwyg-editor">
-                    <div class="document-editor">
-                        <div class="document-editor__toolbar"></div>
-                        <div class="document-editor__editable-container">
-                            <div class="document-editor__editable"></div>
+                <div class="editor-workspace">
+                    <div class="editor-container" id="wysiwyg-editor">
+                        <div class="document-editor">
+                            <div class="document-editor__toolbar"></div>
+                            <div class="document-editor__editable-container">
+                                <div class="document-editor__editable"></div>
+                            </div>
                         </div>
                     </div>
-                </div>                <div class="source-editor-container" id="source-editor" style="display: none;">                    <div class="source-tools">
-                        <button id="import-html-btn" class="btn btn-secondary">Import HTML</button>
-                        <input type="file" id="html-file-input" accept=".html, .htm" style="display: none;">
-                        <button id="copy-html-btn" class="btn btn-secondary">Copy HTML</button>
-                        <button id="paste-html-btn" class="btn btn-secondary">Paste HTML</button>
+                    <div class="source-editor-container" id="source-editor" style="display: none;">
+                        <div class="source-tools">
+                            <button id="import-html-btn" class="btn btn-secondary">Import HTML</button>
+                            <input type="file" id="html-file-input" accept=".html, .htm" style="display: none;">
+                            <button id="copy-html-btn" class="btn btn-secondary">Copy HTML</button>
+                            <button id="paste-html-btn" class="btn btn-secondary">Paste HTML</button>
+                        </div>
+                        <textarea id="html-source" class="html-source-textarea" spellcheck="false"></textarea>
+                        <div class="source-actions">
+                            <button id="apply-source-btn" class="btn btn-primary">Apply HTML</button>
+                        </div>
                     </div>
-                    <textarea id="html-source" class="html-source-textarea" spellcheck="false"></textarea>
-                    <div class="source-actions">
-                        <button id="apply-source-btn" class="btn btn-primary">Apply HTML</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="preview-section">
-                <h2>Preview</h2>
-                <div class="preview-container">
-                    <div class="preview-frame-container">
-                        <iframe id="preview-frame" title="Email Preview"></iframe>
+                    <div class="preview-container" id="preview-editor">
+                        <div class="preview-frame-container">
+                            <iframe id="preview-frame" title="Email Preview"></iframe>
+                        </div>
                     </div>
                 </div>
             </section>            <section class="action-buttons">
                 <button id="email-settings-btn" class="btn btn-secondary">Email Settings</button>
                 <button id="email-guide-btn" class="btn btn-secondary" title="View EmailJS setup guide">Setup Guide</button>
-                <button id="preview-btn" class="btn btn-secondary">Preview Email</button>
                 <button id="test-send-btn" class="btn btn-secondary">Send Test Email</button>
                 <button id="send-campaign-btn" class="btn btn-primary">Send Campaign</button>
             </section>
