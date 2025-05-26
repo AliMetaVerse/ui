@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Campaign Sender</title>
-    <link rel="stylesheet" href="src/css/styles.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- CKEditor CDN with necessary plugins -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/decoupled-document/ckeditor.js"></script>
+    <!-- Keep custom styles for CKEditor -->
+    <link rel="stylesheet" href="src/css/styles.css">
     <!-- Ensure proper plugin loading -->
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -14,77 +42,222 @@
         });
     </script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Email Campaign Sender Tool</h1>
-        </header>
-        
-        <main>
-            <section class="campaign-details">
-                <div class="form-group">
-                    <label for="campaign-name">Campaign Name</label>
-                    <input type="text" id="campaign-name" placeholder="Enter campaign name">
+<body class="bg-gray-50 font-sans antialiased">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-primary-700">Email Campaign Sender</h1>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="campaign-subject">Email Subject</label>
-                    <input type="text" id="campaign-subject" placeholder="Enter email subject line">
+                <div class="flex items-center space-x-4">
+                    <button id="email-settings-btn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Settings
+                    </button>
+                    <button id="email-guide-btn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200" title="View EmailJS setup guide">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Setup Guide
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main class="space-y-8">
+            <!-- Campaign Details Section -->
+            <section class="bg-white shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-medium text-gray-900">Campaign Details</h2>
+                    <p class="mt-1 text-sm text-gray-500">Set up your email campaign name and subject line</p>
+                </div>
+                <div class="px-6 py-6">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label for="campaign-name" class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
+                            <input type="text" id="campaign-name" placeholder="Enter campaign name" 
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors duration-200">
+                        </div>
+                        <div>
+                            <label for="campaign-subject" class="block text-sm font-medium text-gray-700 mb-2">Email Subject</label>
+                            <input type="text" id="campaign-subject" placeholder="Enter email subject line" 
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors duration-200">
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="recipients-section">
-                <h2>Recipients</h2>
-                <div class="form-group">
-                    <label for="email-recipients">Email Addresses</label>
-                    <textarea id="email-recipients" placeholder="Enter email addresses (comma or line separated)"></textarea>
-                    <div class="helper-text">Enter multiple email addresses separated by commas or new lines</div>
+            <!-- Recipients Section -->
+            <section class="bg-white shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-medium text-gray-900">Recipients</h2>
+                    <p class="mt-1 text-sm text-gray-500">Add email addresses for your campaign recipients</p>
                 </div>
-                <div class="recipient-tags" id="recipient-tags"></div>
-            </section>            <section class="editor-section">
-                <h2>Email Content</h2>
-                <div class="view-toggle">
-                    <button id="wysiwyg-view-btn" class="view-btn active">Visual Editor</button>
-                    <button id="source-view-btn" class="view-btn">HTML Source</button>
-                    <button id="preview-view-btn" class="view-btn">Preview</button>
+                <div class="px-6 py-6">
+                    <div>
+                        <label for="email-recipients" class="block text-sm font-medium text-gray-700 mb-2">Email Addresses</label>
+                        <textarea id="email-recipients" rows="4" placeholder="Enter email addresses (comma or line separated)" 
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors duration-200"></textarea>
+                        <p class="mt-2 text-sm text-gray-500">Enter multiple email addresses separated by commas or new lines</p>
+                    </div>
+                    <div class="mt-4">
+                        <div class="recipient-tags flex flex-wrap gap-2" id="recipient-tags"></div>
+                    </div>
                 </div>
-                <div class="editor-workspace">
-                    <div class="editor-container" id="wysiwyg-editor">
-                        <div class="document-editor">
-                            <div class="document-editor__toolbar"></div>
-                            <div class="document-editor__editable-container">
-                                <div class="document-editor__editable"></div>
+            </section>            <!-- Email Content Editor Section -->
+            <section class="bg-white shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-medium text-gray-900">Email Content</h2>
+                    <p class="mt-1 text-sm text-gray-500">Create your email content using the visual editor, HTML source, or preview mode</p>
+                </div>
+                <div class="px-6 py-6">
+                    <!-- View Toggle Buttons -->
+                    <div class="mb-6">
+                        <nav class="flex space-x-0 rounded-lg border border-gray-200 overflow-hidden" aria-label="Tabs">
+                            <button id="wysiwyg-view-btn" class="view-btn group relative min-w-0 flex-1 bg-white py-2 px-4 text-sm font-medium text-center border-r border-gray-200 text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200">
+                                <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                                Visual Editor
+                            </button>
+                            <button id="source-view-btn" class="view-btn group relative min-w-0 flex-1 bg-gray-50 py-2 px-4 text-sm font-medium text-center border-r border-gray-200 text-gray-500 hover:text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200">
+                                <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                                HTML Source
+                            </button>
+                            <button id="preview-view-btn" class="view-btn group relative min-w-0 flex-1 bg-gray-50 py-2 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200">
+                                <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                                Preview
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- Editor Workspace -->
+                    <div class="editor-workspace">
+                        <!-- Visual Editor -->
+                        <div class="editor-container" id="wysiwyg-editor">
+                            <div class="document-editor border border-gray-200 rounded-lg overflow-hidden">
+                                <div class="document-editor__toolbar bg-gray-50 border-b border-gray-200"></div>
+                                <div class="document-editor__editable-container bg-white min-h-96 max-h-[600px] overflow-y-auto">
+                                    <div class="document-editor__editable"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HTML Source Editor -->
+                        <div class="source-editor-container" id="source-editor" style="display: none;">
+                            <div class="mb-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <button id="import-html-btn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        </svg>
+                                        Import HTML
+                                    </button>
+                                    <input type="file" id="html-file-input" accept=".html, .htm" class="hidden">
+                                    <button id="copy-html-btn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Copy HTML
+                                    </button>
+                                    <button id="paste-html-btn" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                        </svg>
+                                        Paste HTML
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea id="html-source" rows="20" 
+                                class="html-source-textarea block w-full font-mono text-sm rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 transition-colors duration-200" 
+                                spellcheck="false"></textarea>
+                            <div class="mt-4">
+                                <button id="apply-source-btn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Apply HTML
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Preview Container -->
+                        <div class="preview-container" id="preview-editor">
+                            <div class="preview-frame-container border border-gray-200 rounded-lg overflow-hidden bg-white">
+                                <div class="bg-gray-50 px-4 py-2 border-b border-gray-200">
+                                    <p class="text-sm text-gray-600">Email Preview</p>
+                                </div>
+                                <iframe id="preview-frame" title="Email Preview" class="w-full h-96 border-0"></iframe>
                             </div>
                         </div>
                     </div>
-                    <div class="source-editor-container" id="source-editor" style="display: none;">
-                        <div class="source-tools">
-                            <button id="import-html-btn" class="btn btn-secondary">Import HTML</button>
-                            <input type="file" id="html-file-input" accept=".html, .htm" style="display: none;">
-                            <button id="copy-html-btn" class="btn btn-secondary">Copy HTML</button>
-                            <button id="paste-html-btn" class="btn btn-secondary">Paste HTML</button>
-                        </div>
-                        <textarea id="html-source" class="html-source-textarea" spellcheck="false"></textarea>
-                        <div class="source-actions">
-                            <button id="apply-source-btn" class="btn btn-primary">Apply HTML</button>
-                        </div>
+                </div>
+            </section>            <!-- Action Buttons Section -->
+            <section class="bg-white shadow-sm rounded-lg border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-medium text-gray-900">Campaign Actions</h2>
+                    <p class="mt-1 text-sm text-gray-500">Test your email configuration and send your campaign</p>
+                </div>
+                <div class="px-6 py-6">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button id="test-send-btn" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Send Test Email
+                        </button>
+                        <button id="send-campaign-btn" class="inline-flex items-center justify-center px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                            Send Campaign
+                        </button>
                     </div>
-                    <div class="preview-container" id="preview-editor">
-                        <div class="preview-frame-container">
-                            <iframe id="preview-frame" title="Email Preview"></iframe>
+                    <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-blue-800">Pro Tip</h3>
+                                <div class="mt-2 text-sm text-blue-700">
+                                    <p>Always send a test email to yourself first to verify formatting and content before launching your campaign.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>            <section class="action-buttons">
-                <button id="email-settings-btn" class="btn btn-secondary">Email Settings</button>
-                <button id="email-guide-btn" class="btn btn-secondary" title="View EmailJS setup guide">Setup Guide</button>
-                <button id="test-send-btn" class="btn btn-secondary">Send Test Email</button>
-                <button id="send-campaign-btn" class="btn btn-primary">Send Campaign</button>
             </section>
         </main>
+    </div>
 
-        <footer>
-            <p>&copy; 2025 Email Campaign Sender</p>        </footer>    </div>    <script src="src/js/fixed-app.js"></script>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center">
+                <p class="text-sm text-gray-500">&copy; 2025 Email Campaign Sender. Built with modern web technologies.</p>
+                <div class="mt-2 sm:mt-0 flex space-x-4">
+                    <a href="#" class="text-sm text-gray-400 hover:text-gray-500 transition-colors duration-200">Documentation</a>
+                    <a href="#" class="text-sm text-gray-400 hover:text-gray-500 transition-colors duration-200">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer><script src="src/js/fixed-app.js"></script>
     <script src="src/js/emailjs-config.js"></script>
     <script src="src/js/email-guide.js"></script>
     <script src="src/js/emailjs-debugger.js"></script>

@@ -1,362 +1,184 @@
-/* Main Styles for Email Campaign Sender Tool */
-:root {
-    --primary-color: #2c6ecb;
-    --secondary-color: #3a82f6;
-    --accent-color: #60a5fa;
-    --bg-color: #f9fafb;
-    --text-color: #111827;
-    --border-color: #d1d5db;
-    --success-color: #10b981;
-    --error-color: #ef4444;
-    --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+/* Custom styles for Email Campaign Sender Tool - Tailwind CSS Compatible */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-h1 {
-    color: var(--primary-color);
-    font-size: 2.5rem;
-}
-
-h2 {
-    color: var(--secondary-color);
-    margin-bottom: 16px;
-    font-size: 1.5rem;
-}
-
-section {
-    background-color: white;
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: var(--box-shadow);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-input[type="text"], textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus, textarea:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
-}
-
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-/* HTML Source Editor */
-.html-source-textarea {
-    min-height: 400px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.helper-text {
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-top: 4px;
-}
-
-/* CKEditor Styles */
-.document-editor {
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.document-editor__toolbar {
-    background-color: #f3f4f6;
-    border-bottom: 1px solid var(--border-color);
-    padding: 8px;
-}
-
-.document-editor__editable-container {
-    padding: 20px;
-    background-color: white;
-    min-height: 400px;
-    max-height: 600px;
-    overflow-y: auto;
-}
-
+/* CKEditor specific styles that need to be preserved */
 .document-editor__editable {
     min-height: 350px;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Source Editor */
-.view-toggle {
-    display: flex;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    overflow: hidden;
-    width: fit-content;
-}
-
-.view-btn {
-    padding: 8px 16px;
-    background-color: #f3f4f6;
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.view-btn:first-child {
-    border-radius: 4px 0 0 4px;
-    border-right: none;
-}
-
-.view-btn:nth-child(2) {
-    border-right: none;
-}
-
-.view-btn:last-child {
-    border-radius: 0 4px 4px 0;
-}
-
-.view-btn.active {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-/* Editor Workspace - Three Panel Layout */
-.editor-workspace {
-    display: flex;
-    gap: 15px;
-    min-height: 500px;
-}
-
-.editor-container,
-.source-editor-container,
-.preview-container {
-    flex: 1;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.editor-container {
-    display: block;
-}
-
-.source-editor-container {
-    display: none;
-}
-
-/* Preview Section */
-.preview-container {
-    background-color: #f3f4f6;
-    padding: 15px;
-    display: none;
-}
-
-.preview-frame-container {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    height: 460px;
-}
-
-#preview-frame {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Recipient Tags */
-.recipient-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.tag {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 16px;
-    font-size: 0.875rem;
-    display: flex;
-    align-items: center;
-}
-
-.tag .remove {
-    margin-left: 6px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Buttons */
-.action-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-}
-
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #2563eb;
-    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
-}
-
-.btn-secondary {
-    background-color: #f3f4f6;
-    color: #374151;
     border: 1px solid #d1d5db;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
 }
 
-.btn-secondary:hover {
-    background-color: #e5e7eb;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.document-editor__editable:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-    color: #6b7280;
-    font-size: 0.875rem;
+/* CKEditor toolbar styling */
+.ck-toolbar {
+    border-color: #d1d5db !important;
+    background: #f9fafb !important;
 }
 
-/* Email Configuration Modal */
+.ck-button {
+    border-radius: 4px !important;
+}
+
+.ck-button:hover {
+    background: #f3f4f6 !important;
+}
+
+.ck-button.ck-on {
+    background: #3b82f6 !important;
+    color: white !important;
+}
+
+/* Custom recipient tags styling */
+.recipient-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: #dbeafe;
+    color: #1e40af;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipient-tag button {
+    margin-left: 0.375rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #60a5fa;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.recipient-tag button:hover {
+    background-color: #bfdbfe;
+    color: #3b82f6;
+}
+
+/* View toggle active state */
+.view-btn.active {
+    background-color: #eff6ff !important;
+    color: #1d4ed8 !important;
+    border-color: #bfdbfe !important;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 50;
+    max-width: 24rem;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    pointer-events: auto;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.notification.success {
+    border-left: 4px solid #10b981;
+}
+
+.notification.error {
+    border-left: 4px solid #ef4444;
+}
+
+.notification.warning {
+    border-left: 4px solid #f59e0b;
+}
+
+.notification.info {
+    border-left: 4px solid #3b82f6;
+}
+
+/* Ensure CKEditor content area has proper styling */
+.ck-content {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+}
+
+/* Loading spinner for buttons */
+.btn-loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Ensure proper spacing for the HTML source textarea */
+.html-source-textarea {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    tab-size: 2;
+}
+
+/* Responsive design improvements */
+@media (max-width: 640px) {
+    .document-editor__editable {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Modal styles for existing functionality */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+    z-index: 1000;
 }
 
 .modal-content {
-    background-color: white;
-    padding: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 500px;
-    max-width: 90%;
-}
-
-/* Notification Types */
-.notification-info {
-    background-color: #60a5fa !important;
-}
-
-.notification-success {
-    background-color: #10b981 !important;
-}
-
-.notification-error {
-    background-color: #ef4444 !important;
-}
-
-.notification-warning {
-    background-color: #f59e0b !important;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-    }
-    
-    .container {
-        padding: 10px;
-    }
-    
-    /* Stack editor panels vertically on mobile */
-    .editor-workspace {
-        flex-direction: column;
-    }
-    
-    .view-toggle {
-        width: 100%;
-    }
-    
-    .view-btn {
-        flex: 1;
-        text-align: center;
-    }
-}
-
-@media (max-width: 1024px) {
-    /* Stack editor panels vertically on tablets */
-    .editor-workspace {
-        flex-direction: column;
-    }
+    padding: 24px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    z-index: 1001;
 }
