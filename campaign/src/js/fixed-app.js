@@ -4,6 +4,9 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log('Initializing email campaign tool');
     initCKEditor();
     setupEventListeners();
+    restoreFormData(); // Restore saved form data
+    setupFormValidation(); // Setup form validation
+    setupFormPersistence(); // Setup auto-save
 });
 
 // Initialize CKEditor
@@ -609,4 +612,219 @@ function setupGuideButton() {
             window.open('emailjs-setup-guide.html', '_blank');
         });
     }
+}
+
+// Restore form data from localStorage
+function restoreFormData() {
+    try {
+        const campaignName = localStorage.getItem('campaign_name');
+        const emailSubject = localStorage.getItem('email_subject');
+        const emailRecipients = localStorage.getItem('email_recipients');
+        
+        if (campaignName) {
+            const nameField = document.getElementById('campaign-name');
+            if (nameField) nameField.value = campaignName;
+        }
+        
+        if (emailSubject) {
+            const subjectField = document.getElementById('campaign-subject');
+            if (subjectField) subjectField.value = emailSubject;
+        }
+        
+        if (emailRecipients) {
+            const recipientsField = document.getElementById('email-recipients');
+            if (recipientsField) {
+                recipientsField.value = emailRecipients;
+                // Trigger the recipient tags update
+                processRecipients();
+            }
+        }
+        
+        console.log('Form data restored from localStorage');
+    } catch (e) {
+        console.error('Error restoring form data:', e);
+    }
+}
+
+// Setup form field persistence
+function setupFormPersistence() {
+    const fieldsToSave = [
+        { id: 'campaign-name', key: 'campaign_name' },
+        { id: 'campaign-subject', key: 'email_subject' },
+        { id: 'email-recipients', key: 'email_recipients' }
+    ];
+    
+    fieldsToSave.forEach(field => {
+        const element = document.getElementById(field.id);
+        if (element) {
+            element.addEventListener('input', function() {
+                try {
+                    localStorage.setItem(field.key, this.value);
+                } catch (e) {
+                    console.error('Error saving form data:', e);
+                }
+            });
+        }
+    });
+}
+
+// Setup form validation
+function setupFormValidation() {
+    const form = document.querySelector('form') || document.querySelector('main');
+    if (!form) return;
+    
+    // Add real-time validation
+    const campaignName = document.getElementById('campaign-name');
+    const emailSubject = document.getElementById('campaign-subject');
+    const emailRecipients = document.getElementById('email-recipients');
+    
+    if (campaignName) {
+        campaignName.addEventListener('blur', validateCampaignName);
+        campaignName.addEventListener('input', clearFieldError);
+    }
+    
+    if (emailSubject) {
+        emailSubject.addEventListener('blur', validateEmailSubject);
+        emailSubject.addEventListener('input', clearFieldError);
+    }
+    
+    if (emailRecipients) {
+        emailRecipients.addEventListener('blur', validateEmailRecipients);
+        emailRecipients.addEventListener('input', clearFieldError);
+    }
+}
+
+// Validation functions
+function validateCampaignName() {
+    const field = document.getElementById('campaign-name');
+    const value = field.value.trim();
+    
+    if (!value) {
+        showFieldError(field, 'Campaign name is required');
+        return false;
+    }
+    
+    if (value.length < 3) {
+        showFieldError(field, 'Campaign name must be at least 3 characters');
+        return false;
+    }
+    
+    clearFieldError(field);
+    return true;
+}
+
+function validateEmailSubject() {
+    const field = document.getElementById('campaign-subject');
+    const value = field.value.trim();
+    
+    if (!value) {
+        showFieldError(field, 'Email subject is required');
+        return false;
+    }
+    
+    if (value.length < 5) {
+        showFieldError(field, 'Email subject should be at least 5 characters');
+        return false;
+    }
+    
+    clearFieldError(field);
+    return true;
+}
+
+function validateEmailRecipients() {
+    const field = document.getElementById('email-recipients');
+    const value = field.value.trim();
+    
+    if (!value) {
+        showFieldError(field, 'At least one email address is required');
+        return false;
+    }
+    
+    const emails = parseEmails(value);
+    if (emails.length === 0) {
+        showFieldError(field, 'Please enter valid email addresses');
+        return false;
+    }
+    
+    const invalidEmails = emails.filter(email => !isValidEmail(email));
+    if (invalidEmails.length > 0) {
+        showFieldError(field, `Invalid email addresses: ${invalidEmails.join(', ')}`);
+        return false;
+    }
+    
+    clearFieldError(field);
+    return true;
+}
+
+// Helper function to validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email.trim());
+}
+
+// Helper function to parse emails from text
+function parseEmails(text) {
+    if (!text) return [];
+    
+    // Split by comma, semicolon, or newline
+    return text.split(/[,;\n]/)
+        .map(email => email.trim())
+        .filter(email => email.length > 0);
+}
+
+// Show field error
+function showFieldError(field, message) {
+    clearFieldError(field);
+    
+    field.style.borderColor = '#ef4444';
+    field.style.boxShadow = '0 0 0 2px rgba(239, 68, 68, 0.2)';
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'field-error';
+    errorDiv.style.color = '#ef4444';
+    errorDiv.style.fontSize = '0.875rem';
+    errorDiv.style.marginTop = '4px';
+    errorDiv.textContent = message;
+    
+    field.parentNode.appendChild(errorDiv);
+}
+
+// Clear field error
+function clearFieldError(field) {
+    if (typeof field === 'object' && field.target) {
+        field = field.target; // Handle event object
+    }
+    
+    field.style.borderColor = '';
+    field.style.boxShadow = '';
+    
+    const existingError = field.parentNode.querySelector('.field-error');
+    if (existingError) {
+        existingError.remove();
+    }
+}
+
+// Validate entire form
+function validateForm() {
+    const nameValid = validateCampaignName();
+    const subjectValid = validateEmailSubject();
+    const recipientsValid = validateEmailRecipients();
+    
+    // Also check if we have email content
+    const contentValid = checkEmailContent();
+    
+    if (!contentValid) {
+        showNotification('Please add some content to your email', 'error');
+    }
+    
+    return nameValid && subjectValid && recipientsValid && contentValid;
+}
+
+// Check if email has content
+function checkEmailContent() {
+    if (window.editorInstance) {
+        const content = window.editorInstance.getData();
+        return content && content.trim().length > 0;
+    }
+    return false;
 }

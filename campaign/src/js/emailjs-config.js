@@ -60,6 +60,18 @@ function preConfigureEmailJS() {
         localStorage.setItem('emailjs_public_key', defaultConfig.publicKey);
         
         console.log('EmailJS set as default email service with Public Key - ready to send real emails!');
+    } else {
+        // Fix any existing configuration that might have wrong service
+        try {
+            const existingConfig = JSON.parse(localStorage.getItem('emailServiceConfig'));
+            if (existingConfig.service !== 'emailjs') {
+                console.log('Fixing service configuration - changing from', existingConfig.service, 'to emailjs');
+                existingConfig.service = 'emailjs';
+                localStorage.setItem('emailServiceConfig', JSON.stringify(existingConfig));
+            }
+        } catch (e) {
+            console.error('Error fixing existing config:', e);
+        }
     }
 }
 
@@ -652,3 +664,56 @@ window.testEmailJSConnection = function() {
         });
     });
 };
+
+// Add a quick fix function for configuration issues
+window.quickFixEmailJSConfig = function() {
+    console.log('🔧 Quick fixing EmailJS configuration...');
+    
+    // Create the correct EmailJS configuration
+    const correctConfig = {
+        service: 'emailjs',
+        serviceId: 'service_6t8hyif',
+        templateId: 'template_newsletter',
+        publicKey: 'WkloAEeQols8UpWuh',
+        fromEmail: 'ali.zuh.fin@gmail.com',
+        fromName: 'Webropol Newsletter'
+    };
+    
+    // Remove any incorrect configurations
+    localStorage.removeItem('mailtrap_api_key');
+    localStorage.removeItem('mailtrap_service_url');
+    
+    // Set the correct configuration
+    localStorage.setItem('emailServiceConfig', JSON.stringify(correctConfig));
+    localStorage.setItem('emailjs_public_key', correctConfig.publicKey);
+    
+    // Try to reinitialize EmailJS
+    if (window.emailjs) {
+        try {
+            emailjs.init(correctConfig.publicKey);
+            console.log('✅ EmailJS reinitialized successfully');
+        } catch (e) {
+            console.error('❌ Failed to reinitialize EmailJS:', e);
+        }
+    }
+    
+    console.log('✅ Configuration fixed! Current config:', correctConfig);
+    
+    // Show a notification if the function exists
+    if (typeof showNotification !== 'undefined') {
+        showNotification('Configuration fixed! EmailJS service restored.', 'success');
+    }
+    
+    return correctConfig;
+};
+
+// Auto-fix on page load if configuration is corrupted
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        const config = window.getEmailServiceConfig();
+        if (config && (config.apiKey || config.serviceUrl || config.service !== 'emailjs')) {
+            console.log('🔍 Detected mixed/incorrect configuration, auto-fixing...');
+            window.quickFixEmailJSConfig();
+        }
+    }, 2000); // Wait 2 seconds after page load
+});

@@ -163,9 +163,9 @@ function showDebugPanel() {
             <p>Current EmailJS Configuration:</p>
             <div id="current-config" style="background: #f5f5f5; padding: 15px; border-radius: 5px; max-height: 200px; overflow: auto; font-family: monospace;"></div>
         </div>
-        <div>
-            <button id="reset-config-btn" style="background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-right: 10px;">Reset Configuration</button>
-            <button id="repair-config-btn" style="background: #10b981; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Repair Configuration</button>
+        <div>            <button id="reset-config-btn" style="background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-right: 10px;">Reset Configuration</button>
+            <button id="repair-config-btn" style="background: #10b981; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-right: 10px;">Repair Configuration</button>
+            <button id="debug-templates-btn" style="background: #8b5cf6; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Debug Templates</button>
         </div>
     `;
     
@@ -444,24 +444,23 @@ function resetEmailJSConfig() {
 
 // Repair the EmailJS configuration with default settings
 function repairEmailJSConfig() {
-    if (confirm('This will attempt to repair your EmailJS configuration with default settings. Continue?')) {
-        // Create default configuration
+    if (confirm('This will attempt to repair your EmailJS configuration with default settings. Continue?')) {        // Create default configuration
         const defaultConfig = {
             service: 'emailjs',
             serviceId: 'service_6t8hyif',
             templateId: 'template_newsletter',
-            publicKey: '',
+            publicKey: 'WkloAEeQols8UpWuh',
             fromEmail: 'ali.zuh.fin@gmail.com',
             fromName: 'Webropol Newsletter'
         };
-        
-        // Get current config to preserve any valid values
+          // Get current config to preserve any valid values
         try {
             const currentConfigString = localStorage.getItem('emailServiceConfig');
             if (currentConfigString) {
                 const currentConfig = JSON.parse(currentConfigString);
                 
-                // Preserve valid values
+                // Preserve valid values but FORCE service to be emailjs
+                defaultConfig.service = 'emailjs'; // Always force this
                 if (currentConfig.serviceId) defaultConfig.serviceId = currentConfig.serviceId;
                 if (currentConfig.templateId) defaultConfig.templateId = currentConfig.templateId;
                 if (currentConfig.publicKey) defaultConfig.publicKey = currentConfig.publicKey;
@@ -471,13 +470,26 @@ function repairEmailJSConfig() {
         } catch (e) {
             console.error('Error parsing current config:', e);
         }
-        
-        // Save the repaired configuration
+          // Save the repaired configuration
         localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
+        
+        // Remove any Mailtrap-related configurations
+        localStorage.removeItem('mailtrap_api_key');
+        localStorage.removeItem('mailtrap_service_url');
         
         // If public key exists, also set it separately
         if (defaultConfig.publicKey) {
             localStorage.setItem('emailjs_public_key', defaultConfig.publicKey);
+        }
+        
+        // Log the action
+        logEmailAction('Configuration', 'Repaired EmailJS configuration', 'success');
+        
+        // Show confirmation
+        alert('EmailJS configuration has been repaired with correct settings. All Mailtrap references removed.');
+        
+        // Refresh the configuration display
+        loadCurrentConfiguration();
             
             // Try to initialize EmailJS
             if (window.emailjs) {
@@ -676,3 +688,93 @@ if (typeof emailjs !== 'undefined') {
             });
     };
 }
+
+// Add template debugging function
+function debugEmailJSTemplates() {
+    const config = getEmailServiceConfig();
+    if (!config || config.service !== 'emailjs') {
+        console.log('❌ No EmailJS configuration found');
+        return;
+    }
+    
+    console.log('🔍 Current Template Configuration:');
+    console.log('Template ID:', config.templateId);
+    console.log('Service ID:', config.serviceId);
+    console.log('Public Key:', config.publicKey ? 'Present' : 'Missing');
+    
+    console.log('\n📝 Common Template ID formats:');
+    console.log('- template_newsletter');
+    console.log('- template_email');
+    console.log('- template_campaign');
+    console.log('- template_default');
+    
+    console.log('\n🛠️ To fix template issues:');
+    console.log('1. Go to your EmailJS dashboard');
+    console.log('2. Check "Email Templates" section');
+    console.log('3. Either create a template with ID "template_newsletter"');
+    console.log('4. Or copy an existing template ID and update the configuration');
+    
+    // Test connection with template validation
+    if (window.emailjs && config.publicKey) {
+        console.log('\n🧪 Testing template connection...');
+        emailjs.send(config.serviceId, config.templateId, {
+            to_email: 'test@example.com',
+            subject: 'Template Test',
+            message_html: 'Testing template existence'
+        }).then(function(response) {
+            console.log('✅ Template exists and is working!', response);
+        }).catch(function(error) {
+            console.log('❌ Template error:', error.text);
+            if (error.text && error.text.includes('Template')) {
+                console.log('🎯 This confirms the template "' + config.templateId + '" does not exist');
+                console.log('💡 Solution: Create this template in EmailJS dashboard or update templateId');
+            }
+        });
+    }
+}
+
+// Quick template ID fix function
+function fixTemplateId(newTemplateId) {
+    if (!newTemplateId) {
+        console.log('❌ Please provide a template ID');
+        console.log('Usage: fixTemplateId("your_template_id")');
+        return;
+    }
+    
+    const config = getEmailServiceConfig();
+    if (!config) {
+        console.log('❌ No email configuration found');
+        return;
+    }
+    
+    // Update template ID
+    config.templateId = newTemplateId;
+    
+    // Save updated configuration
+    localStorage.setItem('emailServiceConfig', JSON.stringify(config));
+    
+    console.log('✅ Template ID updated to:', newTemplateId);
+    console.log('🔄 Configuration saved. You can now try sending emails again.');
+    
+    // Test the new template
+    if (window.emailjs && config.publicKey) {
+        console.log('🧪 Testing new template...');
+        emailjs.send(config.serviceId, newTemplateId, {
+            to_email: 'test@example.com',
+            subject: 'Template Test',
+            message_html: 'Testing new template'
+        }).then(function(response) {
+            console.log('✅ New template is working!', response);
+            showNotification('Template ID updated successfully! Template is working.', 'success');
+        }).catch(function(error) {
+            console.log('❌ New template failed:', error.text);
+            showNotification('Template ID updated but template still has issues: ' + (error.text || 'Unknown error'), 'error');
+        });
+    }
+}
+
+// Add to window for easy access
+window.fixTemplateId = fixTemplateId;
+
+// Add to window for easy access
+window.debugEmailJSTemplates = debugEmailJSTemplates;
