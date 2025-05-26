@@ -20,7 +20,7 @@ function addDebugButton() {
     // Create and add the debug button
     const debugBtn = document.createElement('button');
     debugBtn.id = 'debug-emailjs-btn';
-    debugBtn.className = 'btn btn-secondary';
+    debugBtn.className = 'btn btn-primary';
     debugBtn.title = 'Run EmailJS diagnostics';
     debugBtn.innerHTML = '<span style="color: #ffcc00;">⚠</span> Debug';
     debugBtn.style.marginLeft = '10px';
