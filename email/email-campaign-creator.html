@@ -53,6 +53,43 @@
                                 placeholder="your_template_id"
                             >
                         </div>
+                        <!-- Configuration Test -->
+                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                            <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>
+                            <button onclick="testEmailJSConfig()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                Test EmailJS Setup
+                            </button>
+                            <p class="text-xs text-blue-600 mt-1">Verify your EmailJS service and template configuration</p>
+                        </div>
+                        
+                        <!-- Debug Console -->
+                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                            <h3 class="text-sm font-medium text-gray-800 mb-2">
+                                <i class="fas fa-bug mr-1"></i>
+                                Debug Console
+                            </h3>
+                            <button onclick="toggleDebugConsole()" class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
+                                Show/Hide Debug
+                            </button>
+                            <div id="debugConsole" class="hidden mt-3 p-3 bg-black text-green-400 rounded text-xs font-mono max-h-32 overflow-y-auto">
+                                <div id="debugOutput"></div>
+                            </div>
+                        </div>
+                        <!-- Troubleshooting Tips -->
+                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                            <h3 class="text-sm font-medium text-gray-800 mb-2">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                EmailJS Setup Tips
+                            </h3>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>• Ensure your EmailJS template uses these variable names:</li>
+                                <li class="ml-4 font-mono">{{to_email}}, {{from_name}}, {{subject}}, {{message}}</li>
+                                <li>• Check that your service is properly connected</li>
+                                <li>• Verify your public key is correct</li>
+                                <li>• Make sure your template is published</li>
+                            </ul>
+                        </div>
                         <!-- Email Details -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
@@ -112,7 +149,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <p class="text-sm text-gray-500 mt-1">Total recipients:
+                            <p class="text-sm text-gray-500 mt-1">
+                                Total recipients:
                                 <span id="recipientCount">0</span>
                             </p>
                         </div>
@@ -243,18 +281,79 @@
         <script>
         let editor;
         let emailJSInitialized = false;
-        const PUBLIC_KEY = 'WkloAEeQols8UpWuh';
-
-        // Initialize EmailJS
+        const PUBLIC_KEY = 'WkloAEeQols8UpWuh';        // Initialize EmailJS
         function initializeEmailJS() {
             try {
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('EmailJS library not loaded');
+                }
+                
                 emailjs.init(PUBLIC_KEY);
                 emailJSInitialized = true;
                 updateConnectionStatus('connected', 'Connected to EmailJS');
                 console.log('EmailJS initialized successfully');
+                logToDebugConsole('EmailJS initialized successfully with public key: ' + PUBLIC_KEY);
             } catch (error) {
                 console.error('Failed to initialize EmailJS:', error);
                 updateConnectionStatus('error', 'Connection failed');
+                logToDebugConsole('Failed to initialize EmailJS: ' + error.message);
+            }
+        }
+
+        // Validate EmailJS configuration
+        async function validateEmailJSConfig() {
+            const serviceId = document.getElementById('serviceId').value;
+            const templateId = document.getElementById('templateId').value;
+
+            if (!serviceId || !templateId) {
+                return { valid: false, message: 'Please enter Service ID and Template ID' };
+            }
+
+            if (!emailJSInitialized) {
+                return { valid: false, message: 'EmailJS not initialized' };
+            }
+
+            try {
+                // Test the configuration with a dummy send (this will fail but validate the config)
+                await emailjs.send(serviceId, templateId, {
+                    to_email: 'test@example.com',
+                    message: 'Configuration test'
+                });
+                return { valid: true, message: 'Configuration valid' };
+            } catch (error) {
+                if (error.status === 400) {
+                    return { valid: false, message: 'Invalid service or template ID' };
+                } else if (error.status === 401) {
+                    return { valid: false, message: 'Invalid public key or unauthorized' };
+                } else if (error.status === 404) {
+                    return { valid: false, message: 'Service or template not found' };
+                } else {
+                    // Other errors might still mean the config is valid
+                    return { valid: true, message: 'Configuration appears valid' };                }
+            }
+        }
+
+        // Test EmailJS configuration
+        async function testEmailJSConfig() {
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+            button.disabled = true;
+
+            try {
+                const result = await validateEmailJSConfig();
+                
+                if (result.valid) {
+                    alert('✅ Configuration test passed!\n\n' + result.message + '\n\nYou can now send test emails.');
+                } else {
+                    alert('❌ Configuration test failed!\n\n' + result.message + '\n\nPlease check your EmailJS settings.');
+                }
+            } catch (error) {
+                console.error('Configuration test error:', error);
+                alert('❌ Configuration test failed!\n\nError: ' + (error.message || 'Unknown error'));
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
             }
         }
 
@@ -398,51 +497,69 @@
                 `;
             } else if (type === 'promotional') {
                 templateContent = `
-                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; color: white;">
-                            <h1 style="margin: 0; font-size: 28px;">Special Offer Just for You!</h1>
-                            <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">Limited Time Deal</p>
-                        </div>
-                        
-                        <div style="background-color: white; padding: 40px 30px;">
-                            <h2 style="color: #333; text-align: center;">Save 50% on Premium Plans</h2>
-                            
-                            <div style="text-align: center; margin: 30px 0;">
-                                <div style="display: inline-block; background-color: #ff6b6b; color: white; padding: 20px 30px; border-radius: 50%; font-size: 24px; font-weight: bold;">
-                                    50% OFF
+                    <article>
+                        <h1>
+                            HTML playground
+                        </h1>
+                        <p data-foo="bar">
+                            This is a sample paragraph with a <code><strong>data</strong></code><strong> attribute</strong>.
+                        </p>
+                        <details style="margin:10px auto;" id="details-example">
+                            <summary><span style="color:#d32f2f;"><strong>Spoiler alert</strong></span> created with a <code>details</code> element!</summary>
+                            <p>
+                                This demo uses elements such as <code>abbr</code>, <code>article</code>, <code>section</code>, <code>aside</code>, and <code>details</code>.
+                            </p>
+                        </details>
+                        <hr>
+                        <section>
+                            <h2>
+                                Responsive column layout
+                            </h2>
+                            <div class="columns" style="gap:10px;">
+                                <div class="column" style="border:1px solid orange;">
+                                    <figure class="image">
+                                        <img style="aspect-ratio:185/209;" src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/html.png" width="185" height="209">
+                                        <figcaption>
+                                            <abbr title="HyperText Markup Language">HTML</abbr>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="column" style="border:1px dotted blue;">
+                                    <figure class="image">
+                                        <img style="aspect-ratio:185/210;" src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/css.png" width="185" height="210">
+                                        <figcaption>
+                                            <abbr title="Cascading Style Sheets">CSS</abbr>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="column" style="border:1px dashed olive;">
+                                    <figure class="image">
+                                        <img style="aspect-ratio:185/209;" src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/js.png" width="185" height="209">
+                                        <figcaption>
+                                            <abbr title="JavaScript">JS</abbr>
+                                        </figcaption>
+                                    </figure>
                                 </div>
                             </div>
-                            
-                            <p style="font-size: 18px; text-align: center; color: #555;">
-                                Upgrade to our Premium plan and unlock all features at half the price!
-                            </p>
-                            
-                            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 25px 0;">
-                                <h3 style="color: #333; margin-top: 0;">What's Included:</h3>
-                                <ul style="color: #555;">
-                                    <li>✅ Unlimited access to all features</li>
-                                    <li>✅ Priority customer support</li>
-                                    <li>✅ Advanced analytics dashboard</li>
-                                    <li>✅ Custom integrations</li>
-                                </ul>
-                            </div>
-                            
-                            <div style="text-align: center; margin: 30px 0;">
-                                <a href="#" style="display: inline-block; background-color: #28a745; color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-size: 18px; font-weight: bold;">
-                                    Claim Your Discount
-                                </a>
-                            </div>
-                            
-                            <p style="text-align: center; color: #777; font-size: 14px;">
-                                <strong>Hurry!</strong> This offer expires in 48 hours.
-                            </p>
-                        </div>
-                        
-                        <div style="background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #666;">
-                            <p>© 2025 Company Name. All rights reserved.</p>
-                            <p><a href="#" style="color: #666;">Unsubscribe</a> | <a href="#" style="color: #666;">Update Preferences</a></p>
-                        </div>
-                    </div>
+                        </section>
+                        <hr>
+                        <aside>
+                            <h2>
+                                HTML-related features
+                            </h2>
+                            <ul>
+                                <li>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html">HTML embed</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/features/style.html">Styles</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html">General HTML Support</a>
+                                </li>
+                            </ul>
+                        </aside>
+                    </article>
                 `;
             }
             
@@ -477,9 +594,7 @@
         function closePreview() {
             document.getElementById('previewModal').classList.add('hidden');
             document.getElementById('previewModal').classList.remove('flex');
-        }
-
-        // Send test email
+        }        // Send test email
         async function sendTestEmail() {
             const testEmail = document.getElementById('testEmail').value;
             
@@ -501,21 +616,55 @@
                 return;
             }
 
-            try {
+            // Show loading state
+            const testButton = event.target;
+            const originalText = testButton.innerHTML;
+            testButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            testButton.disabled = true;            try {
+                // Use common EmailJS template parameter names
                 const templateParams = {
                     to_email: testEmail,
                     to_name: 'Test Recipient',
                     from_name: document.getElementById('fromName').value || 'Test Sender',
-                    from_email: document.getElementById('fromEmail').value || 'test@email.com',
+                    reply_to: document.getElementById('fromEmail').value || 'test@email.com',
                     subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
-                    message: editor ? editor.getData() : 'Test email content'
+                    message: editor ? editor.getData() : 'Test email content',
+                    // Additional common parameter names
+                    user_email: testEmail,
+                    user_name: 'Test Recipient',
+                    email_subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
+                    email_message: editor ? editor.getData() : 'Test email content'
                 };
 
-                await emailjs.send(serviceId, templateId, templateParams);
-                alert('Test email sent successfully!');
-            } catch (error) {
+                console.log('Sending test email with params:', templateParams);
+                logToDebugConsole('Sending test email to: ' + testEmail + ' using service: ' + serviceId + ' template: ' + templateId);
+                
+                const response = await emailjs.send(serviceId, templateId, templateParams);
+                console.log('EmailJS response:', response);
+                logToDebugConsole('Test email sent successfully! Response status: ' + response.status);
+                
+                alert('Test email sent successfully!');            } catch (error) {
                 console.error('Failed to send test email:', error);
-                alert('Failed to send test email. Please check your EmailJS configuration.');
+                let errorMessage = 'Failed to send test email. ';
+                
+                if (error.status === 400) {
+                    errorMessage += 'Check your EmailJS service and template configuration.';
+                } else if (error.status === 401) {
+                    errorMessage += 'Invalid EmailJS public key or unauthorized.';
+                } else if (error.status === 404) {
+                    errorMessage += 'EmailJS service or template not found.';
+                } else if (error.status === 429) {
+                    errorMessage += 'Rate limit exceeded. Please try again later.';
+                } else {
+                    errorMessage += `Error: ${error.text || error.message || 'Unknown error'}`;
+                }
+                
+                logToDebugConsole('Test email failed: ' + errorMessage + ' | Status: ' + (error.status || 'unknown') + ' | Details: ' + (error.text || error.message || 'No details'));
+                alert(errorMessage);
+            } finally {
+                // Restore button state
+                testButton.innerHTML = originalText;
+                testButton.disabled = false;
             }
         }
 
@@ -572,55 +721,112 @@
             // Confirm sending
             if (!confirm(`Are you sure you want to send this campaign to ${emailList.length} recipients?`)) {
                 return;
-            }
-
-            // Show progress modal
+            }            // Show progress modal
             showProgressModal();
 
             let sentCount = 0;
             let failedCount = 0;
+            let failedEmails = []; // Track failed emails with error details
             const total = emailList.length;
 
             // Send emails
             for (let i = 0; i < emailList.length; i++) {
                 const email = emailList[i];
-                
-                try {
+                  try {
                     updateProgress(i, total, `Sending to ${email}...`);
 
+                    // Use common EmailJS template parameter names
                     const templateParams = {
                         to_email: email,
                         to_name: email.split('@')[0], // Use email prefix as name
                         from_name: fromName,
-                        from_email: fromEmail,
+                        reply_to: fromEmail,
                         subject: subject,
-                        message: editor.getData()
+                        message: editor.getData(),
+                        // Additional common parameter names for different template structures
+                        user_email: email,
+                        user_name: email.split('@')[0],
+                        email_subject: subject,
+                        email_message: editor.getData(),
+                        recipient_email: email,
+                        recipient_name: email.split('@')[0]
                     };
 
-                    await emailjs.send(serviceId, templateId, templateParams);
+                    console.log(`Sending email ${i + 1}/${total} to ${email}`);
+                    logToDebugConsole(`Sending email ${i + 1}/${total} to ${email} with service: ${serviceId}, template: ${templateId}`);
+                    
+                    const response = await emailjs.send(serviceId, templateId, templateParams);
+                    console.log(`Email sent successfully to ${email}:`, response);
+                    logToDebugConsole(`Email sent successfully to ${email}. Response status: ${response.status}`);
+                    
                     sentCount++;
                     
                     // Update stats
                     updateStats(sentCount, failedCount, total);
 
-                    // Small delay to avoid rate limiting
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-
-                } catch (error) {
+                    // Delay to avoid rate limiting - increase delay for better reliability
+                    await new Promise(resolve => setTimeout(resolve, 2000));} catch (error) {
                     console.error(`Failed to send email to ${email}:`, error);
                     failedCount++;
+                    
+                    // Collect failed email details
+                    let errorMessage = 'Unknown error';
+                    if (error.status === 400) {
+                        errorMessage = 'Invalid service/template configuration';
+                    } else if (error.status === 401) {
+                        errorMessage = 'Unauthorized - check public key';
+                    } else if (error.status === 404) {
+                        errorMessage = 'Service or template not found';
+                    } else if (error.status === 429) {
+                        errorMessage = 'Rate limit exceeded';
+                    } else if (error.text) {
+                        errorMessage = error.text;
+                    } else if (error.message) {
+                        errorMessage = error.message;
+                    }
+                    
+                    failedEmails.push({
+                        email: email,
+                        error: errorMessage
+                    });
+                    
                     updateStats(sentCount, failedCount, total);
+                    
+                    // Log detailed error for debugging
+                    console.error('Error details:', {
+                        status: error.status,
+                        text: error.text,
+                        message: error.message,
+                        email: email
+                    });
+                    
+                    // If we hit rate limits, wait longer
+                    if (error.status === 429) {
+                        console.log('Rate limit hit, waiting 5 seconds...');
+                        await new Promise(resolve => setTimeout(resolve, 5000));
+                    }
                 }
-            }
-
-            // Complete
+            }            // Complete
             updateProgress(total, total, 'Campaign completed!');
             
             setTimeout(() => {
                 hideProgressModal();
                 
                 const successRate = total > 0 ? Math.round((sentCount / total) * 100) : 0;
-                alert(`Campaign completed!\n\nSent: ${sentCount}\nFailed: ${failedCount}\nSuccess Rate: ${successRate}%`);
+                let summary = `Campaign completed!\n\nSent: ${sentCount}\nFailed: ${failedCount}\nSuccess Rate: ${successRate}%`;
+                
+                // Add details about failed emails if any
+                if (failedEmails && failedEmails.length > 0) {
+                    summary += '\n\nFailed emails:\n';
+                    failedEmails.slice(0, 5).forEach(failed => {
+                        summary += `• ${failed.email}: ${failed.error}\n`;
+                    });
+                    if (failedEmails.length > 5) {
+                        summary += `... and ${failedEmails.length - 5} more`;
+                    }
+                }
+                
+                alert(summary);
             }, 1500);
         }
 
@@ -648,6 +854,28 @@
             
             const successRate = total > 0 ? Math.round((sent / (sent + failed)) * 100) : 0;
             document.getElementById('statsRate').textContent = successRate + '%';
+        }
+
+        // Toggle debug console visibility
+        function toggleDebugConsole() {
+            const debugConsole = document.getElementById('debugConsole');
+            const isVisible = !debugConsole.classList.contains('hidden');
+            
+            debugConsole.classList.toggle('hidden', isVisible);
+            debugConsole.classList.toggle('flex', !isVisible);
+            
+            if (!isVisible) {
+                console.clear();
+                document.getElementById('debugOutput').innerHTML = '';
+            }
+        }
+
+        // Log to debug console
+        function logToDebugConsole(message) {
+            const debugOutput = document.getElementById('debugOutput');
+            const timestamp = new Date().toISOString();
+            debugOutput.innerHTML += `[${timestamp}] ${message}<br>`;
+            debugOutput.scrollTop = debugOutput.scrollHeight;
         }
 
         // Event listeners
