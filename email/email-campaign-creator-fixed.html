@@ -42,8 +42,7 @@
                                 id="serviceId"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 placeholder="your_service_id"
-                            >
-                        </div>
+                            >                        </div>
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
                             <input
@@ -53,10 +52,28 @@
                                 placeholder="your_template_id"
                             >
                         </div>
-                        <!-- Configuration Test -->
                         <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                            <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>
-                            <button onclick="testEmailJSConfig()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
+                            <h3 class="text-sm font-medium text-blue-800 mb-2">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                HTML Template Setup Required
+                            </h3>
+                            <p class="text-xs text-blue-700 mb-2">
+                                Create a simple EmailJS template with this content to enable HTML email sending:
+                            </p>                            <div class="text-xs bg-white p-2 rounded border font-mono">
+                                <strong>EmailJS Template Settings:</strong><br>
+                                To: {{user_email}}<br>
+                                From: {{from_name}} &lt;{{reply_to}}&gt;<br>
+                                Subject: {{subject}}<br><br>
+                                <strong>Template Content:</strong><br>
+                                {{{html_content}}}
+                            </div>                            <p class="text-xs text-blue-600 mt-2">
+                                <strong>Critical:</strong> Set the "To" field in EmailJS dashboard to: <code>{{user_email}}</code> or <code>{{to}}</code><br>
+                                The triple braces {{{html_content}}} allow raw HTML injection from your CKEditor content.<br>
+                                Parameters: to, user_email, user_name, from_name, reply_to, subject, message, html_content
+                            </p>
+                        </div><!-- Configuration Test -->
+                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                            <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>                            <button onclick="testEmailJSConfig()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
                                 <i class="fas fa-check-circle mr-1"></i>
                                 Test EmailJS Setup
                             </button>
@@ -290,9 +307,7 @@
                 updateConnectionStatus('error', 'Connection failed');
                 logToDebugConsole('Failed to initialize EmailJS: ' + error.message);
             }
-        }
-
-        // Validate EmailJS configuration
+        }        // Validate EmailJS configuration
         async function validateEmailJSConfig() {
             const serviceId = document.getElementById('serviceId').value;
             const templateId = document.getElementById('templateId').value;
@@ -303,14 +318,21 @@
 
             if (!emailJSInitialized) {
                 return { valid: false, message: 'EmailJS not initialized' };
-            }
-
-            try {
-                // Test the configuration with a dummy send (this will fail but validate the config)
-                await emailjs.send(serviceId, templateId, {
-                    to_email: 'test@example.com',
-                    message: 'Configuration test'
-                });
+            }            try {
+                // Test the configuration with HTML template parameters
+                const testParams = {
+                    to: 'test@example.com',         // Alternative: try 'to' instead of 'user_email'
+                    user_email: 'test@example.com', // Keep both for compatibility
+                    user_name: 'Test Recipient',
+                    from_name: 'Test Sender',
+                    reply_to: 'test@example.com',
+                    subject: 'Configuration Test',
+                    message: '<p>This is a configuration test for HTML email template.</p>',
+                    html_content: '<p>This is a configuration test for HTML email template.</p>'
+                };
+                
+                // This will fail due to invalid recipient, but will validate the service and template IDs
+                await emailjs.send(serviceId, templateId, testParams);
                 return { valid: true, message: 'Configuration valid' };
             } catch (error) {
                 if (error.status === 400) {
@@ -320,11 +342,11 @@
                 } else if (error.status === 404) {
                     return { valid: false, message: 'Service or template not found' };
                 } else {
-                    // Other errors might still mean the config is valid
+                    // Other errors might still mean the config is valid (e.g., bad recipient)
                     return { valid: true, message: 'Configuration appears valid' };
                 }
             }
-        }        // Test EmailJS configuration
+        }// Test EmailJS configuration
         async function testEmailJSConfig() {
             const button = event.target;
             const originalText = button.innerHTML;
@@ -332,10 +354,8 @@
             button.disabled = true;
 
             try {
-                const result = await validateEmailJSConfig();
-                
-                if (result.valid) {
-                    alert('✅ Configuration test passed!\n\n' + result.message + '\n\nYou can now send test emails.');
+                const result = await validateEmailJSConfig();                if (result.valid) {
+                    alert('✅ Configuration test passed!\n\n' + result.message + '\n\nYou can now send HTML emails using your template.');
                     logToDebugConsole('Configuration test passed: ' + result.message);
                 } else {
                     alert('❌ Configuration test failed!\n\n' + result.message + '\n\nPlease check your EmailJS settings.');
@@ -349,49 +369,8 @@
                 button.innerHTML = originalText;
                 button.disabled = false;
             }
-        }
-
-        // Test specific template parameters to identify what your template expects
-        async function testTemplateParameters() {
-            const serviceId = document.getElementById('serviceId').value;
-            const templateId = document.getElementById('templateId').value;
-            const testEmail = 'test@example.com';
-
-            if (!serviceId || !templateId) {
-                alert('Please enter your EmailJS Service ID and Template ID first');
-                return;
-            }
-
-            if (!emailJSInitialized) {
-                alert('EmailJS is not initialized. Please check your connection.');
-                return;
-            }
-
-            logToDebugConsole('Testing template parameter variations...');
-
-            // Test different parameter combinations to see which one works
-            const parameterTests = [
-                { name: 'Standard', params: { to_email: testEmail, message: 'Test content', subject: 'Test subject' } },
-                { name: 'Alternative 1', params: { email: testEmail, content: 'Test content', title: 'Test subject' } },
-                { name: 'Alternative 2', params: { recipient: testEmail, body: 'Test content', email_subject: 'Test subject' } },
-                { name: 'Alternative 3', params: { to: testEmail, html_content: 'Test content', email_title: 'Test subject' } },
-                { name: 'User variant', params: { user_email: testEmail, user_message: 'Test content', user_subject: 'Test subject' } }
-            ];
-
-            for (const test of parameterTests) {
-                try {
-                    logToDebugConsole(`Testing ${test.name} parameters: ${JSON.stringify(test.params)}`);
-                    await emailjs.send(serviceId, templateId, test.params);
-                    logToDebugConsole(`✅ ${test.name} parameters worked!`);
-                    alert(`✅ Found working parameters!\n\nTemplate expects: ${test.name}\nParameters: ${JSON.stringify(test.params, null, 2)}`);
-                    return;
-                } catch (error) {
-                    logToDebugConsole(`❌ ${test.name} failed: ${error.status} - ${error.text || error.message}`);
-                }
-            }
-
-            alert('❌ None of the standard parameter combinations worked.\n\nPlease check your EmailJS template configuration and ensure the template variables match the parameter names being sent.');
-        }
+        }        // Note: testTemplateParameters function removed as we now use direct HTML email sending
+        // No longer need to test template parameters since we bypass templates entirely
 
         // Update connection status
         function updateConnectionStatus(status, message) {
@@ -623,9 +602,7 @@
             if (!emailJSInitialized) {
                 alert('EmailJS is not initialized. Please check your connection.');
                 return;
-            }
-
-            const serviceId = document.getElementById('serviceId').value;
+            }            const serviceId = document.getElementById('serviceId').value;
             const templateId = document.getElementById('templateId').value;
 
             if (!serviceId || !templateId) {
@@ -637,57 +614,32 @@
             const testButton = event.target;
             const originalText = testButton.innerHTML;
             testButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            testButton.disabled = true;            try {
-                // Use comprehensive EmailJS template parameter names to cover different template structures
-                const templateParams = {
-                    // Standard EmailJS parameter names
-                    to_email: testEmail,
-                    to_name: 'Test Recipient',
+            testButton.disabled = true;            try {                // HTML template email parameters for EmailJS
+                const emailParams = {
+                    to: testEmail,              // Alternative: try 'to' instead of 'user_email'
+                    user_email: testEmail,      // Keep both for compatibility
+                    user_name: 'Test Recipient',
                     from_name: document.getElementById('fromName').value || 'Test Sender',
                     reply_to: document.getElementById('fromEmail').value || 'test@email.com',
                     subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
-                    message: editor ? editor.getData() : 'Test email content',
-                    
-                    // Alternative common parameter names
-                    user_email: testEmail,
-                    user_name: 'Test Recipient',
-                    email_subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
-                    email_message: editor ? editor.getData() : 'Test email content',
-                    
-                    // More alternative names found in different templates
-                    recipient_email: testEmail,
-                    recipient_name: 'Test Recipient',
-                    email: testEmail,
-                    name: 'Test Recipient',
-                    recipient: testEmail,
-                    to: testEmail,
-                    
-                    // Content variations
-                    content: editor ? editor.getData() : 'Test email content',
-                    html_content: editor ? editor.getData() : 'Test email content',
-                    email_content: editor ? editor.getData() : 'Test email content',
-                    body: editor ? editor.getData() : 'Test email content',
-                    
-                    // Subject variations
-                    email_title: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
-                    title: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email')
+                    message: editor ? editor.getData() : '<p>Test email content from HTML Template Mode</p>',
+                    html_content: editor ? editor.getData() : '<p>Test email content from HTML Template Mode</p>'
                 };
 
-                console.log('Sending test email with params:', templateParams);
-                logToDebugConsole('Sending test email to: ' + testEmail + ' using service: ' + serviceId + ' template: ' + templateId);
-                logToDebugConsole('Template parameters: ' + JSON.stringify(templateParams, null, 2));
+                console.log('Sending test email with HTML template params:', emailParams);
+                logToDebugConsole('Sending test email to: ' + testEmail + ' using service: ' + serviceId + ' template: ' + templateId + ' (HTML Template Mode)');
+                logToDebugConsole('Email parameters: ' + JSON.stringify(emailParams, null, 2));
                 
-                const response = await emailjs.send(serviceId, templateId, templateParams);
+                // Send using EmailJS with HTML template
+                const response = await emailjs.send(serviceId, templateId, emailParams);
                 console.log('EmailJS response:', response);
                 logToDebugConsole('Test email sent successfully! Response status: ' + response.status);
                 
                 alert('✅ Test email sent successfully!');
             } catch (error) {
                 console.error('Failed to send test email:', error);
-                let errorMessage = 'Failed to send test email. ';
-                
-                if (error.status === 400) {
-                    errorMessage += 'Check your EmailJS service and template configuration.';
+                let errorMessage = 'Failed to send test email. ';                if (error.status === 400) {
+                    errorMessage += 'Check your EmailJS service and template configuration for HTML support.';
                 } else if (error.status === 401) {
                     errorMessage += 'Invalid EmailJS public key or unauthorized.';
                 } else if (error.status === 404) {
@@ -705,11 +657,8 @@
                 testButton.innerHTML = originalText;
                 testButton.disabled = false;
             }
-        }
-
-        // Send campaign
-        async function sendCampaign() {
-            // Validation
+        }        // Send campaign
+        async function sendCampaign() {            // Validation
             const serviceId = document.getElementById('serviceId').value;
             const templateId = document.getElementById('templateId').value;
             const subject = document.getElementById('emailSubject').value;
@@ -774,50 +723,24 @@
 
             // Send emails
             for (let i = 0; i < emailList.length; i++) {
-                const email = emailList[i];
-                  try {
-                    updateProgress(i, total, `Sending to ${email}...`);
-
-                    // Use comprehensive EmailJS template parameter names to cover different template structures
-                    const templateParams = {
-                        // Standard EmailJS parameter names
-                        to_email: email,
-                        to_name: email.split('@')[0], // Use email prefix as name
+                const email = emailList[i];                  try {
+                    updateProgress(i, total, `Sending to ${email}...`);                    // HTML template email parameters for EmailJS
+                    const emailParams = {
+                        to: email,                      // Alternative: try 'to' instead of 'user_email'
+                        user_email: email,              // Keep both for compatibility
+                        user_name: email.split('@')[0], // Use email prefix as name
                         from_name: fromName,
                         reply_to: fromEmail,
                         subject: subject,
-                        message: editor.getData(),
-                        
-                        // Alternative common parameter names
-                        user_email: email,
-                        user_name: email.split('@')[0],
-                        email_subject: subject,
-                        email_message: editor.getData(),
-                        
-                        // More alternative names found in different templates
-                        recipient_email: email,
-                        recipient_name: email.split('@')[0],
-                        email: email,
-                        name: email.split('@')[0],
-                        recipient: email,
-                        to: email,
-                        
-                        // Content variations
-                        content: editor.getData(),
-                        html_content: editor.getData(),
-                        email_content: editor.getData(),
-                        body: editor.getData(),
-                        
-                        // Subject variations
-                        email_title: subject,
-                        title: subject
+                        message: editor.getData(),      // Alternative parameter name
+                        html_content: editor.getData()  // Keep both for compatibility
                     };
 
                     console.log(`Sending email ${i + 1}/${total} to ${email}`);
-                    logToDebugConsole(`Sending email ${i + 1}/${total} to ${email} with service: ${serviceId}, template: ${templateId}`);
-                    logToDebugConsole('Template parameters: ' + JSON.stringify(templateParams, null, 2));
+                    logToDebugConsole(`Sending email ${i + 1}/${total} to ${email} with service: ${serviceId} template: ${templateId} (HTML Template Mode)`);
+                    logToDebugConsole('Email parameters: ' + JSON.stringify(emailParams, null, 2));
                     
-                    const response = await emailjs.send(serviceId, templateId, templateParams);
+                    const response = await emailjs.send(serviceId, templateId, emailParams);
                     console.log(`Email sent successfully to ${email}:`, response);
                     logToDebugConsole(`Email sent successfully to ${email}. Response status: ${response.status}`);
                     
@@ -832,15 +755,14 @@
                 } catch (error) {
                     console.error(`Failed to send email to ${email}:`, error);
                     failedCount++;
-                    
-                    // Collect failed email details
+                      // Collect failed email details
                     let errorMessage = 'Unknown error';
                     if (error.status === 400) {
-                        errorMessage = 'Invalid service/template configuration';
+                        errorMessage = 'Invalid service configuration or direct HTML email not supported';
                     } else if (error.status === 401) {
                         errorMessage = 'Unauthorized - check public key';
                     } else if (error.status === 404) {
-                        errorMessage = 'Service or template not found';
+                        errorMessage = 'Service not found';
                     } else if (error.status === 429) {
                         errorMessage = 'Rate limit exceeded';
                     } else if (error.text) {
@@ -948,9 +870,7 @@
             const timestamp = new Date().toLocaleTimeString();
             debugOutput.innerHTML += `[${timestamp}] ${message}<br>`;
             debugOutput.scrollTop = debugOutput.scrollHeight;
-        }
-
-        // Local Storage Functions
+        }        // Local Storage Functions
         function saveFormData() {
             const formData = {
                 serviceId: document.getElementById('serviceId').value,
@@ -978,9 +898,7 @@
             try {
                 const savedData = localStorage.getItem('emailCampaignData');
                 if (savedData) {
-                    const formData = JSON.parse(savedData);
-                    
-                    // Restore form fields
+                    const formData = JSON.parse(savedData);                    // Restore form fields
                     document.getElementById('serviceId').value = formData.serviceId || '';
                     document.getElementById('templateId').value = formData.templateId || '';
                     document.getElementById('campaignName').value = formData.campaignName || '';
@@ -1017,9 +935,7 @@
             } catch (error) {
                 console.error('Failed to clear form data:', error);
             }
-        }
-
-        // Auto-save form data
+        }        // Auto-save form data
         function setupAutoSave() {
             const formFields = [
                 'serviceId', 'templateId', 'campaignName', 'fromName', 
