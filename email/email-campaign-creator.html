@@ -6,7 +6,7 @@
         <title>Email Campaign Creator</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     </head>
     <body class="bg-gray-50 min-h-screen">
@@ -62,33 +62,23 @@
                             </button>
                             <p class="text-xs text-blue-600 mt-1">Verify your EmailJS service and template configuration</p>
                         </div>
-                        
                         <!-- Debug Console -->
                         <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
                             <h3 class="text-sm font-medium text-gray-800 mb-2">
                                 <i class="fas fa-bug mr-1"></i>
                                 Debug Console
                             </h3>
-                            <button onclick="toggleDebugConsole()" class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
-                                Show/Hide Debug
-                            </button>
+                            <div class="flex space-x-2 mb-2">
+                                <button onclick="toggleDebugConsole()" class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
+                                    Show/Hide Debug
+                                </button>
+                                <button onclick="clearFormData()" class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">
+                                    Clear Session
+                                </button>
+                            </div>
                             <div id="debugConsole" class="hidden mt-3 p-3 bg-black text-green-400 rounded text-xs font-mono max-h-32 overflow-y-auto">
                                 <div id="debugOutput"></div>
                             </div>
-                        </div>
-                        <!-- Troubleshooting Tips -->
-                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
-                            <h3 class="text-sm font-medium text-gray-800 mb-2">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                EmailJS Setup Tips
-                            </h3>
-                            <ul class="text-xs text-gray-600 space-y-1">
-                                <li>• Ensure your EmailJS template uses these variable names:</li>
-                                <li class="ml-4 font-mono">{{to_email}}, {{from_name}}, {{subject}}, {{message}}</li>
-                                <li>• Check that your service is properly connected</li>
-                                <li>• Verify your public key is correct</li>
-                                <li>• Make sure your template is published</li>
-                            </ul>
                         </div>
                         <!-- Email Details -->
                         <div class="mb-4">
@@ -281,7 +271,9 @@
         <script>
         let editor;
         let emailJSInitialized = false;
-        const PUBLIC_KEY = 'WkloAEeQols8UpWuh';        // Initialize EmailJS
+        const PUBLIC_KEY = 'WkloAEeQols8UpWuh';
+
+        // Initialize EmailJS
         function initializeEmailJS() {
             try {
                 if (typeof emailjs === 'undefined') {
@@ -329,11 +321,10 @@
                     return { valid: false, message: 'Service or template not found' };
                 } else {
                     // Other errors might still mean the config is valid
-                    return { valid: true, message: 'Configuration appears valid' };                }
+                    return { valid: true, message: 'Configuration appears valid' };
+                }
             }
-        }
-
-        // Test EmailJS configuration
+        }        // Test EmailJS configuration
         async function testEmailJSConfig() {
             const button = event.target;
             const originalText = button.innerHTML;
@@ -345,16 +336,61 @@
                 
                 if (result.valid) {
                     alert('✅ Configuration test passed!\n\n' + result.message + '\n\nYou can now send test emails.');
+                    logToDebugConsole('Configuration test passed: ' + result.message);
                 } else {
                     alert('❌ Configuration test failed!\n\n' + result.message + '\n\nPlease check your EmailJS settings.');
+                    logToDebugConsole('Configuration test failed: ' + result.message);
                 }
             } catch (error) {
                 console.error('Configuration test error:', error);
+                logToDebugConsole('Configuration test error: ' + error.message);
                 alert('❌ Configuration test failed!\n\nError: ' + (error.message || 'Unknown error'));
             } finally {
                 button.innerHTML = originalText;
                 button.disabled = false;
             }
+        }
+
+        // Test specific template parameters to identify what your template expects
+        async function testTemplateParameters() {
+            const serviceId = document.getElementById('serviceId').value;
+            const templateId = document.getElementById('templateId').value;
+            const testEmail = 'test@example.com';
+
+            if (!serviceId || !templateId) {
+                alert('Please enter your EmailJS Service ID and Template ID first');
+                return;
+            }
+
+            if (!emailJSInitialized) {
+                alert('EmailJS is not initialized. Please check your connection.');
+                return;
+            }
+
+            logToDebugConsole('Testing template parameter variations...');
+
+            // Test different parameter combinations to see which one works
+            const parameterTests = [
+                { name: 'Standard', params: { to_email: testEmail, message: 'Test content', subject: 'Test subject' } },
+                { name: 'Alternative 1', params: { email: testEmail, content: 'Test content', title: 'Test subject' } },
+                { name: 'Alternative 2', params: { recipient: testEmail, body: 'Test content', email_subject: 'Test subject' } },
+                { name: 'Alternative 3', params: { to: testEmail, html_content: 'Test content', email_title: 'Test subject' } },
+                { name: 'User variant', params: { user_email: testEmail, user_message: 'Test content', user_subject: 'Test subject' } }
+            ];
+
+            for (const test of parameterTests) {
+                try {
+                    logToDebugConsole(`Testing ${test.name} parameters: ${JSON.stringify(test.params)}`);
+                    await emailjs.send(serviceId, templateId, test.params);
+                    logToDebugConsole(`✅ ${test.name} parameters worked!`);
+                    alert(`✅ Found working parameters!\n\nTemplate expects: ${test.name}\nParameters: ${JSON.stringify(test.params, null, 2)}`);
+                    return;
+                } catch (error) {
+                    logToDebugConsole(`❌ ${test.name} failed: ${error.status} - ${error.text || error.message}`);
+                }
+            }
+
+            alert('❌ None of the standard parameter combinations worked.\n\nPlease check your EmailJS template configuration and ensure the template variables match the parameter names being sent.');
         }
 
         // Update connection status
@@ -409,9 +445,10 @@
                 table: {
                     contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
                 }
-            })
-            .then(createdEditor => {
+            })            .then(createdEditor => {
                 editor = createdEditor;
+                
+                // Set default content initially
                 editor.setData(`
                     <h2>Welcome to Our Newsletter</h2>
                     <p>Dear Subscriber,</p>
@@ -423,10 +460,21 @@
                     </ul>
                     <p>Best regards,<br>Your Team</p>
                 `);
+                
+                // Load saved form data after editor is ready
+                setTimeout(() => {
+                    loadFormData();
+                }, 100);
+                
+                // Set up auto-save for editor content
+                editor.model.document.on('change:data', debounce(saveFormData, 1000));
+                
                 console.log('CKEditor initialized successfully');
+                logToDebugConsole('CKEditor initialized successfully with auto-save enabled');
             })
             .catch(error => {
                 console.error('Error initializing CKEditor:', error);
+                logToDebugConsole('Error initializing CKEditor: ' + error.message);
             });
 
         // Add recipient function
@@ -439,6 +487,7 @@
                 recipients.value = currentRecipients + singleRecipient.value;
                 singleRecipient.value = '';
                 updateRecipientCount();
+                logToDebugConsole('Added recipient: ' + singleRecipient.value);
             } else {
                 alert('Please enter a valid email address');
             }
@@ -452,6 +501,7 @@
             
             document.getElementById('recipientCount').textContent = count;
             document.getElementById('statsRecipients').textContent = count;
+            logToDebugConsole('Updated recipient count: ' + count);
         }
 
         // Load email templates
@@ -497,81 +547,44 @@
                 `;
             } else if (type === 'promotional') {
                 templateContent = `
-                    <article>
-                        <h1>
-                            HTML playground
-                        </h1>
-                        <p data-foo="bar">
-                            This is a sample paragraph with a <code><strong>data</strong></code><strong> attribute</strong>.
-                        </p>
-                        <details style="margin:10px auto;" id="details-example">
-                            <summary><span style="color:#d32f2f;"><strong>Spoiler alert</strong></span> created with a <code>details</code> element!</summary>
-                            <p>
-                                This demo uses elements such as <code>abbr</code>, <code>article</code>, <code>section</code>, <code>aside</code>, and <code>details</code>.
-                            </p>
-                        </details>
-                        <hr>
-                        <section>
-                            <h2>
-                                Responsive column layout
-                            </h2>
-                            <div class="columns" style="gap:10px;">
-                                <div class="column" style="border:1px solid orange;">
-                                    <figure class="image">
-                                        <img style="aspect-ratio:185/209;" src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/html.png" width="185" height="209">
-                                        <figcaption>
-                                            <abbr title="HyperText Markup Language">HTML</abbr>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <div class="column" style="border:1px dotted blue;">
-                                    <figure class="image">
-                                        <img style="aspect-ratio:185/210;" src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/css.png" width="185" height="210">
-                                        <figcaption>
-                                            <abbr title="Cascading Style Sheets">CSS</abbr>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <div class="column" style="border:1px dashed olive;">
-                                    <figure class="image">
-                                        <img style="aspect-ratio:185/209;" src="https://ckeditor.com/assets/images/ckdemo/html-source-editing/js.png" width="185" height="209">
-                                        <figcaption>
-                                            <abbr title="JavaScript">JS</abbr>
-                                        </figcaption>
-                                    </figure>
-                                </div>
+                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+                        <div style="background-color: #dc3545; padding: 30px; text-align: center; color: white;">
+                            <h1 style="margin: 0; font-size: 36px;">LIMITED TIME OFFER!</h1>
+                            <p style="font-size: 18px; margin: 10px 0 0 0;">Save up to 50% on all products</p>
+                        </div>
+                        
+                        <div style="background-color: white; padding: 30px;">
+                            <h2 style="color: #333;">Don't Miss Out!</h2>
+                            
+                            <p>This is a limited-time promotion that ends soon. Take advantage of our biggest sale of the year!</p>
+                            
+                            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
+                                <h3 style="color: #dc3545; margin-top: 0;">FLASH SALE</h3>
+                                <p style="font-size: 24px; font-weight: bold; color: #333;">50% OFF</p>
+                                <p>Use code: <strong>SAVE50</strong></p>
+                                <a href="#" style="display: inline-block; background-color: #dc3545; color: white; padding: 15px 30px; text-decoration: none; border-radius: 4px; font-weight: bold;">SHOP NOW</a>
                             </div>
-                        </section>
-                        <hr>
-                        <aside>
-                            <h2>
-                                HTML-related features
-                            </h2>
-                            <ul>
-                                <li>
-                                    <a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html">HTML embed</a>
-                                </li>
-                                <li>
-                                    <a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/features/style.html">Styles</a>
-                                </li>
-                                <li>
-                                    <a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html">General HTML Support</a>
-                                </li>
-                            </ul>
-                        </aside>
-                    </article>
+                            
+                            <p style="text-align: center; color: #666; font-size: 14px;">
+                                *Offer valid until midnight. Terms and conditions apply.
+                            </p>
+                        </div>
+                    </div>
                 `;
             }
-            
-            if (editor && templateContent) {
+              if (editor && templateContent) {
                 editor.setData(templateContent);
+                logToDebugConsole('Loaded template: ' + type);
+                // Save the template content
+                setTimeout(saveFormData, 500);
             }
-        }
-
-        // Clear editor
+        }        // Clear editor
         function clearEditor() {
             if (editor) {
                 editor.setData('');
+                logToDebugConsole('Editor cleared');
+                // Save the cleared state
+                setTimeout(saveFormData, 500);
             }
         }
 
@@ -588,13 +601,17 @@
             
             document.getElementById('previewModal').classList.remove('hidden');
             document.getElementById('previewModal').classList.add('flex');
+            
+            logToDebugConsole('Preview opened for: ' + subject);
         }
 
         // Close preview
         function closePreview() {
             document.getElementById('previewModal').classList.add('hidden');
             document.getElementById('previewModal').classList.remove('flex');
-        }        // Send test email
+        }
+
+        // Send test email
         async function sendTestEmail() {
             const testEmail = document.getElementById('testEmail').value;
             
@@ -621,29 +638,51 @@
             const originalText = testButton.innerHTML;
             testButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             testButton.disabled = true;            try {
-                // Use common EmailJS template parameter names
+                // Use comprehensive EmailJS template parameter names to cover different template structures
                 const templateParams = {
+                    // Standard EmailJS parameter names
                     to_email: testEmail,
                     to_name: 'Test Recipient',
                     from_name: document.getElementById('fromName').value || 'Test Sender',
                     reply_to: document.getElementById('fromEmail').value || 'test@email.com',
                     subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
                     message: editor ? editor.getData() : 'Test email content',
-                    // Additional common parameter names
+                    
+                    // Alternative common parameter names
                     user_email: testEmail,
                     user_name: 'Test Recipient',
                     email_subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
-                    email_message: editor ? editor.getData() : 'Test email content'
+                    email_message: editor ? editor.getData() : 'Test email content',
+                    
+                    // More alternative names found in different templates
+                    recipient_email: testEmail,
+                    recipient_name: 'Test Recipient',
+                    email: testEmail,
+                    name: 'Test Recipient',
+                    recipient: testEmail,
+                    to: testEmail,
+                    
+                    // Content variations
+                    content: editor ? editor.getData() : 'Test email content',
+                    html_content: editor ? editor.getData() : 'Test email content',
+                    email_content: editor ? editor.getData() : 'Test email content',
+                    body: editor ? editor.getData() : 'Test email content',
+                    
+                    // Subject variations
+                    email_title: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
+                    title: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email')
                 };
 
                 console.log('Sending test email with params:', templateParams);
                 logToDebugConsole('Sending test email to: ' + testEmail + ' using service: ' + serviceId + ' template: ' + templateId);
+                logToDebugConsole('Template parameters: ' + JSON.stringify(templateParams, null, 2));
                 
                 const response = await emailjs.send(serviceId, templateId, templateParams);
                 console.log('EmailJS response:', response);
                 logToDebugConsole('Test email sent successfully! Response status: ' + response.status);
                 
-                alert('Test email sent successfully!');            } catch (error) {
+                alert('✅ Test email sent successfully!');
+            } catch (error) {
                 console.error('Failed to send test email:', error);
                 let errorMessage = 'Failed to send test email. ';
                 
@@ -660,7 +699,7 @@
                 }
                 
                 logToDebugConsole('Test email failed: ' + errorMessage + ' | Status: ' + (error.status || 'unknown') + ' | Details: ' + (error.text || error.message || 'No details'));
-                alert(errorMessage);
+                alert('❌ ' + errorMessage);
             } finally {
                 // Restore button state
                 testButton.innerHTML = originalText;
@@ -721,7 +760,11 @@
             // Confirm sending
             if (!confirm(`Are you sure you want to send this campaign to ${emailList.length} recipients?`)) {
                 return;
-            }            // Show progress modal
+            }
+
+            logToDebugConsole('Starting campaign send to ' + emailList.length + ' recipients');
+
+            // Show progress modal
             showProgressModal();
 
             let sentCount = 0;
@@ -735,25 +778,44 @@
                   try {
                     updateProgress(i, total, `Sending to ${email}...`);
 
-                    // Use common EmailJS template parameter names
+                    // Use comprehensive EmailJS template parameter names to cover different template structures
                     const templateParams = {
+                        // Standard EmailJS parameter names
                         to_email: email,
                         to_name: email.split('@')[0], // Use email prefix as name
                         from_name: fromName,
                         reply_to: fromEmail,
                         subject: subject,
                         message: editor.getData(),
-                        // Additional common parameter names for different template structures
+                        
+                        // Alternative common parameter names
                         user_email: email,
                         user_name: email.split('@')[0],
                         email_subject: subject,
                         email_message: editor.getData(),
+                        
+                        // More alternative names found in different templates
                         recipient_email: email,
-                        recipient_name: email.split('@')[0]
+                        recipient_name: email.split('@')[0],
+                        email: email,
+                        name: email.split('@')[0],
+                        recipient: email,
+                        to: email,
+                        
+                        // Content variations
+                        content: editor.getData(),
+                        html_content: editor.getData(),
+                        email_content: editor.getData(),
+                        body: editor.getData(),
+                        
+                        // Subject variations
+                        email_title: subject,
+                        title: subject
                     };
 
                     console.log(`Sending email ${i + 1}/${total} to ${email}`);
                     logToDebugConsole(`Sending email ${i + 1}/${total} to ${email} with service: ${serviceId}, template: ${templateId}`);
+                    logToDebugConsole('Template parameters: ' + JSON.stringify(templateParams, null, 2));
                     
                     const response = await emailjs.send(serviceId, templateId, templateParams);
                     console.log(`Email sent successfully to ${email}:`, response);
@@ -765,7 +827,9 @@
                     updateStats(sentCount, failedCount, total);
 
                     // Delay to avoid rate limiting - increase delay for better reliability
-                    await new Promise(resolve => setTimeout(resolve, 2000));} catch (error) {
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                } catch (error) {
                     console.error(`Failed to send email to ${email}:`, error);
                     failedCount++;
                     
@@ -800,13 +864,18 @@
                         email: email
                     });
                     
+                    logToDebugConsole(`Failed to send to ${email}: ${errorMessage} (Status: ${error.status || 'unknown'})`);
+                    
                     // If we hit rate limits, wait longer
                     if (error.status === 429) {
                         console.log('Rate limit hit, waiting 5 seconds...');
+                        logToDebugConsole('Rate limit hit, waiting 5 seconds...');
                         await new Promise(resolve => setTimeout(resolve, 5000));
                     }
                 }
-            }            // Complete
+            }
+
+            // Complete
             updateProgress(total, total, 'Campaign completed!');
             
             setTimeout(() => {
@@ -826,6 +895,7 @@
                     }
                 }
                 
+                logToDebugConsole('Campaign completed: ' + sentCount + ' sent, ' + failedCount + ' failed');
                 alert(summary);
             }, 1500);
         }
@@ -852,7 +922,7 @@
             document.getElementById('statsSent').textContent = sent;
             document.getElementById('statsFailed').textContent = failed;
             
-            const successRate = total > 0 ? Math.round((sent / (sent + failed)) * 100) : 0;
+            const successRate = total > 0 ? Math.round((sent / total) * 100) : 0;
             document.getElementById('statsRate').textContent = successRate + '%';
         }
 
@@ -861,21 +931,163 @@
             const debugConsole = document.getElementById('debugConsole');
             const isVisible = !debugConsole.classList.contains('hidden');
             
-            debugConsole.classList.toggle('hidden', isVisible);
-            debugConsole.classList.toggle('flex', !isVisible);
+            if (isVisible) {
+                debugConsole.classList.add('hidden');
+            } else {
+                debugConsole.classList.remove('hidden');
+            }
             
+            // Clear console when hiding
             if (!isVisible) {
                 console.clear();
                 document.getElementById('debugOutput').innerHTML = '';
             }
-        }
-
-        // Log to debug console
+        }        // Log to debug console
         function logToDebugConsole(message) {
             const debugOutput = document.getElementById('debugOutput');
-            const timestamp = new Date().toISOString();
+            const timestamp = new Date().toLocaleTimeString();
             debugOutput.innerHTML += `[${timestamp}] ${message}<br>`;
             debugOutput.scrollTop = debugOutput.scrollHeight;
+        }
+
+        // Local Storage Functions
+        function saveFormData() {
+            const formData = {
+                serviceId: document.getElementById('serviceId').value,
+                templateId: document.getElementById('templateId').value,
+                campaignName: document.getElementById('campaignName').value,
+                fromName: document.getElementById('fromName').value,
+                fromEmail: document.getElementById('fromEmail').value,
+                emailSubject: document.getElementById('emailSubject').value,
+                recipients: document.getElementById('recipients').value,
+                testEmail: document.getElementById('testEmail').value,
+                editorContent: editor ? editor.getData() : '',
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                localStorage.setItem('emailCampaignData', JSON.stringify(formData));
+                logToDebugConsole('Form data saved to local storage');
+            } catch (error) {
+                console.error('Failed to save form data:', error);
+                logToDebugConsole('Failed to save form data: ' + error.message);
+            }
+        }
+
+        function loadFormData() {
+            try {
+                const savedData = localStorage.getItem('emailCampaignData');
+                if (savedData) {
+                    const formData = JSON.parse(savedData);
+                    
+                    // Restore form fields
+                    document.getElementById('serviceId').value = formData.serviceId || '';
+                    document.getElementById('templateId').value = formData.templateId || '';
+                    document.getElementById('campaignName').value = formData.campaignName || '';
+                    document.getElementById('fromName').value = formData.fromName || '';
+                    document.getElementById('fromEmail').value = formData.fromEmail || '';
+                    document.getElementById('emailSubject').value = formData.emailSubject || '';
+                    document.getElementById('recipients').value = formData.recipients || '';
+                    document.getElementById('testEmail').value = formData.testEmail || '';
+                    
+                    // Restore editor content when editor is ready
+                    if (editor && formData.editorContent) {
+                        editor.setData(formData.editorContent);
+                    }
+                    
+                    // Update recipient count
+                    updateRecipientCount();
+                    
+                    logToDebugConsole('Form data restored from local storage (saved: ' + new Date(formData.timestamp).toLocaleString() + ')');
+                    
+                    // Show restoration notification
+                    showNotification('Previous session restored', 'info');
+                }
+            } catch (error) {
+                console.error('Failed to load form data:', error);
+                logToDebugConsole('Failed to load form data: ' + error.message);
+            }
+        }
+
+        function clearFormData() {
+            try {
+                localStorage.removeItem('emailCampaignData');
+                logToDebugConsole('Form data cleared from local storage');
+                showNotification('Session data cleared', 'info');
+            } catch (error) {
+                console.error('Failed to clear form data:', error);
+            }
+        }
+
+        // Auto-save form data
+        function setupAutoSave() {
+            const formFields = [
+                'serviceId', 'templateId', 'campaignName', 'fromName', 
+                'fromEmail', 'emailSubject', 'recipients', 'testEmail'
+            ];
+
+            formFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('input', debounce(saveFormData, 1000));
+                    field.addEventListener('change', saveFormData);
+                }
+            });
+            
+            logToDebugConsole('Auto-save enabled for form fields');
+        }
+
+        // Debounce function to limit auto-save frequency
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-md shadow-lg transition-all duration-300 transform translate-x-full`;
+            
+            // Set styles based on type
+            const styles = {
+                'info': 'bg-blue-100 text-blue-800 border border-blue-200',
+                'success': 'bg-green-100 text-green-800 border border-green-200',
+                'warning': 'bg-yellow-100 text-yellow-800 border border-yellow-200',
+                'error': 'bg-red-100 text-red-800 border border-red-200'
+            };
+            
+            notification.className += ` ${styles[type] || styles.info}`;
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm font-medium">${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-sm opacity-60 hover:opacity-100">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
         }
 
         // Event listeners
@@ -897,12 +1109,12 @@
             if (e.target === this) {
                 closePreview();
             }
-        });
-
-        // Initialize on page load
-        window.addEventListener('load', function() {
+        });        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateConnectionStatus('connecting', 'Initializing...');
             initializeEmailJS();
-            updateRecipientCount();
+            setupAutoSave();
+            loadFormData();
         });
         </script>
     </body>
