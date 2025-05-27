@@ -1,5 +1,221 @@
 /* Custom styles for Email Campaign Sender Tool - Tailwind CSS Compatible */
 
+/* Form input reset and styling to ensure Tailwind classes work properly */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    appearance: none !important;
+    background-color: white !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.375rem !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    color: #111827 !important;
+    font-family: inherit !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+textarea:disabled,
+select:disabled {
+    background-color: #f9fafb !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+}
+
+/* Ensure placeholders have proper styling */
+input::placeholder,
+textarea::placeholder {
+    color: #9ca3af !important;
+    opacity: 1 !important;
+}
+
+/* Specific styling for textarea to handle rows properly */
+textarea {
+    resize: vertical !important;
+    min-height: 2.5rem !important;
+}
+
+/* Explicit input field classes */
+.block.w-full {
+    display: block !important;
+    width: 100% !important;
+}
+
+.rounded-md {
+    border-radius: 0.375rem !important;
+}
+
+.border-gray-300 {
+    border-color: #d1d5db !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.sm\:text-sm {
+    font-size: 0.875rem !important;
+}
+
+/* Button reset and base styling */
+button {
+    background-color: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-align: inherit;
+    text-decoration: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Ensure button text doesn't get styled by browser defaults */
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/* Enhanced button styling for better Tailwind compatibility */
+.inline-flex {
+    display: inline-flex !important;
+}
+
+button.inline-flex {
+    align-items: center;
+    justify-content: center;
+}
+
+/* Explicit button styling to ensure visibility */
+button.inline-flex.items-center {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.5rem 0.75rem !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.375rem !important;
+    background-color: white !important;
+    color: #374151 !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.15s ease-in-out !important;
+    cursor: pointer !important;
+}
+
+button.inline-flex.items-center:hover {
+    background-color: #f9fafb !important;
+    border-color: #d1d5db !important;
+}
+
+button.inline-flex.items-center:focus {
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Primary button styling */
+button.bg-primary-600 {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+    color: white !important;
+}
+
+button.bg-primary-600:hover {
+    background-color: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
+}
+
+/* View toggle button styling */
+.view-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.5rem 1rem !important;
+    border: 1px solid #d1d5db !important;
+    background-color: #f9fafb !important;
+    color: #6b7280 !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease-in-out !important;
+}
+
+.view-btn:hover {
+    background-color: #f3f4f6 !important;
+    color: #374151 !important;
+}
+
+.view-btn.active {
+    background-color: #eff6ff !important;
+    color: #1d4ed8 !important;
+    border-color: #bfdbfe !important;
+}
+
+/* Label styling */
+label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Additional Tailwind utility overrides for better compatibility */
+.focus\:ring-2:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+}
+
+.focus\:ring-primary-500:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+}
+
+.focus\:border-primary-500:focus {
+    border-color: #3b82f6 !important;
+}
+
+.hover\:bg-gray-50:hover {
+    background-color: #f9fafb !important;
+}
+
+.hover\:bg-primary-700:hover {
+    background-color: #1d4ed8 !important;
+}
+
+.transition-colors {
+    transition-property: color, background-color, border-color !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+}
+
+.transition-all {
+    transition-property: all !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+}
+
 /* CKEditor specific styles that need to be preserved */
 .document-editor__editable {
     min-height: 350px;
