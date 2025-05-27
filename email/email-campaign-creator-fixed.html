@@ -324,9 +324,7 @@
                     return { valid: true, message: 'Configuration appears valid' };
                 }
             }
-        }
-
-        // Test EmailJS configuration
+        }        // Test EmailJS configuration
         async function testEmailJSConfig() {
             const button = event.target;
             const originalText = button.innerHTML;
@@ -351,6 +349,48 @@
                 button.innerHTML = originalText;
                 button.disabled = false;
             }
+        }
+
+        // Test specific template parameters to identify what your template expects
+        async function testTemplateParameters() {
+            const serviceId = document.getElementById('serviceId').value;
+            const templateId = document.getElementById('templateId').value;
+            const testEmail = 'test@example.com';
+
+            if (!serviceId || !templateId) {
+                alert('Please enter your EmailJS Service ID and Template ID first');
+                return;
+            }
+
+            if (!emailJSInitialized) {
+                alert('EmailJS is not initialized. Please check your connection.');
+                return;
+            }
+
+            logToDebugConsole('Testing template parameter variations...');
+
+            // Test different parameter combinations to see which one works
+            const parameterTests = [
+                { name: 'Standard', params: { to_email: testEmail, message: 'Test content', subject: 'Test subject' } },
+                { name: 'Alternative 1', params: { email: testEmail, content: 'Test content', title: 'Test subject' } },
+                { name: 'Alternative 2', params: { recipient: testEmail, body: 'Test content', email_subject: 'Test subject' } },
+                { name: 'Alternative 3', params: { to: testEmail, html_content: 'Test content', email_title: 'Test subject' } },
+                { name: 'User variant', params: { user_email: testEmail, user_message: 'Test content', user_subject: 'Test subject' } }
+            ];
+
+            for (const test of parameterTests) {
+                try {
+                    logToDebugConsole(`Testing ${test.name} parameters: ${JSON.stringify(test.params)}`);
+                    await emailjs.send(serviceId, templateId, test.params);
+                    logToDebugConsole(`✅ ${test.name} parameters worked!`);
+                    alert(`✅ Found working parameters!\n\nTemplate expects: ${test.name}\nParameters: ${JSON.stringify(test.params, null, 2)}`);
+                    return;
+                } catch (error) {
+                    logToDebugConsole(`❌ ${test.name} failed: ${error.status} - ${error.text || error.message}`);
+                }
+            }
+
+            alert('❌ None of the standard parameter combinations worked.\n\nPlease check your EmailJS template configuration and ensure the template variables match the parameter names being sent.');
         }
 
         // Update connection status
@@ -597,26 +637,45 @@
             const testButton = event.target;
             const originalText = testButton.innerHTML;
             testButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            testButton.disabled = true;
-
-            try {
-                // Use common EmailJS template parameter names
+            testButton.disabled = true;            try {
+                // Use comprehensive EmailJS template parameter names to cover different template structures
                 const templateParams = {
+                    // Standard EmailJS parameter names
                     to_email: testEmail,
                     to_name: 'Test Recipient',
                     from_name: document.getElementById('fromName').value || 'Test Sender',
                     reply_to: document.getElementById('fromEmail').value || 'test@email.com',
                     subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
                     message: editor ? editor.getData() : 'Test email content',
-                    // Additional common parameter names
+                    
+                    // Alternative common parameter names
                     user_email: testEmail,
                     user_name: 'Test Recipient',
                     email_subject: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
-                    email_message: editor ? editor.getData() : 'Test email content'
+                    email_message: editor ? editor.getData() : 'Test email content',
+                    
+                    // More alternative names found in different templates
+                    recipient_email: testEmail,
+                    recipient_name: 'Test Recipient',
+                    email: testEmail,
+                    name: 'Test Recipient',
+                    recipient: testEmail,
+                    to: testEmail,
+                    
+                    // Content variations
+                    content: editor ? editor.getData() : 'Test email content',
+                    html_content: editor ? editor.getData() : 'Test email content',
+                    email_content: editor ? editor.getData() : 'Test email content',
+                    body: editor ? editor.getData() : 'Test email content',
+                    
+                    // Subject variations
+                    email_title: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email'),
+                    title: '[TEST] ' + (document.getElementById('emailSubject').value || 'Test Email')
                 };
 
                 console.log('Sending test email with params:', templateParams);
                 logToDebugConsole('Sending test email to: ' + testEmail + ' using service: ' + serviceId + ' template: ' + templateId);
+                logToDebugConsole('Template parameters: ' + JSON.stringify(templateParams, null, 2));
                 
                 const response = await emailjs.send(serviceId, templateId, templateParams);
                 console.log('EmailJS response:', response);
@@ -716,29 +775,47 @@
             // Send emails
             for (let i = 0; i < emailList.length; i++) {
                 const email = emailList[i];
-                
-                try {
+                  try {
                     updateProgress(i, total, `Sending to ${email}...`);
 
-                    // Use common EmailJS template parameter names
+                    // Use comprehensive EmailJS template parameter names to cover different template structures
                     const templateParams = {
+                        // Standard EmailJS parameter names
                         to_email: email,
                         to_name: email.split('@')[0], // Use email prefix as name
                         from_name: fromName,
                         reply_to: fromEmail,
                         subject: subject,
                         message: editor.getData(),
-                        // Additional common parameter names for different template structures
+                        
+                        // Alternative common parameter names
                         user_email: email,
                         user_name: email.split('@')[0],
                         email_subject: subject,
                         email_message: editor.getData(),
+                        
+                        // More alternative names found in different templates
                         recipient_email: email,
-                        recipient_name: email.split('@')[0]
+                        recipient_name: email.split('@')[0],
+                        email: email,
+                        name: email.split('@')[0],
+                        recipient: email,
+                        to: email,
+                        
+                        // Content variations
+                        content: editor.getData(),
+                        html_content: editor.getData(),
+                        email_content: editor.getData(),
+                        body: editor.getData(),
+                        
+                        // Subject variations
+                        email_title: subject,
+                        title: subject
                     };
 
                     console.log(`Sending email ${i + 1}/${total} to ${email}`);
                     logToDebugConsole(`Sending email ${i + 1}/${total} to ${email} with service: ${serviceId}, template: ${templateId}`);
+                    logToDebugConsole('Template parameters: ' + JSON.stringify(templateParams, null, 2));
                     
                     const response = await emailjs.send(serviceId, templateId, templateParams);
                     console.log(`Email sent successfully to ${email}:`, response);
