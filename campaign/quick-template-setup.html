@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quick EmailJS Template Setup</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .step {
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .template-code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .button {
+            display: inline-block;
+            background: #0ea5e9;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 5px;
+            font-weight: 500;
+        }
+        .button:hover {
+            background: #0284c7;
+        }
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .copy-btn {
+            position: relative;
+            top: 10px;
+            right: 10px;
+            float: right;
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background: #4b5563;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>🚀 Quick EmailJS Template Setup</h1>
+        <div class="warning">
+            <strong>⚠️ Action Required:</strong>
+            Your email system is failing because you need to create an EmailJS template. This is a 5-minute fix!
+        </div>
+        <div class="step">
+            <h2>Step 1: Open EmailJS Templates</h2>
+            <p>Click this button to open the EmailJS template dashboard:</p>
+            <a href="https://dashboard.emailjs.com/admin/templates" target="_blank" class="button">🔗 Open EmailJS Templates</a>
+            <p>
+                <small>Make sure you're logged into your EmailJS account first!</small>
+            </p>
+        </div>
+        <div class="success">
+            <h3>✅ Great News!</h3>
+            <p>I can see you already have a template:
+                <code>template_fni9yqj</code>
+            </p>
+            <p>Your system should now work! If you created this template recently, try sending an email from your campaign tool.</p>
+        </div>
+        <div class="step">
+            <h2>If You Still Need to Create a Template</h2>
+            <p>If the template
+                <code>template_fni9yqj</code> doesn't exist yet, follow these steps:
+            </p>
+            <ol>
+                <li>Click
+                    <strong>"Create New Template"</strong> in EmailJS
+                </li>
+                <li>Set the
+                    <strong>Template ID</strong> to:
+                    <code>template_fni9yqj</code>
+                </li>
+                <li>Give it a name like:
+                    <strong>"Newsletter Campaign Template"</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="step">
+            <h2>Step 3: Copy This Template HTML</h2>
+            <p>Copy the template code below and paste it into the EmailJS template editor:</p>
+            <div style="position: relative;">
+                <button class="copy-btn" onclick="copyTemplate()">📋 Copy Template</button>
+                <div class="template-code" id="templateCode">
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <meta charset="utf-8">
+                            <title>{{subject}}</title>
+                            <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background-color: #f8fafc; }
+        .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; }
+        .footer { background: #f1f5f9; padding: 15px; text-align: center; font-size: 12px; color: #64748b; }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <div class="header">
+                                    <h1 style="margin: 0; font-size: 24px;">{{subject}}</h1>
+                                    <p style="margin: 10px 0 0 0; opacity: 0.9;">From {{from_name}}</p>
+                                </div>
+                                <div class="content">
+                                    {{{html_content}}}
+                                </div>
+                                <div class="footer">
+                                    <p>Sent to {{to_email}} via EmailJS Campaign Tool</p>
+                                    <p style="margin: 5px 0 0 0;">© 2024 Campaign Sender</p>
+                                </div>
+                            </div>
+                        </body>
+                    </html>
+                </div>
+            </div>
+        </div>
+        <div class="step">
+            <h2>Step 4: Add Template Variables</h2>
+            <p>Make sure these variables are detected (they should auto-populate):</p>
+            <ul>
+                <li>
+                    <code>{{to_email}}</code> - Recipient email
+                </li>
+                <li>
+                    <code>{{subject}}</code> - Email subject
+                </li>
+                <li>
+                    <code>{{{html_content}}}</code> - Your campaign content (note: triple braces!)
+                </li>
+                <li>
+                    <code>{{from_name}}</code> - Your name
+                </li>
+            </ul>
+        </div>
+        <div class="step">
+            <h2>Step 5: Test & Save</h2>
+            <ol>
+                <li>Click
+                    <strong>"Test"</strong> in the EmailJS template editor
+                </li>
+                <li>Fill in test values for each variable</li>
+                <li>Send a test email to yourself</li>
+                <li>Click
+                    <strong>"Save"</strong> when everything looks good
+                </li>
+            </ol>
+        </div>
+        <div class="success">
+            <h3>✅ You're Done!</h3>
+            <p>After saving your template, return to your campaign tool and try sending an email. It should work immediately!</p>
+        </div>
+        <div class="warning">
+            <h3>🔧 Still Having Issues?</h3>
+            <p>If emails still don't send:</p>
+            <ul>
+                <li>Double-check the template ID is exactly:
+                    <code>template_fni9yqj</code>
+                </li>
+                <li>Verify your service ID is:
+                    <code>service_webropol</code>
+                </li>
+                <li>Make sure your EmailJS service is connected and active</li>
+                <li>Try refreshing your campaign tool page</li>
+            </ul>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="button">🔙 Return to Campaign Tool</a>
+            <a href="emailjs-setup-guide.html" class="button" style="background: #6b7280;">📖 Full Setup Guide</a>
+        </div>
+        <script>
+        function copyTemplate() {
+            const templateCode = document.getElementById('templateCode').textContent;
+            navigator.clipboard.writeText(templateCode).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#374151';
+                }, 2000);
+            }).catch(() => {
+                alert('Please manually copy the template code');
+            });
+        }
+        </script>
+    </body>
+</html>

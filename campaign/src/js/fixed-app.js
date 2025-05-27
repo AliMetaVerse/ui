@@ -111,37 +111,41 @@ function setupEventListeners() {
 
 // Initialize fallback for email sending if the mailtrap-config.js is not loaded
 function initEmailSendingFallback() {
-    // Only define if it doesn't exist yet (won't override mailtrap-config.js)
-    if (typeof window.sendEmailToServer !== 'function') {
-        console.log('Setting up fallback email sending function');
-        
-        window.sendEmailToServer = function(emailData, type) {
-            console.log(`Fallback email sending (${type}):`, emailData);
+    // Wait a bit for EmailJS config to load, then check if we need fallback
+    setTimeout(() => {
+        if (typeof window.sendEmailToServer !== 'function') {
+            console.log('Setting up fallback email sending function - EmailJS not available');
             
-            // Simulate API call with a delay
-            setTimeout(() => {
-                if (type === 'test') {
-                    showNotification(`Test email sent to ${emailData.to} (simulated)`, 'success');
-                } else {
-                    const recipientCount = Array.isArray(emailData.to) ? emailData.to.length : 1;
-                    showNotification(`Campaign sent to ${recipientCount} recipients (simulated)`, 'success');
-                }
-            }, 1500);
-        };
-        
-        // Also provide a fallback for email service config dialog
-        if (typeof window.showEmailServiceConfigDialog !== 'function') {
-            window.showEmailServiceConfigDialog = function() {
-                showNotification('Email service configuration would be shown here', 'info');
+            window.sendEmailToServer = function(emailData, type) {
+                console.log(`Fallback email sending (${type}):`, emailData);
+                
+                // Simulate API call with a delay
+                setTimeout(() => {
+                    if (type === 'test') {
+                        showNotification(`Test email sent to ${emailData.to} (simulated)`, 'success');
+                    } else {
+                        const recipientCount = Array.isArray(emailData.to) ? emailData.to.length : 1;
+                        showNotification(`Campaign sent to ${recipientCount} recipients (simulated)`, 'success');
+                    }
+                }, 1500);
             };
+            
+            // Also provide a fallback for email service config dialog
+            if (typeof window.showEmailServiceConfigDialog !== 'function') {
+                window.showEmailServiceConfigDialog = function() {
+                    showNotification('Email service configuration would be shown here', 'info');
+                };
+            }
+            
+            if (typeof window.getEmailServiceConfig !== 'function') {
+                window.getEmailServiceConfig = function() {
+                    return null;
+                };
+            }
+        } else {
+            console.log('EmailJS sendEmailToServer function detected - real email sending available');
         }
-        
-        if (typeof window.getEmailServiceConfig !== 'function') {
-            window.getEmailServiceConfig = function() {
-                return null;
-            };
-        }
-    }
+    }, 2000); // Wait 2 seconds for EmailJS to initialize
 }
 
 // Setup source view toggle

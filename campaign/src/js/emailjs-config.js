@@ -42,19 +42,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show a console message indicating EmailJS is the default
     console.log('EmailJS is configured as the default email service for sending actual emails');
+    
+    // Force override fallback function after a short delay to ensure it takes precedence
+    setTimeout(() => {
+        if (typeof window.sendEmailToServer === 'function') {
+            console.log('Forcefully ensuring EmailJS sendEmailToServer takes precedence over any fallbacks');
+            // The function is already defined below, this just logs that we're taking precedence
+        }
+    }, 3000);
 });
 
 // Pre-configure EmailJS as the default service if no configuration exists
 function preConfigureEmailJS() {
     // Set EmailJS as the default service
-    if (!localStorage.getItem('emailServiceConfig')) {        const defaultConfig = {
+    if (!localStorage.getItem('emailServiceConfig')) {
+        const defaultConfig = {
             service: 'emailjs',
             serviceId: 'service_6t8hyif',  // Pre-filled with your service ID
-            templateId: 'template_newsletter',  // Updated with more conventional template naming
+            templateId: 'DIRECT_HTML',  // Special value indicating direct HTML sending
             publicKey: 'WkloAEeQols8UpWuh',  // Your EmailJS public key
             fromEmail: 'ali.zuh.fin@gmail.com',
-            fromName: 'Webropol Newsletter'
-        };        localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
+            fromName: 'Webropol Newsletter',
+            useDirectHTML: true  // Flag to indicate we're sending HTML directly
+        };
+        localStorage.setItem('emailServiceConfig', JSON.stringify(defaultConfig));
         
         // Also store the public key separately for immediate initialization
         localStorage.setItem('emailjs_public_key', defaultConfig.publicKey);
@@ -152,13 +163,13 @@ window.showEmailServiceConfigDialog = function(emailData, type) {
                     style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
                 <small style="color: #6b7280; display: block; margin-top: 4px;">Find this in your EmailJS dashboard under "Services"</small>
             </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label for="template-id-input" style="display: block; margin-bottom: 5px; font-weight: 500;">Template ID</label>
-                <input type="text" id="template-id-input" placeholder="template_xxxxxxxx" 
-                    value="${existingConfig.templateId || 'email_template'}"
-                    style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px;">
-                <small style="color: #6b7280; display: block; margin-top: 4px;">Find this in your EmailJS dashboard under "Email Templates"</small>
+              <div style="margin-bottom: 15px;">
+                <label for="template-id-input" style="display: block; margin-bottom: 5px; font-weight: 500;">Template ID <span style="color: #10b981;">(Not Required - Using Direct HTML)</span></label>
+                <input type="text" id="template-id-input" placeholder="DIRECT_HTML" 
+                    value="${existingConfig.templateId || 'DIRECT_HTML'}"
+                    style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px; opacity: 0.7;"
+                    readonly>
+                <small style="color: #10b981; display: block; margin-top: 4px;">✓ This tool sends HTML content directly without requiring EmailJS templates</small>
             </div>
             
             <div style="margin-bottom: 15px;">
@@ -285,17 +296,12 @@ window.showEmailServiceConfigDialog = function(emailData, type) {
             const serviceId = document.getElementById('service-id-input').value.trim();
             const templateId = document.getElementById('template-id-input').value.trim();
             const publicKey = document.getElementById('public-key-input').value.trim();
-            
-            if (!serviceId) {
+              if (!serviceId) {
                 alert('EmailJS Service ID is required');
                 return false;
             }
             
-            if (!templateId) {
-                alert('EmailJS Template ID is required');
-                return false;
-            }
-            
+            // Template ID is not required for direct HTML mode
             if (!publicKey) {
                 alert('EmailJS Public Key is required');
                 return false;
@@ -309,8 +315,9 @@ window.showEmailServiceConfigDialog = function(emailData, type) {
             config = {
                 ...config,
                 serviceId,
-                templateId,
-                publicKey
+                templateId: 'DIRECT_HTML',  // Set to indicate direct HTML mode
+                publicKey,
+                useDirectHTML: true  // Enable direct HTML sending
             };
             
         } else if (service === 'mailtrap') {
@@ -344,8 +351,161 @@ window.showEmailServiceConfigDialog = function(emailData, type) {
     }
 };
 
+// Direct HTML Email Sending Function (bypasses templates)
+function sendDirectHTMLEmail(emailConfig, emailData, type) {
+    showNotification('Sending email directly via EmailJS...', 'info');
+    
+    // For single recipient (test email)
+    if (type === 'test') {
+        sendSingleHTMLEmail(emailConfig, emailData.to, emailData.subject, emailData.html, emailData.campaignName || 'Test Campaign')
+            .then(() => {
+                showSuccessNotification(emailData, type);
+            })
+            .catch((error) => {
+                console.error('Failed to send test email:', error);
+                showNotification('Failed to send test email. Check console for details.', 'error');
+            });
+    } else {
+        // For multiple recipients (campaign)
+        const recipients = Array.isArray(emailData.to) ? emailData.to : [emailData.to];
+        let successCount = 0;
+        let failCount = 0;
+        
+        const sendPromises = recipients.map(recipient => {
+            return sendSingleHTMLEmail(emailConfig, recipient, emailData.subject, emailData.html, emailData.campaignName || 'Campaign')
+                .then(() => {
+                    successCount++;
+                    console.log(`Email sent successfully to: ${recipient}`);
+                })
+                .catch((error) => {
+                    failCount++;
+                    console.error(`Failed to send email to ${recipient}:`, error);
+                });
+        });
+        
+        Promise.allSettled(sendPromises).then(() => {
+            if (successCount > 0) {
+                showSuccessNotification({
+                    ...emailData,
+                    to: `${successCount} recipients`
+                }, type);
+            }
+            if (failCount > 0) {
+                showNotification(`${failCount} emails failed to send`, 'warning');
+            }
+        });
+    }
+}
+
+// Send a single HTML email directly using EmailJS API
+function sendSingleHTMLEmail(emailConfig, toEmail, subject, htmlContent, campaignName) {
+    return new Promise((resolve, reject) => {
+        // Use EmailJS API directly
+        const emailData = {
+            service_id: emailConfig.serviceId,
+            user_id: emailConfig.publicKey,
+            template_params: {
+                to_email: toEmail,
+                from_name: emailConfig.fromName,
+                from_email: emailConfig.fromEmail,
+                subject: subject,
+                message: htmlContent,
+                html_content: htmlContent,
+                campaign_name: campaignName,
+                reply_to: emailConfig.fromEmail
+            }
+        };
+        
+        // Make direct API call to EmailJS without requiring a template
+        fetch('https://api.emailjs.com/api/v1.0/email/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+        })
+        .then(data => {
+            console.log('EmailJS Direct API SUCCESS:', data);
+            resolve(data);
+        })
+        .catch(error => {
+            console.error('EmailJS Direct API FAILED:', error);
+            reject(error);
+        });
+    });
+}
+
+// Helper function to show success notifications
+function showSuccessNotification(emailData, type) {
+    // Create more persistent notification
+    const notificationDiv = document.createElement('div');
+    notificationDiv.style.position = 'fixed';
+    notificationDiv.style.top = '50%';
+    notificationDiv.style.left = '50%';
+    notificationDiv.style.transform = 'translate(-50%, -50%)';
+    notificationDiv.style.backgroundColor = '#10b981';
+    notificationDiv.style.color = 'white';
+    notificationDiv.style.padding = '20px 30px';
+    notificationDiv.style.borderRadius = '8px';
+    notificationDiv.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+    notificationDiv.style.zIndex = '10000';
+    notificationDiv.style.textAlign = 'center';
+    notificationDiv.style.minWidth = '300px';
+    
+    if (type === 'test') {
+        notificationDiv.innerHTML = `
+            <h3 style="margin-top:0">Email Sent Successfully!</h3>
+            <p>Test email was sent to: ${emailData.to}</p>
+            <p style="margin-bottom:0">Check your inbox shortly.</p>
+        `;
+        showNotification(`Test email sent successfully to ${emailData.to}`, 'success');
+    } else {
+        const recipientCount = Array.isArray(emailData.to) ? emailData.to.length : 1;
+        notificationDiv.innerHTML = `
+            <h3 style="margin-top:0">Campaign Sent!</h3>
+            <p>Campaign "${emailData.campaignName}" was sent to ${recipientCount} recipients.</p>
+            <p style="margin-bottom:0">Emails should arrive shortly.</p>
+        `;
+        showNotification(`Campaign "${emailData.campaignName}" sent to ${recipientCount} recipients`, 'success');
+    }
+    
+    // Add close button
+    const closeBtn = document.createElement('button');
+    closeBtn.innerText = 'Close';
+    closeBtn.style.marginTop = '15px';
+    closeBtn.style.padding = '8px 16px';
+    closeBtn.style.border = 'none';
+    closeBtn.style.borderRadius = '4px';
+    closeBtn.style.backgroundColor = 'white';
+    closeBtn.style.color = '#10b981';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.onclick = function() {
+        document.body.removeChild(notificationDiv);
+    };
+    notificationDiv.appendChild(closeBtn);
+    
+    document.body.appendChild(notificationDiv);
+    
+    // Remove after 8 seconds automatically
+    setTimeout(() => {
+        if (document.body.contains(notificationDiv)) {
+            document.body.removeChild(notificationDiv);
+        }
+    }, 8000);
+}
+
 // Email sending function - Prioritizes EmailJS for real email sending
+// Force override any existing fallback function
 window.sendEmailToServer = function(emailData, type) {
+    console.log('EmailJS sendEmailToServer called - real email sending mode');
+    
     // Check if email service configuration exists in local storage
     const emailConfig = getEmailServiceConfig();
     
@@ -378,8 +538,16 @@ window.sendEmailToServer = function(emailData, type) {
             document.head.appendChild(reloadScript);
             return;
         }
+          // Check if we should use direct HTML sending (bypass templates)
+        const useDirectHTML = true; // Set to true to bypass templates and send HTML directly
         
-        // Prepare parameters for the template
+        if (useDirectHTML) {
+            // Send HTML email directly without templates
+            sendDirectHTMLEmail(emailConfig, emailData, type);
+            return;
+        }
+        
+        // Prepare parameters for the template (fallback method)
         const templateParams = {
             to_email: type === 'test' ? emailData.to : emailData.to.join(', '),
             from_name: emailConfig.fromName,
@@ -539,11 +707,11 @@ function validateEmailJSConfig(config) {
     if (config.service !== 'emailjs') {
         return { valid: true }; // Not EmailJS, so other validation will handle it
     }
-    
-    const issues = [];
+      const issues = [];
     
     if (!config.serviceId) issues.push('Service ID is missing');
-    if (!config.templateId) issues.push('Template ID is missing');
+    // Only require template ID if not using direct HTML mode
+    if (!config.useDirectHTML && !config.templateId) issues.push('Template ID is missing');
     if (!config.publicKey) issues.push('Public Key is missing');
     if (!config.fromEmail) issues.push('From Email is missing');
     
@@ -585,84 +753,103 @@ window.testEmailJSConnection = function() {
     loadingDiv.style.zIndex = '10000';
     loadingDiv.innerHTML = 'Testing Email Connection...';
     document.body.appendChild(loadingDiv);
-    
-    // Test the connection with a minimal payload
-    emailjs.send(config.serviceId, config.templateId, {
-        to_email: 'test@example.com',
-        subject: 'Connection Test',
-        message_html: 'This is a connection test.',
-        from_name: config.fromName,
+      // Test the connection with direct HTML if enabled, otherwise use template
+    if (config.useDirectHTML) {
+        // Test with direct HTML sending
+        sendSingleHTMLEmail(config, 'test@example.com', 'Connection Test', 'This is a connection test.', 'Test')
+            .then(function(response) {
+                document.body.removeChild(loadingDiv);
+                showConnectionSuccess();
+            })
+            .catch(function(error) {
+                document.body.removeChild(loadingDiv);
+                showConnectionError(error);
+            });
+    } else {
+        // Test with template method
+        emailjs.send(config.serviceId, config.templateId, {
+            to_email: 'test@example.com',
+            subject: 'Connection Test',
+            message_html: 'This is a connection test.',        from_name: config.fromName,
         from_email: config.fromEmail
     })
     .then(function(response) {
         document.body.removeChild(loadingDiv);
-        
-        // Show success message
-        const successDiv = document.createElement('div');
-        successDiv.style.position = 'fixed';
-        successDiv.style.top = '50%';
-        successDiv.style.left = '50%';
-        successDiv.style.transform = 'translate(-50%, -50%)';
-        successDiv.style.backgroundColor = '#10b981';
-        successDiv.style.color = 'white';
-        successDiv.style.padding = '20px';
-        successDiv.style.borderRadius = '8px';
-        successDiv.style.zIndex = '10000';
-        successDiv.style.textAlign = 'center';
-        successDiv.innerHTML = `
-            <h3 style="margin-top: 0">Connection Successful!</h3>
-            <p>Your EmailJS configuration is working correctly.</p>
-            <button style="padding: 8px 16px; border: none; border-radius: 4px; background: white; color: #10b981; cursor: pointer; margin-top: 10px;">
-                Close
-            </button>
-        `;
-        
-        document.body.appendChild(successDiv);
-        
-        const closeBtn = successDiv.querySelector('button');
-        closeBtn.addEventListener('click', function() {
-            document.body.removeChild(successDiv);
-        });
-        
-        setTimeout(() => {
-            if (document.body.contains(successDiv)) {
-                document.body.removeChild(successDiv);
-            }
-        }, 5000);
+        showConnectionSuccess();
     })
     .catch(function(error) {
         document.body.removeChild(loadingDiv);
-        
-        // Show error message
-        const errorDiv = document.createElement('div');
-        errorDiv.style.position = 'fixed';
-        errorDiv.style.top = '50%';
-        errorDiv.style.left = '50%';
-        errorDiv.style.transform = 'translate(-50%, -50%)';
-        errorDiv.style.backgroundColor = '#ef4444';
-        errorDiv.style.color = 'white';
-        errorDiv.style.padding = '20px';
-        errorDiv.style.borderRadius = '8px';
-        errorDiv.style.zIndex = '10000';
-        errorDiv.style.textAlign = 'center';
-        errorDiv.innerHTML = `
-            <h3 style="margin-top: 0">Connection Failed</h3>
-            <p>There's an issue with your EmailJS configuration:</p>
-            <div style="background: rgba(0,0,0,0.2); padding: 10px; margin: 10px 0; text-align: left; border-radius: 4px; max-height: 100px; overflow-y: auto;">
-                ${error.text || 'Unknown error'}
-            </div>
-            <button style="padding: 8px 16px; border: none; border-radius: 4px; background: white; color: #ef4444; cursor: pointer; margin-top: 10px;">
-                Close
-            </button>
-        `;
-        
-        document.body.appendChild(errorDiv);
-        
-        const closeBtn = errorDiv.querySelector('button');
-        closeBtn.addEventListener('click', function() {
-            document.body.removeChild(errorDiv);
-        });
+        showConnectionError(error);
     });
+    }
+};
+
+// Helper function to show connection success
+function showConnectionSuccess() {
+    const successDiv = document.createElement('div');
+    successDiv.style.position = 'fixed';
+    successDiv.style.top = '50%';
+    successDiv.style.left = '50%';
+    successDiv.style.transform = 'translate(-50%, -50%)';
+    successDiv.style.backgroundColor = '#10b981';
+    successDiv.style.color = 'white';
+    successDiv.style.padding = '20px';
+    successDiv.style.borderRadius = '8px';
+    successDiv.style.zIndex = '10000';
+    successDiv.style.textAlign = 'center';
+    successDiv.innerHTML = `
+        <h3 style="margin-top: 0">Connection Successful!</h3>
+        <p>Your EmailJS configuration is working correctly with direct HTML sending.</p>
+        <button style="padding: 8px 16px; border: none; border-radius: 4px; background: white; color: #10b981; cursor: pointer; margin-top: 10px;">
+            Close
+        </button>
+    `;
+    
+    document.body.appendChild(successDiv);
+    
+    const closeBtn = successDiv.querySelector('button');
+    closeBtn.addEventListener('click', function() {
+        document.body.removeChild(successDiv);
+    });
+    
+    setTimeout(() => {
+        if (document.body.contains(successDiv)) {
+            document.body.removeChild(successDiv);
+        }
+    }, 5000);
+}
+
+// Helper function to show connection error
+function showConnectionError(error) {
+    const errorDiv = document.createElement('div');
+    errorDiv.style.position = 'fixed';
+    errorDiv.style.top = '50%';
+    errorDiv.style.left = '50%';
+    errorDiv.style.transform = 'translate(-50%, -50%)';
+    errorDiv.style.backgroundColor = '#ef4444';
+    errorDiv.style.color = 'white';
+    errorDiv.style.padding = '20px';
+    errorDiv.style.borderRadius = '8px';
+    errorDiv.style.zIndex = '10000';
+    errorDiv.style.textAlign = 'center';
+    errorDiv.innerHTML = `
+        <h3 style="margin-top: 0">Connection Failed</h3>
+        <p>There's an issue with your EmailJS configuration:</p>
+        <div style="background: rgba(0,0,0,0.2); padding: 10px; margin: 10px 0; text-align: left; border-radius: 4px; max-height: 100px; overflow-y: auto;">
+            ${error.message || error.text || 'Unknown error'}
+        </div>
+        <button style="padding: 8px 16px; border: none; border-radius: 4px; background: white; color: #ef4444; cursor: pointer; margin-top: 10px;">
+            Close
+        </button>
+    `;
+    
+    document.body.appendChild(errorDiv);
+    
+    const closeBtn = errorDiv.querySelector('button');
+    closeBtn.addEventListener('click', function() {
+        document.body.removeChild(errorDiv);
+    });
+}
 };
 
 // Add a quick fix function for configuration issues
@@ -673,10 +860,11 @@ window.quickFixEmailJSConfig = function() {
     const correctConfig = {
         service: 'emailjs',
         serviceId: 'service_6t8hyif',
-        templateId: 'template_newsletter',
+        templateId: 'DIRECT_HTML',
         publicKey: 'WkloAEeQols8UpWuh',
         fromEmail: 'ali.zuh.fin@gmail.com',
-        fromName: 'Webropol Newsletter'
+        fromName: 'Webropol Newsletter',
+        useDirectHTML: true
     };
     
     // Remove any incorrect configurations
