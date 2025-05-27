@@ -146,13 +146,15 @@
                             <h2 class="text-xl font-semibold text-gray-900 flex items-center">
                                 <i class="fas fa-edit mr-2 text-blue-600"></i>
                                 Email Content Editor
-                            </h2>
-                            <div class="flex space-x-2">
+                            </h2>                            <div class="flex space-x-2">
                                 <button onclick="loadTemplate('newsletter')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
                                     Newsletter Template
                                 </button>
                                 <button onclick="loadTemplate('promotional')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
                                     Promotional Template
+                                </button>
+                                <button onclick="loadTemplate('webropol')" class="px-3 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition duration-200 text-sm">
+                                    Webropol Template
                                 </button>
                                 <button onclick="clearEditor()" class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
                                     Clear
@@ -582,9 +584,111 @@
                             <p style="text-align: center; color: #666; font-size: 14px;">
                                 *Offer valid until midnight. Terms and conditions apply.
                             </p>
-                        </div>
-                    </div>
-                `;
+                        </div>                    </div>
+                `;            } else if (type === 'webropol') {
+                templateContent = `
+<h1 style="color: #1e6880; text-align: center; background-color: #f0f8ff; padding: 20px; margin: 0 0 30px 0; border-radius: 8px;">📧 Webropol Weekly Update</h1>
+
+<p style="font-size: 16px; color: #333; margin-bottom: 20px;"><strong>Hi all, and greetings from the marketing department!</strong></p>
+
+<p style="line-height: 1.6; margin-bottom: 20px;">This week, we have posted a new customer case story based on our last week's webinar: <strong style="color: #1e6880;">Turku University of Applied Sciences (Turun AMK)</strong> has been Webropol's customer for over a decade, and they have been among the first ones to implement our AI Text Analysis.</p>
+
+<p style="font-weight: 600; color: #1e6880; margin-bottom: 15px;">📖 Go read the stories and like the LinkedIn posts:</p>
+
+<h2 style="color: #1e6880; border-left: 4px solid #1e6880; padding-left: 15px; margin: 30px 0 20px 0;">🌍 Customer Case Studies by Region</h2>
+
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #f8fcff; border: 2px solid #e1f0ff;">
+    <tr style="background-color: #1e6880; color: white;">
+        <th style="padding: 12px; text-align: left; font-weight: bold;">Country</th>
+        <th style="padding: 12px; text-align: left; font-weight: bold;">Case Study</th>
+        <th style="padding: 12px; text-align: left; font-weight: bold;">LinkedIn Post</th>
+    </tr>
+    <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇫🇮 Finland</td>
+        <td style="padding: 15px;">
+            <a href="https://webropol.fi/asiakastarinat/case-turun-amk/" 
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                📋 Read Case Study
+            </a>
+        </td>
+        <td style="padding: 15px;">
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331222961888169985" 
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                👍 Like & Share
+            </a>
+        </td>
+    </tr>
+    <tr style="border-bottom: 1px solid #ddd; background-color: #ffffff;">
+        <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇬🇧 United Kingdom</td>
+        <td style="padding: 15px;">
+            <a href="https://webropol.co.uk/case-studies/case-study-turku-university-of-applied-sciences/" 
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                📋 Read Case Study
+            </a>
+        </td>
+        <td style="padding: 15px;">
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331223395465871362" 
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                👍 Like & Share
+            </a>
+        </td>
+    </tr>
+    <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇩🇪 Germany</td>
+        <td style="padding: 15px;">
+            <a href="https://webropol.de/fall-studien/case-turku-university-of-applied-sciences/" 
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                📋 Read Case Study
+            </a>
+        </td>
+        <td style="padding: 15px;">
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331223778103857152" 
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                👍 Like & Share
+            </a>
+        </td>
+    </tr>
+    <tr style="background-color: #ffffff;">
+        <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇸🇪 Sweden</td>
+        <td style="padding: 15px;">
+            <a href="https://webropol.se/kundcase/kundcase-yrkeshogskolan-i-abo/" 
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                📋 Read Case Study
+            </a>
+        </td>
+        <td style="padding: 15px;">
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331224179058413569" 
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+                👍 Like & Share
+            </a>
+        </td>
+    </tr>
+</table>
+
+<h2 style="color: #e67e00; border-left: 4px solid #ffd700; padding-left: 15px; margin: 40px 0 20px 0;">🚀 Special Campaign Alert</h2>
+
+<blockquote style="background-color: #fff9e6; border-left: 6px solid #ffd700; padding: 20px; margin: 20px 0; font-style: italic; border-radius: 0 8px 8px 0;">
+    <p style="margin: 0 0 15px 0; font-size: 16px; line-height: 1.6;">Currently, we are running a campaign for <strong style="color: #e67e00;">AI Text Analysis module</strong> with a special discount and a free training of AI Text Analysis after the summer.</p>
+    
+    <p style="margin: 0 0 15px 0; font-weight: bold; color: #d35400;">📅 Campaign Details:</p>
+    <ul style="margin: 0; padding-left: 20px;">
+        <li style="margin-bottom: 8px;">💰 <strong>Special discount</strong> on AI Text Analysis module</li>
+        <li style="margin-bottom: 8px;">🎓 <strong>Free training</strong> included after summer</li>
+        <li style="margin-bottom: 8px;">⏰ Campaign open until <strong style="color: #d35400;">June 19th</strong></li>
+        <li style="margin-bottom: 8px;">📺 Open demo on <strong style="color: #d35400;">June 4th</strong></li>
+    </ul>
+    
+    <p style="margin: 15px 0 0 0; font-weight: bold; color: #1e6880;">Feel free to ask for more information and share with your customers!</p>
+</blockquote>
+
+<hr style="border: none; height: 2px; background-color: #e1f0ff; margin: 40px 0;">
+
+<p style="font-size: 16px; line-height: 1.6; color: #333;">That's it for now, have a great weekend! 🌟</p>
+
+<p style="margin-top: 30px; padding: 15px; background-color: #f8fcff; border-radius: 8px; border-left: 4px solid #1e6880;">
+    <strong style="color: #1e6880;">Best regards,</strong><br>
+    <strong style="color: #1e6880; font-size: 18px;">Webropol Marketing Team</strong> 📧
+</p>`;
             }
               if (editor && templateContent) {
                 editor.setData(templateContent);
