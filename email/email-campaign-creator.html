@@ -1,240 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Campaign Creator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- Header -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Email Campaign Creator</h1>
-                    <p class="text-gray-600 mt-1">Create and send professional email campaigns</p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <div id="connectionStatus" class="flex items-center space-x-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
-                        <i class="fas fa-spinner fa-spin text-sm"></i>
-                        <span class="text-sm font-medium">Connecting...</span>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Email Campaign Creator</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-gray-50 min-h-screen">
+        <div class="container mx-auto px-4 py-8 max-w-8xl">
+            <!-- Header -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Email Campaign Creator</h1>
+                        <p class="text-gray-600 mt-1">Create and send professional email campaigns</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div id="connectionStatus" class="flex items-center space-x-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
+                            <i class="fas fa-spinner fa-spin text-sm"></i>
+                            <span class="text-sm font-medium">Connecting...</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Email Configuration Panel -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="fas fa-cog mr-2 text-blue-600"></i>
-                        Campaign Settings
-                    </h2>
-                    
-                    <!-- Service Configuration -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Service ID</label>
-                        <input type="text" id="serviceId" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="your_service_id">
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
-                        <input type="text" id="templateId" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="your_template_id">
-                    </div>
-
-                    <!-- Email Details -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
-                        <input type="text" id="campaignName" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="Enter campaign name">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
-                        <input type="text" id="fromName" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="Your Name">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">From Email</label>
-                        <input type="email" id="fromEmail" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="your@email.com">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
-                        <input type="text" id="emailSubject" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="Enter email subject">
-                    </div>
-
-                    <!-- Recipients -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
-                        <div class="space-y-2">
-                            <textarea id="recipients" rows="4" 
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Email Configuration Panel -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class="fas fa-cog mr-2 text-blue-600"></i>
+                            Campaign Settings
+                        </h2>
+                        <!-- Service Configuration -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Service ID</label>
+                            <input
+                                type="text"
+                                id="serviceId"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="your_service_id"
+                            >
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
+                            <input
+                                type="text"
+                                id="templateId"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="your_template_id"
+                            >
+                        </div>
+                        <!-- Email Details -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
+                            <input
+                                type="text"
+                                id="campaignName"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Enter campaign name"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
+                            <input
+                                type="text"
+                                id="fromName"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Your Name"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">From Email</label>
+                            <input
+                                type="email"
+                                id="fromEmail"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="your@email.com"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
+                            <input
+                                type="text"
+                                id="emailSubject"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Enter email subject"
+                            >
+                        </div>
+                        <!-- Recipients -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
+                            <div class="space-y-2">
+                                <textarea
+                                    id="recipients"
+                                    rows="4"
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="Enter email addresses (one per line)&#10;example1@email.com&#10;example2@email.com"></textarea>
-                            <div class="flex items-center space-x-2">
-                                <input type="email" id="singleRecipient" 
-                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                       placeholder="Add recipient">
-                                <button onclick="addRecipient()" 
-                                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
-                                    <i class="fas fa-plus"></i>
+                                    placeholder="Enter email addresses (one per line)&#10;example1@email.com&#10;example2@email.com"
+                                ></textarea>
+                                <div class="flex items-center space-x-2">
+                                    <input
+                                        type="email"
+                                        id="singleRecipient"
+                                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        placeholder="Add recipient"
+                                    >
+                                    <button onclick="addRecipient()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">Total recipients:
+                                <span id="recipientCount">0</span>
+                            </p>
+                        </div>
+                        <!-- Test Email -->
+                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+                            <h3 class="text-sm font-medium text-yellow-800 mb-2">Send Test Email</h3>
+                            <div class="flex space-x-2">
+                                <input
+                                    type="email"
+                                    id="testEmail"
+                                    class="flex-1 px-3 py-2 border border-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    placeholder="test@email.com"
+                                >
+                                <button onclick="sendTestEmail()" class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-200">
+                                    Test
                                 </button>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1">Total recipients: <span id="recipientCount">0</span></p>
                     </div>
-
-                    <!-- Test Email -->
-                    <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
-                        <h3 class="text-sm font-medium text-yellow-800 mb-2">Send Test Email</h3>
-                        <div class="flex space-x-2">
-                            <input type="email" id="testEmail" 
-                                   class="flex-1 px-3 py-2 border border-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                                   placeholder="test@email.com">
-                            <button onclick="sendTestEmail()" 
-                                    class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-200">
-                                Test
-                            </button>
+                    <!-- Campaign Stats -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Campaign Stats</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Total Recipients:</span>
+                                <span id="statsRecipients" class="font-semibold">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Emails Sent:</span>
+                                <span id="statsSent" class="font-semibold text-green-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Failed:</span>
+                                <span id="statsFailed" class="font-semibold text-red-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Success Rate:</span>
+                                <span id="statsRate" class="font-semibold">0%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Campaign Stats -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Campaign Stats</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Total Recipients:</span>
-                            <span id="statsRecipients" class="font-semibold">0</span>
+                <!-- Email Editor -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+                                <i class="fas fa-edit mr-2 text-blue-600"></i>
+                                Email Content Editor
+                            </h2>
+                            <div class="flex space-x-2">
+                                <button onclick="loadTemplate('newsletter')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
+                                    Newsletter Template
+                                </button>
+                                <button onclick="loadTemplate('promotional')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
+                                    Promotional Template
+                                </button>
+                                <button onclick="clearEditor()" class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
+                                    Clear
+                                </button>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Emails Sent:</span>
-                            <span id="statsSent" class="font-semibold text-green-600">0</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Failed:</span>
-                            <span id="statsFailed" class="font-semibold text-red-600">0</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Success Rate:</span>
-                            <span id="statsRate" class="font-semibold">0%</span>
+                        <!-- CKEditor Container -->
+                        <div id="editor" class="min-h-96"></div>
+                    </div>
+                    <!-- Send Campaign -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Ready to Send?</h3>
+                                <p class="text-gray-600 text-sm">Review your campaign and send to all recipients</p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button onclick="previewEmail()" class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-200 flex items-center">
+                                    <i class="fas fa-eye mr-2"></i>
+                                    Preview
+                                </button>
+                                <button onclick="sendCampaign()" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-200 flex items-center">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    Send Campaign
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Email Editor -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <!-- Progress Modal -->
+            <div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                    <div class="text-center">
+                        <i class="fas fa-paper-plane text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Sending Campaign</h3>
+                        <p class="text-gray-600 mb-4">Please wait while we send your emails...</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <div class="text-sm text-gray-600">
+                            <span id="progressText">Preparing to send...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Preview Modal -->
+            <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-hidden">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-semibold text-gray-900 flex items-center">
-                            <i class="fas fa-edit mr-2 text-blue-600"></i>
-                            Email Content Editor
-                        </h2>
-                        <div class="flex space-x-2">
-                            <button onclick="loadTemplate('newsletter')" 
-                                    class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
-                                Newsletter Template
-                            </button>
-                            <button onclick="loadTemplate('promotional')" 
-                                    class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
-                                Promotional Template
-                            </button>
-                            <button onclick="clearEditor()" 
-                                    class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
-                                Clear
-                            </button>
-                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
+                        <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
                     </div>
-
-                    <!-- CKEditor Container -->
-                    <div id="editor" class="min-h-96"></div>
-                </div>
-
-                <!-- Send Campaign -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Ready to Send?</h3>
-                            <p class="text-gray-600 text-sm">Review your campaign and send to all recipients</p>
+                    <div class="border border-gray-300 rounded-md p-4 max-h-80 overflow-y-auto">
+                        <div class="mb-4 p-3 bg-gray-50 border-l-4 border-blue-500">
+                            <div class="text-sm text-gray-600">
+                                <strong>Subject:</strong>
+                                <span id="previewSubject"></span>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <strong>From:</strong>
+                                <span id="previewFrom"></span>
+                            </div>
                         </div>
-                        <div class="flex space-x-3">
-                            <button onclick="previewEmail()" 
-                                    class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-200 flex items-center">
-                                <i class="fas fa-eye mr-2"></i>
-                                Preview
-                            </button>
-                            <button onclick="sendCampaign()" 
-                                    class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-200 flex items-center">
-                                <i class="fas fa-paper-plane mr-2"></i>
-                                Send Campaign
-                            </button>
-                        </div>
+                        <div id="previewContent" class="prose max-w-none"></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Progress Modal -->
-        <div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                <div class="text-center">
-                    <i class="fas fa-paper-plane text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Sending Campaign</h3>
-                    <p class="text-gray-600 mb-4">Please wait while we send your emails...</p>
-                    
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                        <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
-                    </div>
-                    
-                    <div class="text-sm text-gray-600">
-                        <span id="progressText">Preparing to send...</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Preview Modal -->
-        <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-hidden">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
-                    <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                <div class="border border-gray-300 rounded-md p-4 max-h-80 overflow-y-auto">
-                    <div class="mb-4 p-3 bg-gray-50 border-l-4 border-blue-500">
-                        <div class="text-sm text-gray-600">
-                            <strong>Subject:</strong> <span id="previewSubject"></span>
-                        </div>
-                        <div class="text-sm text-gray-600">
-                            <strong>From:</strong> <span id="previewFrom"></span>
-                        </div>
-                    </div>
-                    <div id="previewContent" class="prose max-w-none"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
+        <script>
         let editor;
         let emailJSInitialized = false;
         const PUBLIC_KEY = 'WkloAEeQols8UpWuh';
@@ -670,6 +676,6 @@
             initializeEmailJS();
             updateRecipientCount();
         });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
