@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Email Campaign Creator</title>
         <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/decoupled-document/ckeditor.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     </head>
@@ -160,9 +160,9 @@
                                     Clear
                                 </button>
                             </div>
-                        </div>
-                        <!-- CKEditor Container -->
-                        <div id="editor" class="min-h-96"></div>
+                        </div>                        <!-- CKEditor Container -->
+                        <div id="toolbar-container" class="border border-gray-300 rounded-t-md bg-gray-50 p-2"></div>
+                        <div id="editor" class="min-h-96 border-l border-r border-b border-gray-300 rounded-b-md p-4"></div>
                     </div>
                     <!-- Send Campaign -->
                     <div class="bg-white rounded-lg shadow-md p-6">
@@ -429,10 +429,8 @@
                 <i class="${statusIcons[status]} text-sm"></i>
                 <span class="text-sm font-medium">${message}</span>
             `;
-        }
-
-        // Initialize CKEditor
-        ClassicEditor
+        }        // Initialize CKEditor
+        DecoupledEditor
             .create(document.querySelector('#editor'), {
                 toolbar: [
                     'heading', '|',
@@ -463,6 +461,10 @@
                 }
             })            .then(createdEditor => {
                 editor = createdEditor;
+                
+                // Mount the toolbar to the toolbar container
+                const toolbarContainer = document.querySelector('#toolbar-container');
+                toolbarContainer.appendChild(editor.ui.view.toolbar.element);
                 
                 // Set default content initially
                 editor.setData(`
