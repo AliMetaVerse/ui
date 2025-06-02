@@ -264,6 +264,9 @@
                                 <i class="fas fa-edit mr-2 text-blue-600"></i>
                                 Email Content Editor
                             </h2>                            <div class="flex space-x-2">
+                                <button onclick="loadTemplate('simple')" class="px-3 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition duration-200 text-sm">
+                                    Simple Template
+                                </button>
                                 <button onclick="loadTemplate('newsletter')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
                                     Newsletter Template
                                 </button>
@@ -676,8 +679,7 @@
         let editor = null;
         let currentColorCommand = null;
         let isHtmlView = false;
-        
-        function initializeCustomEditor() {
+          function initializeCustomEditor() {
             const editorElement = document.getElementById('editor');
             const htmlViewElement = document.getElementById('htmlView');
             const headingSelect = document.getElementById('headingSelect');
@@ -690,8 +692,12 @@
                 setData: function(html) {
                     if (isHtmlView) {
                         this.htmlView.value = html;
+                        // Also update the hidden visual editor
+                        this.element.innerHTML = html;
                     } else {
                         this.element.innerHTML = html;
+                        // Also update the hidden HTML view
+                        this.htmlView.value = html;
                     }
                     // Trigger change event for auto-save
                     setTimeout(() => saveFormData(), 100);
@@ -699,8 +705,12 @@
                 
                 getData: function() {
                     if (isHtmlView) {
+                        // When in HTML view, sync HTML back to visual editor first
+                        this.element.innerHTML = this.htmlView.value;
                         return this.htmlView.value;
                     } else {
+                        // When in visual view, sync visual to HTML view first
+                        this.htmlView.value = this.element.innerHTML;
                         return this.element.innerHTML;
                     }
                 }
@@ -722,9 +732,22 @@
             // Set up toolbar functionality
             setupToolbar();
             
-            // Set up auto-save
-            editorElement.addEventListener('input', debounce(saveFormData, 1000));
-            htmlViewElement.addEventListener('input', debounce(saveFormData, 1000));
+            // Set up auto-save with proper synchronization
+            editorElement.addEventListener('input', function() {
+                // Sync to HTML view when editing in visual mode
+                if (!isHtmlView) {
+                    htmlViewElement.value = editorElement.innerHTML;
+                }
+                debounce(saveFormData, 1000)();
+            });
+            
+            htmlViewElement.addEventListener('input', function() {
+                // Sync to visual editor when editing in HTML mode
+                if (isHtmlView) {
+                    editorElement.innerHTML = htmlViewElement.value;
+                }
+                debounce(saveFormData, 1000)();
+            });
             
             // Load saved form data after editor is ready
             setTimeout(() => {
@@ -732,7 +755,7 @@
             }, 100);
             
             console.log('Custom HTML Editor initialized successfully');
-            logToDebugConsole('Custom HTML Editor initialized successfully with auto-save enabled');
+            logToDebugConsole('Custom HTML Editor initialized successfully with auto-save enabled and view synchronization');
         }
         
         function setupToolbar() {
@@ -765,16 +788,47 @@
             const editorElement = document.getElementById('editor');
             editorElement.addEventListener('mouseup', updateToolbarState);
             editorElement.addEventListener('keyup', updateToolbarState);
-        }
-        
-        function executeCommand(command, value = null) {
+        }        function executeCommand(command, value = null) {
             const editorElement = document.getElementById('editor');
             editorElement.focus();
             
             try {
-                document.execCommand(command, false, value);
+                let success = false;
+                
+                // Handle background color with better browser compatibility
+                if (command === 'hiliteColor') {
+                    // Try hiliteColor first, fallback to backColor for better browser support
+                    success = document.execCommand('hiliteColor', false, value);
+                    if (!success) {
+                        success = document.execCommand('backColor', false, value);
+                        console.log('Using backColor fallback for background color:', value);
+                        logToDebugConsole('Used backColor fallback for background color: ' + value);
+                    } else {
+                        console.log('Used hiliteColor for background color:', value);
+                        logToDebugConsole('Used hiliteColor for background color: ' + value);
+                    }
+                } else {
+                    success = document.execCommand(command, false, value);
+                }
+                
+                if (success) {
+                    console.log('Command executed successfully:', command, value);
+                    logToDebugConsole(`Command executed: ${command}${value ? ' with value: ' + value : ''}`);
+                    
+                    // Sync content between views after command
+                    if (!isHtmlView) {
+                        document.getElementById('htmlView').value = editorElement.innerHTML;
+                    }
+                } else {
+                    console.warn('Command failed:', command, value);
+                    logToDebugConsole(`Command failed: ${command}${value ? ' with value: ' + value : ''}`);
+                }
+                
+                return success;
             } catch (error) {
-                console.warn('Command not supported:', command);
+                console.warn('Command not supported:', command, error);
+                logToDebugConsole(`Command error: ${command} - ${error.message}`);
+                return false;
             }
         }
         
@@ -811,12 +865,27 @@
                 headingSelect.value = 'p';
             }
         }
-        
-        // Color picker functions
+          // Color picker functions
         function showColorPicker(command) {
             currentColorCommand = command;
-            document.getElementById('colorPickerModal').classList.remove('hidden');
-            document.getElementById('colorPickerModal').classList.add('flex');
+            console.log('Opening color picker for command:', command);
+            logToDebugConsole('Color picker opened for: ' + command);
+            
+            const modal = document.getElementById('colorPickerModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Update modal title based on command
+            const title = modal.querySelector('h3');
+            if (title) {
+                if (command === 'foreColor') {
+                    title.textContent = 'Choose Text Color';
+                } else if (command === 'hiliteColor') {
+                    title.textContent = 'Choose Background Color';
+                } else {
+                    title.textContent = 'Choose Color';
+                }
+            }
         }
         
         function closeColorPicker() {
@@ -824,12 +893,23 @@
             document.getElementById('colorPickerModal').classList.remove('flex');
             currentColorCommand = null;
         }
-        
-        function applyColor(color) {
-            if (currentColorCommand) {
-                executeCommand(currentColorCommand, color);
-                closeColorPicker();
-                updateToolbarState();
+          function applyColor(color) {
+            if (currentColorCommand && color) {
+                console.log('Applying color:', color, 'with command:', currentColorCommand);
+                logToDebugConsole(`Applying color: ${color} with command: ${currentColorCommand}`);
+                
+                const success = executeCommand(currentColorCommand, color);
+                
+                if (success) {
+                    closeColorPicker();
+                    updateToolbarState();
+                    logToDebugConsole(`Color applied successfully: ${color}`);
+                } else {
+                    logToDebugConsole(`Failed to apply color: ${color}`);
+                }
+            } else {
+                console.warn('No color command set or invalid color:', currentColorCommand, color);
+                logToDebugConsole(`Color application failed - command: ${currentColorCommand}, color: ${color}`);
             }
         }
         
@@ -861,34 +941,83 @@
                 }
             }
         }
-        
-        // View toggle
+          // View toggle
         function toggleView() {
             const editorElement = document.getElementById('editor');
             const htmlViewElement = document.getElementById('htmlView');
             const toggleBtn = document.getElementById('viewToggle');
             
             if (isHtmlView) {
-                // Switch to visual view
+                // Switch to visual view - sync content from HTML view to editor
                 editorElement.innerHTML = htmlViewElement.value;
                 editorElement.classList.remove('hidden');
                 htmlViewElement.classList.add('hidden');
                 toggleBtn.innerHTML = '<i class="fas fa-code"></i>';
                 isHtmlView = false;
+                
+                // Re-enable contenteditable
+                editorElement.contentEditable = true;
+                
+                logToDebugConsole('Switched to visual view');
             } else {
-                // Switch to HTML view
+                // Switch to HTML view - sync content from editor to HTML view
                 htmlViewElement.value = editorElement.innerHTML;
                 editorElement.classList.add('hidden');
                 htmlViewElement.classList.remove('hidden');
                 toggleBtn.innerHTML = '<i class="fas fa-eye"></i>';
                 isHtmlView = true;
+                
+                logToDebugConsole('Switched to HTML view');
             }
+            
+            // Trigger auto-save after view switch
+            setTimeout(() => saveFormData(), 100);
+        }        // Initialize color picker click handlers
+        function initializeColorPicker() {
+            // Add click handlers to all color options
+            const colorOptions = document.querySelectorAll('.color-option');
+            console.log('Found color options:', colorOptions.length);
+            
+            colorOptions.forEach((colorOption, index) => {
+                colorOption.addEventListener('click', function() {
+                    const color = this.getAttribute('data-color');
+                    console.log('Color clicked:', color);
+                    logToDebugConsole('Color selected: ' + color);
+                    applyColor(color);
+                });
+                
+                // Add visual feedback
+                colorOption.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.borderColor = '#3b82f6';
+                });
+                
+                colorOption.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.borderColor = '#d1d5db';
+                });
+            });
+            
+            logToDebugConsole(`Color picker initialized with ${colorOptions.length} color options`);
         }
-        
-        // Initialize the custom editor when page loads
+          // Initialize the custom editor when page loads
         document.addEventListener('DOMContentLoaded', function() {
             // Small delay to ensure DOM is fully ready
-            setTimeout(initializeCustomEditor, 50);
+            setTimeout(() => {
+                initializeCustomEditor();
+                
+                // Initialize color picker after editor is ready
+                setTimeout(() => {
+                    initializeColorPicker();
+                    logToDebugConsole('Color picker initialized');
+                }, 100);
+                
+                // Initialize EmailJS
+                updateConnectionStatus('connecting', 'Initializing...');
+                initializeEmailJS();
+                setupAutoSave();
+                loadFormData();
+            }, 50);
         });
 
         // Add recipient function
@@ -916,13 +1045,56 @@
             document.getElementById('recipientCount').textContent = count;
             document.getElementById('statsRecipients').textContent = count;
             logToDebugConsole('Updated recipient count: ' + count);
-        }
-
-        // Load email templates
+        }        // Load email templates
         function loadTemplate(type) {
             let templateContent = '';
             
-            if (type === 'newsletter') {
+            if (type === 'simple') {
+                templateContent = `
+                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                        <!-- Header -->
+                        <div style="background-color: #f8fafc; padding: 20px; border-bottom: 1px solid #e5e7eb;">
+                            <h1 style="color: #1f2937; margin: 0; font-size: 24px; font-weight: bold;">Simple Email Template</h1>
+                            <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Clean and professional design</p>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div style="padding: 30px;">
+                            <p style="color: #374151; line-height: 1.6; margin: 0 0 20px 0;">Hello,</p>
+                            
+                            <p style="color: #374151; line-height: 1.6; margin: 0 0 20px 0;">
+                                This is a simple, clean email template that you can customize with your own content. 
+                                It features a modern design with good typography and spacing.
+                            </p>
+                            
+                            <p style="color: #374151; line-height: 1.6; margin: 0 0 20px 0;">
+                                You can add your own text, images, links, and formatting as needed.
+                            </p>
+                            
+                            <!-- Call to Action -->
+                            <div style="text-align: center; margin: 30px 0;">
+                                <a href="#" style="display: inline-block; background-color: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
+                                    Call to Action
+                                </a>
+                            </div>
+                            
+                            <p style="color: #374151; line-height: 1.6; margin: 20px 0 0 0;">
+                                Best regards,<br>
+                                <strong>Your Name</strong>
+                            </p>
+                        </div>
+                        
+                        <!-- Footer -->
+                        <div style="background-color: #f8fafc; padding: 20px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 12px; color: #6b7280;">
+                            <p style="margin: 0;">© 2025 Your Company Name. All rights reserved.</p>
+                            <p style="margin: 5px 0 0 0;">
+                                <a href="#" style="color: #6b7280; text-decoration: underline;">Unsubscribe</a> | 
+                                <a href="#" style="color: #6b7280; text-decoration: underline;">Update Preferences</a>
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'newsletter') {
                 templateContent = `
                     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
                         <div style="background-color: #f8f9fa; padding: 20px; text-align: center;">
