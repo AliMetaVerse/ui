@@ -141,10 +141,9 @@
         
         <div class="controls">
             <h3>Button Customization</h3>
-            
-            <div class="control-group">
-                <label for="buttonText">Button Text:</label>
-                <input type="text" id="buttonText" value="Call to Action" maxlength="25">
+              <div class="control-group">
+                <label for="buttonText">Button Text (optional):</label>
+                <input type="text" id="buttonText" value="Call to Action" maxlength="25" placeholder="Leave empty for text-free button">
             </div>
             
             <div class="control-group">
@@ -195,9 +194,8 @@
             ctx = canvas.getContext('2d');
             generateButton();
         }
-        
-        function generateButton() {
-            const text = document.getElementById('buttonText').value || 'Call to Action';
+          function generateButton() {
+            const text = document.getElementById('buttonText').value.trim();
             const width = parseInt(document.getElementById('buttonWidth').value);
             const height = parseInt(document.getElementById('buttonHeight').value);
             const fontSize = parseInt(document.getElementById('fontSize').value);
@@ -207,7 +205,12 @@
             canvas.height = height;
             
             // Update preview
-            document.getElementById('previewButton').textContent = text;
+            document.getElementById('previewButton').textContent = text || 'No Text';
+            if (!text) {
+                document.getElementById('previewButton').style.minWidth = 'auto';
+            } else {
+                document.getElementById('previewButton').style.minWidth = '180px';
+            }
             
             // Clear canvas
             ctx.clearRect(0, 0, width, height);
@@ -255,26 +258,29 @@
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
             
-            // Draw text
-            ctx.fillStyle = 'white';
-            ctx.font = `bold ${fontSize}px Arial, sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            // Add text shadow
-            ctx.shadowColor = 'rgba(0,0,0,0.3)';
-            ctx.shadowBlur = 2;
-            ctx.shadowOffsetY = 1;
-            
-            ctx.fillText(text, width / 2, height / 2);
+            // Draw text only if text is provided
+            if (text) {
+                ctx.fillStyle = 'white';
+                ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // Add text shadow
+                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowBlur = 2;
+                ctx.shadowOffsetY = 1;
+                
+                ctx.fillText(text, width / 2, height / 2);
+            }
             
             // Generate HTML code
             generateEmailCode(text, width, height);
         }
-        
-        function generateEmailCode(text, width, height) {
+          function generateEmailCode(text, width, height) {
             const displayWidth = width / 2;
             const displayHeight = height / 2;
+            const buttonText = text || 'Button';
+            const altText = text || 'Button';
             
             const emailCode = `<!-- Email Button with Image Fallback -->
 <div style="text-align: center; margin: 20px 0;">
@@ -287,17 +293,17 @@
                stroke="f" 
                fillcolor="#215669">
     <w:anchorlock/>
-    <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
+    ${text ? `<center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
       ${text}
-    </center>
+    </center>` : '<center></center>'}
   </v:roundrect>
   <![endif]-->
   
   <!--[if !mso]><!-- -->
   <a href="https://your-link-here.com" 
      style="display: inline-block; text-decoration: none;">
-    <img src="button-${text.toLowerCase().replace(/\s+/g, '-')}.png" 
-         alt="${text}" 
+    <img src="button-${text ? text.toLowerCase().replace(/\s+/g, '-') : 'no-text'}.png" 
+         alt="${altText}" 
          width="${displayWidth}" 
          height="${displayHeight}"
          style="border: none; display: block; outline: none; border-radius: ${displayHeight/2}px;"
@@ -316,9 +322,9 @@
              stroke="f" 
              fillcolor="#215669">
   <w:anchorlock/>
-  <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
+  ${text ? `<center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
     ${text}
-  </center>
+  </center>` : '<center></center>'}
 </v:roundrect>
 <![endif]-->
 
@@ -341,17 +347,16 @@
           height: ${displayHeight}px;
           -webkit-text-size-adjust: none;
           mso-hide: all;">
-  ${text}
+  ${text || ''}
 </a>
 <!--<![endif]-->`;
             
             document.getElementById('emailCode').textContent = emailCode;
             document.getElementById('outlookCode').textContent = outlookCode;
         }
-        
-        function downloadButton() {
-            const text = document.getElementById('buttonText').value || 'Call to Action';
-            const filename = `button-${text.toLowerCase().replace(/\s+/g, '-')}.png`;
+          function downloadButton() {
+            const text = document.getElementById('buttonText').value.trim();
+            const filename = `button-${text ? text.toLowerCase().replace(/\s+/g, '-') : 'no-text'}.png`;
             
             // Create download link
             const link = document.createElement('a');
