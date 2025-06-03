@@ -1,586 +1,623 @@
 <!DOCTYPE html>
-<html lang="en">    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Email Campaign Creator</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-        <style>
-            /* Custom Editor Styles */
-            .toolbar-btn {
-                padding: 6px 8px;
-                border: 1px solid #d1d5db;
-                background: white;
-                border-radius: 4px;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-width: 32px;
-                height: 32px;
-                font-size: 14px;
-                transition: all 0.2s;
-            }
-            
-            .toolbar-btn:hover {
-                background-color: #f3f4f6;
-                border-color: #9ca3af;
-            }
-            
-            .toolbar-btn.active {
-                background-color: #3b82f6;
-                color: white;
-                border-color: #2563eb;
-            }
-            
-            .editor-content {
-                min-height: 384px;
-                max-height: 600px;
-                overflow-y: auto;
-                border: none;
-                outline: none;
-            }
-            
-            .editor-content:focus {
-                box-shadow: none;
-            }
-            
-            .editor-html-view {
-                min-height: 384px;
-                max-height: 600px;
-                resize: vertical;
-                font-family: 'Courier New', monospace;
-            }
-            
-            .color-option:hover {
-                border-color: #3b82f6;
-                transform: scale(1.1);
-            }
-            
-            .color-option.selected {
-                border-color: #3b82f6;
-                border-width: 3px;
-            }
-            
-            /* Editor content styling */
-            .editor-content h1 {
-                font-size: 2rem;
-                font-weight: bold;
-                margin: 1rem 0;
-            }
-            
-            .editor-content h2 {
-                font-size: 1.5rem;
-                font-weight: bold;
-                margin: 0.875rem 0;
-            }
-            
-            .editor-content h3 {
-                font-size: 1.25rem;
-                font-weight: bold;
-                margin: 0.75rem 0;
-            }
-            
-            .editor-content p {
-                margin: 0.5rem 0;
-            }
-            
-            .editor-content ul, .editor-content ol {
-                margin: 0.5rem 0;
-                padding-left: 2rem;
-            }
-            
-            .editor-content blockquote {
-                border-left: 4px solid #e5e7eb;
-                padding-left: 1rem;
-                margin: 1rem 0;
-                font-style: italic;
-            }
-            
-            .editor-content a {
-                color: #3b82f6;
-                text-decoration: underline;
-            }
-            
-            .editor-content .btn-link {
-                display: inline-block;
-                padding: 8px 16px;
-                background-color: #3b82f6;
-                color: white;
-                text-decoration: none;
-                border-radius: 4px;
-                margin: 4px;
-                border: none;
-                cursor: pointer;
-            }
-            
-            .editor-content .btn-link:hover {
-                background-color: #2563eb;
-            }
-              .editor-content hr {
-                border: none;
-                border-top: 1px solid #e5e7eb;
-                margin: 1rem 0;
-            }
-            
-            /* SVG Button Styles */
-            .svg-button-hover:hover {
-                fill: rgba(255,255,255,0.1);
-                transition: fill 0.2s ease;
-            }
-            
-            svg:hover .svg-button-hover {
-                fill: rgba(255,255,255,0.1);
-            }
-        </style>
-    </head>
-    <body class="bg-gray-50 min-h-screen">
-        <div class="container mx-auto px-4 py-8 max-w-8xl">
-            <!-- Header -->
-            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Email Campaign Creator</h1>
-                        <p class="text-gray-600 mt-1">Create and send professional email campaigns</p>
-                    </div>                    <div class="flex items-center space-x-2">
-                        <button onclick="openSettingsModal()" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200">
-                            <i class="fas fa-cog text-sm"></i>
-                            <span class="text-sm font-medium">Settings</span>
-                        </button>
-                        <div id="connectionStatus" class="flex items-center space-x-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
-                            <i class="fas fa-spinner fa-spin text-sm"></i>
-                            <span class="text-sm font-medium">Connecting...</span>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Campaign Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom Editor Styles */
+        .toolbar-btn {
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .toolbar-btn.active {
+            background-color: #215669;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .editor-content {
+            min-height: 384px;
+            max-height: 600px;
+            overflow-y: auto;
+            border: none;
+            outline: none;
+        }
+
+        .editor-content:focus {
+            box-shadow: none;
+        }
+
+        .editor-html-view {
+            min-height: 384px;
+            max-height: 600px;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+
+        .color-option:hover {
+            border-color: #215669;
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: #215669;
+            border-width: 3px;
+        }
+
+        /* Editor content styling */
+        .editor-content h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .editor-content h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.875rem 0;
+        }
+
+        .editor-content h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0.75rem 0;
+        }
+
+        .editor-content p {
+            margin: 0.5rem 0;
+        }
+
+        .editor-content ul,
+        .editor-content ol {
+            margin: 0.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .editor-content blockquote {
+            border-left: 4px solid #e5e7eb;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .editor-content a {
+            color: #215669;
+            text-decoration: underline;
+        }
+
+        .editor-content .btn-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #215669;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .editor-content .btn-link:hover {
+            background-color: #2563eb;
+        }
+
+        .editor-content hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 1rem 0;
+        }
+
+        /* SVG Button Styles */
+        .svg-button-hover:hover {
+            fill: rgba(255, 255, 255, 0.1);
+            transition: fill 0.2s ease;
+        }
+
+        svg:hover .svg-button-hover {
+            fill: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-8xl">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Email Campaign Creator</h1>
+                    <p class="text-gray-600 mt-1">Create and send professional email campaigns</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="openSettingsModal()"
+                        class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200">
+                        <i class="fas fa-cog text-sm"></i>
+                        <span class="text-sm font-medium">Settings</span>
+                    </button>
+                    <div id="connectionStatus"
+                        class="flex items-center space-x-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
+                        <i class="fas fa-spinner fa-spin text-sm"></i>
+                        <span class="text-sm font-medium">Connecting...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Email Configuration Panel -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-envelope mr-2 text-blue-600"></i>
+                        Campaign Details
+                    </h2>
+                    <!-- Email Details -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
+                        <input type="text" id="campaignName"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter campaign name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
+                        <input type="text" id="fromName"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Your Name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">From Email</label>
+                        <input type="email" id="fromEmail"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="your@email.com">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
+                        <input type="text" id="emailSubject"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter email subject">
+                    </div>
+                    <!-- Recipients -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
+                        <div class="space-y-2">
+                            <textarea id="recipients" rows="4"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Enter email addresses (one per line)&#10;example1@email.com&#10;example2@email.com"></textarea>
+                            <div class="flex items-center space-x-2">
+                                <input type="email" id="singleRecipient"
+                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Add recipient">
+                                <button onclick="addRecipient()"
+                                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Total recipients:
+                            <span id="recipientCount">0</span>
+                        </p>
+                    </div>
+                    <!-- Test Email -->
+                    <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+                        <h3 class="text-sm font-medium text-yellow-800 mb-2">Send Test Email</h3>
+                        <div class="flex space-x-2">
+                            <input type="email" id="testEmail"
+                                class="flex-1 px-3 py-2 border border-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                placeholder="test@email.com">
+                            <button onclick="sendTestEmail()"
+                                class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-200">
+                                Test
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Campaign Stats -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Campaign Stats</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Total Recipients:</span>
+                            <span id="statsRecipients" class="font-semibold">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Emails Sent:</span>
+                            <span id="statsSent" class="font-semibold text-green-600">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Failed:</span>
+                            <span id="statsFailed" class="font-semibold text-red-600">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Success Rate:</span>
+                            <span id="statsRate" class="font-semibold">0%</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Email Configuration Panel -->
-                <div class="lg:col-span-1">
-                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                            <i class="fas fa-envelope mr-2 text-blue-600"></i>
-                            Campaign Details
+            <!-- Email Editor -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+                            <i class="fas fa-edit mr-2 text-blue-600"></i>
+                            Email Content Editor
                         </h2>
-                        <!-- Email Details -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
-                            <input
-                                type="text"
-                                id="campaignName"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Enter campaign name"
-                            >
+                        <div class="flex space-x-2">
+                            <button onclick="loadTemplate('simple')"
+                                class="px-3 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition duration-200 text-sm">
+                                Simple Template
+                            </button>
+                            <button onclick="loadTemplate('newsletter')"
+                                class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
+                                Newsletter Template
+                            </button>
+                            <button onclick="loadTemplate('promotional')"
+                                class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
+                                Promotional Template
+                            </button>
+                            <button onclick="loadTemplate('webropol')"
+                                class="px-3 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition duration-200 text-sm">
+                                Webropol Template
+                            </button>
+                            <button onclick="clearEditor()"
+                                class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
+                                Clear
+                            </button>
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
-                            <input
-                                type="text"
-                                id="fromName"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Your Name"
-                            >
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">From Email</label>
-                            <input
-                                type="email"
-                                id="fromEmail"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="your@email.com"
-                            >
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
-                            <input
-                                type="text"
-                                id="emailSubject"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Enter email subject"
-                            >
-                        </div>
-                        <!-- Recipients -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
-                            <div class="space-y-2">
-                                <textarea
-                                    id="recipients"
-                                    rows="4"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="Enter email addresses (one per line)&#10;example1@email.com&#10;example2@email.com"
-                                ></textarea>
-                                <div class="flex items-center space-x-2">
-                                    <input
-                                        type="email"
-                                        id="singleRecipient"
-                                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                        placeholder="Add recipient"
-                                    >
-                                    <button onclick="addRecipient()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
+                    </div> <!-- Custom HTML Editor -->
+                    <div class="custom-editor-container border border-gray-300 rounded-md">
+                        <!-- Toolbar -->
+                        <div class="editor-toolbar bg-gray-50 border-b border-gray-300 p-3 flex flex-wrap gap-1">
+                            <!-- Text Formatting -->
+                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                <select id="headingSelect" class="px-2 py-1 text-sm border border-gray-300 rounded">
+                                    <option value="p">Paragraph</option>
+                                    <option value="h1">Heading 1</option>
+                                    <option value="h2">Heading 2</option>
+                                    <option value="h3">Heading 3</option>
+                                </select>
                             </div>
-                            <p class="text-sm text-gray-500 mt-1">
-                                Total recipients:
-                                <span id="recipientCount">0</span>
-                            </p>
-                        </div>
-                        <!-- Test Email -->
-                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
-                            <h3 class="text-sm font-medium text-yellow-800 mb-2">Send Test Email</h3>
-                            <div class="flex space-x-2">
-                                <input
-                                    type="email"
-                                    id="testEmail"
-                                    class="flex-1 px-3 py-2 border border-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                                    placeholder="test@email.com"
-                                >
-                                <button onclick="sendTestEmail()" class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-200">
-                                    Test
+
+                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                <button type="button" class="toolbar-btn" data-command="bold" title="Bold">
+                                    <i class="fas fa-bold"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="italic" title="Italic">
+                                    <i class="fas fa-italic"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="underline" title="Underline">
+                                    <i class="fas fa-underline"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="strikeThrough"
+                                    title="Strikethrough">
+                                    <i class="fas fa-strikethrough"></i>
+                                </button>
+                            </div>
+
+                            <!-- Colors -->
+                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                <button type="button" class="toolbar-btn" onclick="showColorPicker('foreColor')"
+                                    title="Text Color">
+                                    <i class="fas fa-palette"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" onclick="showColorPicker('hiliteColor')"
+                                    title="Background Color">
+                                    <i class="fas fa-fill-drip"></i>
+                                </button>
+                            </div>
+
+                            <!-- Lists and Alignment -->
+                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                <button type="button" class="toolbar-btn" data-command="insertUnorderedList"
+                                    title="Bullet List">
+                                    <i class="fas fa-list-ul"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertOrderedList"
+                                    title="Numbered List">
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="justifyLeft" title="Align Left">
+                                    <i class="fas fa-align-left"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="justifyCenter"
+                                    title="Align Center">
+                                    <i class="fas fa-align-center"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="justifyRight"
+                                    title="Align Right">
+                                    <i class="fas fa-align-right"></i>
+                                </button>
+                            </div> <!-- Links and Elements -->
+                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                <button type="button" class="toolbar-btn" onclick="insertLink()" title="Insert Link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" onclick="insertButton()"
+                                    title="Insert Button">
+                                    <i class="fas fa-square"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" onclick="insertSvgButton()"
+                                    title="Insert SVG Button">
+                                    <i class="fas fa-play-circle"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" onclick="insertImageButton()"
+                                    title="Insert Image Button">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertHorizontalRule"
+                                    title="Horizontal Line">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+
+                            <!-- Undo/Redo -->
+                            <div class="toolbar-group flex gap-1">
+                                <button type="button" class="toolbar-btn" data-command="undo" title="Undo">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="redo" title="Redo">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+
+                            <!-- View Toggle -->
+                            <div class="toolbar-group flex gap-1 ml-auto">
+                                <button type="button" class="toolbar-btn" onclick="toggleView()"
+                                    title="Toggle HTML View" id="viewToggle">
+                                    <i class="fas fa-code"></i>
                                 </button>
                             </div>
                         </div>
+
+                        <!-- Editor Content -->
+                        <div id="editor" contenteditable="true" class="editor-content min-h-96 p-4 focus:outline-none"
+                            style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;"></div>
+
+                        <!-- HTML View (hidden by default) -->
+                        <textarea id="htmlView"
+                            class="editor-html-view min-h-96 p-4 font-mono text-sm hidden w-full border-0 focus:outline-none"
+                            placeholder="HTML source code..."></textarea>
                     </div>
-                    <!-- Campaign Stats -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Campaign Stats</h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Total Recipients:</span>
-                                <span id="statsRecipients" class="font-semibold">0</span>
+
+                    <!-- Color Picker Modal -->
+                    <div id="colorPickerModal"
+                        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">Choose Color</h3>
+                                <button onclick="closeColorPicker()" class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Emails Sent:</span>
-                                <span id="statsSent" class="font-semibold text-green-600">0</span>
+                            <div class="color-palette grid grid-cols-8 gap-2 mb-4">
+                                <!-- Common colors -->
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #000000" data-color="#000000"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #ffffff" data-color="#ffffff"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #808080" data-color="#808080"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #ff0000" data-color="#ff0000"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #00ff00" data-color="#00ff00"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #0000ff" data-color="#0000ff"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #ffff00" data-color="#ffff00"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #ff00ff" data-color="#ff00ff"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #00ffff" data-color="#00ffff"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #800000" data-color="#800000"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #008000" data-color="#008000"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #000080" data-color="#000080"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #808000" data-color="#808000"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #800080" data-color="#800080"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #008080" data-color="#008080"></div>
+                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
+                                    style="background-color: #c0c0c0" data-color="#c0c0c0"></div>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Failed:</span>
-                                <span id="statsFailed" class="font-semibold text-red-600">0</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Success Rate:</span>
-                                <span id="statsRate" class="font-semibold">0%</span>
+                            <div class="flex items-center gap-2">
+                                <label class="text-sm">Custom:</label>
+                                <input type="color" id="customColor" class="w-12 h-8 border border-gray-300 rounded">
+                                <button onclick="applyCustomColor()"
+                                    class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Apply</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Email Editor -->
-                <div class="lg:col-span-2">
-                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-xl font-semibold text-gray-900 flex items-center">
-                                <i class="fas fa-edit mr-2 text-blue-600"></i>
-                                Email Content Editor
-                            </h2>                            <div class="flex space-x-2">
-                                <button onclick="loadTemplate('simple')" class="px-3 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition duration-200 text-sm">
-                                    Simple Template
-                                </button>
-                                <button onclick="loadTemplate('newsletter')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
-                                    Newsletter Template
-                                </button>
-                                <button onclick="loadTemplate('promotional')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
-                                    Promotional Template
-                                </button>
-                                <button onclick="loadTemplate('webropol')" class="px-3 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition duration-200 text-sm">
-                                    Webropol Template
-                                </button>
-                                <button onclick="clearEditor()" class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
-                                    Clear
-                                </button>
-                            </div>
-                        </div>                        <!-- Custom HTML Editor -->
-                        <div class="custom-editor-container border border-gray-300 rounded-md">
-                            <!-- Toolbar -->
-                            <div class="editor-toolbar bg-gray-50 border-b border-gray-300 p-3 flex flex-wrap gap-1">
-                                <!-- Text Formatting -->
-                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                    <select id="headingSelect" class="px-2 py-1 text-sm border border-gray-300 rounded">
-                                        <option value="p">Paragraph</option>
-                                        <option value="h1">Heading 1</option>
-                                        <option value="h2">Heading 2</option>
-                                        <option value="h3">Heading 3</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                    <button type="button" class="toolbar-btn" data-command="bold" title="Bold">
-                                        <i class="fas fa-bold"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="italic" title="Italic">
-                                        <i class="fas fa-italic"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="underline" title="Underline">
-                                        <i class="fas fa-underline"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="strikeThrough" title="Strikethrough">
-                                        <i class="fas fa-strikethrough"></i>
-                                    </button>
-                                </div>
-                                
-                                <!-- Colors -->
-                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                    <button type="button" class="toolbar-btn" onclick="showColorPicker('foreColor')" title="Text Color">
-                                        <i class="fas fa-palette"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" onclick="showColorPicker('hiliteColor')" title="Background Color">
-                                        <i class="fas fa-fill-drip"></i>
-                                    </button>
-                                </div>
-                                
-                                <!-- Lists and Alignment -->
-                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                    <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">
-                                        <i class="fas fa-list-ul"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">
-                                        <i class="fas fa-list-ol"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="justifyLeft" title="Align Left">
-                                        <i class="fas fa-align-left"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="justifyCenter" title="Align Center">
-                                        <i class="fas fa-align-center"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="justifyRight" title="Align Right">
-                                        <i class="fas fa-align-right"></i>
-                                    </button>
-                                </div>
-                                  <!-- Links and Elements -->
-                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                    <button type="button" class="toolbar-btn" onclick="insertLink()" title="Insert Link">
-                                        <i class="fas fa-link"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" onclick="insertButton()" title="Insert Button">
-                                        <i class="fas fa-square"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" onclick="insertSvgButton()" title="Insert SVG Button">
-                                        <i class="fas fa-play-circle"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Line">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
-                                
-                                <!-- Undo/Redo -->
-                                <div class="toolbar-group flex gap-1">
-                                    <button type="button" class="toolbar-btn" data-command="undo" title="Undo">
-                                        <i class="fas fa-undo"></i>
-                                    </button>
-                                    <button type="button" class="toolbar-btn" data-command="redo" title="Redo">
-                                        <i class="fas fa-redo"></i>
-                                    </button>
-                                </div>
-                                
-                                <!-- View Toggle -->
-                                <div class="toolbar-group flex gap-1 ml-auto">
-                                    <button type="button" class="toolbar-btn" onclick="toggleView()" title="Toggle HTML View" id="viewToggle">
-                                        <i class="fas fa-code"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Editor Content -->
-                            <div id="editor" contenteditable="true" class="editor-content min-h-96 p-4 focus:outline-none" style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;"></div>
-                            
-                            <!-- HTML View (hidden by default) -->
-                            <textarea id="htmlView" class="editor-html-view min-h-96 p-4 font-mono text-sm hidden w-full border-0 focus:outline-none" placeholder="HTML source code..."></textarea>
+                <!-- Send Campaign -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Ready to Send?</h3>
+                            <p class="text-gray-600 text-sm">Review your campaign and send to all recipients</p>
                         </div>
-                        
-                        <!-- Color Picker Modal -->
-                        <div id="colorPickerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                            <div class="bg-white p-6 rounded-lg max-w-md w-full mx-4">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="text-lg font-semibold">Choose Color</h3>
-                                    <button onclick="closeColorPicker()" class="text-gray-500 hover:text-gray-700">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="color-palette grid grid-cols-8 gap-2 mb-4">
-                                    <!-- Common colors -->
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #000000" data-color="#000000"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ffffff" data-color="#ffffff"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #808080" data-color="#808080"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ff0000" data-color="#ff0000"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #00ff00" data-color="#00ff00"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #0000ff" data-color="#0000ff"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ffff00" data-color="#ffff00"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ff00ff" data-color="#ff00ff"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #00ffff" data-color="#00ffff"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #800000" data-color="#800000"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #008000" data-color="#008000"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #000080" data-color="#000080"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #808000" data-color="#808000"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #800080" data-color="#800080"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #008080" data-color="#008080"></div>
-                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #c0c0c0" data-color="#c0c0c0"></div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <label class="text-sm">Custom:</label>
-                                    <input type="color" id="customColor" class="w-12 h-8 border border-gray-300 rounded">
-                                    <button onclick="applyCustomColor()" class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Apply</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Send Campaign -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900">Ready to Send?</h3>
-                                <p class="text-gray-600 text-sm">Review your campaign and send to all recipients</p>
-                            </div>
-                            <div class="flex space-x-3">
-                                <button onclick="previewEmail()" class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-200 flex items-center">
-                                    <i class="fas fa-eye mr-2"></i>
-                                    Preview
-                                </button>
-                                <button onclick="sendCampaign()" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-200 flex items-center">
-                                    <i class="fas fa-paper-plane mr-2"></i>
-                                    Send Campaign
-                                </button>
-                            </div>
+                        <div class="flex space-x-3">
+                            <button onclick="previewEmail()"
+                                class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-200 flex items-center">
+                                <i class="fas fa-eye mr-2"></i>
+                                Preview
+                            </button>
+                            <button onclick="sendCampaign()"
+                                class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-200 flex items-center">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Send Campaign
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Progress Modal -->
-            <div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                    <div class="text-center">
-                        <i class="fas fa-paper-plane text-4xl text-blue-600 mb-4"></i>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Sending Campaign</h3>
-                        <p class="text-gray-600 mb-4">Please wait while we send your emails...</p>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                            <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <!-- Progress Modal -->
+        <div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                <div class="text-center">
+                    <i class="fas fa-paper-plane text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Sending Campaign</h3>
+                    <p class="text-gray-600 mb-4">Please wait while we send your emails...</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                        <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                            style="width: 0%"></div>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <span id="progressText">Preparing to send...</span>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Settings Modal -->
+        <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <i class="fas fa-cog mr-2 text-blue-600"></i>
+                        Configuration Settings
+                    </h3>
+                    <button onclick="closeSettingsModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="max-h-[70vh] overflow-y-auto">
+                    <!-- Service Configuration -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Service ID</label>
+                        <input type="text" id="modalServiceId"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="your_service_id">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
+                        <input type="text" id="modalTemplateId"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="your_template_id">
+                    </div>
+
+                    <!-- HTML Template Setup -->
+                    <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                        <h3 class="text-sm font-medium text-blue-800 mb-2">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            HTML Template Setup Required
+                        </h3>
+                        <p class="text-xs text-blue-700 mb-2">
+                            Create a simple EmailJS template with this content to enable HTML email sending:
+                        </p>
+                        <div class="text-xs bg-white p-2 rounded border font-mono">
+                            <strong>EmailJS Template Settings:</strong><br>
+                            To: {{user_email}}<br>
+                            From: {{from_name}} &lt;{{reply_to}}&gt;<br>
+                            Subject: {{subject}}<br><br>
+                            <strong>Template Content:</strong><br>
+                            {{{html_content}}}
+                        </div>
+                        <p class="text-xs text-blue-600 mt-2">
+                            <strong>Critical:</strong> Set the "To" field in EmailJS dashboard to:
+                            <code>{{user_email}}</code> or <code>{{to}}</code><br>
+                            The triple braces {{{html_content}}} allow raw HTML injection from your CKEditor
+                            content.<br>
+                            Parameters: to, user_email, user_name, from_name, reply_to, subject, message, html_content
+                        </p>
+                    </div>
+
+                    <!-- Configuration Test -->
+                    <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                        <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>
+                        <button onclick="testEmailJSConfig()"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
+                            <i class="fas fa-check-circle mr-1"></i>
+                            Test EmailJS Setup
+                        </button>
+                        <p class="text-xs text-blue-600 mt-1">Verify your EmailJS service and template configuration</p>
+                    </div>
+
+                    <!-- Debug Console -->
+                    <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                        <h3 class="text-sm font-medium text-gray-800 mb-2">
+                            <i class="fas fa-bug mr-1"></i>
+                            Debug Console
+                        </h3>
+                        <div class="flex space-x-2 mb-2">
+                            <button onclick="toggleDebugConsole()"
+                                class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
+                                Show/Hide Debug
+                            </button>
+                            <button onclick="clearFormData()"
+                                class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">
+                                Clear Session
+                            </button>
+                        </div>
+                        <div id="debugConsole"
+                            class="hidden mt-3 p-3 bg-black text-green-400 rounded text-xs font-mono max-h-32 overflow-y-auto">
+                            <div id="debugOutput"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-6 pt-4 border-t">
+                    <button onclick="closeSettingsModal()"
+                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-200">
+                        Cancel
+                    </button>
+                    <button onclick="saveSettings()"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+                        Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
+                    <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="border border-gray-300 rounded-md p-4 max-h-80 overflow-y-auto">
+                    <div class="mb-4 p-3 bg-gray-50 border-l-4 border-blue-500">
+                        <div class="text-sm text-gray-600">
+                            <strong>Subject:</strong>
+                            <span id="previewSubject"></span>
                         </div>
                         <div class="text-sm text-gray-600">
-                            <span id="progressText">Preparing to send...</span>
+                            <strong>From:</strong>
+                            <span id="previewFrom"></span>
                         </div>
                     </div>
-                </div>
-            </div>            <!-- Settings Modal -->
-            <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-                <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">
-                            <i class="fas fa-cog mr-2 text-blue-600"></i>
-                            Configuration Settings
-                        </h3>
-                        <button onclick="closeSettingsModal()" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    <div class="max-h-[70vh] overflow-y-auto">
-                        <!-- Service Configuration -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Service ID</label>
-                            <input
-                                type="text"
-                                id="modalServiceId"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="your_service_id"
-                            >
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
-                            <input
-                                type="text"
-                                id="modalTemplateId"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="your_template_id"
-                            >
-                        </div>
-                        
-                        <!-- HTML Template Setup -->
-                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                            <h3 class="text-sm font-medium text-blue-800 mb-2">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                HTML Template Setup Required
-                            </h3>
-                            <p class="text-xs text-blue-700 mb-2">
-                                Create a simple EmailJS template with this content to enable HTML email sending:
-                            </p>
-                            <div class="text-xs bg-white p-2 rounded border font-mono">
-                                <strong>EmailJS Template Settings:</strong><br>
-                                To: {{user_email}}<br>
-                                From: {{from_name}} &lt;{{reply_to}}&gt;<br>
-                                Subject: {{subject}}<br><br>
-                                <strong>Template Content:</strong><br>
-                                {{{html_content}}}
-                            </div>
-                            <p class="text-xs text-blue-600 mt-2">
-                                <strong>Critical:</strong> Set the "To" field in EmailJS dashboard to: <code>{{user_email}}</code> or <code>{{to}}</code><br>
-                                The triple braces {{{html_content}}} allow raw HTML injection from your CKEditor content.<br>
-                                Parameters: to, user_email, user_name, from_name, reply_to, subject, message, html_content
-                            </p>
-                        </div>
-
-                        <!-- Configuration Test -->
-                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                            <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>
-                            <button onclick="testEmailJSConfig()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
-                                <i class="fas fa-check-circle mr-1"></i>
-                                Test EmailJS Setup
-                            </button>
-                            <p class="text-xs text-blue-600 mt-1">Verify your EmailJS service and template configuration</p>
-                        </div>
-
-                        <!-- Debug Console -->
-                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
-                            <h3 class="text-sm font-medium text-gray-800 mb-2">
-                                <i class="fas fa-bug mr-1"></i>
-                                Debug Console
-                            </h3>
-                            <div class="flex space-x-2 mb-2">
-                                <button onclick="toggleDebugConsole()" class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
-                                    Show/Hide Debug
-                                </button>
-                                <button onclick="clearFormData()" class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">
-                                    Clear Session
-                                </button>
-                            </div>
-                            <div id="debugConsole" class="hidden mt-3 p-3 bg-black text-green-400 rounded text-xs font-mono max-h-32 overflow-y-auto">
-                                <div id="debugOutput"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-end space-x-3 mt-6 pt-4 border-t">
-                        <button onclick="closeSettingsModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-200">
-                            Cancel
-                        </button>
-                        <button onclick="saveSettings()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
-                            Save Settings
-                        </button>
-                    </div>
+                    <div id="previewContent" class="prose max-w-none"></div>
                 </div>
             </div>
-
-            <!-- Preview Modal -->
-            <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-                <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-hidden">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
-                        <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    <div class="border border-gray-300 rounded-md p-4 max-h-80 overflow-y-auto">
-                        <div class="mb-4 p-3 bg-gray-50 border-l-4 border-blue-500">
-                            <div class="text-sm text-gray-600">
-                                <strong>Subject:</strong>
-                                <span id="previewSubject"></span>
-                            </div>
-                            <div class="text-sm text-gray-600">
-                                <strong>From:</strong>
-                                <span id="previewFrom"></span>
-                            </div>
-                        </div>
-                        <div id="previewContent" class="prose max-w-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>        <script>
+        </div>
+    </div>
+    <script>
         let emailJSInitialized = false;
         const PUBLIC_KEY = 'WkloAEeQols8UpWuh';
 
@@ -590,7 +627,7 @@
                 if (typeof emailjs === 'undefined') {
                     throw new Error('EmailJS library not loaded');
                 }
-                
+
                 emailjs.init(PUBLIC_KEY);
                 emailJSInitialized = true;
                 updateConnectionStatus('connected', 'Connected to EmailJS');
@@ -612,7 +649,7 @@
 
             if (!emailJSInitialized) {
                 return { valid: false, message: 'EmailJS not initialized' };
-            }            try {
+            } try {
                 // Test the configuration with HTML template parameters
                 const testParams = {
                     to: 'test@example.com',         // Alternative: try 'to' instead of 'user_email'
@@ -624,7 +661,7 @@
                     message: '<p>This is a configuration test for HTML email template.</p>',
                     html_content: '<p>This is a configuration test for HTML email template.</p>'
                 };
-                
+
                 // This will fail due to invalid recipient, but will validate the service and template IDs
                 await emailjs.send(serviceId, templateId, testParams);
                 return { valid: true, message: 'Configuration valid' };
@@ -648,7 +685,7 @@
             button.disabled = true;
 
             try {
-                const result = await validateEmailJSConfig();                if (result.valid) {
+                const result = await validateEmailJSConfig(); if (result.valid) {
                     alert('✅ Configuration test passed!\n\n' + result.message + '\n\nYou can now send HTML emails using your template.');
                     logToDebugConsole('Configuration test passed: ' + result.message);
                 } else {
@@ -674,7 +711,7 @@
                 'connected': 'bg-green-100 text-green-800',
                 'error': 'bg-red-100 text-red-800'
             };
-            
+
             const statusIcons = {
                 'connecting': 'fas fa-spinner fa-spin',
                 'connected': 'fas fa-check-circle',
@@ -690,17 +727,17 @@
         let editor = null;
         let currentColorCommand = null;
         let isHtmlView = false;
-          function initializeCustomEditor() {
+        function initializeCustomEditor() {
             const editorElement = document.getElementById('editor');
             const htmlViewElement = document.getElementById('htmlView');
             const headingSelect = document.getElementById('headingSelect');
-            
+
             // Create editor object with CKEditor-compatible API
             editor = {
                 element: editorElement,
                 htmlView: htmlViewElement,
-                
-                setData: function(html) {
+
+                setData: function (html) {
                     if (isHtmlView) {
                         this.htmlView.value = html;
                         // Also update the hidden visual editor
@@ -713,8 +750,8 @@
                     // Trigger change event for auto-save
                     setTimeout(() => saveFormData(), 100);
                 },
-                
-                getData: function() {
+
+                getData: function () {
                     if (isHtmlView) {
                         // When in HTML view, sync HTML back to visual editor first
                         this.element.innerHTML = this.htmlView.value;
@@ -726,7 +763,7 @@
                     }
                 }
             };
-            
+
             // Set default content
             editor.setData(`
                 <h2>Welcome to Our Newsletter</h2>
@@ -739,73 +776,73 @@
                 </ul>
                 <p>Best regards,<br>Your Team</p>
             `);
-            
+
             // Set up toolbar functionality
             setupToolbar();
-            
+
             // Set up auto-save with proper synchronization
-            editorElement.addEventListener('input', function() {
+            editorElement.addEventListener('input', function () {
                 // Sync to HTML view when editing in visual mode
                 if (!isHtmlView) {
                     htmlViewElement.value = editorElement.innerHTML;
                 }
                 debounce(saveFormData, 1000)();
             });
-            
-            htmlViewElement.addEventListener('input', function() {
+
+            htmlViewElement.addEventListener('input', function () {
                 // Sync to visual editor when editing in HTML mode
                 if (isHtmlView) {
                     editorElement.innerHTML = htmlViewElement.value;
                 }
                 debounce(saveFormData, 1000)();
             });
-            
+
             // Load saved form data after editor is ready
             setTimeout(() => {
                 loadFormData();
             }, 100);
-            
+
             console.log('Custom HTML Editor initialized successfully');
             logToDebugConsole('Custom HTML Editor initialized successfully with auto-save enabled and view synchronization');
         }
-        
+
         function setupToolbar() {
             // Setup toolbar buttons
             document.querySelectorAll('.toolbar-btn[data-command]').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const command = this.getAttribute('data-command');
                     executeCommand(command);
                     updateToolbarState();
                 });
             });
-            
+
             // Setup heading select
             const headingSelect = document.getElementById('headingSelect');
-            headingSelect.addEventListener('change', function() {
+            headingSelect.addEventListener('change', function () {
                 const tag = this.value;
                 executeCommand('formatBlock', '<' + tag + '>');
                 updateToolbarState();
             });
-            
+
             // Setup color picker
             document.querySelectorAll('.color-option').forEach(option => {
-                option.addEventListener('click', function() {
+                option.addEventListener('click', function () {
                     const color = this.getAttribute('data-color');
                     applyColor(color);
                 });
             });
-            
+
             // Update toolbar state on selection change
             const editorElement = document.getElementById('editor');
             editorElement.addEventListener('mouseup', updateToolbarState);
             editorElement.addEventListener('keyup', updateToolbarState);
-        }        function executeCommand(command, value = null) {
+        } function executeCommand(command, value = null) {
             const editorElement = document.getElementById('editor');
             editorElement.focus();
-            
+
             try {
                 let success = false;
-                
+
                 // Handle background color with better browser compatibility
                 if (command === 'hiliteColor') {
                     // Try hiliteColor first, fallback to backColor for better browser support
@@ -821,11 +858,11 @@
                 } else {
                     success = document.execCommand(command, false, value);
                 }
-                
+
                 if (success) {
                     console.log('Command executed successfully:', command, value);
                     logToDebugConsole(`Command executed: ${command}${value ? ' with value: ' + value : ''}`);
-                    
+
                     // Sync content between views after command
                     if (!isHtmlView) {
                         document.getElementById('htmlView').value = editorElement.innerHTML;
@@ -834,7 +871,7 @@
                     console.warn('Command failed:', command, value);
                     logToDebugConsole(`Command failed: ${command}${value ? ' with value: ' + value : ''}`);
                 }
-                
+
                 return success;
             } catch (error) {
                 console.warn('Command not supported:', command, error);
@@ -842,10 +879,10 @@
                 return false;
             }
         }
-        
+
         function updateToolbarState() {
             if (isHtmlView) return;
-            
+
             // Update button states
             const commands = ['bold', 'italic', 'underline', 'strikeThrough'];
             commands.forEach(command => {
@@ -858,7 +895,7 @@
                     }
                 }
             });
-            
+
             // Update heading select
             const headingSelect = document.getElementById('headingSelect');
             try {
@@ -876,16 +913,16 @@
                 headingSelect.value = 'p';
             }
         }
-          // Color picker functions
+        // Color picker functions
         function showColorPicker(command) {
             currentColorCommand = command;
             console.log('Opening color picker for command:', command);
             logToDebugConsole('Color picker opened for: ' + command);
-            
+
             const modal = document.getElementById('colorPickerModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            
+
             // Update modal title based on command
             const title = modal.querySelector('h3');
             if (title) {
@@ -898,19 +935,19 @@
                 }
             }
         }
-        
+
         function closeColorPicker() {
             document.getElementById('colorPickerModal').classList.add('hidden');
             document.getElementById('colorPickerModal').classList.remove('flex');
             currentColorCommand = null;
         }
-          function applyColor(color) {
+        function applyColor(color) {
             if (currentColorCommand && color) {
                 console.log('Applying color:', color, 'with command:', currentColorCommand);
                 logToDebugConsole(`Applying color: ${color} with command: ${currentColorCommand}`);
-                
+
                 const success = executeCommand(currentColorCommand, color);
-                
+
                 if (success) {
                     closeColorPicker();
                     updateToolbarState();
@@ -923,12 +960,12 @@
                 logToDebugConsole(`Color application failed - command: ${currentColorCommand}, color: ${color}`);
             }
         }
-        
+
         function applyCustomColor() {
             const customColor = document.getElementById('customColor').value;
             applyColor(customColor);
         }
-        
+
         // Link insertion
         function insertLink() {
             const url = prompt('Enter the URL:');
@@ -940,7 +977,7 @@
                 }
             }
         }
-          // Button insertion
+        // Button insertion
         function insertButton() {
             const url = prompt('Enter the button URL:');
             if (url) {
@@ -950,8 +987,7 @@
                     executeCommand('insertHTML', buttonHtml);
                 }
             }
-        }
-          // SVG Button insertion
+        }        // SVG Button insertion
         function insertSvgButton() {
             const url = prompt('Enter the button URL:');
             if (url) {
@@ -992,12 +1028,55 @@
                 }
             }
         }
-          // View toggle
+
+        // Image Button insertion (for email clients that don't support SVG)
+        function insertImageButton() {
+            const url = prompt('Enter the button URL:');
+            if (url) {
+                const text = prompt('Enter the button text:', 'Call to Action');
+                if (text) {
+                    const imageUrl = prompt('Enter the button image URL (or leave empty to use placeholder):', '');
+                    const finalImageUrl = imageUrl || `https://via.placeholder.com/200x50/215669/ffffff?text=${encodeURIComponent(text)}`;
+
+                    const imageButtonHtml = `
+                        <div style="text-align: center; margin: 20px 0;">
+                            <!--[if mso]>
+                            <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                         xmlns:w="urn:schemas-microsoft-com:office:word" 
+                                         href="${url}"
+                                         style="height:50px;v-text-anchor:middle;width:200px;" 
+                                         arcsize="50%" 
+                                         stroke="f" 
+                                         fillcolor="#215669">
+                              <w:anchorlock/>
+                              <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
+                                ${text}
+                              </center>
+                            </v:roundrect>
+                            <![endif]-->
+                            
+                            <!--[if !mso]><!-- -->
+                            <a href="${url}" target="_blank" style="text-decoration: none; display: inline-block;">
+                                <img src="${finalImageUrl}" 
+                                     alt="${text}" 
+                                     width="200" 
+                                     height="50"
+                                     style="border: none; display: block; outline: none; border-radius: 25px; max-width: 200px;"
+                                     border="0">
+                            </a>
+                            <!--<![endif]-->
+                        </div>`;
+                    executeCommand('insertHTML', imageButtonHtml);
+                    logToDebugConsole('Image button inserted with text: ' + text + ' and URL: ' + url);
+                }
+            }
+        }
+        // View toggle
         function toggleView() {
             const editorElement = document.getElementById('editor');
             const htmlViewElement = document.getElementById('htmlView');
             const toggleBtn = document.getElementById('viewToggle');
-            
+
             if (isHtmlView) {
                 // Switch to visual view - sync content from HTML view to editor
                 editorElement.innerHTML = htmlViewElement.value;
@@ -1005,10 +1084,10 @@
                 htmlViewElement.classList.add('hidden');
                 toggleBtn.innerHTML = '<i class="fas fa-code"></i>';
                 isHtmlView = false;
-                
+
                 // Re-enable contenteditable
                 editorElement.contentEditable = true;
-                
+
                 logToDebugConsole('Switched to visual view');
             } else {
                 // Switch to HTML view - sync content from editor to HTML view
@@ -1017,10 +1096,10 @@
                 htmlViewElement.classList.remove('hidden');
                 toggleBtn.innerHTML = '<i class="fas fa-eye"></i>';
                 isHtmlView = true;
-                
+
                 logToDebugConsole('Switched to HTML view');
             }
-            
+
             // Trigger auto-save after view switch
             setTimeout(() => saveFormData(), 100);
         }        // Initialize color picker click handlers
@@ -1028,41 +1107,41 @@
             // Add click handlers to all color options
             const colorOptions = document.querySelectorAll('.color-option');
             console.log('Found color options:', colorOptions.length);
-            
+
             colorOptions.forEach((colorOption, index) => {
-                colorOption.addEventListener('click', function() {
+                colorOption.addEventListener('click', function () {
                     const color = this.getAttribute('data-color');
                     console.log('Color clicked:', color);
                     logToDebugConsole('Color selected: ' + color);
                     applyColor(color);
                 });
-                
+
                 // Add visual feedback
-                colorOption.addEventListener('mouseenter', function() {
+                colorOption.addEventListener('mouseenter', function () {
                     this.style.transform = 'scale(1.1)';
-                    this.style.borderColor = '#3b82f6';
+                    this.style.borderColor = '#215669';
                 });
-                
-                colorOption.addEventListener('mouseleave', function() {
+
+                colorOption.addEventListener('mouseleave', function () {
                     this.style.transform = 'scale(1)';
                     this.style.borderColor = '#d1d5db';
                 });
             });
-            
+
             logToDebugConsole(`Color picker initialized with ${colorOptions.length} color options`);
         }
-          // Initialize the custom editor when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the custom editor when page loads
+        document.addEventListener('DOMContentLoaded', function () {
             // Small delay to ensure DOM is fully ready
             setTimeout(() => {
                 initializeCustomEditor();
-                
+
                 // Initialize color picker after editor is ready
                 setTimeout(() => {
                     initializeColorPicker();
                     logToDebugConsole('Color picker initialized');
                 }, 100);
-                
+
                 // Initialize EmailJS
                 updateConnectionStatus('connecting', 'Initializing...');
                 initializeEmailJS();
@@ -1075,7 +1154,7 @@
         function addRecipient() {
             const singleRecipient = document.getElementById('singleRecipient');
             const recipients = document.getElementById('recipients');
-            
+
             if (singleRecipient.value && singleRecipient.value.includes('@')) {
                 const currentRecipients = recipients.value ? recipients.value + '\n' : '';
                 recipients.value = currentRecipients + singleRecipient.value;
@@ -1092,14 +1171,14 @@
             const recipients = document.getElementById('recipients').value;
             const emails = recipients.split('\n').filter(email => email.trim() && email.includes('@'));
             const count = emails.length;
-            
+
             document.getElementById('recipientCount').textContent = count;
             document.getElementById('statsRecipients').textContent = count;
             logToDebugConsole('Updated recipient count: ' + count);
         }        // Load email templates
         function loadTemplate(type) {
             let templateContent = '';
-            
+
             if (type === 'simple') {
                 templateContent = `
                     <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
@@ -1124,7 +1203,7 @@
                             
                             <!-- Call to Action -->
                             <div style="text-align: center; margin: 30px 0;">
-                                <a href="#" style="display: inline-block; background-color: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
+                                <a href="#" style="display: inline-block; background-color: #215669; color: white; padding: 12px 24px; text-decoration: none;">
                                     Call to Action
                                 </a>
                             </div>
@@ -1161,7 +1240,7 @@
                             <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                                 <h3 style="color: #333; margin-top: 0;">Featured Article</h3>
                                 <p>This month we're highlighting our new features and improvements.</p>
-                                <a href="#" style="display: inline-block; background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Read More</a>
+                                <a href="#" style="display: inline-block; background-color: #215669; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Read More</a>
                             </div>
                             
                             <h3>What's New</h3>
@@ -1206,7 +1285,8 @@
                                 *Offer valid until midnight. Terms and conditions apply.
                             </p>
                         </div>                    </div>
-                `;            } else if (type === 'webropol') {
+                `;
+            } else if (type === 'webropol') {
                 templateContent = `
 <h1 style="color: #1e6880; text-align: center; background-color: #f0f8ff; padding: 20px; margin: 0 0 30px 0; border-radius: 8px;">📧 Webropol Weekly Update</h1>
 
@@ -1311,7 +1391,7 @@
     <strong style="color: #1e6880; font-size: 18px;">Webropol Marketing Team</strong> 📧
 </p>`;
             }
-              if (editor && templateContent) {
+            if (editor && templateContent) {
                 editor.setData(templateContent);
                 logToDebugConsole('Loaded template: ' + type);
                 // Save the template content
@@ -1337,10 +1417,10 @@
             document.getElementById('previewSubject').textContent = subject;
             document.getElementById('previewFrom').textContent = `${fromName} <${fromEmail}>`;
             document.getElementById('previewContent').innerHTML = content;
-            
+
             document.getElementById('previewModal').classList.remove('hidden');
             document.getElementById('previewModal').classList.add('flex');
-            
+
             logToDebugConsole('Preview opened for: ' + subject);
         }
 
@@ -1353,7 +1433,7 @@
         // Send test email
         async function sendTestEmail() {
             const testEmail = document.getElementById('testEmail').value;
-            
+
             if (!testEmail || !testEmail.includes('@')) {
                 alert('Please enter a valid test email address');
                 return;
@@ -1362,7 +1442,7 @@
             if (!emailJSInitialized) {
                 alert('EmailJS is not initialized. Please check your connection.');
                 return;
-            }            const serviceId = document.getElementById('serviceId').value;
+            } const serviceId = document.getElementById('serviceId').value;
             const templateId = document.getElementById('templateId').value;
 
             if (!serviceId || !templateId) {
@@ -1374,7 +1454,7 @@
             const testButton = event.target;
             const originalText = testButton.innerHTML;
             testButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            testButton.disabled = true;            try {                // HTML template email parameters for EmailJS
+            testButton.disabled = true; try {                // HTML template email parameters for EmailJS
                 const emailParams = {
                     to: testEmail,              // Alternative: try 'to' instead of 'user_email'
                     user_email: testEmail,      // Keep both for compatibility
@@ -1389,16 +1469,16 @@
                 console.log('Sending test email with HTML template params:', emailParams);
                 logToDebugConsole('Sending test email to: ' + testEmail + ' using service: ' + serviceId + ' template: ' + templateId + ' (HTML Template Mode)');
                 logToDebugConsole('Email parameters: ' + JSON.stringify(emailParams, null, 2));
-                
+
                 // Send using EmailJS with HTML template
                 const response = await emailjs.send(serviceId, templateId, emailParams);
                 console.log('EmailJS response:', response);
                 logToDebugConsole('Test email sent successfully! Response status: ' + response.status);
-                
+
                 alert('✅ Test email sent successfully!');
             } catch (error) {
                 console.error('Failed to send test email:', error);
-                let errorMessage = 'Failed to send test email. ';                if (error.status === 400) {
+                let errorMessage = 'Failed to send test email. '; if (error.status === 400) {
                     errorMessage += 'Check your EmailJS service and template configuration for HTML support.';
                 } else if (error.status === 401) {
                     errorMessage += 'Invalid EmailJS public key or unauthorized.';
@@ -1409,7 +1489,7 @@
                 } else {
                     errorMessage += `Error: ${error.text || error.message || 'Unknown error'}`;
                 }
-                
+
                 logToDebugConsole('Test email failed: ' + errorMessage + ' | Status: ' + (error.status || 'unknown') + ' | Details: ' + (error.text || error.message || 'No details'));
                 alert('❌ ' + errorMessage);
             } finally {
@@ -1483,7 +1563,7 @@
 
             // Send emails
             for (let i = 0; i < emailList.length; i++) {
-                const email = emailList[i];                  try {
+                const email = emailList[i]; try {
                     updateProgress(i, total, `Sending to ${email}...`);                    // HTML template email parameters for EmailJS
                     const emailParams = {
                         to: email,                      // Alternative: try 'to' instead of 'user_email'
@@ -1499,13 +1579,13 @@
                     console.log(`Sending email ${i + 1}/${total} to ${email}`);
                     logToDebugConsole(`Sending email ${i + 1}/${total} to ${email} with service: ${serviceId} template: ${templateId} (HTML Template Mode)`);
                     logToDebugConsole('Email parameters: ' + JSON.stringify(emailParams, null, 2));
-                    
+
                     const response = await emailjs.send(serviceId, templateId, emailParams);
                     console.log(`Email sent successfully to ${email}:`, response);
                     logToDebugConsole(`Email sent successfully to ${email}. Response status: ${response.status}`);
-                    
+
                     sentCount++;
-                    
+
                     // Update stats
                     updateStats(sentCount, failedCount, total);
 
@@ -1515,7 +1595,7 @@
                 } catch (error) {
                     console.error(`Failed to send email to ${email}:`, error);
                     failedCount++;
-                      // Collect failed email details
+                    // Collect failed email details
                     let errorMessage = 'Unknown error';
                     if (error.status === 400) {
                         errorMessage = 'Invalid service configuration or direct HTML email not supported';
@@ -1530,14 +1610,14 @@
                     } else if (error.message) {
                         errorMessage = error.message;
                     }
-                    
+
                     failedEmails.push({
                         email: email,
                         error: errorMessage
                     });
-                    
+
                     updateStats(sentCount, failedCount, total);
-                    
+
                     // Log detailed error for debugging
                     console.error('Error details:', {
                         status: error.status,
@@ -1545,9 +1625,9 @@
                         message: error.message,
                         email: email
                     });
-                    
+
                     logToDebugConsole(`Failed to send to ${email}: ${errorMessage} (Status: ${error.status || 'unknown'})`);
-                    
+
                     // If we hit rate limits, wait longer
                     if (error.status === 429) {
                         console.log('Rate limit hit, waiting 5 seconds...');
@@ -1559,13 +1639,13 @@
 
             // Complete
             updateProgress(total, total, 'Campaign completed!');
-            
+
             setTimeout(() => {
                 hideProgressModal();
-                
+
                 const successRate = total > 0 ? Math.round((sentCount / total) * 100) : 0;
                 let summary = `Campaign completed!\n\nSent: ${sentCount}\nFailed: ${failedCount}\nSuccess Rate: ${successRate}%`;
-                
+
                 // Add details about failed emails if any
                 if (failedEmails && failedEmails.length > 0) {
                     summary += '\n\nFailed emails:\n';
@@ -1576,7 +1656,7 @@
                         summary += `... and ${failedEmails.length - 5} more`;
                     }
                 }
-                
+
                 logToDebugConsole('Campaign completed: ' + sentCount + ' sent, ' + failedCount + ' failed');
                 alert(summary);
             }, 1500);
@@ -1603,7 +1683,7 @@
         function updateStats(sent, failed, total) {
             document.getElementById('statsSent').textContent = sent;
             document.getElementById('statsFailed').textContent = failed;
-            
+
             const successRate = total > 0 ? Math.round((sent / total) * 100) : 0;
             document.getElementById('statsRate').textContent = successRate + '%';
         }
@@ -1612,13 +1692,13 @@
         function toggleDebugConsole() {
             const debugConsole = document.getElementById('debugConsole');
             const isVisible = !debugConsole.classList.contains('hidden');
-            
+
             if (isVisible) {
                 debugConsole.classList.add('hidden');
             } else {
                 debugConsole.classList.remove('hidden');
             }
-            
+
             // Clear console when hiding
             if (!isVisible) {
                 console.clear();
@@ -1637,7 +1717,7 @@
             const templateIdField = document.getElementById('templateId');
             const modalServiceId = document.getElementById('modalServiceId');
             const modalTemplateId = document.getElementById('modalTemplateId');
-            
+
             const formData = {
                 serviceId: (modalServiceId?.value) || (serviceIdField?.value) || '',
                 templateId: (modalTemplateId?.value) || (templateIdField?.value) || '',
@@ -1650,7 +1730,7 @@
                 editorContent: editor ? editor.getData() : '',
                 timestamp: new Date().toISOString()
             };
-            
+
             try {
                 localStorage.setItem('emailCampaignData', JSON.stringify(formData));
                 logToDebugConsole('Form data saved to local storage');
@@ -1658,12 +1738,12 @@
                 console.error('Failed to save form data:', error);
                 logToDebugConsole('Failed to save form data: ' + error.message);
             }
-        }        function loadFormData() {
+        } function loadFormData() {
             try {
                 const savedData = localStorage.getItem('emailCampaignData');
                 if (savedData) {
                     const formData = JSON.parse(savedData);
-                    
+
                     // Restore form fields
                     const campaignName = document.getElementById('campaignName');
                     const fromName = document.getElementById('fromName');
@@ -1671,20 +1751,20 @@
                     const emailSubject = document.getElementById('emailSubject');
                     const recipients = document.getElementById('recipients');
                     const testEmail = document.getElementById('testEmail');
-                    
+
                     if (campaignName) campaignName.value = formData.campaignName || '';
                     if (fromName) fromName.value = formData.fromName || '';
                     if (fromEmail) fromEmail.value = formData.fromEmail || '';
                     if (emailSubject) emailSubject.value = formData.emailSubject || '';
                     if (recipients) recipients.value = formData.recipients || '';
                     if (testEmail) testEmail.value = formData.testEmail || '';
-                    
+
                     // Restore configuration values to modal fields (they may not exist yet)
                     const modalServiceId = document.getElementById('modalServiceId');
                     const modalTemplateId = document.getElementById('modalTemplateId');
                     if (modalServiceId) modalServiceId.value = formData.serviceId || '';
                     if (modalTemplateId) modalTemplateId.value = formData.templateId || '';
-                    
+
                     // Also create/update hidden fields for compatibility
                     let serviceIdField = document.getElementById('serviceId');
                     if (!serviceIdField && formData.serviceId) {
@@ -1696,7 +1776,7 @@
                     } else if (serviceIdField) {
                         serviceIdField.value = formData.serviceId || '';
                     }
-                    
+
                     let templateIdField = document.getElementById('templateId');
                     if (!templateIdField && formData.templateId) {
                         templateIdField = document.createElement('input');
@@ -1707,17 +1787,17 @@
                     } else if (templateIdField) {
                         templateIdField.value = formData.templateId || '';
                     }
-                    
+
                     // Restore editor content when editor is ready
                     if (editor && formData.editorContent) {
                         editor.setData(formData.editorContent);
                     }
-                    
+
                     // Update recipient count
                     updateRecipientCount();
-                    
+
                     logToDebugConsole('Form data restored from local storage (saved: ' + new Date(formData.timestamp).toLocaleString() + ')');
-                    
+
                     // Show restoration notification
                     showNotification('Previous session restored', 'info');
                 }
@@ -1748,7 +1828,7 @@
                     field.addEventListener('change', saveFormData);
                 }
             });
-            
+
             // Set up auto-save for modal fields
             const modalFields = ['modalServiceId', 'modalTemplateId'];
             modalFields.forEach(fieldId => {
@@ -1758,7 +1838,7 @@
                     field.addEventListener('change', saveFormData);
                 }
             });
-            
+
             logToDebugConsole('Auto-save enabled for form fields and modal fields');
         }
 
@@ -1780,7 +1860,7 @@
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-md shadow-lg transition-all duration-300 transform translate-x-full`;
-            
+
             // Set styles based on type
             const styles = {
                 'info': 'bg-blue-100 text-blue-800 border border-blue-200',
@@ -1788,7 +1868,7 @@
                 'warning': 'bg-yellow-100 text-yellow-800 border border-yellow-200',
                 'error': 'bg-red-100 text-red-800 border border-red-200'
             };
-            
+
             notification.className += ` ${styles[type] || styles.info}`;
             notification.innerHTML = `
                 <div class="flex items-center space-x-2">
@@ -1796,14 +1876,14 @@
                     <button onclick="this.parentElement.parentElement.remove()" class="text-sm opacity-60 hover:opacity-100">×</button>
                 </div>
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             // Animate in
             setTimeout(() => {
                 notification.classList.remove('translate-x-full');
             }, 100);
-            
+
             // Auto remove after 3 seconds
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
@@ -1812,7 +1892,8 @@
                         notification.remove();
                     }
                 }, 300);
-            }, 3000);        }
+            }, 3000);
+        }
 
         // Settings Modal Functions
         function openSettingsModal() {
@@ -1821,25 +1902,25 @@
             const templateId = document.getElementById('templateId');
             const modalServiceId = document.getElementById('modalServiceId');
             const modalTemplateId = document.getElementById('modalTemplateId');
-            
+
             if (serviceId && modalServiceId) {
                 modalServiceId.value = serviceId.value;
             }
             if (templateId && modalTemplateId) {
                 modalTemplateId.value = templateId.value;
             }
-            
+
             // Show modal
             document.getElementById('settingsModal').classList.remove('hidden');
             document.getElementById('settingsModal').classList.add('flex');
-            
+
             logToDebugConsole('Settings modal opened');
         }
 
         function closeSettingsModal() {
             document.getElementById('settingsModal').classList.add('hidden');
             document.getElementById('settingsModal').classList.remove('flex');
-            
+
             logToDebugConsole('Settings modal closed');
         }
 
@@ -1847,7 +1928,7 @@
             // Sync values from modal back to main form (create hidden inputs if needed)
             const modalServiceId = document.getElementById('modalServiceId');
             const modalTemplateId = document.getElementById('modalTemplateId');
-            
+
             // Create or update hidden service ID field
             let serviceIdField = document.getElementById('serviceId');
             if (!serviceIdField) {
@@ -1857,7 +1938,7 @@
                 document.body.appendChild(serviceIdField);
             }
             serviceIdField.value = modalServiceId.value;
-            
+
             // Create or update hidden template ID field
             let templateIdField = document.getElementById('templateId');
             if (!templateIdField) {
@@ -1867,49 +1948,50 @@
                 document.body.appendChild(templateIdField);
             }
             templateIdField.value = modalTemplateId.value;
-            
+
             // Save to localStorage
             saveFormData();
-            
+
             // Close modal
             closeSettingsModal();
-            
+
             // Show notification
             showNotification('Settings saved successfully', 'success');
-            
+
             logToDebugConsole('Settings saved: Service ID: ' + modalServiceId.value + ', Template ID: ' + modalTemplateId.value);
         }
 
         // Event listeners
         document.getElementById('recipients').addEventListener('input', updateRecipientCount);
-        document.getElementById('singleRecipient').addEventListener('keypress', function(e) {
+        document.getElementById('singleRecipient').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 addRecipient();
             }
         });        // Close modals when clicking outside
-        document.getElementById('progressModal').addEventListener('click', function(e) {
+        document.getElementById('progressModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 // Don't close progress modal by clicking outside
             }
         });
 
-        document.getElementById('previewModal').addEventListener('click', function(e) {
+        document.getElementById('previewModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closePreview();
             }
         });
 
-        document.getElementById('settingsModal').addEventListener('click', function(e) {
+        document.getElementById('settingsModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeSettingsModal();
             }
         });// Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             updateConnectionStatus('connecting', 'Initializing...');
             initializeEmailJS();
             setupAutoSave();
             loadFormData();
         });
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>

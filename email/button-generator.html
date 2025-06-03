@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Button Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .button-preview {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        /* Email Button Styles */
+        .email-button {
+            display: inline-block;
+            background-color: #215669;
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(33, 86, 105, 0.3);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            min-width: 180px;
+        }
+        
+        .email-button:hover {
+            background-color: #1a4552;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(33, 86, 105, 0.4);
+        }
+        
+        /* Canvas for generating image */
+        #buttonCanvas {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .control-group {
+            margin: 15px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            max-width: 300px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button {
+            background: #215669;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #1a4552;
+        }
+        
+        .code-section {
+            background: #f1f3f4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .code-section pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        .specs {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #215669;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Button Generator</h1>
+        <p>Generate fully rounded raster image buttons for email clients that don't support SVG or modern CSS.</p>
+        
+        <div class="specs">
+            <h3>Button Specifications</h3>
+            <ul>
+                <li><strong>Color:</strong> #215669 (Primary), #1a4552 (Hover/Dark)</li>
+                <li><strong>Format:</strong> PNG with transparency</li>
+                <li><strong>Resolution:</strong> 2x for retina support (400x100px actual, 200x50px display)</li>
+                <li><strong>Shape:</strong> Fully rounded (pill shape)</li>
+                <li><strong>Text:</strong> White, bold, centered</li>
+                <li><strong>Padding:</strong> 15px vertical, 30px horizontal minimum</li>
+            </ul>
+        </div>
+        
+        <div class="controls">
+            <h3>Button Customization</h3>
+            
+            <div class="control-group">
+                <label for="buttonText">Button Text:</label>
+                <input type="text" id="buttonText" value="Call to Action" maxlength="25">
+            </div>
+            
+            <div class="control-group">
+                <label for="buttonWidth">Button Width (px):</label>
+                <input type="number" id="buttonWidth" value="400" min="200" max="600">
+            </div>
+            
+            <div class="control-group">
+                <label for="buttonHeight">Button Height (px):</label>
+                <input type="number" id="buttonHeight" value="100" min="60" max="120">
+            </div>
+            
+            <div class="control-group">
+                <label for="fontSize">Font Size (px):</label>
+                <input type="number" id="fontSize" value="32" min="24" max="48">
+            </div>
+            
+            <button onclick="generateButton()">Generate Button</button>
+            <button onclick="downloadButton()">Download PNG</button>
+        </div>
+        
+        <div class="button-preview">
+            <h3>Preview (CSS Version)</h3>
+            <a href="#" class="email-button" id="previewButton">Call to Action</a>
+        </div>
+        
+        <div class="button-preview">
+            <h3>Generated Image (2x Resolution)</h3>
+            <canvas id="buttonCanvas" width="400" height="100"></canvas>
+        </div>
+        
+        <div class="code-section">
+            <h3>Email HTML Implementation</h3>
+            <pre id="emailCode"></pre>
+        </div>
+        
+        <div class="code-section">
+            <h3>Fallback Implementation with VML for Outlook</h3>
+            <pre id="outlookCode"></pre>
+        </div>
+    </div>
+
+    <script>
+        let canvas, ctx;
+        
+        function initCanvas() {
+            canvas = document.getElementById('buttonCanvas');
+            ctx = canvas.getContext('2d');
+            generateButton();
+        }
+        
+        function generateButton() {
+            const text = document.getElementById('buttonText').value || 'Call to Action';
+            const width = parseInt(document.getElementById('buttonWidth').value);
+            const height = parseInt(document.getElementById('buttonHeight').value);
+            const fontSize = parseInt(document.getElementById('fontSize').value);
+            
+            // Update canvas size
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Update preview
+            document.getElementById('previewButton').textContent = text;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Set up canvas for high DPI
+            const dpr = window.devicePixelRatio || 1;
+            canvas.style.width = (width / 2) + 'px';
+            canvas.style.height = (height / 2) + 'px';
+            
+            // Draw button background with gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, '#2d6b7f');
+            gradient.addColorStop(0.5, '#215669');
+            gradient.addColorStop(1, '#1a4552');
+            
+            // Draw fully rounded rectangle (pill shape)
+            const radius = height / 2;
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(radius, 0);
+            ctx.lineTo(width - radius, 0);
+            ctx.arcTo(width, 0, width, radius, radius);
+            ctx.lineTo(width, height - radius);
+            ctx.arcTo(width, height, width - radius, height, radius);
+            ctx.lineTo(radius, height);
+            ctx.arcTo(0, height, 0, height - radius, radius);
+            ctx.lineTo(0, radius);
+            ctx.arcTo(0, 0, radius, 0, radius);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Add subtle inner shadow
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 4;
+            ctx.shadowOffsetY = 2;
+            
+            // Draw border
+            ctx.strokeStyle = '#1a4552';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Reset shadow for text
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            
+            // Draw text
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Add text shadow
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 2;
+            ctx.shadowOffsetY = 1;
+            
+            ctx.fillText(text, width / 2, height / 2);
+            
+            // Generate HTML code
+            generateEmailCode(text, width, height);
+        }
+        
+        function generateEmailCode(text, width, height) {
+            const displayWidth = width / 2;
+            const displayHeight = height / 2;
+            
+            const emailCode = `<!-- Email Button with Image Fallback -->
+<div style="text-align: center; margin: 20px 0;">
+  <!--[if mso]>
+  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+               xmlns:w="urn:schemas-microsoft-com:office:word" 
+               href="https://your-link-here.com"
+               style="height:${displayHeight}px;v-text-anchor:middle;width:${displayWidth}px;" 
+               arcsize="50%" 
+               stroke="f" 
+               fillcolor="#215669">
+    <w:anchorlock/>
+    <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
+      ${text}
+    </center>
+  </v:roundrect>
+  <![endif]-->
+  
+  <!--[if !mso]><!-- -->
+  <a href="https://your-link-here.com" 
+     style="display: inline-block; text-decoration: none;">
+    <img src="button-${text.toLowerCase().replace(/\s+/g, '-')}.png" 
+         alt="${text}" 
+         width="${displayWidth}" 
+         height="${displayHeight}"
+         style="border: none; display: block; outline: none; border-radius: ${displayHeight/2}px;"
+         border="0">
+  </a>
+  <!--<![endif]-->
+</div>`;
+            
+            const outlookCode = `<!-- Outlook VML Button (for better Outlook support) -->
+<!--[if mso]>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+             xmlns:w="urn:schemas-microsoft-com:office:word" 
+             href="https://your-link-here.com"
+             style="height:${displayHeight}px;v-text-anchor:middle;width:${displayWidth}px;" 
+             arcsize="50%" 
+             stroke="f" 
+             fillcolor="#215669">
+  <w:anchorlock/>
+  <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
+    ${text}
+  </center>
+</v:roundrect>
+<![endif]-->
+
+<!-- CSS Button for modern email clients -->
+<!--[if !mso]><!-- -->
+<a href="https://your-link-here.com" 
+   style="background-color: #215669;
+          border: none;
+          border-radius: ${displayHeight/2}px;
+          color: #ffffff;
+          cursor: pointer;
+          display: inline-block;
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          font-weight: bold;
+          line-height: ${displayHeight}px;
+          text-align: center;
+          text-decoration: none;
+          width: ${displayWidth}px;
+          height: ${displayHeight}px;
+          -webkit-text-size-adjust: none;
+          mso-hide: all;">
+  ${text}
+</a>
+<!--<![endif]-->`;
+            
+            document.getElementById('emailCode').textContent = emailCode;
+            document.getElementById('outlookCode').textContent = outlookCode;
+        }
+        
+        function downloadButton() {
+            const text = document.getElementById('buttonText').value || 'Call to Action';
+            const filename = `button-${text.toLowerCase().replace(/\s+/g, '-')}.png`;
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Update button when inputs change
+        document.getElementById('buttonText').addEventListener('input', generateButton);
+        document.getElementById('buttonWidth').addEventListener('input', generateButton);
+        document.getElementById('buttonHeight').addEventListener('input', generateButton);
+        document.getElementById('fontSize').addEventListener('input', generateButton);
+        
+        // Initialize when page loads
+        window.addEventListener('load', initCanvas);
+    </script>
+</body>
+</html>
