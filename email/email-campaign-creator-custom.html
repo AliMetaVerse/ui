@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Campaign Creator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Email Campaign Creator</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <style>
         /* Custom Editor Styles */
         .toolbar-btn {
             padding: 6px 8px;
@@ -137,487 +136,564 @@
         svg:hover .svg-button-hover {
             fill: rgba(255, 255, 255, 0.1);
         }
-    </style>
-</head>
-
-<body class="bg-gray-50 min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-8xl">
-        <!-- Header -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Email Campaign Creator</h1>
-                    <p class="text-gray-600 mt-1">Create and send professional email campaigns</p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <button onclick="openSettingsModal()"
-                        class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200">
-                        <i class="fas fa-cog text-sm"></i>
-                        <span class="text-sm font-medium">Settings</span>
-                    </button>
-                    <div id="connectionStatus"
-                        class="flex items-center space-x-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
-                        <i class="fas fa-spinner fa-spin text-sm"></i>
-                        <span class="text-sm font-medium">Connecting...</span>
+        </style>
+    </head>
+    <body class="bg-gray-50 min-h-screen">
+        <div class="container mx-auto px-4 py-8 max-w-8xl">
+            <!-- Header -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">Email Campaign Creator</h1>
+                        <p class="text-gray-600 mt-1">Create and send professional email campaigns</p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Email Configuration Panel -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="fas fa-envelope mr-2 text-blue-600"></i>
-                        Campaign Details
-                    </h2>
-                    <!-- Email Details -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
-                        <input type="text" id="campaignName"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Enter campaign name">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
-                        <input type="text" id="fromName"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Your Name">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">From Email</label>
-                        <input type="email" id="fromEmail"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="your@email.com">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
-                        <input type="text" id="emailSubject"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Enter email subject">
-                    </div>
-                    <!-- Recipients -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
-                        <div class="space-y-2">
-                            <textarea id="recipients" rows="4"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Enter email addresses (one per line)&#10;example1@email.com&#10;example2@email.com"></textarea>
-                            <div class="flex items-center space-x-2">
-                                <input type="email" id="singleRecipient"
-                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="Add recipient">
-                                <button onclick="addRecipient()"
-                                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1">
-                            Total recipients:
-                            <span id="recipientCount">0</span>
-                        </p>
-                    </div>
-                    <!-- Test Email -->
-                    <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
-                        <h3 class="text-sm font-medium text-yellow-800 mb-2">Send Test Email</h3>
-                        <div class="flex space-x-2">
-                            <input type="email" id="testEmail"
-                                class="flex-1 px-3 py-2 border border-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                                placeholder="test@email.com">
-                            <button onclick="sendTestEmail()"
-                                class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-200">
-                                Test
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Campaign Stats -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Campaign Stats</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Total Recipients:</span>
-                            <span id="statsRecipients" class="font-semibold">0</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Emails Sent:</span>
-                            <span id="statsSent" class="font-semibold text-green-600">0</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Failed:</span>
-                            <span id="statsFailed" class="font-semibold text-red-600">0</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600">Success Rate:</span>
-                            <span id="statsRate" class="font-semibold">0%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Email Editor -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-semibold text-gray-900 flex items-center">
-                            <i class="fas fa-edit mr-2 text-blue-600"></i>
-                            Email Content Editor
-                        </h2>
-                        <div class="flex space-x-2">
-                            <button onclick="loadTemplate('simple')"
-                                class="px-3 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition duration-200 text-sm">
-                                Simple Template
-                            </button>
-                            <button onclick="loadTemplate('newsletter')"
-                                class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
-                                Newsletter Template
-                            </button>
-                            <button onclick="loadTemplate('promotional')"
-                                class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
-                                Promotional Template
-                            </button>
-                            <button onclick="loadTemplate('webropol')"
-                                class="px-3 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition duration-200 text-sm">
-                                Webropol Template
-                            </button>
-                            <button onclick="clearEditor()"
-                                class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
-                                Clear
-                            </button>
-                        </div>
-                    </div> <!-- Custom HTML Editor -->
-                    <div class="custom-editor-container border border-gray-300 rounded-md">
-                        <!-- Toolbar -->
-                        <div class="editor-toolbar bg-gray-50 border-b border-gray-300 p-3 flex flex-wrap gap-1">
-                            <!-- Text Formatting -->
-                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                <select id="headingSelect" class="px-2 py-1 text-sm border border-gray-300 rounded">
-                                    <option value="p">Paragraph</option>
-                                    <option value="h1">Heading 1</option>
-                                    <option value="h2">Heading 2</option>
-                                    <option value="h3">Heading 3</option>
-                                </select>
-                            </div>
-
-                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                <button type="button" class="toolbar-btn" data-command="bold" title="Bold">
-                                    <i class="fas fa-bold"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="italic" title="Italic">
-                                    <i class="fas fa-italic"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="underline" title="Underline">
-                                    <i class="fas fa-underline"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="strikeThrough"
-                                    title="Strikethrough">
-                                    <i class="fas fa-strikethrough"></i>
-                                </button>
-                            </div>
-
-                            <!-- Colors -->
-                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                <button type="button" class="toolbar-btn" onclick="showColorPicker('foreColor')"
-                                    title="Text Color">
-                                    <i class="fas fa-palette"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" onclick="showColorPicker('hiliteColor')"
-                                    title="Background Color">
-                                    <i class="fas fa-fill-drip"></i>
-                                </button>
-                            </div>
-
-                            <!-- Lists and Alignment -->
-                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                <button type="button" class="toolbar-btn" data-command="insertUnorderedList"
-                                    title="Bullet List">
-                                    <i class="fas fa-list-ul"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="insertOrderedList"
-                                    title="Numbered List">
-                                    <i class="fas fa-list-ol"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="justifyLeft" title="Align Left">
-                                    <i class="fas fa-align-left"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="justifyCenter"
-                                    title="Align Center">
-                                    <i class="fas fa-align-center"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="justifyRight"
-                                    title="Align Right">
-                                    <i class="fas fa-align-right"></i>
-                                </button>
-                            </div> <!-- Links and Elements -->
-                            <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
-                                <button type="button" class="toolbar-btn" onclick="insertLink()" title="Insert Link">
-                                    <i class="fas fa-link"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" onclick="insertButton()"
-                                    title="Insert Button">
-                                    <i class="fas fa-square"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" onclick="insertSvgButton()"
-                                    title="Insert SVG Button">
-                                    <i class="fas fa-play-circle"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" onclick="insertImageButton()"
-                                    title="Insert Image Button">
-                                    <i class="fas fa-image"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="insertHorizontalRule"
-                                    title="Horizontal Line">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-
-                            <!-- Undo/Redo -->
-                            <div class="toolbar-group flex gap-1">
-                                <button type="button" class="toolbar-btn" data-command="undo" title="Undo">
-                                    <i class="fas fa-undo"></i>
-                                </button>
-                                <button type="button" class="toolbar-btn" data-command="redo" title="Redo">
-                                    <i class="fas fa-redo"></i>
-                                </button>
-                            </div>
-
-                            <!-- View Toggle -->
-                            <div class="toolbar-group flex gap-1 ml-auto">
-                                <button type="button" class="toolbar-btn" onclick="toggleView()"
-                                    title="Toggle HTML View" id="viewToggle">
-                                    <i class="fas fa-code"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Editor Content -->
-                        <div id="editor" contenteditable="true" class="editor-content min-h-96 p-4 focus:outline-none"
-                            style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;"></div>
-
-                        <!-- HTML View (hidden by default) -->
-                        <textarea id="htmlView"
-                            class="editor-html-view min-h-96 p-4 font-mono text-sm hidden w-full border-0 focus:outline-none"
-                            placeholder="HTML source code..."></textarea>
-                    </div>
-
-                    <!-- Color Picker Modal -->
-                    <div id="colorPickerModal"
-                        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                        <div class="bg-white p-6 rounded-lg max-w-md w-full mx-4">
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-lg font-semibold">Choose Color</h3>
-                                <button onclick="closeColorPicker()" class="text-gray-500 hover:text-gray-700">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="color-palette grid grid-cols-8 gap-2 mb-4">
-                                <!-- Common colors -->
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #000000" data-color="#000000"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #ffffff" data-color="#ffffff"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #808080" data-color="#808080"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #ff0000" data-color="#ff0000"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #00ff00" data-color="#00ff00"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #0000ff" data-color="#0000ff"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #ffff00" data-color="#ffff00"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #ff00ff" data-color="#ff00ff"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #00ffff" data-color="#00ffff"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #800000" data-color="#800000"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #008000" data-color="#008000"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #000080" data-color="#000080"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #808000" data-color="#808000"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #800080" data-color="#800080"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #008080" data-color="#008080"></div>
-                                <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300"
-                                    style="background-color: #c0c0c0" data-color="#c0c0c0"></div>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <label class="text-sm">Custom:</label>
-                                <input type="color" id="customColor" class="w-12 h-8 border border-gray-300 rounded">
-                                <button onclick="applyCustomColor()"
-                                    class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Apply</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Send Campaign -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Ready to Send?</h3>
-                            <p class="text-gray-600 text-sm">Review your campaign and send to all recipients</p>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button onclick="previewEmail()"
-                                class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-200 flex items-center">
-                                <i class="fas fa-eye mr-2"></i>
-                                Preview
-                            </button>
-                            <button onclick="sendCampaign()"
-                                class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-200 flex items-center">
-                                <i class="fas fa-paper-plane mr-2"></i>
-                                Send Campaign
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Progress Modal -->
-        <div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                <div class="text-center">
-                    <i class="fas fa-paper-plane text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Sending Campaign</h3>
-                    <p class="text-gray-600 mb-4">Please wait while we send your emails...</p>
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                        <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                            style="width: 0%"></div>
-                    </div>
-                    <div class="text-sm text-gray-600">
-                        <span id="progressText">Preparing to send...</span>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Settings Modal -->
-        <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-gray-900">
-                        <i class="fas fa-cog mr-2 text-blue-600"></i>
-                        Configuration Settings
-                    </h3>
-                    <button onclick="closeSettingsModal()" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                <div class="max-h-[70vh] overflow-y-auto">
-                    <!-- Service Configuration -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Service ID</label>
-                        <input type="text" id="modalServiceId"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="your_service_id">
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
-                        <input type="text" id="modalTemplateId"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="your_template_id">
-                    </div>
-
-                    <!-- HTML Template Setup -->
-                    <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                        <h3 class="text-sm font-medium text-blue-800 mb-2">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            HTML Template Setup Required
-                        </h3>
-                        <p class="text-xs text-blue-700 mb-2">
-                            Create a simple EmailJS template with this content to enable HTML email sending:
-                        </p>
-                        <div class="text-xs bg-white p-2 rounded border font-mono">
-                            <strong>EmailJS Template Settings:</strong><br>
-                            To: {{user_email}}<br>
-                            From: {{from_name}} &lt;{{reply_to}}&gt;<br>
-                            Subject: {{subject}}<br><br>
-                            <strong>Template Content:</strong><br>
-                            {{{html_content}}}
-                        </div>
-                        <p class="text-xs text-blue-600 mt-2">
-                            <strong>Critical:</strong> Set the "To" field in EmailJS dashboard to:
-                            <code>{{user_email}}</code> or <code>{{to}}</code><br>
-                            The triple braces {{{html_content}}} allow raw HTML injection from your CKEditor
-                            content.<br>
-                            Parameters: to, user_email, user_name, from_name, reply_to, subject, message, html_content
-                        </p>
-                    </div>
-
-                    <!-- Configuration Test -->
-                    <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-                        <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>
-                        <button onclick="testEmailJSConfig()"
-                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
-                            <i class="fas fa-check-circle mr-1"></i>
-                            Test EmailJS Setup
+                    <div class="flex items-center space-x-2">
+                        <button onclick="openSettingsModal()" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200">
+                            <i class="fas fa-cog text-sm"></i>
+                            <span class="text-sm font-medium">Settings</span>
                         </button>
-                        <p class="text-xs text-blue-600 mt-1">Verify your EmailJS service and template configuration</p>
+                        <div id="connectionStatus" class="flex items-center space-x-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
+                            <i class="fas fa-spinner fa-spin text-sm"></i>
+                            <span class="text-sm font-medium">Connecting...</span>
+                        </div>
                     </div>
-
-                    <!-- Debug Console -->
-                    <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
-                        <h3 class="text-sm font-medium text-gray-800 mb-2">
-                            <i class="fas fa-bug mr-1"></i>
-                            Debug Console
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Email Configuration Panel -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-600"></i>
+                            Campaign Details
+                        </h2>
+                        <!-- Email Details -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Campaign Name</label>
+                            <input
+                                type="text"
+                                id="campaignName"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Enter campaign name"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
+                            <input
+                                type="text"
+                                id="fromName"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Your Name"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">From Email</label>
+                            <input
+                                type="email"
+                                id="fromEmail"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="your@email.com"
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subject Line</label>
+                            <input
+                                type="text"
+                                id="emailSubject"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Enter email subject"
+                            >
+                        </div>
+                        <!-- Recipients -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
+                            <div class="space-y-2">
+                                <textarea
+                                    id="recipients"
+                                    rows="4"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder="Enter email addresses (one per line)&#10;example1@email.com&#10;example2@email.com"
+                                ></textarea>
+                                <div class="flex items-center space-x-2">
+                                    <input
+                                        type="email"
+                                        id="singleRecipient"
+                                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        placeholder="Add recipient"
+                                    >
+                                    <button onclick="addRecipient()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Total recipients:
+                                <span id="recipientCount">0</span>
+                            </p>
+                        </div>
+                        <!-- Test Email -->
+                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+                            <h3 class="text-sm font-medium text-yellow-800 mb-2">Send Test Email</h3>
+                            <div class="flex space-x-2">
+                                <input
+                                    type="email"
+                                    id="testEmail"
+                                    class="flex-1 px-3 py-2 border border-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                    placeholder="test@email.com"
+                                >
+                                <button onclick="sendTestEmail()" class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition duration-200">
+                                    Test
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Campaign Stats -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Campaign Stats</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Total Recipients:</span>
+                                <span id="statsRecipients" class="font-semibold">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Emails Sent:</span>
+                                <span id="statsSent" class="font-semibold text-green-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Failed:</span>
+                                <span id="statsFailed" class="font-semibold text-red-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Success Rate:</span>
+                                <span id="statsRate" class="font-semibold">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email Editor -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+                                <i class="fas fa-edit mr-2 text-blue-600"></i>
+                                Email Content Editor
+                            </h2>
+                            <div class="flex space-x-2">
+                                <button onclick="loadTemplate('simple')" class="px-3 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition duration-200 text-sm">
+                                    Simple Template
+                                </button>
+                                <button onclick="loadTemplate('newsletter')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
+                                    Newsletter Template
+                                </button>
+                                <button onclick="loadTemplate('promotional')" class="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition duration-200 text-sm">
+                                    Promotional Template
+                                </button>
+                                <button onclick="loadTemplate('webropol')" class="px-3 py-2 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition duration-200 text-sm">
+                                    Webropol Template
+                                </button>
+                                <button onclick="clearEditor()" class="px-3 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition duration-200 text-sm">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Custom HTML Editor -->
+                        <div class="custom-editor-container border border-gray-300 rounded-md">
+                            <!-- Toolbar -->
+                            <div class="editor-toolbar bg-gray-50 border-b border-gray-300 p-3 flex flex-wrap gap-1">
+                                <!-- Text Formatting -->
+                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                    <select id="headingSelect" class="px-2 py-1 text-sm border border-gray-300 rounded">
+                                        <option value="p">Paragraph</option>
+                                        <option value="h1">Heading 1</option>
+                                        <option value="h2">Heading 2</option>
+                                        <option value="h3">Heading 3</option>
+                                    </select>
+                                </div>
+                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="bold"
+                                        title="Bold"
+                                    >
+                                        <i class="fas fa-bold"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="italic"
+                                        title="Italic"
+                                    >
+                                        <i class="fas fa-italic"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="underline"
+                                        title="Underline"
+                                    >
+                                        <i class="fas fa-underline"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="strikeThrough"
+                                        title="Strikethrough"
+                                    >
+                                        <i class="fas fa-strikethrough"></i>
+                                    </button>
+                                </div>
+                                <!-- Colors -->
+                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="showColorPicker('foreColor')"
+                                        title="Text Color"
+                                    >
+                                        <i class="fas fa-palette"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="showColorPicker('hiliteColor')"
+                                        title="Background Color"
+                                    >
+                                        <i class="fas fa-fill-drip"></i>
+                                    </button>
+                                </div>
+                                <!-- Lists and Alignment -->
+                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="insertUnorderedList"
+                                        title="Bullet List"
+                                    >
+                                        <i class="fas fa-list-ul"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="insertOrderedList"
+                                        title="Numbered List"
+                                    >
+                                        <i class="fas fa-list-ol"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="justifyLeft"
+                                        title="Align Left"
+                                    >
+                                        <i class="fas fa-align-left"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="justifyCenter"
+                                        title="Align Center"
+                                    >
+                                        <i class="fas fa-align-center"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="justifyRight"
+                                        title="Align Right"
+                                    >
+                                        <i class="fas fa-align-right"></i>
+                                    </button>
+                                </div>
+                                <!-- Links and Elements -->
+                                <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="insertLink()"
+                                        title="Insert Link"
+                                    >
+                                        <i class="fas fa-link"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="insertButton()"
+                                        title="Insert Button"
+                                    >
+                                        <i class="fas fa-square"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="insertSvgButton()"
+                                        title="Insert SVG Button"
+                                    >
+                                        <i class="fas fa-play-circle"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="insertImageButton()"
+                                        title="Insert Image Button"
+                                    >
+                                        <i class="fas fa-image"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="insertHorizontalRule"
+                                        title="Horizontal Line"
+                                    >
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <!-- Undo/Redo -->
+                                <div class="toolbar-group flex gap-1">
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="undo"
+                                        title="Undo"
+                                    >
+                                        <i class="fas fa-undo"></i>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        data-command="redo"
+                                        title="Redo"
+                                    >
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                </div>
+                                <!-- View Toggle -->
+                                <div class="toolbar-group flex gap-1 ml-auto">
+                                    <button
+                                        type="button"
+                                        class="toolbar-btn"
+                                        onclick="toggleView()"
+                                        title="Toggle HTML View"
+                                        id="viewToggle"
+                                    >
+                                        <i class="fas fa-code"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Editor Content -->
+                            <div
+                                id="editor"
+                                contenteditable="true"
+                                class="editor-content min-h-96 p-4 focus:outline-none"
+                                style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;"
+                            ></div>
+                            <!-- HTML View (hidden by default) -->
+                            <textarea id="htmlView" class="editor-html-view min-h-96 p-4 font-mono text-sm hidden w-full border-0 focus:outline-none" placeholder="HTML source code..."></textarea>
+                        </div>
+                        <!-- Color Picker Modal -->
+                        <div id="colorPickerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                            <div class="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-semibold">Choose Color</h3>
+                                    <button onclick="closeColorPicker()" class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="color-palette grid grid-cols-8 gap-2 mb-4">
+                                    <!-- Common colors -->
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #000000" data-color="#000000"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ffffff" data-color="#ffffff"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #808080" data-color="#808080"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ff0000" data-color="#ff0000"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #00ff00" data-color="#00ff00"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #0000ff" data-color="#0000ff"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ffff00" data-color="#ffff00"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #ff00ff" data-color="#ff00ff"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #00ffff" data-color="#00ffff"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #800000" data-color="#800000"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #008000" data-color="#008000"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #000080" data-color="#000080"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #808000" data-color="#808000"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #800080" data-color="#800080"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #008080" data-color="#008080"></div>
+                                    <div class="color-option w-8 h-8 rounded cursor-pointer border-2 border-gray-300" style="background-color: #c0c0c0" data-color="#c0c0c0"></div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <label class="text-sm">Custom:</label>
+                                    <input type="color" id="customColor" class="w-12 h-8 border border-gray-300 rounded">
+                                    <button onclick="applyCustomColor()" class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Send Campaign -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Ready to Send?</h3>
+                                <p class="text-gray-600 text-sm">Review your campaign and send to all recipients</p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button onclick="previewEmail()" class="px-6 py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-200 flex items-center">
+                                    <i class="fas fa-eye mr-2"></i>
+                                    Preview
+                                </button>
+                                <button onclick="sendCampaign()" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-200 flex items-center">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    Send Campaign
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Progress Modal -->
+            <div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                    <div class="text-center">
+                        <i class="fas fa-paper-plane text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Sending Campaign</h3>
+                        <p class="text-gray-600 mb-4">Please wait while we send your emails...</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <div class="text-sm text-gray-600">
+                            <span id="progressText">Preparing to send...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Settings Modal -->
+            <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            <i class="fas fa-cog mr-2 text-blue-600"></i>
+                            Configuration Settings
                         </h3>
-                        <div class="flex space-x-2 mb-2">
-                            <button onclick="toggleDebugConsole()"
-                                class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
-                                Show/Hide Debug
-                            </button>
-                            <button onclick="clearFormData()"
-                                class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">
-                                Clear Session
-                            </button>
+                        <button onclick="closeSettingsModal()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="max-h-[70vh] overflow-y-auto">
+                        <!-- Service Configuration -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Service ID</label>
+                            <input
+                                type="text"
+                                id="modalServiceId"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="your_service_id"
+                            >
                         </div>
-                        <div id="debugConsole"
-                            class="hidden mt-3 p-3 bg-black text-green-400 rounded text-xs font-mono max-h-32 overflow-y-auto">
-                            <div id="debugOutput"></div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">EmailJS Template ID</label>
+                            <input
+                                type="text"
+                                id="modalTemplateId"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="your_template_id"
+                            >
+                        </div>
+                        <!-- HTML Template Setup -->
+                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                            <h3 class="text-sm font-medium text-blue-800 mb-2">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                HTML Template Setup Required
+                            </h3>
+                            <p class="text-xs text-blue-700 mb-2">
+                                Create a simple EmailJS template with this content to enable HTML email sending:
+                            </p>
+                            <div class="text-xs bg-white p-2 rounded border font-mono">
+                                <strong>EmailJS Template Settings:</strong>
+                                <br>
+                                To: {{user_email}}
+                                <br>
+                                From: {{from_name}} &lt;{{reply_to}}&gt;
+                                <br>
+                                Subject: {{subject}}
+                                <br>
+                                <br>
+                                <strong>Template Content:</strong>
+                                <br>
+                                {{{html_content}}}
+                            </div>
+                            <p class="text-xs text-blue-600 mt-2">
+                                <strong>Critical:</strong>
+                                Set the "To" field in EmailJS dashboard to:
+                                <code>{{user_email}}</code> or
+                                <code>{{to}}</code>
+                                <br>
+                                The triple braces {{{html_content}}} allow raw HTML injection from your CKEditor
+                            content.
+                                <br>
+                                Parameters: to, user_email, user_name, from_name, reply_to, subject, message, html_content
+                            </p>
+                        </div>
+                        <!-- Configuration Test -->
+                        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                            <h3 class="text-sm font-medium text-blue-800 mb-2">Test Configuration</h3>
+                            <button onclick="testEmailJSConfig()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200 text-sm">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                Test EmailJS Setup
+                            </button>
+                            <p class="text-xs text-blue-600 mt-1">Verify your EmailJS service and template configuration</p>
+                        </div>
+                        <!-- Debug Console -->
+                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                            <h3 class="text-sm font-medium text-gray-800 mb-2">
+                                <i class="fas fa-bug mr-1"></i>
+                                Debug Console
+                            </h3>
+                            <div class="flex space-x-2 mb-2">
+                                <button onclick="toggleDebugConsole()" class="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700">
+                                    Show/Hide Debug
+                                </button>
+                                <button onclick="clearFormData()" class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">
+                                    Clear Session
+                                </button>
+                            </div>
+                            <div id="debugConsole" class="hidden mt-3 p-3 bg-black text-green-400 rounded text-xs font-mono max-h-32 overflow-y-auto">
+                                <div id="debugOutput"></div>
+                            </div>
                         </div>
                     </div>
+                    <div class="flex justify-end space-x-3 mt-6 pt-4 border-t">
+                        <button onclick="closeSettingsModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-200">
+                            Cancel
+                        </button>
+                        <button onclick="saveSettings()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
+                            Save Settings
+                        </button>
+                    </div>
                 </div>
-                <div class="flex justify-end space-x-3 mt-6 pt-4 border-t">
-                    <button onclick="closeSettingsModal()"
-                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-200">
-                        Cancel
-                    </button>
-                    <button onclick="saveSettings()"
-                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200">
-                        Save Settings
-                    </button>
+            </div>
+            <!-- Preview Modal -->
+            <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
+                        <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="border border-gray-300 rounded-md p-4 max-h-80 overflow-y-auto">
+                        <div class="mb-4 p-3 bg-gray-50 border-l-4 border-blue-500">
+                            <div class="text-sm text-gray-600">
+                                <strong>Subject:</strong>
+                                <span id="previewSubject"></span>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <strong>From:</strong>
+                                <span id="previewFrom"></span>
+                            </div>
+                        </div>
+                        <div id="previewContent" class="prose max-w-none"></div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Preview Modal -->
-        <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-hidden">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Email Preview</h3>
-                    <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                <div class="border border-gray-300 rounded-md p-4 max-h-80 overflow-y-auto">
-                    <div class="mb-4 p-3 bg-gray-50 border-l-4 border-blue-500">
-                        <div class="text-sm text-gray-600">
-                            <strong>Subject:</strong>
-                            <span id="previewSubject"></span>
-                        </div>
-                        <div class="text-sm text-gray-600">
-                            <strong>From:</strong>
-                            <span id="previewFrom"></span>
-                        </div>
-                    </div>
-                    <div id="previewContent" class="prose max-w-none"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
+        <script>
         let emailJSInitialized = false;
         const PUBLIC_KEY = 'WkloAEeQols8UpWuh';
 
@@ -1181,7 +1257,7 @@
 
             if (type === 'simple') {
                 templateContent = `
-                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: white; border: 1px solid #e5e7eb; overflow: hidden;">
                         <!-- Header -->
                         <div style="background-color: #f8fafc; padding: 20px; border-bottom: 1px solid #e5e7eb;">
                             <h1 style="color: #1f2937; margin: 0; font-size: 24px; font-weight: bold;">Simple Email Template</h1>
@@ -1237,10 +1313,10 @@
                             
                             <p>We're excited to share our latest updates and news with you.</p>
                             
-                            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                            <div style="background-color: #f8f9fa; padding: 20px; margin: 20px 0;">
                                 <h3 style="color: #333; margin-top: 0;">Featured Article</h3>
                                 <p>This month we're highlighting our new features and improvements.</p>
-                                <a href="#" style="display: inline-block; background-color: #215669; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Read More</a>
+                                <a href="#" style="display: inline-block; background-color: #215669; color: white; padding: 10px 20px; text-decoration: none;">Read More</a>
                             </div>
                             
                             <h3>What's New</h3>
@@ -1274,11 +1350,11 @@
                             
                             <p>This is a limited-time promotion that ends soon. Take advantage of our biggest sale of the year!</p>
                             
-                            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
+                            <div style="background-color: #f8f9fa; padding: 20px; margin: 20px 0; text-align: center;">
                                 <h3 style="color: #dc3545; margin-top: 0;">FLASH SALE</h3>
                                 <p style="font-size: 24px; font-weight: bold; color: #333;">50% OFF</p>
                                 <p>Use code: <strong>SAVE50</strong></p>
-                                <a href="#" style="display: inline-block; background-color: #dc3545; color: white; padding: 15px 30px; text-decoration: none; border-radius: 4px; font-weight: bold;">SHOP NOW</a>
+                                <a href="#" style="display: inline-block; background-color: #dc3545; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold;">SHOP NOW</a>
                             </div>
                             
                             <p style="text-align: center; color: #666; font-size: 14px;">
@@ -1308,13 +1384,13 @@
         <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇫🇮 Finland</td>
         <td style="padding: 15px;">
             <a href="https://webropol.fi/asiakastarinat/case-turun-amk/" 
-               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 📋 Read Case Study
             </a>
         </td>
         <td style="padding: 15px;">
             <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331222961888169985" 
-               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 👍 Like & Share
             </a>
         </td>
@@ -1323,13 +1399,13 @@
         <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇬🇧 United Kingdom</td>
         <td style="padding: 15px;">
             <a href="https://webropol.co.uk/case-studies/case-study-turku-university-of-applied-sciences/" 
-               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 📋 Read Case Study
             </a>
         </td>
         <td style="padding: 15px;">
             <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331223395465871362" 
-               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 👍 Like & Share
             </a>
         </td>
@@ -1338,13 +1414,13 @@
         <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇩🇪 Germany</td>
         <td style="padding: 15px;">
             <a href="https://webropol.de/fall-studien/case-turku-university-of-applied-sciences/" 
-               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 📋 Read Case Study
             </a>
         </td>
         <td style="padding: 15px;">
             <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331223778103857152" 
-               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 👍 Like & Share
             </a>
         </td>
@@ -1353,13 +1429,13 @@
         <td style="padding: 15px; font-weight: bold; color: #1e6880;">🇸🇪 Sweden</td>
         <td style="padding: 15px;">
             <a href="https://webropol.se/kundcase/kundcase-yrkeshogskolan-i-abo/" 
-               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #1e6880; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 📋 Read Case Study
             </a>
         </td>
         <td style="padding: 15px;">
             <a href="https://www.linkedin.com/feed/update/urn:li:activity:7331224179058413569" 
-               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
+               style="background-color: #0077b5; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; display: inline-block;">
                 👍 Like & Share
             </a>
         </td>
@@ -1991,7 +2067,6 @@
             setupAutoSave();
             loadFormData();
         });
-    </script>
-</body>
-
+        </script>
+    </body>
 </html>
