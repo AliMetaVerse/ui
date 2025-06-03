@@ -130,9 +130,8 @@
         <div class="specs">
             <h3>Button Specifications</h3>
             <ul>
-                <li><strong>Color:</strong> #215669 (Primary), #1a4552 (Hover/Dark)</li>
-                <li><strong>Format:</strong> PNG with transparency</li>
-                <li><strong>Resolution:</strong> 2x for retina support (400x100px actual, 200x50px display)</li>
+                <li><strong>Color:</strong> #215669 (Primary), #1a4552 (Hover/Dark)</li>                <li><strong>Format:</strong> PNG with transparency</li>
+                <li><strong>Resolution:</strong> 4x for retina support (800x200px actual, 200x50px display)</li>
                 <li><strong>Shape:</strong> Fully rounded (pill shape)</li>
                 <li><strong>Text:</strong> White, bold, centered</li>
                 <li><strong>Padding:</strong> 15px vertical, 30px horizontal minimum</li>
@@ -144,21 +143,19 @@
               <div class="control-group">
                 <label for="buttonText">Button Text (optional):</label>
                 <input type="text" id="buttonText" value="Call to Action" maxlength="25" placeholder="Leave empty for text-free button">
+            </div>              <div class="control-group">
+                <label for="buttonWidth">Canvas Width (4x resolution):</label>
+                <input type="number" id="buttonWidth" value="800" min="400" max="1200">
             </div>
             
             <div class="control-group">
-                <label for="buttonWidth">Button Width (px):</label>
-                <input type="number" id="buttonWidth" value="400" min="200" max="600">
+                <label for="buttonHeight">Canvas Height (4x resolution):</label>
+                <input type="number" id="buttonHeight" value="200" min="120" max="240">
             </div>
             
             <div class="control-group">
-                <label for="buttonHeight">Button Height (px):</label>
-                <input type="number" id="buttonHeight" value="100" min="60" max="120">
-            </div>
-            
-            <div class="control-group">
-                <label for="fontSize">Font Size (px):</label>
-                <input type="number" id="fontSize" value="32" min="24" max="48">
+                <label for="fontSize">Font Size (4x resolution):</label>
+                <input type="number" id="fontSize" value="64" min="48" max="96">
             </div>
             
             <button onclick="generateButton()">Generate Button</button>
@@ -168,11 +165,9 @@
         <div class="button-preview">
             <h3>Preview (CSS Version)</h3>
             <a href="#" class="email-button" id="previewButton">Call to Action</a>
-        </div>
-        
-        <div class="button-preview">
-            <h3>Generated Image (2x Resolution)</h3>
-            <canvas id="buttonCanvas" width="400" height="100"></canvas>
+        </div>        <div class="button-preview">
+            <h3>Generated Image (4x Resolution)</h3>
+            <canvas id="buttonCanvas" width="800" height="200"></canvas>
         </div>
         
         <div class="code-section">
@@ -211,14 +206,12 @@
             } else {
                 document.getElementById('previewButton').style.minWidth = '180px';
             }
-            
-            // Clear canvas
+              // Clear canvas
             ctx.clearRect(0, 0, width, height);
             
-            // Set up canvas for high DPI
-            const dpr = window.devicePixelRatio || 1;
-            canvas.style.width = (width / 2) + 'px';
-            canvas.style.height = (height / 2) + 'px';
+            // Set up canvas for high DPI (4x resolution)
+            canvas.style.width = (width / 4) + 'px';
+            canvas.style.height = (height / 4) + 'px';
             
             // Draw button background with gradient
             const gradient = ctx.createLinearGradient(0, 0, 0, height);
@@ -275,10 +268,9 @@
             
             // Generate HTML code
             generateEmailCode(text, width, height);
-        }
-          function generateEmailCode(text, width, height) {
-            const displayWidth = width / 2;
-            const displayHeight = height / 2;
+        }        function generateEmailCode(text, width, height) {
+            const displayWidth = width / 4;
+            const displayHeight = height / 4;
             const buttonText = text || 'Button';
             const altText = text || 'Button';
             
