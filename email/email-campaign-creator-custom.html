@@ -118,11 +118,20 @@
             .editor-content .btn-link:hover {
                 background-color: #2563eb;
             }
-            
-            .editor-content hr {
+              .editor-content hr {
                 border: none;
                 border-top: 1px solid #e5e7eb;
                 margin: 1rem 0;
+            }
+            
+            /* SVG Button Styles */
+            .svg-button-hover:hover {
+                fill: rgba(255,255,255,0.1);
+                transition: fill 0.2s ease;
+            }
+            
+            svg:hover .svg-button-hover {
+                fill: rgba(255,255,255,0.1);
             }
         </style>
     </head>
@@ -337,14 +346,16 @@
                                         <i class="fas fa-align-right"></i>
                                     </button>
                                 </div>
-                                
-                                <!-- Links and Elements -->
+                                  <!-- Links and Elements -->
                                 <div class="toolbar-group flex gap-1 border-r border-gray-300 pr-2 mr-2">
                                     <button type="button" class="toolbar-btn" onclick="insertLink()" title="Insert Link">
                                         <i class="fas fa-link"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" onclick="insertButton()" title="Insert Button">
                                         <i class="fas fa-square"></i>
+                                    </button>
+                                    <button type="button" class="toolbar-btn" onclick="insertSvgButton()" title="Insert SVG Button">
+                                        <i class="fas fa-play-circle"></i>
                                     </button>
                                     <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Line">
                                         <i class="fas fa-minus"></i>
@@ -929,8 +940,7 @@
                 }
             }
         }
-        
-        // Button insertion
+          // Button insertion
         function insertButton() {
             const url = prompt('Enter the button URL:');
             if (url) {
@@ -938,6 +948,47 @@
                 if (text) {
                     const buttonHtml = `<a href="${url}" class="btn-link" target="_blank">${text}</a>`;
                     executeCommand('insertHTML', buttonHtml);
+                }
+            }
+        }
+          // SVG Button insertion
+        function insertSvgButton() {
+            const url = prompt('Enter the button URL:');
+            if (url) {
+                const text = prompt('Enter the button text:', 'Call to Action');
+                if (text) {
+                    const svgButtonHtml = `
+                        <div style="text-align: center; margin: 20px 0;">
+                            <a href="${url}" target="_blank" style="text-decoration: none; display: inline-block;">
+                                <svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Button background with fully rounded corners -->
+                                    <rect x="2" y="2" width="196" height="46" rx="25" ry="25" 
+                                          fill="#215669" 
+                                          stroke="#1a4552" 
+                                          stroke-width="2"/>
+                                    
+                                    <!-- Subtle gradient overlay for depth -->
+                                    <defs>
+                                        <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2d6b7f;stop-opacity:0.3"/>
+                                            <stop offset="100%" style="stop-color:#1a4552;stop-opacity:0.3"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect x="2" y="2" width="196" height="46" rx="25" ry="25" fill="url(#buttonGradient)"/>
+                                    
+                                    <!-- Button text -->
+                                    <text x="100" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="bold" 
+                                          text-anchor="middle" fill="white">${text}</text>
+                                    
+                                    <!-- Hover effect overlay (will be handled by CSS) -->
+                                    <rect x="2" y="2" width="196" height="46" rx="25" ry="25" 
+                                          fill="rgba(255,255,255,0)" 
+                                          class="svg-button-hover"/>
+                                </svg>
+                            </a>
+                        </div>`;
+                    executeCommand('insertHTML', svgButtonHtml);
+                    logToDebugConsole('SVG button inserted with text: ' + text + ' and URL: ' + url);
                 }
             }
         }
