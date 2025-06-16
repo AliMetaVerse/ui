@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long Survey | Webropol</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Radix UI dependencies -->
+    <script type="module">
+      import * as RadixUI from 'https://cdn.skypack.dev/@radix-ui/react-primitives';
+    </script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        /* Custom Radio Button Styles */
+        .radio-container input[type="radio"] {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 50%;
+            margin-right: 8px;
+            position: relative;
+        }
+        
+        .radio-container input[type="radio"]:checked {
+            border-color: #3b82f6;
+            background-color: white;
+        }
+        
+        .radio-container input[type="radio"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 8px;
+            height: 8px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+        
+        /* Custom Checkbox Styles */
+        .checkbox-container input[type="checkbox"] {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 3px;
+            margin-right: 8px;
+            position: relative;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked {
+            border-color: #3b82f6;
+            background-color: #3b82f6;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white border-b border-gray-200 py-2 fixed top-0 w-full z-10">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-700 hover:text-blue-600">Preview & Test</button>
+                
+                <div class="flex border border-gray-300 rounded">
+                    <button class="px-3 py-1 bg-gray-100 text-gray-700 border-r border-gray-300 flex items-center">
+                        <span>Desktop</span>
+                    </button>
+                    <button class="px-3 py-1 text-gray-700 border-r border-gray-300 flex items-center">
+                        <span>Tablet</span>
+                    </button>
+                    <button class="px-3 py-1 text-gray-700 flex items-center">
+                        <span>Mobile</span>
+                    </button>
+                </div>
+                
+                <div class="flex border border-gray-300 rounded">
+                    <button class="px-2 py-1">Page</button>
+                    <span class="px-2 py-1 border-x border-gray-300">1</span>
+                    <button class="px-2 py-1 text-gray-700">↓</button>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-700 hover:text-blue-600">Export survey</button>
+                <button class="bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">PHP</button>
+                <button class="border border-gray-300 bg-white px-3 py-1 rounded hover:bg-gray-100">Word</button>
+            </div>
+        </div>
+    </header>    <main class="container mx-auto px-4 py-8 mt-14 max-w-3xl">
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">Long survey</h1>
+            
+            <!-- First Page (initially visible) -->
+            <div>
+                <!-- Question 1: Selection -->
+                <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Selection</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection1" value="option1">
+                        <span class="text-gray-800">Option1</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection1" value="option2">
+                        <span class="text-gray-800">Option2</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection1" value="option3">
+                        <span class="text-gray-800">Option3</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection1" value="option4">
+                        <span class="text-gray-800">Option4</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection1" value="option5">
+                        <span class="text-gray-800">Option5</span>
+                    </label>
+                </div>
+            </section>
+            
+            <!-- Question 2: Multiselection -->
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">2. Multiselection</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection1" value="option1">
+                        <span class="text-gray-800">Option1</span>
+                    </label>
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection1" value="option2">
+                        <span class="text-gray-800">Option2</span>
+                    </label>
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection1" value="option3">
+                        <span class="text-gray-800">Option3</span>
+                    </label>
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection1" value="option4">
+                        <span class="text-gray-800">Option4</span>
+                    </label>
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection1" value="option5">
+                        <span class="text-gray-800">Option5</span>
+                    </label>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 5 options</p>
+                <p class="text-sm text-gray-500">Selected options: 0</p>
+            </section>
+            
+            <!-- Question 3: Selection 2 -->
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">3. Selection 2</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection2" value="option1">
+                        <span class="text-gray-800">Option1</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection2" value="option2">
+                        <span class="text-gray-800">Option2</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection2" value="option3">
+                        <span class="text-gray-800">Option3</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection2" value="option4">
+                        <span class="text-gray-800">Option4</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection2" value="option5">
+                        <span class="text-gray-800">Option5</span>
+                    </label>
+                </div>
+            </section>
+            
+            <!-- Question 4: Multiselection 2 -->
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">4. Multiselection 2</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection2" value="option1">
+                        <span class="text-gray-800">Option</span>
+                    </label>
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection2" value="option2">
+                        <span class="text-gray-800">Option</span>
+                    </label>
+                    <label class="flex items-center checkbox-container">
+                        <input type="checkbox" name="multiselection2" value="option3">
+                        <span class="text-gray-800">Option</span>
+                    </label>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 2 options</p>
+                <p class="text-sm text-gray-500">Selected options: 0</p>
+            </section>
+            
+            <!-- Question 5: Selection 3 -->
+            <section class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">5. Selection 3</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection3" value="option1">
+                        <span class="text-gray-800">Option1</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection3" value="option2">
+                        <span class="text-gray-800">Option2</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection3" value="option3">
+                        <span class="text-gray-800">Option3</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection3" value="option4">
+                        <span class="text-gray-800">Option4</span>
+                    </label>
+                    <label class="flex items-center radio-container">
+                        <input type="radio" name="selection3" value="option5">
+                        <span class="text-gray-800">Option5</span>
+                    </label>
+                </div>
+            </section>            <!-- Next Button -->
+            <div class="flex justify-end mt-8">
+                <button id="nextBtn" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Next
+                </button>
+            </div>
+            </div>
+            
+            <!-- Second Page (initially hidden) -->
+            <div id="page2" class="hidden">
+                <!-- Question 6: Drop down list -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">6. Drop down list</h2>
+                    <div class="relative">
+                        <select class="block w-full px-4 py-2 pr-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none">
+                            <option value="" selected disabled>Select</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                            <option value="option4">Option 4</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Question 7: Matrix selection -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">7. Matrix selection</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4 p-3 text-left"></th>
+                                    <th class="p-3 text-center">Column1</th>
+                                    <th class="p-3 text-center">Column2</th>
+                                    <th class="p-3 text-center">Column3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option1</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option1" value="column1">
+                                            <span class="sr-only">Option1 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option1" value="column2">
+                                            <span class="sr-only">Option1 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option1" value="column3">
+                                            <span class="sr-only">Option1 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option2</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option2" value="column1">
+                                            <span class="sr-only">Option2 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option2" value="column2">
+                                            <span class="sr-only">Option2 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option2" value="column3">
+                                            <span class="sr-only">Option2 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option3</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option3" value="column1">
+                                            <span class="sr-only">Option3 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option3" value="column2">
+                                            <span class="sr-only">Option3 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option3" value="column3">
+                                            <span class="sr-only">Option3 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option4</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option4" value="column1">
+                                            <span class="sr-only">Option4 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option4" value="column2">
+                                            <span class="sr-only">Option4 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center radio-container">
+                                            <input type="radio" name="matrix_option4" value="column3">
+                                            <span class="sr-only">Option4 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- Question 8: Matrix multiselection -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">8. Matrix multiselection</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4 p-3 text-left"></th>
+                                    <th class="p-3 text-center">Column1</th>
+                                    <th class="p-3 text-center">Column2</th>
+                                    <th class="p-3 text-center">Column3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option1</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option1_column1" value="true">
+                                            <span class="sr-only">Option1 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option1_column2" value="true">
+                                            <span class="sr-only">Option1 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option1_column3" value="true">
+                                            <span class="sr-only">Option1 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option2</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option2_column1" value="true">
+                                            <span class="sr-only">Option2 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option2_column2" value="true">
+                                            <span class="sr-only">Option2 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option2_column3" value="true">
+                                            <span class="sr-only">Option2 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option3</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option3_column1" value="true">
+                                            <span class="sr-only">Option3 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option3_column2" value="true">
+                                            <span class="sr-only">Option3 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option3_column3" value="true">
+                                            <span class="sr-only">Option3 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="p-3 text-left">Option4</td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option4_column1" value="true">
+                                            <span class="sr-only">Option4 Column1</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option4_column2" value="true">
+                                            <span class="sr-only">Option4 Column2</span>
+                                        </label>
+                                    </td>
+                                    <td class="p-3 text-center">
+                                        <label class="flex justify-center checkbox-container">
+                                            <input type="checkbox" name="matrix_multi_option4_column3" value="true">
+                                            <span class="sr-only">Option4 Column3</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                  <!-- Navigation Buttons -->
+                <div class="flex justify-between mt-8">
+                    <button id="prevBtn" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        Previous
+                    </button>
+                    <button id="nextBtn2" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        Next
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Third Page (initially hidden) -->
+            <div id="page3" class="hidden">
+                <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">Questions</h1>
+                
+                <!-- Question 1: Open ended text area -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Open ended</h2>
+                    <div class="w-full">
+                        <textarea 
+                            class="w-full h-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                            placeholder="Enter your response here"
+                        ></textarea>
+                    </div>
+                </section>
+                
+                <!-- Question 2: CES (Customer Effort Score) -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">2. CES</h2>
+                    <div class="w-full">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-700">Very Difficult</span>
+                            <span class="text-sm text-gray-700">Very Easy</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-center w-1/5">
+                                <div class="flex justify-center mb-1">
+                                    <label class="radio-container flex justify-center">
+                                        <input type="radio" name="ces" value="1">
+                                        <span class="sr-only">1 (Very Difficult)</span>
+                                    </label>
+                                </div>
+                                <span class="text-xs text-gray-600">1</span>
+                            </div>
+                            <div class="text-center w-1/5">
+                                <div class="flex justify-center mb-1">
+                                    <label class="radio-container flex justify-center">
+                                        <input type="radio" name="ces" value="2">
+                                        <span class="sr-only">2</span>
+                                    </label>
+                                </div>
+                                <span class="text-xs text-gray-600">2</span>
+                            </div>
+                            <div class="text-center w-1/5">
+                                <div class="flex justify-center mb-1">
+                                    <label class="radio-container flex justify-center">
+                                        <input type="radio" name="ces" value="3">
+                                        <span class="sr-only">3</span>
+                                    </label>
+                                </div>
+                                <span class="text-xs text-gray-600">3</span>
+                            </div>
+                            <div class="text-center w-1/5">
+                                <div class="flex justify-center mb-1">
+                                    <label class="radio-container flex justify-center">
+                                        <input type="radio" name="ces" value="4">
+                                        <span class="sr-only">4</span>
+                                    </label>
+                                </div>
+                                <span class="text-xs text-gray-600">4</span>
+                            </div>
+                            <div class="text-center w-1/5">
+                                <div class="flex justify-center mb-1">
+                                    <label class="radio-container flex justify-center">
+                                        <input type="radio" name="ces" value="5">
+                                        <span class="sr-only">5 (Very Easy)</span>
+                                    </label>
+                                </div>
+                                <span class="text-xs text-gray-600">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Question 3: CES Slider -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">3. CES Slider</h2>
+                    <div class="w-full">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm text-gray-700">Very Difficult</span>
+                            <span class="text-sm text-gray-700">Very Easy</span>
+                        </div>
+                        <div class="relative pt-1">
+                            <div class="slider-container relative mb-4">
+                                <input 
+                                    type="range" 
+                                    min="1" 
+                                    max="5" 
+                                    value="1" 
+                                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                    id="cesSlider"
+                                >
+                                <!-- Slider Handle with Label -->
+                                <div id="sliderHandle" class="absolute top-0 transform -translate-y-1/2 -translate-x-1/2 z-10">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-6 h-6 bg-blue-500 rounded text-white flex items-center justify-center text-xs">1</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-600">
+                                <span>1</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Question 4: CES Smileys -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">4. CES Smileys</h2>
+                    <div class="w-full">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm text-gray-700">Very Difficult</span>
+                            <span class="text-sm text-gray-700">Very Easy</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <label class="flex flex-col items-center cursor-pointer w-1/5">
+                                <input type="radio" name="smiley" value="1" class="sr-only">
+                                <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                    <!-- Sad Face -->
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 15C9 15 10 13 12 13C14 13 15 15 15 15M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </label>
+                            <label class="flex flex-col items-center cursor-pointer w-1/5">
+                                <input type="radio" name="smiley" value="2" class="sr-only">
+                                <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                    <!-- Slightly Sad Face -->
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.5 15.5C9.5 15.5 10.5 14.5 12 14.5C13.5 14.5 14.5 15.5 14.5 15.5M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </label>
+                            <label class="flex flex-col items-center cursor-pointer w-1/5">
+                                <input type="radio" name="smiley" value="3" class="sr-only">
+                                <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                    <!-- Neutral Face -->
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 15H15M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </label>
+                            <label class="flex flex-col items-center cursor-pointer w-1/5">
+                                <input type="radio" name="smiley" value="4" class="sr-only">
+                                <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                    <!-- Happy Face -->
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 9H15.01M9 9H9.01M16 13C16 13 15 15 12 15C9 15 8 13 8 13M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </label>
+                            <label class="flex flex-col items-center cursor-pointer w-1/5">
+                                <input type="radio" name="smiley" value="5" class="sr-only">
+                                <div class="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center hover:scale-110 transition-transform">
+                                    <!-- Very Happy Face -->
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 9H15.01M9 9H9.01M16 14C16 14 15 16 12 16C9 16 8 14 8 14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Submit Button -->
+                <div class="flex justify-start mt-8">
+                    <button id="prevBtn2" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 mr-4 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        Previous
+                    </button>
+                    <button id="submitBtn" class="bg-white border border-orange-400 text-orange-700 px-4 py-2 rounded hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>    <!-- Add React implementation for Radix UI components -->
+    <script>
+        // This is where React code would be initialized to use Radix UI primitives
+        // For a complete implementation, we'd use a build tool like Vite, webpack, etc.
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize counter for checkbox selections
+            const multiCheckboxGroups = document.querySelectorAll('[name="multiselection1"], [name="multiselection2"]');
+            
+            multiCheckboxGroups.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const groupName = this.name;
+                    const checkboxes = document.querySelectorAll(`[name="${groupName}"]`);
+                    const selectedCount = Array.from(checkboxes).filter(box => box.checked).length;
+                    
+                    // Find the selected options counter element for this group
+                    const group = this.closest('section');
+                    const countDisplay = group.querySelector('p:last-child');
+                    if (countDisplay) {
+                        countDisplay.textContent = `Selected options: ${selectedCount}`;
+                    }
+                });
+            });              // Page navigation
+            const page1Wrapper = document.querySelector('main > div > div:not([id])');
+            const page1Content = page1Wrapper ? Array.from(page1Wrapper.querySelectorAll('section')).filter(section => !section.closest('[id^="page"]')) : [];
+            const page1NavButton = document.querySelector('main > div > div:not([id]) > div.flex.justify-end');
+            const page2Content = document.getElementById('page2');
+            const page3Content = document.getElementById('page3');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn2 = document.getElementById('nextBtn2');
+            const prevBtn2 = document.getElementById('prevBtn2');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            let currentPage = 1;
+            const totalPages = 3;
+              // Handle page navigation
+            function showPage(pageNumber) {
+                // Hide all pages and their content
+                if (page1Wrapper) {
+                    page1Wrapper.classList.add('hidden');
+                }
+                if (page1NavButton) {
+                    page1NavButton.classList.add('hidden');
+                }
+                if (page2Content) {
+                    page2Content.classList.add('hidden');
+                }
+                if (page3Content) {
+                    page3Content.classList.add('hidden');
+                }
+                
+                // Show the content for the selected page
+                if (pageNumber === 1) {
+                    // Show first page content
+                    if (page1Wrapper) {
+                        page1Wrapper.classList.remove('hidden');
+                    }
+                    if (page1NavButton) {
+                        page1NavButton.classList.remove('hidden');
+                    }
+                } else if (pageNumber === 2) {
+                    // Show second page content
+                    if (page2Content) {
+                        page2Content.classList.remove('hidden');
+                    }
+                } else if (pageNumber === 3) {
+                    // Show third page content
+                    if (page3Content) {
+                        page3Content.classList.remove('hidden');
+                    }
+                }
+                
+                // Update page indicator in header
+                const pageIndicator = document.querySelector('.flex.border.border-gray-300.rounded span');
+                if (pageIndicator) {
+                    pageIndicator.textContent = pageNumber.toString();
+                }
+                
+                // Update current page
+                currentPage = pageNumber;
+                
+                // Scroll to top of survey
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Next button click (page 1 -> page 2)
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    showPage(2);
+                });
+            }
+            
+            // Previous button click (page 2 -> page 1)
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    showPage(1);
+                });
+            }
+            
+            // Next button click (page 2 -> page 3)
+            if (nextBtn2) {
+                nextBtn2.addEventListener('click', function() {
+                    showPage(3);
+                });
+            }
+            
+            // Previous button click (page 3 -> page 2)
+            if (prevBtn2) {
+                prevBtn2.addEventListener('click', function() {
+                    showPage(2);
+                });
+            }
+            
+            // Submit button click
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function() {
+                    alert('Survey completed! Thank you for your responses.');
+                });
+            }
+            
+            // Initialize slider for CES Slider
+            const cesSlider = document.getElementById('cesSlider');
+            const sliderHandle = document.getElementById('sliderHandle');
+            
+            if (cesSlider && sliderHandle) {
+                // Set initial position
+                updateSliderHandlePosition();
+                
+                cesSlider.addEventListener('input', function() {
+                    updateSliderHandlePosition();
+                });
+                
+                function updateSliderHandlePosition() {
+                    const value = cesSlider.value;
+                    const min = cesSlider.min ? parseFloat(cesSlider.min) : 1;
+                    const max = cesSlider.max ? parseFloat(cesSlider.max) : 5;
+                    const percent = ((value - min) / (max - min)) * 100;
+                    
+                    // Update handle position
+                    sliderHandle.style.left = `${percent}%`;
+                    
+                    // Update the label
+                    const handleLabel = sliderHandle.querySelector('div > div');
+                    if (handleLabel) {
+                        handleLabel.textContent = value;
+                    }
+                }
+            }
+            
+            // Handle smiley selection
+            const smileyInputs = document.querySelectorAll('input[name="smiley"]');
+            smileyInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Remove selected state from all smileys
+                    smileyInputs.forEach(smiley => {
+                        const container = smiley.nextElementSibling;
+                        if (container) {
+                            container.classList.remove('ring-4');
+                        }
+                    });
+                    
+                    // Add selected state to chosen smiley
+                    const selectedContainer = this.nextElementSibling;
+                    if (selectedContainer) {
+                        selectedContainer.classList.add('ring-4', 'ring-blue-400');
+                    }
+                });
+            });
+            
+            // Initialize matrix checkboxes to track selections per row/column if needed
+            const matrixCheckboxes = document.querySelectorAll('[name^="matrix_multi_"]');
+            matrixCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Additional validation logic could go here if needed
+                });
+            });
+            
+            // Custom select styling enhancements
+            const selectElements = document.querySelectorAll('select');
+            selectElements.forEach(select => {
+                select.addEventListener('focus', function() {
+                    this.parentElement.classList.add('ring-2', 'ring-blue-500', 'ring-opacity-50');
+                });
+                
+                select.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('ring-2', 'ring-blue-500', 'ring-opacity-50');
+                });
+                
+                select.addEventListener('change', function() {
+                    // Handle select change events if needed
+                });
+            });
+        });
+    </script>
+</body>
+</html>
