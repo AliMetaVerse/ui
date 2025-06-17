@@ -55,6 +55,321 @@
             background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
         }
 
+        /* Accessibility Enhancements */
+        
+        /* High Contrast Selection States */
+        .radio-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            border: 3px solid #e2e8f0;
+            outline: none;
+        }
+
+        .radio-item:hover {
+            border-color: #3b82f6;
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.3);
+        }
+
+        .radio-item:focus-within {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+            outline: 2px solid #1d4ed8;
+            outline-offset: 2px;
+        }
+
+        .radio-item.selected {
+            border-color: #059669;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+        }
+
+        .radio-item.selected::before {
+            content: "✓";
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            color: #059669;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Enhanced Radio Circles */
+        .radio-circle {
+            border-width: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item.selected .radio-circle {
+            border-color: #059669;
+            background: #059669;
+        }
+
+        .radio-item.selected .radio-dot {
+            background: white;
+            opacity: 1;
+        }
+
+        /* Checkbox Enhancement */
+        .checkbox-container {
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 6px;
+            border: 3px solid #e2e8f0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .checkbox-container:hover {
+            background-color: rgba(59, 130, 246, 0.08);
+            transform: translateX(5px);
+            border-color: #3b82f6;
+        }
+
+        .checkbox-container:focus-within {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+        }
+
+        .checkbox-container.selected {
+            border-color: #059669;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+
+        /* Picture Selection Accessibility */
+        .picture-option {
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #e2e8f0;
+            outline: none;
+        }
+
+        .picture-option:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .picture-option:focus {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+            outline: 2px solid #1d4ed8;
+            outline-offset: 2px;
+        }
+
+        .picture-option.selected {
+            border-color: #059669;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.3);
+        }
+
+        .picture-option.selected::after {
+            content: "✓ Selected";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #059669;
+            color: white;
+            text-align: center;
+            padding: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* CES Button Accessibility */
+        .ces-button {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            outline: none;
+        }
+
+        .ces-button:focus {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+            outline: 2px solid #1d4ed8;
+            outline-offset: 2px;
+        }
+
+        .ces-button.selected {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.3);
+            border-color: #ffffff;
+        }
+
+        .ces-button.selected::after {
+            content: "✓";
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #059669;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Title Background Enhancement */
+        .title-background {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(139, 92, 246, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin-bottom: 2rem;
+        }
+
+        /* Form Input Accessibility */
+        .contact-input {
+            border-radius: 12px;
+            border: 3px solid #e2e8f0;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-input:focus {
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+            background: white;
+            outline: none;
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .radio-item, .checkbox-container, .picture-option {
+                border-width: 4px;
+            }
+            
+            .radio-item.selected, .checkbox-container.selected, .picture-option.selected {
+                border-color: #000000;
+                background: #ffff00;
+                color: #000000;
+            }
+            
+            .ces-button.selected {
+                border-color: #000000;
+                outline: 3px solid #000000;
+            }
+        }        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            .radio-item, .checkbox-container, .picture-option, .ces-button {
+                transition: none;
+                transform: none;
+            }
+            
+            .radio-item:hover, .checkbox-container:hover {
+                transform: none;
+            }
+            
+            .nps-emoji {
+                animation: none;
+            }
+        }
+
+        /* Fourfold Chart Styles */
+        .fourfold-chart {
+            cursor: crosshair;
+            user-select: none;
+            position: relative;
+        }
+
+        .fourfold-chart:hover {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+        }
+
+        .fourfold-category {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
+        }
+
+        #fourfoldPoint {
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        #fourfoldPoint.active {
+            opacity: 1;
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.4);
+        }
+
+        #fourfoldPoint:hover {
+            box-shadow: 0 6px 16px rgba(15, 118, 110, 0.5);
+        }
+
+        /* Question Table Styles */
+        .question-table-option {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-table-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.5) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .question-table-option:hover::before {
+            opacity: 1;
+        }
+
+        .question-table-option.selected {
+            border-color: #059669;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px -8px rgba(5, 150, 105, 0.3);
+        }
+
+        .question-table-option.selected::after {
+            content: "✓";
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            color: #059669;
+            font-weight: bold;
+            font-size: 1rem;
+            background: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Screen Reader Only Content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         /* Survey Card Styles */
         .survey-card {
             background: rgba(255, 255, 255, 0.95);
@@ -361,14 +676,15 @@
 
     <!-- Main Container -->
     <div class="min-h-screen py-8 px-4">
-        <div class="max-w-4xl mx-auto">
-            <!-- Header -->
+        <div class="max-w-4xl mx-auto">            <!-- Header -->
             <div class="text-center mb-12 fade-in">
-                <h1 class="text-5xl font-bold text-white mb-4">Complex Questions</h1>
-                <p class="text-xl text-white/80">Experience our modern, interactive survey interface</p>
-                <button onclick="openImageModal()" class="mt-6 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/30 transition-all border border-white/30">
-                    🎨 Customize Background
-                </button>
+                <div class="title-background">
+                    <h1 class="text-5xl font-bold text-white mb-4">Complex Questions</h1>
+                    <p class="text-xl text-white/90">Experience our modern, interactive survey interface</p>
+                    <button onclick="openImageModal()" class="mt-6 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/30 transition-all border border-white/30 focus:outline-none focus:ring-4 focus:ring-white/50">
+                        🎨 Customize Background
+                    </button>
+                </div>
             </div>
 
             <!-- Survey Card -->
@@ -398,9 +714,8 @@
 
                 <!-- Question 2: Selection -->
                 <div class="question-section p-6 mb-8 fade-in">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">2. Selection</h2>
-                    <div class="space-y-3">
-                        <div class="radio-item p-4 cursor-pointer" onclick="selectRadio(this, 'selection1', 'option1')">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">2. Selection</h2>                    <div class="space-y-3">
+                        <div class="radio-item p-4 cursor-pointer" onclick="selectRadio(this, 'selection1', 'option1')" role="radio" aria-checked="false" tabindex="0" onkeydown="handleKeyNavigation(event, this)">
                             <div class="flex items-center">
                                 <div class="radio-circle w-6 h-6 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
                                     <div class="radio-dot w-3 h-3 bg-blue-500 rounded-full opacity-0 transition-opacity"></div>
@@ -408,7 +723,7 @@
                                 <span class="text-gray-800 font-medium">Option 1</span>
                             </div>
                         </div>
-                        <div class="radio-item p-4 cursor-pointer" onclick="selectRadio(this, 'selection1', 'option2')">
+                        <div class="radio-item p-4 cursor-pointer" onclick="selectRadio(this, 'selection1', 'option2')" role="radio" aria-checked="false" tabindex="0" onkeydown="handleKeyNavigation(event, this)">
                             <div class="flex items-center">
                                 <div class="radio-circle w-6 h-6 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
                                     <div class="radio-dot w-3 h-3 bg-blue-500 rounded-full opacity-0 transition-opacity"></div>
@@ -426,13 +741,12 @@
                         <div class="flex justify-between text-sm text-gray-600 mb-2">
                             <span>Very Difficult</span>
                             <span>Very Easy</span>
-                        </div>
-                        <div class="flex space-x-2 justify-center">
-                            <button class="ces-button w-12 h-12 bg-red-500 text-white font-bold" onclick="selectCES(this, 1)">1</button>
-                            <button class="ces-button w-12 h-12 bg-red-400 text-white font-bold" onclick="selectCES(this, 2)">2</button>
-                            <button class="ces-button w-12 h-12 bg-orange-400 text-white font-bold" onclick="selectCES(this, 3)">3</button>
-                            <button class="ces-button w-12 h-12 bg-yellow-400 text-white font-bold" onclick="selectCES(this, 4)">4</button>
-                            <button class="ces-button w-12 h-12 bg-green-400 text-white font-bold" onclick="selectCES(this, 5)">5</button>
+                        </div>                        <div class="flex space-x-2 justify-center">
+                            <button class="ces-button w-12 h-12 bg-red-500 text-white font-bold" onclick="selectCES(this, 1)" role="radio" aria-checked="false" aria-label="Very Difficult - Score 1" tabindex="0">1</button>
+                            <button class="ces-button w-12 h-12 bg-red-400 text-white font-bold" onclick="selectCES(this, 2)" role="radio" aria-checked="false" aria-label="Difficult - Score 2" tabindex="0">2</button>
+                            <button class="ces-button w-12 h-12 bg-orange-400 text-white font-bold" onclick="selectCES(this, 3)" role="radio" aria-checked="false" aria-label="Neutral - Score 3" tabindex="0">3</button>
+                            <button class="ces-button w-12 h-12 bg-yellow-400 text-white font-bold" onclick="selectCES(this, 4)" role="radio" aria-checked="false" aria-label="Easy - Score 4" tabindex="0">4</button>
+                            <button class="ces-button w-12 h-12 bg-green-400 text-white font-bold" onclick="selectCES(this, 5)" role="radio" aria-checked="false" aria-label="Very Easy - Score 5" tabindex="0">5</button>
                         </div>
                     </div>
                 </div>
@@ -485,45 +799,44 @@
 
                 <!-- Question 5: Picture Selection -->
                 <div class="question-section p-6 mb-8 fade-in">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">5. Picture Selection</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-negative')">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">5. Picture Selection</h2>                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-negative')" role="button" aria-pressed="false" tabindex="0" aria-label="Very Negative emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Very Negative</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">😞</span>
                             </div>
                         </div>
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-positive')">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-positive')" role="button" aria-pressed="false" tabindex="0" aria-label="Slightly Positive emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Slightly Positive</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">🙂</span>
                             </div>
                         </div>
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'negative')">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'negative')" role="button" aria-pressed="false" tabindex="0" aria-label="Negative emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Negative</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">😔</span>
                             </div>
                         </div>
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'positive')">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'positive')" role="button" aria-pressed="false" tabindex="0" aria-label="Positive emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Positive</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">😊</span>
                             </div>
                         </div>
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-negative')">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-negative')" role="button" aria-pressed="false" tabindex="0" aria-label="Slightly Negative emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Slightly Negative</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">😐</span>
                             </div>
                         </div>
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-positive')">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-positive')" role="button" aria-pressed="false" tabindex="0" aria-label="Very Positive emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Very Positive</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">😍</span>
                             </div>
                         </div>
-                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'neutral')">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'neutral')" role="button" aria-pressed="false" tabindex="0" aria-label="Neutral emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Neutral</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
                                 <span class="text-2xl">😐</span>
@@ -644,19 +957,73 @@
                         <option>Option 2</option>
                         <option>Option 3</option>
                     </select>
-                </div>
-
-                <!-- Question 12: Freetable -->
+                </div>                <!-- Question 12: Fourfold -->
                 <div class="question-section p-6 mb-8 fade-in">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">12. Freetable</h2>
-                    <div class="bg-blue-50 p-6 rounded-xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-blue-700 font-medium">📈 Sales</span>
-                            <button class="text-blue-600 hover:text-blue-800">Place your graph from your data</button>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">12. Fourfold</h2>
+                    <div class="space-y-4">
+                        <!-- Category Selector -->
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="fourfold-category bg-teal-600 text-white px-4 py-2 rounded-lg font-medium">
+                                1. Ohh
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-sm text-teal-600 border border-teal-300 rounded-md hover:bg-teal-50 transition-colors" onclick="clearFourfoldAll()">Clear all</button>
+                                <button class="px-3 py-1 text-sm text-teal-600 border border-teal-300 rounded-md hover:bg-teal-50 transition-colors" onclick="clearFourfoldSelected()">Clear selected</button>
+                            </div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border-2 border-dashed border-blue-200">
-                            <div class="h-32 flex items-center justify-center text-gray-400">
-                                Chart placeholder
+                        
+                        <!-- Interactive Fourfold Chart -->
+                        <div class="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-8">
+                            <div class="text-center">
+                                <p class="text-gray-600 mb-4">Place your answer below or press</p>
+                                <button class="px-4 py-2 bg-blue-100 text-blue-700 rounded-md border border-blue-300 hover:bg-blue-200 transition-colors" onclick="setDontKnow()">I don't know</button>
+                            </div>
+                            
+                            <div class="relative bg-white border-2 border-gray-300 rounded-lg p-4">
+                                <!-- Y-axis label -->
+                                <div class="absolute -left-8 top-1/2 transform -translate-y-1/2 -rotate-90 text-sm font-medium text-gray-600">
+                                    0 to 100
+                                </div>
+                                
+                                <!-- Chart container -->
+                                <div class="fourfold-chart relative w-80 h-80 border-2 border-teal-500 bg-gradient-to-br from-blue-50 to-white" onclick="placeFourfoldPoint(event)">
+                                    <!-- Grid lines -->
+                                    <div class="absolute inset-0">
+                                        <div class="absolute top-1/2 left-0 w-full h-px bg-teal-400"></div>
+                                        <div class="absolute left-1/2 top-0 h-full w-px bg-teal-400"></div>
+                                    </div>
+                                    
+                                    <!-- Quadrant labels -->
+                                    <div class="absolute top-2 left-2 text-xs text-gray-500 font-medium">100,100</div>
+                                    <div class="absolute top-2 right-2 text-xs text-gray-500 font-medium">100,0</div>
+                                    <div class="absolute bottom-2 left-2 text-xs text-gray-500 font-medium">0,100</div>
+                                    <div class="absolute bottom-2 right-2 text-xs text-gray-500 font-medium">0,0</div>
+                                    
+                                    <!-- Draggable point -->
+                                    <div id="fourfoldPoint" class="absolute w-4 h-4 bg-teal-600 rounded-full border-2 border-white shadow-lg cursor-move transform -translate-x-2 -translate-y-2 opacity-0 transition-all duration-300 hover:scale-125" 
+                                         style="left: 50%; top: 50%;" 
+                                         onmousedown="startFourfoldDrag(event)">
+                                    </div>
+                                </div>
+                                
+                                <!-- X-axis label -->
+                                <div class="text-center mt-2 text-sm font-medium text-gray-600">
+                                    0 to 100
+                                </div>
+                                
+                                <!-- Axis indicators -->
+                                <div class="flex justify-between mt-1 text-xs text-gray-500">
+                                    <span>0</span>
+                                    <span>100</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Coordinates Display -->
+                        <div class="text-center mt-4">
+                            <div class="inline-block bg-gray-100 px-4 py-2 rounded-lg">
+                                <span class="text-gray-700 font-medium">Position: </span>
+                                <span id="fourfoldCoords" class="text-teal-600 font-bold">Click to place point</span>
                             </div>
                         </div>
                     </div>
@@ -665,37 +1032,61 @@
                 <!-- Question 13: Question Table -->
                 <div class="question-section p-6 mb-8 fade-in">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">13. Question Table</h2>
-                    <div class="overflow-x-auto">
-                        <table class="w-full border border-gray-200 rounded-xl">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-4 py-3 text-left text-gray-600 font-medium">Weight</th>
-                                    <th class="px-4 py-3 text-center">
-                                        <div class="flex flex-col items-center">
-                                            <span class="text-2xl mb-1">📊</span>
-                                            <span class="text-sm">Value</span>
+                    <div class="space-y-6">
+                        <!-- Question prompt -->
+                        <div class="text-center">
+                            <h3 class="text-lg font-medium text-gray-800 mb-4">What?</h3>
+                        </div>
+                        
+                        <!-- Interactive Answer Grid -->
+                        <div class="flex justify-center">
+                            <div class="bg-white border-2 border-gray-200 rounded-xl p-6 shadow-sm">
+                                <div class="grid grid-cols-2 gap-8 items-center">
+                                    <!-- Yeah Column -->
+                                    <div class="text-center space-y-4">
+                                        <div class="question-table-option p-4 rounded-lg border-2 border-gray-200 cursor-pointer transition-all duration-300 hover:border-teal-500 hover:bg-teal-50" 
+                                             onclick="selectTableOption(this, 'yeah')" 
+                                             role="button" 
+                                             aria-pressed="false" 
+                                             tabindex="0">
+                                            <div class="w-12 h-12 mx-auto mb-2 bg-teal-500 rounded-lg flex items-center justify-center">
+                                                <span class="text-white font-bold text-lg">�</span>
+                                            </div>
+                                            <div class="text-teal-600 font-medium text-sm mb-1">Yeah</div>
                                         </div>
-                                    </th>
-                                    <th class="px-4 py-3 text-center">
-                                        <div class="flex flex-col items-center">
-                                            <span class="text-2xl mb-1">📈</span>
-                                            <span class="text-sm">Value</span>
+                                        <div class="text-lg font-semibold text-gray-800">Yeah</div>
+                                    </div>
+                                    
+                                    <!-- Nah Column -->
+                                    <div class="text-center space-y-4">
+                                        <div class="question-table-option p-4 rounded-lg border-2 border-gray-200 cursor-pointer transition-all duration-300 hover:border-red-500 hover:bg-red-50" 
+                                             onclick="selectTableOption(this, 'nah')" 
+                                             role="button" 
+                                             aria-pressed="false" 
+                                             tabindex="0">
+                                            <div class="w-12 h-12 mx-auto mb-2 bg-red-500 rounded-lg flex items-center justify-center">
+                                                <span class="text-white font-bold text-lg">❌</span>
+                                            </div>
+                                            <div class="text-red-600 font-medium text-sm mb-1">Nah</div>
                                         </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-t border-gray-200">
-                                    <td class="px-4 py-3 font-medium">Item</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <input type="number" class="w-20 px-2 py-1 border border-gray-300 rounded text-center">
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <input type="number" class="w-20 px-2 py-1 border border-gray-300 rounded text-center">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <div class="text-lg font-semibold text-gray-800">Nah</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Selection Indicator -->
+                                <div class="mt-6 text-center">
+                                    <div id="tableSelection" class="inline-block px-4 py-2 bg-gray-100 rounded-lg text-gray-500">
+                                        Make your selection above
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Options -->
+                        <div class="flex justify-center space-x-4 mt-6">
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors" onclick="clearTableSelection()">Clear Selection</button>
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors" onclick="confirmTableSelection()">Confirm Choice</button>
+                        </div>
                     </div>
                 </div>
 
@@ -760,21 +1151,24 @@
                 document.body.style.backgroundAttachment = 'fixed';
             }
             closeImageModal();
-        }
-
-        // Radio Selection Function
+        }        // Radio Selection Function
         function selectRadio(element, name, value) {
             // Remove selected class from all radio items with the same name
             document.querySelectorAll(`[onclick*="${name}"]`).forEach(item => {
                 item.classList.remove('selected');
                 item.querySelector('.radio-dot').style.opacity = '0';
                 item.querySelector('.radio-circle').style.borderColor = '#d1d5db';
+                item.setAttribute('aria-selected', 'false');
             });
             
             // Add selected class to clicked item
             element.classList.add('selected');
             element.querySelector('.radio-dot').style.opacity = '1';
-            element.querySelector('.radio-circle').style.borderColor = '#3b82f6';
+            element.querySelector('.radio-circle').style.borderColor = '#059669';
+            element.setAttribute('aria-selected', 'true');
+            
+            // Announce selection to screen readers
+            announceSelection(`Selected ${element.querySelector('span').textContent}`);
         }
 
         // CES Selection Function
@@ -782,10 +1176,15 @@
             // Remove selected class from all CES buttons
             document.querySelectorAll('.ces-button').forEach(btn => {
                 btn.classList.remove('selected');
+                btn.setAttribute('aria-selected', 'false');
             });
             
             // Add selected class to clicked button
             element.classList.add('selected');
+            element.setAttribute('aria-selected', 'true');
+            
+            // Announce selection to screen readers
+            announceSelection(`Customer Effort Score ${value} selected`);
         }
 
         // Picture Selection Function
@@ -793,11 +1192,187 @@
             // Remove selected class from all picture options
             document.querySelectorAll('.picture-option').forEach(option => {
                 option.classList.remove('selected');
+                option.setAttribute('aria-selected', 'false');
             });
             
             // Add selected class to clicked option
             element.classList.add('selected');
-        }        // NPS Slider Functions
+            element.setAttribute('aria-selected', 'true');
+            
+            // Announce selection to screen readers
+            const optionText = element.querySelector('div').textContent;
+            announceSelection(`Picture option ${optionText} selected`);
+        }        // Screen reader announcement function
+        function announceSelection(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            
+            // Remove after announcement
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+
+        // Fourfold Chart Functions
+        let isDraggingFourfold = false;
+        let fourfoldPointPlaced = false;
+
+        function placeFourfoldPoint(event) {
+            const chart = event.currentTarget;
+            const rect = chart.getBoundingClientRect();
+            const point = document.getElementById('fourfoldPoint');
+            
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Convert to percentage coordinates
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = ((rect.height - y) / rect.height) * 100; // Invert Y axis
+            
+            // Update point position
+            point.style.left = x + 'px';
+            point.style.top = y + 'px';
+            point.classList.add('active');
+            
+            fourfoldPointPlaced = true;
+            updateFourfoldCoords(Math.round(xPercent), Math.round(yPercent));
+        }
+
+        function startFourfoldDrag(event) {
+            if (!fourfoldPointPlaced) return;
+            
+            isDraggingFourfold = true;
+            document.addEventListener('mousemove', dragFourfoldPoint);
+            document.addEventListener('mouseup', stopFourfoldDrag);
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        function dragFourfoldPoint(event) {
+            if (!isDraggingFourfold) return;
+            
+            const chart = document.querySelector('.fourfold-chart');
+            const rect = chart.getBoundingClientRect();
+            const point = document.getElementById('fourfoldPoint');
+            
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
+            
+            // Keep point within bounds
+            x = Math.max(0, Math.min(rect.width, x));
+            y = Math.max(0, Math.min(rect.height, y));
+            
+            // Convert to percentage coordinates
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = ((rect.height - y) / rect.height) * 100;
+            
+            point.style.left = x + 'px';
+            point.style.top = y + 'px';
+            
+            updateFourfoldCoords(Math.round(xPercent), Math.round(yPercent));
+        }
+
+        function stopFourfoldDrag() {
+            isDraggingFourfold = false;
+            document.removeEventListener('mousemove', dragFourfoldPoint);
+            document.removeEventListener('mouseup', stopFourfoldDrag);
+        }
+
+        function updateFourfoldCoords(x, y) {
+            document.getElementById('fourfoldCoords').textContent = `(${x}, ${y})`;
+        }
+
+        function clearFourfoldAll() {
+            const point = document.getElementById('fourfoldPoint');
+            point.classList.remove('active');
+            point.style.left = '50%';
+            point.style.top = '50%';
+            fourfoldPointPlaced = false;
+            document.getElementById('fourfoldCoords').textContent = 'Click to place point';
+        }
+
+        function clearFourfoldSelected() {
+            clearFourfoldAll();
+        }
+
+        function setDontKnow() {
+            clearFourfoldAll();
+            document.getElementById('fourfoldCoords').textContent = "I don't know";
+        }
+
+        // Question Table Functions
+        function selectTableOption(element, option) {
+            // Remove selected class from all options
+            document.querySelectorAll('.question-table-option').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.setAttribute('aria-pressed', 'false');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            element.setAttribute('aria-pressed', 'true');
+            
+            // Update selection display
+            const selectionDiv = document.getElementById('tableSelection');
+            selectionDiv.textContent = `Selected: ${option.charAt(0).toUpperCase() + option.slice(1)}`;
+            selectionDiv.className = `inline-block px-4 py-2 rounded-lg text-white font-medium ${
+                option === 'yeah' ? 'bg-teal-500' : 'bg-red-500'
+            }`;
+            
+            // Announce selection
+            announceSelection(`Question table option ${option} selected`);
+        }
+
+        function clearTableSelection() {
+            document.querySelectorAll('.question-table-option').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.setAttribute('aria-pressed', 'false');
+            });
+            
+            const selectionDiv = document.getElementById('tableSelection');
+            selectionDiv.textContent = 'Make your selection above';
+            selectionDiv.className = 'inline-block px-4 py-2 bg-gray-100 rounded-lg text-gray-500';
+        }
+
+        function confirmTableSelection() {
+            const selectedOption = document.querySelector('.question-table-option.selected');
+            if (selectedOption) {
+                const option = selectedOption.getAttribute('onclick').includes('yeah') ? 'Yeah' : 'Nah';
+                announceSelection(`Choice confirmed: ${option}`);
+                
+                // Visual feedback
+                selectedOption.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    selectedOption.style.transform = 'scale(1.05)';
+                }, 200);
+            } else {
+                announceSelection('Please make a selection first');
+            }
+        }
+
+        // Keyboard navigation function
+        function handleKeyNavigation(event, element) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                element.click();
+            } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                const nextElement = element.nextElementSibling;
+                if (nextElement && nextElement.classList.contains('radio-item')) {
+                    nextElement.focus();
+                }
+            } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                event.preventDefault();
+                const prevElement = element.previousElementSibling;
+                if (prevElement && prevElement.classList.contains('radio-item')) {
+                    prevElement.focus();
+                }
+            }
+        }// NPS Slider Functions
         function clickNPS(event) {
             const slider = event.currentTarget;
             const handle = document.getElementById('npsHandle');
@@ -976,6 +1551,45 @@
                     }
                 });
             });
+
+            // Add keyboard support for question table options
+            document.querySelectorAll('.question-table-option').forEach(option => {
+                option.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+
+            // Add keyboard support for fourfold chart
+            const fourfoldChart = document.querySelector('.fourfold-chart');
+            if (fourfoldChart) {
+                fourfoldChart.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        // Place point in center if not already placed
+                        if (!fourfoldPointPlaced) {
+                            const rect = this.getBoundingClientRect();
+                            const centerX = rect.width / 2;
+                            const centerY = rect.height / 2;
+                            
+                            const point = document.getElementById('fourfoldPoint');
+                            point.style.left = centerX + 'px';
+                            point.style.top = centerY + 'px';
+                            point.classList.add('active');
+                            
+                            fourfoldPointPlaced = true;
+                            updateFourfoldCoords(50, 50);
+                        }
+                    }
+                });
+                
+                // Make fourfold chart focusable
+                fourfoldChart.setAttribute('tabindex', '0');
+                fourfoldChart.setAttribute('role', 'application');
+                fourfoldChart.setAttribute('aria-label', 'Interactive fourfold chart. Click or press Enter to place a point, then drag to adjust position.');
+            }
 
             // Add animation delays to questions
             const questions = document.querySelectorAll('.question-section');
