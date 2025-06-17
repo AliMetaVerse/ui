@@ -799,47 +799,48 @@
 
                 <!-- Question 5: Picture Selection -->
                 <div class="question-section p-6 mb-8 fade-in">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">5. Picture Selection</h2>                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">5. Picture Selection</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-negative')" role="button" aria-pressed="false" tabindex="0" aria-label="Very Negative emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Very Negative</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">😞</span>
+                                <span class="text-5xl">😫</span>
                             </div>
                         </div>
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'negative')" role="button" aria-pressed="false" tabindex="0" aria-label="Negative emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Negative</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">�</span>
+                                <span class="text-5xl">😔</span>
                             </div>
                         </div>
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-negative')" role="button" aria-pressed="false" tabindex="0" aria-label="Slightly Negative emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Slightly Negative</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">�</span>
+                                <span class="text-5xl">🙁</span>
                             </div>
                         </div>
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'neutral')" role="button" aria-pressed="false" tabindex="0" aria-label="Neutral emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Neutral</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">�</span>
+                                <span class="text-5xl">😐</span>
                             </div>
                         </div>
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-positive')" role="button" aria-pressed="false" tabindex="0" aria-label="Slightly Positive emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Slightly Positive</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">�</span>
+                                <span class="text-5xl">🙂</span>
                             </div>
                         </div>
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'positive')" role="button" aria-pressed="false" tabindex="0" aria-label="Positive emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Positive</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">�</span>
+                                <span class="text-5xl">😊</span>
                             </div>
                         </div>
                         <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-positive')" role="button" aria-pressed="false" tabindex="0" aria-label="Very Positive emotion option">
                             <div class="text-blue-500 text-sm font-medium mb-2">Very Positive</div>
                             <div class="bg-blue-100 p-3 rounded-lg">
-                                <span class="text-5xl">�</span>
+                                <span class="text-5xl">😍</span>
                             </div>
                         </div>
                     </div>
@@ -1048,9 +1049,8 @@
                                              onclick="selectTableOption(this, 'yeah')" 
                                              role="button" 
                                              aria-pressed="false" 
-                                             tabindex="0">
-                                            <div class="w-12 h-12 mx-auto mb-2 bg-teal-500 rounded-lg flex items-center justify-center">
-                                                <span class="text-white font-bold text-lg">�</span>
+                                             tabindex="0">                                            <div class="w-12 h-12 mx-auto mb-2 bg-teal-500 rounded-lg flex items-center justify-center">
+                                                <span class="text-white font-bold text-lg">👍</span>
                                             </div>
                                             <div class="text-teal-600 font-medium text-sm mb-1">Yeah</div>
                                         </div>
@@ -1372,7 +1372,7 @@
                     prevElement.focus();
                 }
             }
-        }// NPS Slider Functions
+       }// NPS Slider Functions
         function clickNPS(event) {
             const slider = event.currentTarget;
             const handle = document.getElementById('npsHandle');
