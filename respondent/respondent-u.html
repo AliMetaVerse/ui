@@ -205,6 +205,89 @@
         .picture-option.selected {
             border: 3px solid #3b82f6;
             transform: scale(1.05);
+        }        /* NPS Emoji Styles */
+        .nps-emoji {
+            font-size: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+            position: relative;
+            display: inline-block;
+        }
+
+        .nps-emoji:hover {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+        }
+
+        .nps-emoji.bounce {
+            animation: emojiPulse 0.6s ease-out;
+        }
+
+        .nps-emoji.promoter {
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        .nps-emoji.detractor {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .nps-emoji.passive {
+            animation: wobble 0.8s ease-in-out;
+        }
+
+        /* Emoji Animations */
+        @keyframes emojiPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* Emoji Particle Effects */
+        .emoji-particles {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 0.8rem;
+            animation: particleFloat 2s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.5);
+            }
         }
 
         /* Animation Classes */
@@ -384,10 +467,12 @@
                         </div>                        <div class="text-center mt-4">
                             <div class="inline-block bg-blue-100 px-4 py-2 rounded-full">
                                 <span class="text-blue-600 font-bold text-lg" id="npsValue">9</span>
-                            </div>
-                            <div id="npsCategory" class="mt-2 p-4 bg-green-50 rounded-xl border border-green-200 transition-all duration-500">
+                            </div>                            <div id="npsCategory" class="mt-2 p-4 bg-green-50 rounded-xl border border-green-200 transition-all duration-500">
                                 <div class="flex items-center justify-center">
-                                    <span class="text-2xl mr-2" id="npsEmoji">😍</span>
+                                    <div class="relative mr-4">
+                                        <span class="nps-emoji" id="npsEmoji" onclick="triggerEmojiInteraction()">😍</span>
+                                        <div class="emoji-particles" id="emojiParticles"></div>
+                                    </div>
                                     <div>
                                         <div class="font-bold" id="npsCategoryText">Promoter</div>
                                         <div class="text-sm" id="npsDescription">You're likely to recommend us!</div>
@@ -759,7 +844,7 @@
             const categoryText = document.getElementById('npsCategoryText');
             const descriptionText = document.getElementById('npsDescription');
             
-            let category, emoji, description, bgColor, textColor, borderColor;
+            let category, emoji, description, bgColor, textColor, borderColor, emojiClass;
             
             if (value <= 6) {
                 category = 'Detractor';
@@ -768,6 +853,7 @@
                 bgColor = 'bg-red-50';
                 textColor = 'text-red-700';
                 borderColor = 'border-red-200';
+                emojiClass = 'detractor';
             } else if (value <= 8) {
                 category = 'Passive';
                 emoji = '😐';
@@ -775,6 +861,7 @@
                 bgColor = 'bg-yellow-50';
                 textColor = 'text-yellow-700';
                 borderColor = 'border-yellow-200';
+                emojiClass = 'passive';
             } else {
                 category = 'Promoter';
                 emoji = '😍';
@@ -782,16 +869,77 @@
                 bgColor = 'bg-green-50';
                 textColor = 'text-green-700';
                 borderColor = 'border-green-200';
+                emojiClass = 'promoter';
             }
             
             // Update the category display with smooth transition
             categoryDiv.className = `mt-2 p-4 ${bgColor} rounded-xl border ${borderColor} transition-all duration-500`;
+            
+            // Remove previous emoji classes and add new ones
+            emojiSpan.className = `nps-emoji ${emojiClass}`;
             emojiSpan.textContent = emoji;
+            
+            // Trigger bounce animation when emoji changes
+            emojiSpan.classList.add('bounce');
+            setTimeout(() => {
+                emojiSpan.classList.remove('bounce');
+            }, 600);
+            
             categoryText.textContent = category;
             categoryText.className = `${textColor} font-bold`;
             descriptionText.textContent = description;
             descriptionText.className = `${textColor.replace('700', '600')} text-sm`;
-        }        // Drag and Drop for File Upload
+        }
+
+        // Interactive emoji click function
+        function triggerEmojiInteraction() {
+            const emoji = document.getElementById('npsEmoji');
+            const particles = document.getElementById('emojiParticles');
+            
+            // Add bounce effect
+            emoji.classList.add('bounce');
+            
+            // Create particles based on emoji type
+            const currentEmoji = emoji.textContent;
+            let particleEmojis = [];
+            
+            if (currentEmoji === '😍') {
+                particleEmojis = ['💖', '✨', '🌟', '💕', '⭐'];
+            } else if (currentEmoji === '😐') {
+                particleEmojis = ['💭', '🤔', '💡', '⚖️', '🔄'];
+            } else if (currentEmoji === '😞') {
+                particleEmojis = ['💧', '😔', '😕', '💔', '⛈️'];
+            }
+            
+            // Generate multiple particles
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createParticle(particles, particleEmojis[i % particleEmojis.length], i);
+                }, i * 100);
+            }
+            
+            // Remove bounce class after animation
+            setTimeout(() => {
+                emoji.classList.remove('bounce');
+            }, 600);
+        }
+
+        function createParticle(container, emoji, index) {
+            const particle = document.createElement('span');
+            particle.className = 'particle';
+            particle.textContent = emoji;
+            particle.style.left = `${(index - 2) * 15}px`;
+            particle.style.animationDelay = `${index * 0.1}s`;
+            
+            container.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (container.contains(particle)) {
+                    container.removeChild(particle);
+                }
+            }, 2000);
+        }// Drag and Drop for File Upload
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize NPS category on page load
             updateNPSCategory(9); // Initialize with the default value
