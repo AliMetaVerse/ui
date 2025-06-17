@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Survey Interface | Webropol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Image Upload Styles */
+        .image-upload-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .image-upload-zone:hover {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            transform: translateY(-2px);
+        }
+
+        .image-upload-zone.active {
+            border-color: #059669;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+
+        /* Survey Card Styles */
+        .survey-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Question Type Specific Styles */
+        .question-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+        }
+
+        .question-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Contact Form Styles */
+        .contact-input {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            background: white;
+        }
+
+        /* Selection Radio Styles */
+        .radio-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .radio-item:hover {
+            border-color: #3b82f6;
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.3);
+        }
+
+        .radio-item.selected {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        /* CES Scale Styles */
+        .ces-button {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ces-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ces-button:hover::before {
+            opacity: 1;
+        }
+
+        .ces-button.selected {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* NPS Slider Styles */
+        .nps-slider {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 50px;
+            height: 12px;
+            position: relative;
+        }
+
+        .nps-handle {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: -10px;
+            box-shadow: 0 8px 25px -8px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .nps-handle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 12px 35px -8px rgba(59, 130, 246, 0.7);
+        }
+
+        /* Picture Selection Styles */
+        .picture-option {
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .picture-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .picture-option:hover::before {
+            opacity: 1;
+        }
+
+        .picture-option.selected {
+            border: 3px solid #3b82f6;
+            transform: scale(1.05);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-pattern">
+    <!-- Image Upload Modal -->
+    <div id="imageUploadModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 survey-card">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Upload Background Image</h3>
+            <div class="image-upload-zone p-8 text-center cursor-pointer" onclick="document.getElementById('backgroundImageInput').click()">
+                <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+                <p class="text-gray-600 font-medium">Click to upload or drag and drop</p>
+                <p class="text-sm text-gray-400 mt-2">PNG, JPG up to 10MB</p>
+            </div>
+            <input type="file" id="backgroundImageInput" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+            <div class="flex space-x-4 mt-6">
+                <button onclick="closeImageModal()" class="flex-1 py-3 px-6 bg-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-300 transition-colors">Cancel</button>
+                <button onclick="applyBackgroundImage()" class="flex-1 py-3 px-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="min-h-screen py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-5xl font-bold text-white mb-4">Complex Questions</h1>
+                <p class="text-xl text-white/80">Experience our modern, interactive survey interface</p>
+                <button onclick="openImageModal()" class="mt-6 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/30 transition-all border border-white/30">
+                    🎨 Customize Background
+                </button>
+            </div>
+
+            <!-- Survey Card -->
+            <div class="survey-card p-8 fade-in">
+                <!-- Question 1: Contact -->
+                <div class="question-section p-6 mb-8 bounce-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">1. Contact</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">First name</label>
+                            <input type="text" class="w-full px-4 py-3 contact-input" placeholder="Enter your first name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Last name</label>
+                            <input type="text" class="w-full px-4 py-3 contact-input" placeholder="Enter your last name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 contact-input" placeholder="Enter your email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                            <input type="text" class="w-full px-4 py-3 contact-input" placeholder="Enter your city">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2: Selection -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">2. Selection</h2>
+                    <div class="space-y-3">
+                        <div class="radio-item p-4 cursor-pointer" onclick="selectRadio(this, 'selection1', 'option1')">
+                            <div class="flex items-center">
+                                <div class="radio-circle w-6 h-6 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-3 h-3 bg-blue-500 rounded-full opacity-0 transition-opacity"></div>
+                                </div>
+                                <span class="text-gray-800 font-medium">Option 1</span>
+                            </div>
+                        </div>
+                        <div class="radio-item p-4 cursor-pointer" onclick="selectRadio(this, 'selection1', 'option2')">
+                            <div class="flex items-center">
+                                <div class="radio-circle w-6 h-6 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-3 h-3 bg-blue-500 rounded-full opacity-0 transition-opacity"></div>
+                                </div>
+                                <span class="text-gray-800 font-medium">Option 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3: CES -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">3. CES</h2>
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm text-gray-600 mb-2">
+                            <span>Very Difficult</span>
+                            <span>Very Easy</span>
+                        </div>
+                        <div class="flex space-x-2 justify-center">
+                            <button class="ces-button w-12 h-12 bg-red-500 text-white font-bold" onclick="selectCES(this, 1)">1</button>
+                            <button class="ces-button w-12 h-12 bg-red-400 text-white font-bold" onclick="selectCES(this, 2)">2</button>
+                            <button class="ces-button w-12 h-12 bg-orange-400 text-white font-bold" onclick="selectCES(this, 3)">3</button>
+                            <button class="ces-button w-12 h-12 bg-yellow-400 text-white font-bold" onclick="selectCES(this, 4)">4</button>
+                            <button class="ces-button w-12 h-12 bg-green-400 text-white font-bold" onclick="selectCES(this, 5)">5</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4: NPS -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">4. NPS</h2>
+                    <p class="text-gray-600 mb-6">How likely are you to recommend us to a friend or colleague?</p>                    <div class="relative">
+                        <div class="nps-slider cursor-pointer" onclick="clickNPS(event)">
+                            <div class="nps-handle cursor-pointer" id="npsHandle" style="left: 80%;" onmousedown="startNPSDrag(event)">
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <div class="w-4 h-4 bg-white rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span>10</span>
+                        </div>
+                        <div class="flex justify-between text-sm mt-2">
+                            <span class="text-red-500 font-medium">Not at all likely</span>
+                            <span class="text-green-500 font-medium">Extremely likely</span>
+                        </div>                        <div class="text-center mt-4">
+                            <div class="inline-block bg-blue-100 px-4 py-2 rounded-full">
+                                <span class="text-blue-600 font-bold text-lg" id="npsValue">9</span>
+                            </div>
+                            <div id="npsCategory" class="mt-2 p-4 bg-green-50 rounded-xl border border-green-200 transition-all duration-500">
+                                <div class="flex items-center justify-center">
+                                    <span class="text-2xl mr-2" id="npsEmoji">😍</span>
+                                    <div>
+                                        <div class="font-bold" id="npsCategoryText">Promoter</div>
+                                        <div class="text-sm" id="npsDescription">You're likely to recommend us!</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5: Picture Selection -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">5. Picture Selection</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-negative')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Very Negative</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">😞</span>
+                            </div>
+                        </div>
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-positive')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Slightly Positive</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">🙂</span>
+                            </div>
+                        </div>
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'negative')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Negative</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">😔</span>
+                            </div>
+                        </div>
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'positive')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Positive</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">😊</span>
+                            </div>
+                        </div>
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'slightly-negative')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Slightly Negative</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">😐</span>
+                            </div>
+                        </div>
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'very-positive')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Very Positive</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">😍</span>
+                            </div>
+                        </div>
+                        <div class="picture-option p-4 border-2 border-gray-200 text-center" onclick="selectPicture(this, 'neutral')">
+                            <div class="text-blue-500 text-sm font-medium mb-2">Neutral</div>
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <span class="text-2xl">😐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 6: Matrix -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">6. Matrix</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="text-left py-3 px-4"></th>
+                                    <th class="text-center py-3 px-4 text-gray-600 font-medium">👍</th>
+                                    <th class="text-center py-3 px-4 text-gray-600 font-medium">➖</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-4 px-4 font-medium text-gray-700">Item 1</td>
+                                    <td class="text-center py-4 px-4">
+                                        <input type="radio" name="matrix1" value="positive" class="w-5 h-5 text-blue-600">
+                                    </td>
+                                    <td class="text-center py-4 px-4">
+                                        <input type="radio" name="matrix1" value="negative" class="w-5 h-5 text-blue-600">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-4 px-4 font-medium text-gray-700">Item 2</td>
+                                    <td class="text-center py-4 px-4">
+                                        <input type="radio" name="matrix2" value="positive" class="w-5 h-5 text-blue-600">
+                                    </td>
+                                    <td class="text-center py-4 px-4">
+                                        <input type="radio" name="matrix2" value="negative" class="w-5 h-5 text-blue-600">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Question 7: Attach -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">7. Attach</h2>
+                    <div class="image-upload-zone p-6 text-center cursor-pointer" onclick="document.getElementById('attachmentInput').click()">
+                        <svg class="w-12 h-12 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                        </svg>
+                        <p class="text-gray-600 font-medium">Choose file to upload</p>
+                        <p class="text-sm text-gray-400 mt-1">Or drag and drop your file here</p>
+                    </div>
+                    <input type="file" id="attachmentInput" class="hidden" multiple>
+                </div>
+
+                <!-- Question 8: Calendar -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">8. Calendar</h2>
+                    <div class="flex items-center space-x-4">
+                        <input type="date" class="px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 transition-colors">
+                        <span class="text-gray-400">📅</span>
+                    </div>
+                </div>
+
+                <!-- Question 9: Multi Selection Matrix -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">9. Multi Selection Matrix</h2>
+                    <div class="grid grid-cols-5 gap-2 text-center">
+                        <div></div>
+                        <div class="font-medium text-gray-600">1</div>
+                        <div class="font-medium text-gray-600">2</div>
+                        <div class="font-medium text-gray-600">3</div>
+                        <div class="font-medium text-gray-600">4</div>
+                        
+                        <div class="font-medium text-gray-700 text-left">Row 1</div>
+                        <div><input type="checkbox" class="w-5 h-5 text-blue-600 rounded"></div>
+                        <div><input type="checkbox" class="w-5 h-5 text-blue-600 rounded"></div>
+                        <div><input type="checkbox" class="w-5 h-5 text-blue-600 rounded"></div>
+                        <div><input type="checkbox" class="w-5 h-5 text-blue-600 rounded"></div>
+                    </div>
+                </div>
+
+                <!-- Question 10: Position -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">10. Position</h2>
+                    <div class="flex justify-center space-x-8">
+                        <div class="text-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mx-auto mb-2"></div>
+                            <span class="text-sm text-gray-600">1</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-full mx-auto mb-2"></div>
+                            <span class="text-sm text-gray-600">2</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-full mx-auto mb-2"></div>
+                            <span class="text-sm text-gray-600">3</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-full mx-auto mb-2"></div>
+                            <span class="text-sm text-gray-600">4</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-full mx-auto mb-2"></div>
+                            <span class="text-sm text-gray-600">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 11: Hierarchical -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">11. Hierarchical</h2>
+                    <select class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 transition-colors bg-white">
+                        <option>Select an option...</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+
+                <!-- Question 12: Freetable -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">12. Freetable</h2>
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-blue-700 font-medium">📈 Sales</span>
+                            <button class="text-blue-600 hover:text-blue-800">Place your graph from your data</button>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border-2 border-dashed border-blue-200">
+                            <div class="h-32 flex items-center justify-center text-gray-400">
+                                Chart placeholder
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 13: Question Table -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">13. Question Table</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border border-gray-200 rounded-xl">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-gray-600 font-medium">Weight</th>
+                                    <th class="px-4 py-3 text-center">
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-2xl mb-1">📊</span>
+                                            <span class="text-sm">Value</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-2xl mb-1">📈</span>
+                                            <span class="text-sm">Value</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 font-medium">Item</td>
+                                    <td class="px-4 py-3 text-center">
+                                        <input type="number" class="w-20 px-2 py-1 border border-gray-300 rounded text-center">
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <input type="number" class="w-20 px-2 py-1 border border-gray-300 rounded text-center">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Question 14: Ranking -->
+                <div class="question-section p-6 mb-8 fade-in">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">14. Ranking</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-gray-600 font-medium">Only</span>
+                            <input type="text" class="w-32 px-3 py-2 border border-gray-300 rounded-lg text-center" placeholder="First">
+                            <span class="text-gray-600">Worst</span>
+                            <input type="text" class="w-32 px-3 py-2 border border-gray-300 rounded-lg text-center" placeholder="Second">
+                            <input type="text" class="w-32 px-3 py-2 border border-gray-300 rounded-lg text-center" placeholder="Third">
+                        </div>
+                        <div class="mt-4">
+                            <button class="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-12">
+                    <button class="px-12 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-bold rounded-2xl hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
+                        Complete Survey
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let uploadedImage = null;
+        let isDragging = false;
+
+        // Image Upload Modal Functions
+        function openImageModal() {
+            document.getElementById('imageUploadModal').classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageUploadModal').classList.add('hidden');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImage = e.target.result;
+                    document.querySelector('.image-upload-zone').classList.add('active');
+                    document.querySelector('.image-upload-zone p').textContent = 'Image uploaded successfully!';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyBackgroundImage() {
+            if (uploadedImage) {
+                document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${uploadedImage})`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundAttachment = 'fixed';
+            }
+            closeImageModal();
+        }
+
+        // Radio Selection Function
+        function selectRadio(element, name, value) {
+            // Remove selected class from all radio items with the same name
+            document.querySelectorAll(`[onclick*="${name}"]`).forEach(item => {
+                item.classList.remove('selected');
+                item.querySelector('.radio-dot').style.opacity = '0';
+                item.querySelector('.radio-circle').style.borderColor = '#d1d5db';
+            });
+            
+            // Add selected class to clicked item
+            element.classList.add('selected');
+            element.querySelector('.radio-dot').style.opacity = '1';
+            element.querySelector('.radio-circle').style.borderColor = '#3b82f6';
+        }
+
+        // CES Selection Function
+        function selectCES(element, value) {
+            // Remove selected class from all CES buttons
+            document.querySelectorAll('.ces-button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked button
+            element.classList.add('selected');
+        }
+
+        // Picture Selection Function
+        function selectPicture(element, value) {
+            // Remove selected class from all picture options
+            document.querySelectorAll('.picture-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+        }        // NPS Slider Functions
+        function clickNPS(event) {
+            const slider = event.currentTarget;
+            const handle = document.getElementById('npsHandle');
+            const rect = slider.getBoundingClientRect();
+            const percentage = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
+            const value = Math.round((percentage / 100) * 10);
+            
+            handle.style.left = percentage + '%';
+            document.getElementById('npsValue').textContent = value;
+            updateNPSCategory(value);
+        }
+
+        function startNPSDrag(event) {
+            isDragging = true;
+            document.addEventListener('mousemove', dragNPS);
+            document.addEventListener('mouseup', stopNPSDrag);
+            event.preventDefault();
+            event.stopPropagation(); // Prevent click event on slider
+        }
+
+        function dragNPS(event) {
+            if (!isDragging) return;
+            
+            const slider = document.querySelector('.nps-slider');
+            const handle = document.getElementById('npsHandle');
+            const rect = slider.getBoundingClientRect();
+            const percentage = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
+            const value = Math.round((percentage / 100) * 10);
+            
+            handle.style.left = percentage + '%';
+            document.getElementById('npsValue').textContent = value;
+            
+            // Update NPS category display
+            updateNPSCategory(value);
+        }
+
+        function stopNPSDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', dragNPS);
+            document.removeEventListener('mouseup', stopNPSDrag);
+        }        function updateNPSCategory(value) {
+            const categoryDiv = document.getElementById('npsCategory');
+            const emojiSpan = document.getElementById('npsEmoji');
+            const categoryText = document.getElementById('npsCategoryText');
+            const descriptionText = document.getElementById('npsDescription');
+            
+            let category, emoji, description, bgColor, textColor, borderColor;
+            
+            if (value <= 6) {
+                category = 'Detractor';
+                emoji = '😞';
+                description = 'You might not recommend us.';
+                bgColor = 'bg-red-50';
+                textColor = 'text-red-700';
+                borderColor = 'border-red-200';
+            } else if (value <= 8) {
+                category = 'Passive';
+                emoji = '😐';
+                description = 'You might consider recommending us.';
+                bgColor = 'bg-yellow-50';
+                textColor = 'text-yellow-700';
+                borderColor = 'border-yellow-200';
+            } else {
+                category = 'Promoter';
+                emoji = '😍';
+                description = 'You\'re likely to recommend us!';
+                bgColor = 'bg-green-50';
+                textColor = 'text-green-700';
+                borderColor = 'border-green-200';
+            }
+            
+            // Update the category display with smooth transition
+            categoryDiv.className = `mt-2 p-4 ${bgColor} rounded-xl border ${borderColor} transition-all duration-500`;
+            emojiSpan.textContent = emoji;
+            categoryText.textContent = category;
+            categoryText.className = `${textColor} font-bold`;
+            descriptionText.textContent = description;
+            descriptionText.className = `${textColor.replace('700', '600')} text-sm`;
+        }        // Drag and Drop for File Upload
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize NPS category on page load
+            updateNPSCategory(9); // Initialize with the default value
+
+            const uploadZones = document.querySelectorAll('.image-upload-zone');
+            
+            uploadZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('active');
+                });
+                
+                zone.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('active');
+                });
+                
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('active');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const file = files[0];
+                        if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                uploadedImage = e.target.result;
+                                zone.classList.add('active');
+                                zone.querySelector('p').textContent = 'Image uploaded successfully!';
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                });
+            });
+
+            // Add animation delays to questions
+            const questions = document.querySelectorAll('.question-section');
+            questions.forEach((question, index) => {
+                question.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
