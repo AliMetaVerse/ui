@@ -448,10 +448,71 @@
 
         .slider-modern:focus::-webkit-slider-thumb {
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }        .slider-modern:focus::-moz-range-thumb {
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
-        .slider-modern:focus::-moz-range-thumb {
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(59, 130, 246, 0.1);
+        /* Responsive viewport styles */
+        .viewport-container {
+            transition: all 0.3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        /* Desktop view - default */
+        .viewport-desktop {
+            max-width: 1200px;
+        }
+
+        .viewport-desktop #survey-page-background {
+            max-width: none;
+            padding: 2.5rem;
+        }
+
+        /* Tablet view */
+        .viewport-tablet {
+            max-width: 768px;
+            padding: 0 1rem;
+        }
+
+        .viewport-tablet #survey-page-background {
+            max-width: 100%;
+            padding: 2rem;
+        }
+
+        /* Mobile view */
+        .viewport-mobile {
+            max-width: 375px;
+            padding: 0 0.5rem;
+        }
+
+        .viewport-mobile #survey-page-background {
+            max-width: 100%;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+        }
+
+        .viewport-mobile .question-card {
+            padding: 1rem;
+        }
+
+        .viewport-mobile h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .viewport-mobile h2 {
+            font-size: 1rem;
+        }
+
+        /* Active viewport button styling */
+        .viewport-btn-active {
+            background: linear-gradient(to right, #3b82f6, #2563eb) !important;
+            color: white !important;
+        }
+
+        .viewport-btn-inactive {
+            background: white !important;
+            color: #374151 !important;
         }
     </style>
 </head>
@@ -473,11 +534,9 @@
                     </svg>
                     <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Preview &
                         Test</span>
-                </button>
-
-                <div class="flex border-2 border-gray-200 rounded-full overflow-hidden shadow-md bg-white">
-                    <button
-                        class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center hover:from-blue-600 hover:to-blue-700 transition-colors duration-300 border-r-2 border-blue-400">
+                </button>                <div class="flex border-2 border-gray-200 rounded-full overflow-hidden shadow-md bg-white">
+                    <button id="desktop-btn"
+                        class="viewport-btn viewport-btn-active px-4 py-2 flex items-center transition-colors duration-300 border-r-2 border-blue-400">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -486,8 +545,8 @@
                         </svg>
                         <span>Desktop</span>
                     </button>
-                    <button
-                        class="px-4 py-2 text-gray-700 border-r-2 border-gray-200 flex items-center hover:bg-blue-50 transition-colors duration-300">
+                    <button id="tablet-btn"
+                        class="viewport-btn viewport-btn-inactive px-4 py-2 border-r-2 border-gray-200 flex items-center transition-colors duration-300">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -495,8 +554,8 @@
                         </svg>
                         <span>Tablet</span>
                     </button>
-                    <button
-                        class="px-4 py-2 text-gray-700 flex items-center hover:bg-blue-50 transition-colors duration-300">
+                    <button id="mobile-btn"
+                        class="viewport-btn viewport-btn-inactive px-4 py-2 flex items-center transition-colors duration-300">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -752,7 +811,7 @@
                 </div>
             </div>
         </div>
-    </header>    <main class="mx-auto px-4 py-12 mt-20 max-w-5xl">
+    </header>    <main class="viewport-container viewport-desktop mx-auto px-4 py-12 mt-20">
         <div id="survey-page-background" class="bg-white/90 rounded-3xl p-10 mb-8 border-2 border-gray-100 hover:border-blue-300 backdrop-blur-sm">
             <h1
                 class="text-3xl font-bold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 via-purple-500 to-blue-800 pb-2">
@@ -1969,8 +2028,46 @@
             [questionTransparency, surveyTransparency, backdropBlur, bgColorPicker, bgImageInput, bgEnableSwitch].forEach(input => {
                 input.addEventListener('input', applyStyles);
                 input.addEventListener('change', applyStyles);
-            });
-            applyStyles();
+            });            applyStyles();
+
+            // Viewport switching functionality
+            const viewportContainer = document.querySelector('.viewport-container');
+            const desktopBtn = document.getElementById('desktop-btn');
+            const tabletBtn = document.getElementById('tablet-btn');
+            const mobileBtn = document.getElementById('mobile-btn');
+
+            function switchViewport(viewportType) {
+                // Remove all viewport classes
+                viewportContainer.classList.remove('viewport-desktop', 'viewport-tablet', 'viewport-mobile');
+                
+                // Add the selected viewport class
+                viewportContainer.classList.add(`viewport-${viewportType}`);
+                
+                // Update button states
+                document.querySelectorAll('.viewport-btn').forEach(btn => {
+                    btn.classList.remove('viewport-btn-active');
+                    btn.classList.add('viewport-btn-inactive');
+                });
+                
+                // Activate the clicked button
+                const activeBtn = document.getElementById(`${viewportType}-btn`);
+                if (activeBtn) {
+                    activeBtn.classList.remove('viewport-btn-inactive');
+                    activeBtn.classList.add('viewport-btn-active');
+                }
+                
+                // Store preference
+                localStorage.setItem('surveyViewport', viewportType);
+            }
+
+            // Add event listeners
+            desktopBtn.addEventListener('click', () => switchViewport('desktop'));
+            tabletBtn.addEventListener('click', () => switchViewport('tablet'));
+            mobileBtn.addEventListener('click', () => switchViewport('mobile'));
+
+            // Load saved viewport preference or default to desktop
+            const savedViewport = localStorage.getItem('surveyViewport') || 'desktop';
+            switchViewport(savedViewport);
 
             // Dropdown logic for appearance controls
             const dropdownBtn = document.getElementById('transparencyDropdownBtn');
