@@ -241,6 +241,13 @@
         .animate-fade-in {
             animation: fade-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* Question Card Styles */
+        .question-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -384,10 +391,8 @@
                 </div>
             </div>
         </div>
-    </header>
-    <main class="mx-auto px-4 py-12 mt-20 max-w-3xl">
-        <div
-            class="bg-white rounded-3xl p-10 mb-8 border-2 border-gray-100 hover:border-blue-300 transition-all duration-500 transform hover:-translate-y-1">
+    </header>    <main class="mx-auto px-4 py-12 mt-20 max-w-3xl">
+        <div id="survey-page-background" class="bg-white/90 rounded-3xl p-10 mb-8 border-2 border-gray-100 hover:border-blue-300 transition-all duration-500 transform hover:-translate-y-1 backdrop-blur-sm">
             <h1
                 class="text-3xl font-bold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 via-purple-500 to-blue-800 pb-2">
                 Long survey</h1>
@@ -396,39 +401,40 @@
             <div>
                 <!-- Question 1: Selection -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Selection</h2>
-                    <div class="space-y-3">
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection1" value="option1">
-                            <span class="text-gray-800">Option1</span>
-                        </label>
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection1" value="option2">
-                            <span class="text-gray-800">Option2</span>
-                        </label>
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection1" value="option3">
-                            <span class="text-gray-800">Option3</span>
-                        </label>
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection1" value="option4">
-                            <span class="text-gray-800">Option4</span>
-                        </label>
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection1" value="option5">
-                            <span class="text-gray-800">Option5</span>
-                        </label>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Selection</h2>
+                        <div class="space-y-3">
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection1" value="option1">
+                                <span class="text-gray-800">Option1</span>
+                            </label>
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection1" value="option2">
+                                <span class="text-gray-800">Option2</span>
+                            </label>
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection1" value="option3">
+                                <span class="text-gray-800">Option3</span>
+                            </label>
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection1" value="option4">
+                                <span class="text-gray-800">Option4</span>
+                            </label>
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection1" value="option5">
+                                <span class="text-gray-800">Option5</span>
+                            </label>
+                        </div>
                     </div>
-                </section>
-
-                <!-- Question 2: Multiselection -->
+                </section>                <!-- Question 2: Multiselection -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">2. Multiselection</h2>
-                    <div class="space-y-3">
-                        <label class="flex items-center checkbox-container">
-                            <input type="checkbox" name="multiselection1" value="option1">
-                            <span class="text-gray-800">Option1</span>
-                        </label>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">2. Multiselection</h2>
+                        <div class="space-y-3">
+                            <label class="flex items-center checkbox-container">
+                                <input type="checkbox" name="multiselection1" value="option1">
+                                <span class="text-gray-800">Option1</span>
+                            </label>
                         <label class="flex items-center checkbox-container">
                             <input type="checkbox" name="multiselection1" value="option2">
                             <span class="text-gray-800">Option2</span>
@@ -444,20 +450,19 @@
                         <label class="flex items-center checkbox-container">
                             <input type="checkbox" name="multiselection1" value="option5">
                             <span class="text-gray-800">Option5</span>
-                        </label>
+                        </label>                        </div>
+                        <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 5 options</p>
+                        <p class="text-sm text-gray-500">Selected options: 0</p>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 5 options</p>
-                    <p class="text-sm text-gray-500">Selected options: 0</p>
-                </section>
-
-                <!-- Question 3: Selection 2 -->
+                </section>                <!-- Question 3: Selection 2 -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">3. Selection 2</h2>
-                    <div class="space-y-3">
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection2" value="option1">
-                            <span class="text-gray-800">Option1</span>
-                        </label>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">3. Selection 2</h2>
+                        <div class="space-y-3">
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection2" value="option1">
+                                <span class="text-gray-800">Option1</span>
+                            </label>
                         <label class="flex items-center radio-container">
                             <input type="radio" name="selection2" value="option2">
                             <span class="text-gray-800">Option2</span>
@@ -473,18 +478,19 @@
                         <label class="flex items-center radio-container">
                             <input type="radio" name="selection2" value="option5">
                             <span class="text-gray-800">Option5</span>
-                        </label>
+                        </label>                        </div>
                     </div>
                 </section>
 
                 <!-- Question 4: Multiselection 2 -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">4. Multiselection 2</h2>
-                    <div class="space-y-3">
-                        <label class="flex items-center checkbox-container">
-                            <input type="checkbox" name="multiselection2" value="option1">
-                            <span class="text-gray-800">Option</span>
-                        </label>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">4. Multiselection 2</h2>
+                        <div class="space-y-3">
+                            <label class="flex items-center checkbox-container">
+                                <input type="checkbox" name="multiselection2" value="option1">
+                                <span class="text-gray-800">Option</span>
+                            </label>
                         <label class="flex items-center checkbox-container">
                             <input type="checkbox" name="multiselection2" value="option2">
                             <span class="text-gray-800">Option</span>
@@ -492,20 +498,21 @@
                         <label class="flex items-center checkbox-container">
                             <input type="checkbox" name="multiselection2" value="option3">
                             <span class="text-gray-800">Option</span>
-                        </label>
+                        </label>                        </div>
+                        <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 2 options</p>
+                        <p class="text-sm text-gray-500">Selected options: 0</p>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 2 options</p>
-                    <p class="text-sm text-gray-500">Selected options: 0</p>
                 </section>
 
                 <!-- Question 5: Selection 3 -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">5. Selection 3</h2>
-                    <div class="space-y-3">
-                        <label class="flex items-center radio-container">
-                            <input type="radio" name="selection3" value="option1">
-                            <span class="text-gray-800">Option1</span>
-                        </label>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">5. Selection 3</h2>
+                        <div class="space-y-3">
+                            <label class="flex items-center radio-container">
+                                <input type="radio" name="selection3" value="option1">
+                                <span class="text-gray-800">Option1</span>
+                            </label>
                         <label class="flex items-center radio-container">
                             <input type="radio" name="selection3" value="option2">
                             <span class="text-gray-800">Option2</span>
@@ -521,7 +528,7 @@
                         <label class="flex items-center radio-container">
                             <input type="radio" name="selection3" value="option5">
                             <span class="text-gray-800">Option5</span>
-                        </label>
+                        </label>                        </div>
                     </div>
                 </section> <!-- Next Button -->
                 <div class="flex justify-end mt-10">
@@ -540,38 +547,38 @@
             </div>
 
             <!-- Second Page (initially hidden) -->
-            <div id="page2" class="hidden">
-                <!-- Question 6: Drop down list -->
+            <div id="page2" class="hidden">                <!-- Question 6: Drop down list -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">6. Drop down list</h2>
-                    <div class="relative">
-                        <select
-                            class="block w-full px-6 py-4 pr-12 border-2 border-gray-300 bg-white rounded-full shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 appearance-none transition-all duration-300 text-gray-700 font-medium hover:border-blue-400">
-                            <option value="" selected disabled>Select an option...</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                            <option value="option4">Option 4</option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-600">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">6. Drop down list</h2>
+                        <div class="relative">
+                            <select
+                                class="block w-full px-6 py-4 pr-12 border-2 border-gray-300 bg-white rounded-full shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 appearance-none transition-all duration-300 text-gray-700 font-medium hover:border-blue-400">
+                                <option value="" selected disabled>Select an option...</option>
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                                <option value="option4">Option 4</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-600">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
                         </div>
+                        <p class="text-sm text-blue-600 mt-2 ml-2">Click to see all available options</p>
                     </div>
-                    <p class="text-sm text-blue-600 mt-2 ml-2">Click to see all available options</p>
-                </section>
-
-                <!-- Question 7: Matrix selection -->
+                </section>                <!-- Question 7: Matrix selection -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">7. Matrix selection</h2>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full border-collapse">
-                            <thead>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">7. Matrix selection</h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full border-collapse">
+                                <thead>
                                 <tr>
                                     <th class="w-1/4 p-3 text-left"></th>
                                     <th class="p-3 text-center">Column1</th>
@@ -663,14 +670,15 @@
                                             <span class="sr-only">Option4 Column3</span>
                                         </label>
                                     </td>
-                                </tr>
-                            </tbody>
+                                </tr>                            </tbody>
                         </table>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <!-- Question 8: Matrix multiselection -->
-                <section class="mb-8">
+            <!-- Question 8: Matrix multiselection -->
+            <section class="mb-8">
+                <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">8. Matrix multiselection</h2>
                     <div class="overflow-x-auto">
                         <table class="min-w-full border-collapse">
@@ -767,10 +775,10 @@
                                         </label>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
+                            </tbody>                        </table>
                     </div>
-                </section> <!-- Navigation Buttons -->
+                </div>
+            </section> <!-- Navigation Buttons -->
                 <div class="flex justify-between mt-10">
                     <button id="prevBtn"
                         class="bg-gradient-to-r from-gray-100 to-gray-300 text-gray-700 px-8 py-4 rounded-full hover:from-gray-200 hover:to-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg border border-gray-300">
@@ -799,34 +807,33 @@
 
             <!-- Third Page (initially hidden) -->
             <div id="page3" class="hidden">
-                <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">Questions</h1>
-
-                <!-- Question 1: Open ended text area -->
+                <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">Questions</h1>                <!-- Question 1: Open ended text area -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Open ended</h2>
-                    <div class="w-full">
-                        <textarea
-                            class="w-full h-40 px-6 py-4 border-2 border-gray-300 rounded-3xl shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 resize-none hover:border-blue-400 transition-all duration-300 text-gray-700"
-                            placeholder="Share your thoughts here..."></textarea>
-                        <div class="mt-3 flex justify-between items-center px-2">
-                            <span class="text-sm text-blue-600 flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                Feel free to write as much as you'd like
-                            </span>
-                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">0/1000
-                                characters</span>
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Open ended</h2>
+                        <div class="w-full">
+                            <textarea
+                                class="w-full h-40 px-6 py-4 border-2 border-gray-300 rounded-3xl shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 resize-none hover:border-blue-400 transition-all duration-300 text-gray-700"
+                                placeholder="Share your thoughts here..."></textarea>
+                            <div class="mt-3 flex justify-between items-center px-2">
+                                <span class="text-sm text-blue-600 flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Feel free to write as much as you'd like
+                                </span>
+                                <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">0/1000
+                                    characters</span>
+                            </div>
                         </div>
                     </div>
-                </section>
-
-                <!-- Question 2: CES (Customer Effort Score) -->
+                </section>                <!-- Question 2: CES (Customer Effort Score) -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">2. CES</h2>
-                    <div class="w-full">
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">2. CES</h2>
+                        <div class="w-full">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-sm text-gray-700">Very Difficult</span>
                             <span class="text-sm text-gray-700">Very Easy</span>
@@ -875,16 +882,16 @@
                                         <span class="sr-only">5 (Very Easy)</span>
                                     </label>
                                 </div>
-                                <span class="text-xs text-gray-600">5</span>
-                            </div>
+                                <span class="text-xs text-gray-600">5</span>                            </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Question 3: CES Slider -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">3. CES Slider</h2>
-                    <div class="w-full">
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">3. CES Slider</h2>
+                        <div class="w-full">
                         <div class="flex justify-between mb-2">
                             <span class="text-sm text-gray-700">Very Difficult</span>
                             <span class="text-sm text-gray-700">Very Easy</span>
@@ -943,16 +950,16 @@
                             </div>
                             <div class="flex justify-between text-xs text-gray-600">
                                 <span>1</span>
-                                <span>5</span>
-                            </div>
+                                <span>5</span>                            </div>
                         </div>
                     </div>
                 </section>
 
                 <!-- Question 4: CES Smileys -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">4. CES Smileys</h2>
-                    <div class="w-full">
+                    <div class="question-card bg-white rounded-2xl shadow-md p-6 transition-all duration-300">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">4. CES Smileys</h2>
+                        <div class="w-full">
                         <div class="flex justify-between mb-2">
                             <span class="text-sm text-gray-700">Very Difficult</span>
                             <span class="text-sm text-gray-700">Very Easy</span>
@@ -1027,8 +1034,7 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                            </label>
-                        </div>
+                            </label>                        </div>
                     </div>
                 </section> <!-- Submit Button -->
                 <div class="flex justify-between mt-10">
@@ -1317,24 +1323,28 @@
             // Load saved background enable state
             if (localStorage.getItem('surveyBgEnabled') === 'false') {
                 bgEnableSwitch.checked = false;
-            }
-            function applyStyles() {
+            }            function applyStyles() {
                 // Remove Tailwind and inline background from body so custom color/image is visible
                 document.body.classList.remove('bg-gray-50');
                 document.body.style.backgroundImage = '';
                 document.body.style.backgroundColor = '';
-                // Survey/Page Transparency (applied to main section)
-                if (mainSection) {
-                    mainSection.style.backgroundColor = `rgba(255,255,255,${surveyTransparency.value / 100})`;
+                
+                // Apply transparency to survey page background
+                const surveyPageBg = document.getElementById('survey-page-background');
+                if (surveyPageBg) {
+                    surveyPageBg.style.backgroundColor = `rgba(255,255,255,${surveyTransparency.value / 100})`;
                 }
+                
                 // Survey Card Blur
                 if (surveyCard) {
                     surveyCard.style.backdropFilter = `blur(${backdropBlur.value}px)`;
                 }
-                // Question Section Transparency
-                questionSections.forEach(section => {
-                    section.style.backgroundColor = `rgba(255,255,255,${questionTransparency.value / 100})`;
+                
+                // Question Card Transparency
+                document.querySelectorAll('.question-card').forEach(card => {
+                    card.style.backgroundColor = `rgba(255,255,255,${questionTransparency.value / 100})`;
                 });
+                
                 // Apply background color and image to body for full-page effect if enabled
                 if (bgEnableSwitch.checked) {
                     document.body.style.backgroundColor = bgColorPicker.value;
@@ -1364,6 +1374,7 @@
             // Dropdown logic for appearance controls
             const dropdownBtn = document.getElementById('transparencyDropdownBtn');
             const dropdown = document.getElementById('transparencyDropdown');
+           
             if (dropdownBtn && dropdown) {
                 dropdownBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
