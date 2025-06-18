@@ -1158,19 +1158,19 @@
                                         id="cesSlider">
                                     <!-- Slider Track Fill -->
                                     <div class="absolute top-1/2 left-0 transform -translate-y-1/2 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full"
-                                        style="width: 0%;" id="sliderFill"></div>
-
-                                    <!-- Slider Handle with Label -->
+                                        style="width: 0%;" id="sliderFill"></div>                                    <!-- Slider Handle with Label -->
                                     <div id="sliderHandle"
                                         class="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10"
                                         style="left: 0%;">
                                         <div class="flex flex-col items-center">
+                                            <!-- Label positioned well above -->
+                                            <div
+                                                class="mb-8 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap transform -translate-y-4">
+                                                Very Difficult</div>
+                                            <!-- Circle at track level -->
                                             <div
                                                 class="w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-red-100 transform transition-all duration-300">
                                                 1</div>
-                                            <div
-                                                class="mt-2 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap">
-                                                Very Difficult</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1467,11 +1467,9 @@
                         } else {
                             sliderFill.className = "absolute top-1/2 left-0 transform -translate-y-1/2 h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full";
                         }
-                    }
-
-                    // Get the handle and tooltip elements
-                    const handleLabel = sliderHandle.querySelector('div > div:first-child');
-                    const handleTooltip = sliderHandle.querySelector('div > div:last-child');
+                    }                    // Get the handle and tooltip elements
+                    const handleTooltip = sliderHandle.querySelector('div > div:first-child');
+                    const handleLabel = sliderHandle.querySelector('div > div:last-child');
 
                     if (handleLabel && handleTooltip) {
                         // Update the numeric label
@@ -1484,18 +1482,16 @@
                         else if (value == 4) tooltipText = "Easy";
                         else if (value >= 5) tooltipText = "Very Easy";
 
-                        handleTooltip.textContent = tooltipText;
-
-                        // Change handle color and style based on value for visual feedback
+                        handleTooltip.textContent = tooltipText;                        // Change handle color and style based on value for visual feedback
                         if (value <= 2) {
                             handleLabel.className = "w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-red-100";
-                            handleTooltip.className = "mt-2 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap";
+                            handleTooltip.className = "mb-8 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap transform -translate-y-4";
                         } else if (value == 3) {
                             handleLabel.className = "w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-yellow-100";
-                            handleTooltip.className = "mt-2 bg-yellow-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap";
+                            handleTooltip.className = "mb-8 bg-yellow-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap transform -translate-y-4";
                         } else {
                             handleLabel.className = "w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-green-100";
-                            handleTooltip.className = "mt-2 bg-green-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap";
+                            handleTooltip.className = "mb-8 bg-green-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap transform -translate-y-4";
                         }
                     }
                 }
