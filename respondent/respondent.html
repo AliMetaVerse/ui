@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Radix UI dependencies -->
     <script type="module">
-      import * as RadixUI from 'https://cdn.skypack.dev/@radix-ui/react-primitives';
+        import * as RadixUI from 'https://cdn.skypack.dev/@radix-ui/react-primitives';
     </script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -20,7 +21,7 @@
             background-image: linear-gradient(to bottom right, #f3f4f6, #fff);
             min-height: 100vh;
         }
-        
+
         /* Custom Radio Button Styles */
         .radio-container input[type="radio"] {
             appearance: none;
@@ -32,20 +33,20 @@
             position: relative;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         .radio-container:hover input[type="radio"] {
             border-color: #60a5fa;
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
             transform: scale(1.05);
         }
-        
+
         .radio-container input[type="radio"]:checked {
             border-color: #3b82f6;
             background-color: white;
         }
-        
+
         .radio-container input[type="radio"]:checked::after {
             content: "";
             position: absolute;
@@ -57,7 +58,7 @@
             border-radius: 50%;
             animation: pulse 0.4s ease-in-out;
         }
-        
+
         /* Custom Checkbox Styles */
         .checkbox-container input[type="checkbox"] {
             appearance: none;
@@ -69,20 +70,20 @@
             position: relative;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         .checkbox-container:hover input[type="checkbox"] {
             border-color: #60a5fa;
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
             transform: scale(1.05);
         }
-        
+
         .checkbox-container input[type="checkbox"]:checked {
             border-color: #3b82f6;
             background: linear-gradient(120deg, #3b82f6, #2563eb, #1d4ed8);
         }
-        
+
         .checkbox-container input[type="checkbox"]:checked::after {
             content: "";
             position: absolute;
@@ -95,44 +96,65 @@
             transform: rotate(45deg);
             animation: checkmark 0.3s ease-in-out forwards;
         }
-        
+
         /* Selection hover effects */
-        .radio-container, .checkbox-container {
+        .radio-container,
+        .checkbox-container {
             padding: 10px 14px;
             border-radius: 16px;
             transition: all 0.3s ease;
             margin-bottom: 4px;
         }
-        
-        .radio-container:hover, .checkbox-container:hover {
+
+        .radio-container:hover,
+        .checkbox-container:hover {
             background-color: rgba(59, 130, 246, 0.08);
             transform: translateX(5px);
         }
-        
+
         /* Animations */
         @keyframes pulse {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.4); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        
+
         @keyframes checkmark {
-            0% { height: 0; opacity: 0; }
-            100% { height: 12px; opacity: 1; }
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+
+            100% {
+                height: 12px;
+                opacity: 1;
+            }
         }
-        
+
         /* Enhanced button styles */
         button {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 9999px !important; /* Forces all buttons to be rounded */
+            border-radius: 9999px !important;
+            /* Forces all buttons to be rounded */
             overflow: hidden;
             position: relative;
         }
-        
+
         button:active {
             transform: scale(0.95);
         }
-        
+
         button::after {
             content: '';
             position: absolute;
@@ -144,289 +166,406 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         button:hover::after {
             opacity: 1;
         }
-        
+
         /* Enhance the slider handle */
         #sliderHandle {
             transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         #sliderHandle .w-8 {
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        #cesSlider:active + #sliderHandle .w-8 {
+
+        #cesSlider:active+#sliderHandle .w-8 {
             transform: scale(1.3);
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.7);
         }
-        
+
         /* Enhanced dropdown */
         select {
             cursor: pointer;
             border-radius: 16px !important;
             transition: all 0.3s ease;
         }
-        
+
         select:hover {
             border-color: #60a5fa !important;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15) !important;
         }
-        
+
         /* Enhanced textarea */
         textarea {
             border-radius: 16px !important;
             transition: all 0.3s ease !important;
         }
-        
+
         textarea:hover {
             border-color: #60a5fa !important;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15) !important;
         }
-        
+
         /* Smiley faces enhancement */
-        input[name="smiley"] + div {
+        input[name="smiley"]+div {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
-        
-        input[name="smiley"]:checked + div {
+
+        input[name="smiley"]:checked+div {
             transform: scale(1.15);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Improved slider track */
         .slider-container .h-2 {
             border-radius: 9999px;
             overflow: hidden;
         }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">    <header class="bg-gradient-to-r from-white to-blue-50 border-b border-gray-200 py-4 fixed top-0 w-full z-10 shadow-lg">
+
+<body class="bg-gray-50 min-h-screen">
+    <header
+        class="bg-gradient-to-r from-white to-blue-50 border-b border-gray-200 py-4 fixed top-0 w-full z-10 shadow-lg">
         <div class="container mx-auto px-4 flex items-center justify-between">
             <div class="flex items-center space-x-5">
-                <button class="bg-blue-50 text-blue-600 hover:text-blue-700 font-medium flex items-center transition-all duration-300 hover:scale-105 px-4 py-2 shadow-sm hover:shadow-md">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                <button
+                    class="bg-blue-50 text-blue-600 hover:text-blue-700 font-medium flex items-center transition-all duration-300 hover:scale-105 px-4 py-2 shadow-sm hover:shadow-md">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                        </path>
                     </svg>
-                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Preview & Test</span>
+                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Preview &
+                        Test</span>
                 </button>
-                
+
                 <div class="flex border-2 border-gray-200 rounded-full overflow-hidden shadow-md bg-white">
-                    <button class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center hover:from-blue-600 hover:to-blue-700 transition-colors duration-300 border-r-2 border-blue-400">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    <button
+                        class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center hover:from-blue-600 hover:to-blue-700 transition-colors duration-300 border-r-2 border-blue-400">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            </path>
                         </svg>
                         <span>Desktop</span>
                     </button>
-                    <button class="px-4 py-2 text-gray-700 border-r-2 border-gray-200 flex items-center hover:bg-blue-50 transition-colors duration-300">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    <button
+                        class="px-4 py-2 text-gray-700 border-r-2 border-gray-200 flex items-center hover:bg-blue-50 transition-colors duration-300">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                         </svg>
                         <span>Tablet</span>
                     </button>
-                    <button class="px-4 py-2 text-gray-700 flex items-center hover:bg-blue-50 transition-colors duration-300">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    <button
+                        class="px-4 py-2 text-gray-700 flex items-center hover:bg-blue-50 transition-colors duration-300">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                         </svg>
                         <span>Mobile</span>
                     </button>
                 </div>
-                  <div class="flex border-2 border-gray-200 rounded-full overflow-hidden shadow-md bg-white">
+                <div class="flex border-2 border-gray-200 rounded-full overflow-hidden shadow-md bg-white">
                     <button class="px-4 py-2 text-gray-700 font-medium bg-white">Page</button>
                     <span class="px-4 py-2 border-x-2 border-gray-200 bg-blue-100 text-blue-700 font-medium">1</span>
                     <button class="px-4 py-2 text-gray-700 hover:bg-blue-50 transition-colors duration-300">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
                 </div>
             </div>
-            
+
             <div class="flex items-center space-x-5">
-                <button class="text-gray-700 hover:text-blue-600 font-medium hover:scale-105 transition-all duration-300 flex items-center bg-white px-4 py-2 shadow-sm hover:shadow-md">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                <button
+                    class="text-gray-700 hover:text-blue-600 font-medium hover:scale-105 transition-all duration-300 flex items-center bg-white px-4 py-2 shadow-sm hover:shadow-md">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
-                    <span class="bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">Export survey</span>
+                    <span class="bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">Export
+                        survey</span>
                 </button>
-                <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-2 shadow-md hover:shadow-lg transition-all duration-300 font-medium">PDF</button>
-                <button class="bg-gradient-to-r from-gray-100 to-gray-200 border-2 border-gray-300 text-gray-800 px-5 py-2 hover:shadow-md transition-all duration-300 font-medium hover:from-gray-200 hover:to-gray-300">Word</button>
+                <button
+                    class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-2 shadow-md hover:shadow-lg transition-all duration-300 font-medium">PDF</button>
+                <button
+                    class="bg-gradient-to-r from-gray-100 to-gray-200 border-2 border-gray-300 text-gray-800 px-5 py-2 hover:shadow-md transition-all duration-300 font-medium hover:from-gray-200 hover:to-gray-300">Word</button>
+                <!-- Transparency & Backdrop Controls DROPDOWN -->
+                <div class="relative ml-4">
+                  <button id="transparencyDropdownBtn"
+                      class="flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200 rounded-xl shadow hover:from-blue-200 hover:to-purple-200 transition font-semibold text-blue-700 gap-2">
+                      <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      <span>Survey Appearance</span>
+                      <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                  </button>
+                  <div id="transparencyDropdown"
+                      class="hidden absolute right-0 mt-3 w-96 bg-white/90 backdrop-blur-xl border border-blue-200 rounded-2xl shadow-2xl z-50 p-6 space-y-6 animate-fade-in">
+                    <div class="flex flex-col gap-4">
+                      <div class="flex items-center gap-2 mb-1">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 text-blue-600"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
+                        <span class="font-semibold text-base text-blue-700">Transparency</span>
+                      </div>
+                      <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1">
+                          <span class="text-xs text-gray-500">Page/Survey</span>
+                          <input id="surveyTransparency" type="range" min="0" max="100" value="100" class="accent-blue-500 w-full">
+                        </div>
+                        <div class="flex flex-col gap-1">
+                          <span class="text-xs text-gray-500">Questions</span>
+                          <input id="questionTransparency" type="range" min="0" max="100" value="100" class="accent-purple-500 w-full">
+                        </div>
+                        <div class="flex flex-col gap-1 col-span-2">
+                          <span class="text-xs text-gray-500">Backdrop Blur</span>
+                          <input id="backdropBlur" type="range" min="0" max="30" value="0" class="accent-blue-300 w-full">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="border-t border-blue-100"></div>
+                    <div class="flex flex-col gap-4">
+                      <div class="flex items-center gap-2 mb-1">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 text-green-600"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg></span>
+                        <span class="font-semibold text-base text-green-700">Background</span>
+                      </div>
+                      <div class="flex items-center gap-3">
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                          <span class="text-xs text-gray-500">Enable</span>
+                          <span class="relative inline-block w-10 h-6">
+                            <input id="bgEnableSwitch" type="checkbox" checked class="peer opacity-0 w-10 h-6">
+                            <span class="absolute left-0 top-0 w-10 h-6 bg-gray-200 rounded-full transition peer-checked:bg-blue-400"></span>
+                            <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition peer-checked:translate-x-4"></span>
+                          </span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                          <span class="text-xs text-gray-500">Color</span>
+                          <input id="bgColorPicker" type="color" value="#ffffff" class="w-8 h-8 p-0 border-0 rounded-full shadow">
+                        </label>
+                        <label class="flex flex-col gap-1 flex-1">
+                          <span class="text-xs text-gray-500">Image URL</span>
+                          <input id="bgImageInput" type="text" placeholder="Paste image URL here" class="w-full text-xs border rounded px-2 py-1 focus:ring-2 focus:ring-blue-200">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
-    </header><main class="container mx-auto px-4 py-12 mt-20 max-w-3xl">
-        <div class="bg-white rounded-3xl shadow-2xl p-10 mb-8 border-2 border-gray-100 hover:border-blue-300 transition-all duration-500 transform hover:-translate-y-1">
-            <h1 class="text-3xl font-bold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 via-purple-500 to-blue-800 pb-2">Long survey</h1>
-            
+    </header>
+    <main class="mx-auto px-4 py-12 mt-20 max-w-3xl">
+        <div
+            class="bg-white rounded-3xl p-10 mb-8 border-2 border-gray-100 hover:border-blue-300 transition-all duration-500 transform hover:-translate-y-1">
+            <h1
+                class="text-3xl font-bold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-br from-blue-600 via-purple-500 to-blue-800 pb-2">
+                Long survey</h1>
+
             <!-- First Page (initially visible) -->
             <div>
                 <!-- Question 1: Selection -->
                 <section class="mb-8">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Selection</h2>
-                <div class="space-y-3">
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection1" value="option1">
-                        <span class="text-gray-800">Option1</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection1" value="option2">
-                        <span class="text-gray-800">Option2</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection1" value="option3">
-                        <span class="text-gray-800">Option3</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection1" value="option4">
-                        <span class="text-gray-800">Option4</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection1" value="option5">
-                        <span class="text-gray-800">Option5</span>
-                    </label>
-                </div>
-            </section>
-            
-            <!-- Question 2: Multiselection -->
-            <section class="mb-8">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">2. Multiselection</h2>
-                <div class="space-y-3">
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection1" value="option1">
-                        <span class="text-gray-800">Option1</span>
-                    </label>
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection1" value="option2">
-                        <span class="text-gray-800">Option2</span>
-                    </label>
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection1" value="option3">
-                        <span class="text-gray-800">Option3</span>
-                    </label>
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection1" value="option4">
-                        <span class="text-gray-800">Option4</span>
-                    </label>
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection1" value="option5">
-                        <span class="text-gray-800">Option5</span>
-                    </label>
-                </div>
-                <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 5 options</p>
-                <p class="text-sm text-gray-500">Selected options: 0</p>
-            </section>
-            
-            <!-- Question 3: Selection 2 -->
-            <section class="mb-8">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">3. Selection 2</h2>
-                <div class="space-y-3">
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection2" value="option1">
-                        <span class="text-gray-800">Option1</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection2" value="option2">
-                        <span class="text-gray-800">Option2</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection2" value="option3">
-                        <span class="text-gray-800">Option3</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection2" value="option4">
-                        <span class="text-gray-800">Option4</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection2" value="option5">
-                        <span class="text-gray-800">Option5</span>
-                    </label>
-                </div>
-            </section>
-            
-            <!-- Question 4: Multiselection 2 -->
-            <section class="mb-8">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">4. Multiselection 2</h2>
-                <div class="space-y-3">
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection2" value="option1">
-                        <span class="text-gray-800">Option</span>
-                    </label>
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection2" value="option2">
-                        <span class="text-gray-800">Option</span>
-                    </label>
-                    <label class="flex items-center checkbox-container">
-                        <input type="checkbox" name="multiselection2" value="option3">
-                        <span class="text-gray-800">Option</span>
-                    </label>
-                </div>
-                <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 2 options</p>
-                <p class="text-sm text-gray-500">Selected options: 0</p>
-            </section>
-            
-            <!-- Question 5: Selection 3 -->
-            <section class="mb-8">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">5. Selection 3</h2>
-                <div class="space-y-3">
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection3" value="option1">
-                        <span class="text-gray-800">Option1</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection3" value="option2">
-                        <span class="text-gray-800">Option2</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection3" value="option3">
-                        <span class="text-gray-800">Option3</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection3" value="option4">
-                        <span class="text-gray-800">Option4</span>
-                    </label>
-                    <label class="flex items-center radio-container">
-                        <input type="radio" name="selection3" value="option5">
-                        <span class="text-gray-800">Option5</span>
-                    </label>
-                </div>
-            </section>            <!-- Next Button -->
-            <div class="flex justify-end mt-10">
-                <button id="nextBtn" class="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white px-8 py-4 rounded-full hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg">
-                    <div class="flex items-center">
-                        <span>Next</span>
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Selection</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection1" value="option1">
+                            <span class="text-gray-800">Option1</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection1" value="option2">
+                            <span class="text-gray-800">Option2</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection1" value="option3">
+                            <span class="text-gray-800">Option3</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection1" value="option4">
+                            <span class="text-gray-800">Option4</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection1" value="option5">
+                            <span class="text-gray-800">Option5</span>
+                        </label>
                     </div>
-                </button>
+                </section>
+
+                <!-- Question 2: Multiselection -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">2. Multiselection</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection1" value="option1">
+                            <span class="text-gray-800">Option1</span>
+                        </label>
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection1" value="option2">
+                            <span class="text-gray-800">Option2</span>
+                        </label>
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection1" value="option3">
+                            <span class="text-gray-800">Option3</span>
+                        </label>
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection1" value="option4">
+                            <span class="text-gray-800">Option4</span>
+                        </label>
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection1" value="option5">
+                            <span class="text-gray-800">Option5</span>
+                        </label>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 5 options</p>
+                    <p class="text-sm text-gray-500">Selected options: 0</p>
+                </section>
+
+                <!-- Question 3: Selection 2 -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">3. Selection 2</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection2" value="option1">
+                            <span class="text-gray-800">Option1</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection2" value="option2">
+                            <span class="text-gray-800">Option2</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection2" value="option3">
+                            <span class="text-gray-800">Option3</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection2" value="option4">
+                            <span class="text-gray-800">Option4</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection2" value="option5">
+                            <span class="text-gray-800">Option5</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Question 4: Multiselection 2 -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">4. Multiselection 2</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection2" value="option1">
+                            <span class="text-gray-800">Option</span>
+                        </label>
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection2" value="option2">
+                            <span class="text-gray-800">Option</span>
+                        </label>
+                        <label class="flex items-center checkbox-container">
+                            <input type="checkbox" name="multiselection2" value="option3">
+                            <span class="text-gray-800">Option</span>
+                        </label>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">You can select from 1 up to 2 options</p>
+                    <p class="text-sm text-gray-500">Selected options: 0</p>
+                </section>
+
+                <!-- Question 5: Selection 3 -->
+                <section class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">5. Selection 3</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection3" value="option1">
+                            <span class="text-gray-800">Option1</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection3" value="option2">
+                            <span class="text-gray-800">Option2</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection3" value="option3">
+                            <span class="text-gray-800">Option3</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection3" value="option4">
+                            <span class="text-gray-800">Option4</span>
+                        </label>
+                        <label class="flex items-center radio-container">
+                            <input type="radio" name="selection3" value="option5">
+                            <span class="text-gray-800">Option5</span>
+                        </label>
+                    </div>
+                </section> <!-- Next Button -->
+                <div class="flex justify-end mt-10">
+                    <button id="nextBtn"
+                        class="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white px-8 py-4 rounded-full hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg">
+                        <div class="flex items-center">
+                            <span>Next</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
             </div>
-            </div>
-            
+
             <!-- Second Page (initially hidden) -->
             <div id="page2" class="hidden">
-                <!-- Question 6: Drop down list -->                <section class="mb-8">
+                <!-- Question 6: Drop down list -->
+                <section class="mb-8">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">6. Drop down list</h2>
                     <div class="relative">
-                        <select class="block w-full px-6 py-4 pr-12 border-2 border-gray-300 bg-white rounded-full shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 appearance-none transition-all duration-300 text-gray-700 font-medium hover:border-blue-400">
+                        <select
+                            class="block w-full px-6 py-4 pr-12 border-2 border-gray-300 bg-white rounded-full shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 appearance-none transition-all duration-300 text-gray-700 font-medium hover:border-blue-400">
                             <option value="" selected disabled>Select an option...</option>
                             <option value="option1">Option 1</option>
                             <option value="option2">Option 2</option>
                             <option value="option3">Option 3</option>
                             <option value="option4">Option 4</option>
                         </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-600">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-600">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                     <p class="text-sm text-blue-600 mt-2 ml-2">Click to see all available options</p>
                 </section>
-                
+
                 <!-- Question 7: Matrix selection -->
                 <section class="mb-8">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">7. Matrix selection</h2>
@@ -529,7 +668,7 @@
                         </table>
                     </div>
                 </section>
-                
+
                 <!-- Question 8: Matrix multiselection -->
                 <section class="mb-8">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">8. Matrix multiselection</h2>
@@ -631,50 +770,59 @@
                             </tbody>
                         </table>
                     </div>
-                </section>                <!-- Navigation Buttons -->
+                </section> <!-- Navigation Buttons -->
                 <div class="flex justify-between mt-10">
-                    <button id="prevBtn" class="bg-gradient-to-r from-gray-100 to-gray-300 text-gray-700 px-8 py-4 rounded-full hover:from-gray-200 hover:to-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg border border-gray-300">
+                    <button id="prevBtn"
+                        class="bg-gradient-to-r from-gray-100 to-gray-300 text-gray-700 px-8 py-4 rounded-full hover:from-gray-200 hover:to-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg border border-gray-300">
                         <span class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
                             </svg>
                             Previous
                         </span>
                     </button>
-                    <button id="nextBtn2" class="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white px-8 py-4 rounded-full hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg">
+                    <button id="nextBtn2"
+                        class="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white px-8 py-4 rounded-full hover:from-blue-600 hover:via-blue-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg">
                         <span class="flex items-center">
                             Next
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
                             </svg>
                         </span>
                     </button>
                 </div>
             </div>
-            
+
             <!-- Third Page (initially hidden) -->
             <div id="page3" class="hidden">
                 <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">Questions</h1>
-                
+
                 <!-- Question 1: Open ended text area -->
                 <section class="mb-8">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Open ended</h2>                    <div class="w-full">
-                        <textarea 
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">1. Open ended</h2>
+                    <div class="w-full">
+                        <textarea
                             class="w-full h-40 px-6 py-4 border-2 border-gray-300 rounded-3xl shadow-md focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-30 focus:border-blue-500 resize-none hover:border-blue-400 transition-all duration-300 text-gray-700"
-                            placeholder="Share your thoughts here..."
-                        ></textarea>
+                            placeholder="Share your thoughts here..."></textarea>
                         <div class="mt-3 flex justify-between items-center px-2">
                             <span class="text-sm text-blue-600 flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 Feel free to write as much as you'd like
                             </span>
-                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">0/1000 characters</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">0/1000
+                                characters</span>
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Question 2: CES (Customer Effort Score) -->
                 <section class="mb-8">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">2. CES</h2>
@@ -732,7 +880,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Question 3: CES Slider -->
                 <section class="mb-8">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">3. CES Slider</h2>
@@ -741,29 +889,34 @@
                             <span class="text-sm text-gray-700">Very Difficult</span>
                             <span class="text-sm text-gray-700">Very Easy</span>
                         </div>
-                        <div class="relative pt-1">                            <div class="slider-container relative mb-6 mt-4">
+                        <div class="relative pt-1">
+                            <div class="slider-container relative mb-6 mt-4">
                                 <div class="relative py-8">
-                                    <div class="h-3 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-full shadow-inner"></div>
-                                    <input 
-                                        type="range" 
-                                        min="1" 
-                                        max="5" 
-                                        value="1" 
+                                    <div
+                                        class="h-3 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-full shadow-inner">
+                                    </div>
+                                    <input type="range" min="1" max="5" value="1"
                                         class="absolute top-1/2 transform -translate-y-1/2 w-full h-3 opacity-0 cursor-pointer"
-                                        id="cesSlider"
-                                    >
+                                        id="cesSlider">
                                     <!-- Slider Track Fill -->
-                                    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full" style="width: 0%;" id="sliderFill"></div>
-                                    
+                                    <div class="absolute top-1/2 left-0 transform -translate-y-1/2 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full"
+                                        style="width: 0%;" id="sliderFill"></div>
+
                                     <!-- Slider Handle with Label -->
-                                    <div id="sliderHandle" class="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10" style="left: 0%;">
+                                    <div id="sliderHandle"
+                                        class="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10"
+                                        style="left: 0%;">
                                         <div class="flex flex-col items-center">
-                                            <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-red-100 transform transition-all duration-300">1</div>
-                                            <div class="mt-2 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap">Very Difficult</div>
+                                            <div
+                                                class="w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-red-100 transform transition-all duration-300">
+                                                1</div>
+                                            <div
+                                                class="mt-2 bg-red-500 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap">
+                                                Very Difficult</div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Slider Marks -->
                                 <div class="flex justify-between items-center px-1 mt-2">
                                     <div class="flex flex-col items-center">
@@ -795,7 +948,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Question 4: CES Smileys -->
                 <section class="mb-8">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">4. CES Smileys</h2>
@@ -807,87 +960,118 @@
                         <div class="flex justify-between">
                             <label class="flex flex-col items-center cursor-pointer w-1/5">
                                 <input type="radio" name="smiley" value="1" class="sr-only">
-                                <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform">
                                     <!-- Sad Face -->
-                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 15C9 15 10 13 12 13C14 13 15 15 15 15M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9 15C9 15 10 13 12 13C14 13 15 15 15 15M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </div>
                             </label>
                             <label class="flex flex-col items-center cursor-pointer w-1/5">
                                 <input type="radio" name="smiley" value="2" class="sr-only">
-                                <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center hover:scale-110 transition-transform">
                                     <!-- Slightly Sad Face -->
-                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9.5 15.5C9.5 15.5 10.5 14.5 12 14.5C13.5 14.5 14.5 15.5 14.5 15.5M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9.5 15.5C9.5 15.5 10.5 14.5 12 14.5C13.5 14.5 14.5 15.5 14.5 15.5M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </div>
                             </label>
                             <label class="flex flex-col items-center cursor-pointer w-1/5">
                                 <input type="radio" name="smiley" value="3" class="sr-only">
-                                <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center hover:scale-110 transition-transform">
                                     <!-- Neutral Face -->
-                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 15H15M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9 15H15M9 10H9.01M15 10H15.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </div>
                             </label>
                             <label class="flex flex-col items-center cursor-pointer w-1/5">
                                 <input type="radio" name="smiley" value="4" class="sr-only">
-                                <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform">
                                     <!-- Happy Face -->
-                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M15 9H15.01M9 9H9.01M16 13C16 13 15 15 12 15C9 15 8 13 8 13M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M15 9H15.01M9 9H9.01M16 13C16 13 15 15 12 15C9 15 8 13 8 13M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </div>
                             </label>
                             <label class="flex flex-col items-center cursor-pointer w-1/5">
                                 <input type="radio" name="smiley" value="5" class="sr-only">
-                                <div class="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center hover:scale-110 transition-transform">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center hover:scale-110 transition-transform">
                                     <!-- Very Happy Face -->
-                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M15 9H15.01M9 9H9.01M16 14C16 14 15 16 12 16C9 16 8 14 8 14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M15 9H15.01M9 9H9.01M16 14C16 14 15 16 12 16C9 16 8 14 8 14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
                                     </svg>
                                 </div>
                             </label>
                         </div>
                     </div>
-                </section>                <!-- Submit Button -->
+                </section> <!-- Submit Button -->
                 <div class="flex justify-between mt-10">
-                    <button id="prevBtn2" class="bg-gradient-to-r from-gray-100 to-gray-300 text-gray-700 px-8 py-4 rounded-full hover:from-gray-200 hover:to-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg border border-gray-300">
+                    <button id="prevBtn2"
+                        class="bg-gradient-to-r from-gray-100 to-gray-300 text-gray-700 px-8 py-4 rounded-full hover:from-gray-200 hover:to-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-200 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-medium text-lg border border-gray-300">
                         <span class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
                             </svg>
                             Previous
                         </span>
                     </button>
-                    <button id="submitBtn" class="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white px-10 py-4 rounded-full hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-opacity-50 shadow-xl hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-bold text-lg">
+                    <button id="submitBtn"
+                        class="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white px-10 py-4 rounded-full hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-opacity-50 shadow-xl hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-1 font-bold text-lg">
                         <span class="flex items-center">
                             Submit
-                            <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
                             </svg>
                         </span>
                     </button>
                 </div>
             </div>
         </div>
-    </main>    <!-- Add React implementation for Radix UI components -->
+    </main> <!-- Add React implementation for Radix UI components -->
     <script>
         // This is where React code would be initialized to use Radix UI primitives
         // For a complete implementation, we'd use a build tool like Vite, webpack, etc.
-        
-        document.addEventListener('DOMContentLoaded', function() {
+
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize counter for checkbox selections
             const multiCheckboxGroups = document.querySelectorAll('[name="multiselection1"], [name="multiselection2"]');
-            
+
             multiCheckboxGroups.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
+                checkbox.addEventListener('change', function () {
                     const groupName = this.name;
                     const checkboxes = document.querySelectorAll(`[name="${groupName}"]`);
                     const selectedCount = Array.from(checkboxes).filter(box => box.checked).length;
-                    
+
                     // Find the selected options counter element for this group
                     const group = this.closest('section');
                     const countDisplay = group.querySelector('p:last-child');
@@ -906,10 +1090,10 @@
             const nextBtn2 = document.getElementById('nextBtn2');
             const prevBtn2 = document.getElementById('prevBtn2');
             const submitBtn = document.getElementById('submitBtn');
-            
+
             let currentPage = 1;
             const totalPages = 3;
-              // Handle page navigation
+            // Handle page navigation
             function showPage(pageNumber) {
                 // Hide all pages and their content
                 if (page1Wrapper) {
@@ -924,7 +1108,7 @@
                 if (page3Content) {
                     page3Content.classList.add('hidden');
                 }
-                
+
                 // Show the content for the selected page
                 if (pageNumber === 1) {
                     // Show first page content
@@ -945,79 +1129,79 @@
                         page3Content.classList.remove('hidden');
                     }
                 }
-                
+
                 // Update page indicator in header
                 const pageIndicator = document.querySelector('.flex.border.border-gray-300.rounded span');
                 if (pageIndicator) {
                     pageIndicator.textContent = pageNumber.toString();
                 }
-                
+
                 // Update current page
                 currentPage = pageNumber;
-                
+
                 // Scroll to top of survey
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            
+
             // Next button click (page 1 -> page 2)
             if (nextBtn) {
-                nextBtn.addEventListener('click', function() {
+                nextBtn.addEventListener('click', function () {
                     showPage(2);
                 });
             }
-            
+
             // Previous button click (page 2 -> page 1)
             if (prevBtn) {
-                prevBtn.addEventListener('click', function() {
+                prevBtn.addEventListener('click', function () {
                     showPage(1);
                 });
             }
-            
+
             // Next button click (page 2 -> page 3)
             if (nextBtn2) {
-                nextBtn2.addEventListener('click', function() {
+                nextBtn2.addEventListener('click', function () {
                     showPage(3);
                 });
             }
-            
+
             // Previous button click (page 3 -> page 2)
             if (prevBtn2) {
-                prevBtn2.addEventListener('click', function() {
+                prevBtn2.addEventListener('click', function () {
                     showPage(2);
                 });
             }
-            
+
             // Submit button click
             if (submitBtn) {
-                submitBtn.addEventListener('click', function() {
+                submitBtn.addEventListener('click', function () {
                     alert('Survey completed! Thank you for your responses.');
                 });
             }
-            
+
             // Initialize slider for CES Slider
             const cesSlider = document.getElementById('cesSlider');
             const sliderHandle = document.getElementById('sliderHandle');
-            
+
             if (cesSlider && sliderHandle) {
                 // Set initial position
                 updateSliderHandlePosition();
-                
-                cesSlider.addEventListener('input', function() {
+
+                cesSlider.addEventListener('input', function () {
                     updateSliderHandlePosition();
-                });            function updateSliderHandlePosition() {
+                }); function updateSliderHandlePosition() {
                     const value = cesSlider.value;
                     const min = cesSlider.min ? parseFloat(cesSlider.min) : 1;
                     const max = cesSlider.max ? parseFloat(cesSlider.max) : 5;
                     const percent = ((value - min) / (max - min)) * 100;
-                    
+
                     // Update handle position
                     sliderHandle.style.left = `${percent}%`;
-                    
+
                     // Update track fill
                     const sliderFill = document.getElementById('sliderFill');
                     if (sliderFill) {
                         sliderFill.style.width = `${percent}%`;
-                        
+
                         // Change fill color based on value
                         if (value <= 2) {
                             sliderFill.className = "absolute top-1/2 left-0 transform -translate-y-1/2 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full";
@@ -1027,24 +1211,24 @@
                             sliderFill.className = "absolute top-1/2 left-0 transform -translate-y-1/2 h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full";
                         }
                     }
-                    
+
                     // Get the handle and tooltip elements
                     const handleLabel = sliderHandle.querySelector('div > div:first-child');
                     const handleTooltip = sliderHandle.querySelector('div > div:last-child');
-                    
+
                     if (handleLabel && handleTooltip) {
                         // Update the numeric label
                         handleLabel.textContent = value;
-                        
+
                         // Update tooltip text based on value
                         let tooltipText = "Very Difficult";
                         if (value == 2) tooltipText = "Difficult";
                         else if (value == 3) tooltipText = "Neutral";
                         else if (value == 4) tooltipText = "Easy";
                         else if (value >= 5) tooltipText = "Very Easy";
-                        
+
                         handleTooltip.textContent = tooltipText;
-                        
+
                         // Change handle color and style based on value for visual feedback
                         if (value <= 2) {
                             handleLabel.className = "w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-xl text-white flex items-center justify-center text-lg font-bold ring-4 ring-red-100";
@@ -1059,11 +1243,11 @@
                     }
                 }
             }
-            
+
             // Handle smiley selection
             const smileyInputs = document.querySelectorAll('input[name="smiley"]');
             smileyInputs.forEach(input => {
-                input.addEventListener('change', function() {
+                input.addEventListener('change', function () {
                     // Remove selected state from all smileys
                     smileyInputs.forEach(smiley => {
                         const container = smiley.nextElementSibling;
@@ -1071,7 +1255,7 @@
                             container.classList.remove('ring-4');
                         }
                     });
-                    
+
                     // Add selected state to chosen smiley
                     const selectedContainer = this.nextElementSibling;
                     if (selectedContainer) {
@@ -1079,31 +1263,120 @@
                     }
                 });
             });
-            
+
             // Initialize matrix checkboxes to track selections per row/column if needed
             const matrixCheckboxes = document.querySelectorAll('[name^="matrix_multi_"]');
             matrixCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
+                checkbox.addEventListener('change', function () {
                     // Additional validation logic could go here if needed
                 });
             });
-            
+
             // Custom select styling enhancements
             const selectElements = document.querySelectorAll('select');
             selectElements.forEach(select => {
-                select.addEventListener('focus', function() {
+                select.addEventListener('focus', function () {
                     this.parentElement.classList.add('ring-2', 'ring-blue-500', 'ring-opacity-50');
                 });
-                
-                select.addEventListener('blur', function() {
+
+                select.addEventListener('blur', function () {
                     this.parentElement.classList.remove('ring-2', 'ring-blue-500', 'ring-opacity-50');
                 });
-                
-                select.addEventListener('change', function() {
+
+                select.addEventListener('change', function () {
                     // Handle select change events if needed
                 });
             });
+
+            // === Transparency, Blur, and Background Controls ===
+            const surveyCard = document.querySelector('main > div');
+            const questionSections = document.querySelectorAll('main section');
+            const questionTransparency = document.getElementById('questionTransparency');
+            const surveyTransparency = document.getElementById('surveyTransparency');
+            const backdropBlur = document.getElementById('backdropBlur');
+            const bgColorPicker = document.getElementById('bgColorPicker');
+            const bgImageInput = document.getElementById('bgImageInput');
+            const bgEnableSwitch = document.getElementById('bgEnableSwitch');
+            const mainContainer = document.querySelector('main.mx-auto, main.container.mx-auto, main');
+            const mainSection = document.querySelector('main');
+            // Remove Tailwind and inline background from body so custom color/image is visible
+            document.body.classList.remove('bg-gray-50');
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundColor = '';
+            // Load saved background color and image from localStorage
+            if (localStorage.getItem('surveyBgColor')) {
+                bgColorPicker.value = localStorage.getItem('surveyBgColor');
+                document.body.style.backgroundColor = bgColorPicker.value;
+            }
+            if (localStorage.getItem('surveyBgImage')) {
+                bgImageInput.value = localStorage.getItem('surveyBgImage');
+                document.body.style.backgroundImage = `url('${bgImageInput.value}')`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundRepeat = 'no-repeat';
+            }
+            // Load saved background enable state
+            if (localStorage.getItem('surveyBgEnabled') === 'false') {
+                bgEnableSwitch.checked = false;
+            }
+            function applyStyles() {
+                // Remove Tailwind and inline background from body so custom color/image is visible
+                document.body.classList.remove('bg-gray-50');
+                document.body.style.backgroundImage = '';
+                document.body.style.backgroundColor = '';
+                // Survey/Page Transparency (applied to main section)
+                if (mainSection) {
+                    mainSection.style.backgroundColor = `rgba(255,255,255,${surveyTransparency.value / 100})`;
+                }
+                // Survey Card Blur
+                if (surveyCard) {
+                    surveyCard.style.backdropFilter = `blur(${backdropBlur.value}px)`;
+                }
+                // Question Section Transparency
+                questionSections.forEach(section => {
+                    section.style.backgroundColor = `rgba(255,255,255,${questionTransparency.value / 100})`;
+                });
+                // Apply background color and image to body for full-page effect if enabled
+                if (bgEnableSwitch.checked) {
+                    document.body.style.backgroundColor = bgColorPicker.value;
+                    localStorage.setItem('surveyBgColor', bgColorPicker.value);
+                    if (bgImageInput.value) {
+                        document.body.style.backgroundImage = `url('${bgImageInput.value}')`;
+                        document.body.style.backgroundSize = 'cover';
+                        document.body.style.backgroundRepeat = 'no-repeat';
+                        localStorage.setItem('surveyBgImage', bgImageInput.value);
+                    } else {
+                        document.body.style.backgroundImage = '';
+                        localStorage.removeItem('surveyBgImage');
+                    }
+                    localStorage.setItem('surveyBgEnabled', 'true');
+                } else {
+                    document.body.style.backgroundColor = '';
+                    document.body.style.backgroundImage = '';
+                    localStorage.setItem('surveyBgEnabled', 'false');
+                }
+            }
+            [questionTransparency, surveyTransparency, backdropBlur, bgColorPicker, bgImageInput, bgEnableSwitch].forEach(input => {
+                input.addEventListener('input', applyStyles);
+                input.addEventListener('change', applyStyles);
+            });
+            applyStyles();
+
+            // Dropdown logic for appearance controls
+            const dropdownBtn = document.getElementById('transparencyDropdownBtn');
+            const dropdown = document.getElementById('transparencyDropdown');
+            if (dropdownBtn && dropdown) {
+                dropdownBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('hidden');
+                });
+                document.addEventListener('click', function (e) {
+                    if (!dropdown.contains(e.target) && !dropdownBtn.contains(e.target)) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            }
         });
     </script>
 </body>
+
 </html>
