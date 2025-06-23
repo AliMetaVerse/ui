@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Language Translation - AI Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,28 +14,17 @@
                     colors: {
                         // Webropol Brand Colors
                         'webropol-teal': {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6', // Primary teal
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
-                        },
-                        'webropol-blue': {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6', // Primary blue
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
+                            50: '#eefbfd',
+                            100: '#d5f4f8',
+                            200: '#b0e8f1',
+                            300: '#79d6e7',
+                            400: '#3fbcd5',
+                            500: '#209fba', // Primary teal
+                            600: '#1d809d',
+                            700: '#1e6880',
+                            800: '#215669',
+                            900: '#204859',
+                            950: '#102e3c',
                         },
                         'webropol-purple': {
                             50: '#faf5ff',
@@ -96,8 +86,8 @@
                             800: '#991b1b',
                             900: '#7f1d1d',
                         },                        // Legacy colors for backward compatibility
-                        'teal-custom': '#3b82f6',
-                        'teal-dark': '#2563eb'
+                        'teal-custom': '#1e6880',
+                        'teal-dark': '#215669'
                     }
                 }
             }
@@ -174,7 +164,7 @@
     <div class="max-w-4xl mx-auto">
         <h1 class="text-2xl font-bold text-webropol-gray-900 mb-8">Survey Languages</h1> <!-- Languages Button -->
         <button @click="openLanguagesModal()"
-            class="inline-flex items-center px-6 py-3 bg-webropol-blue-500 hover:bg-webropol-blue-600 text-white font-medium rounded-full transition-colors duration-200">
+            class="inline-flex items-center px-6 py-3 bg-webropol-teal-700 hover:bg-webropol-teal-800 text-white font-medium rounded-full transition-colors duration-200">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
@@ -208,9 +198,8 @@
                 </div> <!-- Add Languages Section - Accordion -->
                 <div class="mb-6">
                     <div x-data="{ addLanguagesOpen: true }" class="border border-webropol-gray-200 rounded-lg">
-                        <!-- Accordion Header -->
-                        <button @click="addLanguagesOpen = !addLanguagesOpen"
-                            class="flex items-center justify-between w-full px-4 py-3 text-left bg-webropol-gray-50 hover:bg-webropol-gray-100 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-webropol-blue-500">
+                        <!-- Accordion Header --> <button @click="addLanguagesOpen = !addLanguagesOpen"
+                            class="flex items-center justify-between w-full px-4 py-3 text-left bg-webropol-gray-50 hover:bg-webropol-gray-100 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
                             <h4 class="text-lg font-medium text-webropol-gray-900">Add languages</h4>
                             <i class="fas fa-chevron-down w-5 h-5 text-webropol-gray-500 transition-transform duration-200"
                                 :class="{ 'rotate-180': addLanguagesOpen }"></i>
@@ -226,13 +215,13 @@
                                     <div class="enhanced-select" x-data="languageSelector()">
                                         <!-- Select Container with Chips -->
                                         <div @click="showDropdown = !showDropdown"
-                                            class="w-full min-h-[42px] px-3 py-2 border border-webropol-gray-300 rounded-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-webropol-blue-500 focus-within:border-transparent cursor-pointer bg-white flex flex-wrap items-center gap-1">
+                                            class="w-full min-h-[42px] px-3 py-2 border border-webropol-gray-300 rounded-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-webropol-teal-500 focus-within:border-transparent cursor-pointer bg-white flex flex-wrap items-center gap-1">
                                             <!-- Language Chips inside Select -->
                                             <template x-for="langCode in selectedLanguages" :key="langCode"> <span
-                                                    class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-webropol-blue-100 text-webropol-blue-800 mr-1 mb-1">
+                                                    class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-1 mb-1">
                                                     <span x-text="getLanguageName(langCode)"></span> <button
                                                         @click.stop="removeLanguage(langCode)"
-                                                        class="ml-1 text-webropol-blue-600 hover:text-webropol-blue-800">
+                                                        class="ml-1 text-webropol-teal-600 hover:text-webropol-teal-800">
                                                         <i class="fas fa-times w-3 h-3"></i>
                                                     </button>
                                                 </span>
@@ -266,7 +255,7 @@
                                 <!-- Allow language switching checkbox -->
                                 <div class="flex items-start pt-6">
                                     <div class="flex items-start space-x-3"> <input type="checkbox" id="allowSwitching"
-                                            class="mt-1 h-4 w-4 text-webropol-blue-500 focus:ring-webropol-blue-500 border-webropol-gray-300 rounded">
+                                            class="mt-1 h-4 w-4 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded">
                                         <div>
                                             <label for="allowSwitching"
                                                 class="text-sm font-medium text-webropol-gray-900">
@@ -280,7 +269,7 @@
                                     </div>
                                 </div>
                             </div> <!-- AI Translation Button --> <button @click="openTranslationModal()"
-                                class="w-full py-3 px-4 bg-webropol-blue-500 hover:bg-webropol-blue-600 text-white font-medium rounded-full transition-colors duration-200 flex items-center justify-center mb-6">
+                                class="w-full py-3 px-4 bg-webropol-teal-700 hover:bg-webropol-teal-800 text-white font-medium rounded-full transition-colors duration-200 flex items-center justify-center mb-6">
                                 <i class="fas fa-bolt w-5 h-5 mr-2"></i>
                                 Translate All Languages with AI
                             </button><!-- Language Management Section within Accordion -->
@@ -293,22 +282,23 @@
                                 <div class="space-y-3">
                                     <!-- English (Original) - Always Present -->
                                     <div
-                                        class="flex items-center justify-between p-3 bg-webropol-blue-50 border border-webropol-blue-200 rounded-lg">
+                                        class="flex items-center justify-between p-3 bg-webropol-teal-50 border border-webropol-teal-200 rounded-lg">
                                         <div class="flex items-center">
                                             <div class="flex items-center mr-3">
                                                 <i class="fas fa-grip-lines w-4 h-4 text-webropol-gray-400"></i>
                                             </div>
                                             <span class="font-medium text-webropol-gray-900">English</span>
                                             <span
-                                                class="ml-2 px-2 py-0.5 bg-webropol-blue-800 text-white text-xs rounded-full">Original</span>
-                                        </div>                                        <div class="flex items-center space-x-2"> <button
+                                                class="ml-2 px-2 py-0.5 bg-webropol-teal-800 text-white text-xs rounded-full">Original</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2"> <button
                                                 class="p-1 text-webropol-orange-500 hover:text-webropol-orange-600 rounded-full">
                                                 <i class="fas fa-star w-5 h-5"></i>
                                             </button>
                                             <!-- English cannot be deleted --> <button disabled
                                                 class="p-1 text-webropol-gray-300 cursor-not-allowed rounded-full"
                                                 title="Cannot remove original language"> <i
-                                                    class="fas fa-trash w-5 h-5"></i>                                            </button>
+                                                    class="fas fa-trash w-5 h-5"></i> </button>
                                             <button disabled
                                                 class="p-1 text-webropol-gray-300 cursor-not-allowed rounded-full"
                                                 title="Cannot translate original language">
@@ -327,11 +317,12 @@
                                                     x-text="language"></span>
                                             </div>
                                             <div class="flex items-center space-x-2"> <button
-                                                    class="p-1 text-webropol-gray-300 hover:text-webropol-blue-500 rounded-full">
+                                                    class="p-1 text-webropol-gray-300 hover:text-webropol-teal-500 rounded-full">
                                                     <i class="far fa-star w-5 h-5"></i>
                                                 </button> <button @click="removeLanguageCompletely(language)"
-                                                    class="p-1 text-webropol-gray-400 hover:text-webropol-blue-600 rounded-full">
-                                                    <i class="fas fa-trash w-5 h-5"></i>                                                </button>                                                <button @click="openTranslationModal(language)"
+                                                    class="p-1 text-webropol-gray-400 hover:text-webropol-teal-600 rounded-full">
+                                                    <i class="fas fa-trash w-5 h-5"></i> </button> <button
+                                                    @click="openTranslationModal(language)"
                                                     class="p-1 text-webropol-gray-400 hover:text-webropol-gray-600 rounded-full">
                                                     <i class="fas fa-language w-5 h-5"></i>
                                                 </button>
@@ -344,9 +335,11 @@
                     </div>
                 </div> <!-- Second Accordion: Translate Alternative Survey Languages -->
                 <div class="mb-6">
-                    <div x-data="{ alternativeLanguagesOpen: false }" class="border border-webropol-gray-200 rounded-lg">
+                    <div x-data="{ alternativeLanguagesOpen: false }"
+                        class="border border-webropol-gray-200 rounded-lg">
                         <!-- Accordion Header --> <button @click="alternativeLanguagesOpen = !alternativeLanguagesOpen"
-                            class="flex items-center justify-between w-full px-4 py-3 text-left bg-webropol-gray-50 hover:bg-webropol-gray-100 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-webropol-blue-500">                            <h4 class="text-lg font-medium text-webropol-gray-900">Translate alternative survey
+                            class="flex items-center justify-between w-full px-4 py-3 text-left bg-webropol-gray-50 hover:bg-webropol-gray-100 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
+                            <h4 class="text-lg font-medium text-webropol-gray-900">Translate alternative survey
                                 languages</h4>
                             <i class="fas fa-chevron-down w-5 h-5 text-webropol-gray-500 transition-transform duration-200"
                                 :class="{ 'rotate-180': alternativeLanguagesOpen }"></i>
@@ -366,7 +359,7 @@
                                     class="flex items-center justify-between p-3 border border-webropol-gray-200 rounded-lg hover:bg-webropol-gray-50">
                                     <div class="flex items-center">
                                         <input type="checkbox"
-                                            class="h-4 w-4 text-webropol-blue-500 focus:ring-webropol-blue-500 border-webropol-gray-300 rounded mr-3">
+                                            class="h-4 w-4 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded mr-3">
                                         <span class="text-sm font-medium text-webropol-gray-900">Enable regional dialect
                                             adaptations</span>
                                     </div>
@@ -375,7 +368,7 @@
                                 <div
                                     class="flex items-center justify-between p-3 border border-webropol-gray-200 rounded-lg hover:bg-webropol-gray-50">
                                     <div class="flex items-center"> <input type="checkbox"
-                                            class="h-4 w-4 text-webropol-blue-500 focus:ring-webropol-blue-500 border-webropol-gray-300 rounded mr-3">
+                                            class="h-4 w-4 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded mr-3">
                                         <span class="text-sm font-medium text-webropol-gray-900">Use cultural context in
                                             translations</span>
                                     </div>
@@ -385,7 +378,7 @@
                                     class="flex items-center justify-between p-3 border border-webropol-gray-200 rounded-lg hover:bg-webropol-gray-50">
                                     <div class="flex items-center">
                                         <input type="checkbox"
-                                            class="h-4 w-4 text-webropol-blue-500 focus:ring-webropol-blue-500 border-webropol-gray-300 rounded mr-3">
+                                            class="h-4 w-4 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded mr-3">
                                         <span class="text-sm font-medium text-webropol-gray-900">Apply industry-specific
                                             terminology</span>
                                     </div>
@@ -393,16 +386,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <!-- Modal Footer -->
+                </div> <!-- Modal Footer -->
                 <div class="flex justify-end space-x-3 mt-6 pt-6"> <button @click="closeLanguagesModal()"
-                        class="px-4 py-2 text-webropol-gray-700 bg-white border border-webropol-gray-300 rounded-full hover:bg-webropol-gray-50 focus:outline-none focus:ring-2 focus:ring-webropol-blue-500">
+                        class="px-4 py-2 text-webropol-gray-700 bg-white border border-webropol-gray-300 rounded-full hover:bg-webropol-gray-50 focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
                         Close
                     </button>
                     <button
-                        class="px-4 py-2 bg-webropol-blue-500 hover:bg-webropol-blue-600 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-webropol-blue-500">
+                        class="px-4 py-2 bg-webropol-teal-700 hover:bg-webropol-teal-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
                         Apply
                     </button>
                 </div>
@@ -420,10 +410,12 @@
             <div
                 class="inline-block w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
                 <!-- Modal Header -->
-                <div class="flex items-center mb-6">                    <div class="flex items-center justify-center w-8 h-8 bg-webropol-blue-100 rounded-lg mr-3">
-                        <i class="fas fa-bolt w-5 h-5 text-webropol-blue-600"></i>
+                <div class="flex items-center mb-6">
+                    <div class="flex items-center justify-center w-8 h-8 bg-webropol-teal-100 rounded-lg mr-3">
+                        <i class="fas fa-bolt w-4 h-4 text-webropol-teal-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-webropol-gray-900">AI Translation Assistant</h3>                    <button @click="closeTranslationModal()"
+                    <h3 class="text-xl font-semibold text-webropol-gray-900">AI Translation Assistant</h3> <button
+                        @click="closeTranslationModal()"
                         class="ml-auto text-webropol-gray-400 hover:text-webropol-gray-600">
                         <i class="fas fa-times w-5 h-5"></i>
                     </button>
@@ -431,9 +423,8 @@
 
                 <!-- Translation Setup -->
                 <div class="mb-6">
-                    <div class="flex items-center mb-4">
-                        <svg class="w-5 h-5 text-webropol-blue-400 mr-2" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                    <div class="flex items-center mb-4"> <svg class="w-5 h-5 text-webropol-teal-400 mr-2" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
                             </path>
@@ -445,38 +436,39 @@
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-webropol-gray-700 mb-2">Source Language</label>
                         <select
-                            class="w-full px-3 py-2 border border-webropol-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-webropol-blue-500 focus:border-transparent">
+                            class="w-full px-3 py-2 border border-webropol-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent">
                             <option selected>English (Default)</option>
                         </select>
-                    </div>                    <!-- Target Languages -->
+                    </div> <!-- Target Languages -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-webropol-gray-700 mb-3">Target Languages</label>
                         <div class="space-y-2">
                             <template x-for="language in targetLanguages" :key="language"> <label
-                                    class="flex items-center">
-                                    <input type="checkbox" 
+                                    class="flex items-center"> <input type="checkbox"
                                         :checked="isLanguageChecked(language)"
                                         @change="toggleLanguageSelection(language)"
-                                        class="h-4 w-4 text-webropol-blue-500 focus:ring-webropol-blue-500 border-webropol-gray-300 rounded">
+                                        class="h-4 w-4 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded">
                                     <span class="ml-3 text-sm text-webropol-gray-700" x-text="language"></span>
                                 </label>
-                            </template>                        </div>
+                            </template>
+                        </div>
                         <div class="mt-3 flex space-x-4">
                             <button @click="selectAllLanguages()"
-                                class="text-sm text-webropol-blue-500 hover:text-webropol-blue-600 font-medium rounded-full">
+                                class="text-sm text-webropol-teal-500 hover:text-webropol-teal-600 font-medium rounded-full">
                                 Select All
                             </button>
                             <button @click="deselectAllLanguages()"
-                                class="text-sm text-webropol-blue-500 hover:text-webropol-blue-600 font-medium rounded-full">
+                                class="text-sm text-webropol-teal-500 hover:text-webropol-teal-600 font-medium rounded-full">
                                 Deselect All
                             </button>
                         </div>
                     </div><!-- AI Translation Notice -->
-                    <div class="bg-webropol-blue-50 border border-webropol-blue-200 rounded-lg p-4 mb-6">                        <div class="flex items-start">
-                            <i class="fas fa-info-circle w-5 h-5 text-webropol-blue-600 mt-0.5 mr-3 flex-shrink-0"></i>
+                    <div class="bg-webropol-teal-50 border border-webropol-teal-200 rounded-lg p-4 mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle w-5 h-5 text-webropol-teal-600 mt-0.5 mr-3 flex-shrink-0"></i>
                             <div>
-                                <h5 class="text-sm font-medium text-webropol-blue-900 mb-1">AI Translation Notice</h5>
-                                <p class="text-sm text-webropol-blue-700">
+                                <h5 class="text-sm font-medium text-webropol-teal-900 mb-1">AI Translation Notice</h5>
+                                <p class="text-sm text-webropol-teal-700">
                                     Translations will be generated using AI and marked accordingly. We recommend
                                     reviewing AI-translated surveys to ensure accuracy and context.
                                 </p>
@@ -485,11 +477,13 @@
                     </div>
                 </div> <!-- Modal Footer -->
                 <div class="flex justify-end space-x-3"> <button @click="closeTranslationModal()"
-                        class="px-4 py-2 text-webropol-gray-700 bg-white border border-webropol-gray-300 rounded-full hover:bg-webropol-gray-50 focus:outline-none focus:ring-2 focus:ring-webropol-blue-500">
+                        class="px-4 py-2 text-webropol-gray-700 bg-white border border-webropol-gray-300 rounded-full hover:bg-webropol-gray-50 focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
                         Cancel
-                    </button>                    <button
-                        class="px-6 py-2 bg-webropol-gray-900 hover:bg-webropol-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-webropol-gray-900">
-                        <span x-text="`Start Translation (${checkedTranslationLanguages.length} ${checkedTranslationLanguages.length === 1 ? 'language' : 'languages'})`"></span>
+                    </button>
+                    <button
+                        class="px-6 py-2 bg-webropol-teal-900 hover:bg-webropol-teal-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-webropol-gray-900">
+                        <span
+                            x-text="`Start Translation (${checkedTranslationLanguages.length} ${checkedTranslationLanguages.length === 1 ? 'language' : 'languages'})`"></span>
                     </button>
                 </div>
             </div>
@@ -614,7 +608,7 @@
                     return language ? language.name : langCode;
                 }
             }
-        }        function translationApp() {
+        } function translationApp() {
             const instance = {
                 showLanguagesModal: true,
                 showTranslationModal: false,
