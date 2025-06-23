@@ -586,41 +586,48 @@
                             <div x-show="addLanguagesOpen" 
                                  x-collapse 
                                  class="px-6 pb-6 space-y-6">
-                                
-                                <!-- Language Selection Grid -->
-                                <div class="grid lg:grid-cols-2 gap-8">
+                                  <!-- Language Selection Grid -->
+                                <div class="grid lg:grid-cols-2 gap-8 mt-6">
                                     <!-- Language Selector -->
-                                    <div class="space-y-4">
+                                    <div class="space-y-6">
                                         <label class="block">
-                                            <span class="text-sm font-semibold text-gray-700 mb-2 block">
+                                            <span class="text-sm font-semibold text-gray-700 mb-4 block">
                                                 <i class="fas fa-search mr-2 text-blue-500"></i>
                                                 Search & Add Languages
-                                            </span>
-                                            <div class="relative" x-data="languageSelector()">
-                                                <!-- Modern Search Input -->
-                                                <div @click="showDropdown = !showDropdown"
-                                                     class="input-modern cursor-pointer min-h-[60px] flex flex-wrap items-center gap-2">
+                                            </span>                                            <div class="relative mt-3" x-data="languageSelector()">                                                <!-- Modern Search Input -->
+                                                <div class="input-modern min-h-[70px] flex flex-wrap items-center gap-3 p-4">
                                                     
                                                     <!-- Language Chips -->
                                                     <template x-for="langCode in selectedLanguages" :key="langCode">
                                                         <span class="chip-modern">
                                                             <span x-text="getLanguageName(langCode)"></span>
-                                                            <button @click.stop="removeLanguage(langCode)"
-                                                                    class="chip-remove">
+                                                            <button @click.stop.prevent="handleRemoveLanguage(langCode)"
+                                                                    class="chip-remove"
+                                                                    type="button"
+                                                                    :aria-label="'Remove ' + getLanguageName(langCode)">
                                                                 <i class="fas fa-times text-xs"></i>
                                                             </button>
                                                         </span>
                                                     </template>
 
-                                                    <!-- Search Input -->
-                                                    <input type="text" 
-                                                           x-model="searchTerm" 
-                                                           @click.stop
-                                                           @keydown.escape="showDropdown = false" 
-                                                           placeholder="Search languages..."
-                                                           class="flex-1 min-w-[200px] bg-transparent border-none outline-none">
-                                                    
-                                                    <i class="fas fa-chevron-down text-gray-400 flex-shrink-0"></i>
+                                                    <!-- Search Input Wrapper -->
+                                                    <div class="flex-1 flex items-center min-w-[200px]" 
+                                                         @click="handleInputAreaClick($event)">
+                                                        <input type="text" 
+                                                               x-model="searchTerm" 
+                                                               @focus="showDropdown = true"
+                                                               @keydown.escape="showDropdown = false" 
+                                                               @input="handleSearchInput()"
+                                                               placeholder="Search languages..."
+                                                               class="flex-1 bg-transparent border-none outline-none py-2">
+                                                        
+                                                        <button type="button"
+                                                                @click.stop="toggleDropdown()"
+                                                                class="ml-2 p-1 hover:bg-gray-100 rounded"
+                                                                aria-label="Toggle language dropdown">
+                                                            <i class="fas fa-chevron-down text-gray-400"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
 
                                                 <!-- Modern Dropdown -->
@@ -629,7 +636,7 @@
                                                      x-cloak
                                                      class="absolute z-30 w-full mt-2 glass-card rounded-2xl shadow-xl max-h-80 overflow-y-auto">
                                                     <template x-for="language in filteredLanguages" :key="language.code">
-                                                        <div @click="selectLanguage(language); searchTerm = ''"
+                                                        <div @click.stop.prevent="handleLanguageSelect(language)"
                                                              class="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex justify-between items-center">
                                                             <div class="flex items-center gap-3">
                                                                 <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center text-white text-xs font-bold"
@@ -1013,18 +1020,16 @@
                                     READY
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Target Languages -->
-                        <div>
-                            <label class="block font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        </div>                        <!-- Target Languages -->
+                        <div class="p-6 bg-gray-50 rounded-2xl">
+                            <label class="block font-semibold text-gray-900 mb-4 flex items-center gap-2">
                                 <i class="fas fa-globe text-purple-500"></i>
                                 Target Languages
                                 <span class="text-sm font-normal text-gray-500">
                                     (Select languages to translate)
                                 </span>
                             </label>
-                              <div class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                            <div class="space-y-3 max-h-60 overflow-y-auto pr-2 px-2">
                                 <template x-for="language in targetLanguages" :key="language">
                                     <label class="card-elevated p-4 rounded-xl cursor-pointer hover:shadow-lg block"
                                            :class="{ 'ring-2 ring-purple-500 bg-purple-50': isLanguageChecked(language) }">
@@ -1047,11 +1052,9 @@
                                             </div>
                                         </div>
                                     </label>
-                                </template>
-                            </div>
-                            
+                                </template>                            
                             <!-- Selection Controls -->
-                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                            <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
                                 <div class="flex gap-3">
                                     <button @click="selectAllLanguages()"
                                             class="text-sm text-purple-600 hover:text-purple-700 font-semibold focus-ring-modern rounded px-2 py-1">
@@ -1274,7 +1277,31 @@
                         );
                     }
 
-                    return filtered;
+                    return filtered;                },                // Event Handlers
+                handleInputAreaClick(event) {
+                    // Only open dropdown if clicking on the wrapper, not on the input itself
+                    if (event.target !== event.target.querySelector('input')) {
+                        this.showDropdown = true;
+                    }
+                },
+
+                handleSearchInput() {
+                    this.showDropdown = true;
+                },
+
+                toggleDropdown() {
+                    this.showDropdown = !this.showDropdown;
+                },
+
+                handleLanguageSelect(language) {
+                    this.selectLanguage(language);
+                    this.searchTerm = '';
+                    this.showDropdown = false;
+                },
+
+                handleRemoveLanguage(langCode) {
+                    console.log('Removing language:', langCode);
+                    this.removeLanguage(langCode);
                 },
 
                 async selectLanguage(language) {
