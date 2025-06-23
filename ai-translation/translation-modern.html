@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Language Translation - AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Webropol Brand Colors
+                        'webropol-teal': {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6', // Primary teal
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        'webropol-blue': {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6', // Primary blue
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        'webropol-purple': {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7', // Primary purple
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        'webropol-green': {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e', // Primary green
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        'webropol-gray': {
+                            50: '#f9fafb',
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280',
+                            600: '#4b5563',
+                            700: '#374151',
+                            800: '#1f2937',
+                            900: '#111827',
+                        },
+                        'webropol-orange': {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316', // Primary orange
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        'webropol-red': {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444', // Primary red
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },                        // Legacy colors for backward compatibility
+                        'teal-custom': '#3b82f6',
+                        'teal-dark': '#2563eb'
+                    }
+                }
+            }
+        }
+    </script>    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Modern Design System Variables */
+        :root {
+            --glass-blur: blur(20px);
+            --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.08);
+            --shadow-strong: 0 20px 64px rgba(0, 0, 0, 0.15);
+            --border-radius-lg: 24px;
+            --border-radius-xl: 32px;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* Glassmorphism Base */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow-strong);
+        }        /* Enhanced Button System */
+        .btn-gradient-primary {
+            background: var(--gradient-primary);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-gradient-primary:hover {
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-gradient-secondary {
+            background: var(--gradient-secondary);
+            box-shadow: 0 8px 32px rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #374151;
+        }
+
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }        /* Modern Card System */
+        .card-elevated {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-elevated:hover {
+            box-shadow: var(--shadow-strong);
+        }
+
+        .card-interactive {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Enhanced Modal System */
+        .modal-modern {
+            border-radius: var(--border-radius-xl);
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 
+                0 32px 128px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-backdrop-modern {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(12px);
+        }        /* Advanced Form Controls */
+        .input-modern {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 16px 20px;
+            font-size: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-modern:focus {
+            background: white;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            outline: none;
+        }
+
+        .select-modern {
+            appearance: none;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 16px 50px 16px 20px;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 20px;
+        }        /* Enhanced Language Chips */
+        .chip-modern {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .chip-modern:hover {
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .chip-remove {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chip-remove:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }        /* Progress Indicators */
+        .progress-modern {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            height: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-modern {
+            background: var(--gradient-primary);
+            height: 100%;
+            border-radius: 12px;
+            position: relative;
+        }        /* Loading Indicators */
+        .loading-spinner-modern {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(102, 126, 234, 0.1);
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        /* Toast Notifications */
+        .toast-modern {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .toast-success { border-left: 4px solid #10b981; }
+        .toast-error { border-left: 4px solid #ef4444; }
+        .toast-warning { border-left: 4px solid #f59e0b; }
+        .toast-info { border-left: 4px solid #3b82f6; }        /* Accordion Modern */
+        .accordion-modern {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .accordion-header-modern {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        }
+
+        .accordion-header-modern:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+
+        /* Language List Items */
+        .language-item-modern {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .language-item-modern:hover {
+            border-color: rgba(102, 126, 234, 0.3);
+            background: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        }
+
+        .language-item-original {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-color: rgba(102, 126, 234, 0.2);
+        }        /* Enhanced Focus States */
+        .focus-ring-modern:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        @media (prefers-contrast: high) {
+            .glass-card, .glass-modal {
+                background: white;
+                border: 2px solid #000;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .modal-modern {
+                margin: 16px;
+                border-radius: 20px;
+            }
+            
+            .card-elevated {
+                border-radius: 16px;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100" x-data="translationApp()" x-init="initializeApp()">
+    <!-- Modern Background Pattern -->
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM2NjdlZWEiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40"></div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" 
+         class="fixed top-6 right-6 z-[100] space-y-3"
+         x-data="toastManager()"
+         x-init="initToasts()">        <template x-for="toast in toasts" :key="toast.id">
+            <div x-show="toast.visible"
+                 :class="toast.type"
+                 class="toast-modern max-w-md p-4 text-gray-800">
+                <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <div class="w-5 h-5 rounded-full flex items-center justify-center"
+                             :class="{
+                                 'bg-green-100 text-green-600': toast.type === 'toast-success',
+                                 'bg-red-100 text-red-600': toast.type === 'toast-error',
+                                 'bg-yellow-100 text-yellow-600': toast.type === 'toast-warning',
+                                 'bg-blue-100 text-blue-600': toast.type === 'toast-info'
+                             }">
+                            <i :class="{
+                                'fas fa-check': toast.type === 'toast-success',
+                                'fas fa-exclamation': toast.type === 'toast-error',
+                                'fas fa-exclamation-triangle': toast.type === 'toast-warning',
+                                'fas fa-info': toast.type === 'toast-info'
+                            }" class="text-xs"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-semibold text-sm" x-text="toast.title"></h4>
+                        <p class="text-sm text-gray-600 mt-1" x-text="toast.message"></p>
+                    </div>                    <button @click="removeToast(toast.id)"
+                            class="flex-shrink-0 text-gray-400 hover:text-gray-600 focus-ring-modern rounded-lg p-1">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- Modern Loading Overlay -->
+    <div x-show="isLoading" 
+         x-cloak
+         class="fixed inset-0 z-[90] bg-black/20 backdrop-blur-sm flex items-center justify-center">
+        <div class="glass-card p-8 rounded-3xl max-w-sm mx-4">
+            <div class="flex items-center gap-4">
+                <div class="loading-spinner-modern"></div>
+                <div>
+                    <div class="font-semibold text-gray-900" x-text="loadingMessage"></div>
+                    <div class="loading-dots mt-2">
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="relative">
+        <div class="max-w-7xl mx-auto px-6 pt-16 pb-12">
+            <!-- Navigation -->
+            <nav class="flex items-center justify-between mb-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-language text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                        Webropol AI
+                    </span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="btn-glass px-4 py-2 rounded-full text-sm font-medium">
+                        <i class="fas fa-question-circle mr-2"></i>Help
+                    </button>
+                    <button class="btn-glass px-4 py-2 rounded-full text-sm font-medium">
+                        <i class="fas fa-cog mr-2"></i>Settings
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Main Hero Content -->
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-sm font-medium text-gray-700">AI Translation Assistant Ready</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-6 leading-tight">
+                    Survey Language
+                    <span class="block">Translation Hub</span>
+                </h1>
+                
+                <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Effortlessly translate your surveys into multiple languages with our advanced AI assistant. 
+                    Reach global audiences with precision and cultural awareness.
+                </p>
+
+                <!-- Main CTA Button -->
+                <button @click="openLanguagesModal()"
+                        @keydown.enter="openLanguagesModal()"
+                        @keydown.space.prevent="openLanguagesModal()"
+                        class="btn-gradient-primary text-white font-semibold px-12 py-4 rounded-2xl text-lg inline-flex items-center gap-3 focus-ring-modern"
+                        :aria-expanded="showLanguagesModal"
+                        aria-haspopup="dialog">
+                    <i class="fas fa-magic text-xl"></i>
+                    <span>Manage Languages</span>
+                    <i class="fas fa-arrow-right text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="grid md:grid-cols-3 gap-8 mt-20">
+                <div class="card-elevated p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">AI-Powered Translation</h3>
+                    <p class="text-gray-600">Advanced machine learning algorithms ensure accurate and contextual translations.</p>
+                </div>
+                
+                <div class="card-elevated p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-globe text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">50+ Languages</h3>
+                    <p class="text-gray-600">Support for major world languages with regional dialect variations.</p>
+                </div>
+                
+                <div class="card-elevated p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-lightning-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Real-time Processing</h3>
+                    <p class="text-gray-600">Instant translation with live progress tracking and quality assurance.</p>
+                </div>
+            </div>
+        </div>
+    </div>    <!-- Modern Languages Modal -->
+    <div x-show="showLanguagesModal" 
+         x-cloak 
+         class="fixed inset-0 z-50 overflow-y-auto"
+         @keydown.escape.prevent="closeLanguagesModal()"
+         x-trap.noscroll="showLanguagesModal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="languages-modal-title"
+         aria-describedby="languages-modal-description">
+        
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <!-- Modern Backdrop -->
+            <div class="fixed inset-0 modal-backdrop-modern"
+                 @click="handleBackdropClick()"
+                 aria-hidden="true">
+            </div>            <!-- Modal Content -->
+            <div class="relative w-full max-w-6xl modal-modern p-0 overflow-hidden">
+                
+                <!-- Modal Header -->
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-language text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 id="languages-modal-title" class="text-2xl font-bold">
+                                    Survey Languages
+                                </h3>
+                                <p class="text-blue-100 mt-1">Manage and translate your survey languages</p>
+                            </div>
+                        </div>                        <button @click="closeLanguagesModal()"
+                                @keydown.enter="closeLanguagesModal()"
+                                @keydown.space.prevent="closeLanguagesModal()"
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 focus-ring-modern"
+                                aria-label="Close modal">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="languages-modal-description" class="sr-only">
+                    Modern interface for managing survey languages and AI translation
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-8 space-y-8">
+                    <!-- Error Display -->
+                    <div x-show="modalError" 
+                         x-cloak
+                         class="glass-card border-l-4 border-red-400 p-6 rounded-r-2xl">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-red-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-red-900 mb-1">Error</h4>
+                                <p class="text-red-700" x-text="modalError"></p>
+                            </div>
+                            <button @click="modalError = ''"
+                                    class="text-red-400 hover:text-red-600 focus-ring-modern rounded-lg p-2">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Add Languages Section -->
+                    <div class="accordion-modern">
+                        <div x-data="{ addLanguagesOpen: true }">
+                            <!-- Accordion Header -->
+                            <button @click="addLanguagesOpen = !addLanguagesOpen"
+                                    class="accordion-header-modern w-full px-6 py-4 text-left flex items-center justify-between focus-ring-modern">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-plus text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-gray-900">Add Languages</h4>
+                                        <p class="text-gray-600 text-sm">Select and configure survey languages</p>
+                                    </div>
+                                </div>                                <i class="fas fa-chevron-down text-gray-400 text-xl"
+                                   :class="{ 'rotate-180': addLanguagesOpen }"></i>
+                            </button>
+
+                            <!-- Accordion Content -->
+                            <div x-show="addLanguagesOpen" 
+                                 x-collapse 
+                                 class="px-6 pb-6 space-y-6">
+                                
+                                <!-- Language Selection Grid -->
+                                <div class="grid lg:grid-cols-2 gap-8">
+                                    <!-- Language Selector -->
+                                    <div class="space-y-4">
+                                        <label class="block">
+                                            <span class="text-sm font-semibold text-gray-700 mb-2 block">
+                                                <i class="fas fa-search mr-2 text-blue-500"></i>
+                                                Search & Add Languages
+                                            </span>
+                                            <div class="relative" x-data="languageSelector()">
+                                                <!-- Modern Search Input -->
+                                                <div @click="showDropdown = !showDropdown"
+                                                     class="input-modern cursor-pointer min-h-[60px] flex flex-wrap items-center gap-2">
+                                                    
+                                                    <!-- Language Chips -->
+                                                    <template x-for="langCode in selectedLanguages" :key="langCode">
+                                                        <span class="chip-modern">
+                                                            <span x-text="getLanguageName(langCode)"></span>
+                                                            <button @click.stop="removeLanguage(langCode)"
+                                                                    class="chip-remove">
+                                                                <i class="fas fa-times text-xs"></i>
+                                                            </button>
+                                                        </span>
+                                                    </template>
+
+                                                    <!-- Search Input -->
+                                                    <input type="text" 
+                                                           x-model="searchTerm" 
+                                                           @click.stop
+                                                           @keydown.escape="showDropdown = false" 
+                                                           placeholder="Search languages..."
+                                                           class="flex-1 min-w-[200px] bg-transparent border-none outline-none">
+                                                    
+                                                    <i class="fas fa-chevron-down text-gray-400 flex-shrink-0"></i>
+                                                </div>
+
+                                                <!-- Modern Dropdown -->
+                                                <div x-show="showDropdown && filteredLanguages.length > 0"
+                                                     @click.away="showDropdown = false" 
+                                                     x-cloak
+                                                     class="absolute z-30 w-full mt-2 glass-card rounded-2xl shadow-xl max-h-80 overflow-y-auto">
+                                                    <template x-for="language in filteredLanguages" :key="language.code">
+                                                        <div @click="selectLanguage(language); searchTerm = ''"
+                                                             class="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex justify-between items-center">
+                                                            <div class="flex items-center gap-3">
+                                                                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center text-white text-xs font-bold"
+                                                                     x-text="language.code.toUpperCase()">
+                                                                </div>
+                                                                <span class="font-medium text-gray-900" x-text="language.name"></span>
+                                                            </div>
+                                                            <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full" 
+                                                                  x-text="language.code.toUpperCase()"></span>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <!-- Settings Panel -->
+                                    <div class="glass-card p-6 rounded-2xl">
+                                        <h5 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                            <i class="fas fa-cog text-blue-500"></i>
+                                            Language Settings
+                                        </h5>
+                                        <div class="space-y-4">
+                                            <label class="flex items-start gap-3 cursor-pointer">
+                                                <input type="checkbox" 
+                                                       id="allowSwitching"
+                                                       class="mt-1 w-5 h-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded focus-ring-modern">
+                                                <div>
+                                                    <span class="font-medium text-gray-900 block">
+                                                        Allow Language Switching
+                                                    </span>
+                                                    <span class="text-sm text-gray-600">
+                                                        Respondents can change languages during the survey
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AI Translation CTA -->
+                                <div class="text-center">
+                                    <button @click="handleBulkTranslation()"
+                                            @keydown.enter="handleBulkTranslation()"
+                                            @keydown.space.prevent="handleBulkTranslation()"
+                                            :disabled="isProcessingTranslation || languages.length === 0"
+                                            :class="{
+                                                'opacity-50 cursor-not-allowed': isProcessingTranslation || languages.length === 0
+                                            }"
+                                            class="btn-gradient-secondary text-white font-bold px-12 py-4 rounded-2xl text-lg inline-flex items-center gap-3 focus-ring-modern">
+                                        
+                                        <template x-if="!isProcessingTranslation">
+                                            <i class="fas fa-magic text-xl"></i>
+                                        </template>
+                                        <template x-if="isProcessingTranslation">
+                                            <div class="loading-spinner-modern w-5 h-5 border-2 border-white border-t-transparent"></div>
+                                        </template>
+                                        
+                                        <span x-text="isProcessingTranslation ? 'Processing...' : 'Translate with AI Magic'"></span>
+                                        
+                                        <template x-if="!isProcessingTranslation">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </template>
+                                    </button>
+                                    
+                                    <div x-show="languages.length === 0" 
+                                         class="text-sm text-gray-500 mt-3">
+                                        Add languages above to enable AI translation
+                                    </div>
+                                </div>                                <!-- Language Management Section -->
+                                <div class="border-t border-gray-200 pt-8">
+                                    <h5 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                                        <i class="fas fa-list-ul text-blue-500"></i>
+                                        Active Languages
+                                        <span class="text-sm font-normal text-gray-500">({1 + languages.length} total)</span>
+                                    </h5>
+
+                                    <div class="space-y-4">
+                                        <!-- English (Original) -->
+                                        <div class="language-item-modern language-item-original">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-4">
+                                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
+                                                        <span class="text-white font-bold text-sm">EN</span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="flex items-center gap-3">
+                                                            <span class="font-bold text-gray-900 text-lg">English</span>
+                                                            <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                                                ORIGINAL
+                                                            </span>
+                                                        </div>
+                                                        <p class="text-gray-600 text-sm mt-1">Source language for translations</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <button class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center hover:bg-yellow-200">
+                                                        <i class="fas fa-star"></i>
+                                                    </button>
+                                                    <button disabled 
+                                                            class="w-10 h-10 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center cursor-not-allowed"
+                                                            title="Cannot remove original language">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                    <button disabled 
+                                                            class="w-10 h-10 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center cursor-not-allowed"
+                                                            title="Cannot translate original language">
+                                                        <i class="fas fa-language"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Dynamic Languages -->
+                                        <template x-for="language in languages" :key="language">
+                                            <div class="language-item-modern card-interactive">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex items-center gap-4">
+                                                        <div class="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl flex items-center justify-center">
+                                                            <span class="text-white font-bold text-xs" 
+                                                                  x-text="language.substring(0, 2).toUpperCase()"></span>
+                                                        </div>
+                                                        <div>
+                                                            <div class="flex items-center gap-3">
+                                                                <span class="font-bold text-gray-900 text-lg" x-text="language"></span>
+                                                                <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">
+                                                                    ACTIVE
+                                                                </span>
+                                                            </div>
+                                                            <p class="text-gray-600 text-sm mt-1">Ready for translation</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center gap-2">
+                                                        <button class="w-10 h-10 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center hover:bg-blue-100 hover:text-blue-600 focus-ring-modern">
+                                                            <i class="far fa-star"></i>
+                                                        </button>
+                                                        <button @click="removeLanguageCompletely(language)"
+                                                                class="w-10 h-10 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center hover:bg-red-100 hover:text-red-600 focus-ring-modern">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                        <button @click="openTranslationModal(language)"
+                                                                class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-200 focus-ring-modern">
+                                                            <i class="fas fa-language"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <!-- Empty State -->
+                                        <div x-show="languages.length === 0" class="text-center py-12">
+                                            <div class="w-20 h-20 bg-gray-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                                <i class="fas fa-language text-gray-400 text-2xl"></i>
+                                            </div>
+                                            <h6 class="font-semibold text-gray-900 mb-2">No Additional Languages</h6>
+                                            <p class="text-gray-600 text-sm">Add languages above to get started with translations</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Settings Accordion -->
+                    <div class="accordion-modern">
+                        <div x-data="{ advancedOpen: false }">
+                            <button @click="advancedOpen = !advancedOpen"
+                                    class="accordion-header-modern w-full px-6 py-4 text-left flex items-center justify-between focus-ring-modern">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-cogs text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-gray-900">Advanced Translation Settings</h4>
+                                        <p class="text-gray-600 text-sm">Regional dialects and cultural adaptations</p>
+                                    </div>                                </div>
+                                <i class="fas fa-chevron-down text-gray-400 text-xl"
+                                   :class="{ 'rotate-180': advancedOpen }"></i>
+
+                            <div x-show="advancedOpen" x-collapse class="px-6 pb-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div class="space-y-4">                                    <div class="space-y-4">
+                                        <label class="card-elevated p-4 cursor-pointer block hover:shadow-lg">
+                                            <div class="fle                                        <label class="card-elevated p-4 cursor-pointer block hover:shadow-lg">
+                                            <div class="flex items-start gap-3">
+                                                <input type="checkbox" 
+                                                       class="mt-1 w-5 h-5 text-purple-500 focus:ring-purple-500 border-gray-300 rounded focus-ring-modern">
+                                                <div>
+                                                    <span class="font-semibold text-gray-900 block">Regional Dialect Adaptations</span>
+                                                    <span class="text-sm text-gray-600">Adapt translations for regional variations</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="card-elevated p-4 cursor-pointer block hover:shadow-lg"> rounded focus-ring-modern">
+                                                <div>
+                                                    <span class="font-semibold text-gray-900 block">Cultural Context</span>
+                                                    <span class="text-sm text-gray-600">Include cultural considerations in translations</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="space-y-4">
+                                      <div class="space-y-4">
+                                        <label class="card-elevated p-4 cursor-pointer block hover:shadow-lg">
+                                            <div class="fle                                        <label class="card-elevated p-4 cursor-pointer block hover:shadow-lg">
+                                            <div class="flex items-start gap-3">
+                                                <input type="checkbox" 
+                                                       class="mt-1 w-5 h-5 text-purple-500 focus:ring-purple-500 border-gray-300 rounded focus-ring-modern">
+                                                <div>
+                                                    <span class="font-semibold text-gray-900 block">Industry Terminology</span>
+                                                    <span class="text-sm text-gray-600">Use specialized business terminology</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="card-elevated p-4 cursor-pointer block hover:shadow-lg">
+                                                    <span class="font-semibold text-gray-900 block">Formal Language Style</span>
+                                                    <span class="text-sm text-gray-600">Use formal language in all translations</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern Modal Footer -->
+                <div class="bg-gray-50 px-8 py-6 flex justify-between items-center">
+                    <div class="text-sm text-gray-600">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Changes will be saved automatically
+                    </div>
+                    <div class="flex gap-3">
+                        <button @click="closeLanguagesModal()"
+                                @keydown.enter="closeLanguagesModal()"
+                                @keydown.space.prevent="closeLanguagesModal()"
+                                :disabled="isProcessingTranslation"
+                                :class="{ 'opacity-50 cursor-not-allowed': isProcessingTranslation }"
+                                class="btn-glass px-6 py-3 rounded-xl font-medium focus-ring-modern">
+                            Close
+                        </button>
+                        <button @click="applyLanguageChanges()"
+                                @keydown.enter="applyLanguageChanges()"
+                                @keydown.space.prevent="applyLanguageChanges()"
+                                :disabled="isProcessingTranslation"
+                                :class="{ 'opacity-50 cursor-not-allowed': isProcessingTranslation }"
+                                class="btn-gradient-primary text-white px-8 py-3 rounded-xl font-semibold focus-ring-modern flex items-center gap-2">
+                            
+                            <template x-if="!isProcessingTranslation">
+                                <i class="fas fa-check"></i>
+                            </template>
+                            <template x-if="isProcessingTranslation">
+                                <div class="loading-spinner-modern w-4 h-4 border-2 border-white border-t-transparent"></div>
+                            </template>
+                            
+                            <span x-text="isProcessingTranslation ? 'Saving...' : 'Apply Changes'"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <!-- Modern AI Translation Modal -->
+    <div x-show="showTranslationModal" 
+         x-cloak 
+         class="fixed inset-0 z-[60] overflow-y-auto"
+         @keydown.escape.prevent="closeTranslationModal()"
+         x-trap.noscroll="showTranslationModal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="translation-modal-title"
+         aria-describedby="translation-modal-description">
+        
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <!-- Enhanced Backdrop -->
+            <div class="fixed inset-0 modal-backdrop-modern"
+                 @click="handleTranslationBackdropClick()"
+                 aria-hidden="true">
+            </div>            <!-- Modal Content -->
+            <div class="relative w-full max-w-2xl modal-modern overflow-hidden">
+                
+                <!-- Modal Header with Gradient -->
+                <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 px-8 py-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-magic text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 id="translation-modal-title" class="text-2xl font-bold">
+                                    AI Translation Assistant
+                                </h3>
+                                <p class="text-pink-100 mt-1">Powered by advanced machine learning</p>
+                            </div>
+                        </div>                        <button @click="closeTranslationModal()"
+                                @keydown.enter="closeTranslationModal()"
+                                @keydown.space.prevent="closeTranslationModal()"
+                                :disabled="isTranslationInProgress"
+                                :class="{ 'opacity-50 cursor-not-allowed': isTranslationInProgress }"
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 focus-ring-modern"
+                                aria-label="Close translation modal">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="translation-modal-description" class="sr-only">
+                    AI-powered translation interface with progress tracking
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-8 space-y-6">
+                    <!-- Translation Progress -->
+                    <div x-show="isTranslationInProgress" 
+                         x-cloak
+                         class="glass-card p-6 rounded-2xl border-l-4 border-purple-500">
+                        <div class="flex items-center gap-4">
+                            <div class="loading-spinner-modern flex-shrink-0"></div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    <i class="fas fa-cog text-purple-600"></i>
+                                    Translation in Progress
+                                </h4>
+                                <p class="text-gray-700 mb-3">
+                                    Processing <span class="font-semibold" x-text="translationProgress.current"></span> 
+                                    of <span class="font-semibold" x-text="translationProgress.total"></span> languages
+                                </p>
+                                <!-- Modern Progress Bar -->
+                                <div class="progress-modern">
+                                    <div class="progress-bar-modern" 
+                                         :style="`width: ${(translationProgress.current / translationProgress.total) * 100}%`">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between text-sm text-gray-600 mt-2">
+                                    <span x-text="`${Math.round((translationProgress.current / translationProgress.total) * 100)}% Complete`"></span>
+                                    <span>Estimated time: 2-3 minutes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Error -->
+                    <div x-show="translationError" 
+                         x-cloak
+                         class="glass-card border-l-4 border-red-500 p-6 rounded-r-2xl">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-red-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-red-900 mb-1">Translation Error</h4>
+                                <p class="text-red-700" x-text="translationError"></p>
+                            </div>
+                            <button @click="translationError = ''"
+                                    class="text-red-400 hover:text-red-600 focus-ring-modern rounded-lg p-2">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Translation Setup -->
+                    <div class="space-y-6">
+                        <!-- Source Language -->
+                        <div>
+                            <label class="block font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                <i class="fas fa-file-alt text-blue-500"></i>
+                                Source Language
+                            </label>
+                            <div class="card-elevated p-4 rounded-xl flex items-center gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
+                                    <span class="text-white font-bold">EN</span>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-gray-900">English</span>
+                                    <p class="text-gray-600 text-sm">Original survey language</p>
+                                </div>
+                                <div class="ml-auto bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
+                                    READY
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Target Languages -->
+                        <div>
+                            <label class="block font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                <i class="fas fa-globe text-purple-500"></i>
+                                Target Languages
+                                <span class="text-sm font-normal text-gray-500">
+                                    (Select languages to translate)
+                                </span>
+                            </label>
+                              <div class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                                <template x-for="language in targetLanguages" :key="language">
+                                    <label class="card-elevated p-4 rounded-xl cursor-pointer hover:shadow-lg block"
+                                           :class="{ 'ring-2 ring-purple-500 bg-purple-50': isLanguageChecked(language) }">
+                                        <div class="flex items-center gap-4">
+                                            <input type="checkbox" 
+                                                   :checked="isLanguageChecked(language)"
+                                                   @change="toggleLanguageSelection(language)"
+                                                   class="w-5 h-5 text-purple-500 focus:ring-purple-500 border-gray-300 rounded focus-ring-modern">
+                                            <div class="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl flex items-center justify-center">
+                                                <span class="text-white font-bold text-xs" 
+                                                      x-text="language.substring(0, 2).toUpperCase()"></span>
+                                            </div>
+                                            <div class="flex-1">
+                                                <span class="font-semibold text-gray-900" x-text="language"></span>
+                                                <p class="text-gray-600 text-sm">Ready for AI translation</p>
+                                            </div>
+                                            <div x-show="isLanguageChecked(language)" 
+                                                 class="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-xs font-medium">
+                                                SELECTED
+                                            </div>
+                                        </div>
+                                    </label>
+                                </template>
+                            </div>
+                            
+                            <!-- Selection Controls -->
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                                <div class="flex gap-3">
+                                    <button @click="selectAllLanguages()"
+                                            class="text-sm text-purple-600 hover:text-purple-700 font-semibold focus-ring-modern rounded px-2 py-1">
+                                        <i class="fas fa-check-double mr-1"></i>Select All
+                                    </button>
+                                    <button @click="deselectAllLanguages()"
+                                            class="text-sm text-gray-600 hover:text-gray-700 font-semibold focus-ring-modern rounded px-2 py-1">
+                                        <i class="fas fa-times mr-1"></i>Clear All
+                                    </button>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-semibold" x-text="checkedTranslationLanguages.length"></span> 
+                                    of <span x-text="targetLanguages.length"></span> selected
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Notice -->
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-blue-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-robot text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-900 mb-2">AI Translation Notice</h5>
+                                    <p class="text-blue-800 text-sm leading-relaxed">
+                                        Our advanced AI will translate your survey content while preserving context, 
+                                        tone, and cultural nuances. All translations will be clearly marked and 
+                                        can be reviewed before publishing.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern Modal Footer -->
+                <div class="bg-gray-50 px-8 py-6 flex justify-between items-center">
+                    <div class="text-sm text-gray-600 flex items-center gap-2">
+                        <i class="fas fa-shield-alt text-green-500"></i>
+                        Secure & GDPR compliant processing
+                    </div>
+                    <div class="flex gap-3">
+                        <button @click="closeTranslationModal()"
+                                @keydown.enter="closeTranslationModal()"
+                                @keydown.space.prevent="closeTranslationModal()"
+                                :disabled="isTranslationInProgress"
+                                :class="{ 'opacity-50 cursor-not-allowed': isTranslationInProgress }"
+                                class="btn-glass px-6 py-3 rounded-xl font-medium focus-ring-modern">
+                            <span x-text="isTranslationInProgress ? 'Processing...' : 'Cancel'"></span>
+                        </button>
+                        
+                        <button @click="startTranslation()"
+                                @keydown.enter="startTranslation()"
+                                @keydown.space.prevent="startTranslation()"
+                                :disabled="isTranslationInProgress || checkedTranslationLanguages.length === 0"
+                                :class="{ 'opacity-50 cursor-not-allowed': isTranslationInProgress || checkedTranslationLanguages.length === 0 }"
+                                class="btn-gradient-secondary text-white px-8 py-3 rounded-xl font-bold focus-ring-modern flex items-center gap-3">
+                            
+                            <template x-if="!isTranslationInProgress">
+                                <i class="fas fa-magic"></i>
+                            </template>
+                            <template x-if="isTranslationInProgress">
+                                <div class="loading-spinner-modern w-4 h-4 border-2 border-white border-t-transparent"></div>
+                            </template>
+                            
+                            <span>
+                                <span x-show="!isTranslationInProgress" 
+                                      x-text="`Start Translation (${checkedTranslationLanguages.length})`">
+                                </span>
+                                <span x-show="isTranslationInProgress">
+                                    Translating...
+                                </span>
+                            </span>
+                            
+                            <template x-if="!isTranslationInProgress">
+                                <i class="fas fa-arrow-right"></i>
+                            </template>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Help text for disabled state -->
+                <div x-show="checkedTranslationLanguages.length === 0 && !isTranslationInProgress" 
+                     class="absolute bottom-0 left-0 right-0 bg-yellow-50 border-t border-yellow-200 px-8 py-3">
+                    <div class="text-sm text-yellow-800 text-center flex items-center justify-center gap-2">
+                        <i class="fas fa-lightbulb text-yellow-600"></i>
+                        Select at least one language to begin AI translation
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><script>
+        // Toast Management System
+        function toastManager() {
+            return {
+                toasts: [],
+                nextId: 1,
+
+                initToasts() {
+                    // Global toast function
+                    window.showToast = (title, message, type = 'info', duration = 5000) => {
+                        this.addToast(title, message, type, duration);
+                    };
+                },
+
+                addToast(title, message, type = 'info', duration = 5000) {
+                    const toast = {
+                        id: this.nextId++,
+                        title,
+                        message,
+                        type,
+                        visible: true
+                    };
+
+                    this.toasts.push(toast);
+
+                    // Auto-remove toast after duration
+                    if (duration > 0) {
+                        setTimeout(() => {
+                            this.removeToast(toast.id);
+                        }, duration);
+                    }
+                },
+
+                removeToast(id) {
+                    const index = this.toasts.findIndex(toast => toast.id === id);
+                    if (index > -1) {
+                        this.toasts[index].visible = false;
+                        setTimeout(() => {
+                            this.toasts.splice(index, 1);
+                        }, 300); // Wait for exit animation
+                    }
+                }
+            };
+        }
+
+        // Enhanced Language Selector with Better UX
+        function languageSelector() {
+            return {
+                searchTerm: '',
+                showDropdown: false,
+                selectedLanguages: ['fi', 'sv', 'de', 'ar', 'hi'], // Pre-selected language codes
+                isLoading: false,
+                availableLanguages: [
+                    { code: 'af', name: 'Afrikaans' },
+                    { code: 'sq', name: 'Albanian' },
+                    { code: 'ar', name: 'Arabic' },
+                    { code: 'hy', name: 'Armenian' },
+                    { code: 'az', name: 'Azerbaijani' },
+                    { code: 'eu', name: 'Basque' },
+                    { code: 'be', name: 'Belarusian' },
+                    { code: 'bn', name: 'Bengali' },
+                    { code: 'bs', name: 'Bosnian' },
+                    { code: 'bg', name: 'Bulgarian' },
+                    { code: 'ca', name: 'Catalan' },
+                    { code: 'zh', name: 'Chinese' },
+                    { code: 'hr', name: 'Croatian' },
+                    { code: 'cs', name: 'Czech' },
+                    { code: 'da', name: 'Danish' },
+                    { code: 'nl', name: 'Dutch' },
+                    { code: 'et', name: 'Estonian' },
+                    { code: 'fi', name: 'Finnish' },
+                    { code: 'fr', name: 'French' },
+                    { code: 'gl', name: 'Galician' },
+                    { code: 'ka', name: 'Georgian' },
+                    { code: 'de', name: 'German' },
+                    { code: 'el', name: 'Greek' },
+                    { code: 'gu', name: 'Gujarati' },
+                    { code: 'he', name: 'Hebrew' },
+                    { code: 'hi', name: 'Hindi' },
+                    { code: 'hu', name: 'Hungarian' },
+                    { code: 'is', name: 'Icelandic' },
+                    { code: 'id', name: 'Indonesian' },
+                    { code: 'ga', name: 'Irish' },
+                    { code: 'it', name: 'Italian' },
+                    { code: 'ja', name: 'Japanese' },
+                    { code: 'kn', name: 'Kannada' },
+                    { code: 'kk', name: 'Kazakh' },
+                    { code: 'ko', name: 'Korean' },
+                    { code: 'lv', name: 'Latvian' },
+                    { code: 'lt', name: 'Lithuanian' },
+                    { code: 'mk', name: 'Macedonian' },
+                    { code: 'ms', name: 'Malay' },
+                    { code: 'ml', name: 'Malayalam' },
+                    { code: 'mt', name: 'Maltese' },
+                    { code: 'mr', name: 'Marathi' },
+                    { code: 'no', name: 'Norwegian' },
+                    { code: 'fa', name: 'Persian' },
+                    { code: 'pl', name: 'Polish' },
+                    { code: 'pt', name: 'Portuguese' },
+                    { code: 'pa', name: 'Punjabi' },
+                    { code: 'ro', name: 'Romanian' },
+                    { code: 'ru', name: 'Russian' },
+                    { code: 'sr', name: 'Serbian' },
+                    { code: 'sk', name: 'Slovak' },
+                    { code: 'sl', name: 'Slovenian' },
+                    { code: 'es', name: 'Spanish' },
+                    { code: 'sw', name: 'Swahili' },
+                    { code: 'sv', name: 'Swedish' },
+                    { code: 'ta', name: 'Tamil' },
+                    { code: 'te', name: 'Telugu' },
+                    { code: 'th', name: 'Thai' },
+                    { code: 'tr', name: 'Turkish' },
+                    { code: 'uk', name: 'Ukrainian' },
+                    { code: 'ur', name: 'Urdu' },
+                    { code: 'vi', name: 'Vietnamese' },
+                    { code: 'cy', name: 'Welsh' }
+                ],
+
+                get filteredLanguages() {
+                    let filtered = this.availableLanguages.filter(lang =>
+                        !this.selectedLanguages.includes(lang.code)
+                    );
+
+                    if (this.searchTerm) {
+                        filtered = filtered.filter(lang =>
+                            lang.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                            lang.code.toLowerCase().includes(this.searchTerm.toLowerCase())
+                        );
+                    }
+
+                    return filtered;
+                },
+
+                async selectLanguage(language) {
+                    try {
+                        this.isLoading = true;
+                        
+                        if (!this.selectedLanguages.includes(language.code)) {
+                            this.selectedLanguages.push(language.code);
+                            
+                            // Update main app's languages array
+                            if (window.translationAppInstance) {
+                                const languageName = language.name;
+                                if (!window.translationAppInstance.languages.includes(languageName)) {
+                                    window.translationAppInstance.languages.push(languageName);
+                                    window.translationAppInstance.targetLanguages.push(languageName);
+                                }
+                            }
+                            
+                            window.showToast('Language Added', `${language.name} has been added to your survey languages`, 'success');
+                        }
+                        
+                        this.showDropdown = false;
+                        this.searchTerm = '';
+                        
+                    } catch (error) {
+                        console.error('Error selecting language:', error);
+                        window.showToast('Error', 'Failed to add language. Please try again.', 'error');
+                    } finally {
+                        this.isLoading = false;
+                    }
+                },
+
+                async removeLanguage(langCode) {
+                    try {
+                        const language = this.availableLanguages.find(lang => lang.code === langCode);
+                        
+                        this.selectedLanguages = this.selectedLanguages.filter(code => code !== langCode);
+                        
+                        // Update main app's languages array
+                        if (window.translationAppInstance && language) {
+                            window.translationAppInstance.languages = window.translationAppInstance.languages.filter(lang => lang !== language.name);
+                            window.translationAppInstance.targetLanguages = window.translationAppInstance.targetLanguages.filter(lang => lang !== language.name);
+                        }
+                        
+                        if (language) {
+                            window.showToast('Language Removed', `${language.name} has been removed from your survey languages`, 'info');
+                        }
+                        
+                    } catch (error) {
+                        console.error('Error removing language:', error);
+                        window.showToast('Error', 'Failed to remove language. Please try again.', 'error');
+                    }
+                },
+
+                getLanguageName(langCode) {
+                    const language = this.availableLanguages.find(lang => lang.code === langCode);
+                    return language ? language.name : langCode;
+                }
+            };
+        }
+
+        // Enhanced Translation App with Full Modal Management
+        function translationApp() {
+            const instance = {
+                // Modal States
+                showLanguagesModal: false,
+                showTranslationModal: false,
+                modalError: '',
+                
+                // Loading States
+                isLoading: false,
+                loadingMessage: 'Loading...',
+                isProcessingTranslation: false,
+                isTranslationInProgress: false,
+                
+                // Translation States
+                translationError: '',
+                translationProgress: { current: 0, total: 0 },
+                
+                // Data
+                languages: ['Finnish', 'Swedish', 'German', 'Arabic', 'Hindi'],
+                targetLanguages: ['Finnish', 'Swedish', 'German', 'Arabic', 'Hindi'],
+                checkedTranslationLanguages: [],
+
+                // Initialization
+                initializeApp() {
+                    this.setupKeyboardListeners();
+                    this.setupFocusManagement();
+                    
+                    // Set initial modal state
+                    this.showLanguagesModal = true;
+                    this.manageFocusTrap();
+                },
+
+                setupKeyboardListeners() {
+                    document.addEventListener('keydown', (e) => {
+                        // Global escape key handler
+                        if (e.key === 'Escape') {
+                            if (this.showTranslationModal) {
+                                this.closeTranslationModal();
+                            } else if (this.showLanguagesModal) {
+                                this.closeLanguagesModal();
+                            }
+                        }
+                    });
+                },
+
+                setupFocusManagement() {
+                    // Focus management for accessibility
+                    this.$watch('showLanguagesModal', (isOpen) => {
+                        if (isOpen) {
+                            this.$nextTick(() => {
+                                const firstFocusable = document.querySelector('#languages-modal-title');
+                                if (firstFocusable) firstFocusable.focus();
+                            });
+                        }
+                    });
+
+                    this.$watch('showTranslationModal', (isOpen) => {
+                        if (isOpen) {
+                            this.$nextTick(() => {
+                                const firstFocusable = document.querySelector('#translation-modal-title');
+                                if (firstFocusable) firstFocusable.focus();
+                            });
+                        }
+                    });
+                },
+
+                manageFocusTrap() {
+                    document.body.classList.toggle('modal-open', this.showLanguagesModal || this.showTranslationModal);
+                },
+
+                // Modal Management Methods
+                openLanguagesModal() {
+                    this.showLanguagesModal = true;
+                    this.modalError = '';
+                    this.manageFocusTrap();
+                },
+
+                closeLanguagesModal() {
+                    if (this.isProcessingTranslation) {
+                        window.showToast('Cannot Close', 'Please wait for the current operation to complete', 'warning');
+                        return;
+                    }
+                    
+                    this.showLanguagesModal = false;
+                    this.manageFocusTrap();
+                },
+
+                handleBackdropClick() {
+                    if (!this.isProcessingTranslation) {
+                        this.closeLanguagesModal();
+                    }
+                },
+
+                async openTranslationModal(specificLanguage = null) {
+                    try {
+                        if (this.targetLanguages.length === 0) {
+                            this.modalError = 'Please add at least one language before starting translation';
+                            return;
+                        }
+
+                        if (specificLanguage) {
+                            this.checkedTranslationLanguages = [specificLanguage];
+                        } else {
+                            this.checkedTranslationLanguages = [...this.targetLanguages];
+                        }
+                        
+                        this.showTranslationModal = true;
+                        this.translationError = '';
+                        this.manageFocusTrap();
+                        
+                    } catch (error) {
+                        console.error('Error opening translation modal:', error);
+                        this.modalError = 'Failed to open translation assistant';
+                    }
+                },
+
+                closeTranslationModal() {
+                    if (this.isTranslationInProgress) {
+                        window.showToast('Translation Active', 'Translation is in progress. Please wait for completion.', 'warning');
+                        return;
+                    }
+                    
+                    this.showTranslationModal = false;
+                    this.translationError = '';
+                    this.manageFocusTrap();
+                },
+
+                handleTranslationBackdropClick() {
+                    if (!this.isTranslationInProgress) {
+                        this.closeTranslationModal();
+                    }
+                },
+
+                // Bulk Translation Handler
+                async handleBulkTranslation() {
+                    if (this.languages.length === 0) {
+                        this.modalError = 'Please add languages first';
+                        return;
+                    }
+                    
+                    this.openTranslationModal();
+                },
+
+                // Language Selection Methods
+                toggleLanguageSelection(language) {
+                    const index = this.checkedTranslationLanguages.indexOf(language);
+                    if (index > -1) {
+                        this.checkedTranslationLanguages.splice(index, 1);
+                    } else {
+                        this.checkedTranslationLanguages.push(language);
+                    }
+                },
+
+                isLanguageChecked(language) {
+                    return this.checkedTranslationLanguages.includes(language);
+                },
+
+                selectAllLanguages() {
+                    this.checkedTranslationLanguages = [...this.targetLanguages];
+                },
+
+                deselectAllLanguages() {
+                    this.checkedTranslationLanguages = [];
+                },
+
+                // Translation Process
+                async startTranslation() {
+                    if (this.checkedTranslationLanguages.length === 0) {
+                        this.translationError = 'Please select at least one language to translate';
+                        return;
+                    }
+
+                    try {
+                        this.isTranslationInProgress = true;
+                        this.translationError = '';
+                        this.translationProgress = { current: 0, total: this.checkedTranslationLanguages.length };
+
+                        for (let i = 0; i < this.checkedTranslationLanguages.length; i++) {
+                            const language = this.checkedTranslationLanguages[i];
+                            
+                            // Simulate translation API call
+                            await this.translateLanguage(language);
+                            
+                            this.translationProgress.current = i + 1;
+                            
+                            // Add small delay for better UX
+                            await new Promise(resolve => setTimeout(resolve, 500));
+                        }
+
+                        // Success handling
+                        window.showToast('Translation Complete', `Successfully translated ${this.checkedTranslationLanguages.length} languages`, 'success');
+                        
+                        // Close modal after success
+                        setTimeout(() => {
+                            this.closeTranslationModal();
+                        }, 1500);
+
+                    } catch (error) {
+                        console.error('Translation error:', error);
+                        this.translationError = error.message || 'Translation failed. Please try again.';
+                        window.showToast('Translation Failed', 'An error occurred during translation', 'error');
+                    } finally {
+                        this.isTranslationInProgress = false;
+                    }
+                },
+
+                async translateLanguage(language) {
+                    // Simulate API call with random delay
+                    const delay = Math.random() * 2000 + 1000; // 1-3 seconds
+                    
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            // Simulate occasional failures for demo
+                            if (Math.random() < 0.1) { // 10% failure rate
+                                reject(new Error(`Failed to translate to ${language}`));
+                            } else {
+                                resolve(`Translated to ${language}`);
+                            }
+                        }, delay);
+                    });
+                },
+
+                // Language Management
+                async applyLanguageChanges() {
+                    try {
+                        this.isProcessingTranslation = true;
+                        this.modalError = '';
+                        
+                        // Simulate saving changes
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        
+                        window.showToast('Changes Applied', 'Language settings have been saved successfully', 'success');
+                        this.closeLanguagesModal();
+                        
+                    } catch (error) {
+                        console.error('Error applying changes:', error);
+                        this.modalError = 'Failed to save language settings. Please try again.';
+                        window.showToast('Save Failed', 'Could not save language settings', 'error');
+                    } finally {
+                        this.isProcessingTranslation = false;
+                    }
+                },
+
+                removeLanguageCompletely(language) {
+                    if (language === 'English') {
+                        this.modalError = 'Cannot remove the original language';
+                        return;
+                    }
+
+                    try {
+                        // Remove from main languages array
+                        this.languages = this.languages.filter(lang => lang !== language);
+                        this.targetLanguages = this.targetLanguages.filter(lang => lang !== language);
+
+                        // Remove from translation selection
+                        this.checkedTranslationLanguages = this.checkedTranslationLanguages.filter(lang => lang !== language);
+
+                        // Also remove from language selector chips if present
+                        const selectorInstance = document.querySelector('[x-data*="languageSelector"]')?._x_dataStack?.[0];
+                        if (selectorInstance) {
+                            const languageCode = selectorInstance.availableLanguages.find(lang => lang.name === language)?.code;
+                            if (languageCode) {
+                                selectorInstance.selectedLanguages = selectorInstance.selectedLanguages.filter(code => code !== languageCode);
+                            }
+                        }
+
+                        window.showToast('Language Removed', `${language} has been removed from the survey`, 'info');
+                        
+                    } catch (error) {
+                        console.error('Error removing language:', error);
+                        this.modalError = 'Failed to remove language. Please try again.';
+                    }
+                },
+
+                // Legacy method for compatibility
+                removeLanguage(language) {
+                    this.removeLanguageCompletely(language);
+                }
+            };
+
+            // Make instance globally available
+            window.translationAppInstance = instance;
+            return instance;
+        }
+
+        // Enhanced error handling and debugging
+        document.addEventListener('alpine:init', () => {
+            console.log('Alpine.js initialized successfully');
+            
+            // Setup global error handling
+            window.addEventListener('unhandledrejection', (event) => {
+                console.error('Unhandled promise rejection:', event.reason);
+                if (window.showToast) {
+                    window.showToast('Unexpected Error', 'An unexpected error occurred', 'error');
+                }
+            });
+        });
+
+        // Enhanced Alpine.js error logging
+        window.addEventListener('error', (e) => {
+            if (e.message.includes('Alpine')) {
+                console.error('Alpine.js Error:', e);
+                if (window.showToast) {
+                    window.showToast('System Error', 'A system error occurred. Please refresh the page.', 'error');
+                }
+            }
+        });
+
+        // Accessibility enhancement: Announce modal state changes
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+
+        // Export for global use
+        window.announceToScreenReader = announceToScreenReader;
+    </script>
+</body>
+
+</html>
