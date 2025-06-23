@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webropol Color Palette - Brand Guidelines</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Primary Brand Colors
+                        'webropol-teal': {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6', // Primary teal
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        'webropol-blue': {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6', // Primary blue
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        // Secondary Colors
+                        'webropol-purple': {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7', // Primary purple
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        'webropol-green': {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e', // Primary green
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        // Neutral Colors
+                        'webropol-gray': {
+                            50: '#f9fafb',
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280',
+                            600: '#4b5563',
+                            700: '#374151',
+                            800: '#1f2937',
+                            900: '#111827',
+                        },
+                        // Accent Colors
+                        'webropol-orange': {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316', // Primary orange
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        'webropol-red': {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444', // Primary red
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .color-card {
+            transition: all 0.3s ease;
+        }
+        .color-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .copy-button {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .color-card:hover .copy-button {
+            opacity: 1;
+        }
+    </style>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body class="bg-webropol-gray-50 min-h-screen" x-data="colorPalette()">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-webropol-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-webropol-gray-900">Webropol Color Palette</h1>
+                    <p class="text-webropol-gray-600 mt-2">Brand guidelines and color specifications for consistent visual identity</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button 
+                        @click="exportColors()" 
+                        class="inline-flex items-center px-4 py-2 bg-webropol-teal-500 hover:bg-webropol-teal-600 text-white font-medium rounded-lg transition-colors"
+                    >
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Export Palette
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Navigation Tabs -->
+        <div class="mb-8">
+            <nav class="flex space-x-8" aria-label="Tabs">
+                <template x-for="(tab, index) in tabs" :key="tab.id">
+                    <button
+                        @click="activeTab = tab.id"
+                        :class="activeTab === tab.id ? 'border-webropol-teal-500 text-webropol-teal-600' : 'border-transparent text-webropol-gray-500 hover:text-webropol-gray-700 hover:border-webropol-gray-300'"
+                        class="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors"
+                        x-text="tab.name"
+                    ></button>
+                </template>
+            </nav>
+        </div>
+
+        <!-- Primary Brand Colors -->
+        <div x-show="activeTab === 'primary'" class="space-y-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-webropol-gray-900 mb-4">Primary Brand Colors</h2>
+                <p class="text-webropol-gray-600 mb-6">Core colors that define the Webropol brand identity. Use these as the foundation for all design work.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Teal -->
+                    <div class="color-card bg-white rounded-xl shadow-sm border border-webropol-gray-200 overflow-hidden">
+                        <div class="h-32 bg-webropol-teal-500 relative">
+                            <button 
+                                @click="copyToClipboard('#14b8a6')" 
+                                class="copy-button absolute top-2 right-2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-lg transition-all"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-webropol-gray-900 mb-2">Webropol Teal</h3>
+                            <p class="text-sm text-webropol-gray-600 mb-3">Primary brand color for buttons, links, and highlights</p>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HEX</span>
+                                    <span class="font-mono">#14b8a6</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">RGB</span>
+                                    <span class="font-mono">20, 184, 166</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HSL</span>
+                                    <span class="font-mono">174, 80%, 40%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blue -->
+                    <div class="color-card bg-white rounded-xl shadow-sm border border-webropol-gray-200 overflow-hidden">
+                        <div class="h-32 bg-webropol-blue-500 relative">
+                            <button 
+                                @click="copyToClipboard('#3b82f6')" 
+                                class="copy-button absolute top-2 right-2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-lg transition-all"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-webropol-gray-900 mb-2">Webropol Blue</h3>
+                            <p class="text-sm text-webropol-gray-600 mb-3">Secondary brand color for information and trust</p>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HEX</span>
+                                    <span class="font-mono">#3b82f6</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">RGB</span>
+                                    <span class="font-mono">59, 130, 246</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HSL</span>
+                                    <span class="font-mono">217, 91%, 60%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Purple -->
+                    <div class="color-card bg-white rounded-xl shadow-sm border border-webropol-gray-200 overflow-hidden">
+                        <div class="h-32 bg-webropol-purple-500 relative">
+                            <button 
+                                @click="copyToClipboard('#a855f7')" 
+                                class="copy-button absolute top-2 right-2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-lg transition-all"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-webropol-gray-900 mb-2">Webropol Purple</h3>
+                            <p class="text-sm text-webropol-gray-600 mb-3">Accent color for creativity and innovation</p>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HEX</span>
+                                    <span class="font-mono">#a855f7</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">RGB</span>
+                                    <span class="font-mono">168, 85, 247</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HSL</span>
+                                    <span class="font-mono">271, 91%, 65%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Green -->
+                    <div class="color-card bg-white rounded-xl shadow-sm border border-webropol-gray-200 overflow-hidden">
+                        <div class="h-32 bg-webropol-green-500 relative">
+                            <button 
+                                @click="copyToClipboard('#22c55e')" 
+                                class="copy-button absolute top-2 right-2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-lg transition-all"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-webropol-gray-900 mb-2">Webropol Green</h3>
+                            <p class="text-sm text-webropol-gray-600 mb-3">Success states and positive actions</p>
+                            <div class="space-y-1 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HEX</span>
+                                    <span class="font-mono">#22c55e</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">RGB</span>
+                                    <span class="font-mono">34, 197, 94</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-webropol-gray-500">HSL</span>
+                                    <span class="font-mono">142, 71%, 45%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Shades -->
+        <div x-show="activeTab === 'shades'" class="space-y-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-webropol-gray-900 mb-4">Color Shades</h2>
+                <p class="text-webropol-gray-600 mb-6">Complete color scales from light to dark for each brand color. Use these for backgrounds, borders, and semantic states.</p>
+                
+                <!-- Teal Shades -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-medium text-webropol-gray-900 mb-4">Teal Scale</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-3">
+                        <template x-for="(shade, index) in tealShades" :key="index">
+                            <div class="color-card bg-white rounded-lg shadow-sm border border-webropol-gray-200 overflow-hidden">
+                                <div 
+                                    :class="shade.class" 
+                                    class="h-20 relative cursor-pointer"
+                                    @click="copyToClipboard(shade.hex)"
+                                >
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                        <svg class="w-5 h-5 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="p-2 text-center">
+                                    <div class="text-xs font-medium text-webropol-gray-900" x-text="shade.name"></div>
+                                    <div class="text-xs text-webropol-gray-500 font-mono" x-text="shade.hex"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Gray Scale -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-medium text-webropol-gray-900 mb-4">Gray Scale</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-3">
+                        <template x-for="(shade, index) in grayShades" :key="index">
+                            <div class="color-card bg-white rounded-lg shadow-sm border border-webropol-gray-200 overflow-hidden">
+                                <div 
+                                    :class="shade.class" 
+                                    class="h-20 relative cursor-pointer"
+                                    @click="copyToClipboard(shade.hex)"
+                                >
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                        <svg class="w-5 h-5" :class="index > 5 ? 'text-white' : 'text-webropol-gray-900'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="p-2 text-center">
+                                    <div class="text-xs font-medium text-webropol-gray-900" x-text="shade.name"></div>
+                                    <div class="text-xs text-webropol-gray-500 font-mono" x-text="shade.hex"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Guidelines -->
+        <div x-show="activeTab === 'usage'" class="space-y-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-webropol-gray-900 mb-4">Usage Guidelines</h2>
+                <p class="text-webropol-gray-600 mb-8">Best practices for using Webropol colors in your designs to maintain brand consistency and accessibility.</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Do's -->
+                    <div class="bg-white rounded-xl shadow-sm border border-webropol-gray-200 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 bg-webropol-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-webropol-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-webropol-gray-900">Do's</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-webropol-gray-600">
+                            <li class="flex items-start">
+                                <span class="text-webropol-green-500 mr-2">•</span>
+                                Use Webropol Teal (#14b8a6) as the primary call-to-action color
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-green-500 mr-2">•</span>
+                                Maintain sufficient contrast ratios for accessibility (4.5:1 minimum)
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-green-500 mr-2">•</span>
+                                Use lighter shades for backgrounds and hover states
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-green-500 mr-2">•</span>
+                                Apply semantic colors consistently (green for success, red for errors)
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-green-500 mr-2">•</span>
+                                Use the gray scale for text hierarchy and neutral elements
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Don'ts -->
+                    <div class="bg-white rounded-xl shadow-sm border border-webropol-gray-200 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 bg-webropol-red-100 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-webropol-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-webropol-gray-900">Don'ts</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-webropol-gray-600">
+                            <li class="flex items-start">
+                                <span class="text-webropol-red-500 mr-2">•</span>
+                                Don't use colors outside the approved palette
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-red-500 mr-2">•</span>
+                                Don't use multiple primary colors in the same component
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-red-500 mr-2">•</span>
+                                Don't apply colors with insufficient contrast
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-red-500 mr-2">•</span>
+                                Don't override semantic color meanings
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-webropol-red-500 mr-2">•</span>
+                                Don't use pure black (#000000) or pure white (#ffffff) for text
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Accessibility Section -->
+                <div class="mt-8 bg-webropol-blue-50 rounded-xl border border-webropol-blue-200 p-6">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-webropol-blue-100 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <svg class="w-5 h-5 text-webropol-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-webropol-gray-900 mb-2">Accessibility Guidelines</h3>
+                            <p class="text-webropol-gray-700 mb-4">All color combinations in this palette meet WCAG 2.1 AA standards for contrast accessibility. When creating new combinations, always verify contrast ratios.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <span class="font-medium text-webropol-gray-900">Normal text:</span>
+                                    <span class="text-webropol-gray-600">Minimum 4.5:1 contrast ratio</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-webropol-gray-900">Large text:</span>
+                                    <span class="text-webropol-gray-600">Minimum 3:1 contrast ratio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Examples -->
+        <div x-show="activeTab === 'code'" class="space-y-8">
+            <div>
+                <h2 class="text-2xl font-semibold text-webropol-gray-900 mb-4">Implementation</h2>
+                <p class="text-webropol-gray-600 mb-8">Code examples and configuration for using Webropol colors in different frameworks and environments.</p>
+                
+                <!-- Tailwind CSS -->
+                <div class="bg-white rounded-xl shadow-sm border border-webropol-gray-200 p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-webropol-gray-900 mb-4">Tailwind CSS Configuration</h3>
+                    <div class="bg-webropol-gray-900 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm text-webropol-gray-100"><code>// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'webropol-teal': {
+          50: '#f0fdfa',
+          500: '#14b8a6',
+          900: '#134e4a',
+        },
+        'webropol-blue': {
+          50: '#eff6ff',
+          500: '#3b82f6',
+          900: '#1e3a8a',
+        },
+        // ... additional colors
+      }
+    }
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- CSS Variables -->
+                <div class="bg-white rounded-xl shadow-sm border border-webropol-gray-200 p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-webropol-gray-900 mb-4">CSS Custom Properties</h3>
+                    <div class="bg-webropol-gray-900 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm text-webropol-gray-100"><code>:root {
+  --webropol-teal-50: #f0fdfa;
+  --webropol-teal-500: #14b8a6;
+  --webropol-teal-900: #134e4a;
+  
+  --webropol-blue-50: #eff6ff;
+  --webropol-blue-500: #3b82f6;
+  --webropol-blue-900: #1e3a8a;
+  
+  /* Usage examples */
+  --primary-color: var(--webropol-teal-500);
+  --secondary-color: var(--webropol-blue-500);
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- SCSS Variables -->
+                <div class="bg-white rounded-xl shadow-sm border border-webropol-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-webropol-gray-900 mb-4">SCSS Variables</h3>
+                    <div class="bg-webropol-gray-900 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm text-webropol-gray-100"><code>// colors.scss
+$webropol-teal-50: #f0fdfa;
+$webropol-teal-500: #14b8a6;
+$webropol-teal-900: #134e4a;
+
+$webropol-blue-50: #eff6ff;
+$webropol-blue-500: #3b82f6;
+$webropol-blue-900: #1e3a8a;
+
+// Color maps for programmatic access
+$webropol-colors: (
+  'teal': (
+    50: $webropol-teal-50,
+    500: $webropol-teal-500,
+    900: $webropol-teal-900
+  ),
+  'blue': (
+    50: $webropol-blue-50,
+    500: $webropol-blue-500,
+    900: $webropol-blue-900
+  )
+);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Success Toast -->
+    <div 
+        x-show="showToast" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 transform translate-y-2"
+        x-transition:enter-end="opacity-100 transform translate-y-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 transform translate-y-0"
+        x-transition:leave-end="opacity-0 transform translate-y-2"
+        class="fixed bottom-4 right-4 bg-webropol-teal-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center z-50"
+        x-cloak
+    >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span x-text="toastMessage"></span>
+    </div>
+
+    <script>
+        function colorPalette() {
+            return {
+                activeTab: 'primary',
+                showToast: false,
+                toastMessage: '',
+                
+                tabs: [
+                    { id: 'primary', name: 'Primary Colors' },
+                    { id: 'shades', name: 'Color Shades' },
+                    { id: 'usage', name: 'Usage Guidelines' },
+                    { id: 'code', name: 'Implementation' }
+                ],
+
+                tealShades: [
+                    { name: '50', hex: '#f0fdfa', class: 'bg-webropol-teal-50' },
+                    { name: '100', hex: '#ccfbf1', class: 'bg-webropol-teal-100' },
+                    { name: '200', hex: '#99f6e4', class: 'bg-webropol-teal-200' },
+                    { name: '300', hex: '#5eead4', class: 'bg-webropol-teal-300' },
+                    { name: '400', hex: '#2dd4bf', class: 'bg-webropol-teal-400' },
+                    { name: '500', hex: '#14b8a6', class: 'bg-webropol-teal-500' },
+                    { name: '600', hex: '#0d9488', class: 'bg-webropol-teal-600' },
+                    { name: '700', hex: '#0f766e', class: 'bg-webropol-teal-700' },
+                    { name: '800', hex: '#115e59', class: 'bg-webropol-teal-800' },
+                    { name: '900', hex: '#134e4a', class: 'bg-webropol-teal-900' }
+                ],
+
+                grayShades: [
+                    { name: '50', hex: '#f9fafb', class: 'bg-webropol-gray-50' },
+                    { name: '100', hex: '#f3f4f6', class: 'bg-webropol-gray-100' },
+                    { name: '200', hex: '#e5e7eb', class: 'bg-webropol-gray-200' },
+                    { name: '300', hex: '#d1d5db', class: 'bg-webropol-gray-300' },
+                    { name: '400', hex: '#9ca3af', class: 'bg-webropol-gray-400' },
+                    { name: '500', hex: '#6b7280', class: 'bg-webropol-gray-500' },
+                    { name: '600', hex: '#4b5563', class: 'bg-webropol-gray-600' },
+                    { name: '700', hex: '#374151', class: 'bg-webropol-gray-700' },
+                    { name: '800', hex: '#1f2937', class: 'bg-webropol-gray-800' },
+                    { name: '900', hex: '#111827', class: 'bg-webropol-gray-900' }
+                ],
+
+                async copyToClipboard(text) {
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        this.showToastMessage(`Copied ${text} to clipboard`);
+                    } catch (err) {
+                        console.error('Failed to copy: ', err);
+                        this.showToastMessage('Failed to copy color code');
+                    }
+                },
+
+                showToastMessage(message) {
+                    this.toastMessage = message;
+                    this.showToast = true;
+                    setTimeout(() => {
+                        this.showToast = false;
+                    }, 3000);
+                },
+
+                exportColors() {
+                    const colors = {
+                        primary: {
+                            teal: '#14b8a6',
+                            blue: '#3b82f6',
+                            purple: '#a855f7',
+                            green: '#22c55e'
+                        },
+                        accent: {
+                            orange: '#f97316',
+                            red: '#ef4444'
+                        },
+                        neutral: {
+                            gray50: '#f9fafb',
+                            gray100: '#f3f4f6',
+                            gray200: '#e5e7eb',
+                            gray300: '#d1d5db',
+                            gray400: '#9ca3af',
+                            gray500: '#6b7280',
+                            gray600: '#4b5563',
+                            gray700: '#374151',
+                            gray800: '#1f2937',
+                            gray900: '#111827'
+                        }
+                    };
+
+                    const dataStr = JSON.stringify(colors, null, 2);
+                    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                    const url = URL.createObjectURL(dataBlob);
+                    
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'webropol-colors.json';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+
+                    this.showToastMessage('Color palette exported successfully');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
