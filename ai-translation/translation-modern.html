@@ -10,19 +10,19 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        // Webropol Brand Colors
+                    colors: {                        // Webropol Brand Colors
                         'webropol-teal': {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6', // Primary teal
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
+                            50: '#eefbfd',
+                            100: '#d5f4f8',
+                            200: '#b0e8f1',
+                            300: '#79d6e7',
+                            400: '#3fbcd5',
+                            500: '#209fba', // Primary teal
+                            600: '#1d809d',
+                            700: '#1e6880',
+                            800: '#215669',
+                            900: '#204859',
+                            950: '#102e3c',
                         },
                         'webropol-blue': {
                             50: '#eff6ff',
@@ -105,18 +105,16 @@
     </script>    <style>
         [x-cloak] {
             display: none !important;
-        }
-
-        /* Modern Design System Variables */
+        }        /* Modern Design System Variables */
         :root {
             --glass-blur: blur(20px);
             --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.08);
             --shadow-strong: 0 20px 64px rgba(0, 0, 0, 0.15);
             --border-radius-lg: 24px;
             --border-radius-xl: 32px;
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --color-primary: #1e6880; /* webropol-teal-700 */
+            --color-secondary: #a855f7; /* webropol-purple-500 */
+            --color-success: #16a34a; /* webropol-green-600 */
         }
 
         /* Glassmorphism Base */
@@ -134,17 +132,23 @@
             box-shadow: var(--shadow-strong);
         }        /* Enhanced Button System */
         .btn-gradient-primary {
-            background: var(--gradient-primary);
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+            background: var(--color-primary);
+            box-shadow: 0 8px 32px rgba(30, 104, 128, 0.4);
         }
 
         .btn-gradient-primary:hover {
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+            background: #215669; /* webropol-teal-800 */
+            box-shadow: 0 12px 40px rgba(30, 104, 128, 0.6);
         }
 
         .btn-gradient-secondary {
-            background: var(--gradient-secondary);
-            box-shadow: 0 8px 32px rgba(240, 147, 251, 0.4);
+            background: var(--color-secondary);
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-gradient-secondary:hover {
+            background: #9333ea; /* webropol-purple-600 */
+            box-shadow: 0 12px 40px rgba(168, 85, 247, 0.6);
         }
 
         .btn-glass {
@@ -195,12 +199,10 @@
             padding: 16px 20px;
             font-size: 16px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        }
-
-        .input-modern:focus {
+        }        .input-modern:focus {
             background: white;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(30, 104, 128, 0.1);
             outline: none;
         }
 
@@ -210,13 +212,12 @@
             border: 2px solid transparent;
             border-radius: 16px;
             padding: 16px 50px 16px 20px;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e6880' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 16px center;
             background-size: 20px;
-        }        /* Enhanced Language Chips */
-        .chip-modern {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        }        /* Enhanced Language Chips */        .chip-modern {
+            background: var(--color-primary);
             color: white;
             border-radius: 12px;
             padding: 8px 16px;
@@ -225,11 +226,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
-        }
-
-        .chip-modern:hover {
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 16px rgba(30, 104, 128, 0.3);
+        }.chip-modern:hover {
+            background: #215669; /* webropol-teal-800 */
+            box-shadow: 0 6px 20px rgba(30, 104, 128, 0.4);
         }
 
         .chip-remove {
@@ -246,7 +246,7 @@
             background: rgba(255, 255, 255, 0.3);
         }        /* Progress Indicators */
         .progress-modern {
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(30, 104, 128, 0.1);
             border-radius: 12px;
             height: 8px;
             overflow: hidden;
@@ -254,7 +254,7 @@
         }
 
         .progress-bar-modern {
-            background: var(--gradient-primary);
+            background: var(--color-primary);
             height: 100%;
             border-radius: 12px;
             position: relative;
@@ -262,8 +262,8 @@
         .loading-spinner-modern {
             width: 40px;
             height: 40px;
-            border: 3px solid rgba(102, 126, 234, 0.1);
-            border-top: 3px solid #667eea;
+            border: 3px solid rgba(30, 104, 128, 0.1);
+            border-top: 3px solid var(--color-primary);
             border-radius: 50%;
         }
 
@@ -276,7 +276,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #667eea;
+            background: var(--color-primary);
         }
 
         /* Toast Notifications */
@@ -297,14 +297,12 @@
             overflow: hidden;
             box-shadow: var(--shadow-soft);
             border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .accordion-header-modern {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        }        .accordion-header-modern {
+            background: rgba(30, 104, 128, 0.05);
         }
 
         .accordion-header-modern:hover {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            background: rgba(30, 104, 128, 0.1);
         }
 
         /* Language List Items */
@@ -315,22 +313,20 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
-        }
-
-        .language-item-modern:hover {
-            border-color: rgba(102, 126, 234, 0.3);
+        }        .language-item-modern:hover {
+            border-color: rgba(30, 104, 128, 0.3);
             background: white;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 8px 32px rgba(30, 104, 128, 0.15);
         }
 
         .language-item-original {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-color: rgba(102, 126, 234, 0.2);
+            background: rgba(30, 104, 128, 0.1);
+            border-color: rgba(30, 104, 128, 0.2);
         }        /* Enhanced Focus States */
         .focus-ring-modern:focus {
             outline: none;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(30, 104, 128, 0.2);
+            border-color: var(--color-primary);
         }
 
         @media (prefers-contrast: high) {
@@ -421,12 +417,11 @@
     <div class="relative">
         <div class="max-w-7xl mx-auto px-6 pt-16 pb-12">
             <!-- Navigation -->
-            <nav class="flex items-center justify-between mb-16">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+            <nav class="flex items-center justify-between mb-16">                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-webropol-teal-600 rounded-2xl flex items-center justify-center">
                         <i class="fas fa-language text-white text-lg"></i>
                     </div>
-                    <span class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                    <span class="text-xl font-bold text-webropol-gray-900">
                         Webropol AI
                     </span>
                 </div>
@@ -446,8 +441,7 @@
                     <div class="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span class="text-sm font-medium text-gray-700">AI Translation Assistant Ready</span>
                 </div>
-                
-                <h1 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-6 leading-tight">
+                  <h1 class="text-5xl md:text-6xl font-bold text-webropol-gray-900 mb-6 leading-tight">
                     Survey Language
                     <span class="block">Translation Hub</span>
                 </h1>
@@ -471,9 +465,8 @@
             </div>
 
             <!-- Feature Cards -->
-            <div class="grid md:grid-cols-3 gap-8 mt-20">
-                <div class="card-elevated p-8 text-center">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+            <div class="grid md:grid-cols-3 gap-8 mt-20">                <div class="card-elevated p-8 text-center">
+                    <div class="w-16 h-16 bg-webropol-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i class="fas fa-robot text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">AI-Powered Translation</h3>
@@ -481,7 +474,7 @@
                 </div>
                 
                 <div class="card-elevated p-8 text-center">
-                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                    <div class="w-16 h-16 bg-webropol-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i class="fas fa-globe text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">50+ Languages</h3>
@@ -489,7 +482,7 @@
                 </div>
                 
                 <div class="card-elevated p-8 text-center">
-                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                    <div class="w-16 h-16 bg-webropol-green-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i class="fas fa-lightning-bolt text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">Real-time Processing</h3>
@@ -515,9 +508,8 @@
                  aria-hidden="true">
             </div>            <!-- Modal Content -->
             <div class="relative w-full max-w-6xl modal-modern p-0 overflow-hidden">
-                
-                <!-- Modal Header -->
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6 text-white">
+                  <!-- Modal Header -->
+                <div class="bg-webropol-teal-700 px-8 py-6 text-white">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
@@ -527,9 +519,9 @@
                                 <h3 id="languages-modal-title" class="text-2xl font-bold">
                                     Survey Languages
                                 </h3>
-                                <p class="text-blue-100 mt-1">Manage and translate your survey languages</p>
+                                <p class="text-webropol-teal-100 mt-1">Manage and translate your survey languages</p>
                             </div>
-                        </div>                        <button @click="closeLanguagesModal()"
+                        </div><button @click="closeLanguagesModal()"
                                 @keydown.enter="closeLanguagesModal()"
                                 @keydown.space.prevent="closeLanguagesModal()"
                                 class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 focus-ring-modern"
@@ -569,16 +561,15 @@
                         <div x-data="{ addLanguagesOpen: true }">
                             <!-- Accordion Header -->
                             <button @click="addLanguagesOpen = !addLanguagesOpen"
-                                    class="accordion-header-modern w-full px-6 py-4 text-left flex items-center justify-between focus-ring-modern">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                    class="accordion-header-modern w-full px-6 py-4 text-left flex items-center justify-between focus-ring-modern">                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-webropol-teal-600 rounded-xl flex items-center justify-center">
                                         <i class="fas fa-plus text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-xl font-bold text-gray-900">Add Languages</h4>
                                         <p class="text-gray-600 text-sm">Select and configure survey languages</p>
                                     </div>
-                                </div>                                <i class="fas fa-chevron-down text-gray-400 text-xl"
+                                </div><i class="fas fa-chevron-down text-gray-400 text-xl"
                                    :class="{ 'rotate-180': addLanguagesOpen }"></i>
                             </button>
 
@@ -638,8 +629,7 @@
                                                     <template x-for="language in filteredLanguages" :key="language.code">
                                                         <div @click.stop.prevent="handleLanguageSelect(language)"
                                                              class="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex justify-between items-center">
-                                                            <div class="flex items-center gap-3">
-                                                                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center text-white text-xs font-bold"
+                                                            <div class="flex items-center gap-3">                                                                <div class="w-8 h-8 bg-webropol-teal-500 rounded-lg flex items-center justify-center text-white text-xs font-bold"
                                                                      x-text="language.code.toUpperCase()">
                                                                 </div>
                                                                 <span class="font-medium text-gray-900" x-text="language.name"></span>
@@ -718,14 +708,13 @@
                                         <!-- English (Original) -->
                                         <div class="language-item-modern language-item-original">
                                             <div class="flex items-center justify-between">
-                                                <div class="flex items-center gap-4">
-                                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
+                                                <div class="flex items-center gap-4">                                                    <div class="w-12 h-12 bg-webropol-teal-700 rounded-2xl flex items-center justify-center">
                                                         <span class="text-white font-bold text-sm">EN</span>
                                                     </div>
                                                     <div>
                                                         <div class="flex items-center gap-3">
                                                             <span class="font-bold text-gray-900 text-lg">English</span>
-                                                            <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                                            <span class="bg-webropol-teal-700 text-white px-3 py-1 rounded-full text-xs font-bold">
                                                                 ORIGINAL
                                                             </span>
                                                         </div>
@@ -804,15 +793,14 @@
                     <div class="accordion-modern">
                         <div x-data="{ advancedOpen: false }">
                             <button @click="advancedOpen = !advancedOpen"
-                                    class="accordion-header-modern w-full px-6 py-4 text-left flex items-center justify-between focus-ring-modern">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                                    class="accordion-header-modern w-full px-6 py-4 text-left flex items-center justify-between focus-ring-modern">                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-webropol-purple-600 rounded-xl flex items-center justify-center">
                                         <i class="fas fa-cogs text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-xl font-bold text-gray-900">Advanced Translation Settings</h4>
                                         <p class="text-gray-600 text-sm">Regional dialects and cultural adaptations</p>
-                                    </div>                                </div>
+                                    </div></div>
                                 <i class="fas fa-chevron-down text-gray-400 text-xl"
                                    :class="{ 'rotate-180': advancedOpen }"></i>
 
@@ -920,9 +908,8 @@
                  aria-hidden="true">
             </div>            <!-- Modal Content -->
             <div class="relative w-full max-w-2xl modal-modern overflow-hidden">
-                
-                <!-- Modal Header with Gradient -->
-                <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 px-8 py-6 text-white">
+                  <!-- Modal Header with Gradient -->
+                <div class="bg-webropol-purple-600 px-8 py-6 text-white">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
                             <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
@@ -932,9 +919,9 @@
                                 <h3 id="translation-modal-title" class="text-2xl font-bold">
                                     AI Translation Assistant
                                 </h3>
-                                <p class="text-pink-100 mt-1">Powered by advanced machine learning</p>
+                                <p class="text-webropol-purple-100 mt-1">Powered by advanced machine learning</p>
                             </div>
-                        </div>                        <button @click="closeTranslationModal()"
+                        </div><button @click="closeTranslationModal()"
                                 @keydown.enter="closeTranslationModal()"
                                 @keydown.space.prevent="closeTranslationModal()"
                                 :disabled="isTranslationInProgress"
@@ -1007,9 +994,8 @@
                             <label class="block font-semibold text-gray-900 mb-3 flex items-center gap-2">
                                 <i class="fas fa-file-alt text-blue-500"></i>
                                 Source Language
-                            </label>
-                            <div class="card-elevated p-4 rounded-xl flex items-center gap-4">
-                                <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
+                            </label>                            <div class="card-elevated p-4 rounded-xl flex items-center gap-4">
+                                <div class="w-12 h-12 bg-webropol-teal-700 rounded-2xl flex items-center justify-center">
                                     <span class="text-white font-bold">EN</span>
                                 </div>
                                 <div>
@@ -1028,7 +1014,7 @@
                                 <span class="text-sm font-normal text-gray-500">
                                     (Select languages to translate)
                                 </span>
-                            </label>
+                            </label>                            <!-- Scrollable Language List -->
                             <div class="space-y-3 max-h-60 overflow-y-auto pr-2 px-2">
                                 <template x-for="language in targetLanguages" :key="language">
                                     <label class="card-elevated p-4 rounded-xl cursor-pointer hover:shadow-lg block"
@@ -1052,21 +1038,23 @@
                                             </div>
                                         </div>
                                     </label>
-                                </template>                            
-                            <!-- Selection Controls -->
-                            <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+                                </template>
+                            </div>
+                            
+                            <!-- Fixed Selection Controls -->
+                            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 bg-gray-50 -mx-6 px-6 -mb-6 pb-6 rounded-b-2xl">
                                 <div class="flex gap-3">
                                     <button @click="selectAllLanguages()"
-                                            class="text-sm text-purple-600 hover:text-purple-700 font-semibold focus-ring-modern rounded px-2 py-1">
+                                            class="text-sm text-purple-600 hover:text-purple-700 font-semibold focus-ring-modern rounded px-3 py-2 bg-white shadow-sm border border-purple-200 hover:bg-purple-50">
                                         <i class="fas fa-check-double mr-1"></i>Select All
                                     </button>
                                     <button @click="deselectAllLanguages()"
-                                            class="text-sm text-gray-600 hover:text-gray-700 font-semibold focus-ring-modern rounded px-2 py-1">
+                                            class="text-sm text-gray-600 hover:text-gray-700 font-semibold focus-ring-modern rounded px-3 py-2 bg-white shadow-sm border border-gray-200 hover:bg-gray-50">
                                         <i class="fas fa-times mr-1"></i>Clear All
                                     </button>
                                 </div>
-                                <div class="text-sm text-gray-600">
-                                    <span class="font-semibold" x-text="checkedTranslationLanguages.length"></span> 
+                                <div class="text-sm text-gray-700 font-medium bg-white px-3 py-2 rounded-lg shadow-sm border border-gray-200">
+                                    <span class="font-bold text-purple-600" x-text="checkedTranslationLanguages.length"></span> 
                                     of <span x-text="targetLanguages.length"></span> selected
                                 </div>
                             </div>
