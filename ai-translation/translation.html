@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Languages - Translation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-custom': '#4a9da1',
+                        'teal-dark': '#3a7a7d'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body class="bg-gray-50 p-8" x-data="translationApp()">
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold text-gray-900 mb-8">Survey Settings</h1>
+        
+        <!-- Languages Button -->
+        <button 
+            @click="openLanguagesModal()"
+            class="inline-flex items-center px-6 py-3 bg-teal-custom hover:bg-teal-dark text-white font-medium rounded-lg transition-colors duration-200"
+        >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+            </svg>
+            Languages
+        </button>
+    </div>
+
+    <!-- Survey Languages Modal (First Modal) -->
+    <div 
+        x-show="showLanguagesModal" 
+        x-cloak
+        class="fixed inset-0 z-50 overflow-y-auto"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    >
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" @click="closeLanguagesModal()"></div>
+
+            <div class="inline-block w-full max-w-2xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <button @click="closeLanguagesModal()" class="mr-3 text-gray-400 hover:text-gray-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <h3 class="text-xl font-semibold text-gray-900">Survey languages</h3>
+                    </div>
+                </div>
+
+                <!-- Add Languages Section -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-900 mb-4">Add languages</h4>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Select languages from the dropdown menu
+                        </label>
+                        <div class="relative">
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-custom focus:border-transparent">
+                                <option value="">Select languages...</option>
+                                <option value="finnish">Finnish</option>
+                                <option value="swedish">Swedish</option>
+                                <option value="german">German</option>
+                                <option value="arabic">Arabic</option>
+                                <option value="hindi">Hindi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Language Tags -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-blue-100 text-blue-800">
+                            English
+                            <span class="ml-2 px-2 py-0.5 bg-blue-800 text-white text-xs rounded">Original</span>
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                            Finnish
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                            Swedish
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                            German
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                            Arabic
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                            Hindi
+                        </span>
+                    </div>
+
+                    <!-- Allow language switching -->
+                    <div class="flex items-start space-x-3 mb-6">
+                        <input type="checkbox" id="allowSwitching" class="mt-1 h-4 w-4 text-teal-custom focus:ring-teal-custom border-gray-300 rounded">
+                        <div>
+                            <label for="allowSwitching" class="text-sm font-medium text-gray-900">
+                                Allow respondents to change language during answering
+                            </label>
+                            <p class="text-sm text-gray-500">
+                                When enabled, respondents can switch between available languages while completing the survey.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- AI Translation Button -->
+                    <button 
+                        @click="openTranslationModal()"
+                        class="w-full py-3 px-4 bg-teal-custom hover:bg-teal-dark text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center"
+                    >
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Translate All Languages with AI
+                    </button>
+                </div>
+
+                <!-- Language Management Section -->
+                <div class="border-t pt-6">
+                    <h4 class="text-lg font-medium text-gray-900 mb-4">
+                        Sort the order, choose your default language or translate via AI
+                    </h4>
+
+                    <!-- Language List -->
+                    <div class="space-y-3">
+                        <!-- English (Original) -->
+                        <div class="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="flex items-center mr-3">
+                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium text-gray-900">English</span>
+                                <span class="ml-2 px-2 py-0.5 bg-blue-800 text-white text-xs rounded">Original</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="p-1 text-yellow-500 hover:text-yellow-600">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-1 text-gray-400 hover:text-gray-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                                <button class="p-1 text-gray-400 hover:text-gray-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Other Languages -->
+                        <template x-for="language in languages" :key="language">
+                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    <div class="flex items-center mr-3">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="font-medium text-gray-900" x-text="language"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="p-1 text-gray-300 hover:text-yellow-500">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Accordion for Alternative Survey Languages -->
+                <div class="mt-6 border-t pt-6">
+                    <div x-data="{ open: false }">
+                        <button 
+                            @click="open = !open"
+                            class="flex items-center justify-between w-full py-2 text-left"
+                        >
+                            <span class="text-sm font-medium text-gray-700">Translate alternative survey languages</span>
+                            <svg 
+                                class="w-4 h-4 text-gray-500 transition-transform duration-200"
+                                :class="{ 'rotate-180': open }"
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div 
+                            x-show="open" 
+                            x-collapse
+                            class="mt-2 text-sm text-gray-600"
+                        >
+                            Additional translation options and settings would appear here.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="flex justify-end space-x-3 mt-6 pt-6 border-t">
+                    <button 
+                        @click="closeLanguagesModal()"
+                        class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-custom"
+                    >
+                        Close
+                    </button>
+                    <button 
+                        class="px-4 py-2 bg-teal-custom hover:bg-teal-dark text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-custom"
+                    >
+                        Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Translation Assistant Modal (Second Modal) -->
+    <div 
+        x-show="showTranslationModal" 
+        x-cloak
+        class="fixed inset-0 z-50 overflow-y-auto"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    >
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" @click="closeTranslationModal()"></div>
+
+            <div class="inline-block w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
+                <!-- Modal Header -->
+                <div class="flex items-center mb-6">
+                    <div class="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg mr-3">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900">AI Translation Assistant</h3>
+                    <button @click="closeTranslationModal()" class="ml-auto text-gray-400 hover:text-gray-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Translation Setup -->
+                <div class="mb-6">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                        </svg>
+                        <h4 class="text-lg font-medium text-gray-900">Translation Setup</h4>
+                    </div>
+
+                    <!-- Source Language -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Source Language</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-custom focus:border-transparent">
+                            <option selected>English (Default)</option>
+                        </select>
+                    </div>
+
+                    <!-- Target Languages -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Target Languages</label>
+                        <div class="space-y-2">
+                            <template x-for="language in targetLanguages" :key="language">
+                                <label class="flex items-center">
+                                    <input type="checkbox" checked class="h-4 w-4 text-teal-custom focus:ring-teal-custom border-gray-300 rounded">
+                                    <span class="ml-3 text-sm text-gray-700" x-text="language"></span>
+                                </label>
+                            </template>
+                        </div>
+                        <div class="mt-3">
+                            <button class="text-sm text-teal-custom hover:text-teal-dark font-medium">
+                                Deselect All
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Translation Notice -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h5 class="text-sm font-medium text-blue-900 mb-1">AI Translation Notice</h5>
+                                <p class="text-sm text-blue-700">
+                                    Translations will be generated using AI and marked accordingly. We recommend reviewing AI-translated surveys to ensure accuracy and context.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="flex justify-end space-x-3">
+                    <button 
+                        @click="closeTranslationModal()"
+                        class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-custom"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        class="px-6 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                    >
+                        Start Translation (5 languages)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function translationApp() {
+            return {
+                showLanguagesModal: false,
+                showTranslationModal: false,
+                languages: ['Finnish', 'Swedish', 'German', 'Arabic', 'Hindi'],
+                targetLanguages: ['Finnish', 'Swedish', 'German', 'Arabic', 'Hindi'],
+                
+                openLanguagesModal() {
+                    this.showLanguagesModal = true;
+                },
+                
+                closeLanguagesModal() {
+                    this.showLanguagesModal = false;
+                },
+                
+                openTranslationModal() {
+                    this.showTranslationModal = true;
+                    this.showLanguagesModal = false;
+                },
+                
+                closeTranslationModal() {
+                    this.showTranslationModal = false;
+                    this.showLanguagesModal = true;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
