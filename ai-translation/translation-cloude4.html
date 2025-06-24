@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Language Translation - AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Webropol Brand Colors
+                        'webropol-teal': {
+                            50: '#eefbfd',
+                            100: '#d5f4f8',
+                            200: '#b0e8f1',
+                            300: '#79d6e7',
+                            400: '#3fbcd5',
+                            500: '#209fba', // Primary teal
+                            600: '#1d809d',
+                            700: '#1e6880',
+                            800: '#215669',
+                            900: '#204859',
+                            950: '#102e3c',
+                        },
+                        'webropol-purple': {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7', // Primary purple
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        'webropol-green': {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e', // Primary green
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        'webropol-gray': {
+                            50: '#f9fafb',
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280',
+                            600: '#4b5563',
+                            700: '#374151',
+                            800: '#1f2937',
+                            900: '#111827',
+                        },
+                        'webropol-orange': {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316', // Primary orange
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        'webropol-red': {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444', // Primary red
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },                        // Legacy colors for backward compatibility
+                        'teal-custom': '#1e6880',
+                        'teal-dark': '#215669'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Enhanced select styling */
+        .enhanced-select {
+            position: relative;
+        }
+
+        .enhanced-select .dropdown-list {
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .enhanced-select .dropdown-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .enhanced-select .dropdown-list::-webkit-scrollbar-thumb {
+            background-color: #d1d5db;
+            border-radius: 3px;
+        }
+
+        /* Prevent modal background scroll */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Ensure proper z-index layering */
+        .modal-backdrop {
+            backdrop-filter: blur(2px);
+        }
+
+        /* Custom select styling for search functionality */
+        .searchable-select {
+            position: relative;
+        }
+
+        .searchable-select input {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.25em;
+            padding-right: 2.5rem;
+        }
+
+        .dropdown-list {
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .dropdown-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dropdown-list::-webkit-scrollbar-thumb {
+            background-color: #d1d5db;
+            border-radius: 3px;
+        }
+    </style>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+
+<body class="bg-webropol-gray-50 p-8" x-data="translationApp()">
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold text-webropol-gray-900 mb-8">Survey Languages</h1>        <!-- Languages Button -->
+        <button @click="openLanguagesModal()"
+            class="inline-flex items-center px-8 py-4 bg-webropol-teal-700 hover:bg-webropol-teal-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg">
+            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                </path>
+            </svg>
+            Languages
+        </button>
+    </div>
+
+    <!-- Survey Languages Modal (First Modal) -->
+    <div x-show="showLanguagesModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity bg-webropol-gray-500 bg-opacity-75"
+                @click="closeLanguagesModal()">
+            </div>
+
+            <div
+                class="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <button @click="closeLanguagesModal()"
+                            class="mr-3 text-webropol-gray-400 hover:text-webropol-gray-600">
+                            <i class="fas fa-arrow-left w-5 h-5"></i>
+                        </button>
+                        <h3 class="text-xl font-semibold text-webropol-gray-900">Survey languages</h3>
+                    </div>                </div> <!-- Add Languages Section - Accordion -->
+                <div class="mb-8">
+                    <div x-data="{ addLanguagesOpen: true }" class="border border-webropol-gray-200 rounded-xl shadow-sm">                        <!-- Accordion Header --><button @click="addLanguagesOpen = !addLanguagesOpen"
+                            class="flex items-center justify-between w-full px-6 py-4 text-left bg-webropol-gray-50 hover:bg-webropol-gray-100 rounded-t-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 transition-all duration-200">
+                            <h4 class="text-lg font-semibold text-webropol-gray-900">Add languages</h4>
+                            <i class="fas fa-chevron-down w-5 h-5 text-webropol-gray-500 transition-transform duration-300"
+                                :class="{ 'rotate-180': addLanguagesOpen }"></i>
+                        </button>                        <!-- Accordion Content -->
+                        <div x-show="addLanguagesOpen" x-collapse class="px-6 py-6 border-t border-webropol-gray-200 bg-white rounded-b-xl">
+                            <!-- Language Selection and Checkbox Row -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4">
+                                <!-- Enhanced Select with Language Chips -->
+                                <div>
+                                    <label class="block text-sm font-medium text-webropol-gray-700 mb-2">
+                                        Select languages from the dropdown menu
+                                    </label>
+                                    <div class="enhanced-select" x-data="languageSelector()">                                        <!-- Select Container with Chips -->
+                                        <div @click="showDropdown = !showDropdown"
+                                            class="w-full min-h-[48px] px-4 py-3 border border-webropol-gray-300 rounded-xl focus-within:outline-none focus-within:ring-2 focus-within:ring-webropol-teal-500 focus-within:border-transparent cursor-pointer bg-white flex flex-wrap items-center gap-2 hover:border-webropol-gray-400 transition-all duration-200">                                            <!-- Language Chips inside Select -->
+                                            <template x-for="langCode in selectedLanguages" :key="langCode"> <span
+                                                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-1 mb-1">
+                                                    <span x-text="getLanguageName(langCode)"></span> <button
+                                                        @click.stop="removeLanguage(langCode)"
+                                                        class="ml-2 text-webropol-teal-600 hover:text-webropol-teal-800 p-0.5 rounded-full hover:bg-webropol-teal-200 transition-colors duration-200">
+                                                        <i class="fas fa-times w-3 h-3"></i>
+                                                    </button>
+                                                </span>
+                                            </template>                                            <!-- Search Input -->
+                                            <input type="text" x-model="searchTerm" @click.stop
+                                                @keydown.escape="showDropdown = false" placeholder="Search languages..."
+                                                class="flex-1 min-w-[140px] border-none outline-none bg-transparent text-sm p-1">
+                                            <!-- Dropdown Arrow -->
+                                            <i
+                                                class="fas fa-chevron-down w-4 h-4 text-webropol-gray-400 ml-2 flex-shrink-0 transition-transform duration-200"
+                                                :class="{ 'rotate-180': showDropdown }"></i>
+                                        </div>
+
+                                        <!-- Dropdown List -->
+                                        <div x-show="showDropdown && filteredLanguages.length > 0"
+                                            @click.away="showDropdown = false" x-cloak
+                                            class="absolute z-20 w-full mt-2 bg-white border border-webropol-gray-300 rounded-xl shadow-xl dropdown-list max-h-60 overflow-y-auto"
+                                            x-transition:enter="ease-out duration-200"
+                                            x-transition:enter-start="opacity-0 scale-95"
+                                            x-transition:enter-end="opacity-100 scale-100"
+                                            x-transition:leave="ease-in duration-150"
+                                            x-transition:leave-start="opacity-100 scale-100"
+                                            x-transition:leave-end="opacity-0 scale-95">                                            <template x-for="language in filteredLanguages" :key="language.code">
+                                                <div @click="selectLanguage(language); searchTerm = ''"
+                                                    class="px-4 py-3 hover:bg-webropol-gray-100 cursor-pointer border-b border-webropol-gray-100 last:border-b-0 flex justify-between items-center transition-colors duration-150">
+                                                    <span x-text="language.name" class="font-medium text-webropol-gray-900"></span>
+                                                    <span x-text="language.code"
+                                                        class="text-xs text-webropol-gray-500 uppercase bg-webropol-gray-100 px-2 py-1 rounded-full"></span>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Allow language switching checkbox -->
+                                <div class="flex items-start pt-6">
+                                    <div class="flex items-start space-x-3"> <input type="checkbox" id="allowSwitching"
+                                            class="mt-1 h-4 w-4 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded">
+                                        <div>
+                                            <label for="allowSwitching"
+                                                class="text-sm font-medium text-webropol-gray-900">
+                                                Allow respondents to change language during answering
+                                            </label>
+                                            <p class="text-sm text-webropol-gray-500 mt-1">
+                                                When enabled, respondents can switch between available languages while
+                                                completing the survey.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            <!-- AI Translation Button --> <button @click="openTranslationModal()"
+                                class="w-full py-4 px-6 bg-gradient-to-r from-webropol-purple-600 to-webropol-purple-700 hover:from-webropol-purple-700 hover:to-webropol-purple-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex items-center justify-center mb-8 shadow-md">
+                                <i class="fas fa-bolt w-5 h-5 mr-3 animate-pulse"></i>
+                                Translate All Languages with AI
+                            </button><!-- Language Management Section within Accordion -->
+                            <div class="border-t pt-6">
+                                <h4 class="text-lg font-medium text-webropol-gray-900 mb-4">
+                                    Sort the order, choose your default language or translate via AI
+                                </h4>                                <!-- Language List -->
+                                <div class="space-y-4">
+                                    <!-- English (Original) - Always Present -->
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-webropol-teal-50 border border-webropol-teal-200 rounded-xl hover:bg-webropol-teal-100 transition-all duration-200">
+                                        <div class="flex items-center">
+                                            <div class="flex items-center mr-4">
+                                                <i class="fas fa-grip-lines w-4 h-4 text-webropol-gray-400"></i>
+                                            </div>
+                                            <span class="font-semibold text-webropol-gray-900">English</span>
+                                            <span
+                                                class="ml-3 px-3 py-1 bg-webropol-teal-800 text-white text-xs font-medium rounded-full">Original</span>
+                                        </div><div class="flex items-center space-x-3"> <button
+                                                class="p-2 text-webropol-orange-500 hover:text-webropol-orange-600 rounded-full hover:bg-webropol-orange-50 transition-all duration-200">
+                                                <i class="fas fa-star w-5 h-5"></i>
+                                            </button>
+                                            <!-- English cannot be deleted --> <button disabled
+                                                class="p-2 text-webropol-gray-300 cursor-not-allowed rounded-full"
+                                                title="Cannot remove original language"> <i
+                                                    class="fas fa-trash w-5 h-5"></i> </button>
+                                            <button disabled
+                                                class="p-2 text-webropol-gray-300 cursor-not-allowed rounded-full"
+                                                title="Cannot translate original language">
+                                                <i class="fas fa-language w-5 h-5"></i>
+                                            </button>
+                                        </div>                                    </div><!-- Dynamic Languages -->
+                                    <template x-for="language in languages" :key="language">
+                                        <div
+                                            class="flex items-center justify-between p-4 border border-webropol-gray-200 rounded-xl hover:bg-webropol-gray-50 hover:border-webropol-gray-300 transition-all duration-200">
+                                            <div class="flex items-center">
+                                                <div class="flex items-center mr-4">
+                                                    <i class="fas fa-grip-lines w-4 h-4 text-webropol-gray-400"></i>
+                                                </div>
+                                                <span class="font-semibold text-webropol-gray-900"
+                                                    x-text="language"></span>
+                                            </div><div class="flex items-center space-x-3"> <button
+                                                    class="p-2 text-webropol-gray-400 hover:text-webropol-orange-500 rounded-full hover:bg-webropol-orange-50 transition-all duration-200">
+                                                    <i class="far fa-star w-5 h-5"></i>
+                                                </button> <button @click="removeLanguageCompletely(language)"
+                                                    class="p-2 text-webropol-gray-400 hover:text-webropol-red-500 rounded-full hover:bg-webropol-red-50 transition-all duration-200">
+                                                    <i class="fas fa-trash w-5 h-5"></i> </button> <button
+                                                    @click="openTranslationModal(language)"
+                                                    class="p-2 bg-gradient-to-r from-webropol-purple-500 to-webropol-purple-600 hover:from-webropol-purple-600 hover:to-webropol-purple-700 text-white rounded-full transition-all duration-300 transform hover:scale-110 hover:shadow-md">
+                                                    <i class="fas fa-language w-5 h-5"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                </div> <!-- Second Accordion: Translate Alternative Survey Languages -->
+                <div class="mb-8">
+                    <div x-data="{ alternativeLanguagesOpen: false }"
+                        class="border border-webropol-gray-200 rounded-xl shadow-sm">                        <!-- Accordion Header --><button @click="alternativeLanguagesOpen = !alternativeLanguagesOpen"
+                            class="flex items-center justify-between w-full px-6 py-4 text-left bg-webropol-gray-50 hover:bg-webropol-gray-100 rounded-t-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 transition-all duration-200">
+                            <h4 class="text-lg font-semibold text-webropol-gray-900">Translate alternative survey
+                                languages</h4>
+                            <i class="fas fa-chevron-down w-5 h-5 text-webropol-gray-500 transition-transform duration-300"
+                                :class="{ 'rotate-180': alternativeLanguagesOpen }"></i>
+                        </button>                        <!-- Accordion Content -->
+                        <div x-show="alternativeLanguagesOpen" x-collapse
+                            class="px-6 py-6 border-t border-webropol-gray-200 bg-white rounded-b-xl">
+                            <div class="text-sm text-webropol-gray-600 mb-4">
+                                Configure advanced translation options for alternative survey versions, such as regional
+                                dialects, cultural adaptations, or specialized terminology.
+                            </div>                            <!-- Alternative Language Options -->
+                            <div class="space-y-4">
+                                <div
+                                    class="flex items-center justify-between p-4 border border-webropol-gray-200 rounded-xl hover:bg-webropol-gray-50 transition-all duration-200">
+                                    <div class="flex items-center">
+                                        <input type="checkbox"
+                                            class="h-5 w-5 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded-md mr-4">
+                                        <span class="text-sm font-medium text-webropol-gray-900">Enable regional dialect
+                                            adaptations</span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-center justify-between p-4 border border-webropol-gray-200 rounded-xl hover:bg-webropol-gray-50 transition-all duration-200">
+                                    <div class="flex items-center"> <input type="checkbox"
+                                            class="h-5 w-5 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded-md mr-4">
+                                        <span class="text-sm font-medium text-webropol-gray-900">Use cultural context in
+                                            translations</span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-center justify-between p-4 border border-webropol-gray-200 rounded-xl hover:bg-webropol-gray-50 transition-all duration-200">
+                                    <div class="flex items-center">
+                                        <input type="checkbox"
+                                            class="h-5 w-5 text-webropol-teal-500 focus:ring-webropol-teal-500 border-webropol-gray-300 rounded-md mr-4">
+                                        <span class="text-sm font-medium text-webropol-gray-900">Apply industry-specific
+                                            terminology</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                <!-- Modal Footer -->
+                <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-webropol-gray-100"> <button @click="closeLanguagesModal()"
+                        class="px-6 py-3 text-webropol-gray-700 bg-white border border-webropol-gray-300 rounded-full hover:bg-webropol-gray-50 hover:border-webropol-gray-400 focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 transition-all duration-200">
+                        Close
+                    </button>
+                    <button
+                        class="px-6 py-3 bg-webropol-teal-700 hover:bg-webropol-teal-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 transform hover:scale-[1.02] transition-all duration-200 shadow-md hover:shadow-lg">
+                        Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>    <!-- AI Translation Assistant Modal (Second Modal) -->
+    <div x-show="showTranslationModal" x-cloak class="fixed inset-0 z-[60] overflow-y-auto"
+        x-transition:enter="ease-out duration-400" x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-300"
+        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity bg-black bg-opacity-70 backdrop-blur-md"
+                @click="closeTranslationModal()"></div>
+
+            <div
+                class="inline-block w-full max-w-lg p-8 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-2xl rounded-2xl border border-webropol-gray-100">
+                <!-- Modal Header -->
+                <div class="flex items-center mb-8">
+                    <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-webropol-purple-100 to-webropol-purple-200 rounded-xl mr-4">
+                        <i class="fas fa-bolt w-5 h-5 text-webropol-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-webropol-gray-900">AI Translation Assistant</h3> <button
+                        @click="closeTranslationModal()"
+                        class="ml-auto p-2 text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-100 rounded-full transition-all duration-200">
+                        <i class="fas fa-times w-5 h-5"></i>
+                    </button>
+                </div>                <!-- Translation Setup -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-6"> <svg class="w-6 h-6 text-webropol-purple-500 mr-3" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                            </path>
+                        </svg>
+                        <h4 class="text-lg font-semibold text-webropol-gray-900">Translation Setup</h4>
+                    </div>
+
+                    <!-- Source Language -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-webropol-gray-700 mb-3">Source Language</label>
+                        <select
+                            class="w-full px-4 py-3 border border-webropol-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-purple-500 focus:border-transparent bg-white hover:border-webropol-gray-400 transition-all duration-200">
+                            <option selected>English (Default)</option>
+                        </select>
+                    </div>                    <!-- Target Languages -->
+                    <div class="mb-8">
+                        <label class="block text-sm font-medium text-webropol-gray-700 mb-4">Target Languages</label>
+                        <div class="space-y-3 max-h-48 overflow-y-auto p-1">
+                            <template x-for="language in targetLanguages" :key="language"> <label
+                                    class="flex items-center p-3 rounded-xl hover:bg-webropol-gray-50 transition-all duration-200 cursor-pointer border border-transparent hover:border-webropol-gray-200"> <input type="checkbox"
+                                        :checked="isLanguageChecked(language)"
+                                        @change="toggleLanguageSelection(language)"
+                                        class="h-5 w-5 text-webropol-purple-500 focus:ring-webropol-purple-500 border-webropol-gray-300 rounded-md">
+                                    <span class="ml-4 text-sm font-medium text-webropol-gray-700" x-text="language"></span>
+                                </label>
+                            </template>                        </div>
+                        <div class="mt-4 flex space-x-3">
+                            <button @click="selectAllLanguages()"
+                                class="text-sm text-webropol-purple-600 hover:text-webropol-purple-700 font-medium bg-webropol-purple-50 hover:bg-webropol-purple-100 px-4 py-2 rounded-full transition-all duration-200">
+                                Select All
+                            </button>
+                            <button @click="deselectAllLanguages()"
+                                class="text-sm text-webropol-gray-600 hover:text-webropol-gray-700 font-medium bg-webropol-gray-100 hover:bg-webropol-gray-200 px-4 py-2 rounded-full transition-all duration-200">
+                                Deselect All
+                            </button>
+                        </div>
+                    </div>                    <!-- AI Translation Notice -->
+                    <div class="bg-gradient-to-r from-webropol-purple-50 to-webropol-purple-100 border border-webropol-purple-200 rounded-xl p-6 mb-8">
+                        <div class="flex items-start">
+                            <i class="fas fa-magic w-6 h-6 text-webropol-purple-600 mt-0.5 mr-4 flex-shrink-0"></i>
+                            <div>
+                                <h5 class="text-sm font-semibold text-webropol-purple-900 mb-2">AI Translation Notice</h5>
+                                <p class="text-sm text-webropol-purple-800 leading-relaxed">
+                                    Translations will be generated using AI and marked accordingly. We recommend
+                                    reviewing AI-translated surveys to ensure accuracy and context.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                <!-- Modal Footer -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-webropol-gray-100"> <button @click="closeTranslationModal()"
+                        class="px-6 py-3 text-webropol-gray-700 bg-white border border-webropol-gray-300 rounded-full hover:bg-webropol-gray-50 hover:border-webropol-gray-400 focus:outline-none focus:ring-2 focus:ring-webropol-purple-500 transition-all duration-200">
+                        Cancel
+                    </button>
+                    <button
+                        class="px-8 py-3 bg-gradient-to-r from-webropol-purple-600 to-webropol-purple-700 hover:from-webropol-purple-700 hover:to-webropol-purple-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-webropol-purple-500 transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl font-semibold">
+                        <span
+                            x-text="`Start Translation (${checkedTranslationLanguages.length} ${checkedTranslationLanguages.length === 1 ? 'language' : 'languages'})`"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function languageSelector() {
+            return {
+                searchTerm: '',
+                showDropdown: false,
+                selectedLanguages: ['fi', 'sv', 'de', 'ar', 'hi'], // Pre-selected language codes
+                availableLanguages: [
+                    { code: 'af', name: 'Afrikaans' },
+                    { code: 'sq', name: 'Albanian' },
+                    { code: 'ar', name: 'Arabic' },
+                    { code: 'hy', name: 'Armenian' },
+                    { code: 'az', name: 'Azerbaijani' },
+                    { code: 'eu', name: 'Basque' },
+                    { code: 'be', name: 'Belarusian' },
+                    { code: 'bn', name: 'Bengali' },
+                    { code: 'bs', name: 'Bosnian' },
+                    { code: 'bg', name: 'Bulgarian' },
+                    { code: 'ca', name: 'Catalan' },
+                    { code: 'zh', name: 'Chinese' },
+                    { code: 'hr', name: 'Croatian' },
+                    { code: 'cs', name: 'Czech' },
+                    { code: 'da', name: 'Danish' },
+                    { code: 'nl', name: 'Dutch' },
+                    { code: 'et', name: 'Estonian' },
+                    { code: 'fi', name: 'Finnish' },
+                    { code: 'fr', name: 'French' },
+                    { code: 'gl', name: 'Galician' },
+                    { code: 'ka', name: 'Georgian' },
+                    { code: 'de', name: 'German' },
+                    { code: 'el', name: 'Greek' },
+                    { code: 'gu', name: 'Gujarati' },
+                    { code: 'he', name: 'Hebrew' },
+                    { code: 'hi', name: 'Hindi' },
+                    { code: 'hu', name: 'Hungarian' },
+                    { code: 'is', name: 'Icelandic' },
+                    { code: 'id', name: 'Indonesian' },
+                    { code: 'ga', name: 'Irish' },
+                    { code: 'it', name: 'Italian' },
+                    { code: 'ja', name: 'Japanese' },
+                    { code: 'kn', name: 'Kannada' },
+                    { code: 'kk', name: 'Kazakh' },
+                    { code: 'ko', name: 'Korean' },
+                    { code: 'lv', name: 'Latvian' },
+                    { code: 'lt', name: 'Lithuanian' },
+                    { code: 'mk', name: 'Macedonian' },
+                    { code: 'ms', name: 'Malay' },
+                    { code: 'ml', name: 'Malayalam' },
+                    { code: 'mt', name: 'Maltese' },
+                    { code: 'mr', name: 'Marathi' },
+                    { code: 'no', name: 'Norwegian' },
+                    { code: 'fa', name: 'Persian' },
+                    { code: 'pl', name: 'Polish' },
+                    { code: 'pt', name: 'Portuguese' },
+                    { code: 'pa', name: 'Punjabi' },
+                    { code: 'ro', name: 'Romanian' },
+                    { code: 'ru', name: 'Russian' },
+                    { code: 'sr', name: 'Serbian' },
+                    { code: 'sk', name: 'Slovak' },
+                    { code: 'sl', name: 'Slovenian' },
+                    { code: 'es', name: 'Spanish' },
+                    { code: 'sw', name: 'Swahili' },
+                    { code: 'sv', name: 'Swedish' },
+                    { code: 'ta', name: 'Tamil' },
+                    { code: 'te', name: 'Telugu' },
+                    { code: 'th', name: 'Thai' },
+                    { code: 'tr', name: 'Turkish' },
+                    { code: 'uk', name: 'Ukrainian' },
+                    { code: 'ur', name: 'Urdu' },
+                    { code: 'vi', name: 'Vietnamese' },
+                    { code: 'cy', name: 'Welsh' }
+                ],
+
+                get filteredLanguages() {
+                    let filtered = this.availableLanguages.filter(lang =>
+                        !this.selectedLanguages.includes(lang.code)
+                    );
+
+                    if (this.searchTerm) {
+                        filtered = filtered.filter(lang =>
+                            lang.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                            lang.code.toLowerCase().includes(this.searchTerm.toLowerCase())
+                        );
+                    }
+
+                    return filtered;
+                },
+
+                selectLanguage(language) {
+                    if (!this.selectedLanguages.includes(language.code)) {
+                        this.selectedLanguages.push(language.code);
+                        // Also update the main app's languages array
+                        if (window.translationAppInstance) {
+                            const languageName = language.name;
+                            if (!window.translationAppInstance.languages.includes(languageName)) {
+                                window.translationAppInstance.languages.push(languageName);
+                                window.translationAppInstance.targetLanguages.push(languageName);
+                            }
+                        }
+                    }
+                    this.showDropdown = false;
+                },
+
+                removeLanguage(langCode) {
+                    this.selectedLanguages = this.selectedLanguages.filter(code => code !== langCode);
+                    // Also update the main app's languages array
+                    if (window.translationAppInstance) {
+                        const language = this.availableLanguages.find(lang => lang.code === langCode);
+                        if (language) {
+                            window.translationAppInstance.languages = window.translationAppInstance.languages.filter(lang => lang !== language.name);
+                            window.translationAppInstance.targetLanguages = window.translationAppInstance.targetLanguages.filter(lang => lang !== language.name);
+                        }
+                    }
+                },
+
+                getLanguageName(langCode) {
+                    const language = this.availableLanguages.find(lang => lang.code === langCode);
+                    return language ? language.name : langCode;
+                }
+            }
+        } function translationApp() {
+            const instance = {
+                showLanguagesModal: true,
+                showTranslationModal: false,
+                // Pre-selected languages (English is always present)
+                languages: ['Finnish', 'Swedish', 'German', 'Arabic', 'Hindi'],
+                targetLanguages: ['Finnish', 'Swedish', 'German', 'Arabic', 'Hindi'],
+                // Track which languages are checked for translation
+                checkedTranslationLanguages: [],
+
+                openLanguagesModal() {
+                    this.showLanguagesModal = true;
+                    document.body.style.overflow = 'hidden'; // Prevent background scroll
+                },
+
+                closeLanguagesModal() {
+                    this.showLanguagesModal = false;
+                    if (!this.showTranslationModal) {
+                        document.body.style.overflow = 'auto'; // Restore scroll
+                    }
+                },
+
+                openTranslationModal(specificLanguage = null) {
+                    if (specificLanguage) {
+                        // If a specific language is provided, check only that language
+                        this.checkedTranslationLanguages = [specificLanguage];
+                    } else {
+                        // If no specific language, check all available languages
+                        this.checkedTranslationLanguages = [...this.targetLanguages];
+                    }
+                    this.showTranslationModal = true;
+                    // Keep the languages modal open (stacked modals) - do NOT close it
+                },
+
+                closeTranslationModal() {
+                    this.showTranslationModal = false;
+                    // Languages modal remains open
+                },
+
+                // Toggle language selection in translation modal
+                toggleLanguageSelection(language) {
+                    const index = this.checkedTranslationLanguages.indexOf(language);
+                    if (index > -1) {
+                        this.checkedTranslationLanguages.splice(index, 1);
+                    } else {
+                        this.checkedTranslationLanguages.push(language);
+                    }
+                },
+
+                // Check if language is selected for translation
+                isLanguageChecked(language) {
+                    return this.checkedTranslationLanguages.includes(language);
+                },                // Deselect all languages
+                deselectAllLanguages() {
+                    this.checkedTranslationLanguages = [];
+                },
+
+                // Select all languages
+                selectAllLanguages() {
+                    this.checkedTranslationLanguages = [...this.targetLanguages];
+                },
+
+                // Remove language from both selection and management areas
+                removeLanguageCompletely(language) {
+                    // Prevent removal of English (original language)
+                    if (language === 'English') {
+                        return;
+                    }
+
+                    // Remove from main languages array
+                    this.languages = this.languages.filter(lang => lang !== language);
+                    this.targetLanguages = this.targetLanguages.filter(lang => lang !== language);
+
+                    // Also remove from language selector chips if present
+                    const selectorInstance = document.querySelector('[x-data*="languageSelector"]')?._x_dataStack?.[0];
+                    if (selectorInstance) {
+                        const languageCode = selectorInstance.availableLanguages.find(lang => lang.name === language)?.code;
+                        if (languageCode) {
+                            selectorInstance.selectedLanguages = selectorInstance.selectedLanguages.filter(code => code !== languageCode);
+                        }
+                    }
+                },
+
+                // Legacy method for compatibility
+                removeLanguage(language) {
+                    this.removeLanguageCompletely(language);
+                }
+            };
+
+            // Make instance globally available
+            window.translationAppInstance = instance;
+            return instance;
+        }
+
+        // Initialize Alpine.js error handling
+        document.addEventListener('alpine:init', () => {
+            console.log('Alpine.js initialized successfully');
+        });
+
+        // Debug: Log any Alpine.js errors
+        window.addEventListener('error', (e) => {
+            if (e.message.includes('Alpine')) {
+                console.error('Alpine.js Error:', e);
+            }
+        });
+    </script>
+</body>
+
+</html>
