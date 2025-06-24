@@ -71,7 +71,7 @@
                     <i class="fas fa-home w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
                     <span class="font-medium">Home</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-white rounded-xl bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 shadow-medium font-semibold">
+                <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
                     <i class="fas fa-poll-h w-5 mr-4"></i> 
                     <span>Surveys</span>
                     <div class="ml-auto w-2 h-2 bg-white/30 rounded-full"></div>
@@ -89,7 +89,7 @@
                     <span class="font-medium">Analytics</span>
                 </a>
                 <div class="pt-4 border-t border-webropol-gray-200/50 mt-4">
-                    <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
+                    <a href="#" class="flex items-center px-4 py-3 text-white rounded-xl bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 shadow-medium font-semibold">
                         <i class="fas fa-book-open w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
                         <span class="font-medium">MyWebropol</span>
                     </a>
@@ -173,12 +173,9 @@
                                         <span class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium"
                                               :class="currentView === 'surveys' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''" x-text="getFilteredSurveys().length"></span>
                                     </button>
-                                </div>
-
-                                <!-- Language Selection -->
+                                </div>                                <!-- Language Selection -->
                                 <div class="relative mb-4">
                                     <select x-model="selectedLanguage" class="w-full px-4 py-3 pr-10 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all appearance-none text-sm font-medium">
-                                        <option value="all">All Languages</option>
                                         <option value="en">English</option>
                                         <option value="fi">Finnish</option>
                                     </select>
@@ -246,22 +243,6 @@
                                             </div>
                                         </template>
 
-                                        <!-- Ungrouped Items -->
-                                        <div x-show="getUngroupedItems().length > 0" class="pt-3 border-t border-webropol-gray-200">
-                                            <div class="text-xs font-medium text-webropol-gray-500 mb-2 px-3">UNGROUPED ITEMS</div>
-                                            <template x-for="item in getUngroupedItems()" :key="item.id">
-                                                <div class="flex items-center justify-between p-2 rounded-lg hover:bg-webropol-gray-50 transition-all group">
-                                                    <div class="flex items-center">
-                                                        <i :class="item.type === 'question' ? 'fas fa-question-circle text-webropol-blue-500' : 'fas fa-poll-h text-webropol-teal-500'" class="mr-3 text-sm"></i>
-                                                        <span class="text-sm font-medium" x-text="item.name"></span>
-                                                        <span class="ml-2 text-xs text-webropol-gray-500" x-text="'(' + item.language.toUpperCase() + ')'"></span>
-                                                    </div>
-                                                    <button @click="showMoveToFolder = item.id" class="opacity-0 group-hover:opacity-100 w-6 h-6 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 rounded transition-all">
-                                                        <i class="fas fa-folder-plus text-xs"></i>
-                                                    </button>
-                                                </div>
-                                            </template>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
