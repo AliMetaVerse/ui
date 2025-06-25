@@ -227,7 +227,7 @@
                         <!-- Activity List -->
                         <div class="space-y-3 px-0 pb-6">
                             <template x-for="activity in filteredActivities()" :key="activity.id">
-                                <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
+                                <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4 transition-shadow duration-200 hover:shadow-xl">
                                     <span class="font-medium text-webropol-gray-900" x-text="activity.name"></span>
                                     <template x-if="activity.status === 'Open'">
                                         <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full">Open</span>
