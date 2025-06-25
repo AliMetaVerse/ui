@@ -323,15 +323,15 @@
                                             <div class="flex items-center space-x-4">
                                                 <label
                                                     class="flex items-center text-sm font-medium text-webropol-gray-700">
-                                                    <input type="checkbox"
+                                                    <input type="checkbox" x-model="showOnlyTitles"
                                                         class="h-4 w-4 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-3">
                                                     Show only question titles
                                                 </label>
                                                 <div class="flex items-center space-x-2">
                                                     <span class="text-sm text-webropol-gray-600">Language:</span>
                                                     <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800"
-                                                        x-text="selectedLanguage === 'all' ? 'All' : selectedLanguage.toUpperCase()"></span>
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800"
+                                                        x-text="selectedLanguage.toUpperCase()"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -349,14 +349,12 @@
                                                         <div class="flex-1">
                                                             <div class="flex items-center mb-3">
                                                                 <span
-                                                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-3">
-                                                                    Multiple Choice
-                                                                </span>
+                                                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-3"
+                                                                    x-text="question.questionType"></span>
                                                                 <h3 class="text-lg font-semibold text-webropol-gray-900"
                                                                     x-text="question.name"></h3>
                                                                 <span
-                                                                    class="ml-3 inline-flex items-center px-2 py-1 rounded text-xs font-medium"
-                                                                    :class="question.language === 'en' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'"
+                                                                    class="ml-3 inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-800"
                                                                     x-text="question.language.toUpperCase()"></span>
                                                                 <span x-show="question.folderId"
                                                                     class="ml-2 inline-flex items-center px-2 py-1 rounded text-xs bg-gray-100 text-gray-700">
@@ -365,31 +363,58 @@
                                                                         x-text="folders.find(f => f.id === question.folderId)?.name || 'Unknown'"></span>
                                                                 </span>
                                                             </div>
-                                                            <div class="space-y-3" x-show="question.id <= 1">
-                                                                <label class="flex items-center">
-                                                                    <input type="radio" :name="'q' + question.id"
-                                                                        class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
-                                                                        disabled>
-                                                                    <span class="text-webropol-gray-700">Option 1</span>
-                                                                </label>
-                                                                <label class="flex items-center">
-                                                                    <input type="radio" :name="'q' + question.id"
-                                                                        class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
-                                                                        disabled>
-                                                                    <span class="text-webropol-gray-700">Option 2</span>
-                                                                </label>
-                                                                <label class="flex items-center">
-                                                                    <input type="radio" :name="'q' + question.id"
-                                                                        class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
-                                                                        disabled>
-                                                                    <span class="text-webropol-gray-700">Option 3</span>
-                                                                </label>
-                                                            </div>
-                                                            <div x-show="question.id === 2">
-                                                                <textarea
-                                                                    class="w-full p-4 border border-webropol-gray-200 rounded-lg bg-webropol-gray-50"
-                                                                    rows="2" placeholder="Your answer..."
-                                                                    disabled></textarea>
+                                                            
+                                                            <!-- Question Options - Hidden when showOnlyTitles is true -->
+                                                            <div x-show="!showOnlyTitles">
+                                                                <!-- Selection Questions -->
+                                                                <div x-show="question.type === 'selection'" class="space-y-3">
+                                                                    <template x-for="option in question.options" :key="option">
+                                                                        <label class="flex items-center">
+                                                                            <input type="radio" :name="'q' + question.id"
+                                                                                class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
+                                                                                disabled>
+                                                                            <span class="text-webropol-gray-700" x-text="option"></span>
+                                                                        </label>
+                                                                    </template>
+                                                                </div>
+                                                                
+                                                                <!-- Multiple Choice Questions -->
+                                                                <div x-show="question.type === 'multiple'" class="space-y-3">
+                                                                    <template x-for="option in question.options" :key="option">
+                                                                        <label class="flex items-center">
+                                                                            <input type="checkbox"
+                                                                                class="h-4 w-4 rounded border-webropol-gray-300 text-webropol-teal-600 mr-3"
+                                                                                disabled>
+                                                                            <span class="text-webropol-gray-700" x-text="option"></span>
+                                                                        </label>
+                                                                    </template>
+                                                                </div>
+                                                                
+                                                                <!-- Rating Questions -->
+                                                                <div x-show="question.type === 'rating'" class="space-y-3">
+                                                                    <div class="flex items-center space-x-4">
+                                                                        <template x-for="(option, index) in question.options" :key="option">
+                                                                            <label class="flex flex-col items-center">
+                                                                                <input type="radio" :name="'q' + question.id"
+                                                                                    class="form-radio h-4 w-4 text-webropol-teal-600 mb-2"
+                                                                                    disabled>
+                                                                                <span class="text-xs text-webropol-gray-600 text-center" x-text="index + 1"></span>
+                                                                            </label>
+                                                                        </template>
+                                                                    </div>
+                                                                    <div class="flex justify-between text-xs text-webropol-gray-500">
+                                                                        <span>Poor</span>
+                                                                        <span>Excellent</span>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <!-- Text Questions -->
+                                                                <div x-show="question.type === 'text'">
+                                                                    <textarea
+                                                                        class="w-full p-4 border border-webropol-gray-200 rounded-lg bg-webropol-gray-50"
+                                                                        rows="2" placeholder="Your answer..."
+                                                                        disabled></textarea>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -439,8 +464,8 @@
                                                 <div class="flex items-center space-x-2">
                                                     <span class="text-sm text-webropol-gray-600">Language:</span>
                                                     <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800"
-                                                        x-text="selectedLanguage === 'all' ? 'All' : selectedLanguage.toUpperCase()"></span>
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800"
+                                                        x-text="selectedLanguage.toUpperCase()"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1127,7 +1152,7 @@
         function libraryApp() {
             return {
                 currentView: 'questions',
-                selectedLanguage: 'all',
+                selectedLanguage: 'en',
                 searchTerm: '',
                 showPreviewModal: false,
                 showCreateFolder: false,
@@ -1137,6 +1162,7 @@
                 newFolderName: '',
                 newFolderDescription: '',
                 expandedFolders: [],
+                showOnlyTitles: false,
 
                 // Sample data
                 folders: [
@@ -1146,12 +1172,60 @@
                 ],
 
                 questions: [
-                    { id: 1, name: 'Valintakysymys', type: 'question', language: 'fi', folderId: null },
-                    { id: 2, name: 'Avoin kysymys', type: 'question', language: 'fi', folderId: 1 },
-                    { id: 3, name: 'Selection Question', type: 'question', language: 'en', folderId: null },
-                    { id: 4, name: 'Rating Question', type: 'question', language: 'en', folderId: 2 },
-                    { id: 5, name: 'Multiple Choice', type: 'question', language: 'en', folderId: 1 },
-                    { id: 6, name: 'Tekstikysymys', type: 'question', language: 'fi', folderId: 3 }
+                    { 
+                        id: 1, 
+                        name: 'Valintakysymys', 
+                        type: 'selection', 
+                        language: 'fi', 
+                        folderId: null,
+                        questionType: 'Selection',
+                        options: ['Vaihtoehto 1', 'Vaihtoehto 2', 'Vaihtoehto 3', 'Vaihtoehto 4']
+                    },
+                    { 
+                        id: 2, 
+                        name: 'Avoin kysymys', 
+                        type: 'text', 
+                        language: 'fi', 
+                        folderId: 1,
+                        questionType: 'Text Question',
+                        options: []
+                    },
+                    { 
+                        id: 3, 
+                        name: 'Selection Question', 
+                        type: 'selection', 
+                        language: 'en', 
+                        folderId: null,
+                        questionType: 'Selection',
+                        options: ['Option A', 'Option B', 'Option C', 'Option D']
+                    },
+                    { 
+                        id: 4, 
+                        name: 'Rating Question', 
+                        type: 'rating', 
+                        language: 'en', 
+                        folderId: 2,
+                        questionType: 'Rating',
+                        options: ['1 - Poor', '2 - Fair', '3 - Good', '4 - Very Good', '5 - Excellent']
+                    },
+                    { 
+                        id: 5, 
+                        name: 'Multiple Choice', 
+                        type: 'multiple', 
+                        language: 'en', 
+                        folderId: 1,
+                        questionType: 'Multiple Choice',
+                        options: ['Choice 1', 'Choice 2', 'Choice 3', 'Choice 4', 'Choice 5']
+                    },
+                    { 
+                        id: 6, 
+                        name: 'Tekstikysymys', 
+                        type: 'text', 
+                        language: 'fi', 
+                        folderId: 3,
+                        questionType: 'Text Question',
+                        options: []
+                    }
                 ],
 
                 surveys: [
@@ -1216,7 +1290,7 @@
                     const currentItems = this.currentView === 'questions' ? this.questions : this.surveys;
                     return currentItems.filter(item => {
                         const matchesFolder = item.folderId === folderId;
-                        const matchesLanguage = this.selectedLanguage === 'all' || item.language === this.selectedLanguage;
+                        const matchesLanguage = item.language === this.selectedLanguage;
                         const matchesSearch = !this.searchTerm || item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
                         return matchesFolder && matchesLanguage && matchesSearch;
                     });
@@ -1230,7 +1304,7 @@
                     const currentItems = this.currentView === 'questions' ? this.questions : this.surveys;
                     return currentItems.filter(item => {
                         const isUngrouped = item.folderId === null;
-                        const matchesLanguage = this.selectedLanguage === 'all' || item.language === this.selectedLanguage;
+                        const matchesLanguage = item.language === this.selectedLanguage;
                         const matchesSearch = !this.searchTerm || item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
                         return isUngrouped && matchesLanguage && matchesSearch;
                     });
@@ -1238,7 +1312,7 @@
 
                 getFilteredQuestions() {
                     return this.questions.filter(question => {
-                        const matchesLanguage = this.selectedLanguage === 'all' || question.language === this.selectedLanguage;
+                        const matchesLanguage = question.language === this.selectedLanguage;
                         const matchesSearch = !this.searchTerm || question.name.toLowerCase().includes(this.searchTerm.toLowerCase());
                         return matchesLanguage && matchesSearch;
                     });
@@ -1246,7 +1320,7 @@
 
                 getFilteredSurveys() {
                     return this.surveys.filter(survey => {
-                        const matchesLanguage = this.selectedLanguage === 'all' || survey.language === this.selectedLanguage;
+                        const matchesLanguage = survey.language === this.selectedLanguage;
                         const matchesSearch = !this.searchTerm || survey.name.toLowerCase().includes(this.searchTerm.toLowerCase());
                         return matchesLanguage && matchesSearch;
                     });
