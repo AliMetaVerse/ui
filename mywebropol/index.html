@@ -161,521 +161,116 @@
                 </div>
             </header> <!-- Page Content -->
             <main class="flex-1 overflow-y-auto p-8">
-                <div class="max-w-8xl mx-auto">
-                    <!-- Page Header -->
-                    <div class="flex items-center justify-between mb-8">
-                        <div>
-                            <h1 class="text-3xl font-bold text-webropol-gray-900 mb-2">Question & Survey Library</h1>
-                            <p class="text-webropol-gray-600">Manage and organize your survey questions and templates
-                            </p>
-                        </div> <button @click="showCreateModal = true"
-                            class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-lg transition-all duration-200 hover-lift">
-                            <i class="fas fa-plus mr-3"></i> Create new
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-12 gap-8">
-                        <!-- Library Folder Tree -->
-                        <div class="col-span-3">
-                            <div
-                                class="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-card border border-webropol-gray-200/50 hover-lift">
-                                <div class="flex items-center justify-between mb-6">
-                                    <h2 class="text-xl font-semibold text-webropol-gray-900">Webropol Library</h2>
-                                    <button
-                                        class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                </div>
-                                <!-- Pill Tab Navigation -->
-                                <div class="flex items-center space-x-1 mb-6 p-1 bg-webropol-gray-100 rounded-xl">
-                                    <button @click="setView('questions')"
-                                        :class="currentView === 'questions' ? 'bg-white text-webropol-teal-700 shadow-soft' : 'text-webropol-gray-600 hover:text-webropol-gray-900'"
-                                        class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
-                                        <i class="fas fa-question-circle mr-2"></i>
-                                        <span>Questions</span>
-                                        <span
-                                            class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium"
-                                            :class="currentView === 'questions' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''"
-                                            x-text="getFilteredQuestions().length"></span>
-                                    </button>
-                                    <button @click="setView('surveys')"
-                                        :class="currentView === 'surveys' ? 'bg-white text-webropol-teal-700 shadow-soft' : 'text-webropol-gray-600 hover:text-webropol-gray-900'"
-                                        class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
-                                        <i class="fas fa-poll-h mr-2"></i>
-                                        <span>Surveys</span>
-                                        <span
-                                            class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium"
-                                            :class="currentView === 'surveys' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''"
-                                            x-text="getFilteredSurveys().length"></span>
-                                    </button>
-                                </div> <!-- Language Selection -->
-                                <div class="relative mb-4">
-                                    <select x-model="selectedLanguage"
-                                        class="w-full px-4 py-3 pr-10 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all appearance-none text-sm font-medium">
-                                        <option value="en">English</option>
-                                        <option value="fi">Finnish</option>
-                                    </select>
-                                    <i
-                                        class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-webropol-gray-400 pointer-events-none"></i>
-                                </div>
-
-                                <div class="relative mb-6">
-                                    <i
-                                        class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-webropol-gray-400"></i>
-                                    <input type="text" x-model="searchTerm"
-                                        :placeholder="currentView === 'questions' ? 'Search questions...' : 'Search surveys...'"
-                                        class="w-full pl-12 pr-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all">
-                                </div>
-                                <!-- Folder Management -->
-                                <div class="space-y-3">
-                                    <!-- Add New Folder Button -->
-                                    <button @click="showCreateFolder = true"
-                                        class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-webropol-gray-300 rounded-xl hover:border-webropol-teal-400 hover:bg-webropol-teal-50 transition-all text-webropol-gray-600 hover:text-webropol-teal-700">
-                                        <i class="fas fa-plus mr-2"></i>
-                                        <span class="font-medium">Create New Folder</span>
-                                    </button>
-
-                                    <!-- Root Level Items -->
-                                    <div class="space-y-2">
-                                        <template x-for="folder in getFilteredFolders()" :key="folder.id">
-                                            <div class="group">
-                                                <!-- Folder Header -->
-                                                <div @click="toggleFolder(folder.id)"
-                                                    class="flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all duration-200"
-                                                    :class="expandedFolders.includes(folder.id) ? 'bg-gradient-to-r from-webropol-teal-50 to-webropol-blue-50 text-webropol-teal-700' : 'hover:bg-webropol-gray-50'">
-                                                    <div class="flex items-center">
-                                                        <div class="w-8 h-8 flex items-center justify-center rounded-lg mr-3"
-                                                            :class="expandedFolders.includes(folder.id) ? 'bg-webropol-teal-100' : 'bg-webropol-gray-100 group-hover:bg-webropol-teal-50'">
-                                                            <i class="fas fa-folder text-webropol-teal-600"></i>
-                                                        </div>
-                                                        <span class="font-medium" x-text="folder.name"></span>
-                                                    </div>
-                                                    <div class="flex items-center space-x-2">
-                                                        <span
-                                                            class="text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-1 font-medium"
-                                                            x-text="getFolderItemCount(folder.id)"></span>
-                                                        <button @click.stop="editFolder(folder.id)"
-                                                            class="opacity-0 group-hover:opacity-100 w-6 h-6 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 rounded transition-all">
-                                                            <i class="fas fa-edit text-xs"></i>
-                                                        </button>
-                                                        <i class="fas fa-chevron-right text-xs transition-transform"
-                                                            :class="expandedFolders.includes(folder.id) ? 'rotate-90' : ''"></i>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Folder Contents -->
-                                                <div x-show="expandedFolders.includes(folder.id)" x-collapse
-                                                    class="ml-11 mt-2 space-y-1">
-                                                    <template x-for="item in getFolderItems(folder.id)" :key="item.id">
-                                                        <div
-                                                            class="flex items-center justify-between p-2 rounded-lg hover:bg-webropol-gray-50 transition-all">
-                                                            <div class="flex items-center">
-                                                                <i :class="item.type === 'question' ? 'fas fa-question-circle text-webropol-blue-500' : 'fas fa-poll-h text-webropol-teal-500'"
-                                                                    class="mr-3 text-sm"></i>
-                                                                <span class="text-sm font-medium"
-                                                                    x-text="item.name"></span>
-                                                                <span class="ml-2 text-xs text-webropol-gray-500"
-                                                                    x-text="'(' + item.language.toUpperCase() + ')'"></span>
-                                                            </div>
-                                                            <button @click="removeFromFolder(item.id, folder.id)"
-                                                                class="opacity-0 group-hover:opacity-100 w-5 h-5 flex items-center justify-center text-webropol-gray-400 hover:text-red-500 rounded transition-all">
-                                                                <i class="fas fa-times text-xs"></i>
-                                                            </button>
-                                                        </div>
-                                                    </template>
-
-                                                    <!-- Add to Folder Button -->
-                                                    <button @click="showAddToFolder = folder.id"
-                                                        class="w-full flex items-center justify-center p-2 border border-dashed border-webropol-gray-300 rounded-lg hover:border-webropol-teal-400 hover:bg-webropol-teal-50 transition-all text-webropol-gray-500 hover:text-webropol-teal-600 text-sm">
-                                                        <i class="fas fa-plus mr-2"></i>
-                                                        <span>Add items to folder</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </template>
-
+                <div class="max-w-6xl mx-auto">
+                    <h1 class="text-3xl font-bold text-webropol-gray-900 mb-8">MyWebropol</h1>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Left Column -->
+                        <div class="space-y-8">
+                            <!-- Templates and Libraries Section -->
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-card border border-webropol-gray-200/50 hover-lift">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mr-3">
+                                        <i class="fas fa-th-list text-white"></i>
                                     </div>
+                                    <h2 class="text-xl font-bold text-webropol-gray-900">Templates and Libraries</h2>
+                                </div>
+                                <div class="space-y-3">
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-envelope text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Email Templates</span>
+                                        </div>
+                                        <i class="fas fa-info-circle text-webropol-teal-600"></i>
+                                    </a>
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-layout text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Layout templates</span>
+                                        </div>
+                                        <i class="fas fa-info-circle text-webropol-teal-600"></i>
+                                    </a>
+                                    <a href="library.html" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-book-open text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Question & Survey Library</span>
+                                        </div>
+                                        <i class="fas fa-info-circle text-webropol-teal-600"></i>
+                                    </a>
                                 </div>
                             </div>
-                        </div> <!-- Content Area -->
-                        <div class="col-span-9"> <!-- Questions View -->
-                            <div x-show="currentView === 'questions'" x-cloak>
-                                <div
-                                    class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-card border border-webropol-gray-200/50 overflow-hidden hover-lift">
-                                    <!-- Header -->
-                                    <div
-                                        class="px-8 py-6 border-b border-webropol-gray-200/50 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
-                                        <div class="flex items-center justify-between">
-                                            <div>
-                                                <h2 class="text-2xl font-bold text-webropol-gray-900 mb-1">Questions
-                                                    Library</h2>
-                                                <p class="text-webropol-gray-600"
-                                                    x-text="getFilteredQuestions().length + ' questions available'"></p>
-                                            </div>
-                                            <div class="flex items-center space-x-4">
-                                                <div @click="showOnlyTitles = !showOnlyTitles" class="flex items-center bg-white rounded-xl px-4 py-2 shadow-sm border border-webropol-gray-200 cursor-pointer hover:shadow-md hover:border-webropol-gray-300 transition-all duration-200">
-                                                    <span class="text-sm font-medium text-webropol-gray-700 mr-3">Show only question titles</span>
-                                                    <label class="relative inline-flex items-center pointer-events-none">
-                                                        <input type="checkbox" x-model="showOnlyTitles" class="sr-only peer">
-                                                        <div class="peer h-5 w-9 rounded-full bg-webropol-gray-200 after:absolute after:top-[2px] after:left-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-webropol-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-webropol-teal-500 peer-checked:to-webropol-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-webropol-teal-300"></div>
-                                                    </label>
-                                                </div>
-                                                <div class="flex items-center space-x-2">
-                                                    <span class="text-sm text-webropol-gray-600">Language:</span>
-                                                    <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800"
-                                                        x-text="selectedLanguage.toUpperCase()"></span>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <!-- Action Buttons Bar -->
-                                        <div x-show="hasSelectedItems()" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="mt-4 flex items-center justify-between p-4 bg-webropol-teal-50 border border-webropol-teal-200 rounded-xl">
-                                            <div class="flex items-center space-x-3">
-                                                <span class="text-sm font-medium text-webropol-gray-700" x-text="selectedQuestions.length + ' questions selected'"></span>
-                                            </div>
-                                            <div class="flex items-center space-x-3">
-                                                <button @click="deleteSelectedItems()" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200">
-                                                    <i class="fas fa-trash mr-2"></i>
-                                                    Delete
-                                                </button>
-                                                <button @click="freezeSelectedItems()" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200">
-                                                    <i class="fas fa-snowflake mr-2"></i>
-                                                    Freeze
-                                                </button>
-                                            </div>
-                                        </div>
+                            <!-- Other Tools Section -->
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-card border border-webropol-gray-200/50 hover-lift">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-webropol-blue-500 to-webropol-purple-600 rounded-xl flex items-center justify-center mr-3">
+                                        <i class="fas fa-cog text-white"></i>
                                     </div>
-
-                                    <!-- Questions List -->
-                                    <div class="p-6 space-y-4">
-                                        <!-- Select All Checkbox -->
-                                        <div class="flex items-center p-4 bg-webropol-gray-50 rounded-xl border border-webropol-gray-200">
-                                            <label class="flex items-center cursor-pointer">
-                                                <input type="checkbox" 
-                                                    x-model="selectAllQuestions" 
-                                                    @change="toggleSelectAllQuestions()"
-                                                    class="h-5 w-5 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-3">
-                                                <span class="text-sm font-medium text-webropol-gray-700">Select All Questions</span>
-                                            </label>
-                                        </div>
-                                        <template x-for="question in getFilteredQuestions()" :key="question.id">
-                                            <div
-                                                class="group border border-webropol-gray-200 rounded-xl p-6 bg-white hover:border-webropol-teal-300 hover:shadow-medium transition-all duration-200"
-                                                :class="selectedQuestions.includes(question.id) ? 'ring-2 ring-webropol-teal-500 border-webropol-teal-500' : ''">
-                                                <div class="flex items-start justify-between">
-                                                    <div class="flex items-start flex-1">
-                                                        <input type="checkbox"
-                                                            :checked="selectedQuestions.includes(question.id)"
-                                                            @change="toggleQuestionSelection(question.id)"
-                                                            class="h-5 w-5 mt-1 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-4">
-                                                        <div class="flex-1">
-                                                            <div class="flex items-center mb-3">
-                                                                <span
-                                                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-3"
-                                                                    x-text="question.questionType"></span>
-                                                                <h3 class="text-lg font-semibold text-webropol-gray-900"
-                                                                    x-text="question.name"></h3>
-                                                                <span
-                                                                    class="ml-3 inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-800"
-                                                                    x-text="question.language.toUpperCase()"></span>
-                                                                <span x-show="question.folderId"
-                                                                    class="ml-2 inline-flex items-center px-2 py-1 rounded text-xs bg-gray-100 text-gray-700">
-                                                                    <i class="fas fa-folder mr-1"></i>
-                                                                    <span
-                                                                        x-text="folders.find(f => f.id === question.folderId)?.name || 'Unknown'"></span>
-                                                                </span>
-                                                            </div>
-                                                            
-                                                            <!-- Question Options - Hidden when showOnlyTitles is true -->
-                                                            <div x-show="!showOnlyTitles">
-                                                                <!-- Selection Questions -->
-                                                                <div x-show="question.type === 'selection'" class="space-y-3">
-                                                                    <template x-for="option in question.options" :key="option">
-                                                                        <label class="flex items-center">
-                                                                            <input type="radio" :name="'q' + question.id"
-                                                                                class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
-                                                                                disabled>
-                                                                            <span class="text-webropol-gray-700" x-text="option"></span>
-                                                                        </label>
-                                                                    </template>
-                                                                </div>
-                                                                
-                                                                <!-- Multiple Choice Questions -->
-                                                                <div x-show="question.type === 'multiple'" class="space-y-3">
-                                                                    <template x-for="option in question.options" :key="option">
-                                                                        <label class="flex items-center">
-                                                                            <input type="checkbox"
-                                                                                class="h-4 w-4 rounded border-webropol-gray-300 text-webropol-teal-600 mr-3"
-                                                                                disabled>
-                                                                            <span class="text-webropol-gray-700" x-text="option"></span>
-                                                                        </label>
-                                                                    </template>
-                                                                </div>
-                                                                
-                                                                <!-- Rating Questions -->
-                                                                <div x-show="question.type === 'rating'" class="space-y-3">
-                                                                    <div class="flex items-center space-x-4">
-                                                                        <template x-for="(option, index) in question.options" :key="option">
-                                                                            <label class="flex flex-col items-center">
-                                                                                <input type="radio" :name="'q' + question.id"
-                                                                                    class="form-radio h-4 w-4 text-webropol-teal-600 mb-2"
-                                                                                    disabled>
-                                                                                <span class="text-xs text-webropol-gray-600 text-center" x-text="index + 1"></span>
-                                                                            </label>
-                                                                        </template>
-                                                                    </div>
-                                                                    <div class="flex justify-between text-xs text-webropol-gray-500">
-                                                                        <span>Poor</span>
-                                                                        <span>Excellent</span>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <!-- Text Questions -->
-                                                                <div x-show="question.type === 'text'">
-                                                                    <textarea
-                                                                        class="w-full p-4 border border-webropol-gray-200 rounded-lg bg-webropol-gray-50"
-                                                                        rows="2" placeholder="Your answer..."
-                                                                        disabled></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex items-center space-x-2">
-                                                        <button
-                                                            class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button>
-                                                        <div class="relative">
-                                                            <button @click.stop="toggleContextMenu(question.id, 'question')"
-                                                                class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
-                                                                <i class="fas fa-ellipsis-v"></i>
-                                                            </button>
-                                                            <!-- Context Menu -->
-                                                            <div x-show="showContextMenu === question.id" 
-                                                                @click.stop
-                                                                x-transition:enter="transition ease-out duration-100"
-                                                                x-transition:enter-start="transform opacity-0 scale-95"
-                                                                x-transition:enter-end="transform opacity-100 scale-100"
-                                                                x-transition:leave="transition ease-in duration-75"
-                                                                x-transition:leave-start="transform opacity-100 scale-100"
-                                                                x-transition:leave-end="transform opacity-0 scale-95"
-                                                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-webropol-gray-200 z-10">
-                                                                <div class="py-1">
-                                                                    <button @click="deleteItem(question.id, 'question')"
-                                                                        class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
-                                                                        <i class="fas fa-trash mr-3"></i>
-                                                                        Delete Question
-                                                                    </button>
-                                                                    <button @click="freezeItem(question.id, 'question')"
-                                                                        class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors">
-                                                                        <i class="fas fa-snowflake mr-3"></i>
-                                                                        Freeze Question
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </template>
-
-                                        <div x-show="getFilteredQuestions().length === 0" class="text-center py-12">
-                                            <i class="fas fa-question-circle text-4xl text-webropol-gray-300 mb-4"></i>
-                                            <h3 class="text-lg font-semibold text-webropol-gray-900 mb-2">No questions
-                                                found</h3>
-                                            <p class="text-webropol-gray-600">Try adjusting your language filter or
-                                                search terms.</p>
-                                        </div>
-                                    </div>
+                                    <h2 class="text-xl font-bold text-webropol-gray-900">Other Tools</h2>
                                 </div>
-                            </div><!-- Surveys View -->
-                            <div x-show="currentView === 'surveys'" x-cloak>
-                                <div
-                                    class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-card border border-webropol-gray-200/50 overflow-hidden hover-lift">
-                                    <!-- Header -->
-                                    <div
-                                        class="px-8 py-6 border-b border-webropol-gray-200/50 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
-                                        <div class="flex items-center justify-between">
-                                            <div>
-                                                <h2 class="text-2xl font-bold text-webropol-gray-900 mb-1">Surveys
-                                                    Library</h2>
-                                                <p class="text-webropol-gray-600"
-                                                    x-text="getFilteredSurveys().length + ' surveys available'"></p>
-                                            </div>
-                                            <div class="flex items-center space-x-4">
-                                                <div class="flex items-center space-x-2">
-                                                    <span class="text-sm text-webropol-gray-600">Language:</span>
-                                                    <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800"
-                                                        x-text="selectedLanguage.toUpperCase()"></span>
-                                                </div>
-                                            </div>
+                                <div class="space-y-3">
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-sign-in-alt text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Login and Landing pages</span>
                                         </div>
-
-                                        <!-- Action Buttons Bar -->
-                                        <div x-show="hasSelectedItems()" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="mt-4 flex items-center justify-between p-4 bg-webropol-teal-50 border border-webropol-teal-200 rounded-xl">
-                                            <div class="flex items-center space-x-3">
-                                                <span class="text-sm font-medium text-webropol-gray-700" x-text="selectedSurveys.length + ' surveys selected'"></span>
-                                            </div>
-                                            <div class="flex items-center space-x-3">
-                                                <button @click="deleteSelectedItems()" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200">
-                                                    <i class="fas fa-trash mr-2"></i>
-                                                    Delete
-                                                </button>
-                                                <button @click="freezeSelectedItems()" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200">
-                                                    <i class="fas fa-snowflake mr-2"></i>
-                                                    Freeze
-                                                </button>
-                                            </div>
+                                        <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600"></i>
+                                    </a>
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-sms text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">View and Manage SMS credits</span>
                                         </div>
-                                    </div>
+                                        <i class="fas fa-info-circle text-webropol-teal-600"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-                                    <!-- Enhanced Table -->
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full">
-                                            <thead class="bg-webropol-gray-50/50">
-                                                <tr class="text-left">
-                                                    <th class="px-8 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        <input type="checkbox"
-                                                            x-model="selectAllSurveys"
-                                                            @change="toggleSelectAllSurveys()"
-                                                            class="h-5 w-5 rounded border-webropol-gray-300 text-webropol-teal-600">
-                                                    </th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        Survey name</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        Languages</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        Questions</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        Survey type</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        Created by</th>
-                                                    <th
-                                                        class="px-8 py-4 font-semibold text-webropol-gray-700 text-sm text-right">
-                                                        Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="divide-y divide-webropol-gray-100">
-                                                <template x-for="survey in getFilteredSurveys()" :key="survey.id">
-                                                    <tr class="group hover:bg-webropol-teal-50/30 transition-colors"
-                                                        :class="selectedSurveys.includes(survey.id) ? 'ring-2 ring-webropol-teal-500 bg-webropol-teal-50/50' : ''">
-                                                        <td class="px-8 py-6">
-                                                            <input type="checkbox"
-                                                                :checked="selectedSurveys.includes(survey.id)"
-                                                                @change="toggleSurveySelection(survey.id)"
-                                                                class="h-5 w-5 rounded border-webropol-gray-300 text-webropol-teal-600">
-                                                        </td>
-                                                        <td class="px-4 py-6">
-                                                            <div class="font-semibold text-webropol-gray-900" x-text="survey.name"></div>
-                                                            <div class="text-sm text-webropol-gray-500 mt-1">Survey description</div>
-                                                        </td>
-                                                        <td class="px-4 py-6">
-                                                            <span
-                                                                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800">
-                                                                1 language
-                                                            </span>
-                                                        </td>
-                                                        <td class="px-4 py-6">
-                                                            <span class="font-medium text-webropol-gray-900">6</span>
-                                                            <span class="text-webropol-gray-500 text-sm">questions</span>
-                                                        </td>
-                                                        <td class="px-4 py-6">
-                                                            <span
-                                                                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-blue-100 text-webropol-blue-800">
-                                                                Survey
-                                                            </span>
-                                                        </td>
-                                                        <td class="px-4 py-6">
-                                                            <div class="flex items-center">
-                                                                <div
-                                                                    class="w-8 h-8 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">
-                                                                    W
-                                                                </div>
-                                                                <span
-                                                                    class="text-webropol-gray-900 font-medium">Webropol</span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="px-8 py-6">
-                                                            <div class="flex items-center justify-end space-x-2">
-                                                                <button @click="showPreviewModal = true"
-                                                                    class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
-                                                                    <i class="fas fa-eye"></i>
-                                                                </button>
-                                                                <div class="relative">
-                                                                    <button @click.stop="toggleContextMenu(survey.id, 'survey')"
-                                                                        class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
-                                                                        <i class="fas fa-ellipsis-v"></i>
-                                                                    </button>
-                                                                    <!-- Context Menu -->
-                                                                    <div x-show="showContextMenu === survey.id" 
-                                                                        @click.stop
-                                                                        x-transition:enter="transition ease-out duration-100"
-                                                                        x-transition:enter-start="transform opacity-0 scale-95"
-                                                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                                                        x-transition:leave="transition ease-in duration-75"
-                                                                        x-transition:leave-start="transform opacity-100 scale-100"
-                                                                        x-transition:leave-end="transform opacity-0 scale-95"
-                                                                        class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-webropol-gray-200 z-10">
-                                                                        <div class="py-1">
-                                                                            <button @click="deleteItem(survey.id, 'survey')"
-                                                                                class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
-                                                                                <i class="fas fa-trash mr-3"></i>
-                                                                                Delete Survey
-                                                                            </button>
-                                                                            <button @click="freezeItem(survey.id, 'survey')"
-                                                                                class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors">
-                                                                                <i class="fas fa-snowflake mr-3"></i>
-                                                                                Freeze Survey
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </template>
-                                            </tbody>
-                                        </table>
+                        <!-- Right Column -->
+                        <div class="space-y-8">
+                            <!-- Help Centre and Agreements Section -->
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-card border border-webropol-gray-200/50 hover-lift">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-webropol-green-500 to-webropol-teal-600 rounded-xl flex items-center justify-center mr-3">
+                                        <i class="fas fa-file-alt text-white"></i>
                                     </div>
-
-                                    <!-- Enhanced Pagination -->
-                                    <div class="px-8 py-6 border-t border-webropol-gray-200/50 bg-webropol-gray-50/30">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center space-x-4">
-                                                <span class="text-sm text-webropol-gray-700 font-medium">Page 1 of
-                                                    1</span>
-                                                <div class="flex items-center space-x-2">
-                                                    <button
-                                                        class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all disabled:opacity-50"
-                                                        disabled>
-                                                        <i class="fas fa-chevron-left"></i>
-                                                    </button>
-                                                    <button
-                                                        class="w-8 h-8 flex items-center justify-center bg-webropol-teal-500 text-white rounded-lg font-medium">
-                                                        1
-                                                    </button>
-                                                    <button
-                                                        class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all disabled:opacity-50"
-                                                        disabled>
-                                                        <i class="fas fa-chevron-right"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center space-x-3">
-                                                <span class="text-sm text-webropol-gray-700 font-medium">Show on
-                                                    page</span>
-                                                <select
-                                                    class="border border-webropol-gray-300 rounded-lg text-sm px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
-                                                    <option>5</option>
-                                                    <option selected>20</option>
-                                                    <option>50</option>
-                                                    <option>100</option>
-                                                </select>
-                                            </div>
+                                    <h2 class="text-xl font-bold text-webropol-gray-900">Help Centre and Agreements</h2>
+                                </div>
+                                <div class="space-y-3">
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-question-circle text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Help Centre</span>
                                         </div>
+                                        <i class="fas fa-info-circle text-webropol-teal-600"></i>
+                                    </a>
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-file-contract text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Agreements</span>
+                                        </div>
+                                        <i class="fas fa-info-circle text-webropol-teal-600"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Data Security Section -->
+                            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-card border border-webropol-gray-200/50 hover-lift">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-webropol-red-500 to-webropol-orange-600 rounded-xl flex items-center justify-center mr-3">
+                                        <i class="fas fa-shield-alt text-white"></i>
                                     </div>
+                                    <h2 class="text-xl font-bold text-webropol-gray-900">Data security</h2>
+                                </div>
+                                <div class="space-y-3">
+                                    <a href="#" class="flex items-center justify-between p-3 rounded-xl hover:bg-webropol-teal-50 transition-all duration-200 group">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-file-shield text-webropol-gray-500 mr-3 group-hover:text-webropol-teal-600"></i>
+                                            <span class="font-medium text-webropol-gray-900">Data security white paper</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
