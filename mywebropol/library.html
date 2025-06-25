@@ -52,7 +52,7 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-webropol-gray-50 to-webropol-teal-50/30" x-data="libraryApp()">
+<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" style="background-color: #ebf4f7;" x-data="libraryApp()">
 
     <div class="flex h-screen">
         <!-- Modern Sidebar -->
@@ -81,12 +81,12 @@
                     <span class="font-medium">Events</span>
                 </a>
                 <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-users w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
-                    <span class="font-medium">Respondents</span>
+                    <i class="fas fa-sms w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
+                    <span class="font-medium">2-Way SMS</span>
                 </a>
                 <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
                     <i class="fas fa-chart-line w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
-                    <span class="font-medium">Analytics</span>
+                    <span class="font-medium">Dashboards</span>
                 </a>
                 <div class="pt-4 border-t border-webropol-gray-200/50 mt-4">
                     <a href="#" class="flex items-center px-4 py-3 text-white rounded-xl bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 shadow-medium font-semibold">
@@ -140,8 +140,7 @@
                         <div>
                             <h1 class="text-3xl font-bold text-webropol-gray-900 mb-2">Question & Survey Library</h1>
                             <p class="text-webropol-gray-600">Manage and organize your survey questions and templates</p>
-                        </div>
-                        <button class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-lg transition-all duration-200 hover-lift">
+                        </div>                        <button @click="showCreateModal = true" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-lg transition-all duration-200 hover-lift">
                             <i class="fas fa-plus mr-3"></i> Create new
                         </button>
                     </div>
@@ -782,13 +781,118 @@
                 <button @click="showPreviewModal = false" 
                         class="px-6 py-3 text-webropol-gray-700 font-medium rounded-xl hover:bg-webropol-gray-100 transition-all">
                     Close Preview
-                </button>
-                <button class="px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium transition-all">
+                </button>                <button class="px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium transition-all">
                     Use This Survey
                 </button>
             </div>
         </div>
-    </div>    <script>
+    </div>
+
+    <!-- Create New Modal -->
+    <div x-show="showCreateModal" x-cloak 
+         class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @click.away="showCreateModal = false" 
+             class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden"
+             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-8 scale-95">
+            
+            <!-- Modal Header -->
+            <div class="p-8 border-b border-webropol-gray-200 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
+                <h3 class="text-2xl font-bold text-webropol-gray-900 mb-2">Create New</h3>
+                <p class="text-webropol-gray-600">Choose what you want to create. This will take to create new page of each survey</p>
+            </div>
+            
+            <!-- Modal Content -->
+            <div class="p-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Surveys -->
+                    <button @click="createItem('surveys')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-poll-h text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">Surveys</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Create custom surveys</span>
+                    </button>
+
+                    <!-- Events -->
+                    <button @click="createItem('events')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-calendar-alt text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">Events</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Event management</span>
+                    </button>
+
+                    <!-- EXW Surveys -->
+                    <button @click="createItem('exw-surveys')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-chart-line text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">EXW Surveys</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Employee experience</span>
+                    </button>
+
+                    <!-- Case Management -->
+                    <button @click="createItem('case-management')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-briefcase text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">Case Management</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Manage cases</span>
+                    </button>
+
+                    <!-- eTests -->
+                    <button @click="createItem('etests')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-clipboard-check text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">eTests</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Online testing</span>
+                    </button>
+
+                    <!-- Assessments -->
+                    <button @click="createItem('assessments')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-tasks text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">Assessments</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Performance review</span>
+                    </button>
+
+                    <!-- Touch Tablets -->
+                    <button @click="createItem('touch-tablets')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-tablet-alt text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">Touch Tablets</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Tablet surveys</span>
+                    </button>
+
+                    <!-- Direct Mobile Surveys -->
+                    <button @click="createItem('mobile-surveys')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-mobile-alt text-white text-lg"></i>
+                        </div>
+                        <span class="font-semibold text-webropol-gray-900 text-center">Direct Mobile Surveys</span>
+                        <span class="text-xs text-webropol-gray-500 text-center mt-1">Mobile optimized</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-8 border-t border-webropol-gray-200 bg-webropol-gray-50/50 flex items-center justify-end">
+                <button @click="showCreateModal = false" class="px-6 py-3 text-webropol-gray-700 font-medium rounded-xl hover:bg-webropol-gray-100 transition-all">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
         function libraryApp() {
             return {
                 currentView: 'questions',
@@ -796,6 +900,7 @@
                 searchTerm: '',
                 showPreviewModal: false,
                 showCreateFolder: false,
+                showCreateModal: false,
                 showMoveToFolder: null,
                 showAddToFolder: null,
                 newFolderName: '',
@@ -913,7 +1018,49 @@
                         const matchesLanguage = this.selectedLanguage === 'all' || survey.language === this.selectedLanguage;
                         const matchesSearch = !this.searchTerm || survey.name.toLowerCase().includes(this.searchTerm.toLowerCase());
                         return matchesLanguage && matchesSearch;
-                    });
+                    });                },
+                
+                createItem(type) {
+                    // Close the modal first
+                    this.showCreateModal = false;
+                    
+                    // Handle the creation logic based on type
+                    switch(type) {
+                        case 'surveys':
+                            console.log('Creating new survey...');
+                            // Add your survey creation logic here
+                            break;
+                        case 'events':
+                            console.log('Creating new event...');
+                            // Add your event creation logic here
+                            break;
+                        case 'exw-surveys':
+                            console.log('Creating new EXW survey...');
+                            // Add your EXW survey creation logic here
+                            break;
+                        case 'case-management':
+                            console.log('Creating new case management...');
+                            // Add your case management creation logic here
+                            break;
+                        case 'etests':
+                            console.log('Creating new eTest...');
+                            // Add your eTest creation logic here
+                            break;
+                        case 'assessments':
+                            console.log('Creating new assessment...');
+                            // Add your assessment creation logic here
+                            break;
+                        case 'touch-tablets':
+                            console.log('Creating new touch tablet survey...');
+                            // Add your touch tablet creation logic here
+                            break;
+                        case 'mobile-surveys':
+                            console.log('Creating new mobile survey...');
+                            // Add your mobile survey creation logic here
+                            break;
+                        default:
+                            console.log('Unknown item type:', type);
+                    }
                 },
                 
                 editFolder(folderId) {
