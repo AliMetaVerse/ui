@@ -157,7 +157,7 @@
                     <h2 class="text-2xl font-bold mb-6 text-webropol-gray-900">Hi! What do you want to do next?</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
                         <!-- Card 1 -->
-                        <div class="rounded-2xl bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100">
+                        <div class="rounded-2xl bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100 transition-shadow duration-200 hover:shadow-2xl">
                             <i class="fas fa-search text-4xl text-webropol-teal-600 mb-4"></i>
                             <div class="font-semibold text-lg text-webropol-gray-900 mb-2 text-center">Gain insight with surveys
                             </div>
@@ -167,7 +167,7 @@
                             </button>
                         </div>
                         <!-- Card 2 -->
-                        <div class="rounded-2xl bg-gradient-to-br from-orange-50 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100">
+                        <div class="rounded-2xl bg-gradient-to-br from-orange-50 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100 transition-shadow duration-200 hover:shadow-2xl">
                             <i class="fas fa-microphone text-4xl text-webropol-teal-600 mb-4"></i>
                             <div class="font-semibold text-lg text-webropol-gray-900 mb-2 text-center">Organise successful
                                 events
@@ -178,7 +178,7 @@
                             </button>
                         </div>
                         <!-- Card 3 -->
-                        <div class="relative rounded-2xl bg-gradient-to-br from-orange-50 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100">
+                        <div class="relative rounded-2xl bg-gradient-to-br from-orange-50 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100 transition-shadow duration-200 hover:shadow-2xl">
                             <span
                                 class="absolute top-4 right-4 bg-webropol-gray-700 text-white text-xs px-3 py-1 rounded-full">
                                 Popular
@@ -189,7 +189,7 @@
                             <a href="#" class="mt-2 text-webropol-teal-700 font-semibold hover:underline">Read more</a>
                         </div>
                         <!-- Card 4 -->
-                        <div class="relative rounded-2xl bg-gradient-to-br from-pink-50 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100">
+                        <div class="relative rounded-2xl bg-gradient-to-br from-pink-50 to-webropol-teal-100/80 p-6 flex flex-col items-center shadow-card border border-webropol-teal-100 transition-shadow duration-200 hover:shadow-2xl">
                             <span
                                 class="absolute top-4 right-4 bg-webropol-gray-700 text-white text-xs px-3 py-1 rounded-full">
                                 Popular
@@ -207,49 +207,43 @@
                         <!-- Tabs -->
                         <div class="flex mb-6">
                             <div class="inline-flex bg-webropol-teal-50 p-1 rounded-full gap-2">
-                                <button class="px-6 py-2 rounded-full font-semibold bg-white text-webropol-teal-700 shadow transition-all">All</button>
-                                <button class="px-6 py-2 rounded-full font-semibold text-webropol-gray-600 hover:bg-white transition-all">Surveys</button>
-                                <button class="px-6 py-2 rounded-full font-semibold text-webropol-gray-600 hover:bg-white transition-all">Events</button>
+                                <button
+                                    :class="selectedActivityTab === 'all' ? 'bg-white text-webropol-teal-700 shadow-lg border-2 border-webropol-teal-500 scale-105' : 'text-webropol-gray-600 hover:bg-white border-2 border-transparent'"
+                                    class="px-6 py-2 rounded-full font-semibold min-w-[110px] text-center focus:outline-none transition-colors transition-shadow transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                                    @click="selectedActivityTab = 'all'"
+                                >All</button>
+                                <button
+                                    :class="selectedActivityTab === 'surveys' ? 'bg-white text-webropol-teal-700 shadow-lg border-2 border-webropol-teal-500 scale-105' : 'text-webropol-gray-600 hover:bg-white border-2 border-transparent'"
+                                    class="px-6 py-2 rounded-full font-semibold min-w-[110px] text-center focus:outline-none transition-colors transition-shadow transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                                    @click="selectedActivityTab = 'surveys'"
+                                >Surveys</button>
+                                <button
+                                    :class="selectedActivityTab === 'events' ? 'bg-white text-webropol-teal-700 shadow-lg border-2 border-webropol-teal-500 scale-105' : 'text-webropol-gray-600 hover:bg-white border-2 border-transparent'"
+                                    class="px-6 py-2 rounded-full font-semibold min-w-[110px] text-center focus:outline-none transition-colors transition-shadow transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                                    @click="selectedActivityTab = 'events'"
+                                >Events</button>
                             </div>
                         </div>
                         <!-- Activity List -->
                         <div class="space-y-3 px-0 pb-6">
-                            <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
-                                <span class="font-medium text-webropol-gray-900">Questions</span>
-                                <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full">Open</span>
-                            </div>
-                            <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
-                                <span class="font-medium text-webropol-gray-900">Translation</span>
-                                <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full">Draft</span>
-                            </div>
-                            <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
-                                <span class="font-medium text-webropol-gray-900">Complex Questions</span>
-                                <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full">Open</span>
-                            </div>
-                            <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
-                                <span class="font-medium text-webropol-gray-900">AI Text Analysis Survey</span>
-                                <span class="flex items-center space-x-2">
-                                    <i class="fas fa-paper-plane text-webropol-teal-600"></i>
-                                    <span class="text-webropol-gray-700 text-xs">8 answers</span>
-                                    <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">Open</span>
-                                </span>
-                            </div>
-                            <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
-                                <span class="font-medium text-webropol-gray-900">Long survey</span>
-                                <span class="flex items-center space-x-2">
-                                    <i class="fas fa-paper-plane text-webropol-teal-600"></i>
-                                    <span class="text-webropol-gray-700 text-xs">2 answers</span>
-                                    <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">Open</span>
-                                </span>
-                            </div>
-                            <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
-                                <span class="font-medium text-webropol-gray-900">AI Text Analysis</span>
-                                <span class="flex items-center space-x-2">
-                                    <i class="fas fa-paper-plane text-webropol-teal-600"></i>
-                                    <span class="text-webropol-gray-700 text-xs">1 answers</span>
-                                    <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">Open</span>
-                                </span>
-                            </div>
+                            <template x-for="activity in filteredActivities()" :key="activity.id">
+                                <div class="flex items-center justify-between bg-white/80 border border-webropol-teal-50 rounded-xl px-6 py-4">
+                                    <span class="font-medium text-webropol-gray-900" x-text="activity.name"></span>
+                                    <template x-if="activity.status === 'Open'">
+                                        <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full">Open</span>
+                                    </template>
+                                    <template x-if="activity.status === 'Draft'">
+                                        <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full">Draft</span>
+                                    </template>
+                                    <template x-if="activity.status === 'Answered'">
+                                        <span class="flex items-center space-x-2">
+                                            <i class="fas fa-paper-plane text-webropol-teal-600"></i>
+                                            <span class="text-webropol-gray-700 text-xs" x-text="activity.answers + ' answers'"></span>
+                                            <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">Open</span>
+                                        </span>
+                                    </template>
+                                </div>
+                            </template>
                         </div>
                 </div>
             </main>
@@ -1226,7 +1220,22 @@
                     return this.currentView === 'questions' 
                         ? this.selectedQuestions.length > 0 
                         : this.selectedSurveys.length > 0;
-                }
+                },
+
+                // Activity tracking
+                selectedActivityTab: 'all',
+                activities: [
+                    { id: 1, name: 'Questions', type: 'surveys', status: 'Open' },
+                    { id: 2, name: 'Translation', type: 'surveys', status: 'Draft' },
+                    { id: 3, name: 'Complex Questions', type: 'surveys', status: 'Open' },
+                    { id: 4, name: 'AI Text Analysis Survey', type: 'surveys', status: 'Answered', answers: 8 },
+                    { id: 5, name: 'Long survey', type: 'surveys', status: 'Answered', answers: 2 },
+                    { id: 6, name: 'AI Text Analysis', type: 'events', status: 'Answered', answers: 1 },
+                ],
+                filteredActivities() {
+                    if (this.selectedActivityTab === 'all') return this.activities;
+                    return this.activities.filter(a => a.type === this.selectedActivityTab);
+                },
             }
         }
     </script>
