@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,35 +31,55 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        [x-cloak] { display: none !important; }
-        body { 
-            scrollbar-width: thin; 
-            scrollbar-color: #cbd5e1 #f8fafc; 
+        [x-cloak] {
+            display: none !important;
+        }
+
+        body {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #f8fafc;
             font-family: 'Inter', sans-serif;
         }
-        body::-webkit-scrollbar { width: 6px; }
-        body::-webkit-scrollbar-track { background: #f8fafc; }
-        body::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 6px; }
+
+        body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 6px;
+        }
+
         .glass-effect {
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.9);
         }
+
         .hover-lift {
             transition: all 0.2s ease;
         }
+
         .hover-lift:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" style="background-color: #ebf4f7;" x-data="libraryApp()">
+
+<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" style="background-color: #ebf4f7;"
+    x-data="libraryApp()">
 
     <div class="flex h-screen">
         <!-- Modern Sidebar -->
-        <aside class="w-72 bg-white/80 backdrop-blur-xl border-r border-webropol-gray-200/50 flex flex-col flex-shrink-0 shadow-soft">
+        <aside
+            class="w-72 bg-white/80 backdrop-blur-xl border-r border-webropol-gray-200/50 flex flex-col flex-shrink-0 shadow-soft">
             <div class="h-20 flex items-center px-8 border-b border-webropol-gray-200/50">
-                <div class="w-10 h-10 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center">
                     <i class="fas fa-chart-bar text-white text-lg"></i>
                 </div>
                 <div class="ml-3">
@@ -67,30 +88,36 @@
                 </div>
             </div>
             <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
-                <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-home w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
+                    <i class="fas fa-home w-5 mr-4 group-hover:scale-110 transition-transform"></i>
                     <span class="font-medium">Home</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-poll-h w-5 mr-4"></i> 
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
+                    <i class="fas fa-poll-h w-5 mr-4"></i>
                     <span>Surveys</span>
                     <div class="ml-auto w-2 h-2 bg-white/30 rounded-full"></div>
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-calendar-alt w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
+                    <i class="fas fa-calendar-alt w-5 mr-4 group-hover:scale-110 transition-transform"></i>
                     <span class="font-medium">Events</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-sms w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
+                    <i class="fas fa-sms w-5 mr-4 group-hover:scale-110 transition-transform"></i>
                     <span class="font-medium">2-Way SMS</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-chart-line w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
+                    <i class="fas fa-chart-line w-5 mr-4 group-hover:scale-110 transition-transform"></i>
                     <span class="font-medium">Dashboards</span>
                 </a>
                 <div class="pt-4 border-t border-webropol-gray-200/50 mt-4">
-                    <a href="#" class="flex items-center px-4 py-3 text-white rounded-xl bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 shadow-medium font-semibold">
-                        <i class="fas fa-book-open w-5 mr-4 group-hover:scale-110 transition-transform"></i> 
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-white rounded-xl bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 shadow-medium font-semibold">
+                        <i class="fas fa-book-open w-5 mr-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">MyWebropol</span>
                     </a>
                 </div>
@@ -100,47 +127,57 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Enhanced Header -->
-            <header class="h-20 glass-effect border-b border-webropol-gray-200/50 flex items-center justify-between px-8 shadow-soft">
+            <header
+                class="h-20 glass-effect border-b border-webropol-gray-200/50 flex items-center justify-between px-8 shadow-soft">
                 <div class="flex items-center space-x-4">
                     <nav class="flex items-center space-x-2 text-sm">
-                        <a href="#" class="text-webropol-gray-500 hover:text-webropol-teal-600 transition-colors">Home</a>
+                        <a href="#"
+                            class="text-webropol-gray-500 hover:text-webropol-teal-600 transition-colors">Home</a>
                         <i class="fas fa-chevron-right text-webropol-gray-300 text-xs"></i>
-                        <a href="#" class="text-webropol-gray-500 hover:text-webropol-teal-600 transition-colors">MyWebropol</a>
+                        <a href="#"
+                            class="text-webropol-gray-500 hover:text-webropol-teal-600 transition-colors">MyWebropol</a>
                         <i class="fas fa-chevron-right text-webropol-gray-300 text-xs"></i>
                         <span class="text-webropol-gray-900 font-medium">Question & Survey Library</span>
                     </nav>
                 </div>
                 <div class="flex items-center space-x-6">
-                    <a href="#" class="flex items-center text-sm font-medium text-webropol-teal-600 hover:text-webropol-teal-700 transition-colors">
+                    <a href="#"
+                        class="flex items-center text-sm font-medium text-webropol-teal-600 hover:text-webropol-teal-700 transition-colors">
                         <i class="fas fa-arrow-left mr-2"></i> Back to report
                     </a>
                     <div class="flex items-center space-x-3">
-                        <button class="w-10 h-10 flex items-center justify-center text-webropol-gray-500 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-xl transition-all">
+                        <button
+                            class="w-10 h-10 flex items-center justify-center text-webropol-gray-500 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-xl transition-all">
                             <i class="fas fa-bell"></i>
                         </button>
-                        <button class="w-10 h-10 flex items-center justify-center text-webropol-gray-500 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-xl transition-all">
+                        <button
+                            class="w-10 h-10 flex items-center justify-center text-webropol-gray-500 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-xl transition-all">
                             <i class="fas fa-question-circle"></i>
                         </button>
                         <div class="relative">
-                            <button class="flex items-center text-webropol-gray-700 hover:text-webropol-teal-600 transition-colors">
+                            <button
+                                class="flex items-center text-webropol-gray-700 hover:text-webropol-teal-600 transition-colors">
                                 <span class="mr-2 font-medium">All</span>
                                 <i class="fas fa-chevron-down text-xs"></i>
                             </button>
                         </div>
-                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center text-white font-bold shadow-medium">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center text-white font-bold shadow-medium">
                             A
                         </div>
                     </div>
                 </div>
-            </header>            <!-- Page Content -->
+            </header> <!-- Page Content -->
             <main class="flex-1 overflow-y-auto p-8">
                 <div class="max-w-8xl mx-auto">
                     <!-- Page Header -->
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <h1 class="text-3xl font-bold text-webropol-gray-900 mb-2">Question & Survey Library</h1>
-                            <p class="text-webropol-gray-600">Manage and organize your survey questions and templates</p>
-                        </div>                        <button @click="showCreateModal = true" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-lg transition-all duration-200 hover-lift">
+                            <p class="text-webropol-gray-600">Manage and organize your survey questions and templates
+                            </p>
+                        </div> <button @click="showCreateModal = true"
+                            class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-lg transition-all duration-200 hover-lift">
                             <i class="fas fa-plus mr-3"></i> Create new
                         </button>
                     </div>
@@ -148,47 +185,60 @@
                     <div class="grid grid-cols-12 gap-8">
                         <!-- Library Folder Tree -->
                         <div class="col-span-3">
-                            <div class="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-card border border-webropol-gray-200/50 hover-lift">                                <div class="flex items-center justify-between mb-6">
+                            <div
+                                class="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-card border border-webropol-gray-200/50 hover-lift">
+                                <div class="flex items-center justify-between mb-6">
                                     <h2 class="text-xl font-semibold text-webropol-gray-900">Webropol Library</h2>
-                                    <button class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
+                                    <button
+                                        class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
                                         <i class="fas fa-cog"></i>
                                     </button>
                                 </div>
-                                  <!-- Pill Tab Navigation -->
+                                <!-- Pill Tab Navigation -->
                                 <div class="flex items-center space-x-1 mb-6 p-1 bg-webropol-gray-100 rounded-xl">
-                                    <button @click="setView('questions')" 
-                                            :class="currentView === 'questions' ? 'bg-white text-webropol-teal-700 shadow-soft' : 'text-webropol-gray-600 hover:text-webropol-gray-900'"
-                                            class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
+                                    <button @click="setView('questions')"
+                                        :class="currentView === 'questions' ? 'bg-white text-webropol-teal-700 shadow-soft' : 'text-webropol-gray-600 hover:text-webropol-gray-900'"
+                                        class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
                                         <i class="fas fa-question-circle mr-2"></i>
                                         <span>Questions</span>
-                                        <span class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium" 
-                                              :class="currentView === 'questions' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''" x-text="getFilteredQuestions().length"></span>
+                                        <span
+                                            class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium"
+                                            :class="currentView === 'questions' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''"
+                                            x-text="getFilteredQuestions().length"></span>
                                     </button>
-                                    <button @click="setView('surveys')" 
-                                            :class="currentView === 'surveys' ? 'bg-white text-webropol-teal-700 shadow-soft' : 'text-webropol-gray-600 hover:text-webropol-gray-900'"
-                                            class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
+                                    <button @click="setView('surveys')"
+                                        :class="currentView === 'surveys' ? 'bg-white text-webropol-teal-700 shadow-soft' : 'text-webropol-gray-600 hover:text-webropol-gray-900'"
+                                        class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
                                         <i class="fas fa-poll-h mr-2"></i>
                                         <span>Surveys</span>
-                                        <span class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium"
-                                              :class="currentView === 'surveys' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''" x-text="getFilteredSurveys().length"></span>
+                                        <span
+                                            class="ml-2 text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-0.5 font-medium"
+                                            :class="currentView === 'surveys' ? 'bg-webropol-teal-100 text-webropol-teal-700' : ''"
+                                            x-text="getFilteredSurveys().length"></span>
                                     </button>
-                                </div>                                <!-- Language Selection -->
+                                </div> <!-- Language Selection -->
                                 <div class="relative mb-4">
-                                    <select x-model="selectedLanguage" class="w-full px-4 py-3 pr-10 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all appearance-none text-sm font-medium">
+                                    <select x-model="selectedLanguage"
+                                        class="w-full px-4 py-3 pr-10 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all appearance-none text-sm font-medium">
                                         <option value="en">English</option>
                                         <option value="fi">Finnish</option>
                                     </select>
-                                    <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-webropol-gray-400 pointer-events-none"></i>
+                                    <i
+                                        class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-webropol-gray-400 pointer-events-none"></i>
                                 </div>
-                                
+
                                 <div class="relative mb-6">
-                                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-webropol-gray-400"></i>
-                                    <input type="text" x-model="searchTerm" :placeholder="currentView === 'questions' ? 'Search questions...' : 'Search surveys...'" class="w-full pl-12 pr-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all">
-                                </div>                                
+                                    <i
+                                        class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-webropol-gray-400"></i>
+                                    <input type="text" x-model="searchTerm"
+                                        :placeholder="currentView === 'questions' ? 'Search questions...' : 'Search surveys...'"
+                                        class="w-full pl-12 pr-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent bg-white/50 backdrop-blur-sm transition-all">
+                                </div>
                                 <!-- Folder Management -->
                                 <div class="space-y-3">
                                     <!-- Add New Folder Button -->
-                                    <button @click="showCreateFolder = true" class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-webropol-gray-300 rounded-xl hover:border-webropol-teal-400 hover:bg-webropol-teal-50 transition-all text-webropol-gray-600 hover:text-webropol-teal-700">
+                                    <button @click="showCreateFolder = true"
+                                        class="w-full flex items-center justify-center px-4 py-3 border-2 border-dashed border-webropol-gray-300 rounded-xl hover:border-webropol-teal-400 hover:bg-webropol-teal-50 transition-all text-webropol-gray-600 hover:text-webropol-teal-700">
                                         <i class="fas fa-plus mr-2"></i>
                                         <span class="font-medium">Create New Folder</span>
                                     </button>
@@ -198,43 +248,53 @@
                                         <template x-for="folder in getFilteredFolders()" :key="folder.id">
                                             <div class="group">
                                                 <!-- Folder Header -->
-                                                <div @click="toggleFolder(folder.id)" 
-                                                     class="flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all duration-200"
-                                                     :class="expandedFolders.includes(folder.id) ? 'bg-gradient-to-r from-webropol-teal-50 to-webropol-blue-50 text-webropol-teal-700' : 'hover:bg-webropol-gray-50'">
+                                                <div @click="toggleFolder(folder.id)"
+                                                    class="flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all duration-200"
+                                                    :class="expandedFolders.includes(folder.id) ? 'bg-gradient-to-r from-webropol-teal-50 to-webropol-blue-50 text-webropol-teal-700' : 'hover:bg-webropol-gray-50'">
                                                     <div class="flex items-center">
                                                         <div class="w-8 h-8 flex items-center justify-center rounded-lg mr-3"
-                                                             :class="expandedFolders.includes(folder.id) ? 'bg-webropol-teal-100' : 'bg-webropol-gray-100 group-hover:bg-webropol-teal-50'">
+                                                            :class="expandedFolders.includes(folder.id) ? 'bg-webropol-teal-100' : 'bg-webropol-gray-100 group-hover:bg-webropol-teal-50'">
                                                             <i class="fas fa-folder text-webropol-teal-600"></i>
                                                         </div>
                                                         <span class="font-medium" x-text="folder.name"></span>
                                                     </div>
                                                     <div class="flex items-center space-x-2">
-                                                        <span class="text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-1 font-medium" 
-                                                              x-text="getFolderItemCount(folder.id)"></span>
-                                                        <button @click.stop="editFolder(folder.id)" class="opacity-0 group-hover:opacity-100 w-6 h-6 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 rounded transition-all">
+                                                        <span
+                                                            class="text-xs bg-webropol-gray-200 text-webropol-gray-700 rounded-full px-2 py-1 font-medium"
+                                                            x-text="getFolderItemCount(folder.id)"></span>
+                                                        <button @click.stop="editFolder(folder.id)"
+                                                            class="opacity-0 group-hover:opacity-100 w-6 h-6 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 rounded transition-all">
                                                             <i class="fas fa-edit text-xs"></i>
                                                         </button>
-                                                        <i class="fas fa-chevron-right text-xs transition-transform" :class="expandedFolders.includes(folder.id) ? 'rotate-90' : ''"></i>
+                                                        <i class="fas fa-chevron-right text-xs transition-transform"
+                                                            :class="expandedFolders.includes(folder.id) ? 'rotate-90' : ''"></i>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <!-- Folder Contents -->
-                                                <div x-show="expandedFolders.includes(folder.id)" x-collapse class="ml-11 mt-2 space-y-1">
+                                                <div x-show="expandedFolders.includes(folder.id)" x-collapse
+                                                    class="ml-11 mt-2 space-y-1">
                                                     <template x-for="item in getFolderItems(folder.id)" :key="item.id">
-                                                        <div class="flex items-center justify-between p-2 rounded-lg hover:bg-webropol-gray-50 transition-all">
+                                                        <div
+                                                            class="flex items-center justify-between p-2 rounded-lg hover:bg-webropol-gray-50 transition-all">
                                                             <div class="flex items-center">
-                                                                <i :class="item.type === 'question' ? 'fas fa-question-circle text-webropol-blue-500' : 'fas fa-poll-h text-webropol-teal-500'" class="mr-3 text-sm"></i>
-                                                                <span class="text-sm font-medium" x-text="item.name"></span>
-                                                                <span class="ml-2 text-xs text-webropol-gray-500" x-text="'(' + item.language.toUpperCase() + ')'"></span>
+                                                                <i :class="item.type === 'question' ? 'fas fa-question-circle text-webropol-blue-500' : 'fas fa-poll-h text-webropol-teal-500'"
+                                                                    class="mr-3 text-sm"></i>
+                                                                <span class="text-sm font-medium"
+                                                                    x-text="item.name"></span>
+                                                                <span class="ml-2 text-xs text-webropol-gray-500"
+                                                                    x-text="'(' + item.language.toUpperCase() + ')'"></span>
                                                             </div>
-                                                            <button @click="removeFromFolder(item.id, folder.id)" class="opacity-0 group-hover:opacity-100 w-5 h-5 flex items-center justify-center text-webropol-gray-400 hover:text-red-500 rounded transition-all">
+                                                            <button @click="removeFromFolder(item.id, folder.id)"
+                                                                class="opacity-0 group-hover:opacity-100 w-5 h-5 flex items-center justify-center text-webropol-gray-400 hover:text-red-500 rounded transition-all">
                                                                 <i class="fas fa-times text-xs"></i>
                                                             </button>
                                                         </div>
                                                     </template>
-                                                    
+
                                                     <!-- Add to Folder Button -->
-                                                    <button @click="showAddToFolder = folder.id" class="w-full flex items-center justify-center p-2 border border-dashed border-webropol-gray-300 rounded-lg hover:border-webropol-teal-400 hover:bg-webropol-teal-50 transition-all text-webropol-gray-500 hover:text-webropol-teal-600 text-sm">
+                                                    <button @click="showAddToFolder = folder.id"
+                                                        class="w-full flex items-center justify-center p-2 border border-dashed border-webropol-gray-300 rounded-lg hover:border-webropol-teal-400 hover:bg-webropol-teal-50 transition-all text-webropol-gray-500 hover:text-webropol-teal-600 text-sm">
                                                         <i class="fas fa-plus mr-2"></i>
                                                         <span>Add items to folder</span>
                                                     </button>
@@ -245,107 +305,142 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                        <!-- Content Area -->
-                        <div class="col-span-9">                            <!-- Questions View -->
+                        </div> <!-- Content Area -->
+                        <div class="col-span-9"> <!-- Questions View -->
                             <div x-show="currentView === 'questions'" x-cloak>
-                                <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-card border border-webropol-gray-200/50 overflow-hidden hover-lift">
+                                <div
+                                    class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-card border border-webropol-gray-200/50 overflow-hidden hover-lift">
                                     <!-- Header -->
-                                    <div class="px-8 py-6 border-b border-webropol-gray-200/50 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
+                                    <div
+                                        class="px-8 py-6 border-b border-webropol-gray-200/50 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
                                         <div class="flex items-center justify-between">
                                             <div>
-                                                <h2 class="text-2xl font-bold text-webropol-gray-900 mb-1">Questions Library</h2>
-                                                <p class="text-webropol-gray-600" x-text="getFilteredQuestions().length + ' questions available'"></p>
+                                                <h2 class="text-2xl font-bold text-webropol-gray-900 mb-1">Questions
+                                                    Library</h2>
+                                                <p class="text-webropol-gray-600"
+                                                    x-text="getFilteredQuestions().length + ' questions available'"></p>
                                             </div>
                                             <div class="flex items-center space-x-4">
-                                                <label class="flex items-center text-sm font-medium text-webropol-gray-700">
-                                                    <input type="checkbox" class="h-4 w-4 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-3">
+                                                <label
+                                                    class="flex items-center text-sm font-medium text-webropol-gray-700">
+                                                    <input type="checkbox"
+                                                        class="h-4 w-4 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-3">
                                                     Show only question titles
                                                 </label>
                                                 <div class="flex items-center space-x-2">
                                                     <span class="text-sm text-webropol-gray-600">Language:</span>
-                                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800"
-                                                          x-text="selectedLanguage === 'all' ? 'All' : selectedLanguage.toUpperCase()"></span>
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800"
+                                                        x-text="selectedLanguage === 'all' ? 'All' : selectedLanguage.toUpperCase()"></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Questions List -->
                                     <div class="p-6 space-y-4">
                                         <template x-for="question in getFilteredQuestions()" :key="question.id">
-                                            <div class="group border border-webropol-gray-200 rounded-xl p-6 bg-white hover:border-webropol-teal-300 hover:shadow-medium transition-all duration-200">
+                                            <div
+                                                class="group border border-webropol-gray-200 rounded-xl p-6 bg-white hover:border-webropol-teal-300 hover:shadow-medium transition-all duration-200">
                                                 <div class="flex items-start justify-between">
                                                     <div class="flex items-start flex-1">
-                                                        <input type="checkbox" class="h-5 w-5 mt-1 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-4">
+                                                        <input type="checkbox"
+                                                            class="h-5 w-5 mt-1 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-4">
                                                         <div class="flex-1">
                                                             <div class="flex items-center mb-3">
-                                                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-3">
+                                                                <span
+                                                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800 mr-3">
                                                                     Multiple Choice
                                                                 </span>
-                                                                <h3 class="text-lg font-semibold text-webropol-gray-900" x-text="question.name"></h3>
-                                                                <span class="ml-3 inline-flex items-center px-2 py-1 rounded text-xs font-medium"
-                                                                      :class="question.language === 'en' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'"
-                                                                      x-text="question.language.toUpperCase()"></span>
-                                                                <span x-show="question.folderId" class="ml-2 inline-flex items-center px-2 py-1 rounded text-xs bg-gray-100 text-gray-700">
+                                                                <h3 class="text-lg font-semibold text-webropol-gray-900"
+                                                                    x-text="question.name"></h3>
+                                                                <span
+                                                                    class="ml-3 inline-flex items-center px-2 py-1 rounded text-xs font-medium"
+                                                                    :class="question.language === 'en' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'"
+                                                                    x-text="question.language.toUpperCase()"></span>
+                                                                <span x-show="question.folderId"
+                                                                    class="ml-2 inline-flex items-center px-2 py-1 rounded text-xs bg-gray-100 text-gray-700">
                                                                     <i class="fas fa-folder mr-1"></i>
-                                                                    <span x-text="folders.find(f => f.id === question.folderId)?.name || 'Unknown'"></span>
+                                                                    <span
+                                                                        x-text="folders.find(f => f.id === question.folderId)?.name || 'Unknown'"></span>
                                                                 </span>
                                                             </div>
-                                                            <div class="space-y-3" x-show="question.id <= 2">
+                                                            <div class="space-y-3" x-show="question.id <= 1">
                                                                 <label class="flex items-center">
-                                                                    <input type="radio" :name="'q' + question.id" class="form-radio h-4 w-4 text-webropol-teal-600 mr-3" disabled> 
+                                                                    <input type="radio" :name="'q' + question.id"
+                                                                        class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
+                                                                        disabled>
                                                                     <span class="text-webropol-gray-700">Option 1</span>
                                                                 </label>
                                                                 <label class="flex items-center">
-                                                                    <input type="radio" :name="'q' + question.id" class="form-radio h-4 w-4 text-webropol-teal-600 mr-3" disabled> 
+                                                                    <input type="radio" :name="'q' + question.id"
+                                                                        class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
+                                                                        disabled>
                                                                     <span class="text-webropol-gray-700">Option 2</span>
                                                                 </label>
                                                                 <label class="flex items-center">
-                                                                    <input type="radio" :name="'q' + question.id" class="form-radio h-4 w-4 text-webropol-teal-600 mr-3" disabled> 
+                                                                    <input type="radio" :name="'q' + question.id"
+                                                                        class="form-radio h-4 w-4 text-webropol-teal-600 mr-3"
+                                                                        disabled>
                                                                     <span class="text-webropol-gray-700">Option 3</span>
                                                                 </label>
                                                             </div>
                                                             <div x-show="question.id === 2">
-                                                                <textarea class="w-full p-4 border border-webropol-gray-200 rounded-lg bg-webropol-gray-50" rows="2" placeholder="Your answer..." disabled></textarea>
+                                                                <textarea
+                                                                    class="w-full p-4 border border-webropol-gray-200 rounded-lg bg-webropol-gray-50"
+                                                                    rows="2" placeholder="Your answer..."
+                                                                    disabled></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        <button class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
+                                                    <div
+                                                        class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <button
+                                                            class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
-                                                        <button class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-blue-600 hover:bg-webropol-blue-50 rounded-lg transition-all">
+                                                        <button
+                                                            class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-blue-600 hover:bg-webropol-blue-50 rounded-lg transition-all">
                                                             <i class="fas fa-copy"></i>
                                                         </button>
-                                                        <button class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
+                                                        <button
+                                                            class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
                                                             <i class="fas fa-ellipsis-v"></i>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </template>
-                                        
+
                                         <div x-show="getFilteredQuestions().length === 0" class="text-center py-12">
                                             <i class="fas fa-question-circle text-4xl text-webropol-gray-300 mb-4"></i>
-                                            <h3 class="text-lg font-semibold text-webropol-gray-900 mb-2">No questions found</h3>
-                                            <p class="text-webropol-gray-600">Try adjusting your language filter or search terms.</p>
+                                            <h3 class="text-lg font-semibold text-webropol-gray-900 mb-2">No questions
+                                                found</h3>
+                                            <p class="text-webropol-gray-600">Try adjusting your language filter or
+                                                search terms.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- Surveys View -->
                             <div x-show="currentView === 'surveys'" x-cloak>
-                                <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-card border border-webropol-gray-200/50 overflow-hidden hover-lift">                                    <!-- Header -->
-                                    <div class="px-8 py-6 border-b border-webropol-gray-200/50 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
+                                <div
+                                    class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-card border border-webropol-gray-200/50 overflow-hidden hover-lift">
+                                    <!-- Header -->
+                                    <div
+                                        class="px-8 py-6 border-b border-webropol-gray-200/50 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
                                         <div class="flex items-center justify-between">
                                             <div>
-                                                <h2 class="text-2xl font-bold text-webropol-gray-900 mb-1">Surveys Library</h2>
-                                                <p class="text-webropol-gray-600" x-text="getFilteredSurveys().length + ' surveys available'"></p>
+                                                <h2 class="text-2xl font-bold text-webropol-gray-900 mb-1">Surveys
+                                                    Library</h2>
+                                                <p class="text-webropol-gray-600"
+                                                    x-text="getFilteredSurveys().length + ' surveys available'"></p>
                                             </div>
                                             <div class="flex items-center space-x-4">
                                                 <div class="flex items-center space-x-2">
                                                     <span class="text-sm text-webropol-gray-600">Language:</span>
-                                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800"
-                                                          x-text="selectedLanguage === 'all' ? 'All' : selectedLanguage.toUpperCase()"></span>
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800"
+                                                        x-text="selectedLanguage === 'all' ? 'All' : selectedLanguage.toUpperCase()"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -357,27 +452,38 @@
                                             <thead class="bg-webropol-gray-50/50">
                                                 <tr class="text-left">
                                                     <th class="px-8 py-4 font-semibold text-webropol-gray-700 text-sm">
-                                                        <input type="checkbox" class="rounded border-webropol-gray-300 text-webropol-teal-600">
+                                                        <input type="checkbox"
+                                                            class="rounded border-webropol-gray-300 text-webropol-teal-600">
                                                     </th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">Survey name</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">Languages</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">Questions</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">Survey type</th>
-                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">Created by</th>
-                                                    <th class="px-8 py-4 font-semibold text-webropol-gray-700 text-sm text-right">Actions</th>
+                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
+                                                        Survey name</th>
+                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
+                                                        Languages</th>
+                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
+                                                        Questions</th>
+                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
+                                                        Survey type</th>
+                                                    <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
+                                                        Created by</th>
+                                                    <th
+                                                        class="px-8 py-4 font-semibold text-webropol-gray-700 text-sm text-right">
+                                                        Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-webropol-gray-100">
                                                 <tr class="group hover:bg-webropol-teal-50/30 transition-colors">
                                                     <td class="px-8 py-6">
-                                                        <input type="checkbox" class="rounded border-webropol-gray-300 text-webropol-teal-600">
+                                                        <input type="checkbox"
+                                                            class="rounded border-webropol-gray-300 text-webropol-teal-600">
                                                     </td>
                                                     <td class="px-4 py-6">
                                                         <div class="font-semibold text-webropol-gray-900">360</div>
-                                                        <div class="text-sm text-webropol-gray-500 mt-1">Performance evaluation survey</div>
+                                                        <div class="text-sm text-webropol-gray-500 mt-1">Performance
+                                                            evaluation survey</div>
                                                     </td>
                                                     <td class="px-4 py-6">
-                                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800">
+                                                        <span
+                                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800">
                                                             1 language
                                                         </span>
                                                     </td>
@@ -386,27 +492,34 @@
                                                         <span class="text-webropol-gray-500 text-sm">questions</span>
                                                     </td>
                                                     <td class="px-4 py-6">
-                                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-blue-100 text-webropol-blue-800">
+                                                        <span
+                                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-blue-100 text-webropol-blue-800">
                                                             360 survey
                                                         </span>
                                                     </td>
                                                     <td class="px-4 py-6">
                                                         <div class="flex items-center">
-                                                            <div class="w-8 h-8 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">
+                                                            <div
+                                                                class="w-8 h-8 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">
                                                                 W
                                                             </div>
-                                                            <span class="text-webropol-gray-900 font-medium">Webropol</span>
+                                                            <span
+                                                                class="text-webropol-gray-900 font-medium">Webropol</span>
                                                         </div>
                                                     </td>
                                                     <td class="px-8 py-6">
-                                                        <div class="flex items-center justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                            <button class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-blue-600 hover:bg-webropol-blue-50 rounded-lg transition-all">
+                                                        <div
+                                                            class="flex items-center justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <button
+                                                                class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-blue-600 hover:bg-webropol-blue-50 rounded-lg transition-all">
                                                                 <i class="fas fa-copy"></i>
                                                             </button>
-                                                            <button @click="showPreviewModal = true" class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
+                                                            <button @click="showPreviewModal = true"
+                                                                class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
                                                                 <i class="fas fa-eye"></i>
                                                             </button>
-                                                            <button class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
+                                                            <button
+                                                                class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
                                                                 <i class="fas fa-ellipsis-v"></i>
                                                             </button>
                                                         </div>
@@ -414,14 +527,18 @@
                                                 </tr>
                                                 <tr class="group hover:bg-webropol-teal-50/30 transition-colors">
                                                     <td class="px-8 py-6">
-                                                        <input type="checkbox" class="rounded border-webropol-gray-300 text-webropol-teal-600">
+                                                        <input type="checkbox"
+                                                            class="rounded border-webropol-gray-300 text-webropol-teal-600">
                                                     </td>
                                                     <td class="px-4 py-6">
-                                                        <div class="font-semibold text-webropol-gray-900">Revalidation Sample</div>
-                                                        <div class="text-sm text-webropol-gray-500 mt-1">Sample survey for validation</div>
+                                                        <div class="font-semibold text-webropol-gray-900">Revalidation
+                                                            Sample</div>
+                                                        <div class="text-sm text-webropol-gray-500 mt-1">Sample survey
+                                                            for validation</div>
                                                     </td>
                                                     <td class="px-4 py-6">
-                                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800">
+                                                        <span
+                                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-teal-100 text-webropol-teal-800">
                                                             1 language
                                                         </span>
                                                     </td>
@@ -430,27 +547,34 @@
                                                         <span class="text-webropol-gray-500 text-sm">questions</span>
                                                     </td>
                                                     <td class="px-4 py-6">
-                                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-blue-100 text-webropol-blue-800">
+                                                        <span
+                                                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-webropol-blue-100 text-webropol-blue-800">
                                                             360 survey
                                                         </span>
                                                     </td>
                                                     <td class="px-4 py-6">
                                                         <div class="flex items-center">
-                                                            <div class="w-8 h-8 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">
+                                                            <div
+                                                                class="w-8 h-8 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">
                                                                 W
                                                             </div>
-                                                            <span class="text-webropol-gray-900 font-medium">Webropol</span>
+                                                            <span
+                                                                class="text-webropol-gray-900 font-medium">Webropol</span>
                                                         </div>
                                                     </td>
                                                     <td class="px-8 py-6">
-                                                        <div class="flex items-center justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                            <button class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-blue-600 hover:bg-webropol-blue-50 rounded-lg transition-all">
+                                                        <div
+                                                            class="flex items-center justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <button
+                                                                class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-blue-600 hover:bg-webropol-blue-50 rounded-lg transition-all">
                                                                 <i class="fas fa-copy"></i>
                                                             </button>
-                                                            <button @click="showPreviewModal = true" class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
+                                                            <button @click="showPreviewModal = true"
+                                                                class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all">
                                                                 <i class="fas fa-eye"></i>
                                                             </button>
-                                                            <button class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
+                                                            <button
+                                                                class="w-9 h-9 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-50 rounded-lg transition-all">
                                                                 <i class="fas fa-ellipsis-v"></i>
                                                             </button>
                                                         </div>
@@ -464,22 +588,30 @@
                                     <div class="px-8 py-6 border-t border-webropol-gray-200/50 bg-webropol-gray-50/30">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center space-x-4">
-                                                <span class="text-sm text-webropol-gray-700 font-medium">Page 1 of 1</span>
+                                                <span class="text-sm text-webropol-gray-700 font-medium">Page 1 of
+                                                    1</span>
                                                 <div class="flex items-center space-x-2">
-                                                    <button class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all disabled:opacity-50" disabled>
+                                                    <button
+                                                        class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all disabled:opacity-50"
+                                                        disabled>
                                                         <i class="fas fa-chevron-left"></i>
                                                     </button>
-                                                    <button class="w-8 h-8 flex items-center justify-center bg-webropol-teal-500 text-white rounded-lg font-medium">
+                                                    <button
+                                                        class="w-8 h-8 flex items-center justify-center bg-webropol-teal-500 text-white rounded-lg font-medium">
                                                         1
                                                     </button>
-                                                    <button class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all disabled:opacity-50" disabled>
+                                                    <button
+                                                        class="w-8 h-8 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-lg transition-all disabled:opacity-50"
+                                                        disabled>
                                                         <i class="fas fa-chevron-right"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="flex items-center space-x-3">
-                                                <span class="text-sm text-webropol-gray-700 font-medium">Show on page</span>
-                                                <select class="border border-webropol-gray-300 rounded-lg text-sm px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
+                                                <span class="text-sm text-webropol-gray-700 font-medium">Show on
+                                                    page</span>
+                                                <select
+                                                    class="border border-webropol-gray-300 rounded-lg text-sm px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-webropol-teal-500">
                                                     <option>5</option>
                                                     <option selected>20</option>
                                                     <option>50</option>
@@ -498,40 +630,47 @@
     </div>
 
     <!-- Create Folder Modal -->
-    <div x-show="showCreateFolder" x-cloak 
-         class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div @click.away="showCreateFolder = false" 
-             class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
-             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
-             x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-8 scale-95">
-            
+    <div x-show="showCreateFolder" x-cloak
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @click.away="showCreateFolder = false"
+            class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-8 scale-95">
+
             <div class="p-6 border-b border-webropol-gray-200">
                 <h3 class="text-xl font-bold text-webropol-gray-900">Create New Folder</h3>
                 <p class="text-webropol-gray-600 mt-1">Organize your questions and surveys</p>
             </div>
-            
+
             <div class="p-6">
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-webropol-gray-700 mb-2">Folder Name</label>
-                        <input x-model="newFolderName" type="text" placeholder="Enter folder name..." class="w-full px-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent">
+                        <input x-model="newFolderName" type="text" placeholder="Enter folder name..."
+                            class="w-full px-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-webropol-gray-700 mb-2">Description (Optional)</label>
-                        <textarea x-model="newFolderDescription" rows="3" placeholder="Describe what this folder contains..." class="w-full px-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent resize-none"></textarea>
+                        <label class="block text-sm font-medium text-webropol-gray-700 mb-2">Description
+                            (Optional)</label>
+                        <textarea x-model="newFolderDescription" rows="3"
+                            placeholder="Describe what this folder contains..."
+                            class="w-full px-4 py-3 border border-webropol-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent resize-none"></textarea>
                     </div>
                 </div>
             </div>
-            
+
             <div class="p-6 border-t border-webropol-gray-200 flex items-center justify-end space-x-3">
-                <button @click="showCreateFolder = false" class="px-4 py-2 text-webropol-gray-700 font-medium rounded-lg hover:bg-webropol-gray-100 transition-all">
+                <button @click="showCreateFolder = false"
+                    class="px-4 py-2 text-webropol-gray-700 font-medium rounded-lg hover:bg-webropol-gray-100 transition-all">
                     Cancel
                 </button>
-                <button @click="createFolder()" class="px-6 py-2 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-lg transition-all">
+                <button @click="createFolder()"
+                    class="px-6 py-2 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-lg transition-all">
                     Create Folder
                 </button>
             </div>
@@ -539,45 +678,49 @@
     </div>
 
     <!-- Move to Folder Modal -->
-    <div x-show="showMoveToFolder !== null" x-cloak 
-         class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div @click.away="showMoveToFolder = null" 
-             class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
-             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
-             x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-8 scale-95">
-            
+    <div x-show="showMoveToFolder !== null" x-cloak
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @click.away="showMoveToFolder = null"
+            class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-8 scale-95">
+
             <div class="p-6 border-b border-webropol-gray-200">
                 <h3 class="text-xl font-bold text-webropol-gray-900">Move to Folder</h3>
                 <p class="text-webropol-gray-600 mt-1">Select a folder for this item</p>
             </div>
-            
+
             <div class="p-6">
                 <div class="space-y-3">
                     <template x-for="folder in folders" :key="folder.id">
-                        <button @click="moveToFolder(showMoveToFolder, folder.id)" class="w-full flex items-center p-3 rounded-xl hover:bg-webropol-teal-50 transition-all text-left">
+                        <button @click="moveToFolder(showMoveToFolder, folder.id)"
+                            class="w-full flex items-center p-3 rounded-xl hover:bg-webropol-teal-50 transition-all text-left">
                             <div class="w-8 h-8 bg-webropol-teal-100 rounded-lg flex items-center justify-center mr-3">
                                 <i class="fas fa-folder text-webropol-teal-600"></i>
                             </div>
                             <div>
                                 <div class="font-medium text-webropol-gray-900" x-text="folder.name"></div>
-                                <div class="text-sm text-webropol-gray-500" x-text="folder.description || 'No description'"></div>
+                                <div class="text-sm text-webropol-gray-500"
+                                    x-text="folder.description || 'No description'"></div>
                             </div>
                         </button>
                     </template>
-                    
+
                     <div x-show="folders.length === 0" class="text-center py-8 text-webropol-gray-500">
                         <i class="fas fa-folder-open text-2xl mb-2"></i>
                         <p>No folders available. Create one first.</p>
                     </div>
                 </div>
             </div>
-            
+
             <div class="p-6 border-t border-webropol-gray-200 flex items-center justify-end">
-                <button @click="showMoveToFolder = null" class="px-4 py-2 text-webropol-gray-700 font-medium rounded-lg hover:bg-webropol-gray-100 transition-all">
+                <button @click="showMoveToFolder = null"
+                    class="px-4 py-2 text-webropol-gray-700 font-medium rounded-lg hover:bg-webropol-gray-100 transition-all">
                     Cancel
                 </button>
             </div>
@@ -585,21 +728,24 @@
     </div>
 
     <!-- Enhanced Preview Modal -->
-    <div x-show="showPreviewModal" x-cloak 
-         class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div @click.away="showPreviewModal = false" 
-             class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden"
-             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
-             x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-8 scale-95">
-            
+    <div x-show="showPreviewModal" x-cloak
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @click.away="showPreviewModal = false"
+            class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden"
+            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-8 scale-95">
+
             <!-- Modal Header -->
-            <div class="flex items-center justify-between p-8 border-b border-webropol-gray-200 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
+            <div
+                class="flex items-center justify-between p-8 border-b border-webropol-gray-200 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
                 <div class="flex items-center">
-                    <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mr-4">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mr-4">
                         <i class="fas fa-eye text-white text-lg"></i>
                     </div>
                     <div>
@@ -607,12 +753,12 @@
                         <p class="text-webropol-gray-600">360 Performance Evaluation</p>
                     </div>
                 </div>
-                <button @click="showPreviewModal = false" 
-                        class="w-10 h-10 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-100 rounded-xl transition-all">
+                <button @click="showPreviewModal = false"
+                    class="w-10 h-10 flex items-center justify-center text-webropol-gray-400 hover:text-webropol-gray-600 hover:bg-webropol-gray-100 rounded-xl transition-all">
                     <i class="fas fa-times text-lg"></i>
                 </button>
             </div>
-            
+
             <!-- Modal Content -->
             <div class="flex-1 overflow-y-auto p-8">
                 <div class="max-w-3xl mx-auto space-y-8">
@@ -622,70 +768,96 @@
                     </div>
 
                     <!-- Question 1: Gender -->
-                    <div class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
+                    <div
+                        class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
                         <h4 class="text-lg font-semibold text-webropol-gray-900 mb-4">1. Gender</h4>
                         <div class="space-y-3">
-                            <label class="flex items-center p-3 rounded-lg hover:bg-webropol-teal-50 transition-colors cursor-pointer">
-                                <input type="radio" name="gender" class="form-radio h-5 w-5 text-webropol-teal-600 mr-4"> 
+                            <label
+                                class="flex items-center p-3 rounded-lg hover:bg-webropol-teal-50 transition-colors cursor-pointer">
+                                <input type="radio" name="gender"
+                                    class="form-radio h-5 w-5 text-webropol-teal-600 mr-4">
                                 <span class="text-webropol-gray-700 font-medium">Male</span>
                             </label>
-                            <label class="flex items-center p-3 rounded-lg hover:bg-webropol-teal-50 transition-colors cursor-pointer">
-                                <input type="radio" name="gender" class="form-radio h-5 w-5 text-webropol-teal-600 mr-4"> 
+                            <label
+                                class="flex items-center p-3 rounded-lg hover:bg-webropol-teal-50 transition-colors cursor-pointer">
+                                <input type="radio" name="gender"
+                                    class="form-radio h-5 w-5 text-webropol-teal-600 mr-4">
                                 <span class="text-webropol-gray-700 font-medium">Female</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Question 2: Rate -->
-                    <div class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
+                    <div
+                        class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
                         <h4 class="text-lg font-semibold text-webropol-gray-900 mb-6">2. Rate</h4>
                         <div class="overflow-x-auto">
                             <table class="w-full">
                                 <thead>
                                     <tr class="border-b border-webropol-gray-200">
                                         <th class="text-left py-3 px-4 font-medium text-webropol-gray-700"></th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">1</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">2</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">3</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">4</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">5</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            1</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            2</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            3</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            4</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            5</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-webropol-gray-100">
                                     <tr class="hover:bg-webropol-teal-50/50 transition-colors">
                                         <td class="py-4 px-4 font-medium text-webropol-gray-900">A</td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_a" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_a"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_a" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_a"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_a" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_a"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_a" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_a"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_a" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_a"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-webropol-teal-50/50 transition-colors">
                                         <td class="py-4 px-4 font-medium text-webropol-gray-900">B</td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_b" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_b"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_b" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_b"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_b" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_b"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_b" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_b"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="rate_b" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="rate_b"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -694,7 +866,8 @@
                     </div>
 
                     <!-- Question 3: Recommend -->
-                    <div class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
+                    <div
+                        class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
                         <h4 class="text-lg font-semibold text-webropol-gray-900 mb-6">3. Recommend</h4>
                         <div class="flex flex-col space-y-4">
                             <div class="flex items-center justify-between text-sm text-webropol-gray-600 font-medium">
@@ -702,71 +875,106 @@
                                 <span>Extremely likely</span>
                             </div>
                             <div class="flex items-center justify-center space-x-2">
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">0</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">1</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">2</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">3</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">4</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">5</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">6</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">7</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">8</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">9</button>
-                                <button class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">10</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">0</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">1</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">2</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">3</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">4</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">5</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">6</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">7</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">8</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">9</button>
+                                <button
+                                    class="w-12 h-12 border-2 border-webropol-gray-300 rounded-lg hover:border-webropol-teal-500 hover:bg-webropol-teal-50 transition-all font-semibold text-webropol-gray-700">10</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Question 4: Leadership -->
-                    <div class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
+                    <div
+                        class="bg-white border border-webropol-gray-200 rounded-xl p-6 hover:border-webropol-teal-300 transition-colors">
                         <h4 class="text-lg font-semibold text-webropol-gray-900 mb-6">4. Leadership and charisma</h4>
                         <div class="overflow-x-auto">
                             <table class="w-full">
                                 <thead>
                                     <tr class="border-b border-webropol-gray-200">
-                                        <th class="text-left py-3 px-4 font-medium text-webropol-gray-700 min-w-[200px]"></th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">1</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">2</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">3</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">4</th>
-                                        <th class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">5</th>
+                                        <th
+                                            class="text-left py-3 px-4 font-medium text-webropol-gray-700 min-w-[200px]">
+                                        </th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            1</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            2</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            3</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            4</th>
+                                        <th
+                                            class="text-center py-3 px-2 font-medium text-webropol-gray-700 min-w-[60px]">
+                                            5</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-webropol-gray-100">
                                     <tr class="hover:bg-webropol-teal-50/50 transition-colors">
-                                        <td class="py-4 px-4 text-webropol-gray-900">Possesses dignity and authority</td>
-                                        <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_1" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                        <td class="py-4 px-4 text-webropol-gray-900">Possesses dignity and authority
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_1" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_1"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_1" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_1"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_1" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_1"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_1" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_1"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
+                                        </td>
+                                        <td class="text-center py-4 px-2">
+                                            <input type="radio" name="lead_1"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-webropol-teal-50/50 transition-colors">
                                         <td class="py-4 px-4 text-webropol-gray-900">Sets clear goals</td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_2" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_2"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_2" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_2"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_2" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_2"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_2" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_2"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                         <td class="text-center py-4 px-2">
-                                            <input type="radio" name="lead_2" class="form-radio h-5 w-5 text-webropol-teal-600">
+                                            <input type="radio" name="lead_2"
+                                                class="form-radio h-5 w-5 text-webropol-teal-600">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -775,14 +983,16 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Modal Footer -->
-            <div class="p-8 border-t border-webropol-gray-200 bg-webropol-gray-50/50 flex items-center justify-end space-x-4">
-                <button @click="showPreviewModal = false" 
-                        class="px-6 py-3 text-webropol-gray-700 font-medium rounded-xl hover:bg-webropol-gray-100 transition-all">
+            <div
+                class="p-8 border-t border-webropol-gray-200 bg-webropol-gray-50/50 flex items-center justify-end space-x-4">
+                <button @click="showPreviewModal = false"
+                    class="px-6 py-3 text-webropol-gray-700 font-medium rounded-xl hover:bg-webropol-gray-100 transition-all">
                     Close Preview
-                </button>                
-                <button class="hidden px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium transition-all">
+                </button>
+                <button
+                    class="hidden px-6 py-3 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 text-white font-semibold rounded-xl shadow-medium transition-all">
                     Use This Survey
                 </button>
             </div>
@@ -790,29 +1000,34 @@
     </div>
 
     <!-- Create New Modal -->
-    <div x-show="showCreateModal" x-cloak 
-         class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div @click.away="showCreateModal = false" 
-             class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden"
-             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
-             x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-8 scale-95">
-            
+    <div x-show="showCreateModal" x-cloak
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @click.away="showCreateModal = false"
+            class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden"
+            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-8 scale-95">
+
             <!-- Modal Header -->
-            <div class="p-8 border-b border-webropol-gray-200 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
+            <div
+                class="p-8 border-b border-webropol-gray-200 bg-gradient-to-r from-webropol-gray-50 to-webropol-teal-50/30">
                 <h3 class="text-2xl font-bold text-webropol-gray-900 mb-2">Create New</h3>
-                <p class="text-webropol-gray-600">Choose what you want to create. This will take to create new page of each survey</p>
+                <p class="text-webropol-gray-600">Choose what you want to create. This will take to create new page of
+                    each survey</p>
             </div>
-            
+
             <!-- Modal Content -->
             <div class="p-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <!-- Surveys -->
-                    <button @click="createItem('surveys')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('surveys')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-poll-h text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">Surveys</span>
@@ -820,8 +1035,10 @@
                     </button>
 
                     <!-- Events -->
-                    <button @click="createItem('events')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('events')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-calendar-alt text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">Events</span>
@@ -829,8 +1046,10 @@
                     </button>
 
                     <!-- EXW Surveys -->
-                    <button @click="createItem('exw-surveys')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('exw-surveys')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-chart-line text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">EXW Surveys</span>
@@ -838,8 +1057,10 @@
                     </button>
 
                     <!-- Case Management -->
-                    <button @click="createItem('case-management')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('case-management')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-briefcase text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">Case Management</span>
@@ -847,8 +1068,10 @@
                     </button>
 
                     <!-- eTests -->
-                    <button @click="createItem('etests')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('etests')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-clipboard-check text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">eTests</span>
@@ -856,8 +1079,10 @@
                     </button>
 
                     <!-- Assessments -->
-                    <button @click="createItem('assessments')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('assessments')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-tasks text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">Assessments</span>
@@ -865,8 +1090,10 @@
                     </button>
 
                     <!-- Touch Tablets -->
-                    <button @click="createItem('touch-tablets')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('touch-tablets')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-tablet-alt text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">Touch Tablets</span>
@@ -874,8 +1101,10 @@
                     </button>
 
                     <!-- Direct Mobile Surveys -->
-                    <button @click="createItem('mobile-surveys')" class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
-                        <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <button @click="createItem('mobile-surveys')"
+                        class="group flex flex-col items-center p-6 rounded-xl border-2 border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i class="fas fa-mobile-alt text-white text-lg"></i>
                         </div>
                         <span class="font-semibold text-webropol-gray-900 text-center">Direct Mobile Surveys</span>
@@ -883,10 +1112,11 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Modal Footer -->
             <div class="p-8 border-t border-webropol-gray-200 bg-webropol-gray-50/50 flex items-center justify-end">
-                <button @click="showCreateModal = false" class="px-6 py-3 text-webropol-gray-700 font-medium rounded-xl hover:bg-webropol-gray-100 transition-all">
+                <button @click="showCreateModal = false"
+                    class="px-6 py-3 text-webropol-gray-700 font-medium rounded-xl hover:bg-webropol-gray-100 transition-all">
                     Cancel
                 </button>
             </div>
@@ -907,14 +1137,14 @@
                 newFolderName: '',
                 newFolderDescription: '',
                 expandedFolders: [],
-                
+
                 // Sample data
                 folders: [
                     { id: 1, name: 'Customer Feedback', description: 'Questions and surveys for customer satisfaction' },
                     { id: 2, name: 'Employee Evaluation', description: '360 degree feedback surveys' },
                     { id: 3, name: 'Market Research', description: 'Market analysis questions' }
                 ],
-                
+
                 questions: [
                     { id: 1, name: 'Valintakysymys', type: 'question', language: 'fi', folderId: null },
                     { id: 2, name: 'Avoin kysymys', type: 'question', language: 'fi', folderId: 1 },
@@ -923,18 +1153,18 @@
                     { id: 5, name: 'Multiple Choice', type: 'question', language: 'en', folderId: 1 },
                     { id: 6, name: 'Tekstikysymys', type: 'question', language: 'fi', folderId: 3 }
                 ],
-                
+
                 surveys: [
                     { id: 1, name: '360', type: 'survey', language: 'en', folderId: 2 },
                     { id: 2, name: 'Revalidation Sample', type: 'survey', language: 'en', folderId: null },
                     { id: 3, name: 'Asiakastyytyväisyys', type: 'survey', language: 'fi', folderId: 1 },
                     { id: 4, name: 'Employee Satisfaction', type: 'survey', language: 'en', folderId: 2 }
                 ],
-                
+
                 setView(view) {
                     this.currentView = view;
                 },
-                
+
                 toggleFolder(folderId) {
                     if (this.expandedFolders.includes(folderId)) {
                         this.expandedFolders = this.expandedFolders.filter(id => id !== folderId);
@@ -942,22 +1172,22 @@
                         this.expandedFolders.push(folderId);
                     }
                 },
-                
+
                 createFolder() {
                     if (!this.newFolderName.trim()) return;
-                    
+
                     const newFolder = {
                         id: Date.now(),
                         name: this.newFolderName.trim(),
                         description: this.newFolderDescription.trim()
                     };
-                    
+
                     this.folders.push(newFolder);
                     this.newFolderName = '';
                     this.newFolderDescription = '';
                     this.showCreateFolder = false;
                 },
-                
+
                 moveToFolder(itemId, folderId) {
                     const allItems = [...this.questions, ...this.surveys];
                     const item = allItems.find(item => item.id === itemId);
@@ -966,7 +1196,7 @@
                     }
                     this.showMoveToFolder = null;
                 },
-                
+
                 removeFromFolder(itemId, folderId) {
                     const allItems = [...this.questions, ...this.surveys];
                     const item = allItems.find(item => item.id === itemId);
@@ -974,14 +1204,14 @@
                         item.folderId = null;
                     }
                 },
-                
+
                 getFilteredFolders() {
                     return this.folders.filter(folder => {
                         const folderItems = this.getFolderItems(folder.id);
                         return folderItems.length > 0;
                     });
                 },
-                
+
                 getFolderItems(folderId) {
                     const currentItems = this.currentView === 'questions' ? this.questions : this.surveys;
                     return currentItems.filter(item => {
@@ -991,11 +1221,11 @@
                         return matchesFolder && matchesLanguage && matchesSearch;
                     });
                 },
-                
+
                 getFolderItemCount(folderId) {
                     return this.getFolderItems(folderId).length;
                 },
-                
+
                 getUngroupedItems() {
                     const currentItems = this.currentView === 'questions' ? this.questions : this.surveys;
                     return currentItems.filter(item => {
@@ -1005,7 +1235,7 @@
                         return isUngrouped && matchesLanguage && matchesSearch;
                     });
                 },
-                
+
                 getFilteredQuestions() {
                     return this.questions.filter(question => {
                         const matchesLanguage = this.selectedLanguage === 'all' || question.language === this.selectedLanguage;
@@ -1013,20 +1243,21 @@
                         return matchesLanguage && matchesSearch;
                     });
                 },
-                
+
                 getFilteredSurveys() {
                     return this.surveys.filter(survey => {
                         const matchesLanguage = this.selectedLanguage === 'all' || survey.language === this.selectedLanguage;
                         const matchesSearch = !this.searchTerm || survey.name.toLowerCase().includes(this.searchTerm.toLowerCase());
                         return matchesLanguage && matchesSearch;
-                    });                },
-                
+                    });
+                },
+
                 createItem(type) {
                     // Close the modal first
                     this.showCreateModal = false;
-                    
+
                     // Handle the creation logic based on type
-                    switch(type) {
+                    switch (type) {
                         case 'surveys':
                             console.log('Creating new survey...');
                             // Add your survey creation logic here
@@ -1063,7 +1294,7 @@
                             console.log('Unknown item type:', type);
                     }
                 },
-                
+
                 editFolder(folderId) {
                     // Implement folder editing functionality
                     console.log('Edit folder:', folderId);
@@ -1073,4 +1304,5 @@
     </script>
 
 </body>
+
 </html>
