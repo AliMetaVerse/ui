@@ -321,12 +321,13 @@
                                                     x-text="getFilteredQuestions().length + ' questions available'"></p>
                                             </div>
                                             <div class="flex items-center space-x-4">
-                                                <label
-                                                    class="flex items-center text-sm font-medium text-webropol-gray-700">
-                                                    <input type="checkbox" x-model="showOnlyTitles"
-                                                        class="h-4 w-4 rounded border-webropol-gray-300 text-webropol-teal-600 focus:ring-webropol-teal-500 mr-3">
-                                                    Show only question titles
-                                                </label>
+                                                <div @click="showOnlyTitles = !showOnlyTitles" class="flex items-center bg-white rounded-xl px-4 py-2 shadow-sm border border-webropol-gray-200 cursor-pointer hover:shadow-md hover:border-webropol-gray-300 transition-all duration-200">
+                                                    <span class="text-sm font-medium text-webropol-gray-700 mr-3">Show only question titles</span>
+                                                    <label class="relative inline-flex items-center pointer-events-none">
+                                                        <input type="checkbox" x-model="showOnlyTitles" class="sr-only peer">
+                                                        <div class="peer h-5 w-9 rounded-full bg-webropol-gray-200 after:absolute after:top-[2px] after:left-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-webropol-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-webropol-teal-500 peer-checked:to-webropol-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-webropol-teal-300"></div>
+                                                    </label>
+                                                </div>
                                                 <div class="flex items-center space-x-2">
                                                     <span class="text-sm text-webropol-gray-600">Language:</span>
                                                     <span
