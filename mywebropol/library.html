@@ -540,7 +540,7 @@
                                                         <input type="checkbox"
                                                             x-model="selectAllSurveys"
                                                             @change="toggleSelectAllSurveys()"
-                                                            class="rounded border-webropol-gray-300 text-webropol-teal-600">
+                                                            class="h-5 w-5 rounded border-webropol-gray-300 text-webropol-teal-600">
                                                     </th>
                                                     <th class="px-4 py-4 font-semibold text-webropol-gray-700 text-sm">
                                                         Survey name</th>
@@ -565,7 +565,7 @@
                                                             <input type="checkbox"
                                                                 :checked="selectedSurveys.includes(survey.id)"
                                                                 @change="toggleSurveySelection(survey.id)"
-                                                                class="rounded border-webropol-gray-300 text-webropol-teal-600">
+                                                                class="h-5 w-5 rounded border-webropol-gray-300 text-webropol-teal-600">
                                                         </td>
                                                         <td class="px-4 py-6">
                                                             <div class="font-semibold text-webropol-gray-900" x-text="survey.name"></div>
