@@ -115,7 +115,7 @@
                     <span class="font-medium">Dashboards</span>
                 </a>
                 <div class="pt-4 border-t border-webropol-gray-200/50 mt-4">
-                    <a href="../index.html"
+                    <a href="mywebropol/index.html"
                         class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
                         <i class="fas fa-book-open w-5 mr-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">MyWebropol</span>
@@ -151,14 +151,124 @@
                     </div>
                 </div>
             </header> <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12" role="main">
+            <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12 bg-[#eef6f9] min-h-screen" role="main">
                 <div class="max-w-7xl mx-auto">
-                    <!-- Main Content Grid -->
-                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-10">
-                        <!-- Left Column -->
-                        <div class="space-y-10"></div>
-                        <!-- Right Column -->
-                        <div class="space-y-10"></div>
+                    <!-- What do you want to do next? -->
+                    <h2 class="text-2xl font-bold mb-6 text-webropol-gray-900">Hi! What do you want to do next?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+                        <!-- Card 1 -->
+                        <div class="rounded-2xl bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/60 p-6 flex flex-col items-center shadow-card">
+                            <i class="fas fa-search text-4xl text-webropol-gray-400 mb-4"></i>
+                            <div class="font-semibold text-lg text-webropol-gray-900 mb-2 text-center">Gain insight with surveys
+                            </div>
+                            <button
+                                class="mt-2 px-6 py-2 bg-white text-webropol-teal-600 font-semibold rounded-full shadow hover:bg-webropol-teal-50 transition">
+                                Create survey
+                            </button>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="rounded-2xl bg-gradient-to-br from-orange-50 to-webropol-teal-50/60 p-6 flex flex-col items-center shadow-card">
+                            <i class="fas fa-microphone text-4xl text-webropol-gray-400 mb-4"></i>
+                            <div class="font-semibold text-lg text-webropol-gray-900 mb-2 text-center">Organise successful
+                                events
+                            </div>
+                            <button
+                                class="mt-2 px-6 py-2 bg-white text-webropol-teal-600 font-semibold rounded-full shadow hover:bg-webropol-teal-50 transition">
+                                Create Event
+                            </button>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="relative rounded-2xl bg-gradient-to-br from-orange-50 to-webropol-teal-50/60 p-6 flex flex-col items-center shadow-card">
+                            <span
+                                class="absolute top-4 right-4 bg-webropol-gray-700 text-white text-xs px-3 py-1 rounded-full">
+                                Popular
+                            </span>
+                            <i class="fas fa-chart-bar text-4xl text-webropol-gray-400 mb-4"></i>
+                            <div class="font-semibold text-lg text-webropol-gray-900 mb-2 text-center">AI Text Analysis
+                            </div>
+                            <a href="#" class="mt-2 text-webropol-teal-600 font-semibold hover:underline">Read more</a>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="relative rounded-2xl bg-gradient-to-br from-pink-50 to-webropol-teal-50/60 p-6 flex flex-col items-center shadow-card">
+                            <span
+                                class="absolute top-4 right-4 bg-webropol-gray-700 text-white text-xs px-3 py-1 rounded-full">
+                                Popular
+                            </span>
+                            <i class="fas fa-tasks text-4xl text-webropol-gray-400 mb-4"></i>
+                            <div class="font-semibold text-lg text-webropol-gray-900 mb-2 text-center">Manage feedback
+                                instantly
+                            </div>
+                            <a href="#" class="mt-2 text-webropol-teal-600 font-semibold hover:underline">Read more</a>
+                        </div>
+                    </div>
+
+                    <!-- My latest activity -->
+                    <h3 class="text-xl font-bold mb-4 text-webropol-gray-900">My latest activity</h3>
+                    <div class="bg-white rounded-2xl shadow-card p-6">
+                        <!-- Tabs -->
+                        <div class="flex space-x-4 mb-6">
+                            <button
+                                class="px-4 py-2 rounded-lg font-semibold bg-webropol-teal-100 text-webropol-teal-700">
+                                All
+                            </button>
+                            <button
+                                class="px-4 py-2 rounded-lg text-webropol-gray-600 hover:bg-webropol-teal-50">
+                                Surveys
+                            </button>
+                            <button
+                                class="px-4 py-2 rounded-lg text-webropol-gray-600 hover:bg-webropol-teal-50">
+                                Events
+                            </button>
+                        </div>
+                        <!-- Activity List -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between bg-webropol-blue-50 rounded-xl px-6 py-4">
+                                <span class="font-medium text-webropol-gray-900">Questions</span>
+                                <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full">
+                                    Open
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between bg-webropol-blue-50 rounded-xl px-6 py-4">
+                                <span class="font-medium text-webropol-gray-900">Translation</span>
+                                <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full">Draft</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-webropol-blue-50 rounded-xl px-6 py-4">
+                                <span class="font-medium text-webropol-gray-900">Complex Questions</span>
+                                <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full">
+                                    Open
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between bg-webropol-blue-50 rounded-xl px-6 py-4">
+                                <span class="font-medium text-webropol-gray-900">AI Text Analysis Survey</span>
+                                <span class="flex items-center space-x-2">
+                                    <i class="fas fa-paper-plane text-webropol-teal-600"></i>
+                                    <span class="text-webropol-gray-700 text-xs">8 answers</span>
+                                    <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">
+                                        Open
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between bg-webropol-blue-50 rounded-xl px-6 py-4">
+                                <span class="font-medium text-webropol-gray-900">Long survey</span>
+                                <span class="flex items-center space-x-2">
+                                    <i class="fas fa-paper-plane text-webropol-teal-600"></i>
+                                    <span class="text-webropol-gray-700 text-xs">2 answers</span>
+                                    <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">
+                                        Open
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between bg-webropol-blue-50 rounded-xl px-6 py-4">
+                                <span class="font-medium text-webropol-gray-900">AI Text Analysis</span>
+                                <span class="flex items-center space-x-2">
+                                    <i class="fas fa-paper-plane text-webropol-teal-600"></i>
+                                    <span class="text-webropol-gray-700 text-xs">1 answers</span>
+                                    <span class="bg-webropol-green-100 text-webropol-green-700 text-xs px-3 py-1 rounded-full ml-2">
+                                        Open
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
