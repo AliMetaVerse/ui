@@ -80,100 +80,133 @@
       <div class="bg-white/70 backdrop-blur px-0 sm:px-4">
         <webropol-breadcrumbs trail='[{"label":"Home","url":"../index.html"},{"label":"Admin Tools","url":"index.html"}]'></webropol-breadcrumbs>
       </div>
-      <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12 pb-24" role="main">
+      <main class="flex-1 overflow-y-auto px-6 py-6 lg:px-12 pb-16" role="main">
         <div class="max-w-7xl mx-auto">
-          <div class="mb-16">
-            <div class="text-center lg:text-left mb-8">
-              <h1 class="text-4xl lg:text-5xl font-bold text-webropol-gray-900 mb-4 tracking-tight">
+          <!-- Enhanced Header Section -->
+          <div class="mb-8">
+            <div class="text-center lg:text-left mb-6">
+              <h1 class="text-3xl lg:text-4xl font-bold text-webropol-gray-900 mb-3 tracking-tight">
                 Admin Tools
               </h1>
-              <p class="text-xl text-webropol-gray-600 max-w-2xl lg:mx-0 mx-auto leading-relaxed">
+              <p class="text-lg text-webropol-gray-600 max-w-2xl lg:mx-0 mx-auto leading-relaxed">
                 Manage your organization settings, users, and system configurations
               </p>
             </div>
           </div>
           
           <!-- Admin Tools Content -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
             <!-- Left Column -->
             <div class="space-y-6">
               
-              <!-- User management and survey rights -->
-              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300" aria-labelledby="user-management-heading">
+              <!-- User Management Section -->
+              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="user-management-heading">
                 <div class="mb-6">
-                  <h2 id="user-management-heading" class="text-xl font-bold text-webropol-gray-900 mb-3 tracking-tight flex items-center">
-                    <i class="fas fa-users text-webropol-teal-600 text-xl mr-3"></i>
-                    User management and survey rights
+                  <h2 id="user-management-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                    User Management and Rights
                   </h2>
+                  <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                    Manage users, permissions, and access control for your organization
+                  </p>
                 </div>
                 <nav class="space-y-3" aria-label="User Management">
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">User management and new user creation</span>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access User Management">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">User Management</span>
+                        <span class="text-webropol-gray-500 text-xs">User creation and management</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about User Management">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Survey and folder rights</span>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access Survey and Folder Rights">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-folder-open text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Survey and Folder Rights</span>
+                        <span class="text-webropol-gray-500 text-xs">Configure access permissions</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about Survey and Folder Rights">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">User group management</span>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access User Group Management">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users-cog text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">User Group Management</span>
+                        <span class="text-webropol-gray-500 text-xs">Organize users into groups</span>
+                      </div>
                     </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Access requests</span>
-                      <span class="text-orange-600 text-xs ml-1">(0)</span>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about User Group Management">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
                 </nav>
               </section>
 
-              <!-- Security and data protection -->
-              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300" aria-labelledby="security-heading">
+              <!-- Security and Data Protection Section -->
+              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="security-heading">
                 <div class="mb-6">
-                  <h2 id="security-heading" class="text-xl font-bold text-webropol-gray-900 mb-3 tracking-tight flex items-center">
-                    <i class="fas fa-lock text-webropol-teal-600 text-xl mr-3"></i>
-                    Security and data protection
+                  <h2 id="security-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                    Security and Data Protection
                   </h2>
+                  <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                    Learn about our security measures and compliance standards
+                  </p>
                 </div>
                 <nav class="space-y-3" aria-label="Security and Data Protection">
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">User Environment cleaning</span>
-                      <span class="text-red-600 text-xs ml-1">(5542)</span>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access Data Security White Paper">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-shield-alt text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Data Security White Paper</span>
+                        <span class="text-webropol-gray-500 text-xs">Security documentation</span>
+                      </div>
                     </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Restore surveys</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Personal data management (GDPR)</span>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Password policy</span>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Two factor authentication</span>
-                      <span class="text-red-600 text-xs ml-1">Not in use</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">IP restrictions</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about Data Security White Paper">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
                 </nav>
@@ -184,97 +217,134 @@
             <!-- Right Column -->
             <div class="space-y-6">
               
-              <!-- Additional modules -->
-              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300" aria-labelledby="additional-modules-heading">
+              <!-- Additional Modules Section -->
+              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="additional-modules-heading">
                 <div class="mb-6">
-                  <h2 id="additional-modules-heading" class="text-xl font-bold text-webropol-gray-900 mb-3 tracking-tight flex items-center">
-                    <i class="fas fa-puzzle-piece text-webropol-teal-600 text-xl mr-3"></i>
-                    Additional modules
+                  <h2 id="additional-modules-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                    Additional Modules
                   </h2>
+                  <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                    Extended functionality and specialized survey tools
+                  </p>
                 </div>
                 <nav class="space-y-3" aria-label="Additional Modules">
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">360 Evaluations</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access 360 Evaluations">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-sync-alt text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">360 Evaluations</span>
+                        <span class="text-webropol-gray-500 text-xs">Multi-perspective assessments</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about 360 Evaluations">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Hierarchy</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access Hierarchy Management">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-sitemap text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Hierarchy</span>
+                        <span class="text-webropol-gray-500 text-xs">Organizational structure tools</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about Hierarchy">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Hierarchy administrators</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access Online Payments">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-credit-card text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Online Payments</span>
+                        <span class="text-webropol-gray-500 text-xs">Payment processing and receipts</span>
+                      </div>
                     </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Suomi.fi Messages</span>
-                      <span class="text-xs text-webropol-gray-600 ml-1">Status: </span>
-                      <span class="text-green-600 text-xs">In use</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Online payments and receipts</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Answering with voice</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Wott Management</span>
-                      <span class="text-red-600 text-sm ml-1">⚠</span>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about Online Payments">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
                 </nav>
               </section>
 
-              <!-- Other tools -->
-              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300" aria-labelledby="other-tools-heading">
+              <!-- Other Tools Section -->
+              <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="other-tools-heading">
                 <div class="mb-6">
-                  <h2 id="other-tools-heading" class="text-xl font-bold text-webropol-gray-900 mb-3 tracking-tight flex items-center">
-                    <i class="fas fa-cogs text-webropol-teal-600 text-xl mr-3"></i>
-                    Other tools
+                  <h2 id="other-tools-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                    Other Tools
                   </h2>
+                  <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                    Additional utilities and management tools for your surveys
+                  </p>
                 </div>
                 <nav class="space-y-3" aria-label="Other Tools">
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Respondent login page</span>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access Respondent Login Page">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-sign-in-alt text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Respondent Login Page</span>
+                        <span class="text-webropol-gray-500 text-xs">Customize user experience</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about Respondent Login Page">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Define question keywords for environment</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
+                  <a href="#" 
+                     class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                     role="button"
+                     aria-label="Access Respondent Panel">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                      </div>
+                      <div>
+                        <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Respondent Panel</span>
+                        <span class="text-webropol-gray-500 text-xs">Manage survey participants</span>
+                      </div>
                     </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Create Question IDs</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Respondent Panel</span>
-                      <i class="fas fa-info-circle text-webropol-gray-400 text-xs ml-2"></i>
-                    </div>
-                  </a>
-                  <a href="#" class="group flex items-center p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100">
-                    <div class="flex-1">
-                      <span class="text-webropol-blue-600 hover:text-webropol-blue-800 text-sm font-medium">Do-Not-Contact List</span>
+                    <div class="flex items-center space-x-2">
+                      <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                              aria-label="More information about Respondent Panel">
+                        <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                      </button>
+                      <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
                     </div>
                   </a>
                 </nav>
@@ -294,9 +364,46 @@
   <script>
     function adminApp() {
       return {
-        // App-specific logic here
+        // Enhanced admin tools functionality
+        showContextMenu: null,
+        
+        // Initialize any admin-specific features
+        init() {
+          this.setupInteractiveElements();
+        },
+
+        setupInteractiveElements() {
+          // Add any admin-specific interactive features here
+          console.log('Admin Tools initialized');
+        }
       }
     }
+
+    // Additional enhancements for admin tools
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add enhanced hover effects
+      const cards = document.querySelectorAll('.hover-lift');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-2px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Smooth scroll to sections if needed
+      const links = document.querySelectorAll('a[href^="#"]');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>

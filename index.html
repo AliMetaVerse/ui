@@ -1,189 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Component Library | Webropol Design System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/50ef2d3cf8.css" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'webropol-teal': { 50: '#f0fdff', 100: '#ccf7fe', 200: '#99effd', 300: '#66e0fa', 400: '#22ccf1', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63' },
+                        'webropol-gray': { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a' },
+                        'webropol-blue': { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' },
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 6px;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .hover-lift {
+            transition: all 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.15);
         }
     </style>
+    <script src="webropol/components/sidebar.js" type="module"></script>
+    <script src="webropol/components/header.js" type="module"></script>
+    <script src="webropol/components/breadcrumbs.js" type="module"></script>
+    <script src="webropol/components/floating-button.js" type="module"></script>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        <header class="mb-8">
-            <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Webropol Design System</h1>
-            <p class="text-base text-gray-600 mb-4">A comprehensive collection of UI components and design guidelines</p>
-            
-            <!-- Search Input -->
-            <div class="relative">
-                <input 
-                    type="text" 
-                    id="searchInput"
-                    class="w-full px-4 py-2 pl-10 pr-4 text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Search components..."
-                >
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" style="background-color: #ebf4f7;" x-data="componentLibraryApp()" @click="showContextMenu = null">
+
+    <div class="flex h-screen">
+        <webropol-sidebar active="components" base="webropol/"></webropol-sidebar>
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <webropol-header username="Ali Al-Zuhairi"></webropol-header>
+            <div id="breadcrumbs-fix-wrapper" class="bg-white/70 backdrop-blur px-0 sm:px-4">
+                <webropol-breadcrumbs trail='[{"label":"Home","url":"webropol/index.html"},{"label":"Component Library","url":"index.html"}]'></webropol-breadcrumbs>
+            </div>
+            <!-- Page Content -->
+            <main class="flex-1 overflow-y-auto px-6 py-6 lg:px-12 pb-16" role="main">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Enhanced Header Section -->
+                    <div class="mb-8">
+                        <div class="text-center lg:text-left mb-6">
+                            <h1 class="text-3xl lg:text-4xl font-bold text-webropol-gray-900 mb-3 tracking-tight">
+                                Webropol Design System
+                            </h1>
+                            <p class="text-lg text-webropol-gray-600 max-w-2xl lg:mx-0 mx-auto leading-relaxed">
+                                A comprehensive collection of UI components and design guidelines for building modern, accessible interfaces
+                            </p>
+                        </div>
+                        
+                        <!-- Enhanced Search Input -->
+                        <div class="relative max-w-md mx-auto lg:mx-0">
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                x-model="searchTerm"
+                                @input="filterComponents"
+                                class="w-full px-4 py-3 pl-12 pr-4 text-webropol-gray-900 bg-white/90 backdrop-blur border border-webropol-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-webropol-teal-500 focus:border-transparent shadow-soft transition-all"
+                                placeholder="Search components..."
+                            >
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-webropol-gray-400"></i>
+                            </div>
+                            <div x-show="searchTerm" @click="clearSearch" class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
+                                <i class="fas fa-times text-webropol-gray-400 hover:text-webropol-gray-600 transition-colors"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Component Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Left Column -->
+                        <div class="space-y-6">
+                            <!-- Design System Section -->
+                            <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="design-system-heading">
+                                <div class="mb-6">
+                                    <h2 id="design-system-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                        Design System & Core
+                                    </h2>
+                                    <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                        Core design foundations and interactive elements
+                                    </p>
+                                </div>
+                                <nav class="space-y-3" aria-label="Design System">
+                                    <a href="ds/templates/interactive-ds.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Design System Interaction">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-magic text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Design System Interaction</span>
+                                                <span class="text-webropol-gray-500 text-xs">Interactive design explorer</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Design System Interaction">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="ds/index.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Webropol Design System">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-palette text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Design System Library</span>
+                                                <span class="text-webropol-gray-500 text-xs">Core components and tokens</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Design System Library">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </nav>
+                            </section>
+
+                            <!-- Survey Components Section -->
+                            <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="survey-heading">
+                                <div class="mb-6">
+                                    <h2 id="survey-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                        Survey Components
+                                    </h2>
+                                    <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                        Interactive rating and survey elements
+                                    </p>
+                                </div>
+                                <nav class="space-y-3" aria-label="Survey Components">
+                                    <a href="ranking/ranking.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Star and Smiley Rating">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-star text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Star & Smiley Rating</span>
+                                                <span class="text-webropol-gray-500 text-xs">Interactive rating components</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Star and Smiley Rating">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="ranking/ranking-accessiblity.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Accessible Rating">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-universal-access text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Accessible Rating</span>
+                                                <span class="text-webropol-gray-500 text-xs">WCAG compliant components</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Accessible Rating">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="ranking/ranking-nps-numbers.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access NPS Numeric Rating">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-chart-line text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">NPS Numeric Rating</span>
+                                                <span class="text-webropol-gray-500 text-xs">Net Promoter Score components</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about NPS Numeric Rating">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </nav>
+                            </section>
+
+                            <!-- Mobile & Responsive Section -->
+                            <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="mobile-heading">
+                                <div class="mb-6">
+                                    <h2 id="mobile-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                        Mobile & Responsive
+                                    </h2>
+                                    <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                        Responsive design mockups and mobile components
+                                    </p>
+                                </div>
+                                <nav class="space-y-3" aria-label="Mobile and Responsive">
+                                    <a href="mobile-device/mobile-device-modern-full.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Mobile Full View">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-mobile-alt text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Mobile - Full View</span>
+                                                <span class="text-webropol-gray-500 text-xs">Complete mobile interface</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Mobile Full View">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="mobile-device/tablet-device-modern-full.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Tablet Mockup">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-tablet-alt text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Tablet Mockup</span>
+                                                <span class="text-webropol-gray-500 text-xs">Tablet interface design</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Tablet Mockup">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </nav>
+                            </section>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-6">
+                            <!-- Documentation & Wiki Section -->
+                            <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="wiki-heading">
+                                <div class="mb-6">
+                                    <h2 id="wiki-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                        Documentation & Wiki
+                                    </h2>
+                                    <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                        Comprehensive guides and documentation
+                                    </p>
+                                </div>
+                                <nav class="space-y-3" aria-label="Documentation">
+                                    <a href="wiki/wiki-test.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Wiki Documentation">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-book text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Wiki Documentation</span>
+                                                <span class="text-webropol-gray-500 text-xs">Guides and references</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Wiki Documentation">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </nav>
+                            </section>
+
+                            <!-- Samples & Examples Section -->
+                            <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="samples-heading">
+                                <div class="mb-6">
+                                    <h2 id="samples-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                        Samples & Examples
+                                    </h2>
+                                    <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                        Practical implementations and code examples
+                                    </p>
+                                </div>
+                                <nav class="space-y-3" aria-label="Samples and Examples">
+                                    <a href="samples/auto-deletion.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Auto Data Deletion">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-trash-alt text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Auto Data Deletion</span>
+                                                <span class="text-webropol-gray-500 text-xs">GDPR compliance tools</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Auto Data Deletion">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="samples/smartnotifier.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Smart Notifications">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-bell text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Smart Notifications</span>
+                                                <span class="text-webropol-gray-500 text-xs">Intelligent alerts system</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Smart Notifications">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="samples/tabs-toolbars.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Tabs and Toolbars">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-layer-group text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Tabs & Toolbars</span>
+                                                <span class="text-webropol-gray-500 text-xs">Navigation components</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Tabs and Toolbars">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </nav>
+                            </section>
+
+                            <!-- AI & Translation Section -->
+                            <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="ai-heading">
+                                <div class="mb-6">
+                                    <h2 id="ai-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                        AI & Translation
+                                    </h2>
+                                    <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                        AI-powered tools and chatbot interfaces
+                                    </p>
+                                </div>
+                                <nav class="space-y-3" aria-label="AI and Translation">
+                                    <a href="ai/index.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access AI Assistants Comparison">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-robot text-webropol-blue-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">AI Assistants Comparison</span>
+                                                <span class="text-webropol-gray-500 text-xs">Multiple AI model comparison</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about AI Assistants Comparison">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="chatbots/botpress.html" 
+                                       class="group flex items-center justify-between p-4 rounded-2xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-webropol-teal-100 focus:border-webropol-teal-300"
+                                       role="button"
+                                       aria-label="Access Botpress Interface">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                                <i class="fas fa-comments text-webropol-teal-600 text-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div>
+                                                <span class="font-semibold text-webropol-gray-900 text-base block mb-0.5">Botpress Interface</span>
+                                                <span class="text-webropol-gray-500 text-xs">Chatbot platform UI</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="w-8 h-8 rounded-xl bg-webropol-gray-100 hover:bg-webropol-teal-100 flex items-center justify-center transition-colors group/info"
+                                                    aria-label="More information about Botpress Interface">
+                                                <i class="fas fa-info-circle text-webropol-gray-400 group-hover/info:text-webropol-teal-600 transition-colors text-sm" aria-hidden="true"></i>
+                                            </button>
+                                            <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </nav>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Additional Components Section -->
+                    <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Backend & Components -->
+                        <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="backend-heading">
+                            <div class="mb-6">
+                                <h2 id="backend-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                    Backend Tools
+                                </h2>
+                                <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                    Server-side components and utilities
+                                </p>
+                            </div>
+                            <nav class="space-y-3" aria-label="Backend Tools">
+                                <a href="backend/pseudo-bg.html" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100"
+                                   role="button"
+                                   aria-label="Access Pseudo Background">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                            <i class="fas fa-server text-webropol-blue-600 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-medium text-webropol-gray-900 text-sm block">Pseudo Background</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-xs" aria-hidden="true"></i>
+                                </a>
+                                <a href="backend/pseudo-simple.html" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100"
+                                   role="button"
+                                   aria-label="Access Pseudo Simple">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                            <i class="fas fa-code text-webropol-teal-600 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-medium text-webropol-gray-900 text-sm block">Pseudo Simple</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-xs" aria-hidden="true"></i>
+                                </a>
+                            </nav>
+                        </section>
+
+                        <!-- Additional UI Components -->
+                        <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="additional-heading">
+                            <div class="mb-6">
+                                <h2 id="additional-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                    UI Components
+                                </h2>
+                                <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                    Specialized interface elements
+                                </p>
+                            </div>
+                            <nav class="space-y-3" aria-label="UI Components">
+                                <a href="selection-drop/selection-drop.html" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100"
+                                   role="button"
+                                   aria-label="Access Dropdown Selection">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                            <i class="fas fa-list text-webropol-teal-600 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-medium text-webropol-gray-900 text-sm block">Dropdown Selection</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-xs" aria-hidden="true"></i>
+                                </a>
+                                <a href="smileys/smiley-survey.html" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100"
+                                   role="button"
+                                   aria-label="Access Smiley Rating">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                            <i class="fas fa-smile text-webropol-blue-600 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-medium text-webropol-gray-900 text-sm block">Smiley Rating</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-xs" aria-hidden="true"></i>
+                                </a>
+                            </nav>
+                        </section>
+
+                        <!-- Campaign & Email Tools -->
+                        <section class="bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-xl border border-webropol-gray-100/80 hover:shadow-2xl transition-all duration-300 hover-lift" aria-labelledby="campaign-heading">
+                            <div class="mb-6">
+                                <h2 id="campaign-heading" class="text-xl font-bold text-webropol-gray-900 mb-2 tracking-tight">
+                                    Campaign Tools
+                                </h2>
+                                <p class="text-webropol-gray-600 text-sm leading-relaxed">
+                                    Email campaigns and marketing tools
+                                </p>
+                            </div>
+                            <nav class="space-y-3" aria-label="Campaign Tools">
+                                <a href="campaign/email-campaign-classic.html" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100"
+                                   role="button"
+                                   aria-label="Access Email Campaign Classic">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-blue-100 to-webropol-teal-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                            <i class="fas fa-envelope text-webropol-blue-600 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-medium text-webropol-gray-900 text-sm block">Email Campaign</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-xs" aria-hidden="true"></i>
+                                </a>
+                                <a href="signature/ali.html" 
+                                   class="group flex items-center justify-between p-3 rounded-xl bg-webropol-gray-50/50 hover:bg-webropol-teal-50 border border-transparent hover:border-webropol-teal-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-webropol-teal-100"
+                                   role="button"
+                                   aria-label="Access Email Signature">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-webropol-teal-100 to-webropol-blue-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                                            <i class="fas fa-signature text-webropol-teal-600 text-sm" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            <span class="font-medium text-webropol-gray-900 text-sm block">Email Signature</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-webropol-gray-400 group-hover:text-webropol-teal-600 group-hover:translate-x-1 transition-all duration-300 text-xs" aria-hidden="true"></i>
+                                </a>
+                            </nav>
+                        </section>
+                    </div>
                 </div>
-            </div>
-        </header>
 
-        <div id="componentsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Design System Section -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-palette text-green-500 w-5 h-5 mr-2"></i>
-                    Design System
-                </h2>                <ul class="space-y-1.5">
-                    <li><a href="ds/templates/interactive-ds.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Design System Interaction</a></li>
-                    <li><a href="ds/index.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Webropol Design System</a></li>
-                </ul>
-            </div>
-
-            <!-- Wiki Section -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-book text-green-500 w-5 h-5 mr-2"></i>
-                    Wiki
-                </h2>                
-                <ul class="space-y-1.5">
-                    <li><a href="wiki/wiki-test.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Wiki Documentation</a></li>
-                </ul>
-            </div>
-
-            <!-- Mobile & Tablet Devices -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-mobile-screen text-yellow-500 w-5 h-5 mr-2"></i>
-                    Mobile & Tablet
-                </h2>                <ul class="space-y-1.5">
-                    <li><a href="mobile-device/mobile-device-modern-full.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Mobile - Full View</a></li>
-                    <li><a href="mobile-device/mobile-device-modern.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Mobile Mockup</a></li>
-                    <li><a href="mobile-device/tablet-device-modern-full.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Tablet Mockup</a></li>
-                </ul>
-            </div>
-
-            <!-- Ranking & Survey Components -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-chart-bar text-red-500 w-5 h-5 mr-2"></i>
-                    Ranking & Survey
-                </h2>                <ul class="space-y-1.5">
-                    <li><a href="ranking/ranking.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Star & Smiley Rating</a></li>
-                    <li><a href="ranking/ranking-accessiblity.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Accessible Rating</a></li>
-                    <li><a href="ranking/ranking-accessiblity-size.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Accessible Sizing</a></li>
-                    <li><a href="ranking/ranking-nps-numbers.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">NPS Numeric Rating</a></li>
-                </ul>
-            </div>
-
-            <!-- Samples & Examples -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-box text-indigo-500 w-5 h-5 mr-2"></i>
-                    Samples & Examples
-                </h2>                <ul class="space-y-1.5">
-                    <li><a href="samples/auto-deletion.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Auto Data Deletion</a></li>
-                    <li><a href="samples/clickable-list-button.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Clickable List</a></li>
-                    <li><a href="samples/compare.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Data Comparison</a></li>
-                    <li><a href="samples/event.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Event Management</a></li>
-                    <li><a href="samples/smartnotifier.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smart Notifications</a></li>
-                    <li><a href="samples/tabs-toolbars.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Tabs & Toolbars</a></li>
-                    <li><a href="samples/zoom.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Content Zoom</a></li>
-                    <li><a href="samples/gdpr-pii-detection.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">GDPR PII Detection</a></li>
-                </ul>
-            </div>
-
-            <!-- Additional Components -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-plus-square text-pink-500 w-5 h-5 mr-2"></i>
-                    Additional Components
-                </h2>                <ul class="space-y-1.5">
-                    <li><a href="selection-drop/selection-drop.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Dropdown Selection</a></li>
-                    <li><a href="signature/ali.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Email Signature</a></li>
-                    <li><a href="smileys/smiley-survey.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley Rating</a></li>
-                    <li><a href="smileys/smiley-survey-bg.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley w/ Background</a></li>
-                    <li><a href="smileys/smiley-survey-bg-blur.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley w/ Blur</a></li>
-                    <li><a href="smileys/smiley-survey-bg-blur-c.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley Custom Blur</a></li>
-                </ul>
-            </div>
-            
-            <!-- Backend & Components Section -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-server text-blue-500 w-5 h-5 mr-2"></i>
-                    Backend & Components
-                </h2>
-                <ul class="space-y-1.5">
-                    <li><a href="backend/pseudo-bg-line.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Pseudo Background Line</a></li>
-                    <li><a href="backend/pseudo-bg.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Pseudo Background</a></li>
-                    <li><a href="backend/pseudo-simple.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Pseudo Simple</a></li>
-                </ul>
-            </div>
-
-            <!-- AI & Chatbots Section -->
-            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                    <i class="fa-solid fa-robot text-purple-500 w-5 h-5 mr-2"></i>
-                    AI & Chatbots
-                </h2>                <ul class="space-y-1.5">
-                    <li><a href="ai/index.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">AI Assistants Comparison</a></li>
-                    <li><a href="chatbots/botpress.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Botpress Interface</a></li>
-                    <li><a href="chatbots/moicca.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Moicca Interface</a></li>
-                </ul>
-            </div>
-
-        </div>        <footer class="mt-12 text-center text-gray-600">
-            <p>Webropol Design System - Updated June 2025</p>
-        </footer>
+                <!-- Footer -->
+                <footer class="mt-12 text-center text-webropol-gray-500">
+                    <p class="text-sm">Webropol Design System - Updated January 2025</p>
+                </footer>
+            </main>
+        </div>
     </div>
 
     <script>
-        // Add smooth hover effect for cards
-        document.querySelectorAll('.hover\\:shadow-md').forEach(card => {
-            card.addEventListener('mouseover', () => {
-                card.style.transform = 'translateY(-2px)';
-                card.style.transition = 'all 0.2s ease-in-out';
-            });
-            card.addEventListener('mouseout', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
+        function componentLibraryApp() {
+            return {
+                searchTerm: '',
+                showContextMenu: null,
+                
+                filterComponents() {
+                    const sections = document.querySelectorAll('section');
+                    
+                    sections.forEach(section => {
+                        const title = section.querySelector('h2').textContent.toLowerCase();
+                        const links = section.querySelectorAll('a');
+                        let hasMatch = false;
 
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const componentsGrid = document.getElementById('componentsGrid');
-        const cards = componentsGrid.querySelectorAll('.bg-white');
+                        // Check section title
+                        if (title.includes(this.searchTerm.toLowerCase())) {
+                            hasMatch = true;
+                        }
 
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            
-            cards.forEach(card => {
-                const links = card.querySelectorAll('a');
-                const cardTitle = card.querySelector('h2').textContent.toLowerCase();
-                let hasMatch = false;
+                        // Check all links in the section
+                        links.forEach(link => {
+                            const linkText = link.textContent.toLowerCase();
+                            if (linkText.includes(this.searchTerm.toLowerCase())) {
+                                hasMatch = true;
+                                link.style.backgroundColor = this.searchTerm ? 'rgba(240, 249, 255, 0.8)' : 'transparent';
+                            } else {
+                                link.style.backgroundColor = 'transparent';
+                            }
+                        });
 
-                // Check card title
-                if (cardTitle.includes(searchTerm)) {
-                    hasMatch = true;
+                        // Show/hide the entire section based on matches
+                        section.style.display = hasMatch ? 'block' : 'none';
+                    });
+                },
+
+                clearSearch() {
+                    this.searchTerm = '';
+                    this.filterComponents();
                 }
+            }
+        }
 
-                // Check all links in the card
-                links.forEach(link => {
-                    const linkText = link.textContent.toLowerCase();
-                    if (linkText.includes(searchTerm)) {
-                        hasMatch = true;
-                        link.style.backgroundColor = searchTerm ? '#f0f9ff' : 'transparent';
-                    } else {
-                        link.style.backgroundColor = 'transparent';
+        // Additional enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add enhanced hover effects
+            const cards = document.querySelectorAll('.hover-lift');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-2px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Smooth scroll to sections
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
-
-                // Show/hide the entire card based on matches
-                card.style.display = hasMatch ? 'block' : 'none';
             });
         });
     </script>
