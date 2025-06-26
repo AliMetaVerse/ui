@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webropol Components Demo - Buttons & Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/50ef2d3cf8.js" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'webropol-teal': { 50: '#f0fdff', 100: '#ccf7fe', 200: '#99effd', 300: '#66e0fa', 400: '#22ccf1', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63' },
+                        'webropol-gray': { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a' },
+                        'webropol-blue': { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' },
+                        'webropol-green': { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac', 400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="components/buttons.js" type="module"></script>
+    <script src="components/cards.js" type="module"></script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30 min-h-screen">
+    <div class="container mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-webropol-gray-900 mb-4">Webropol Component Library</h1>
+            <p class="text-lg text-webropol-gray-600 max-w-2xl mx-auto">
+                Standardized buttons and cards for consistent design across the Webropol platform
+            </p>
+        </div>
+
+        <!-- Button Components Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-webropol-gray-900 mb-8">Button Components</h2>
+            
+            <!-- Primary Buttons -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Primary Buttons</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <webropol-button variant="primary" size="sm">Small Primary</webropol-button>
+                    <webropol-button variant="primary" size="md">Medium Primary</webropol-button>
+                    <webropol-button variant="primary" size="lg">Large Primary</webropol-button>
+                    <webropol-button variant="primary" size="xl">Extra Large Primary</webropol-button>
+                </div>
+                <div class="flex flex-wrap gap-4 items-center mt-4">
+                    <webropol-button variant="primary" icon="fas fa-plus">With Icon</webropol-button>
+                    <webropol-button variant="primary" icon="fas fa-download" icon-position="right">Icon Right</webropol-button>
+                    <webropol-button variant="primary" icon="fas fa-heart"></webropol-button>
+                    <webropol-button variant="primary" disabled>Disabled</webropol-button>
+                </div>
+            </div>
+
+            <!-- Secondary Buttons -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Secondary Buttons</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <webropol-button variant="secondary" size="sm">Small Secondary</webropol-button>
+                    <webropol-button variant="secondary" size="md">Medium Secondary</webropol-button>
+                    <webropol-button variant="secondary" size="lg">Large Secondary</webropol-button>
+                    <webropol-button variant="secondary" icon="fas fa-edit">Edit</webropol-button>
+                    <webropol-button variant="secondary" disabled>Disabled</webropol-button>
+                </div>
+            </div>
+
+            <!-- Tertiary Buttons -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Tertiary Buttons</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <webropol-button variant="tertiary" size="sm">Small Tertiary</webropol-button>
+                    <webropol-button variant="tertiary" size="md">Medium Tertiary</webropol-button>
+                    <webropol-button variant="tertiary" size="lg">Large Tertiary</webropol-button>
+                    <webropol-button variant="tertiary" icon="fas fa-info-circle">Info</webropol-button>
+                    <webropol-button variant="tertiary" disabled>Disabled</webropol-button>
+                </div>
+            </div>
+
+            <!-- Other Button Variants -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Other Variants</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <webropol-button variant="danger" icon="fas fa-trash">Delete</webropol-button>
+                    <webropol-button variant="success" icon="fas fa-check">Success</webropol-button>
+                    <webropol-button variant="primary" full-width>Full Width Button</webropol-button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Components Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-webropol-gray-900 mb-8">Card Components</h2>
+            
+            <!-- Gradient Cards (Homepage Style) -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-6">Light Gradient Cards (Homepage Style)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                    <webropol-gradient-card 
+                        icon="fa-solid fa-poll-h"
+                        title="Gain insight with surveys"
+                        button-text="Create survey"
+                        gradient="from-webropol-blue-100 to-webropol-teal-100/80">
+                    </webropol-gradient-card>
+                    
+                    <webropol-gradient-card 
+                        icon="fa-solid fa-calendar"
+                        title="Organise successful events"
+                        button-text="Create Event"
+                        gradient="from-orange-50 to-webropol-teal-100/80">
+                    </webropol-gradient-card>
+                    
+                    <webropol-gradient-card 
+                        icon="fa-solid fa-magnifying-glass-chart"
+                        title="AI Text Analysis"
+                        link-text="Read more"
+                        badge="Popular"
+                        gradient="from-orange-50 to-webropol-teal-100/80">
+                    </webropol-gradient-card>
+                    
+                    <webropol-gradient-card 
+                        icon="fa-solid fa-tasks"
+                        title="Manage feedback instantly"
+                        link-text="Read more"
+                        badge="Popular"
+                        gradient="from-pink-50 to-webropol-teal-100/80">
+                    </webropol-gradient-card>
+                </div>
+            </div>
+
+            <!-- Standard Cards -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-6">Standard Cards with Icon, Title, and Description</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Card 1: Basic with actions -->
+                    <webropol-card variant="standard" hoverable>
+                        <webropol-card-header 
+                            icon="fas fa-chart-line" 
+                            title="Analytics Dashboard" 
+                            subtitle="View detailed insights and metrics">
+                        </webropol-card-header>
+                        <webropol-card-content>
+                            <p class="text-webropol-gray-600">
+                                Track survey responses, engagement rates, and generate comprehensive reports with real-time data visualization.
+                            </p>
+                        </webropol-card-content>
+                        <webropol-card-actions>
+                            <webropol-button variant="tertiary" size="sm" icon="fas fa-eye">View</webropol-button>
+                            <webropol-button variant="secondary" size="sm" icon="fas fa-edit">Edit</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+
+                    <!-- Card 2: With badge -->
+                    <webropol-card variant="light" elevated>
+                        <webropol-card-header 
+                            icon="fas fa-users" 
+                            title="Team Management" 
+                            subtitle="Manage users and permissions"
+                            badge="Admin"
+                            badge-variant="primary">
+                        </webropol-card-header>
+                        <webropol-card-content>
+                            <p class="text-webropol-gray-600">
+                                Add team members, assign roles, and control access to surveys and data across your organization.
+                            </p>
+                        </webropol-card-content>
+                        <webropol-card-actions alignment="between">
+                            <span class="text-sm text-webropol-gray-500">12 active users</span>
+                            <webropol-button variant="primary" size="sm">Manage</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+
+                    <!-- Card 3: Glass effect -->
+                    <webropol-card variant="glass">
+                        <webropol-card-header 
+                            icon="fas fa-cog" 
+                            title="Settings" 
+                            subtitle="Configure your preferences">
+                        </webropol-card-header>
+                        <webropol-card-content>
+                            <p class="text-webropol-gray-600">
+                                Customize your workspace, notification preferences, and default survey settings.
+                            </p>
+                        </webropol-card-content>
+                        <webropol-card-actions>
+                            <webropol-button variant="tertiary" size="sm">Configure</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+                </div>
+            </div>
+
+            <!-- Cards with Lists -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-6">Cards with Lists</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Recent Surveys Card -->
+                    <webropol-card variant="standard">
+                        <webropol-card-list title="Recent Surveys" collapsible default-open>
+                            <webropol-card-list-item 
+                                icon="fas fa-poll"
+                                title="Customer Satisfaction Survey"
+                                subtitle="Created 2 days ago"
+                                status="active"
+                                action="View Results"
+                                action-icon="fas fa-chart-bar"
+                                clickable>
+                            </webropol-card-list-item>
+                            
+                            <webropol-card-list-item 
+                                icon="fas fa-poll"
+                                title="Employee Feedback Q4"
+                                subtitle="Created 1 week ago"
+                                status="pending"
+                                action="Edit"
+                                action-icon="fas fa-edit"
+                                clickable>
+                            </webropol-card-list-item>
+                            
+                            <webropol-card-list-item 
+                                icon="fas fa-poll"
+                                title="Product Feature Survey"
+                                subtitle="Created 2 weeks ago"
+                                status="inactive"
+                                action="Archive"
+                                action-icon="fas fa-archive"
+                                clickable>
+                            </webropol-card-list-item>
+                        </webropol-card-list>
+                        
+                        <webropol-card-actions>
+                            <webropol-button variant="primary" size="sm" icon="fas fa-plus">Create New Survey</webropol-button>
+                            <webropol-button variant="tertiary" size="sm" href="#" target="_blank">View All</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+
+                    <!-- Project Tasks Card -->
+                    <webropol-card variant="light">
+                        <webropol-card-list title="Project Tasks" collapsible default-open>
+                            <webropol-card-list-item 
+                                icon="fas fa-tasks"
+                                title="Setup survey distribution"
+                                subtitle="Due: Tomorrow"
+                                status="pending"
+                                clickable>
+                                <div slot="actions">
+                                    <webropol-button variant="success" size="sm" icon="fas fa-check"></webropol-button>
+                                    <webropol-button variant="tertiary" size="sm" icon="fas fa-edit"></webropol-button>
+                                </div>
+                            </webropol-card-list-item>
+                            
+                            <webropol-card-list-item 
+                                icon="fas fa-check-circle"
+                                title="Design survey questions"
+                                subtitle="Completed yesterday"
+                                status="active"
+                                clickable>
+                            </webropol-card-list-item>
+                            
+                            <webropol-card-list-item 
+                                icon="fas fa-clock"
+                                title="Review response data"
+                                subtitle="Due: Next week"
+                                clickable>
+                                <div slot="actions">
+                                    <webropol-button variant="primary" size="sm" icon="fas fa-play">Start</webropol-button>
+                                </div>
+                            </webropol-card-list-item>
+                        </webropol-card-list>
+                        
+                        <webropol-card-actions alignment="center">
+                            <webropol-button variant="secondary" size="sm" icon="fas fa-plus">Add Task</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+                </div>
+            </div>
+
+            <!-- Usage Examples -->
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold text-webropol-gray-800 mb-6">Mixed Layout Examples</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Statistics Card -->
+                    <webropol-card variant="gradient" gradient="from-green-50 to-webropol-teal-50">
+                        <webropol-card-header title="Total Responses" icon="fas fa-chart-pie">
+                        </webropol-card-header>
+                        <webropol-card-content>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-webropol-gray-900 mb-2">1,247</div>
+                                <div class="text-sm text-green-600 font-medium">↗ +12% this month</div>
+                            </div>
+                        </webropol-card-content>
+                    </webropol-card>
+
+                    <!-- Quick Actions Card -->
+                    <webropol-card variant="standard">
+                        <webropol-card-header title="Quick Actions" icon="fas fa-bolt">
+                        </webropol-card-header>
+                        <webropol-card-content padding="sm">
+                            <div class="space-y-3">
+                                <webropol-button variant="primary" size="sm" full-width icon="fas fa-plus">New Survey</webropol-button>
+                                <webropol-button variant="secondary" size="sm" full-width icon="fas fa-calendar">New Event</webropol-button>
+                                <webropol-button variant="tertiary" size="sm" full-width icon="fas fa-folder">New Folder</webropol-button>
+                            </div>
+                        </webropol-card-content>
+                    </webropol-card>
+
+                    <!-- Notification Card -->
+                    <webropol-card variant="light">
+                        <webropol-card-header 
+                            title="Notifications" 
+                            icon="fas fa-bell"
+                            badge="3"
+                            badge-variant="danger">
+                        </webropol-card-header>
+                        <webropol-card-list>
+                            <webropol-card-list-item 
+                                icon="fas fa-info-circle"
+                                title="Survey completed"
+                                subtitle="2 minutes ago"
+                                clickable>
+                            </webropol-card-list-item>
+                            <webropol-card-list-item 
+                                icon="fas fa-exclamation-triangle"
+                                title="Low response rate"
+                                subtitle="1 hour ago"
+                                clickable>
+                            </webropol-card-list-item>
+                        </webropol-card-list>
+                        <webropol-card-actions>
+                            <webropol-button variant="tertiary" size="sm">View All</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Instructions -->
+        <section class="bg-white rounded-2xl p-8 shadow-card">
+            <h2 class="text-2xl font-bold text-webropol-gray-900 mb-6">Usage Instructions</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-webropol-gray-800 mb-4">Button Component</h3>
+                    <div class="bg-webropol-gray-50 p-4 rounded-lg">
+                        <code class="text-sm">
+&lt;webropol-button variant="primary" size="md" icon="fas fa-plus"&gt;<br>
+&nbsp;&nbsp;Button Text<br>
+&lt;/webropol-button&gt;
+                        </code>
+                    </div>
+                    <p class="text-sm text-webropol-gray-600 mt-2">
+                        Available variants: primary, secondary, tertiary, danger, success<br>
+                        Available sizes: sm, md, lg, xl<br>
+                        Optional attributes: disabled, full-width, href, target
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-webropol-gray-800 mb-4">Card Components</h3>
+                    <div class="bg-webropol-gray-50 p-4 rounded-lg">
+                        <code class="text-sm">
+&lt;webropol-card variant="standard" hoverable&gt;<br>
+&nbsp;&nbsp;&lt;webropol-card-header title="Title" icon="fas fa-icon"&gt;&lt;/webropol-card-header&gt;<br>
+&nbsp;&nbsp;&lt;webropol-card-content&gt;Content&lt;/webropol-card-content&gt;<br>
+&nbsp;&nbsp;&lt;webropol-card-actions&gt;...&lt;/webropol-card-actions&gt;<br>
+&lt;/webropol-card&gt;
+                        </code>
+                    </div>
+                    <p class="text-sm text-webropol-gray-600 mt-2">
+                        Card variants: standard, light, gradient, glass<br>
+                        Optional attributes: hoverable, elevated
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Edge Cases & Accessibility Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-webropol-gray-900 mb-8">Accessibility & Edge Cases</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Button Accessibility -->
+                <div>
+                    <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Button Accessibility</h3>
+                    <div class="flex flex-col gap-4">
+                        <webropol-button variant="primary" aria-label="Accessible Primary Button">Accessible Button</webropol-button>
+                        <webropol-button variant="secondary" size="md" aria-label="Secondary Button with Icon" icon="fas fa-user">User</webropol-button>
+                        <webropol-button variant="tertiary" size="md" aria-label="Tertiary Button" tabindex="0">Tabbable Button</webropol-button>
+                        <webropol-button variant="primary" size="md" disabled aria-label="Disabled Button">Disabled</webropol-button>
+                        <webropol-button variant="primary" size="md" style="background: #fff; color: #222; border: 2px solid #222;">Custom Style</webropol-button>
+                    </div>
+                </div>
+                <!-- Card Accessibility -->
+                <div>
+                    <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Card Accessibility</h3>
+                    <webropol-card variant="standard" hoverable tabindex="0" aria-label="Accessible Card">
+                        <webropol-card-header icon="fas fa-universal-access" title="Accessible Card" subtitle="This card is focusable and labeled."></webropol-card-header>
+                        <webropol-card-content>
+                            <p class="text-webropol-gray-600">This card can be focused using the keyboard and is labeled for screen readers.</p>
+                        </webropol-card-content>
+                        <webropol-card-actions>
+                            <webropol-button variant="primary" size="sm">Action</webropol-button>
+                        </webropol-card-actions>
+                    </webropol-card>
+                </div>
+            </div>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Button Edge Cases -->
+                <div>
+                    <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Button Edge Cases</h3>
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <webropol-button variant="primary"></webropol-button>
+                        <webropol-button variant="secondary" icon="fas fa-question"></webropol-button>
+                        <webropol-button variant="tertiary" size="xl" full-width></webropol-button>
+                        <webropol-button variant="danger" size="sm" icon="fas fa-exclamation-triangle">Danger</webropol-button>
+                        <webropol-button variant="success" size="sm" icon="fas fa-check"></webropol-button>
+                    </div>
+                </div>
+                <!-- Card Edge Cases -->
+                <div>
+                    <h3 class="text-xl font-semibold text-webropol-gray-800 mb-4">Card Edge Cases</h3>
+                    <webropol-card variant="gradient" gradient="from-gray-100 to-gray-300">
+                        <webropol-card-header title="No Icon or Subtitle"></webropol-card-header>
+                        <webropol-card-content>
+                            <p class="text-webropol-gray-600">Card with only a title in the header.</p>
+                        </webropol-card-content>
+                    </webropol-card>
+                    <webropol-card variant="light">
+                        <webropol-card-header icon="fas fa-bug" title="Empty Card"></webropol-card-header>
+                    </webropol-card>
+                    <webropol-card variant="glass">
+                        <webropol-card-header icon="fas fa-list" title="List Card with No Items"></webropol-card-header>
+                        <webropol-card-list title="Empty List" collapsible default-open></webropol-card-list>
+                    </webropol-card>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Add some interactivity for demo purposes
+        document.addEventListener('button-click', function(e) {
+            console.log('Button clicked:', e.target);
+        });
+        
+        document.addEventListener('card-click', function(e) {
+            console.log('Card clicked:', e.target);
+        });
+        
+        document.addEventListener('list-item-click', function(e) {
+            console.log('List item clicked:', e.target);
+        });
+    </script>
+</body>
+
+</html>
