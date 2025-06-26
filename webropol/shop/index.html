@@ -38,6 +38,7 @@
   <script src="../components/sidebar.js" type="module"></script>
   <script src="../components/header.js" type="module"></script>
   <script src="../components/breadcrumbs.js" type="module"></script>
+  <script src="../components/floating-button.js" type="module"></script>
 </head>
 <body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" x-data="{ createDropdownOpen: false }">
   <div class="flex h-screen">
@@ -229,50 +230,40 @@
     </div>
   </div>
 
-  <!-- Floating Create New Button -->
-  <div class="fixed bottom-6 right-6 z-50" x-data="{ open: false }">
-    <div class="relative">
-      <!-- Main Button -->
-      <button 
-        @click="open = !open"
-        class="bg-webropol-blue-500 hover:bg-webropol-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 transform hover:scale-105"
-        :class="{ 'rotate-45': open }"
-      >
-        <i class="fas fa-plus text-xl"></i>
-      </button>
-      
-      <!-- Dropdown Menu -->
-      <div 
-        x-show="open" 
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 scale-95 translate-y-2"
-        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-        x-transition:leave-end="opacity-0 scale-95 translate-y-2"
-        @click.away="open = false"
-        class="absolute bottom-16 right-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2"
-        style="display: none;"
-      >
-        <a href="../surveys/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-          <i class="fas fa-poll text-webropol-blue-500 w-5 mr-3"></i>
-          <span class="text-sm">New Survey</span>
-        </a>
-        <a href="../sms/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-          <i class="fas fa-sms text-webropol-teal-500 w-5 mr-3"></i>
-          <span class="text-sm">SMS Campaign</span>
-        </a>
-        <a href="../dashboards/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-          <i class="fas fa-chart-line text-webropol-blue-500 w-5 mr-3"></i>
-          <span class="text-sm">Dashboard</span>
-        </a>
-        <div class="border-t border-gray-100 my-1"></div>
-        <a href="../events/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-          <i class="fas fa-calendar-plus text-webropol-teal-500 w-5 mr-3"></i>
-          <span class="text-sm">Event</span>
-        </a>
-      </div>
-    </div>
-  </div>
+  <!-- Floating Create Button Component -->
+  <webropol-floating-button 
+    position="bottom-center"
+    theme="teal-blue"
+    items='[
+      {
+        "id": "surveys",
+        "label": "Survey",
+        "description": "Create custom surveys",
+        "icon": "fas fa-poll-h",
+        "url": "../surveys/create.html"
+      },
+      {
+        "id": "sms",
+        "label": "SMS Campaign", 
+        "description": "SMS messaging",
+        "icon": "fas fa-sms",
+        "url": "../sms/create.html"
+      },
+      {
+        "id": "events",
+        "label": "Event",
+        "description": "Event management", 
+        "icon": "fas fa-calendar-alt",
+        "url": "../events/create.html"
+      },
+      {
+        "id": "dashboards",
+        "label": "Dashboard",
+        "description": "Data visualization",
+        "icon": "fas fa-chart-line", 
+        "url": "../dashboards/create.html"
+      }
+    ]'>
+  </webropol-floating-button>
 </body>
 </html>

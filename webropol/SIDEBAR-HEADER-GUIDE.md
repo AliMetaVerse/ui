@@ -1,6 +1,6 @@
 # Webropol Sidebar and Header Integration Guide
 
-This guide explains how to properly integrate the Webropol sidebar and header components into new pages in the webropol folder.
+This guide explains how to properly integrate the Webropol sidebar, header, and floating button components into new pages in the webropol folder.
 
 ## Overview
 
@@ -8,13 +8,15 @@ All pages in the Webropol application should use a consistent layout with:
 - **Sidebar navigation** (`<webropol-sidebar>`)
 - **Header component** (`<webropol-header>`) 
 - **Breadcrumbs navigation** (`<webropol-breadcrumbs>`)
+- **Floating Create Button** (`<webropol-floating-button>`) - NEW!
 
 ## Quick Start
 
 1. **Copy the template**: Use `page-template.html` as your starting point for new pages
 2. **Update file paths**: Adjust script imports based on your page location
 3. **Configure components**: Set the active state, base paths, and breadcrumbs
-4. **Add your content**: Replace the placeholder content with your page-specific content
+4. **Add floating button**: Include the floating button component for quick actions
+5. **Add your content**: Replace the placeholder content with your page-specific content
 
 ## Detailed Configuration
 
@@ -27,16 +29,19 @@ Include these script imports in your `<head>` section. **Update paths based on y
 <script src="components/sidebar.js" type="module"></script>
 <script src="components/header.js" type="module"></script>
 <script src="components/breadcrumbs.js" type="module"></script>
+<script src="components/floating-button.js" type="module"></script>
 
 <!-- For one level deep (e.g., /webropol/surveys/index.html) -->
 <script src="../components/sidebar.js" type="module"></script>
 <script src="../components/header.js" type="module"></script>
 <script src="../components/breadcrumbs.js" type="module"></script>
+<script src="../components/floating-button.js" type="module"></script>
 
 <!-- For two levels deep (e.g., /webropol/surveys/create/index.html) -->
 <script src="../../components/sidebar.js" type="module"></script>
 <script src="../../components/header.js" type="module"></script>
 <script src="../../components/breadcrumbs.js" type="module"></script>
+<script src="../../components/floating-button.js" type="module"></script>
 ```
 
 ### 2. Basic HTML Structure
@@ -48,17 +53,22 @@ Use this basic structure for all pages:
     <div class="flex h-screen">
         <webropol-sidebar active="[SECTION]" base="[BASE_PATH]"></webropol-sidebar>
         <div class="flex-1 flex flex-col overflow-hidden">
-            <webropol-header username="Ali Al-Zuhairi"></webropol-header>
+            <webropol-header username="[USERNAME]"></webropol-header>
             <div class="bg-white/70 backdrop-blur px-0 sm:px-4">
                 <webropol-breadcrumbs trail='[BREADCRUMB_TRAIL]'></webropol-breadcrumbs>
             </div>
-            <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12 bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30 min-h-screen" role="main">
-                <div class="max-w-7xl mx-auto">
-                    <!-- Your page content here -->
-                </div>
+            <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12" role="main">
+                <!-- Your page content goes here -->
             </main>
         </div>
     </div>
+
+    <!-- Floating Create Button Component -->
+    <webropol-floating-button 
+        position="bottom-center"
+        theme="teal-blue"
+        items='[...]'>
+    </webropol-floating-button>
 </body>
 ```
 
@@ -106,39 +116,76 @@ Update the `trail` attribute with proper navigation hierarchy:
 <webropol-breadcrumbs trail='[{"label":"Home","url":"../../index.html"},{"label":"Surveys","url":"../index.html"},{"label":"Create Survey","url":"index.html"}]'></webropol-breadcrumbs>
 ```
 
-## Examples by Page Location
+### 5. Floating Create Button Configuration
 
-### Root Level Page (`/webropol/new-page.html`)
+The floating button component provides quick access to create new items. Add it before the closing `</body>` tag:
 
 ```html
-<script src="components/sidebar.js" type="module"></script>
-<script src="components/header.js" type="module"></script>
-<script src="components/breadcrumbs.js" type="module"></script>
-
-<webropol-sidebar active="home" base=""></webropol-sidebar>
-<webropol-breadcrumbs trail='[{"label":"Home","url":"index.html"},{"label":"New Page","url":"new-page.html"}]'></webropol-breadcrumbs>
+<webropol-floating-button 
+    position="bottom-center"
+    theme="teal-blue"
+    items='[
+        {
+            "id": "surveys",
+            "label": "Survey",
+            "description": "Create custom surveys",
+            "icon": "fas fa-poll-h",
+            "url": "../surveys/create.html"
+        },
+        {
+            "id": "sms",
+            "label": "SMS Campaign", 
+            "description": "SMS messaging",
+            "icon": "fas fa-sms",
+            "url": "../sms/create.html"
+        },
+        {
+            "id": "events",
+            "label": "Event",
+            "description": "Event management", 
+            "icon": "fas fa-calendar-alt",
+            "url": "../events/create.html"
+        },
+        {
+            "id": "dashboards",
+            "label": "Dashboard",
+            "description": "Data visualization",
+            "icon": "fas fa-chart-line", 
+            "url": "../dashboards/create.html"
+        }
+    ]'>
+</webropol-floating-button>
 ```
 
-### Section Page (`/webropol/surveys/new-feature.html`)
+#### Floating Button Attributes:
+
+- **`position`**: `"bottom-center"`, `"bottom-right"`, or `"bottom-left"`
+- **`theme`**: `"teal-blue"` or `"blue"`
+- **`items`**: JSON array of menu items with id, label, description, icon, and url
+
+#### Customizing Menu Items:
+
+Update the `items` array to include only relevant options for your page context. For example, on the SMS page, you might want SMS-specific items:
 
 ```html
-<script src="../components/sidebar.js" type="module"></script>
-<script src="../components/header.js" type="module"></script>
-<script src="../components/breadcrumbs.js" type="module"></script>
-
-<webropol-sidebar active="surveys" base="../"></webropol-sidebar>
-<webropol-breadcrumbs trail='[{"label":"Home","url":"../index.html"},{"label":"Surveys","url":"index.html"},{"label":"New Feature","url":"new-feature.html"}]'></webropol-breadcrumbs>
-```
-
-### Deep Page (`/webropol/surveys/create/advanced.html`)
-
-```html
-<script src="../../components/sidebar.js" type="module"></script>
-<script src="../../components/header.js" type="module"></script>
-<script src="../../components/breadcrumbs.js" type="module"></script>
-
-<webropol-sidebar active="surveys" base="../../"></webropol-sidebar>
-<webropol-breadcrumbs trail='[{"label":"Home","url":"../../index.html"},{"label":"Surveys","url":"../index.html"},{"label":"Create","url":"index.html"},{"label":"Advanced","url":"advanced.html"}]'></webropol-breadcrumbs>
+<webropol-floating-button 
+    items='[
+        {
+            "id": "sms-campaign",
+            "label": "SMS Campaign",
+            "description": "Create new SMS survey",
+            "icon": "fas fa-sms",
+            "url": "../sms/create.html"
+        },
+        {
+            "id": "contact-list",
+            "label": "Contact List",
+            "description": "Manage recipients",
+            "icon": "fas fa-address-book",
+            "url": "../sms/contacts.html"
+        }
+    ]'>
+</webropol-floating-button>
 ```
 
 ## Required Dependencies
