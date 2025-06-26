@@ -13,133 +13,131 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">        <header class="mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Webropol Design System</h1>
-            <p class="text-lg text-gray-600">A comprehensive collection of UI components and design guidelines</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        <header class="mb-8">
+            <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Webropol Design System</h1>
+            <p class="text-base text-gray-600 mb-4">A comprehensive collection of UI components and design guidelines</p>
             
             <!-- Search Input -->
-            <div class="mt-6">
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        id="searchInput"
-                        class="w-full px-4 py-2 pl-10 pr-4 text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Search components..."
-                    >
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                    </div>
+            <div class="relative">
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    class="w-full px-4 py-2 pl-10 pr-4 text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Search components..."
+                >
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                 </div>
             </div>
         </header>
 
-        <div id="componentsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="componentsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <!-- Design System Section -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-palette text-green-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-palette text-green-500 w-5 h-5 mr-2"></i>
                     Design System
-                </h2>                <ul class="space-y-2">
-                    <li><a href="ds/templates/interactive-ds.html" class="text-blue-600 hover:text-blue-800 hover:underline">Design System Interaction</a></li>
-                    <li><a href="ds/index.html" class="text-blue-600 hover:text-blue-800 hover:underline">Webropol Design System</a></li>
+                </h2>                <ul class="space-y-1.5">
+                    <li><a href="ds/templates/interactive-ds.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Design System Interaction</a></li>
+                    <li><a href="ds/index.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Webropol Design System</a></li>
                 </ul>
             </div>
 
             <!-- Wiki Section -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-book text-green-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-book text-green-500 w-5 h-5 mr-2"></i>
                     Wiki
                 </h2>                
-                <ul class="space-y-2">
-                    <li><a href="wiki/wiki-test.html" class="text-blue-600 hover:text-blue-800 hover:underline">Wiki Documentation</a></li>
+                <ul class="space-y-1.5">
+                    <li><a href="wiki/wiki-test.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Wiki Documentation</a></li>
                 </ul>
             </div>
 
             <!-- Mobile & Tablet Devices -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-mobile-screen text-yellow-500 w-6 h-6 mr-2"></i>
-                    Mobile & Tablet Devices
-                </h2>                <ul class="space-y-2">
-                    <li><a href="mobile-device/mobile-device-modern-full.html" class="text-blue-600 hover:text-blue-800 hover:underline">Modern Mobile Device - Full View</a></li>
-                    <li><a href="mobile-device/mobile-device-modern.html" class="text-blue-600 hover:text-blue-800 hover:underline">Modern Mobile Device Mockup</a></li>
-                    <li><a href="mobile-device/tablet-device-modern-full.html" class="text-blue-600 hover:text-blue-800 hover:underline">Modern Tablet Device Mockup</a></li>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-mobile-screen text-yellow-500 w-5 h-5 mr-2"></i>
+                    Mobile & Tablet
+                </h2>                <ul class="space-y-1.5">
+                    <li><a href="mobile-device/mobile-device-modern-full.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Mobile - Full View</a></li>
+                    <li><a href="mobile-device/mobile-device-modern.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Mobile Mockup</a></li>
+                    <li><a href="mobile-device/tablet-device-modern-full.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Tablet Mockup</a></li>
                 </ul>
             </div>
 
             <!-- Ranking & Survey Components -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-chart-bar text-red-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-chart-bar text-red-500 w-5 h-5 mr-2"></i>
                     Ranking & Survey
-                </h2>                <ul class="space-y-2">
-                    <li><a href="ranking/ranking.html" class="text-blue-600 hover:text-blue-800 hover:underline">Star & Smiley Rating Components</a></li>
-                    <li><a href="ranking/ranking-accessiblity.html" class="text-blue-600 hover:text-blue-800 hover:underline">Accessible Rating Components</a></li>
-                    <li><a href="ranking/ranking-accessiblity-size.html" class="text-blue-600 hover:text-blue-800 hover:underline">Accessible Rating Components - Sizing</a></li>
-                    <li><a href="ranking/ranking-nps-numbers.html" class="text-blue-600 hover:text-blue-800 hover:underline">NPS Numeric Rating Component</a></li>
+                </h2>                <ul class="space-y-1.5">
+                    <li><a href="ranking/ranking.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Star & Smiley Rating</a></li>
+                    <li><a href="ranking/ranking-accessiblity.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Accessible Rating</a></li>
+                    <li><a href="ranking/ranking-accessiblity-size.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Accessible Sizing</a></li>
+                    <li><a href="ranking/ranking-nps-numbers.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">NPS Numeric Rating</a></li>
                 </ul>
             </div>
 
             <!-- Samples & Examples -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-box text-indigo-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-box text-indigo-500 w-5 h-5 mr-2"></i>
                     Samples & Examples
-                </h2>                <ul class="space-y-2">
-                    <li><a href="samples/auto-deletion.html" class="text-blue-600 hover:text-blue-800 hover:underline">Auto Personal Data Deletion</a></li>
-                    <li><a href="samples/clickable-list-button.html" class="text-blue-600 hover:text-blue-800 hover:underline">Clickable List Component</a></li>
-                    <li><a href="samples/compare.html" class="text-blue-600 hover:text-blue-800 hover:underline">Data Comparison Component</a></li>
-                    <li><a href="samples/event.html" class="text-blue-600 hover:text-blue-800 hover:underline">Event Management Interface</a></li>
-                    <li><a href="samples/smartnotifier.html" class="text-blue-600 hover:text-blue-800 hover:underline">Smart Notification System</a></li>
-                    <li><a href="samples/tabs-toolbars.html" class="text-blue-600 hover:text-blue-800 hover:underline">Navigation Tabs & Toolbars</a></li>
-                    <li><a href="samples/zoom.html" class="text-blue-600 hover:text-blue-800 hover:underline">Content Zoom Control</a></li>
-                    <li><a href="samples/gdpr-pii-detection.html" class="text-blue-600 hover:text-blue-800 hover:underline">GDPR PII Detection Tool</a></li>
+                </h2>                <ul class="space-y-1.5">
+                    <li><a href="samples/auto-deletion.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Auto Data Deletion</a></li>
+                    <li><a href="samples/clickable-list-button.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Clickable List</a></li>
+                    <li><a href="samples/compare.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Data Comparison</a></li>
+                    <li><a href="samples/event.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Event Management</a></li>
+                    <li><a href="samples/smartnotifier.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smart Notifications</a></li>
+                    <li><a href="samples/tabs-toolbars.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Tabs & Toolbars</a></li>
+                    <li><a href="samples/zoom.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Content Zoom</a></li>
+                    <li><a href="samples/gdpr-pii-detection.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">GDPR PII Detection</a></li>
                 </ul>
             </div>
 
             <!-- Additional Components -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-plus-square text-pink-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-plus-square text-pink-500 w-5 h-5 mr-2"></i>
                     Additional Components
-                </h2>                <ul class="space-y-2">
-                    <li><a href="selection-drop/selection-drop.html" class="text-blue-600 hover:text-blue-800 hover:underline">Dropdown Selection Component</a></li>
-                    <li><a href="signature/ali.html" class="text-blue-600 hover:text-blue-800 hover:underline">Email Signature Template</a></li>
-                    <li><a href="smileys/smiley-survey.html" class="text-blue-600 hover:text-blue-800 hover:underline">Smiley Rating Component</a></li>
-                    <li><a href="smileys/smiley-survey-bg.html" class="text-blue-600 hover:text-blue-800 hover:underline">Smiley Rating with Background</a></li>
-                    <li><a href="smileys/smiley-survey-bg-blur.html" class="text-blue-600 hover:text-blue-800 hover:underline">Smiley Rating with Blurred Background</a></li>
-                    <li><a href="smileys/smiley-survey-bg-blur-c.html" class="text-blue-600 hover:text-blue-800 hover:underline">Smiley Rating with Custom Blur</a></li>
+                </h2>                <ul class="space-y-1.5">
+                    <li><a href="selection-drop/selection-drop.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Dropdown Selection</a></li>
+                    <li><a href="signature/ali.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Email Signature</a></li>
+                    <li><a href="smileys/smiley-survey.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley Rating</a></li>
+                    <li><a href="smileys/smiley-survey-bg.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley w/ Background</a></li>
+                    <li><a href="smileys/smiley-survey-bg-blur.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley w/ Blur</a></li>
+                    <li><a href="smileys/smiley-survey-bg-blur-c.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Smiley Custom Blur</a></li>
                 </ul>
             </div>
             
             <!-- Backend & Components Section -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-server text-blue-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-server text-blue-500 w-5 h-5 mr-2"></i>
                     Backend & Components
                 </h2>
-                <ul class="space-y-2">
-                    <li><a href="backend/pseudo-bg-line.html" class="text-blue-600 hover:text-blue-800 hover:underline">Pseudo Background Line</a></li>
-                    <li><a href="backend/pseudo-bg.html" class="text-blue-600 hover:text-blue-800 hover:underline">Pseudo Background</a></li>
-                    <li><a href="backend/pseudo-simple.html" class="text-blue-600 hover:text-blue-800 hover:underline">Pseudo Simple</a></li>
+                <ul class="space-y-1.5">
+                    <li><a href="backend/pseudo-bg-line.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Pseudo Background Line</a></li>
+                    <li><a href="backend/pseudo-bg.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Pseudo Background</a></li>
+                    <li><a href="backend/pseudo-simple.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Pseudo Simple</a></li>
                 </ul>
             </div>
 
             <!-- AI & Chatbots Section -->
-            <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fa-solid fa-robot text-purple-500 w-6 h-6 mr-2"></i>
+            <div class="bg-white rounded-lg shadow-sm p-5 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fa-solid fa-robot text-purple-500 w-5 h-5 mr-2"></i>
                     AI & Chatbots
-                </h2>                <ul class="space-y-2">
-                    <li><a href="ai/index.html" class="text-blue-600 hover:text-blue-800 hover:underline">AI Assistants Comparison</a></li>
-                    <li><a href="chatbots/botpress.html" class="text-blue-600 hover:text-blue-800 hover:underline">Botpress Chatbot Interface</a></li>
-                    <li><a href="chatbots/moicca.html" class="text-blue-600 hover:text-blue-800 hover:underline">Moicca Chatbot Interface</a></li>
+                </h2>                <ul class="space-y-1.5">
+                    <li><a href="ai/index.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">AI Assistants Comparison</a></li>
+                    <li><a href="chatbots/botpress.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Botpress Interface</a></li>
+                    <li><a href="chatbots/moicca.html" class="text-blue-600 hover:text-blue-800 hover:underline text-sm">Moicca Interface</a></li>
                 </ul>
             </div>
 
-        </div>        <footer class="mt-16 text-center text-gray-600">
-            <p>Webropol Design System - Updated May 2025</p>
+        </div>        <footer class="mt-12 text-center text-gray-600">
+            <p>Webropol Design System - Updated June 2025</p>
         </footer>
     </div>
 
