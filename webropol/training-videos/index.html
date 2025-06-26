@@ -4,24 +4,196 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training Videos - MyWebropol</title>
-  <script src="../../components/sidebar.js" type="module"></script>
-  <script src="../../components/header.js" type="module"></script>
-  <script src="../../components/breadcrumbs.js" type="module"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'webropol-blue': {
+              50: '#f0f9ff',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1'
+            },
+            'webropol-teal': {
+              50: '#f0fdfa',
+              500: '#14b8a6',
+              600: '#0d9488'
+            },
+            'webropol-gray': {
+              50: '#f9fafb',
+              100: '#f3f4f6',
+              600: '#4b5563',
+              800: '#1f2937',
+              900: '#111827'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="../components/sidebar.js" type="module"></script>
+  <script src="../components/header.js" type="module"></script>
+  <script src="../components/breadcrumbs.js" type="module"></script>
 </head>
-<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30">
+<body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" x-data="{ createDropdownOpen: false }">
   <div class="flex h-screen">
-    <webropol-sidebar active="training-videos" base="../../"></webropol-sidebar>
+    <webropol-sidebar active="training-videos" base="../"></webropol-sidebar>
     <div class="flex-1 flex flex-col overflow-hidden">
       <webropol-header username="Ali Al-Zuhairi"></webropol-header>
       <div class="bg-white/70 backdrop-blur px-0 sm:px-4">
-        <webropol-breadcrumbs trail='[{"label":"Home","url":"../../index.html"},{"label":"MyWebropol","url":"../index.html"},{"label":"Training Videos","url":"index.html"}]'></webropol-breadcrumbs>
+        <webropol-breadcrumbs trail='[{"label":"Home","url":"../index.html"},{"label":"MyWebropol","url":"../mywebropol/index.html"},{"label":"Training Videos","url":"index.html"}]'></webropol-breadcrumbs>
       </div>
       <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12">
         <div class="max-w-7xl mx-auto">
-          <h1 class="text-3xl font-bold mb-8">Training Videos</h1>
-          <p class="text-lg text-webropol-gray-600">This is a placeholder for the Training Videos page.</p>
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+              <h1 class="text-3xl font-bold mb-8 text-webropol-gray-900">Training Videos</h1>
+              
+              <!-- Video Categories -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div class="h-32 bg-gradient-to-r from-webropol-blue-500 to-webropol-teal-500 flex items-center justify-center">
+                    <i class="fas fa-play-circle text-white text-4xl"></i>
+                  </div>
+                  <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-2">Getting Started</h3>
+                    <p class="text-webropol-gray-600 text-sm mb-4">Learn the basics of creating and managing surveys</p>
+                    <span class="inline-block bg-webropol-blue-100 text-webropol-blue-700 px-2 py-1 rounded text-xs">5 videos</span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div class="h-32 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-500 flex items-center justify-center">
+                    <i class="fas fa-chart-bar text-white text-4xl"></i>
+                  </div>
+                  <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-2">Advanced Analytics</h3>
+                    <p class="text-webropol-gray-600 text-sm mb-4">Deep dive into data analysis and reporting</p>
+                    <span class="inline-block bg-webropol-teal-100 text-webropol-teal-700 px-2 py-1 rounded text-xs">8 videos</span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div class="h-32 bg-gradient-to-r from-webropol-blue-600 to-webropol-teal-600 flex items-center justify-center">
+                    <i class="fas fa-cogs text-white text-4xl"></i>
+                  </div>
+                  <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-2">Admin Tools</h3>
+                    <p class="text-webropol-gray-600 text-sm mb-4">Master user management and system settings</p>
+                    <span class="inline-block bg-webropol-gray-100 text-webropol-gray-700 px-2 py-1 rounded text-xs">6 videos</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Videos -->
+              <div class="mt-12">
+                <h2 class="text-2xl font-bold mb-6 text-webropol-gray-900">Recent Videos</h2>
+                <div class="space-y-4">
+                  <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
+                    <div class="flex-shrink-0 w-16 h-16 bg-webropol-blue-500 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-play text-white text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-lg font-semibold">Creating Your First Survey</h3>
+                      <p class="text-webropol-gray-600 text-sm">A step-by-step guide to building effective surveys</p>
+                      <span class="text-xs text-webropol-gray-500">Duration: 12:34</span>
+                    </div>
+                    <button class="bg-webropol-blue-500 text-white px-4 py-2 rounded-lg hover:bg-webropol-blue-600 transition-colors">
+                      <i class="fas fa-play mr-2"></i>Watch
+                    </button>
+                  </div>
+
+                  <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
+                    <div class="flex-shrink-0 w-16 h-16 bg-webropol-teal-500 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-play text-white text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-lg font-semibold">Advanced Question Types</h3>
+                      <p class="text-webropol-gray-600 text-sm">Explore matrix questions, ranking, and conditional logic</p>
+                      <span class="text-xs text-webropol-gray-500">Duration: 18:45</span>
+                    </div>
+                    <button class="bg-webropol-teal-500 text-white px-4 py-2 rounded-lg hover:bg-webropol-teal-600 transition-colors">
+                      <i class="fas fa-play mr-2"></i>Watch
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+              <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <div class="space-y-3">
+                  <a href="#" class="block text-webropol-blue-600 hover:text-webropol-blue-700 text-sm">
+                    <i class="fas fa-book mr-2"></i>Video Library
+                  </a>
+                  <a href="#" class="block text-webropol-blue-600 hover:text-webropol-blue-700 text-sm">
+                    <i class="fas fa-download mr-2"></i>Download Resources
+                  </a>
+                  <a href="#" class="block text-webropol-blue-600 hover:text-webropol-blue-700 text-sm">
+                    <i class="fas fa-question-circle mr-2"></i>FAQ
+                  </a>
+                  <a href="#" class="block text-webropol-blue-600 hover:text-webropol-blue-700 text-sm">
+                    <i class="fas fa-headset mr-2"></i>Contact Support
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
+    </div>
+  </div>
+
+  <!-- Floating Create New Button -->
+  <div class="fixed bottom-6 right-6 z-50" x-data="{ open: false }">
+    <div class="relative">
+      <!-- Main Button -->
+      <button 
+        @click="open = !open"
+        class="bg-webropol-blue-500 hover:bg-webropol-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 transform hover:scale-105"
+        :class="{ 'rotate-45': open }"
+      >
+        <i class="fas fa-plus text-xl"></i>
+      </button>
+      
+      <!-- Dropdown Menu -->
+      <div 
+        x-show="open" 
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+        x-transition:leave-end="opacity-0 scale-95 translate-y-2"
+        @click.away="open = false"
+        class="absolute bottom-16 right-0 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2"
+        style="display: none;"
+      >
+        <a href="../surveys/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+          <i class="fas fa-poll text-webropol-blue-500 w-5 mr-3"></i>
+          <span class="text-sm">New Survey</span>
+        </a>
+        <a href="../sms/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+          <i class="fas fa-sms text-webropol-teal-500 w-5 mr-3"></i>
+          <span class="text-sm">SMS Campaign</span>
+        </a>
+        <a href="../dashboards/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+          <i class="fas fa-chart-line text-webropol-blue-500 w-5 mr-3"></i>
+          <span class="text-sm">Dashboard</span>
+        </a>
+        <div class="border-t border-gray-100 my-1"></div>
+        <a href="../events/create.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+          <i class="fas fa-calendar-plus text-webropol-teal-500 w-5 mr-3"></i>
+          <span class="text-sm">Event</span>
+        </a>
+      </div>
     </div>
   </div>
 </body>

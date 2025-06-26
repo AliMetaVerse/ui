@@ -24,7 +24,7 @@ class WebropolSidebar extends HTMLElement {
             <i class="fas fa-poll-h w-5 mr-4"></i>
             <span>Surveys</span>
           </a>
-          <a href="${link('events/events-list.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='events' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+          <a href="${link('events/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='events' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
             <i class="fas fa-calendar-alt w-5 mr-4 group-hover:scale-110 transition-transform"></i>
             <span class="font-medium">Events</span>
           </a>
