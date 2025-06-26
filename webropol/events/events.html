@@ -71,17 +71,18 @@
     <script src="../../components/sidebar.js" type="module"></script>
     <script src="../../components/header.js" type="module"></script>
     <script src="../../components/breadcrumbs.js" type="module"></script>
+    <script src="../components/floating-button.js" type="module"></script>
 </head>
 
 <body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" style="background-color: #ebf4f7;"
-    x-data="libraryApp()" @click="showContextMenu = null; showFloatingMenu = false">
+    x-data="libraryApp()" @click="showContextMenu = null">
 
     <div class="flex h-screen">
-        <webropol-sidebar active="events"></webropol-sidebar>
+        <webropol-sidebar active="events" base="../"></webropol-sidebar>
         <div class="flex-1 flex flex-col overflow-hidden">
             <webropol-header username="Ali Al-Zuhairi"></webropol-header>
             <div class="bg-white/70 backdrop-blur px-0 sm:px-4">
-                <webropol-breadcrumbs trail='[{"label":"Home","url":"../../index.html"},{"label":"Events","url":"events.html"}]'></webropol-breadcrumbs>
+                <webropol-breadcrumbs trail='[{"label":"Home","url":"../../index.html"},{"label":"Events","url":"index.html"}]'></webropol-breadcrumbs>
             </div>
             <!-- Page Content -->
             <main class="flex-1 overflow-y-auto px-6 py-12 lg:px-12" role="main">
@@ -98,134 +99,8 @@
         </div>
     </div>
 
-    <!-- Floating Create Button -->
-    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40">
-        <!-- Create Menu (appears above button) -->
-        <div x-show="showFloatingMenu" x-cloak
-            x-transition:enter="ease-out duration-200" 
-            x-transition:enter-start="opacity-0 translate-y-4 scale-95"
-            x-transition:enter-end="opacity-100 translate-y-0 scale-100" 
-            x-transition:leave="ease-in duration-150"
-            x-transition:leave-start="opacity-100 translate-y-0 scale-100" 
-            x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-            class="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4">
-            
-            <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-webropol-gray-200/50 py-3 min-w-[280px]" @click.stop>
-                <div class="space-y-1">
-                    <!-- Surveys -->
-                    <button @click="createItemFromFloat('surveys')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-poll-h text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">Surveys</div>
-                            <div class="text-xs text-webropol-gray-500">Create custom surveys</div>
-                        </div>
-                    </button>
-
-                    <!-- Events -->
-                    <button @click="createItemFromFloat('events')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-calendar-alt text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">Events</div>
-                            <div class="text-xs text-webropol-gray-500">Event management</div>
-                        </div>
-                    </button>
-
-                    <!-- EXW Surveys -->
-                    <button @click="createItemFromFloat('exw-surveys')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-chart-line text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">EXW Surveys</div>
-                            <div class="text-xs text-webropol-gray-500">Employee experience</div>
-                        </div>
-                    </button>
-
-                    <!-- Case Management -->
-                    <button @click="createItemFromFloat('case-management')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-briefcase text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">Case Management</div>
-                            <div class="text-xs text-webropol-gray-500">Manage cases</div>
-                        </div>
-                    </button>
-
-                    <!-- eTests -->
-                    <button @click="createItemFromFloat('etests')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-clipboard-check text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">eTests</div>
-                            <div class="text-xs text-webropol-gray-500">Online testing</div>
-                        </div>
-                    </button>
-
-                    <!-- Assessments -->
-                    <button @click="createItemFromFloat('assessments')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-tasks text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">Assessments</div>
-                            <div class="text-xs text-webropol-gray-500">Performance reviews</div>
-                        </div>
-                    </button>
-
-                    <!-- Touch Tablets -->
-                    <button @click="createItemFromFloat('touch-tablets')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-tablet-alt text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">Touch Tablets</div>
-                            <div class="text-xs text-webropol-gray-500">Tablet surveys</div>
-                        </div>
-                    </button>
-
-                    <!-- Direct Mobile Surveys -->
-                    <button @click="createItemFromFloat('mobile-surveys')"
-                        class="group w-full flex items-center px-4 py-3 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
-                        <i class="fas fa-mobile-alt text-webropol-gray-700 text-lg mr-4 group-hover:text-webropol-teal-600 transition-colors"></i>
-                        <div class="flex-1">
-                            <div class="font-medium text-webropol-gray-900 group-hover:text-webropol-teal-700">Mobile Surveys</div>
-                            <div class="text-xs text-webropol-gray-500">Mobile optimized</div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Floating Button -->
-        <button @click.stop="showFloatingMenu = !showFloatingMenu"
-            class="group relative w-16 h-16 bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 active:scale-95">
-            
-            <!-- Plus Icon -->
-            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-200"
-                :class="showFloatingMenu ? 'rotate-45' : 'rotate-0'">
-                <i class="fas fa-plus text-white text-xl font-bold"></i>
-            </div>
-            
-            <!-- Ripple Effect -->
-            <div class="absolute inset-0 rounded-full bg-white/20 scale-0 group-hover:scale-100 group-hover:opacity-75 transition-all duration-300"></div>
-            
-            <!-- Tooltip -->
-            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-2 bg-black/80 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                Create New
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/80"></div>
-            </div>
-        </button>
-    </div>
-
-    <!-- Backdrop for floating menu -->
-    <div x-show="showFloatingMenu" x-cloak @click="showFloatingMenu = false"
-        class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
-        x-transition:enter="ease-out duration-200" 
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100" 
-        x-transition:leave="ease-in duration-150"
-        x-transition:leave-start="opacity-100" 
-        x-transition:leave-end="opacity-0">
-    </div>
+    <!-- Floating Create Button Component -->
+    <webropol-floating-button></webropol-floating-button>
 
     <!-- Create Folder Modal -->
     <div x-show="showCreateFolder" x-cloak
@@ -730,7 +605,6 @@
                 showPreviewModal: false,
                 showCreateFolder: false,
                 showCreateModal: false,
-                showFloatingMenu: false,
                 showMoveToFolder: null,
                 showAddToFolder: null,
                 newFolderName: '',
@@ -913,53 +787,6 @@
 
                     // Handle the creation logic based on type
                     this.handleItemCreation(type);
-                },
-
-                createItemFromFloat(type) {
-                    // Close the floating menu first
-                    this.showFloatingMenu = false;
-
-                    // Handle the creation logic based on type
-                    this.handleItemCreation(type);
-                },
-
-                handleItemCreation(type) {
-                    switch (type) {
-                        case 'surveys':
-                            console.log('Creating new survey...');
-                            // Add your survey creation logic here
-                            break;
-                        case 'events':
-                            console.log('Creating new event...');
-                            // Add your event creation logic here
-                            break;
-                        case 'exw-surveys':
-                            console.log('Creating new EXW survey...');
-                            // Add your EXW survey creation logic here
-                            break;
-                        case 'case-management':
-                            console.log('Creating new case management...');
-                            // Add your case management creation logic here
-                            break;
-                        case 'etests':
-                            console.log('Creating new eTest...');
-                            // Add your eTest creation logic here
-                            break;
-                        case 'assessments':
-                            console.log('Creating new assessment...');
-                            // Add your assessment creation logic here
-                            break;
-                        case 'touch-tablets':
-                            console.log('Creating new touch tablet survey...');
-                            // Add your touch tablet creation logic here
-                            break;
-                        case 'mobile-surveys':
-                            console.log('Creating new mobile survey...');
-                            // Add your mobile survey creation logic here
-                            break;
-                        default:
-                            console.log('Unknown item type:', type);
-                    }
                 },
 
                 editFolder(folderId) {

@@ -1,208 +1,214 @@
-// Webropol Floating Create Button Component
-class WebropolfloatingButton extends HTMLElement {
-    constructor() {
-        super();
-        this.innerHTML = this.render();
-        this.setupEventListeners();
-    }
+// Webropol Floating Create Button Component - Fixed version
+class WebropolFloatingButton extends HTMLElement {
+  constructor() {
+    super();
+    this.showMenu = false;
+  }
 
-    static get observedAttributes() {
-        return ['items', 'position', 'theme'];
-    }
+  connectedCallback() {
+    this.render();
+    this.setupEventListeners();
+  }
 
-    connectedCallback() {
-        // Initialize Alpine.js data if not already present
-        if (!window.Alpine) {
-            console.warn('Alpine.js is required for the floating button component');
-            return;
-        }
-    }
-
-    get items() {
-        const itemsAttr = this.getAttribute('items');
-        if (itemsAttr) {
-            try {
-                return JSON.parse(itemsAttr);
-            } catch (e) {
-                console.error('Invalid items JSON:', e);
-                return this.getDefaultItems();
-            }
-        }
-        return this.getDefaultItems();
-    }
-
-    get position() {
-        return this.getAttribute('position') || 'bottom-center';
-    }
-
-    get theme() {
-        return this.getAttribute('theme') || 'teal-blue';
-    }
-
-    getDefaultItems() {
-        return [
-            {
-                id: 'surveys',
-                label: 'Survey',
-                description: 'Create custom surveys',
-                icon: 'fas fa-poll-h',
-                url: '../surveys/create.html'
-            },
-            {
-                id: 'sms',
-                label: 'SMS Campaign',
-                description: 'SMS messaging',
-                icon: 'fas fa-sms',
-                url: '../sms/create.html'
-            },
-            {
-                id: 'events',
-                label: 'Event',
-                description: 'Event management',
-                icon: 'fas fa-calendar-alt',
-                url: '../events/create.html'
-            },
-            {
-                id: 'dashboards',
-                label: 'Dashboard',
-                description: 'Data visualization',
-                icon: 'fas fa-chart-line',
-                url: '../dashboards/create.html'
-            }
-        ];
-    }
-
-    getPositionClasses() {
-        const positions = {
-            'bottom-center': 'fixed bottom-8 left-1/2 transform -translate-x-1/2',
-            'bottom-right': 'fixed bottom-8 right-8',
-            'bottom-left': 'fixed bottom-8 left-8'
-        };
-        return positions[this.position] || positions['bottom-center'];
-    }
-
-    getThemeClasses() {
-        const themes = {
-            'teal-blue': {
-                button: 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 hover:from-webropol-teal-600 hover:to-webropol-blue-700',
-                menuItem: 'hover:bg-webropol-teal-50 group-hover:text-webropol-teal-600'
-            },
-            'blue': {
-                button: 'bg-webropol-blue-500 hover:bg-webropol-blue-600',
-                menuItem: 'hover:bg-webropol-blue-50 group-hover:text-webropol-blue-600'
-            }
-        };
-        return themes[this.theme] || themes['teal-blue'];
-    }
-
-    setupEventListeners() {
-        // Add click event delegation for menu items
-        this.addEventListener('click', (e) => {
-            const menuItem = e.target.closest('[data-create-item]');
-            if (menuItem) {
-                const itemId = menuItem.getAttribute('data-create-item');
-                const url = menuItem.getAttribute('data-url');
-                this.handleCreateItem(itemId, url);
-            }
-        });
-    }
-
-    handleCreateItem(itemId, url) {
-        // Close the menu first
-        const event = new CustomEvent('webropol:close-floating-menu');
-        this.dispatchEvent(event);
-        
-        // Navigate to the URL or emit a custom event
-        if (url && url !== '#') {
-            window.location.href = url;
-        } else {
-            // Emit custom event for handling in parent component
-            const createEvent = new CustomEvent('webropol:create-item', {
-                detail: { itemId, type: itemId }
-            });
-            this.dispatchEvent(createEvent);
-        }
-    }
-
-    render() {
-        const items = this.items;
-        const positionClasses = this.getPositionClasses();
-        const themeClasses = this.getThemeClasses();
-
-        return `
-            <div class="${positionClasses} z-40" x-data="{ showFloatingMenu: false }" @click.away="showFloatingMenu = false">
-                <!-- Create Menu (appears above button) -->
-                <div x-show="showFloatingMenu" x-cloak
-                    x-transition:enter="ease-out duration-200" 
-                    x-transition:enter-start="opacity-0 translate-y-4 scale-95"
-                    x-transition:enter-end="opacity-100 translate-y-0 scale-100" 
-                    x-transition:leave="ease-in duration-150"
-                    x-transition:leave-start="opacity-100 translate-y-0 scale-100" 
-                    x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-                    class="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4">
-                    
-                    <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-webropol-gray-200/50 py-3 min-w-[280px]" @click.stop>
-                        <div class="space-y-1">
-                            ${items.map(item => `
-                                <button data-create-item="${item.id}" data-url="${item.url || '#'}"
-                                    class="group w-full flex items-center px-4 py-3 ${themeClasses.menuItem} transition-all duration-200 text-left">
-                                    <i class="${item.icon} text-webropol-gray-700 text-lg mr-4 transition-colors"></i>
-                                    <div class="flex-1">
-                                        <div class="font-medium text-webropol-gray-900">${item.label}</div>
-                                        <div class="text-xs text-webropol-gray-500">${item.description}</div>
-                                    </div>
-                                </button>
-                            `).join('')}
-                        </div>
-                    </div>
+  render() {
+    this.innerHTML = `
+      <!-- Floating Create Menu -->
+      <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40">
+        <!-- Menu Items Grid -->
+        <div class="floating-menu absolute bottom-16 left-1/2 transform -translate-x-1/2 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">
+          <div class="bg-white rounded-2xl shadow-2xl p-6 border border-webropol-gray-200 min-w-64">
+            <h3 class="text-lg font-bold text-webropol-gray-900 mb-4 text-center">Create New</h3>
+            <div class="space-y-2">
+              <!-- Surveys -->
+              <button data-type="surveys"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-poll-h text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">Surveys</span>
+                  <span class="text-xs text-webropol-gray-500">Custom surveys</span>
                 </div>
+              </button>
 
-                <!-- Main Floating Button -->
-                <button @click.stop="showFloatingMenu = !showFloatingMenu"
-                    class="group relative w-16 h-16 ${themeClasses.button} rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 active:scale-95">
-                    
-                    <!-- Plus Icon -->
-                    <div class="absolute inset-0 flex items-center justify-center transition-transform duration-200"
-                        :class="showFloatingMenu ? 'rotate-45' : 'rotate-0'">
-                        <i class="fas fa-plus text-white text-xl font-bold"></i>
-                    </div>
-                    
-                    <!-- Ripple Effect -->
-                    <div class="absolute inset-0 rounded-full bg-white/20 scale-0 group-hover:scale-100 group-hover:opacity-75 transition-all duration-300"></div>
-                    
-                    <!-- Tooltip -->
-                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-3 py-2 bg-black/80 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                        Create New
-                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/80"></div>
-                    </div>
-                </button>
-
-                <!-- Backdrop for floating menu -->
-                <div x-show="showFloatingMenu" x-cloak @click="showFloatingMenu = false"
-                    class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
-                    x-transition:enter="ease-out duration-200" 
-                    x-transition:enter-start="opacity-0"
-                    x-transition:enter-end="opacity-100" 
-                    x-transition:leave="ease-in duration-150"
-                    x-transition:leave-start="opacity-100" 
-                    x-transition:leave-end="opacity-0">
+              <!-- Events -->
+              <button data-type="events"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-calendar-alt text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">Events</span>
+                  <span class="text-xs text-webropol-gray-500">Event management</span>
                 </div>
+              </button>
+
+              <!-- EXW Surveys -->
+              <button data-type="exw-surveys"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-chart-line text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">EXW Surveys</span>
+                  <span class="text-xs text-webropol-gray-500">Employee experience</span>
+                </div>
+              </button>
+
+              <!-- Case Management -->
+              <button data-type="case-management"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-briefcase text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">Case Management</span>
+                  <span class="text-xs text-webropol-gray-500">Manage cases</span>
+                </div>
+              </button>
+
+              <!-- eTests -->
+              <button data-type="etests"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-clipboard-check text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">eTests</span>
+                  <span class="text-xs text-webropol-gray-500">Online testing</span>
+                </div>
+              </button>
+
+              <!-- Assessments -->
+              <button data-type="assessments"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-tasks text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">Assessments</span>
+                  <span class="text-xs text-webropol-gray-500">Performance review</span>
+                </div>
+              </button>
+
+              <!-- Touch Tablets -->
+              <button data-type="touch-tablets"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-tablet-alt text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">Touch Tablets</span>
+                  <span class="text-xs text-webropol-gray-500">Tablet surveys</span>
+                </div>
+              </button>
+
+              <!-- Direct Mobile Surveys -->
+              <button data-type="mobile-surveys"
+                class="create-item-btn w-full flex items-center p-3 rounded-lg border border-webropol-gray-200 hover:border-webropol-teal-300 hover:bg-webropol-teal-50 transition-all duration-200 text-left">
+                <i class="fas fa-mobile-alt text-webropol-teal-600 mr-3 w-5"></i>
+                <div class="flex-1">
+                  <span class="font-semibold text-webropol-gray-900 block">Direct Mobile</span>
+                  <span class="text-xs text-webropol-gray-500">Mobile optimized</span>
+                </div>
+              </button>
             </div>
-        `;
-    }
+          </div>
+        </div>
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (oldValue !== newValue) {
-            this.innerHTML = this.render();
-            this.setupEventListeners();
-        }
+        <!-- Main Floating Button -->
+        <button class="main-toggle-btn w-14 h-14 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-white hover:scale-105 group">
+          <i class="fas fa-plus text-xl transition-transform duration-300"></i>
+        </button>
+      </div>
+
+      <!-- Backdrop -->
+      <div class="floating-backdrop fixed inset-0 bg-black/20 z-30 transition-opacity duration-300 opacity-0 pointer-events-none">
+      </div>
+    `;
+  }
+  createItem(type) {
+    // Handle different survey types with navigation
+    const currentPath = window.location.pathname;
+    const isInSubfolder = currentPath.includes('/') && !currentPath.endsWith('/index.html');
+    const basePath = isInSubfolder ? '../' : '';
+    
+    const routes = {
+      'surveys': `${basePath}create-new/survey-creator.html`,
+      'events': `${basePath}events/`,
+      'exw-surveys': `${basePath}create-new/survey-creator.html?type=exw`,
+      'case-management': `${basePath}create-new/survey-creator.html?type=case`,
+      'etests': `${basePath}create-new/survey-creator.html?type=test`,
+      'assessments': `${basePath}create-new/survey-creator.html?type=assessment`,
+      'touch-tablets': `${basePath}create-new/survey-creator.html?type=tablet`,
+      'mobile-surveys': `${basePath}create-new/survey-creator.html?type=mobile`
+    };
+
+    const url = routes[type] || `${basePath}create-new/survey-creator.html`;
+    window.location.href = url;
+    this.closeMenu();
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+    this.updateMenuVisibility();
+  }
+
+  closeMenu() {
+    this.showMenu = false;
+    this.updateMenuVisibility();
+  }
+
+  updateMenuVisibility() {
+    const menu = this.querySelector('.floating-menu');
+    const backdrop = this.querySelector('.floating-backdrop');
+    const icon = this.querySelector('.main-toggle-btn i');
+
+    if (this.showMenu) {
+      menu.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      menu.classList.add('opacity-100', 'translate-y-0');
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop.classList.add('opacity-100');
+      icon.classList.add('rotate-45');
+    } else {
+      menu.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      menu.classList.remove('opacity-100', 'translate-y-0');
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      backdrop.classList.remove('opacity-100');
+      icon.classList.remove('rotate-45');
     }
+  }
+
+  setupEventListeners() {
+    // Main toggle button
+    const toggleBtn = this.querySelector('.main-toggle-btn');
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.toggleMenu();
+    });
+
+    // Create item buttons
+    const createBtns = this.querySelectorAll('.create-item-btn');
+    createBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const type = btn.getAttribute('data-type');
+        this.createItem(type);
+      });
+    });
+
+    // Backdrop click
+    const backdrop = this.querySelector('.floating-backdrop');
+    backdrop.addEventListener('click', () => {
+      this.closeMenu();
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!this.contains(e.target) && this.showMenu) {
+        this.closeMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.showMenu) {
+        this.closeMenu();
+      }
+    });
+  }
 }
 
 // Register the custom element
-customElements.define('webropol-floating-button', WebropolfloatingButton);
+customElements.define('webropol-floating-button', WebropolFloatingButton);
 
 // Export for ES modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = WebropolfloatingButton;
+    module.exports = WebropolFloatingButton;
 }

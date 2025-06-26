@@ -2,8 +2,14 @@ class WebropolSidebar extends HTMLElement {
   connectedCallback() {
     const active = this.getAttribute('active') || 'home';
     const base = this.getAttribute('base') || '';
-    // Helper to prefix base to links
-    const link = (path) => `${base}${path}`;
+    // Helper to prefix base to links - ensure proper path concatenation
+    const link = (path) => {
+      if (!base) return path;
+      // Ensure base ends with / and path doesn't start with /
+      const normalizedBase = base.endsWith('/') ? base : base + '/';
+      const normalizedPath = path.startsWith('/') ? path.substring(1) : path;
+      return normalizedBase + normalizedPath;
+    };
     this.innerHTML = `
       <aside class="h-screen w-72 bg-white/80 backdrop-blur-xl border-r border-webropol-gray-200/50 flex flex-col flex-shrink-0 shadow-soft">
         <div class="h-20 flex items-center px-8 border-b border-webropol-gray-200/50">
