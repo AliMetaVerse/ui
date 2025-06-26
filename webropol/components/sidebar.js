@@ -20,19 +20,19 @@ class WebropolSidebar extends HTMLElement {
             <i class="fas fa-home w-5 mr-4 group-hover:scale-110 transition-transform"></i>
             <span class="font-medium">Home</span>
           </a>
-          <a href="${link('surveys.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='surveys' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+          <a href="${link('surveys/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='surveys' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
             <i class="fas fa-poll-h w-5 mr-4"></i>
             <span>Surveys</span>
           </a>
-          <a href="${link('events.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='events' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+          <a href="${link('events/events-list.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='events' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
             <i class="fas fa-calendar-alt w-5 mr-4 group-hover:scale-110 transition-transform"></i>
             <span class="font-medium">Events</span>
           </a>
-          <a href="${link('sms.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='sms' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+          <a href="${link('sms/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='sms' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
             <i class="fas fa-sms w-5 mr-4 group-hover:scale-110 transition-transform"></i>
             <span class="font-medium">2-Way SMS</span>
           </a>
-          <a href="${link('dashboards.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='dashboards' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+          <a href="${link('dashboards/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='dashboards' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
             <i class="fas fa-chart-line w-5 mr-4 group-hover:scale-110 transition-transform"></i>
             <span class="font-medium">Dashboards</span>
           </a>
@@ -41,8 +41,26 @@ class WebropolSidebar extends HTMLElement {
               <i class="fas fa-book-open w-5 mr-4 group-hover:scale-110 transition-transform"></i>
               <span class="font-medium">MyWebropol</span>
             </a>
+            <a href="${link('admin-tools/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='admin-tools' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+              <i class="fas fa-tools w-5 mr-4 group-hover:scale-110 transition-transform"></i>
+              <span class="font-medium">Admin Tools</span>
+            </a>
+            <a href="${link('training-videos/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='training-videos' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+              <i class="fas fa-video w-5 mr-4 group-hover:scale-110 transition-transform"></i>
+              <span class="font-medium">Training Videos</span>
+            </a>
+            <a href="${link('shop/index.html')}" class="flex items-center px-4 py-3 rounded-xl font-semibold transition-all duration-200 group ${active==='shop' ? 'bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 text-white shadow-medium' : 'text-webropol-gray-600 hover:bg-webropol-teal-50 hover:text-webropol-teal-700'}">
+              <i class="fas fa-shopping-cart w-5 mr-4 group-hover:scale-110 transition-transform"></i>
+              <span class="font-medium">Shop</span>
+            </a>
           </div>
         </nav>
+        <div class="mt-auto px-4 pb-6">
+          <a href="#" class="flex items-center px-4 py-3 rounded-xl font-semibold text-webropol-teal-700 hover:bg-webropol-teal-50 transition-all duration-200">
+            <i class="fas fa-envelope w-5 mr-4"></i>
+            <span>Contact Us</span>
+          </a>
+        </div>
       </aside>
     `;
   }
