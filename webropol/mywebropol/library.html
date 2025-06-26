@@ -68,98 +68,18 @@
             box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.15);
         }
     </style>
+    <script src="../components/sidebar.js" type="module"></script>
+    <script src="../components/header.js" type="module"></script>
 </head>
 
 <body class="bg-gradient-to-br from-webropol-blue-50 to-webropol-teal-50/30" style="background-color: #ebf4f7;"
     x-data="libraryApp()" @click="showContextMenu = null; showFloatingMenu = false">
 
     <div class="flex h-screen">
-        <!-- Modern Sidebar -->
-        <aside
-            class="w-72 bg-white/80 backdrop-blur-xl border-r border-webropol-gray-200/50 flex flex-col flex-shrink-0 shadow-soft">
-            <div class="h-20 flex items-center px-8 border-b border-webropol-gray-200/50">
-                <div
-                    class="w-10 h-10 bg-gradient-to-br from-webropol-teal-500 to-webropol-blue-600 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-chart-bar text-white text-lg"></i>
-                </div>
-                <div class="ml-3">
-                    <h1 class="font-bold text-webropol-gray-900 text-lg">Webropol</h1>
-                    <p class="text-xs text-webropol-gray-500 -mt-1">Survey Platform</p>
-                </div>
-            </div>
-            <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
-                <a href="../index.html"
-                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-home w-5 mr-4 group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">Home</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-poll-h w-5 mr-4"></i>
-                    <span>Surveys</span>
-                    <div class="ml-auto w-2 h-2 bg-white/30 rounded-full"></div>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-calendar-alt w-5 mr-4 group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">Events</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-sms w-5 mr-4 group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">2-Way SMS</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-webropol-gray-600 rounded-xl hover:bg-webropol-teal-50 hover:text-webropol-teal-700 transition-all duration-200 group">
-                    <i class="fas fa-chart-line w-5 mr-4 group-hover:scale-110 transition-transform"></i>
-                    <span class="font-medium">Dashboards</span>
-                </a>
-                <div class="pt-4 border-t border-webropol-gray-200/50 mt-4">
-                    <a href="index.html"
-                        class="flex items-center px-4 py-3 text-white rounded-xl bg-gradient-to-r from-webropol-teal-500 to-webropol-blue-600 shadow-medium font-semibold">
-                        <i class="fas fa-book-open w-5 mr-4 group-hover:scale-110 transition-transform"></i>
-                        <span class="font-medium">MyWebropol</span>
-                    </a>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
+        <webropol-sidebar active="mywebropol"></webropol-sidebar>
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Enhanced Header -->
-            <header
-                class="h-20 glass-effect border-b border-webropol-gray-200/50 flex items-center justify-between px-8 shadow-soft">
-                <div class="flex items-center space-x-4">
-                    <nav class="flex items-center space-x-2 text-sm">
-                        <a href="../index.html"
-                            class="text-webropol-gray-500 hover:text-webropol-teal-600 transition-colors">Home</a>
-                        <i class="fas fa-chevron-right text-webropol-gray-300 text-xs"></i>
-                        <a href="index.html"
-                            class="text-webropol-gray-500 hover:text-webropol-teal-600 transition-colors">MyWebropol</a>
-                        <i class="fas fa-chevron-right text-webropol-gray-300 text-xs"></i>
-                        <span class="text-webropol-gray-900 font-medium">Question & Survey Library</span>
-                    </nav>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <div class="flex items-center space-x-3">
-                        <button
-                            class="w-10 h-10 flex items-center justify-center text-webropol-gray-500 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-xl transition-all">
-                            <i class="fas fa-bell"></i>
-                        </button>
-                        <button
-                            class="w-10 h-10 flex items-center justify-center text-webropol-gray-500 hover:text-webropol-teal-600 hover:bg-webropol-teal-50 rounded-xl transition-all">
-                            <i class="fas fa-question-circle"></i>
-                        </button>
-                        <div class="relative">
-                            <button
-                                class="flex items-center text-webropol-gray-700 hover:text-webropol-teal-600 transition-colors">
-                                <span class="mr-2 font-medium">Ali Al-Zuhairi</span>
-                                <i class="fas fa-chevron-down text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header> <!-- Page Content -->
+            <webropol-header username="Ali Al-Zuhairi"></webropol-header>
+            <!-- Page Content -->
             <main class="flex-1 overflow-y-auto p-8">
                 <div class="max-w-8xl mx-auto">
                     <!-- Page Header -->
